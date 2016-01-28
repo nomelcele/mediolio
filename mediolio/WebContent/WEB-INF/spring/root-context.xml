@@ -17,10 +17,13 @@
 	<context:component-scan base-package="com.mediolio.mvc"/>
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
 
-	<beans:bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<beans:property name="jndiName" value="java:comp/env/jdbc/myDB"></beans:property>
-	</beans:bean>
-
+    <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <beans:property name="url" value="jdbc:mysql://localhost:3306/mediolio"/>
+        <beans:property name="username" value="mediolio"/>
+        <beans:property name="password" value="1234"/>
+    </beans:bean>
+    
 	<beans:bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="configLocation" value="classpath:com/mediolio/config/config.xml" />
 		<beans:property name="mapperLocations" value="classpath*:com/mediolio/mapper/*.xml" />
