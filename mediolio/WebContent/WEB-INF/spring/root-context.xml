@@ -18,12 +18,12 @@
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
 
 	<beans:bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<beans:property name="jndiName" value="java:comp/env/jdbc/myora"></beans:property>
+		<beans:property name="jndiName" value="java:comp/env/jdbc/myDB"></beans:property>
 	</beans:bean>
 
 	<beans:bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<beans:property name="configLocation" value="classpath:or/mediolio/config/config.xml" />
-		<beans:property name="mapperLocations" value="classpath*:or/mediolio/mapper/*.xml" />
+		<beans:property name="configLocation" value="classpath:com/mediolio/config/config.xml" />
+		<beans:property name="mapperLocations" value="classpath*:com/mediolio/mapper/*.xml" />
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
 	</beans:bean>
 
