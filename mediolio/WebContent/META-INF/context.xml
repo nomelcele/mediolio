@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-   <Resource name="jdbc/myora"
+   <Resource name="jdbc/myDB"
    auth="Container"
-   type="oracle.jdbc.pool.OracleDataSource"
-   driverClassName="oracle.jdbc.driver.OracleDriver"
-   factory="oracle.jdbc.pool.OracleDataSourceFactory"
-   url="jdbc:oracle:thin:@192.168.0.40:1521:xe"
+   type="javax.sql.DataSource"
+   driverClassName="com.mysql.jdbc.Driver"
+   url="jdbc:mysql://localhost:3306/myDB"
    user="mediolio"
    password="1234"
    maxActive="20"
