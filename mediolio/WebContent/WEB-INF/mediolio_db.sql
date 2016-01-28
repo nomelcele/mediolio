@@ -25,8 +25,6 @@ CREATE TABLE PROJECT(
   p_hash VARCHAR2(500),
   p_date DATE,
   p_viewnum NUMBER(10),
-  p_goodnum NUMBER(10),
-  p_replynum NUMBER(10),
   p_coverImg VARCHAR2(100)
 );
 
@@ -40,8 +38,6 @@ CREATE TABLE CONTENT(
 
 CREATE TABLE CATEGORY(	
   cate_id NUMBER(5) PRIMARY KEY,
-  cate_groupID NUMBER(5),
-  cate_groupName VARCHAR2(30),
   cate_name VARCHAR2(30)
 );
 
