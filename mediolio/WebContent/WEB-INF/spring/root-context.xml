@@ -14,7 +14,7 @@
 	<mvc:default-servlet-handler/>
 	
 	<!-- javascript, jQuery, css, image 사용 -->
-	<context:component-scan base-package="or.mediolio.mvc"/>
+	<context:component-scan base-package="com.mediolio.mvc"/>
 	<mvc:resources location="/resources/" mapping="/resources/**"/>
 
 	<beans:bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">

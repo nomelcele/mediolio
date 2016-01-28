@@ -6,7 +6,7 @@
    driverClassName="oracle.jdbc.driver.OracleDriver"
    factory="oracle.jdbc.pool.OracleDataSourceFactory"
    url="jdbc:oracle:thin:@192.168.0.40:1521:xe"
-   user="junglecast"
+   user="mediolio"
    password="1234"
    maxActive="20"
    maxIdle="10"
