@@ -55,3 +55,12 @@ CREATE TABLE MESSAGE(
   msg_text VARCHAR(1000),
   msg_date DATE
 );
+
+
+ALTER TABLE category CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE content CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE member CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE member_action CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE message CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE project CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE reply CHARACTER SET utf8 COLLATE utf8_general_ci;
