@@ -13,7 +13,7 @@ public class ProjectDao {
 		st.insert("proj.insertTest", 1);
 	}
 	
-	public String selectTest(){
+	public int selectTest(){
 		return st.selectOne("proj.selectTest");
 	}
 }
