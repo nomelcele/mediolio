@@ -4,7 +4,7 @@
    auth="Container"
    type="javax.sql.DataSource"
    driverClassName="com.mysql.jdbc.Driver"
-   url="jdbc:mysql://localhost:3306/myDB"
+   url="jdbc:mysql://localhost:3306/mediolio"
    user="mediolio"
    password="1234"
    maxActive="20"
