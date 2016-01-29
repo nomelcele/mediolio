@@ -7,12 +7,49 @@
 <title>Insert title here</title>
 <style>
 	fieldset{display:inline-block;}
+	.mediaTagArea{display:none;}
+	.textArea{display:none;}
 </style>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script>
 	$(function(){
 		$("#dbTestBtn").click(function(){
 			location="dbTest";
+		});
+		
+		$("#fileUpload").change(function(){
+			// 파일 추가
+			var ext = $(this).val().split('.').pop().toLowerCase(); // 파일의 확장자
+			if($.inArray(ext,['gif','png','jpg','jpeg']) == -1){
+				// doc, pdf, ppt
+				
+			} else {
+				// 이미지 파일
+				var file = $(this).prop("files")[0];
+				blobURL = window.URL.createObjectURL(file);
+				// 미리보기 영역에 이미지 표시
+				$(".writeArea").append("<p><img src='"+blobURL+"' style='display:block;'/></p>");				
+			}
+		});
+		
+		$("#tagBtn").click(function(){
+			// 미디어 태그 추가
+			$(".mediaTagArea").css("display","block");
+		});
+		
+		$("#mediaTagAddBtn").click(function(){
+			// 미디어 태그 표시(비디오 등)
+			$(".writeArea").append("<p>"+$("#mediaTagContent").val()+"</p>");
+		});
+		
+		$("#textBtn").click(function(){
+			// 텍스트 추가
+			$(".textArea").css("display","block");
+		});
+		
+		$("#textAddBtn").click(function(){
+			// 텍스트 표시
+			$(".writeArea").append("<p>"+$("#textContent").val()+"</p>");
 		});
 	});
 </script>
@@ -33,7 +70,22 @@
 				<input type="text" placeholder="제목을 입력하세요.">
 			</div>
 			<div>
-				<div></div>
+				<div>
+					<input type="file" id="fileUpload">
+					<input type="button" id="tagBtn" value="embed">
+					<input type="button" id="textBtn" value="텍스트">
+				</div>
+				<div class="mediaTagArea">
+					<textarea id="mediaTagContent" placeholder="미디어 태그를 입력하세요."></textarea>
+					<input type="button" id="mediaTagAddBtn" value="태그 추가">
+				</div>
+				<div class="textArea">
+					<textarea id="textContent" placeholder="텍스트를 입력하세요."></textarea>
+					<input type="button" id="textAddBtn" value="텍스트 추가">
+				</div>				
+				<div class="writeArea">
+					
+				</div>
 			</div>
 			<div>
 				<input type="text" placeholder="태그를 입력하세요.">
