@@ -1,3 +1,12 @@
+CREATE TABLE HASH(
+	h_id int(10) PRIMARY KEY auto_increment,
+	h_value VARCHAR(20),
+	p_id int(10),
+	cate_id int(10)
+);
+ALTER TABLE PROJECT DROP p_hash;
+ALTER TABLE hash CHARACTER SET utf8 COLLATE utf8_general_ci;
+
 CREATE TABLE MEMBER(	
   m_id int(10) PRIMARY KEY auto_increment,
   m_mail VARCHAR(100),
@@ -22,7 +31,6 @@ CREATE TABLE PROJECT(
   m_id int(10),
   p_title VARCHAR(300),
   cate_id int(5),
-  p_hash VARCHAR(500),
   p_date DATE,
   p_viewnum int(10),
   p_coverImg VARCHAR(100)
@@ -55,7 +63,6 @@ CREATE TABLE MESSAGE(
   msg_text VARCHAR(1000),
   msg_date DATE
 );
-
 
 ALTER TABLE category CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE content CHARACTER SET utf8 COLLATE utf8_general_ci;
