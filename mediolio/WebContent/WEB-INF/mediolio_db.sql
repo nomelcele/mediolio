@@ -1,11 +1,16 @@
+CREATE TABLE SUBCATEGORY(
+  sc_id int(5) PRIMARY KEY auto_increment,
+  sc_name VARCHAR(30),
+  sc_parent int(5)
+);
+ALTER TABLE subcategory CHARACTER SET utf8 COLLATE utf8_general_ci;
+
 CREATE TABLE HASHTAG(
 	h_id int(10) PRIMARY KEY auto_increment,
 	h_value VARCHAR(20),
 	p_id int(10),
 	cate_id int(10)
 );
-ALTER TABLE PROJECT DROP p_hash;
-ALTER TABLE hashtag CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 CREATE TABLE MEMBER(	
   m_id int(10) PRIMARY KEY auto_increment,
@@ -71,3 +76,4 @@ ALTER TABLE member_action CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE message CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE project CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE reply CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE hashtag CHARACTER SET utf8 COLLATE utf8_general_ci;
