@@ -1,11 +1,11 @@
-CREATE TABLE HASH(
+CREATE TABLE HASHTAG(
 	h_id int(10) PRIMARY KEY auto_increment,
 	h_value VARCHAR(20),
 	p_id int(10),
 	cate_id int(10)
 );
 ALTER TABLE PROJECT DROP p_hash;
-ALTER TABLE hash CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE hashtag CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 CREATE TABLE MEMBER(	
   m_id int(10) PRIMARY KEY auto_increment,
