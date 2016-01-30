@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,7 +20,14 @@ public class TestModel {
 
 	@RequestMapping("gotoTest")
 	public ModelAndView gotoTest(){
-		return new ModelAndView("tutorial3");
+		return new ModelAndView("test");
+	}
+	
+	@RequestMapping("imgCrop_modal")
+	public String imgCrop_modal(String url, Model model){
+		model.addAttribute("imgUrl", url);
+		return "tutorial3";
+		
 	}
 	
 	@RequestMapping("cropImage")
