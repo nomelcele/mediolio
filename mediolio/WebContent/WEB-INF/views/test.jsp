@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,69 +15,53 @@
 <script type="text/javascript" src="js/jquery.Jcrop.js"></script>
 <link rel="stylesheet" href="resources/css/jquery.Jcrop.css" type="text/css" />
 <script type="text/javascript">
-$(function () {
-    $('#actualImage').Jcrop({
-     setSelect: [0, 0, 268, 180],
-     addClass: 'custom',
-     bgColor: 'yellow',
-     bgOpacity: .8,
-     //sideHandles: true
-     allowResize: false,
-     allowSelect: false,
-     onSelect: storeCoords
- });
-    
+
+var preview_url='';
+
+function show_cropModal(url){
+	console.log("function:", url);
+	$.ajax({
+		type: "POST",
+		url: "imgCrop_modal",
+		data: {
+			url : url
+		},
+		async:false,
+		success: function(result){
+			$("#modalBox").html(result);
+			location.href="#crop";
+		}
+	});
+}
+
+function readUrl(input){
+	console.log("readUrl");
+	//var result='';
+    var reader= new FileReader();
+    reader.onload = function (e) {
+    	preview_url = e.target.result;	
+   } 
+	reader.readAsDataURL(input.files[0]);
+}
+
+$(function (){
+	$('#representative_img').change(function(){
+		$.ajax({
+			url:readUrl(this),
+			async:false,
+			success:function(){
+				show_cropModal(preview_url);
+			}
+		});
+	});
 });
 
-function storeCoords(c) {
 
- jQuery('#X1').val(c.x);
- jQuery('#Y1').val(c.y); 
- jQuery('#X2').val(c.x2);
- jQuery('#Y2').val(c.y2); 
- jQuery('#W').val(c.w);
- jQuery('#H').val(c.h);
-}
-
-function cropPicture(){
-    $.ajax({
-        url: "cropPhoto.htm",
-        type: "POST", 
-        data :{
-            x : $('input#X1').val(),
-            y : $('input#Y1').val(),
-            x2 : $('input#X2').val(),
-            y2 : $('input#Y2').val(), 
-            w : $('input#W').val(),
-            h : $('input#H').val(),
-            imageName : $('input#imageName').val()
-        },
-        success: function (data) { 
-            window.location = 'photo.htm';
-         }
-}
 </script>
 </head>
 <body>
-<div class="container">
-<div class="row">
-<div class="span12">
-<div class="jc-demo-box">
-
-  <img src="test.jpg" id="target" />
-
-  <div id="preview-pane">
-    <div class="preview-container">
-      <img src="../test.jpg" class="jcrop-preview" alt="Preview" />
-    </div>
-  </div>
-
-<div class="clearfix"></div>
-
-</div>
-</div>
-</div>
-</div>
+<div id="modalBox"></div>
+<input type="file" id="representative_img" name="p_coverImg">
 
 </body>
 </html>
