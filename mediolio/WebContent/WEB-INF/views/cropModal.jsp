@@ -16,7 +16,7 @@
 /* The modal box */
 .modal-dialog {display: table-cell; vertical-align: middle;}
 /* The modal's content */
-.modal-dialog .modal-content {margin: auto; background-color: #fff; position: relative; padding: 0; outline: 0; border: 1px #777 solid; text-align: justify; width:985px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius:10px; 
+.modal-dialog .modal-content {margin: auto; background-color: #fff; position: relative; padding: 0; outline: 0; border: 1px #777 solid; text-align: justify; max-width:985px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius:10px; 
 
 </style>
 <script src="js/jquery-1.11.3.min.js"></script>
@@ -25,7 +25,6 @@
 <script type="text/javascript">
 
 	$(function($) {
-
 		// Create variables (in this scope) to hold the API and image size
 		var jcrop_api, boundx, boundy,
 
@@ -41,6 +40,8 @@
 		$('#target').Jcrop({
 			boxWidth: 700, 
 			boxHeight: 500,
+			minSize:[200, 136],
+			setSelect:[0,0, 200, 136],
 			onChange : updatePreview,
 			onSelect : updatePreview,
 			aspectRatio : xsize / ysize
@@ -124,7 +125,7 @@
 					</div>
 					<div class="clearfix"></div>
 			</div>
-			<form name="myForm" action="cropper.jsp" method="post" onsubmit="return checkCoordinates();">
+			<form name="myForm" method="post" onsubmit="return checkCoordinates();">
 				<input type="hidden" name="x" value=""/>
 				<input type="hidden" name="y" value=""/>
 				<input type="hidden" name="w" value=""/>
