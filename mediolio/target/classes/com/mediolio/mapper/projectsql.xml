@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="proj">
+  	<insert id="insertTest" parameterType="int">
+  		insert into member_action(act_type, m_id, act_target) values('like',#{m_id},2)
+  	</insert>
+  	<select id="selectTest" resultType="int">
+  		select count(*) from member_action
+  	</select>
+  </mapper>
