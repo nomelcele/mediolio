@@ -61,6 +61,11 @@ $(function(){
 				}
 		});
 	});
+	$("input[name='m_studentID']").keypress(function (event) {
+        if (event.which && (event.which <= 47 || event.which >= 58) && event.which != 8) {
+            event.preventDefault();
+        }
+	});
 });
 </script>
 </head>
@@ -105,7 +110,7 @@ $(function(){
 <br>
 학번
 <div>
-<input type = "text" name="m_studentID" maxlength="2">
+<input type = "text" name="m_studentID" maxlength="2" class = "m_studentID">
 </div>
 <br>
 닉네임
