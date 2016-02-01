@@ -26,7 +26,7 @@
 
 	$(function($) {
 		// Create variables (in this scope) to hold the API and image size
-		var jcrop_api, boundx, boundy,
+		var jcrop_api, boundx, boundy;
 
 		// Grab some information about the preview pane
 		$preview = $('#preview-pane'), 
@@ -35,22 +35,24 @@
 
 		xsize = $pcnt.width(), ysize = $pcnt.height();
 
-		console.log('init', [ xsize, ysize ]);
+		var imgWidth = $('#target').width();
+		var imgHeight = $('#target').height();
+		console.log(imgWidth + "*" + imgHeight);
 
 		$('#target').Jcrop({
-			boxWidth: 700, 
-			boxHeight: 500,
-			minSize:[200, 136],
-			setSelect:[0,0, 200, 136],
+			boxWidth: 800, 
+			boxHeight: 700,
+			minSize:[180, 180],
+			setSelect:[imgWidth/2-90, imgHeight/2-90, imgWidth/2+90, imgHeight/2+90],
 			onChange : updatePreview,
 			onSelect : updatePreview,
 			aspectRatio : xsize / ysize
 		}, function() {
+			
 			// 이미지 사이즈 구함
 			var bounds = this.getBounds();
 			boundx = bounds[0];
-			boundy = bounds[1];
-			
+			boundy= bounds[1];
 			jcrop_api = this;
 
 			// Move the preview into the jcrop container for css positioning
@@ -62,10 +64,10 @@
 				var rx = xsize / c.w;
 				var ry = ysize / c.h;
 
-				document.myForm.x.value = c.x;
-				document.myForm.y.value = c.y;
-				document.myForm.w.value = c.w;
-				document.myForm.h.value = c.h;
+				$('#preview_x').val(c.x);
+				$('#preview_y').val(c.y);
+				$('#preview_w').val(c.w);
+				$('#preview_h').val(c.h);
 				
 				$pimg.css({
 					width : Math.round(rx * boundx) + 'px',
@@ -78,22 +80,25 @@
 		
 	});
 	
-	function checkCoordinates() {
-		if (document.myForm.x.value == "" || document.myForm.y.value == "") {
-			alert("Please select a crop region");
-			return false;
-		} else {
-/* 			$.ajax({
-				url: "cropImage",
-				data: {},
-				dataType: 'JSON', 
-				type: 'POST',
-				success: function (data) {
-					
-				}
-			}); */
-			return true;
-		}
+	function uploadAjax() {
+		$.ajax({
+			url: "cropImage",
+			type: "POST",
+			data: new FormData(document.getElementById("coverImg_form")),
+	        enctype: "multipart/form-data",
+			processData: false,
+			contentType: false,
+			dataType : "json",
+			async:false,
+			success: function(result){
+				$("#modalBox").html(result);
+				location.href="#crop";
+			}
+		});
+	}
+	
+	function cancelCrop(){
+		
 	}
 </script>
 <style type="text/css">
@@ -106,7 +111,7 @@
 
 /* thumbnail preview 창 크기 비율에 따라 crop 비율이 정해짐 */
 #preview-pane .preview-container {
-	width: 250px; height: 170px; overflow: hidden;
+	width: 180px; height: 180px; overflow: hidden;
 }
 </style>
 </head>
@@ -125,13 +130,9 @@
 					</div>
 					<div class="clearfix"></div>
 			</div>
-			<form name="myForm" method="post" onsubmit="return checkCoordinates();">
-				<input type="hidden" name="x" value=""/>
-				<input type="hidden" name="y" value=""/>
-				<input type="hidden" name="w" value=""/>
-				<input type="hidden" name="h" value=""/>
-				<input type="submit" value="Crop Image"/>
-			</form>
+
+			<input type="button" value="Crop Image" id="crop_submit" onclick="uploadAjax()"/>
+			<input type="button" value="Cancel" id="crop_cancel" onclick="cancelCrop()">
 		</div>
 	</div>
 </div>

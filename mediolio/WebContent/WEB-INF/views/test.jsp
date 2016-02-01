@@ -73,6 +73,10 @@ $(function (){
 <form method="post" id="coverImg_form" enctype="multipart/form-data">
 	<input type="file" id="cover_img" name="p_coverImg" onchange="fileCheck()">
  	<input type="hidden" id="preview_url" name="preview_url">
+ 	<input type="hidden" id="preview_x" name="x" value=""/>
+	<input type="hidden" id="preview_y"name="y" value=""/>
+	<input type="hidden" id="preview_w"name="w" value=""/>
+	<input type="hidden" id="preview_h"name="h" value=""/>
 </form>
 
 

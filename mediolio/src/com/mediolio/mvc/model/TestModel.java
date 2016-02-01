@@ -1,27 +1,29 @@
 package com.mediolio.mvc.model;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.mediolio.fileupload.FileUpload;
 
 @Controller
 public class TestModel {
@@ -44,7 +46,7 @@ public class TestModel {
         //String contentType = multipartFile.getContentType();
         //InputStream stream = multipartFile.getInputStream();
         //byte[] bytes = IOUtils.toByteArray(stream);
-		//String src = "data:'"+contentType+"';base64,'"+new String(Base64Utils.encode(bytes))+"'";
+		//String src = "data:"+contentType+";base64,"+new String(Base64Utils.encode(bytes));
         
 		model.addAttribute("imgObj", multipartFile); 
         model.addAttribute("imgUrl", url);
@@ -53,32 +55,55 @@ public class TestModel {
 		
 	}
 	
-	@RequestMapping("cropImage")
-	public String cropImage(HttpServletRequest request,HttpServletResponse response,
-            HttpSession session) throws IOException{
-        int x=Integer.parseInt(request.getParameter("x"));
-        int y=Integer.parseInt(request.getParameter("y"));
-        int w=Integer.parseInt(request.getParameter("w"));
-        int h=Integer.parseInt(request.getParameter("h"));
-        System.out.println(x+" "+y+" "+" "+w+" "+" "+h);
-
-		String absolutePath = "C:/Users/JieunO/Desktop/original-crop/";
+	@RequestMapping(value = "cropImage", method = RequestMethod.POST)
+	public ModelAndView cropImage( MultipartHttpServletRequest  request, HttpServletResponse response, HttpSession session) throws IOException{
+		ModelAndView mav = new ModelAndView("jsonView");
+		
+		MultipartFile multipartFile = request.getFile("p_coverImg");
+		String fileFullName = multipartFile.getOriginalFilename();
+		String fileName = fileFullName.substring(0, fileFullName.lastIndexOf("."));
+		String fileType = fileFullName.substring(fileFullName.lastIndexOf(".")+1, fileFullName.length());
+		System.out.println("fileName : " + fileName + ", " + "fileType : " + fileType);
+		
+		//경로
+		String saveDir = new HttpServletRequestWrapper(request).getSession().getServletContext().getRealPath("/resources/projectCover");
+		
+		//대체이름
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		Date nowdate = new Date();
+		String originReplaceName = fileName+"_"+formatter.format(nowdate) +"."+ fileType;
+		FileUpload.fileUpload(multipartFile.getInputStream(), saveDir+"/OriginFile", originReplaceName);
+		
+		int x=(int) Float.parseFloat(request.getParameter("x"));
+        int y=(int) Float.parseFloat(request.getParameter("y"));
+        int w=(int) Float.parseFloat(request.getParameter("w"))-4;
+        int h=(int) Float.parseFloat(request.getParameter("h"))-4;
+        System.out.println(x+" "+y+" "+w+" "+h);
+        
+        System.out.println(saveDir);
+        
 		try {
-			BufferedImage originalImgage = ImageIO.read(new File(absolutePath+"pool.jpg"));
-			System.out.println("Original image dimension: "+originalImgage.getWidth()+"x"+originalImgage.getHeight());
-			BufferedImage SubImgage = originalImgage.getSubimage(x, y, w, h);
-			System.out.println("Cropped image dimension: "+SubImgage.getWidth()+"x"+SubImgage.getHeight());
-			File outputfile = new File(absolutePath + "croppedImage.jpg");
-			ImageIO.write(SubImgage, "jpg", outputfile);
+			BufferedImage originalImage = ImageIO.read(new File(saveDir+"/OriginFile/"+originReplaceName));
+			System.out.println("Original image dimension: "+originalImage.getWidth()+"x"+originalImage.getHeight());
+			BufferedImage SubImage = originalImage.getSubimage(x, y, w, h);
+			System.out.println("Cropped image dimension: "+SubImage.getWidth()+"x"+SubImage.getHeight());
 			
-			System.out.println("Image cropped successfully: "+outputfile.getPath());
+			String cropReplaceName = "crop_"+originReplaceName;
 			
-			return outputfile.getName();
+			//bufferedImage -> InputStream
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(SubImage, fileType, baos);
+			InputStream is = new ByteArrayInputStream(baos.toByteArray());
+			
+			//파일쓰기
+			FileUpload.fileUpload(is, saveDir, cropReplaceName);
+			
+			mav.addObject("result", "success");
 		} catch (IOException e) {
 			e.printStackTrace();
-			return "";
+			mav.addObject("result", "fail");
 		}
-
-       //return "redirect:/tutorial3";
+		
+		return mav;
 	}
 }
