@@ -30,7 +30,7 @@
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
 	</beans:bean>
 
-	<beans:bean id="st" class="org.mybatis.spring.SqlSessionTemplate">
+	<beans:bean id="st" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<beans:constructor-arg ref="factoryBean" />
 	</beans:bean>
 	
@@ -38,5 +38,13 @@
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
 	</beans:bean>
 	<tx:annotation-driven transaction-manager="transactionManager"/> 
+	
+	<mvc:interceptors>
+        <mvc:interceptor> 
+           <mvc:mapping path="/menu=loginsuccess"/>
+           <beans:bean class="com.mediolio.mvc.model.SessionModel"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+	
 		
 </beans:beans>
