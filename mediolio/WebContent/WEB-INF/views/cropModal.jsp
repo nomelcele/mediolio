@@ -91,14 +91,14 @@
 			dataType : "json",
 			async:false,
 			success: function(result){
-				$("#modalBox").html(result);
-				location.href="#crop";
+				$('.coverImg_box').append('<img src="resources/images/projectCover/'+result.result+'">');
+				$('#crop').remove();
 			}
 		});
 	}
 	
 	function cancelCrop(){
-		
+		$('#crop').remove();
 	}
 </script>
 <style type="text/css">

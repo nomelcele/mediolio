@@ -98,7 +98,7 @@ public class TestModel {
 			//파일쓰기
 			FileUpload.fileUpload(is, saveDir, cropReplaceName);
 			
-			mav.addObject("result", "success");
+			mav.addObject("result", cropReplaceName);
 		} catch (IOException e) {
 			e.printStackTrace();
 			mav.addObject("result", "fail");
