@@ -28,17 +28,22 @@ $(function(){
 				success : function(response) {								
 					if(response.m_id=='0')
 					{
-						alert('이메일이 중복됩니다');
+						alert('사용할 수 있는 이메일 입니다.');
 					}
 					else
 					{
-						alert('사용할 수 있는 이메일 입니다.');
+						alert('이메일이 중복됩니다');
 					}
 				}
 			});
 		} 	
 	});
 	$('.button').on('click',function(){
+		var mail = $('.id input').val()+'@'+$('.adress input').val();
+		var pw = $('.passwordcorrect input').val();
+		$('#m_mail').attr('value',mail);
+		$('#m_pw').attr('value',pw);
+		var form = $("form[name=sendForm]").serialize();
 		$.ajax({/******************************************************/
 				url: "InsertJoinInfo",
 				data: form,
@@ -51,6 +56,7 @@ $(function(){
 					}
 					else{
 						alert('회원가입 성공');
+						location.href="menu=loginsuccess";
 					}
 				}
 		});
@@ -59,7 +65,7 @@ $(function(){
 </script>
 </head>
 <body>
-<form action = "" method="post">
+<form action = "" method="post" name="sendForm">
 이메일
 <div class = "mail">
 	<span class = "id">
