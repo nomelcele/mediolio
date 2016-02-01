@@ -11,6 +11,7 @@
 	.textArea{display:none;}
 </style>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.gdocsviewer.min.js"></script>
 <script>
 	$(function(){
 		$("#dbTestBtn").click(function(){
@@ -20,13 +21,17 @@
 		$("#fileUpload").change(function(){
 			// 파일 추가
 			var ext = $(this).val().split('.').pop().toLowerCase(); // 파일의 확장자
+			var file = $(this).prop("files")[0];
+			console.log(file);
+			blobURL = window.URL.createObjectURL(file);
 			if($.inArray(ext,['gif','png','jpg','jpeg']) == -1){
 				// doc, pdf, ppt
-				
+				$(".tempFilePath").attr("href",blobURL);
+				// $(".tempFilePath").gdocsViewer()
+				$("#docViewer").attr("src",blobURL);
+				$("#docViewer2").attr("src","https://docs.google.com/viewer?url=http://localhost/mediolio/resources/doc/doctest.docx&embedded=true");
 			} else {
 				// 이미지 파일
-				var file = $(this).prop("files")[0];
-				blobURL = window.URL.createObjectURL(file);
 				// 미리보기 영역에 이미지 표시
 				$(".writeArea").append("<p><img src='"+blobURL+"' style='display:block;'/></p>");				
 			}
