@@ -1,5 +1,7 @@
 package com.mediolio.mvc.model;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mediolio.email.Email;
+import com.mediolio.email.EmailSender;
 import com.mediolio.mvc.dao.JoinDao;
 import com.mediolio.vo.MemberVO;
+
+
 
 
 @Controller
@@ -17,6 +23,11 @@ public class JoinModel {
 
 	@Autowired
 	private JoinDao jdao;
+	@Autowired
+	private EmailSender emailSender;
+	@Autowired
+	private Email email;
+
 	
 	@RequestMapping("/menu=login")
 	public ModelAndView gotoLogin(){
@@ -96,4 +107,32 @@ public class JoinModel {
 			return mav;
 		}
 	}
+	
+	@RequestMapping("sendEmailAction")
+    public ModelAndView sendEmailAction (String m_mail) throws Exception {
+        ModelAndView mav = new ModelAndView("jsonView");
+        //AccountVO selectedPw = new AccountVO();
+        //selectedPw.setM_mail(m_mail);
+        MemberVO selectedPw = new MemberVO();
+        selectedPw.setM_mail(m_mail);
+        StringBuffer buffer = new StringBuffer();
+        Random random = new Random();
+        String chars[] = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9".split(",");    		
+        for (int i = 0; i < 6; i++) {
+        buffer.append(chars[random.nextInt(chars.length)]);
+        }
+        selectedPw.setM_pw(buffer.toString());
+        //AccountVO selectedPw = jdao.sendEmailAction(m_mail);
+        jdao.sendEmailAction(selectedPw);
+       // mav.addObject("m_pw", selectedPw.getM_pw());
+        mav.addObject("m_pw", buffer.toString());
+        String id=m_mail;
+        String pw=selectedPw.getM_pw();
+        System.out.println(pw);
+        email.setContent("비밀번호는 "+pw+" 입니다.");
+        email.setReceiver(m_mail);
+        email.setSubject(id+"님 비밀번호 찾기 메일입니다.");
+        emailSender.SendEmail(email);
+        return mav;
+    }
 }

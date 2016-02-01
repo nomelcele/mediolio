@@ -21,10 +21,11 @@ private static final Log log = LogFactory.getLog(SessionModel.class);
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception { 
 		log.info("session체크");
 		HttpSession session  =  request.getSession();
-		int m_mail = (int)session.getAttribute("id");
-		System.out.println("로그인 성공!");
-		log.info("현재 로그인하려는 m_mail = "+m_mail);
-		if ( m_mail == 0) {		//session check
+		//int m_id = (int)session.getAttribute("id");
+		System.out.println("로그인 상태");
+		//log.info("현재 로그인하려는 m_id = "+m_id);
+		log.info("현재 로그인하려는 m_id = "+session.getAttribute("id"));
+		if ( session.getAttribute("id") == null) {		//session check
 			response.sendRedirect("menu=login");
 			return false;
 		}
