@@ -6,10 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.container { width: 500px; clear: both;}
-.container input {width: 100%;clear: both;}
-#wrapper {margin: 0 auto; width: 400px;}
-#wrapper2 {margin: 0 auto; width: 200px;}
+.coverImg_box{width:180px; height:180px; display:block;}
 </style>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/jquery.Jcrop.js"></script>
@@ -51,6 +48,7 @@ function fileCheck(){
         //배열에 추출한 확장자가 존재하는지 체크
         if($.inArray(ext, ['png', 'jpg', 'jpeg']) == -1) {
             window.alert('png, jpg, jpeg 만 업로드 가능합니다.');
+            $('#cover_img').val("");
         } else {
             var file = $('#cover_img').prop("files")[0];
             blobURL = window.URL.createObjectURL(file);
@@ -78,7 +76,9 @@ $(function (){
 	<input type="hidden" id="preview_w"name="w" value=""/>
 	<input type="hidden" id="preview_h"name="h" value=""/>
 </form>
+<div class="coverImg_box">
 
+</div>
 
 </body>
 </html>
