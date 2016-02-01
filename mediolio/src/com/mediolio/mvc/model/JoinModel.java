@@ -30,6 +30,20 @@ public class JoinModel {
 	public ModelAndView gotoJoin(){
 		return new ModelAndView("/login/join");
 	}
+	@RequestMapping("/menu=loginsuccess")
+	public ModelAndView gotoTestmain(){
+		return new ModelAndView("/login/loginsuccess");
+	}
+/*	@RequestMapping("/logout")
+	public ModelAndView logout(HttpSession session) throws Exception{
+		ModelAndView mav = new ModelAndView("redirect:menu=nonlogin");
+		session.invalidate();
+		return mav;
+	}*/
+	@RequestMapping("/menu=nonlogin")
+	public ModelAndView gotoTestnonlogin(){
+		return new ModelAndView("/login/nonlogin");
+	}
 	
 	@RequestMapping(value="InsertJoinInfo", method = RequestMethod.POST)
 	public ModelAndView InsertJoinInfo(MemberVO mevo, HttpSession session){
@@ -43,10 +57,10 @@ public class JoinModel {
 		ModelAndView mav = new ModelAndView("jsonView");
 		int insertedJoininfo = jdao.InsertJoinInfo(mevo);
 		mav.addObject("m_id", insertedJoininfo);
-		/*if(insertedJoininfo!=0){
+		if(insertedJoininfo!=0){
 			session.setAttribute("id", insertedJoininfo);
 			session.setAttribute("pw", mevo.getM_pw());
-		}*/
+		}
 		return mav;
 	}
 	
@@ -55,11 +69,31 @@ public class JoinModel {
 		ModelAndView mav = new ModelAndView("jsonView");
 		System.out.println(m_mail);
 		String Isdouble = jdao.DoubleInfo(m_mail);
-		System.out.println(Isdouble);
 		if(Isdouble==null){
 			Isdouble = "0";
 		}
 		mav.addObject("m_id", Isdouble);
 		return mav;
+	}
+	
+	@RequestMapping(value = "LoginInfo")
+	public ModelAndView LoginInfo(String m_mail, String pw, HttpSession session){
+		ModelAndView mav = new ModelAndView("jsonView");
+		MemberVO selectedPw = jdao.LoginInfo(m_mail);
+		//System.out.println(selectedPw);
+		if(selectedPw!=null){
+			mav.addObject("m_pw", selectedPw.getM_pw());
+			mav.addObject("m_id", selectedPw.getM_id());
+			if(selectedPw.getM_pw().equals(pw)){
+				session.setAttribute("id", selectedPw.getM_id());
+				session.setAttribute("pw", pw);
+			}
+			return mav;
+		}
+		else{
+			mav.addObject("m_id", null);
+			mav.addObject("m_pw","0");
+			return mav;
+		}
 	}
 }

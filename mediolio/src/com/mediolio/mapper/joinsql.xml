@@ -7,11 +7,17 @@
     <select id="select_m_id" resultType="int">
 		SELECT MAX(m_id) FROM MEMBER 
 	</select>
-  	<insert id="InsertJoinInfo" parameterType="mevo">
-		INSERT INTO MEMBER VALUES(M_ID_SEQ.NEXTVAL, #{m_mail}, #{m_pw}, #{m_nickname}, #{m_gender}, #{m_studentID}, null, #{m_introduce}, SYSDATE)
+
+	<insert id="InsertJoinInfo" parameterType="mevo">
+		INSERT INTO MEMBER (m_mail,m_pw,m_nickname,m_gender,m_studentID,m_interestingPart,m_introduce,m_joindate) VALUES(#{m_mail}, #{m_pw}, #{m_nickname}, #{m_gender}, #{m_studentID}, null, #{m_introduce}, SYSDATE())
 	</insert>
   
   	<select id="doubleInfo" resultType="string" parameterType="string" >
-		SELECT count(m_id) FROM ACCOUNT WHERE m_mail=#{m_mail}
+		SELECT count(m_id) FROM MEMBER WHERE m_mail=#{m_mail}
 	</select>
+	
+	<select id="loginIdentify" resultType="mevo" parameterType="String" >
+		SELECT m_pw,m_id FROM MEMBER WHERE m_mail=#{m_mail}
+	</select>
+	
   </mapper>
