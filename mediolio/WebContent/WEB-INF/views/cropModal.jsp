@@ -20,7 +20,6 @@
 
 </style>
 <script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/jquery.form.js"></script>
 <script src="js/jquery.Jcrop.js"></script>
 <script type="text/javascript">
 
@@ -91,7 +90,11 @@
 			dataType : "json",
 			async:false,
 			success: function(result){
-				$('.coverImg_box').append('<img src="resources/images/projectCover/'+result.result+'">');
+				if(result.result == "fail") alert("이미지 크롭에 실패하였습니다.");
+				else{
+					$('.coverImg_box').empty().append('<img src="resources/images/projectCover/'+result.result+'" class="">');
+					$('#p_coverImg').val(result.result);
+				}
 				$('#crop').remove();
 			}
 		});
