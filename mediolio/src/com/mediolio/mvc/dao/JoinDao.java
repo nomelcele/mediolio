@@ -1,13 +1,16 @@
 package com.mediolio.mvc.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mediolio.vo.MemberVO;
 
+
 @Repository
 public class JoinDao {
 	
+	@Autowired
 	private SqlSessionTemplate st;
 	
 	public int InsertJoinInfo(MemberVO mevo){
@@ -18,5 +21,9 @@ public class JoinDao {
 	
 	public String DoubleInfo(String m_mail) {
 		return st.selectOne("join.doubleInfo",m_mail);
+	}
+	
+	public MemberVO LoginInfo(String m_mail) {
+		return st.selectOne("join.loginIdentify",m_mail);
 	}
 }
