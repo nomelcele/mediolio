@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import com.mediolio.vo.MemberVO;
 
 
+
+
 @Repository
 public class JoinDao {
 	
@@ -25,5 +27,9 @@ public class JoinDao {
 	
 	public MemberVO LoginInfo(String m_mail) {
 		return st.selectOne("join.loginIdentify",m_mail);
+	}
+	
+	public void sendEmailAction (MemberVO mevo){
+		st.update("join.sendpw",mevo);
 	}
 }
