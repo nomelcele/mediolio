@@ -1,17 +1,6 @@
-INSERT into SUBCATEGORY (sc_name, sc_parent) values ('디자인',4);
-INSERT into SUBCATEGORY (sc_name, sc_parent) values ('컴퓨터 그래픽스',6);
-INSERT into SUBCATEGORY (sc_name, sc_parent) values ('사운드',7);
-
-ALTER TABLE reply add p_id int(10); 
-ALTER TABLE message add msg_read VARCHAR(2);
-
-CREATE TABLE NOTIFICATION(
-	noti_id int(10) PRIMARY KEY auto_increment,
-	m_id int(10),
-	noti_type VARCHAR(10),
-	noti_target int(10)
-);
-ALTER TABLE NOTIFICATION CHARACTER SET utf8 COLLATE utf8_general_ci;
+drop table notification;
+ALTER TABLE member_action add act_date DATE;
+ALTER TABLE member_action add act_read VARCHAR(2);
 
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('기획',1);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('개발',1);
@@ -23,6 +12,9 @@ INSERT into SUBCATEGORY (sc_name, sc_parent) values ('모델링',3);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('애니메이션',3);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('기획',5);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('개발',5);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('디자인',4);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('컴퓨터 그래픽스',6);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('사운드',7);
 
 INSERT into CATEGORY (cate_name) values ('게임');
 INSERT into CATEGORY (cate_name) values ('영상');
@@ -56,7 +48,9 @@ CREATE TABLE MEMBER_ACTION(
   act_id int(10) PRIMARY KEY auto_increment,
   act_type VARCHAR(10),
   m_id int(10),
-  act_target int(10)
+  act_target int(10),
+  act_date DATE,
+  act_read VARCHAR(2)
 );
 
 CREATE TABLE PROJECT(	
