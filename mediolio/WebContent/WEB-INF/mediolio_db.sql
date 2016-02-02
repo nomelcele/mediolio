@@ -1,3 +1,7 @@
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('디자인',4);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('컴퓨터 그래픽스',6);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('사운드',7);
+
 ALTER TABLE reply add p_id int(10); 
 ALTER TABLE message add msg_read VARCHAR(2);
 
