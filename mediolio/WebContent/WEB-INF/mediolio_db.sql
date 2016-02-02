@@ -1,3 +1,22 @@
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('기획',1);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('개발',1);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('시나리오',2);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('연출',2);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('촬영',2);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('OAP',2);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('모델링',3);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('애니메이션',3);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('기획',5);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('개발',5);
+
+INSERT into CATEGORY (cate_name) values ('게임');
+INSERT into CATEGORY (cate_name) values ('영상');
+INSERT into CATEGORY (cate_name) values ('3D');
+INSERT into CATEGORY (cate_name) values ('디자인');
+INSERT into CATEGORY (cate_name) values ('웹&앱');
+INSERT into CATEGORY (cate_name) values ('컴퓨터 그래픽스');
+INSERT into CATEGORY (cate_name) values ('사운드');
+
 CREATE TABLE SUBCATEGORY(
   sc_id int(5) PRIMARY KEY auto_increment,
   sc_name VARCHAR(30),
