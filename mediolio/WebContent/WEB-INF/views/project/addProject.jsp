@@ -18,6 +18,7 @@
 </style>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/jscolor.min.js"></script>
+<script type="text/javascript" src="js/jquery.form.js"></script>
 <script>
 	var txtId = 0;
 
@@ -29,9 +30,15 @@
 			console.log(file);
 			blobURL = window.URL.createObjectURL(file);
 			if($.inArray(ext,['gif','png','jpg','jpeg']) == -1){
-				// doc, pdf, ppt
-				$(".tempFilePath").attr("href",blobURL);
-				$("#docViewer").attr("src",blobURL);
+				// doc, pdf, ppt 파일
+				// 미리보기 영역에 뷰어 표시
+				$("#viewerForm").submit();
+				
+				$("#viewerForm").ajaxForm({
+					success: function(jdata){
+						$(".writeBox").append("<div><iframe src='"+jdata+"'/></div>");				
+					}
+				});
 			} else {
 				// 이미지 파일
 				// 미리보기 영역에 이미지 표시
@@ -75,7 +82,7 @@
 			+"<li class='txtAttr'><select class='txtStyle' onchange='changeTxtStyle(this)'>"
 			+"<option selected>스타일</option><option>bold</option><option>italic</option><option>underline</option>"
 			+"</select></li></ul></div>"
-			+"<div contenteditable='true' class='contentTxt' onfocusin='showTxtAttrArea(this)'>"
+			+"<div contenteditable='true' class='contentTxt' onfocusin='showTxtAttrArea(this)' id='txt"+txtId+"'>"
 			+$("#textContent").val()
 			+"</div></div>");
 		});
@@ -126,6 +133,7 @@
 		// 텍스트 색상 변경
 		// => 수정
 		var txtId = "#txt"+id;
+		console.log("텍스트 아이디: "+txtId);
 		$(txtId).css("color","#"+picker.toString());
 // 		document.getElementsByTagName('body')[0].style.color = '#' + picker.toString()
 	}
@@ -163,7 +171,9 @@
 			</div>
 			<div>
 				<div>
-					<input type="file" id="fileUpload">
+					<form id="viewerForm" action="showViewer" method="post" enctype="multipart/form-data">
+						<input type="file" id="fileUpload" name="projectFile">
+					</form>
 					<input type="button" id="tagBtn" value="embed">
 					<input type="button" id="textBtn" value="텍스트">
 				</div>
@@ -176,7 +186,7 @@
 					<input type="button" id="textAddBtn" value="텍스트 추가">
 				</div>				
 				<div class="writeBox">
-					<div class="contentTextBox" onmouseover="changeTxtAttr();">
+					<div class="contentTextBox">
 						<div class="changeTxtArea">
 							<ul>
 								<li class="txtAttr">

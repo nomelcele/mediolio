@@ -1,27 +1,90 @@
 package com.mediolio.mvc.model;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.swing.text.BoxView;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mediolio.mvc.dao.ProjectDao;
+import com.mediolio.viewer.BoxViewClient;
+import com.mediolio.viewer.BoxViewException;
+import com.mediolio.viewer.Document;
+import com.mediolio.viewer.Session;
 
 @Controller
 public class ProjectModel {
 	@Autowired
 	private ProjectDao pdao;
 	
+	private static BoxViewClient boxView;
+	
 	@RequestMapping(value="addProject")
 	public String addProject(){
 		return "project/addProject";
 	}
 	
-	@RequestMapping(value="dbTest")
-	public String dbTest(Model model){
-		pdao.insertTest();
-		model.addAttribute("test", pdao.selectTest());
-		return "project/addProject";
+//	@RequestMapping(value="dbTest")
+//	public String dbTest(Model model){
+//		pdao.insertTest();
+//		model.addAttribute("test", pdao.selectTest());
+//		return "project/addProject";
+//	}
+	
+	@RequestMapping(value="showViewer")
+	public void showViewer(MultipartFile projectFile, HttpSession session, HttpServletResponse response) throws IOException{
+		// doc, ppt, pdf 업로드 했을 때 뷰어 보여주기
+		String[] fileFullName = projectFile.getOriginalFilename().split("\\.");
+		System.out.println(projectFile.getOriginalFilename());
+		String fileName = fileFullName[0]; // 파일 이름
+		String fileExt = fileFullName[1]; // 파일 확장자
+		String newFileName = fileName+"_"+System.currentTimeMillis()+"."+fileExt;
+		System.out.println("New File Name: "+newFileName); // 새로운 파일 이름(중복 방지)
+		
+		String realPath = session.getServletContext().getRealPath("/");
+		StringBuffer path = new StringBuffer();
+		path.append(realPath).append(newFileName);
+		System.out.println("Upload Path: "+path.toString());
+		
+		File file = new File(path.toString());
+		file.mkdirs();
+		try {
+			projectFile.transferTo(file);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} 
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("name", newFileName);
+		params.put("nonSvg", true);
+		
+		try {
+			boxView = new BoxViewClient("3e7kxpyozin7r0kbknmiwa2dmpcoyq3w");
+			Document doc = boxView.upload(file, params);
+			Session viewSession = doc.createSession();
+			String viewUrl = viewSession.getViewUrl(); // 뷰어 url
+			System.out.println("View Url: "+viewUrl);
+			
+			PrintWriter pw = response.getWriter();
+			pw.write(viewUrl);
+			pw.flush();
+			pw.close();
+			
+		} catch (BoxViewException e) {
+			System.out.println("Failed");
+			e.printStackTrace();
+		}
+		
 	}
 
 }
