@@ -70,16 +70,121 @@ function fileValidation(){
 	}
 
 }
+function msgSend(){
+	$.ajax({
+		url: "msgSend",
+		type: "POST",
+		data: $('#msg_form').serialize(),
+		dataType : "json",
+		success: function(result){
+			alert("success");
+		}
+	});
+}
+function projectLike(){
+	$.ajax({
+		url: "projectLike",
+		type: "POST",
+		data: {p_id:$('#p_id').val()},
+		dataType : "json",
+		success: function(result){
+			$('#likeNum').val(result.likeNum);
+		}
+	});
+}
+
+function followMember(){
+	$.ajax({
+		url: "followMember",
+		type: "POST",
+		data: {m_id:$('#m_id').val()},
+		dataType : "json",
+		success: function(result){
+			alert("success");
+		}
+	});
+}
+
+function followCancel(){
+	$.ajax({
+		url: "followCancel",
+		type: "POST",
+		data: {m_id:$('#m_id').val()},
+		dataType : "json",
+		success: function(result){
+			alert("success");
+		}
+	});
+}
+
+function followCheck(){
+	$.ajax({
+		url: "followCheck",
+		type: "POST",
+		data: {m_id:$('#m_id').val()},
+		dataType : "json",
+		success: function(result){
+			if(result.isFollowed == 'y'){
+				$('.followCheck_result').text("팔로우 되어 있습니다.");
+			}else if(result.isFollowed == 'n'){
+				$('.followCheck_result').text("팔로우 된 상태가 아닙니다.");
+			}
+		}
+	});
+}
+
+function projectLikeCancel(){
+	$.ajax({
+		url: "projectLikeCancel",
+		type: "POST",
+		data: {p_id:$('#p_id').val()},
+		dataType : "json",
+		success: function(result){
+			alert("success");
+		}
+	});
+}
 
 $(function (){
-
+	$('.msgSend').click(msgSend);
+	$('.projectLike').click(projectLike);
+	$('.projectLikeCancel').click(projectLikeCancel);
+	$('.followMember').click(followMember);
+	$('.followCancel').click(followCancel);
+	$('.followCheck').click(followCheck);
 });
 
 
 </script>
 </head>
 <body>
+<div>
+	<h2>팔로우!!!</h2>
+	<span>팔로우 대상 m_id : </span><input type="text" value="2" id="m_id">
+	<input type="button" value="팔로우" class="followMember">
+	<input type="button" value="언팔로우" class="followCancel"><br>
+	<input type="button" value="팔로우여부" class="followCheck">
+	<span class="followCheck_result"></span>
+</div>
+<div>
+	<h2>좋아요!!!</h2>
+	<span>프로젝트ID : </span><input type="text" value="1" id="p_id"><br>
+	<span>좋아요 수 : </span><input type="text" id="likeNum">
+	<input type="button" value="좋아요" class="projectLike">
+	<input type="button" value="좋아요 취소" class="projectLikeCancel">
+</div>
+<div>
+	<h2>쪽지!!!</h2>
+	<form id="msg_form">
+		<span>to</span><input type="text" name="msg_to" value="1"><br>
+		<textarea name="msg_text"></textarea>
+		<input type="button" value="보내기" class="msgSend">
+		<input type="button" value="취소" class="msgCancel">
+	</form>
+</div>
+
 <div id="modalBox"></div>
+<h2>이미지 첨부!!!</h2>
 <form method="post" id="coverImg_form" enctype="multipart/form-data">
 	<input type="file" id="cover_img" name="coverImg" onchange="fileValidation()">
  	<input type="hidden" id="preview_url" name="preview_url">
@@ -92,6 +197,5 @@ $(function (){
 <div class="coverImg_box">
 
 </div>
-
 </body>
 </html>

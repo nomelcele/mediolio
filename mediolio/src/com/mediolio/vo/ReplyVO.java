@@ -1,9 +1,16 @@
 package com.mediolio.vo;
 
 public class ReplyVO {
-	private int r_id, m_id;
+	private int r_id, m_id, p_id;
 	private String r_text, r_date;
 	
+	
+	public int getP_id() {
+		return p_id;
+	}
+	public void setP_id(int p_id) {
+		this.p_id = p_id;
+	}
 	public int getR_id() {
 		return r_id;
 	}
