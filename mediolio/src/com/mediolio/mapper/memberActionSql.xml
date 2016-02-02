@@ -8,28 +8,35 @@
 	</insert>
 	
   	<insert id="projectLike" parameterType="mavo">
-		INSERT INTO member_action (act_type, m_id, act_target, act_date, act_read) VALUES ('like', #{m_id}, #{act_target}, now(), 'n')
+		INSERT INTO member_action (act_type, act_to, act_from, p_id, act_date, act_read) VALUES ('like', #{act_to}, #{act_from},#{p_id}, now(), 'n')
 	</insert>
 	
 	<delete id="projectLikeCancel" parameterType="mavo">
-		DELETE FROM member_action WHERE act_type='like' AND m_id=#{m_id} AND act_target=#{act_target}
+		DELETE FROM member_action WHERE act_type='like' AND act_from=#{act_from} AND p_id=#{p_id}
 	</delete>
 	
   	<select id="getProjectLike" parameterType="int" resultType="int">
-		SELECT count(*) from member_action WHERE act_type='like' AND act_target=#{act_target}
+		SELECT count(*) from member_action WHERE act_type='like' AND p_id=#{p_id}
 	</select>
 	
 	<insert id="followMember" parameterType="mavo">
-		INSERT INTO member_action (act_type, m_id, act_target, act_date, act_read) VALUES ('follow', #{m_id}, #{act_target}, now(), 'n')
+		INSERT INTO member_action (act_type, act_to, act_from, act_date, act_read) VALUES ('follow', #{act_to}, #{act_from}, now(), 'n')
 	</insert>
 	
 	<delete id="followCancel" parameterType="mavo">
-		DELETE FROM member_action WHERE act_type='follow' AND m_id=#{m_id} AND act_target=#{act_target}
+		DELETE FROM member_action WHERE act_type='follow' AND act_from=#{act_from} AND act_to=#{act_to}
 	</delete>
 	
 	<select id="followCheck" parameterType = "mavo" resultType="int">
-		SELECT count(*) from member_action WHERE act_type='follow' AND m_id=#{m_id} AND act_target=#{act_target}
+		SELECT count(*) from member_action WHERE act_type='follow' AND act_from=#{act_from} AND act_to=#{act_to}
 	</select>
 	
+	<insert id="submitReply" parameterType="rvo" useGeneratedKeys="true" keyProperty="r_id">
+		INSERT INTO reply (m_id, r_text, r_date, p_id) values (#{m_id}, #{r_text}, now(), #{p_id})
+	</insert>
+	
+	<insert id="actionReplySumbitted" parameterType="mavo">
+		INSERT INTO member_action (act_type, act_to, act_from, p_id, r_id, act_date, act_read) VALUES ('reply', #{act_to}, #{act_from}, #{p_id}, #{r_id}, now(), 'n')
+	</insert>
   </mapper>
   

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mediolio.mvc.dao.MemberActionDao;
 import com.mediolio.vo.Member_actionVO;
 import com.mediolio.vo.MessageVO;
+import com.mediolio.vo.ReplyVO;
 
 /*
  * Member Action : 쪽지 보내기, 좋아요, 팔로우, 푸쉬알림
@@ -32,14 +33,15 @@ public class MemberActionModel {
 	
 	//프로젝트 좋아요
 	@RequestMapping("projectLike")
-	public ModelAndView projectLike(@RequestParam("p_id") String p_id, HttpSession session){
+	public ModelAndView projectLike(@RequestParam("p_id") String p_id, @RequestParam("act_to") String act_to, HttpSession session){
 		ModelAndView mav = new ModelAndView("jsonView");
 		
 		System.out.println("projectID : " + p_id +", m_id : " + (int)session.getAttribute("id"));
 		
 		Member_actionVO maVo = new Member_actionVO();
-		maVo.setM_id((int)session.getAttribute("id"));
-		maVo.setAct_target(Integer.parseInt(p_id));
+		maVo.setAct_from((int)session.getAttribute("id"));
+		maVo.setAct_to(Integer.parseInt(act_to));
+		maVo.setP_id(Integer.parseInt(p_id));
 		
 		//좋아요 수 추가 & 현재 프로젝트의 좋아요 수 받아오기
 		mav.addObject("likeNum", maDao.projectLike(maVo));
@@ -48,12 +50,13 @@ public class MemberActionModel {
 	
 	//프로젝트 좋아요 취소
 	@RequestMapping("projectLikeCancel")
-	public ModelAndView projectLikeCancel(@RequestParam("p_id") String p_id, HttpSession session){
+	public ModelAndView projectLikeCancel(@RequestParam("p_id") String p_id, @RequestParam("act_to") String act_to, HttpSession session){
 		ModelAndView mav = new ModelAndView("jsonView");
 				
 		Member_actionVO maVo = new Member_actionVO();
-		maVo.setM_id((int)session.getAttribute("id"));
-		maVo.setAct_target(Integer.parseInt(p_id));
+		maVo.setAct_from((int)session.getAttribute("id"));
+		maVo.setAct_to(Integer.parseInt(act_to));
+		maVo.setP_id(Integer.parseInt(p_id));
 		
 		maDao.projectLikeCancel(maVo);
 		return mav;
@@ -66,8 +69,8 @@ public class MemberActionModel {
 		System.out.println("m_id to follow : " + m_id +", my m_id : " + (int)session.getAttribute("id"));
 		
 		Member_actionVO maVo = new Member_actionVO();
-		maVo.setM_id((int)session.getAttribute("id"));
-		maVo.setAct_target(Integer.parseInt(m_id));
+		maVo.setAct_from((int)session.getAttribute("id"));
+		maVo.setAct_to(Integer.parseInt(m_id));
 		maDao.followMember(maVo);
 		return mav;
 	}
@@ -79,8 +82,8 @@ public class MemberActionModel {
 		System.out.println("m_id to unfollow : " + m_id +", my m_id : " + (int)session.getAttribute("id"));
 		
 		Member_actionVO maVo = new Member_actionVO();
-		maVo.setM_id((int)session.getAttribute("id"));
-		maVo.setAct_target(Integer.parseInt(m_id));
+		maVo.setAct_from((int)session.getAttribute("id"));
+		maVo.setAct_to(Integer.parseInt(m_id));
 		maDao.followCancel(maVo);
 		return mav;
 	}
@@ -92,8 +95,8 @@ public class MemberActionModel {
 		int myId = (int)session.getAttribute("id");
 		
 		Member_actionVO maVo = new Member_actionVO();
-		maVo.setM_id(myId);
-		maVo.setAct_target(Integer.parseInt(m_id));
+		maVo.setAct_from(myId);
+		maVo.setAct_to(Integer.parseInt(m_id));
 		
 		//팔로우된 row가 있는지 체크
 		int isFollow = maDao.followCheck(maVo);
@@ -104,6 +107,21 @@ public class MemberActionModel {
 		}else{
 			mav.addObject("isFollowed", "n");
 		}
+		return mav;
+	}
+	
+	//댓글 달기
+
+	//쪽지 보내기
+	@RequestMapping("submitReply")
+	public ModelAndView submitReply(ReplyVO vo, @RequestParam("act_to") String act_to, HttpSession session){
+		System.out.println("들어옴");
+		int myId = (int)session.getAttribute("id");
+		vo.setM_id(myId);
+		ModelAndView mav = new ModelAndView("jsonView");
+		System.out.println("댓글 내용 : " + vo.getR_text() + ", projectID : " + vo.getP_id() + ", m_id : " + vo.getM_id());
+		
+		maDao.submitReply(vo, act_to);
 		return mav;
 	}
 }
