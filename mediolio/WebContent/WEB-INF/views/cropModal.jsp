@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Aspect Ratio with Preview Pane | Jcrop Demo</title>
-  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
- <link rel="stylesheet" href="resources/css/jquery.Jcrop.css" type="text/css" />
+<link rel="stylesheet" href="resources/css/jquery.Jcrop.css" type="text/css" />
 <style type="text/css">
 /* 모달 설정 */
 /* The modal's background */
@@ -16,7 +10,7 @@
 /* The modal box */
 .modal-dialog {display: table-cell; vertical-align: middle;}
 /* The modal's content */
-.modal-dialog .modal-content {margin: auto; background-color: #fff; position: relative; padding: 0; outline: 0; border: 1px #777 solid; text-align: justify; max-width:985px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius:10px; 
+.modal-dialog .modal-content {margin: auto; background-color: #fff; position: relative; padding: 0; outline: 0; border: 1px #777 solid; text-align: justify; max-width:1020px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius:10px; 
 
 </style>
 <script src="js/jquery-1.11.3.min.js"></script>
@@ -107,7 +101,7 @@
 <style type="text/css">
 /* jcrop 속성 */
 #preview-pane{ 
-  display: block; position: absolute; z-index: 2000; top: 10px; right: -280px; padding: 6px; border: 1px rgba(0,0,0,.4) solid; background-color: white;
+  display: block; position: absolute; z-index: 2000; /* top: 10px;  */right: -220px; padding: 6px; border: 1px rgba(0,0,0,.4) solid; background-color: white;
   -webkit-border-radius: 6px; -moz-border-radius: 6px; border-radius: 6px;
   -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2); -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
 }
@@ -117,8 +111,7 @@
 	width: 180px; height: 180px; overflow: hidden;
 }
 </style>
-</head>
-<body>
+
 <div id="crop" class="modal">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -139,6 +132,4 @@
 		</div>
 	</div>
 </div>
-</body>
-</html>
 
