@@ -1,21 +1,21 @@
-INSERT into SUBCATEGORY (sc_name, sc_parent) values ('±âÈ¹',1);
-INSERT into SUBCATEGORY (sc_name, sc_parent) values ('°³¹ß',1);
-INSERT into SUBCATEGORY (sc_name, sc_parent) values ('½Ã³ª¸®¿À',2);
-INSERT into SUBCATEGORY (sc_name, sc_parent) values ('¿¬Ãâ',2);
-INSERT into SUBCATEGORY (sc_name, sc_parent) values ('ÃÔ¿µ',2);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('ê¸°íš',1);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('ê°œë°œ',1);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('ì‹œë‚˜ë¦¬ì˜¤',2);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('ì—°ì¶œ',2);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('ì´¬ì˜',2);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('OAP',2);
-INSERT into SUBCATEGORY (sc_name, sc_parent) values ('¸ğµ¨¸µ',3);
-INSERT into SUBCATEGORY (sc_name, sc_parent) values ('¾Ö´Ï¸ŞÀÌ¼Ç',3);
-INSERT into SUBCATEGORY (sc_name, sc_parent) values ('±âÈ¹',5);
-INSERT into SUBCATEGORY (sc_name, sc_parent) values ('°³¹ß',5);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('ëª¨ë¸ë§',3);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('ì• ë‹ˆë©”ì´ì…˜',3);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('ê¸°íš',5);
+INSERT into SUBCATEGORY (sc_name, sc_parent) values ('ê°œë°œ',5);
 
-INSERT into CATEGORY (cate_name) values ('°ÔÀÓ');
-INSERT into CATEGORY (cate_name) values ('¿µ»ó');
+INSERT into CATEGORY (cate_name) values ('ê²Œì„');
+INSERT into CATEGORY (cate_name) values ('ì˜ìƒ');
 INSERT into CATEGORY (cate_name) values ('3D');
-INSERT into CATEGORY (cate_name) values ('µğÀÚÀÎ');
-INSERT into CATEGORY (cate_name) values ('À¥&¾Û');
-INSERT into CATEGORY (cate_name) values ('ÄÄÇ»ÅÍ ±×·¡ÇÈ½º');
-INSERT into CATEGORY (cate_name) values ('»ç¿îµå');
+INSERT into CATEGORY (cate_name) values ('ë””ìì¸');
+INSERT into CATEGORY (cate_name) values ('ì›¹&ì•±');
+INSERT into CATEGORY (cate_name) values ('ì»´í“¨í„° ê·¸ë˜í”½ìŠ¤');
+INSERT into CATEGORY (cate_name) values ('ì‚¬ìš´ë“œ');
 
 CREATE TABLE SUBCATEGORY(
   sc_id int(5) PRIMARY KEY auto_increment,
