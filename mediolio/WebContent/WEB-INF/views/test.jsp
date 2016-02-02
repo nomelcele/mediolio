@@ -85,7 +85,7 @@ function projectLike(){
 	$.ajax({
 		url: "projectLike",
 		type: "POST",
-		data: {p_id:$('#p_id').val()},
+		data: {p_id:$('#p_id').val(), act_to:$('#m_id').val()},
 		dataType : "json",
 		success: function(result){
 			$('#likeNum').val(result.likeNum);
@@ -137,7 +137,19 @@ function projectLikeCancel(){
 	$.ajax({
 		url: "projectLikeCancel",
 		type: "POST",
-		data: {p_id:$('#p_id').val()},
+		data: {p_id:$('#p_id').val(), act_to:$('#m_id').val()},
+		dataType : "json",
+		success: function(result){
+			alert("success");
+		}
+	});
+}
+
+function submitReply(){
+	$.ajax({
+		url: "submitReply",
+		type: "POST",
+		data: $('#reply_form').serialize()+"&act_to="+$('#m_id').val(),
 		dataType : "json",
 		success: function(result){
 			alert("success");
@@ -152,6 +164,7 @@ $(function (){
 	$('.followMember').click(followMember);
 	$('.followCancel').click(followCancel);
 	$('.followCheck').click(followCheck);
+	$('.submitReply').click(submitReply);
 });
 
 
@@ -159,8 +172,16 @@ $(function (){
 </head>
 <body>
 <div>
+	<h2>댓글!!!</h2>
+	<form id="reply_form">
+		<span>P_ID : </span><input type="text" value="1" name="p_id"><br>
+		<textarea name="r_text"></textarea>
+		<input type="button" value="댓글등록" class="submitReply">
+	</form>
+</div>
+<div>
 	<h2>팔로우!!!</h2>
-	<span>팔로우 대상 m_id : </span><input type="text" value="2" id="m_id">
+	<span>내가 팔로우 대상 m_id : </span><input type="text" value="2" id="m_id">
 	<input type="button" value="팔로우" class="followMember">
 	<input type="button" value="언팔로우" class="followCancel"><br>
 	<input type="button" value="팔로우여부" class="followCheck">
@@ -176,7 +197,7 @@ $(function (){
 <div>
 	<h2>쪽지!!!</h2>
 	<form id="msg_form">
-		<span>to</span><input type="text" name="msg_to" value="1"><br>
+		<span>to</span><input type="text" name="msg_to" value="2"><br>
 		<textarea name="msg_text"></textarea>
 		<input type="button" value="보내기" class="msgSend">
 		<input type="button" value="취소" class="msgCancel">

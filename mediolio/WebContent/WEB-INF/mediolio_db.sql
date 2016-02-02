@@ -1,6 +1,7 @@
-drop table notification;
-ALTER TABLE member_action add act_date DATE;
-ALTER TABLE member_action add act_read VARCHAR(2);
+ALTER TABLE member_action CHANGE act_target act_to INT(10);
+ALTER TABLE member_action CHANGE m_id act_from INT(10);
+ALTER TABLE member_action add p_id INT(10);
+ALTER TABLE member_action add r_id INT(10);
 
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('기획',1);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('개발',1);
