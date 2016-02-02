@@ -67,6 +67,87 @@ $(function(){
         }
 	});
 });
+
+var num=0;
+
+function subcat(value,count){
+	if($(".interesting"+count).children().hasClass("subcategory"+count)){
+		$(".subcategory"+count).remove();
+	}
+	if(value =="1"){
+		$(".interesting"+count).append("<span class = 'subcategory"+count+"'>"
+		+"<select>"
+		+"<option value='0' selected='selected'>세부관심분야</option>"	
+		+"<option value='1'>기획</option>"
+		+"<option value='2'>개발</option>"
+		+"</select>"
+		 +"</span>");
+	}
+	else if(value =="2"){
+		$(".interesting"+count).append("<span class = 'subcategory"+count+"'>"
+		+"<select>"
+		+"<option value='0' selected='selected'>세부관심분야</option>"	
+		+"<option value='3'>시나리오</option>"
+		+"<option value='4'>연출</option>"
+		+"<option value='5'>촬영</option>"
+		+"<option value='6'>OAP</option>"
+		+"</select>"
+		+"</span>");
+	}
+	else if(value =="3"){
+		$(".interesting"+count).append("<span class = 'subcategory"+count+"'>"
+		+"<select>"
+		+"<option value='0' selected='selected'>세부관심분야</option>"	
+		+"<option value='7'>모델링</option>"
+		+"<option value='8'>애니메이션</option>"
+		+"</select>"
+		+"</span>");
+	}
+	else if(value =="5"){
+		$(".interesting"+count).append("<span class = 'subcategory"+count+"'>"
+		+"<select>"
+		+"<option value='0' selected='selected'>세부관심분야</option>"	
+		+"<option value='9'>기획</option>"
+		+"<option value='10'>개발</option>"
+		+"</select>"
+		+"</span>");
+	}
+}
+
+function addcat(){
+	var sel1 = $(".interesting"+num+" select option:selected").val();
+	var sel2 = $(".subcategory"+num+" select option:selected").val();
+	var T_F=false;
+	
+	if(sel1=='1'||sel1=='2'||sel1=='3'||sel1=='5'){
+		if(sel2!='0')
+			T_F=true;
+		else
+			T_F=false;
+	}
+	else if(sel1=='0')
+		T_F=false;
+	else{
+		T_F=true;
+	}
+	
+	if(num<2&&T_F==true){
+	num++;
+	$(".interest").append("<div class = 'interesting"+num+"'>"
+	+"<select class = 'printerest"+num+"' onchange='subcat(this.value,"+num+")'>"
+	+"<option value='0' selected='selected'>관심분야</option>"	
+	+"<option value='1'>게임</option>"
+	+"<option value='2'>영상</option>"
+	+"<option value='3'>3D</option>"
+	+"<option value='4'>디자인</option>"
+	+"<option value='5'>웹&앱</option>"
+	+"<option value='6'>컴퓨터 그래픽스</option>"
+	+"<option value='7'>사운드</option>"
+	+"</select>"
+	+"</div>");
+	}
+}
+
 </script>
 </head>
 <body>
@@ -106,7 +187,45 @@ $(function(){
 </div>
 <br>
 관심분야
-
+<div class = "interest">
+<div class = 'interesting0'>
+<select class = 'printerest0' onchange='subcat(this.value,0)'>
+	<option value='0' selected='selected'>관심분야</option>	
+	<option value='1'>게임</option>
+	<option value='2'>영상</option>
+	<option value='3'>3D</option>
+	<option value='4'>디자인</option>
+	<option value='5'>웹&앱</option>
+	<option value='6'>컴퓨터 그래픽스</option>
+	<option value='7'>사운드</option>
+</select>
+</div>
+<!-- <span class = "subcategory">
+</span> -->
+<!-- <select name='m_ininterestingPart1'style = "display:none;">
+	<option value="0" selected="selected">세부관심분야</option>	
+	<option value="1">기획</option>
+	<option value="2">개발</option>
+</select>
+<select name='m_ininterestingPart2'style = "display:none;">
+	<option value="0" selected="selected">세부관심분야</option>	
+	<option value="3">시나리오</option>
+	<option value="4">연출</option>
+	<option value="5">촬영</option>
+	<option value="6">OAP</option>
+</select>
+<select name='m_ininterestingPart3'style = "display:none;">
+	<option value="0" selected="selected">세부관심분야</option>	
+	<option value="7">모델링</option>
+	<option value="8">애니메이션</option>
+</select>
+<select name='m_ininterestingPart4' style = "display:none;">
+	<option value="0" selected="selected">세부관심분야</option>	
+	<option value="9">기획</option>
+	<option value="10">개발</option>
+</select> -->
+</div>
+<input type = "button" value = "추가" class = "addbutton" onclick = "addcat()" >
 <br>
 학번
 <div>
