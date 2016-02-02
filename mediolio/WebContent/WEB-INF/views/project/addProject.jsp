@@ -27,18 +27,17 @@
 			// 파일 추가
 			var ext = $(this).val().split('.').pop().toLowerCase(); // 파일의 확장자
 			var file = $(this).prop("files")[0];
-			console.log(file);
 			blobURL = window.URL.createObjectURL(file);
 			if($.inArray(ext,['gif','png','jpg','jpeg']) == -1){
 				// doc, pdf, ppt 파일
 				// 미리보기 영역에 뷰어 표시
-				$("#viewerForm").submit();
-				
 				$("#viewerForm").ajaxForm({
+					dataType: "text",
+					url: "showViewer",
 					success: function(jdata){
-						$(".writeBox").append("<div><iframe src='"+jdata+"'/></div>");				
+						$(".writeBox").append("<div><iframe src='"+jdata+"' style='width:500px; height:500px;'/></div>");				
 					}
-				});
+				}).submit();
 			} else {
 				// 이미지 파일
 				// 미리보기 영역에 이미지 표시
