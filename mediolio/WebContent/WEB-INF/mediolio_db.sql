@@ -1,3 +1,14 @@
+ALTER TABLE reply add p_id int(10); 
+ALTER TABLE message add msg_read VARCHAR(2);
+
+CREATE TABLE NOTIFICATION(
+	noti_id int(10) PRIMARY KEY auto_increment,
+	m_id int(10),
+	noti_type VARCHAR(10),
+	noti_target int(10)
+);
+ALTER TABLE NOTIFICATION CHARACTER SET utf8 COLLATE utf8_general_ci;
+
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('기획',1);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('개발',1);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('시나리오',2);
@@ -17,12 +28,6 @@ INSERT into CATEGORY (cate_name) values ('웹&앱');
 INSERT into CATEGORY (cate_name) values ('컴퓨터 그래픽스');
 INSERT into CATEGORY (cate_name) values ('사운드');
 
-CREATE TABLE SUBCATEGORY(
-  sc_id int(5) PRIMARY KEY auto_increment,
-  sc_name VARCHAR(30),
-  sc_parent int(5)
-);
-ALTER TABLE subcategory CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 CREATE TABLE HASHTAG(
 	h_id int(10) PRIMARY KEY auto_increment,
@@ -73,9 +78,16 @@ CREATE TABLE CATEGORY(
   cate_name VARCHAR(30)
 );
 
+CREATE TABLE SUBCATEGORY(
+  sc_id int(5) PRIMARY KEY auto_increment,
+  sc_name VARCHAR(30),
+  sc_parent int(5)
+);
+
 CREATE TABLE REPLY(	
   r_id int(10) PRIMARY KEY auto_increment,
   m_id int(10),
+  p_id int(10),
   r_text VARCHAR(1000),
   r_date DATE
 );
@@ -85,9 +97,11 @@ CREATE TABLE MESSAGE(
   msg_from int(10),
   msg_to int(10),
   msg_text VARCHAR(1000),
-  msg_date DATE
+  msg_date date,
+  msg_read VARCHAR(2)
 );
 
+ALTER TABLE subcategory CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE category CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE content CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE member CHARACTER SET utf8 COLLATE utf8_general_ci;
