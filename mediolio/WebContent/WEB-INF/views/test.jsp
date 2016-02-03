@@ -68,8 +68,12 @@ function fileValidation(){
             };
         }
 	}
-
 }
+
+/*
+ * ***** 메세지 관련 시작 *****
+ * *********************
+ */
 function msgSend(){
 	$.ajax({
 		url: "msgSend",
@@ -82,16 +86,104 @@ function msgSend(){
 	});
 }
 
-function getMsgList(){
+function getMsgListReceived(){
 	$.ajax({
-		url: "getMsgList",
+		url: "getMsgListReceived",
 		dataType : "json",
 		success: function(result){
+			var msg = '';
+			$.each(result.list, function(index, entry){
+				var status;
+				if(entry.msg_to_status == 'no-read') status = '읽지 않음';
+				else if(entry.msg_to_status == 'read') status = '읽음';
+				msg += returnMsgList(entry.msg_id, entry.msg_from, entry.msg_to, entry.msg_text, entry.msg_date, entry.msg_to_status, status);
+			});
+			$('#appendMsg').empty().append(msg);
+		}
+	});
+}
+
+function getMsgListSent(){
+	$.ajax({
+		url: "getMsgListSent",
+		dataType : "json",
+		success: function(result){
+			var msg = '';
+			$.each(result.list, function(index, entry){
+				msg += returnMsgList(entry.msg_id, entry.msg_from, entry.msg_to, entry.msg_text, entry.msg_date, entry.msg_to_status, '보냄');
+			});
+			$('#appendMsg').empty().append(msg);
+		}
+	});
+}
+
+function returnMsgList(msg_id, msg_from, msg_to, msg_text, msg_date, msg_to_status, msg_status){
+	var aMsg = '';
+	aMsg += '<div class="sent">';
+	aMsg += '<span>"'+msg_status+'" - </span><span>'+msg_from+'가 '+ msg_to + '에게 보낸 쪽지' +' : </span>';
+	aMsg += '<span>'+msg_text+' </span>'+'<span> '+msg_date+'</span>';
+	aMsg += '<input type="hidden" value="'+msg_id+'" class="msg_id"><input type="hidden" value="'+msg_to_status+'" class="msg_to_status">';
+	aMsg += '<input type="hidden" value="'+msg_from+'" class="msg_from"><input type="hidden" value="'+msg_to+'" class="msg_to">';
+	if(msg_status == '보냄') aMsg += '<input type="button" value="읽음" class="readMsgSent"><input type="button" value="삭제" class="deleteMsgSent">';
+	else aMsg += '<input type="button" value="읽음" class="readMsgReceived"><input type="button" value="삭제" class="deleteMsgReceived">';
+	aMsg += '</div>';
+	return aMsg;
+}
+
+function deleteMsgSent($div){
+	$.ajax({
+		url: "deleteMsgSent",
+		type: "POST",
+		data: {msg_id:$div.find('input.msg_id').val()},
+		dataType : "json",
+		success: function(result){
+			$div.remove();
 			alert("success");
 		}
 	});
 }
 
+function deleteMsgReceived($div){
+	$.ajax({
+		url: "deleteMsgReceived",
+		type: "POST",
+		data: {msg_id:$div.find('input.msg_id').val()},
+		dataType : "json",
+		success: function(result){
+			$div.remove();
+			alert("success");
+		}
+	});
+}
+
+function readMsgReceived($div){
+	if($div.find('input.msg_to_status').val() == 'read') alert("이미 읽음");
+	else{
+		//안 읽은 쪽지일 때
+		$.ajax({
+			url: "readMsgReceived",
+			type: "POST",
+			data: {msg_id:$div.find('input.msg_id').val()},
+			dataType : "json",
+			success: function(result){
+				$div.find('span:first').text('"읽음" - ');
+				$div.find('input.msg_to_status').val('read');
+				alert("success");
+			}
+		});
+	}
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * ***** 메세지 관련 끝 *****
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+
+ 
+ /*
+  * ***** 좋아요 관련 시작 *****
+  * *********************
+  */
 function projectLike(){
 	$.ajax({
 		url: "projectLike",
@@ -104,6 +196,27 @@ function projectLike(){
 	});
 }
 
+function projectLikeCancel(){
+	$.ajax({
+		url: "projectLikeCancel",
+		type: "POST",
+		data: {p_id:$('#p_id').val(), act_to:$('#m_id').val()},
+		dataType : "json",
+		success: function(result){
+			alert("success");
+		}
+	});
+}
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * ***** 좋아요 관련 끝 *****
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+
+ 
+ /*
+  * ***** 팔로우 관련 시작 *****
+  * *********************
+  */
 function followMember(){
 	$.ajax({
 		url: "followMember",
@@ -143,19 +256,16 @@ function followCheck(){
 		}
 	});
 }
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * ***** 팔로우 관련 끝 *****
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
 
-function projectLikeCancel(){
-	$.ajax({
-		url: "projectLikeCancel",
-		type: "POST",
-		data: {p_id:$('#p_id').val(), act_to:$('#m_id').val()},
-		dataType : "json",
-		success: function(result){
-			alert("success");
-		}
-	});
-}
-
+ 
+ /*
+  * ***** 댓글 관련 시작 *****
+  * *********************
+  */
 function submitReply(){
 	$.ajax({
 		url: "submitReply",
@@ -211,10 +321,24 @@ function getReplyList(){
 		}
 	});
 }
-
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * ***** 댓글 관련 끝 *****
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+ 
 $(function (){
 	$('.msgSend').click(msgSend);
-	$('.getMsgList').click(getMsgList);
+	$('.getMsgListReceived').click(getMsgListReceived);
+	$('.getMsgListSent').click(getMsgListSent);
+	$('#appendMsg').on('click', '.deleteMsgReceived', function(){
+		deleteMsgReceived($(this).parent());
+	});
+	$('#appendMsg').on('click', '.deleteMsgSent', function(){
+		deleteMsgSent($(this).parent());
+	});
+	$('#appendMsg').on('click', '.readMsgReceived', function(){
+		readMsgReceived($(this).parent());
+	});
 	
 	$('.projectLike').click(projectLike);
 	$('.projectLikeCancel').click(projectLikeCancel);
@@ -267,7 +391,8 @@ $(function (){
 		<input type="button" value="보내기" class="msgSend">
 		<input type="button" value="취소" class="msgCancel">
 	</form>
-	<input type="button" value="내게 도착한 모든 메세지" class="getMsgList">
+	<input type="button" value="내게 도착한 모든 메세지" class="getMsgListReceived">
+	<input type="button" value="내가 보낸 모든 메세지" class="getMsgListSent">
 	<div id="appendMsg">
 	</div>
 </div>
