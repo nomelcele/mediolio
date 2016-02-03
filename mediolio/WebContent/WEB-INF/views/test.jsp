@@ -81,6 +81,17 @@ function msgSend(){
 		}
 	});
 }
+
+function getMsgList(){
+	$.ajax({
+		url: "getMsgList",
+		dataType : "json",
+		success: function(result){
+			alert("success");
+		}
+	});
+}
+
 function projectLike(){
 	$.ajax({
 		url: "projectLike",
@@ -152,21 +163,72 @@ function submitReply(){
 		data: $('#reply_form').serialize()+"&act_to="+$('#m_id').val(),
 		dataType : "json",
 		success: function(result){
+			$('#appendReply').append(returnReplyList(result.reply.m_id, result.reply.r_text, result.reply.r_date, result.reply.r_id));
+		}
+	});
+}
+
+function deleteReply($div){
+	//var reply_rid = $div.find('input.reply_rid').val();
+	$.ajax({
+		url: "deleteReply",
+		type: "POST",
+		data: {r_id:$div.find('input.reply_rid').val()},
+		dataType : "json",
+		success: function(result){
+			$div.remove();
 			alert("success");
+		}
+	});
+}
+
+function returnReplyList(m_id, r_text, r_date, r_id){
+	var resultDateTime = r_date;
+	var dateArr = resultDateTime.split(" ");
+	var date = dateArr[0].replace(/-/gi, ".");
+	var time = dateArr[1].substring(0, dateArr[1].lastIndexOf(":"));
+	var aReply = '';
+	aReply += '<div>';
+	aReply += '<span>M_ID : </span><span>'+ m_id +'</span><span> '+ r_text+' </span>'
+	aReply += '<span>'+ date +' '+time+'</span>';
+	aReply += '<input type="hidden" value="'+r_id+'" class="reply_rid"><input type="button" value="삭제" class="deleteReply">';
+	aReply += '</div>';
+	return aReply;
+}
+
+function getReplyList(){
+	$.ajax({
+		url: "getReplyList",
+		type: "POST",
+		data: {p_id:$('#p_id').val()},
+		dataType : "json",
+		success: function(result){
+			var replyList='';
+			$.each(result.list, function(index, entry){
+				replyList += returnReplyList(entry.m_id, entry.r_text, entry.r_date, entry.r_id);
+			});
+			$('#appendReply').empty().append(replyList);
 		}
 	});
 }
 
 $(function (){
 	$('.msgSend').click(msgSend);
+	$('.getMsgList').click(getMsgList);
+	
 	$('.projectLike').click(projectLike);
 	$('.projectLikeCancel').click(projectLikeCancel);
+	
 	$('.followMember').click(followMember);
 	$('.followCancel').click(followCancel);
 	$('.followCheck').click(followCheck);
+	
 	$('.submitReply').click(submitReply);
+	$('.getReplyList').click(getReplyList);
+	$('#appendReply').on('click', '.deleteReply', function(){
+		deleteReply($(this).parent());
+	});
 });
-
 
 </script>
 </head>
@@ -178,10 +240,13 @@ $(function (){
 		<textarea name="r_text"></textarea>
 		<input type="button" value="댓글등록" class="submitReply">
 	</form>
+	<input type="button" value="이 프로젝트의 모든 댓글 가져오기" class="getReplyList">
+	<div id="appendReply">		
+	</div>
 </div>
 <div>
 	<h2>팔로우!!!</h2>
-	<span>내가 팔로우 대상 m_id : </span><input type="text" value="2" id="m_id">
+	<span>내가 팔로우할 대상 m_id : </span><input type="text" value="2" id="m_id">
 	<input type="button" value="팔로우" class="followMember">
 	<input type="button" value="언팔로우" class="followCancel"><br>
 	<input type="button" value="팔로우여부" class="followCheck">
@@ -202,6 +267,9 @@ $(function (){
 		<input type="button" value="보내기" class="msgSend">
 		<input type="button" value="취소" class="msgCancel">
 	</form>
+	<input type="button" value="내게 도착한 모든 메세지" class="getMsgList">
+	<div id="appendMsg">
+	</div>
 </div>
 
 <div id="modalBox"></div>

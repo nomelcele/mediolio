@@ -7,6 +7,10 @@
 		INSERT INTO message (msg_from, msg_to, msg_text, msg_date, msg_read) VALUES (#{msg_from}, #{msg_to}, #{msg_text}, now(), 'n')
 	</insert>
 	
+	<select id="getMsgList" parameterType="int" resultType="msvo">
+		SELECT * FROM message WHERE m_id = #{m_id} ORDER BY m
+	</select>
+	
   	<insert id="projectLike" parameterType="mavo">
 		INSERT INTO member_action (act_type, act_to, act_from, p_id, act_date, act_read) VALUES ('like', #{act_to}, #{act_from},#{p_id}, now(), 'n')
 	</insert>
@@ -38,5 +42,21 @@
 	<insert id="actionReplySumbitted" parameterType="mavo">
 		INSERT INTO member_action (act_type, act_to, act_from, p_id, r_id, act_date, act_read) VALUES ('reply', #{act_to}, #{act_from}, #{p_id}, #{r_id}, now(), 'n')
 	</insert>
+	
+	<select id="selectInsertedReply" parameterType="int" resultType="rvo">
+		SELECT * FROM reply WHERE r_id = #{r_id}
+	</select>
+	
+	<delete id="deleteReply" parameterType="int">
+		DELETE FROM reply WHERE r_id=#{r_id}
+	</delete>
+	
+	<delete id="actionDeleteReply" parameterType="int">
+		DELETE FROM member_action WHERE r_id=#{r_id}
+	</delete>
+	
+	<select id="getReplyList" parameterType="int" resultType="rvo">
+		SELECT * FROM reply WHERE p_id=#{p_id} ORDER BY p_id DESC
+	</select>
   </mapper>
   
