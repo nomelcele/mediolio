@@ -1,16 +1,3 @@
-ALTER TABLE project MODIFY p_date datetime;
-ALTER TABLE member_action MODIFY act_date datetime;
-ALTER TABLE reply MODIFY r_date datetime;
-ALTER TABLE message MODIFY msg_date datetime;
-
-ALTER TABLE message drop msg_read;
-ALTER TABLE message add msg_from_status VARCHAR(10);
-ALTER TABLE message add msg_to_status VARCHAR(10);
-
-ALTER TABLE member_action CHANGE act_target act_to INT(10);
-ALTER TABLE member_action CHANGE m_id act_from INT(10);
-ALTER TABLE member_action add p_id INT(10);
-ALTER TABLE member_action add r_id INT(10);
 
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('기획',1);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('개발',1);
@@ -61,7 +48,7 @@ CREATE TABLE MEMBER_ACTION(
   act_to int(10),
   p_id int(10),
   r_id int(10),
-  act_date DATE,
+  act_date datetime,
   act_read VARCHAR(2)
 );
 
@@ -70,7 +57,7 @@ CREATE TABLE PROJECT(
   m_id int(10),
   p_title VARCHAR(300),
   cate_id int(5),
-  p_date DATE,
+  p_date datetime,
   p_viewnum int(10),
   p_coverImg VARCHAR(100)
 );
@@ -99,7 +86,7 @@ CREATE TABLE REPLY(
   m_id int(10),
   p_id int(10),
   r_text VARCHAR(1000),
-  r_date DATE
+  r_date datetime
 );
 
 CREATE TABLE MESSAGE(
@@ -107,8 +94,7 @@ CREATE TABLE MESSAGE(
   msg_from int(10),
   msg_to int(10),
   msg_text VARCHAR(1000),
-  msg_date date,
-  msg_read VARCHAR(2),
+  msg_date datetime,
   msg_from_status VARCHAR(10),
   msg_to_status VARCHAR(10)
 );
