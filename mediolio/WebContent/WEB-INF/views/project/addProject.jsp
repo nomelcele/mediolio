@@ -16,9 +16,13 @@
 	
 	.changeTxtArea{background-color:#CECACA; height:30px; display:none; margin:auto; width:70%;}
 	.txtAttr{float:left; text-align:center; width:33.3%;}
+	
+	.upBtn{position:absolute; left:45%;}
+	.downBtn{position:absolute; left:50%;}
+	.removeBtn{position:absolute; left:55%;}
 </style>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="js/jscolor.min.js"></script>
+<script type="text/javascript" src="js/jscolor.js"></script>
 <script type="text/javascript" src="js/jquery.form.js"></script>
 <script>
 	var txtId = 0;
@@ -59,6 +63,14 @@
 		$("#textBtn").click(function(){
 			// 텍스트 추가
 			$(".textBox").css("display","block");
+			
+			// 정렬하는 코드
+			var $wrapper = $('.writeBox');
+
+			$wrapper.find('.contentTextBox').sort(function (a, b) {
+			    return +a.getAttribute('data-sort') - +b.getAttribute('data-sort');
+			})
+			.appendTo( $wrapper );
 		});
 		
 		$("#textAddBtn").click(function(){
@@ -85,9 +97,13 @@
 			+"<div contenteditable='true' class='contentTxt' onfocusin='showTxtAttrArea(this)' id='txt"+txtId+"'>"
 			+$("#textContent").val()
 			+"</div></div>");
+			// $(".jscolor").init();
 			
-			jscolor.init();
+			
 		});
+		
+		
+		
 		
 		$(".contentTxt").focusin(function(){
 			// 텍스트에 포커스가 맞춰져 있을 경우 텍스트 속성 변경 창 표시
@@ -155,6 +171,28 @@
 			$(txtStyle).closest(".contentTextBox").find(".contentTxt").css("text-decoration","underline");	
 		}		
 	}
+	
+	function moveUpElement(ele){
+		// 엘리먼트 위로 이동
+		var element = ele;
+		console.log($(element).closest(".contentTextBox").attr("data-sort"));
+		var order = $(element).closest(".contentTextBox").attr("data-sort");
+		$(element).closest(".contentTextBox").attr("data-sort",order-1);
+	}
+	
+	function moveDownElement(ele){
+		// 엘리먼트 아래로 이동
+		var element = ele;
+		console.log($(element).closest(".contentTextBox").attr("data-sort"));
+		var order = $(element).closest(".contentTextBox").attr("data-sort");
+		$(element).closest(".contentTextBox").attr("data-sort",order+1);
+	}
+	
+	function removeElement(ele){
+		// 엘리먼트 삭제
+		var element = ele;
+		$(element).closest(".contentTextBox").remove();
+	}
 </script>
 </head>
 <body>
@@ -189,7 +227,10 @@
 					<input type="button" id="textAddBtn" value="텍스트 추가">
 				</div>				
 				<div class="writeBox">
-					<div class="contentTextBox">
+					<div class="contentTextBox" data-sort="2">
+						<a href="#" onclick="moveUpElement(this); return false;" class="upBtn">↑</a>
+						<a href="#" onclick="moveDownElement(this); return false;" class="downBtn">↓</a>
+						<a href="#" onclick="removeElement(this); return false;" class="removeBtn">X</a>
 						<div class="changeTxtArea">
 							<ul>
 								<li class="txtAttr">
@@ -223,9 +264,9 @@
 								</li>
 							</ul>
 						</div>
-						<div contenteditable="true" class="contentTxt" id="txt1">dfdfs</div>
+						<div contenteditable="true" class="contentTxt" id="txt1">첫번째</div>
 					</div>
-										<div class="contentTextBox">
+					<div class="contentTextBox" data-sort="1">
 						<div class="changeTxtArea">
 							<ul>
 								<li class="txtAttr">
@@ -259,7 +300,7 @@
 								</li>
 							</ul>
 						</div>
-						<div contenteditable="true" class="contentTxt" id="txt2">dfdfs</div>
+						<div contenteditable="true" class="contentTxt" id="txt2">두번째</div>
 					</div>
 				</div>
 			</div>
