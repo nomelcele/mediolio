@@ -9,7 +9,7 @@
 	</select>
 
 	<insert id="InsertJoinInfo" parameterType="mevo">
-		INSERT INTO MEMBER (m_mail,m_pw,m_nickname,m_gender,m_studentID,m_interestingPart,m_introduce,m_joindate) VALUES(#{m_mail}, #{m_pw}, #{m_nickname}, #{m_gender}, #{m_studentID}, null, #{m_introduce}, SYSDATE())
+		INSERT INTO MEMBER (m_mail,m_pw,m_nickname,m_gender,m_studentID,m_interestingPart,m_introduce,m_joindate) VALUES(#{m_mail}, #{m_pw}, #{m_nickname}, #{m_gender}, #{m_studentID}, #{m_interestingPart}, #{m_introduce}, SYSDATE())
 	</insert>
   
   	<select id="doubleInfo" resultType="string" parameterType="string" >
