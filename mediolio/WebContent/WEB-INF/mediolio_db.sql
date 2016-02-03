@@ -1,3 +1,12 @@
+ALTER TABLE project MODIFY p_date datetime;
+ALTER TABLE member_action MODIFY act_date datetime;
+ALTER TABLE reply MODIFY r_date datetime;
+ALTER TABLE message MODIFY msg_date datetime;
+
+ALTER TABLE message drop msg_read;
+ALTER TABLE message add msg_from_status VARCHAR(10);
+ALTER TABLE message add msg_to_status VARCHAR(10);
+
 ALTER TABLE member_action CHANGE act_target act_to INT(10);
 ALTER TABLE member_action CHANGE m_id act_from INT(10);
 ALTER TABLE member_action add p_id INT(10);
@@ -99,7 +108,9 @@ CREATE TABLE MESSAGE(
   msg_to int(10),
   msg_text VARCHAR(1000),
   msg_date date,
-  msg_read VARCHAR(2)
+  msg_read VARCHAR(2),
+  msg_from_status VARCHAR(10),
+  msg_to_status VARCHAR(10)
 );
 
 ALTER TABLE subcategory CHARACTER SET utf8 COLLATE utf8_general_ci;
