@@ -48,8 +48,10 @@ CREATE TABLE MEMBER(
 CREATE TABLE MEMBER_ACTION(
   act_id int(10) PRIMARY KEY auto_increment,
   act_type VARCHAR(10),
-  m_id int(10),
-  act_target int(10),
+  act_from int(10),
+  act_to int(10),
+  p_id int(10),
+  r_id int(10),
   act_date DATE,
   act_read VARCHAR(2)
 );
