@@ -14,7 +14,7 @@ import com.mediolio.vo.MessageVO;
 import com.mediolio.vo.ReplyVO;
 
 /*
- * Member Action : 쪽지 보내기, 좋아요, 팔로우, 푸쉬알림
+ * Member Action : 쪽지, 좋아요, 팔로우, 푸쉬알림
  */
 @Controller
 public class MemberActionModel {
@@ -28,6 +28,14 @@ public class MemberActionModel {
 		ModelAndView mav = new ModelAndView("jsonView");
 		System.out.println("메세지내용 : " + vo.getMsg_text() + ", from~to : " + vo.getMsg_from() + ", " + vo.getMsg_to());
 		maDao.msgSend(vo);
+		return mav;
+	}
+	
+	//나에게 온 쪽지 받아오기
+	@RequestMapping("getMsgList")
+	public ModelAndView getMsgList(HttpSession session){
+		ModelAndView mav = new ModelAndView("jsonView");
+		mav.addObject("list", maDao.getMsgList((int)session.getAttribute("id")));
 		return mav;
 	}
 	
@@ -111,17 +119,30 @@ public class MemberActionModel {
 	}
 	
 	//댓글 달기
-
-	//쪽지 보내기
 	@RequestMapping("submitReply")
 	public ModelAndView submitReply(ReplyVO vo, @RequestParam("act_to") String act_to, HttpSession session){
-		System.out.println("들어옴");
 		int myId = (int)session.getAttribute("id");
 		vo.setM_id(myId);
 		ModelAndView mav = new ModelAndView("jsonView");
-		System.out.println("댓글 내용 : " + vo.getR_text() + ", projectID : " + vo.getP_id() + ", m_id : " + vo.getM_id());
 		
-		maDao.submitReply(vo, act_to);
+		mav.addObject("reply", maDao.submitReply(vo, act_to));
+		System.out.println("댓글 내용 : " + vo.getR_text() + ", projectID : " + vo.getP_id() + ", m_id : " + vo.getM_id());
+		return mav;
+	}
+	
+	//댓글 삭제
+	@RequestMapping("deleteReply")
+	public ModelAndView deleteReply(@RequestParam("r_id") String r_id){
+		ModelAndView mav = new ModelAndView("jsonView");
+		maDao.deleteReply(Integer.parseInt(r_id));	
+		return mav;
+	}
+	
+	//프로젝트에 딸린 댓글 모두 가져오기
+	@RequestMapping("getReplyList")
+	public ModelAndView getReplyList(@RequestParam("p_id") String p_id){
+		ModelAndView mav = new ModelAndView("jsonView");
+		mav.addObject("list", maDao.getReplyList(Integer.parseInt(p_id))); 
 		return mav;
 	}
 }
