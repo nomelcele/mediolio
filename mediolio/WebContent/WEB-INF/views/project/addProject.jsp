@@ -17,14 +17,15 @@
 	.changeTxtArea{background-color:#CECACA; height:30px; display:none; margin:auto; width:70%;}
 	.txtAttr{float:left; text-align:center; width:33.3%;}
 	
-	.upBtn{position:absolute; left:45%;}
-	.downBtn{position:absolute; left:50%;}
-	.removeBtn{position:absolute; left:55%;}
+	.upBtn{}
+	.downBtn{}
+	.removeBtn{}
 </style>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="js/jscolor.js"></script>
+<script type="text/javascript" src="js/jscolor.min.js"></script>
 <script type="text/javascript" src="js/jquery.form.js"></script>
 <script>
+	var order = 0;
 	var txtId = 0;
 
 	$(function(){
@@ -40,13 +41,23 @@
 					dataType: "text",
 					url: "showViewer",
 					success: function(jdata){
-						$(".writeBox").append("<div><iframe src='"+jdata+"' style='width:500px; height:500px;'/></div>");				
+						order++;
+						$(".writeBox").append("<div class='contentBox' data-sort="+order+">"
+							+"<a href='#' onclick='moveUpElement(this); return false;' class='upBtn'>↑</a>"
+							+"<a href='#' onclick='moveDownElement(this); return false;' class='downBtn'>↓</a>"
+							+"<a href='#' onclick='removeElement(this); return false;' class='removeBtn'>X</a>"
+							+"<iframe src='"+jdata+"' style='width:500px; height:500px;'/></div>");				
 					}
 				}).submit();
 			} else {
 				// 이미지 파일
 				// 미리보기 영역에 이미지 표시
-				$(".writeBox").append("<div><img src='"+blobURL+"' style='display:block;'/></div>");				
+				order++;
+				$(".writeBox").append("<div class='contentBox' data-sort="+order+">"
+						+"<a href='#' onclick='moveUpElement(this); return false;' class='upBtn'>↑</a>"
+						+"<a href='#' onclick='moveDownElement(this); return false;' class='downBtn'>↓</a>"
+						+"<a href='#' onclick='removeElement(this); return false;' class='removeBtn'>X</a>"
+						+"<img src='"+blobURL+"' style='display:block;'/></div>");				
 			}
 		});
 		
@@ -57,31 +68,28 @@
 		
 		$("#mediaTagAddBtn").click(function(){
 			// 미디어 태그 표시(비디오 등)
-			$(".writeBox").append("<div>"+$("#mediaTagContent").val()+"</div>");
+			order++;
+			$(".writeBox").append("<div class='contentBox' data-sort="+order+">"
+					+"<a href='#' onclick='moveUpElement(this); return false;' class='upBtn'>↑</a>"
+					+"<a href='#' onclick='moveDownElement(this); return false;' class='downBtn'>↓</a>"
+					+"<a href='#' onclick='removeElement(this); return false;' class='removeBtn'>X</a>"
+					+$("#mediaTagContent").val()+"</div>");
 		});
 		
 		$("#textBtn").click(function(){
 			// 텍스트 추가
 			$(".textBox").css("display","block");
-			
-			// 정렬하는 코드
-			var $wrapper = $('.writeBox');
-
-			$wrapper.find('.contentTextBox').sort(function (a, b) {
-			    return +a.getAttribute('data-sort') - +b.getAttribute('data-sort');
-			})
-			.appendTo( $wrapper );
 		});
 		
 		$("#textAddBtn").click(function(){
 			// 텍스트 표시
-// 			$(".writeBox").append("<div class='contentText' contentEditable='true' onmouseover='changeTxtAttr();'>"
-// 			+"<div class='changeTxtArea'><ul><li class='txtAttr'><span>크기</span></li><li class='txtAttr'><span>색상</span></li><li class='txtAttr'><span>굵기</span></li></ul></div><div>"
-// 			+$("#textContent").val()
-// 			+"</div></div>");
 			txtId++;
 			
-			$(".writeBox").append("<div class='contentTextBox'>"
+			order++;
+			$(".writeBox").append("<div class='contentBox contentTextBox' data-sort="+order+">"
+			+"<a href='#' onclick='moveUpElement(this); return false;' class='upBtn'>↑</a>"
+			+"<a href='#' onclick='moveDownElement(this); return false;' class='downBtn'>↓</a>"
+			+"<a href='#' onclick='removeElement(this); return false;' class='removeBtn'>X</a>"
 			+"<div class='changeTxtArea'><ul><li class='txtAttr'>"
 			+"<select class='txtSize' onchange='changeTxtSize(this)'><option selected>크기</option><option>10</option><option>11</option>"
 			+"<option>12</option><option>13</option><option>14</option>"
@@ -99,11 +107,7 @@
 			+"</div></div>");
 			// $(".jscolor").init();
 			
-			
 		});
-		
-		
-		
 		
 		$(".contentTxt").focusin(function(){
 			// 텍스트에 포커스가 맞춰져 있을 경우 텍스트 속성 변경 창 표시
@@ -175,23 +179,33 @@
 	function moveUpElement(ele){
 		// 엘리먼트 위로 이동
 		var element = ele;
-		console.log($(element).closest(".contentTextBox").attr("data-sort"));
-		var order = $(element).closest(".contentTextBox").attr("data-sort");
-		$(element).closest(".contentTextBox").attr("data-sort",order-1);
+		var order = $(element).closest(".contentBox").attr("data-sort");
+		$(element).closest(".contentBox").attr("data-sort",parseInt(order)-1);
+		sortElements();
 	}
 	
 	function moveDownElement(ele){
 		// 엘리먼트 아래로 이동
 		var element = ele;
-		console.log($(element).closest(".contentTextBox").attr("data-sort"));
-		var order = $(element).closest(".contentTextBox").attr("data-sort");
-		$(element).closest(".contentTextBox").attr("data-sort",order+1);
+		var order = $(element).closest(".contentBox").attr("data-sort");
+		$(element).closest(".contentBox").attr("data-sort",parseInt(order)+1);
+		sortElements();
 	}
 	
 	function removeElement(ele){
 		// 엘리먼트 삭제
 		var element = ele;
-		$(element).closest(".contentTextBox").remove();
+		$(element).closest(".contentBox").remove();
+	}
+	
+	function sortElements(){
+		// 순서에 따라 엘리먼트 정렬
+		var $wrapper = $('.writeBox');
+
+		$wrapper.find('.contentBox').sort(function (a, b) {
+		    return +a.getAttribute('data-sort') - +b.getAttribute('data-sort');
+		})
+		.appendTo($wrapper);
 	}
 </script>
 </head>
@@ -227,7 +241,7 @@
 					<input type="button" id="textAddBtn" value="텍스트 추가">
 				</div>				
 				<div class="writeBox">
-					<div class="contentTextBox" data-sort="2">
+					<div class="contentBox contentTextBox" data-sort="2">
 						<a href="#" onclick="moveUpElement(this); return false;" class="upBtn">↑</a>
 						<a href="#" onclick="moveDownElement(this); return false;" class="downBtn">↓</a>
 						<a href="#" onclick="removeElement(this); return false;" class="removeBtn">X</a>
@@ -266,7 +280,10 @@
 						</div>
 						<div contenteditable="true" class="contentTxt" id="txt1">첫번째</div>
 					</div>
-					<div class="contentTextBox" data-sort="1">
+					<div class="contentBox contentTextBox" data-sort="1">
+						<a href="#" onclick="moveUpElement(this); return false;" class="upBtn">↑</a>
+						<a href="#" onclick="moveDownElement(this); return false;" class="downBtn">↓</a>
+						<a href="#" onclick="removeElement(this); return false;" class="removeBtn">X</a>
 						<div class="changeTxtArea">
 							<ul>
 								<li class="txtAttr">
