@@ -19,10 +19,26 @@ public class MemberActionDao {
 		st.insert("ma.msgSend", vo);		
 	}
 
-	public List<MessageVO> getMsgList(int m_id) {
-		return st.selectList("ma.getMsgList", m_id);
+	public List<MessageVO> getMsgListReceived(int msg_to) {
+		return st.selectList("ma.getMsgListReceived", msg_to);
 	}
 	
+	public List<MessageVO> getMsgListSent(int msg_from) {
+		return st.selectList("ma.getMsgListSent", msg_from);
+	}
+
+	public void deleteMsgSent(int msg_id) {
+		st.update("ma.deleteMsgSent", msg_id);		
+	}
+	
+	public void deleteMsgReceived(int msg_id){
+		st.update("ma.deleteMsgReceived", msg_id);
+	}
+
+	public void readMsgReceived(int msg_id) {
+		st.update("ma.readMsgReceived", msg_id);
+	}
+
 	public int projectLike(Member_actionVO maVo) {
 		st.insert("ma.projectLike", maVo);
 		return st.selectOne("ma.getProjectLike", maVo.getP_id());

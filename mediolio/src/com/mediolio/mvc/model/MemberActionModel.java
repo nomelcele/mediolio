@@ -1,5 +1,7 @@
 package com.mediolio.mvc.model;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +34,42 @@ public class MemberActionModel {
 	}
 	
 	//나에게 온 쪽지 받아오기
-	@RequestMapping("getMsgList")
-	public ModelAndView getMsgList(HttpSession session){
+	@RequestMapping("getMsgListReceived")
+	public ModelAndView getMsgListReceived(HttpSession session){
 		ModelAndView mav = new ModelAndView("jsonView");
-		mav.addObject("list", maDao.getMsgList((int)session.getAttribute("id")));
+		mav.addObject("list", maDao.getMsgListReceived((int)session.getAttribute("id")));
+		return mav;
+	}
+	
+	//내가 보낸 쪽지 받아오기
+	@RequestMapping("getMsgListSent")
+	public ModelAndView getMsgListSent(HttpSession session){
+		ModelAndView mav = new ModelAndView("jsonView");
+		mav.addObject("list", maDao.getMsgListSent((int)session.getAttribute("id")));
+		return mav;
+	}
+	
+	//내가 보낸 쪽지 삭제하기
+	@RequestMapping("deleteMsgSent")
+	public ModelAndView deleteMsgSent(@RequestParam("msg_id") String msg_id){
+		ModelAndView mav = new ModelAndView("jsonView");
+		maDao.deleteMsgSent(Integer.parseInt(msg_id));
+		return mav;
+	}
+	
+	//내가 받은 쪽지 삭제하기
+	@RequestMapping("deleteMsgReceived")
+	public ModelAndView deleteMsgReceived(@RequestParam("msg_id") String msg_id){
+		ModelAndView mav = new ModelAndView("jsonView");
+		maDao.deleteMsgReceived(Integer.parseInt(msg_id));
+		return mav;
+	}
+	
+	//내가 받은 쪽지 읽음으로 업데이트
+	@RequestMapping("readMsgReceived")
+	public ModelAndView readMsgReceived(@RequestParam("msg_id") String msg_id){
+		ModelAndView mav = new ModelAndView("jsonView");
+		maDao.readMsgReceived(Integer.parseInt(msg_id));
 		return mav;
 	}
 	

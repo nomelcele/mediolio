@@ -2,8 +2,20 @@ package com.mediolio.vo;
 
 public class MessageVO {
 	private int msg_id, msg_from, msg_to;
-	private String msg_text, msg_date;
+	private String msg_text, msg_date, msg_to_status, msg_from_status;
 	
+	public String getMsg_to_status() {
+		return msg_to_status;
+	}
+	public void setMsg_to_status(String msg_to_status) {
+		this.msg_to_status = msg_to_status;
+	}
+	public String getMsg_from_status() {
+		return msg_from_status;
+	}
+	public void setMsg_from_status(String msg_from_status) {
+		this.msg_from_status = msg_from_status;
+	}
 	public int getMsg_id() {
 		return msg_id;
 	}
