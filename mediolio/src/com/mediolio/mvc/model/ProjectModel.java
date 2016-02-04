@@ -29,6 +29,11 @@ public class ProjectModel {
 	
 	private static BoxViewClient boxView;
 	
+	@RequestMapping(value="addProjectForm")
+	public String addForm(){
+		return "project/addProjectForm";
+	}
+	
 	@RequestMapping(value="addProject")
 	public String addProject(){
 		return "project/addProject";
