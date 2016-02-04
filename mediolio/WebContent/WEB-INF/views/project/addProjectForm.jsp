@@ -21,6 +21,7 @@
 <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="js/jquery.nice-select.js"></script>
 <script src="js/jquery-labelauty.js"></script>
+<script type="text/javascript" src="js/jquery.form.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/modal.js"></script>
 <script src="js/index.js"></script>    
@@ -141,9 +142,15 @@
         <div class="cardWindow_hd">UPLOAD PORTFOLIO</div>
         <div id="write_hd">
             <div id="write_category">
-                <select>
-                    <option value="male">카테고리1</option>
-                    <option value="female">카테고리2</option>
+                <select id="selectedCategory">
+                	<option>카테고리</option>
+                    <option value="1">게임</option>
+                    <option value="2">영상</option>
+                    <option value="3">3D</option>
+                    <option value="4">디자인</option>
+                    <option value="5">웹 & 앱</option>
+                    <option value="6">컴퓨터 그래픽스</option>
+                    <option value="7">사운드</option>
                 </select>
             </div><!--//write_category-->
             <div id="write_dCategory">
@@ -158,7 +165,11 @@
         <div id="write_bd">
             <a href="#" class="btn_circle" id="btn_addWrite"></a>
             <ul class="bubble" id="bubble_addWrite">
-                <li><a id="btn_addFile" href="#"><input type="file"/>파일 업로드</a></li>
+                <li>
+					<form id="viewerForm" action="showViewer" method="post" enctype="multipart/form-data">
+                		<a id="btn_addFile" href="#"><input type="file" id="contentFile" name="projectFile"/>파일 업로드</a>
+  					</form>
+                </li>
                 <li><a id="btn_addMedia" href="#" onclick="writeEmbedModalOpen()">미디어 추가</a></li>
                 <li><a id="btn_addText" href="#">텍스트 추가</a></li>
             </ul>
@@ -237,66 +248,14 @@
     </div>
     <div class="modal_bd modal_bd_dCategory" id="modal_bd_writeDCategory">
         <ul>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍게임프로그래밍게임프로그래밍</label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍</label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍</label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍</label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍</label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍</label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍</label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍ul </label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍</label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍</label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍</label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍ul </label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍</label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍</label>
-            </li>
-            <li>
-                <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                <label class="label_category">게임프로그래밍ul 1끝</label>
-            </li>
+<!--             <li> -->
+<!--                 <input type="checkbox" data-labelauty="게임프로그래밍"/> -->
+<!--                 <label class="label_category">게임프로그래밍</label> -->
+<!--             </li> -->
+<!--             <li> -->
+<!--                 <input type="checkbox" data-labelauty="게임프로그래밍"/> -->
+<!--                 <label class="label_category">게임프로그래밍</label> -->
+<!--             </li> -->
         </ul>
         
         

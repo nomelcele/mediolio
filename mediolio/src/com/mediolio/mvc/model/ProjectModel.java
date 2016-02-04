@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import com.mediolio.viewer.BoxViewClient;
 import com.mediolio.viewer.BoxViewException;
 import com.mediolio.viewer.Document;
 import com.mediolio.viewer.Session;
+import com.mediolio.vo.SubcategoryVO;
 
 @Controller
 public class ProjectModel {
@@ -38,13 +40,6 @@ public class ProjectModel {
 	public String addProject(){
 		return "project/addProject";
 	}
-	
-//	@RequestMapping(value="dbTest")
-//	public String dbTest(Model model){
-//		pdao.insertTest();
-//		model.addAttribute("test", pdao.selectTest());
-//		return "project/addProject";
-//	}
 	
 	@RequestMapping(value="showViewer")
 	public void showViewer(MultipartFile projectFile, HttpSession session, HttpServletResponse response) throws IOException{
@@ -90,6 +85,34 @@ public class ProjectModel {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@RequestMapping(value="subcategoryList")
+	public void subcategoryList(int sc_parent, HttpServletResponse response) throws IOException{
+		// 카테고리 선택 후 서브카테고리 추가 영역을 클릭했을 때
+		// 해당하는 서브카테고리의 목록 출력
+		List<SubcategoryVO> scList = pdao.subcategoryList(sc_parent);
+		int[] scIds = new int[scList.size()];
+		String[] scNames = new String[scList.size()];
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("[");
+		for(int i=0; i<scList.size(); i++){
+			scIds[i] = scList.get(i).getSc_id();
+			scNames[i] = scList.get(i).getSc_name();
+			sb.append("\"<input type='checkbox' value="+scIds[i]+" data-labelauty='"+scNames[i]+"'/>");
+			sb.append("<label class='label_category'>"+scNames[i]+"</label>");
+			sb.append("\"");
+			if(!(i == scList.size()-1)){
+				sb.append(",");
+			}
+		}
+		sb.append("]");
+		
+		PrintWriter pw = response.getWriter();
+		pw.write(sb.toString());
+		pw.flush();
+		pw.close();
 	}
 
 }

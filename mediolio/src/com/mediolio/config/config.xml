@@ -11,6 +11,7 @@
   		<typeAlias type="com.mediolio.vo.MessageVO" alias="msvo"/>
   		<typeAlias type="com.mediolio.vo.ProjectVO" alias="pvo"/>
   		<typeAlias type="com.mediolio.vo.ReplyVO" alias="rvo"/>
+  		<typeAlias type="com.mediolio.vo.SubcategoryVO" alias="scvo"/>
   	</typeAliases>
   </configuration>
   

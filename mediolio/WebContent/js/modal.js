@@ -121,9 +121,30 @@ function writeDCategoryModalOpen(){
 	$('#modal_writeDCategory').show();
     
     $('#btn_writeDCategory').on('click',function(){
-        $('.modal_bg, .modal').hide();
-    })
+    	console.log($(":checked"));
+    	$('.modal_bg, .modal').hide();
+    });
     
+    // 1. 선택한 카테고리를 가지고 세부 카테고리 검색
+    $.ajax({
+    	type: "POST",
+    	url: "subcategoryList",
+    	data: {
+    		sc_parent: $("#selectedCategory").val()
+    	},
+    	dataType: "json",
+    	success: function(jdata){
+    		var scList = jdata;
+    		var codes = "";
+    		for(var i=0; i<scList.length; i++){
+    			codes += "<li>"+scList[i]+"</li>";
+    		}
+    	    // 2. 세부 카테고리 목록 출력
+    	    $("#modal_bd_writeDCategory ul").html(codes);
+    	    $(":checkbox").labelauty({ label: false });
+    	}
+    });
+
 }    
     
 function writeEmbedModalOpen(){
