@@ -1,0 +1,67 @@
+@charset "utf-8";
+/* CSS Document */
+
+html, body{ width:100%; height:100%;}
+#header{ width:100%; height:40px; padding-top:10px; background-color:#222; position:fixed; z-index:10;}
+#headerWrap{ width:352px; height:30px; margin-right:20px; float:right; }
+
+#search_main, #btn_login, #select_main, #text_main{ float:left; }
+#btn_login{ width:70px;}
+#search_main{ margin-right:20px; }
+#select_main{ width:85px; height:24px;}
+#text_main{ width:120px; height:24px;}
+
+#selectWrap_main{ width:73px; padding-left:10px; height:22px; float:left; line-height:22px; margin-top:3px; margin-left:3px; background:#fff; border-radius:30px; font-size:12px; border:1px solid #999;}
+
+
+
+
+
+
+#aside{ width:210px; height:100%; background:#222; box-sizing:border-box; position:fixed; z-index:12; }
+
+#logoWrap{ width:100%; height:50px; background:#111;}
+.asideWrap{ width:190px; padding-left:20px;}
+
+#uploadWrap{ width:100%; height:60px; background:#444;}
+
+#categoryTitle{ height:25px; background:#111;}
+#categoryTitle p{ font:12px/25px 'Open Sans', sans-serif; color:#999; font-weight:bold;}
+
+#categoryWrap{ width:210px; }
+
+
+#userBox{ height:90px; background:#222; }
+#userBox p{ line-height:40px; background:url(../images/user.png) left 16px no-repeat; background-size:7.5%;}
+#userBox p a{ height:16px; line-height:16px; font:12px 'Open Sans', sans-serif; font-weight:bold; color:#eee; margin-left:20px; }
+#userBox p a:hover{ text-decoration:underline;}
+
+#userBox ul li{ float:left; width:35px; height:35px; margin-right:10px; }
+#userBox ul li#myPf{ background:#e64c3c; background-image:url(../images/myPortfolio.png); background-position:center center; background-repeat:no-repeat;}
+#userBox ul li#likePf{ background:#e17d25; background-image:url(../images/like.png); background-position:center center; background-repeat:no-repeat;}
+#userBox ul li#follow{ background:#f4c10f; background-image:url(../images/follow.png); background-position:center center; background-repeat:no-repeat;}
+#userBox ul li#message{ background:#29ae5d; margin-right:0; background-image:url(../images/message.png); background-position:center center; background-repeat:no-repeat;}
+
+#userBox ul li a{ width:35px; height:35px; }
+
+
+a#uploadPf{ display:block; width:100%; height:60px; font:12px 'Open Sans', sans-serif; letter-spacing:1px; font-weight:bold; color:#eee; line-height:60px; text-indent:23px; text-align:center; background:url(../images/write.png) 20px center no-repeat;}
+
+
+
+.nav_title{ height:40px; letter-spacing:1px; font-weight:400; color:#ccc; padding-left:20px; cursor:pointer; font-size:16px; font-family:'Open Sans', sans-serif; line-height:40px;}
+.nav_title span{ display:block; float:left; margin-right:10px; width:20px; height:40px; background-position:0 center; background-repeat:no-repeat;}
+#ct_game span{ background-image:url(../images/game.png);}
+#ct_video span{ background-image:url(../images/video.png);}
+#ct_sound span{ background-image:url(../images/sound.png);}
+#ct_webApp span{ background-image:url(../images/web.png);}
+#ct_design span{ background-image:url(../images/design.png);}
+#ct_3d span{ background-image:url(../images/_3d.png);}
+
+.choose_menuText{ color:#fff; background-color:#0f84cf;	}
+
+
+.nav_sub li{ height:25px; line-height:25px; text-indent:25px; background:#111;}
+.nav_sub li a{ font-family:'나눔고딕', 'Nanum Gothic', sans-serif; font-size:12px; color:#999;}
+.nav_sub li a:hover{ color:#eee;}
+.nav_selected{ background-position:-20px center;}

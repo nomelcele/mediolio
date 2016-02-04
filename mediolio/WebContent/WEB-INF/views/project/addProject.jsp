@@ -138,6 +138,24 @@
 				$(this).closest(".contentTextBox").find(".contentTxt").css("text-decoration","underline");	
 			}
 		});
+		
+		$("#hashtags").keyup(function(){
+			// 태그 입력시 자동 완성으로 태그 추천
+				// 1. 사용자가 입력한 문자열을 서버로 보낸다.
+				// 2. 서버에서는 hashtag 테이블을 조회,
+				// 사용자가 입력한 문자열로 시작하는 해시태그가 테이블에 존재하는지를 확인
+				// 3. 존재한다면 그 해시태그들을 select
+				// 4. 해시태그들을 보여줄 팝업의 html 태그 작성, printwriter에 입력
+				// 5. response에서 전달된 printwriter의 태그를 화면 상에 출력
+			$.ajax({
+				type: "POST",
+				url: "showHashtags",
+				dataType: "json",
+				success: function(jdata){
+					
+				}
+			});
+		});
 	});
 	
 	function showTxtAttrArea(txtObj){
@@ -322,7 +340,7 @@
 				</div>
 			</div>
 			<div>
-				<input type="text" placeholder="태그를 입력하세요.">
+				<input type="text" id="hashtags" placeholder="태그를 입력하세요.">
 			</div>
 		</div>
 	</fieldset>
