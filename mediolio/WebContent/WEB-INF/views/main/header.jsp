@@ -81,6 +81,7 @@
             	<div class="login_smallBox"></div>
             	<div id="selectWrap_gender">
                 	<select class="inputStyle2 input_join" id="input_gender" name="m_gender">
+                		<!-- <option value="" disabled selected style="display: none;">GENDER</option> -->
                     	<option value="male">MALE</option>
                     	<option value="female">FEMALE</option>
                 	</select>
