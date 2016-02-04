@@ -6,8 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <title>Insert title here</title>
+<link href="css/modal.css" rel="stylesheet" type="text/css"/>
 <script>
-$(function(){
+/* $(function(){
 	$('.l_button').on('click',function(){
 		var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 		var email = $('.mail').val();
@@ -41,11 +42,12 @@ $(function(){
 			});
 		} 	
 	});
-});
+}); */
 </script>
+<script src="js/modal.js"></script>
 </head>
 <body>
-			로그인
+<!-- 			로그인
 			<form action = "" method="post">
 				<div class = "l_id">
 					<input type = "text" name="m_mail" placeholder = "이메일을 입력하세요." onfocus="this.placeholder = ''" onblur="this.placeholder = '이메일을 입력하세요.'" class = "mail"/>
@@ -60,6 +62,32 @@ $(function(){
 			<div class = "other">
 				<div class = "join"><a href = "/mediolio/menu=join" target = "_self">회원가입</a></div>
 				<div class = "password"><a href = "/mediolio/menu=password" target = "_self">비밀번호 찾기</a></div>
-			</div>
+			</div> -->
+<div class="modal_bg"></div>
+<div class="modal_bg2"></div>
+    
+<div class="modal" id="modal_login">
+	<div class="modal_hd"></div> 
+    <div class="modal_bd" id="modal_bd_login">
+    	<div id="otherLoginWrap">
+            <a id="link_facebook" href="#"></a>
+            <span id="otherLogin">LOGIN WITH FACEBOOK</span>
+        </div>
+        
+        <div class="login_inputWrap" id="inputWrap_id">
+            <div class="login_smallBox"></div><input class="inputStyle2" type="text" placeholder="ID"/>
+        </div>
+        <div class="login_inputWrap" id="inputWrap_pw">
+            <div class="login_smallBox"></div><input class="inputStyle2" type="password" placeholder="PASSWORD"/>
+        </div>
+        
+        <input type="button" class="btnStyle2" id="btn_mdLogin" value="LOGIN"/>
+        
+        <p><a href="#">FIND PASSWORD</a></p>
+        
+        <hr>
+        <input type="button" class="btnStyle2" id="btn_mdJoin" value="JOIN" onClick="joinModalOpen()"/>
+    </div><!--//modal_bd -->
+</div><!--//modal_login-->
 </body>
 </html>
