@@ -45,7 +45,7 @@ private static final Log log = LogFactory.getLog(SessionModel.class);
 	public ModelAndView logout(HttpSession session) throws Exception{	
 		String curTime = new SimpleDateFormat("yyyy/MM/dd/HH:mm").format(new Date());	
 		log.info("logout 현재시간 : "+curTime);
-		ModelAndView mav = new ModelAndView("redirect:/menu=nonlogin");
+		ModelAndView mav = new ModelAndView("redirect:/main");
 		session.invalidate();			//session 종료(안에있는 데이터 다삭제)
 		System.out.println("로그아웃 성공");
 		return mav;		
