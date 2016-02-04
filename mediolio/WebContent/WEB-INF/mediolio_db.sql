@@ -1,3 +1,6 @@
+ALTER TABLE project ADD COLUMN sc_id INT(5);
+ALTER TABLE hashtag DROP COLUMN cate_id;
+
 
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('기획',1);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('개발',1);
