@@ -26,7 +26,9 @@
 <script src="js/write.js"></script>   
 </head>
 <body>
-<div id="header">
+<jsp:include page="./header.jsp"></jsp:include>
+<jsp:include page="./aside.jsp"></jsp:include>
+<!-- <div id="header">
 	<div id="headerWrap">
         <div class="inputStyle" id="search_main">
         	<div id="selectWrap_main">
@@ -38,9 +40,9 @@
            </div>
             <input class="input_in" id="text_main" type="text"/>
             <input class="btn_search" type="button" />
-        </div><!--//search_main-->
+        </div>//search_main
         <input class="btnStyle" id="btn_login" type="button" value="LOGIN" onClick="loginModalOpen()"/>
-    </div><!--//headerWrap-->
+    </div>//headerWrap
     
     
 </div>
@@ -56,13 +58,13 @@
             <li id="follow"><a href="#" class="indent">Follow</a></li>
             <li id="message"><a href="#" class="indent">Message</a></li>
         </ul>
-    </div><!--//userBox-->
+    </div>//userBox
     <div id="uploadWrap">
     	<a id="uploadPf" onclick="location='addProjectForm'; return false;" href="#">UPLOAD PORTFOLIO</a>
-    </div><!--//uploadWrap-->
+    </div>//uploadWrap
     <div class="asideWrap" id="categoryTitle">
     	<p>CATEGORY</p>
-    </div><!--//categoryTitle-->
+    </div>//categoryTitle
     
     <div id="categoryWrap">
         <ul id="nav_category">
@@ -130,9 +132,9 @@
                     <li><a href="#">tag</a>
                 </ul>
             </li>
-    	</ul><!--//nav_category-->
-	</div><!--//categoryWrap-->
-</div><!--//aside-->
+    	</ul>//nav_category
+	</div>//categoryWrap
+</div>//aside -->
     
 <!--<div id="navigator"></div>-->
 <div id="contentsWrap">
