@@ -37,6 +37,20 @@ function modalOpen(){
 function modalClose(){
     $('.modal_bg').css('z-index','100');
 	$('.modal_bg, .modal').hide();
+	
+	$('#mail').val("");
+	$('#pw').val("");
+	$('#id').val("");
+	$('#jpw').val("");
+	$('#jpw_correct').val("");
+	$('#m_nickname').val("");
+	$('#m_studentID').val("");
+	$('#btn_addBookmark').val("LIKE");
+	$(".current").text("GENDER");
+	$(":checkbox[name='check']:checked").each(function () {  
+		$(this).attr('checked', false);
+	});
+	
 }
 
 function loginModalOpen(){
@@ -51,6 +65,8 @@ function loginModalOpen(){
     
     $('#modal_login').css({ left: movImg_posX, top: movImg_posY });
 	$('.modal_bg, #modal_login').show();
+	
+
     
 	return false;
 }
@@ -70,10 +86,12 @@ function joinModalOpen(){
 	$('#modal_login').hide();
 	$('#modal_join').css({ left: movImg_posX, top: movImg_posY });
 	$('#modal_join').show();
+	
+	
     
-    $('#btn_mdJoinForm').on('click',function(){
+/*    $('#btn_mdJoinForm').on('click',function(){
         $('.modal_bg, .modal').hide();
-    })
+    })*/
     
     
 }
