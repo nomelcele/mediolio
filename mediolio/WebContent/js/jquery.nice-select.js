@@ -18,14 +18,35 @@
         var options = select.find('option');
         var selected = select.find('option:selected');
         
-        dropdown.find('.current').html(selected.data('display') || selected.text());
+        /*dropdown.find('.current').html(selected.data('display') || selected.text());*/
+        if(select.attr("id")=="input_gender"){
+        	dropdown.find('.current').html(selected.data('display') || "GENDER");
+        	options.each(function() {
+                var display = $(this).data('display');
+                dropdown.find('ul').append('<li class="option ' + '' + 
+                  '" data-value="' + $(this).val() + '' + '">' + 
+                  $(this).text() + '</li>');
+              
+              });
+        }
+        else{
+        	dropdown.find('.current').html(selected.data('display') || selected.text());
+            options.each(function() {
+                var display = $(this).data('display');
+                dropdown.find('ul').append('<li class="option ' + ($(this).is(':selected') ? 'selected' : '') + 
+                  '" data-value="' + $(this).val() + (display ? '" data-display="' + display : '') + '">' + 
+                  $(this).text() + '</li>');
+              
+              });
+        }
         
-        options.each(function() {
+/*        options.each(function() {
           var display = $(this).data('display');
           dropdown.find('ul').append('<li class="option ' + ($(this).is(':selected') ? 'selected' : '') + 
             '" data-value="' + $(this).val() + (display ? '" data-display="' + display : '') + '">' + 
             $(this).text() + '</li>');
-        });
+        
+        });*/
       }
     });
     
