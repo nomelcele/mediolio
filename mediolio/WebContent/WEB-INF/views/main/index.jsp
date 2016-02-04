@@ -58,7 +58,7 @@
         </ul>
     </div><!--//userBox-->
     <div id="uploadWrap">
-    	<a id="uploadPf" href="write.html">UPLOAD PORTFOLIO</a>
+    	<a id="uploadPf" onclick="location='addProjectForm'; return false;" href="#">UPLOAD PORTFOLIO</a>
     </div><!--//uploadWrap-->
     <div class="asideWrap" id="categoryTitle">
     	<p>CATEGORY</p>
