@@ -214,7 +214,7 @@
                 <div>
                     <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p>
                 </div>
-                <img src="images/default.png"/>
+                <img src="resources/images/default.png"/>
             </a>
         </div><!--//card_img-->
     	<div class="card_bd">
@@ -300,7 +300,7 @@
     
 </div>
 
-<div class="modal_bg"></div>
+<!-- <div class="modal_bg"></div>
 <div class="modal_bg2"></div>
     
 <div class="modal" id="modal_login">
@@ -324,11 +324,11 @@
         
         <hr>
         <input type="button" class="btnStyle2" id="btn_mdJoin" value="JOIN" onClick="joinModalOpen()"/>
-    </div><!--//modal_bd -->
-</div><!--//modal_login-->
+    </div>//modal_bd
+</div>//modal_login -->
 
 
-<div class="modal" id="modal_join">
+<!-- <div class="modal" id="modal_join">
 	<div class="modal_hd"></div> 
     <div class="modal_bd" id="modal_bd_login">
     	<div id="joinTitle">JOIN FORM</div>
@@ -368,8 +368,8 @@
         </div>
         <input type="button" class="btnStyle2" id="btn_mdJoinForm" value="JOIN"/>
         
-    </div><!--//modal_bd -->
-</div><!--//modal_join-->
+    </div>//modal_bd
+</div>//modal_join
 
     
 <div class="modal modal_dCategory" id="modal_likeCategory">
@@ -505,7 +505,7 @@
         </ul>
         
         
-    </div><!--//modal_bd_likeCategory -->
-</div><!--//_modal_likeCategory-->
+    </div>//modal_bd_likeCategory
+</div>//_modal_likeCategory -->
 </body>
 </html>
