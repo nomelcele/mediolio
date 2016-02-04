@@ -34,6 +34,11 @@ public class TestModel {
 		return new ModelAndView("test");
 	}
 	
+	@RequestMapping("pushTest")
+	public ModelAndView pushTest(){
+		return new ModelAndView("pushTest");
+	}
+	
 	@RequestMapping(value = "imgCrop_modal")
 	public String imgCrop_modal(Model model, @RequestParam("url") String url) throws IOException{
 		model.addAttribute("imgUrl", url);

@@ -327,6 +327,7 @@ function getReplyList(){
  */
  
 $(function (){
+	
 	$('.msgSend').click(msgSend);
 	$('.getMsgListReceived').click(getMsgListReceived);
 	$('.getMsgListSent').click(getMsgListSent);

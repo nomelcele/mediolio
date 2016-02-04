@@ -1,7 +1,5 @@
 package com.mediolio.mvc.model;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +75,6 @@ public class MemberActionModel {
 	@RequestMapping("projectLike")
 	public ModelAndView projectLike(@RequestParam("p_id") String p_id, @RequestParam("act_to") String act_to, HttpSession session){
 		ModelAndView mav = new ModelAndView("jsonView");
-		
 		System.out.println("projectID : " + p_id +", m_id : " + (int)session.getAttribute("id"));
 		
 		Member_actionVO maVo = new Member_actionVO();
