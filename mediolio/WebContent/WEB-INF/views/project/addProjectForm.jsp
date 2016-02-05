@@ -99,7 +99,10 @@
         <div id="write_ft">
             <div id="write_tagTitle">#</div>
             <div id="write_tag">
-                <input id="write_tagTxt" class="input_in" type="text" placeholder="태그를 입력하세요."/>
+            	<div id="write_tagArea">
+            		<div id="write_tagTxt"></div>
+            		<input id="write_tagInput" class="input_in" type="text" placeholder="태그를 입력하세요."/>
+            	</div>
 				<div class="autoCompleteBox"><ul id="autoCompleteArea"></ul></div>                
             </div>
         </div>

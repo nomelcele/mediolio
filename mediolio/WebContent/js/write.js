@@ -110,7 +110,7 @@ $('document').ready(function(){
     	}
     });
     
-    $("#write_tagTxt").keyup(function(){
+    $("#write_tagInput").keyup(function(){
     	// 태그 자동 완성
     	console.log("입력한 값: "+$(this).val());
     	$.ajax({
@@ -186,6 +186,7 @@ function changeTxtSize(select){
 function addTag(li){
 	// 자동 완성된 태그 클릭 시 태그 추가
 	var newTag = li;
-	var currentTags = $("#write_tagTxt").val();
-	$("#write_tagTxt").val(currentTags+" #"+$(newTag).find("span").html());
+//	var currentTags = $("#write_tagArea").html();
+	$("#write_tagTxt").append("<span>#"+$(newTag).find("span").html()+"</span>");
+	
 }
