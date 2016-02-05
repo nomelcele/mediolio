@@ -1,6 +1,5 @@
 $(function(){
 	$('#btn_mdJoinForm').on('click',function(){
-		alert($(".current").text())
 		/* var mail = $('.id input').val()+'@'+$('.adress input').val(); */
 		var mail = $('#id').val();
 		/* var pw = $('.passwordcorrect input').val(); */
@@ -32,7 +31,7 @@ $(function(){
 /*		else if($("#input_gender").val()!="male"&&$("#input_gender").val()!="female"){
 			alert('성별을 입력해주세요');
 		}*/
-		else if($(".current").text()=="TITLEGENDER"||$(".current").text()=="GENDERGENDER"){
+		else if($("#sel_gender").text()=="GENDER"){
 			alert('성별을 입력해주세요');
 		}
 		else if(stdid>16&&stdid<98||$("#m_studentID").val().length==0||$("#m_studentID").val().length==1){
