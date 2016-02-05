@@ -46,7 +46,7 @@ function modalClose(){
 	$('#m_nickname').val("");
 	$('#m_studentID').val("");
 	$('#btn_addBookmark').val("LIKE");
-	$(".current").text("GENDER");
+	$("#sel_gender").text("GENDER");
 	$(":checkbox[name='check']:checked").each(function () {  
 		$(this).attr('checked', false);
 	});
