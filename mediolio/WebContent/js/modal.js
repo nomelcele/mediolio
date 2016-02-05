@@ -175,29 +175,3 @@ function writeDCategoryModalOpen(){
 
 }    
     
-function writeEmbedModalOpen(){
-    var win_w = $(window).width();
-	var win_h = $(window).height();
-	
-	var movImg_w = $('#modal_writeEmbed').width();
-	var movImg_h = $('#modal_writeEmbed').height();
-	
-	var movImg_posX = (win_w - movImg_w)/2;
-	var movImg_posY = (win_h - movImg_h)/2;
-		
-	$('#modal_writeEmbed').css({ left: movImg_posX, top: movImg_posY });
-    $('.modal_bg').show();
-	$('#modal_writeEmbed').show();
-    
-    $('#btn_writeEmbed').on('click',function(){
-    	// 임베드 태그 등록
-        $('.modal_bg, .modal').hide();
-        $("#write_bd").append("<div class='contentBox' data-sort="+order+">"
-    			+"<ul class='text_toolBoxes content_toolBox'>"
-    			+"<li id='text_delete'><a href='#'></a></li>"
-    			+"<li id='text_up'><a href='#'></a></li>"
-    			+"<li id='text_down'><a href='#'></a></li></ul>"
-    			+$("#modal_bd_writeEmbed textarea").val()+"</div>");	
-    });
-    
-}
