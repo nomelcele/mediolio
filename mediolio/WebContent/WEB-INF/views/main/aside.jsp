@@ -10,7 +10,7 @@
 <div id="aside">
     <div id="logoWrap"></div>
 	<div class="asideWrap" id="userBox">
-    	<p><a href="#">12LEEYURA</a></p>
+    	<div id="user_idWrap"><a href="#" id="user_id">12LEEYURA</a></div>
         <ul>
         	<li id="myPf"><a href="#" class="indent">MyPortfolio</a></li>
             <li id="likePf"><a href="#" class="indent">Like</a></li>
