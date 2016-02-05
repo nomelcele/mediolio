@@ -18,7 +18,7 @@ $('document').ready(function(){
     
     //텍스트 추가 버튼 누르고 난 후 이벤트
     $('#btn_addText').on('click',function(){
-        $('#write_bd').append('<div class="write_textarea contentBox" contenteditable="true"></div><ul class="text_toolBoxes"><li id="text_size"><select id="select_fontSize"><option>10px</option><option>11px</option></select></li><li id="text_color"><a href="#"></a></li><li id="text_bold"><a href="#"></a></li><li id="text_italic"><a href="#"></a></li><li id="text_under"><a href="#"></a></li><li id="text_delete"><a href="#" onclick="removeElement(this); return false;"></a></li><li id="text_up"><a href="#" onclick="moveUpElement(this); return false;"></a></li><li id="text_down"><a href="#" onclick="moveDownElement(this); return false;"></a></li></ul>');
+        $('#write_bd').append('<div class="write_textarea contentBox" contenteditable="true" onmouseup="getSelectedText()"></div><ul class="text_toolBoxes"><li id="text_size"><select id="select_fontSize" onchange="changeTxtSize(this)"><option value="10">10px</option value="11"><option>11px</option></select></li><li id="text_color"><a href="#"></a></li><li id="text_bold"><a href="#"></a></li><li id="text_italic"><a href="#"></a></li><li id="text_under"><a href="#"></a></li><li id="text_delete"><a href="#" onclick="removeElement(this); return false;"></a></li><li id="text_up"><a href="#" onclick="moveUpElement(this); return false;"></a></li><li id="text_down"><a href="#" onclick="moveDownElement(this); return false;"></a></li></ul>');
        
         $('.text_toolBoxes').hide();
         $('select').niceSelect();
@@ -80,8 +80,39 @@ $('document').ready(function(){
 					+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
 					+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
 					+"<img src='"+blobURL+"' style='display:block;'/></div>");				
-		}    	
+		}    
+		
+		
+		$(".text_toolBoxes").hide();
+		
+        $('.contentBox').on('click', function(){
+            $(".text_toolBoxes").hide();
+            $(this).next().css('top', $(this).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
+            $(this).next().show();
+        });
+        
+        $('html').click(function(e) {   
+            if( !$(e.target).is( $('.write_textarea')) ) { 
+               if( !$(e.target).is( $('.write_textarea').find('*') ) ){                    
+                    if( !$(e.target).is( $('.text_toolBoxes').find('*') )){                    
+                        $(".text_toolBoxes").hide();
+                    }
+               }
+            }
+        });   
     	
+    });
+    
+    $("#selectedCategory").change(function(){
+    	// 카테고리 새로 선택했을 때 기존에 있던 세부카테고리 초기화
+    	if($("#write_dCategory a").html() != "세부 카테고리 선택.."){
+    		$("#write_dCategory a").html("세부 카테고리 선택..");
+    	}
+    });
+    
+    $("#write_tagTxt").keyup(function(){
+    	// 태그 자동 완성
+    	console.log($(this).val());
     });
     
 });
@@ -116,4 +147,17 @@ function sortElements(){
 	    return +a.getAttribute('data-sort') - +b.getAttribute('data-sort');
 	})
 	.appendTo($wrapper);
+}
+
+function getSelectedText(){
+	// 선택된 텍스트 출력
+//	console.log("선택된 텍스트: "+window.getSelection());
+	var obj = window.getSelection();
+//	$(obj).css("font-size","20px");
+}
+
+function changeTxtSize(select){
+	var txtSize = select;
+	var selectedTxt = window.getSelection();
+	$(txtSize).closest(".write_textarea").val().replace(selectedTxt,"<span>"+selectedTxt+"</span>");
 }

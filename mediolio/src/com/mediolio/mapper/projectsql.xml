@@ -12,4 +12,7 @@
   	<select id="subcategoryList" parameterType="int" resultType="scvo">
   		select sc_id, sc_name from subcategory where sc_parent=#{sc_parent}
   	</select>
+  	<select id="autocompleteTags" parameterType="String" resultType="hvo">
+  		select h_id, h_value from hashtag where h_value like '%'||#{h_value}||'%'
+  	</select>
   </mapper>
