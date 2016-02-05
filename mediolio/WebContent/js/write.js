@@ -18,16 +18,41 @@ $('document').ready(function(){
     
     //텍스트 추가 버튼 누르고 난 후 이벤트
     $('#btn_addText').on('click',function(){
-        $('#write_bd').append('<div class="write_textarea contentBox" contenteditable="true" onmouseup="getSelectedText()"></div><ul class="text_toolBoxes"><li id="text_size"><select id="select_fontSize" onchange="changeTxtSize(this)"><option value="10">10px</option value="11"><option>11px</option></select></li><li id="text_color"><a href="#"></a></li><li id="text_bold"><a href="#"></a></li><li id="text_italic"><a href="#"></a></li><li id="text_under"><a href="#"></a></li><li id="text_delete"><a href="#" onclick="removeElement(this); return false;"></a></li><li id="text_up"><a href="#" onclick="moveUpElement(this); return false;"></a></li><li id="text_down"><a href="#" onclick="moveDownElement(this); return false;"></a></li></ul>');
-       
+        $('#write_bd').append('<div class="write_textarea contentBox" contenteditable="true" onmouseup="getSelectedText()"></div>'
+        		+'<ul class="text_toolBoxes" id="text_toolBox">'
+        		+'<li id="text_size">'
+        		+'<select id="select_fontSize" onchange="changeTxtSize(this)">'
+        		+'<option value="10">10px</option value="11">'
+        		+'<option>11px</option>'
+        		+'</select></li>'
+        		+'<li id="text_color"><a href="#"></a></li>'
+        		+'<li id="text_bold"><a href="#"></a></li>'
+        		+'<li id="text_italic"><a href="#"></a></li>'
+        		+'<li id="text_under"><a href="#"></a></li></ul>'
+        		+'<ul class="text_toolBoxes content_toolBoxes" id="content_toolBox">'
+                +'<li id="text_up"><a href="#"></a></li>'
+                +'<li id="text_down"><a href="#"></a></li>'
+                +'<li id="text_delete"><a href="#"></a></li></ul>'
+        );
+        $(".content_toolBoxes").hide();
         $('.text_toolBoxes').hide();
         $('select').niceSelect();
+       
+        
         
         //div.write_textarea에 focus된 경우 툴박스 보이기
         $('.write_textarea').on('focus', function(){
+        	
+         	
+            $(".content_toolBoxes").hide();
             $(".text_toolBoxes").hide();
+            
             $(this).next().css('top', $(this).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
+            $(this).next().next().css('top', $(this).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
+            
             $(this).next().show();
+            $(this).next().next().show();
+            
         })
         
         //다른 곳을 클릭했을 때 툴박스 숨기기
@@ -35,12 +60,45 @@ $('document').ready(function(){
             if( !$(e.target).is( $('.write_textarea')) ) { 
                if( !$(e.target).is( $('.write_textarea').find('*') ) ){                    
                     if( !$(e.target).is( $('.text_toolBoxes').find('*') )){                    
-                        $(".text_toolBoxes").hide();
+                        $(".text_toolBoxes, .content_toolBoxes").hide();
                     }
                }
             }
-        });     
+        }); 
+       
+        
+        
+        
+        //div.write_textarea에 mouseover된 경우 content툴박스 보이기
+        $('.write_textarea').on('mouseover', function(){     	
+        	$(this).next().next().css('top', $(this).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
+            $(this).next().next().show();
+        })
+        
+       
+        
+        
+        var focused = document.activeElement;
+     	
+        $('html').mouseover(function(e) {   
+            if( !$(e.target).is( $('.write_textarea')) ) { 
+               if( !$(e.target).is( $('.write_textarea').find('*') ) ){                    
+                    if( !$(e.target).is( $('.text_toolBoxes').find('*') )){
+                    	$(".content_toolBoxes").hide();
+                    	document.activeElement.nextElementSibling.nextElementSibling.style.display = 'block';
+                    }
+               }
+            }
+        }); 
+        
+        
     })//끝- 텍스트 추가 버튼 누르고 난 후 이벤트
+    
+    
+    
+    
+    
+    
     
     $("#contentFile").change(function(){
     	// 파일(이미지, 문서) 추가
@@ -56,12 +114,29 @@ $('document').ready(function(){
 				success: function(jdata){
 					order++;
 					$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
-						+"<ul class='text_toolBoxes content_toolBox'>"
+						+"<ul class='content_toolBoxes' id='content_toolBox'>"
 						+"<li id='text_delete'><a href='#'></a></li>"
 						+"<li id='text_up'><a href='#'></a></li>"
 						+"<li id='text_down'><a href='#'></a></li></ul>"
 						+"<iframe src='"+jdata+"' style='width:500px; height:500px;'/></div>");				
-
+					
+					//contentBox에 mouseover된 경우 content툴박스 보이기
+				    $('.contentBox').on('mouseover', function(){ 
+				    	$('.content_toolBoxes',this).css('top', $(this).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
+				        $('.content_toolBoxes',this).show();
+				    })
+				    
+				 	//contentBox를 벗어난 경우 content툴박스 숨기기
+				    $('html').mouseover(function(e) {   
+				        if( !$(e.target).is( $('.contentBox')) ) { 
+				           if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
+				                if( !$(e.target).is( $('.content_toolBoxes').find('*') )){
+				                	$(".content_toolBoxes").hide();
+				                }
+				           }
+				        }
+				    }); 
+				    
 					/*
 					 * 	+"<a href='#' onclick='moveUpElement(this); return false;' class='upBtn'>↑</a>"
 						+"<a href='#' onclick='moveDownElement(this); return false;' class='downBtn'>↓</a>"
@@ -70,36 +145,43 @@ $('document').ready(function(){
 					 * */ 
 				}
 			}).submit();
+			
+			
+		    
 		} else {
 			// 이미지 파일
 			// 미리보기 영역에 이미지 표시
 			order++;
 			$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
-					+"<ul class='text_toolBoxes content_toolBox'>"
+					+"<ul class='content_toolBoxes' id='content_toolBox'>"
 					+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 					+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
 					+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
-					+"<img src='"+blobURL+"' style='display:block;'/></div>");				
+					+"<img src='"+blobURL+"' style='display:block;'/></div>");
+			
+			
+			//contentBox에 mouseover된 경우 content툴박스 보이기
+		    $('.contentBox').on('mouseover', function(){ 
+		    	$('.content_toolBoxes',this).css('top', $(this).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
+		        $('.content_toolBoxes',this).show();
+		    })
+		    
+		 	//contentBox를 벗어난 경우 content툴박스 숨기기
+		    $('html').mouseover(function(e) {   
+		        if( !$(e.target).is( $('.contentBox')) ) { 
+		           if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
+		                if( !$(e.target).is( $('.content_toolBoxes').find('*') )){
+		                	$(".content_toolBoxes").hide();
+		                }
+		           }
+		        }
+		    }); 
+		    
+		    
 		}    
 		
 		
-		$(".text_toolBoxes").hide();
 		
-        $('.contentBox').on('click', function(){
-            $(".text_toolBoxes").hide();
-            $(this).next().css('top', $(this).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
-            $(this).next().show();
-        });
-        
-        $('html').click(function(e) {   
-            if( !$(e.target).is( $('.write_textarea')) ) { 
-               if( !$(e.target).is( $('.write_textarea').find('*') ) ){                    
-                    if( !$(e.target).is( $('.text_toolBoxes').find('*') )){                    
-                        $(".text_toolBoxes").hide();
-                    }
-               }
-            }
-        });   
     	
     });
     
@@ -181,6 +263,53 @@ function changeTxtSize(select){
 	var txtSize = select;
 	var selectedTxt = window.getSelection();
 	$(txtSize).closest(".write_textarea").val().replace(selectedTxt,"<span>"+selectedTxt+"</span>");
+}
+
+function writeEmbedModalOpen(){
+	// 미디어 태그 추가
+    var win_w = $(window).width();
+	var win_h = $(window).height();
+	
+	var movImg_w = $('#modal_writeEmbed').width();
+	var movImg_h = $('#modal_writeEmbed').height();
+	
+	var movImg_posX = (win_w - movImg_w)/2;
+	var movImg_posY = (win_h - movImg_h)/2;
+		
+	$('#modal_writeEmbed').css({ left: movImg_posX, top: movImg_posY });
+    $('.modal_bg').show();
+	$('#modal_writeEmbed').show();
+    
+    $('#btn_writeEmbed').on('click',function(){
+    	// 임베드 태그 등록
+        $('.modal_bg, .modal').hide();
+        $("#write_bd").append("<div class='contentBox' data-sort="+order+">"
+    			+"<ul class='content_toolBoxes' id='content_toolBox'>"
+    			+"<li id='text_delete'><a href='#'></a></li>"
+    			+"<li id='text_up'><a href='#'></a></li>"
+    			+"<li id='text_down'><a href='#'></a></li></ul>"
+    			+$("#modal_bd_writeEmbed textarea").val()+"</div>");
+        
+      //contentBox에 mouseover된 경우 content툴박스 보이기
+        $('.contentBox').on('mouseover', function(){ 
+        	$('.content_toolBoxes',this).css('top', $(this).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
+            $('.content_toolBoxes',this).show();
+        })
+        
+     	//contentBox를 벗어난 경우 content툴박스 숨기기
+        $('html').mouseover(function(e) {   
+            if( !$(e.target).is( $('.contentBox')) ) { 
+               if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
+                    if( !$(e.target).is( $('.content_toolBoxes').find('*') )){
+                    	$(".content_toolBoxes").hide();
+                    }
+               }
+            }
+        }); 
+    });
+    
+  
+    
 }
 
 function addTag(li){

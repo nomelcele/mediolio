@@ -71,7 +71,7 @@
             </div>
             
 
-            <ul id="text_toolBox">
+            <ul class="text_toolBoxes" id="text_toolBox">
                 <li id="text_size">
                     <select id="select_fontSize">
                         <option>10px</option>
@@ -82,8 +82,9 @@
                 <li id="text_bold"><a href="#"></a></li>
                 <li id="text_italic"><a href="#"></a></li>
                 <li id="text_under"><a href="#"></a></li>
-                <li id="text_up"><a href="#"></a></li>
-                <li id="text_down"><a href="#"></a></li>
+            </ul>
+            
+            <ul class="text_toolBoxes" id="content_toolBox">
                 <li id="text_up"><a href="#"></a></li>
                 <li id="text_down"><a href="#"></a></li>
                 <li id="text_delete"><a href="#"></a></li>
