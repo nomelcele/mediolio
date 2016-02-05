@@ -112,7 +112,27 @@ $('document').ready(function(){
     
     $("#write_tagTxt").keyup(function(){
     	// 태그 자동 완성
-    	console.log($(this).val());
+    	console.log("입력한 값: "+$(this).val());
+    	$.ajax({
+    		type: "POST",
+    		url: "autocompleteTags",
+    		data: {
+    			h_value: $(this).val()
+    		},
+    		dataType: "json",
+    		success: function(jdata){
+    			console.log(jdata);
+    			var codes = "";
+    			var arr = jdata;
+    			for(var i=0; i<arr.length; i++){
+    				codes += "<li onclick='addTag(this)'>"+arr[i]+"</li>";
+    			}
+    			if(arr.length>0){
+    				$("#autoCompleteArea").html(codes);
+        			$(".autoCompleteBox").css("display","block");
+    			}
+    		}
+    	});
     });
     
 });
@@ -157,7 +177,15 @@ function getSelectedText(){
 }
 
 function changeTxtSize(select){
+	// 텍스트 사이즈 변경
 	var txtSize = select;
 	var selectedTxt = window.getSelection();
 	$(txtSize).closest(".write_textarea").val().replace(selectedTxt,"<span>"+selectedTxt+"</span>");
+}
+
+function addTag(li){
+	// 자동 완성된 태그 클릭 시 태그 추가
+	var newTag = li;
+	var currentTags = $("#write_tagTxt").val();
+	$("#write_tagTxt").val(currentTags+" #"+$(newTag).find("span").html());
 }

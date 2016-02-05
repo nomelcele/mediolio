@@ -8,7 +8,6 @@
 <link href="resources/css/common.css" rel="stylesheet" type="text/css"/>
 <link href="resources/css/ui.css" rel="stylesheet" type="text/css"/>
 <link href="resources/css/index.css" rel="stylesheet" type="text/css"/>
-<link href="resources/css/card.css" rel="stylesheet" type="text/css"/>
 <link href="resources/css/modal.css" rel="stylesheet" type="text/css"/>
 <link href="resources/css/write.css" rel="stylesheet" type="text/css"/>
     
@@ -101,6 +100,7 @@
             <div id="write_tagTitle">#</div>
             <div id="write_tag">
                 <input id="write_tagTxt" class="input_in" type="text" placeholder="태그를 입력하세요."/>
+				<div class="autoCompleteBox"><ul id="autoCompleteArea"></ul></div>                
             </div>
         </div>
     </div><!--//cardWindow-->

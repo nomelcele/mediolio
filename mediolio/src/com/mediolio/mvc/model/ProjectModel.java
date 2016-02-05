@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.text.BoxView;
@@ -22,6 +23,7 @@ import com.mediolio.viewer.BoxViewClient;
 import com.mediolio.viewer.BoxViewException;
 import com.mediolio.viewer.Document;
 import com.mediolio.viewer.Session;
+import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.SubcategoryVO;
 
 @Controller
@@ -114,5 +116,32 @@ public class ProjectModel {
 		pw.flush();
 		pw.close();
 	}
-
+	
+	@RequestMapping(value="autocompleteTags")
+	public void autocompleteTags(String h_value, HttpServletResponse response) throws IOException{
+		// 태그 입력 시 자동 완성
+		List<HashtagVO> tagList = pdao.autocompleteTags(h_value);
+		int[] tagIds = new int[tagList.size()];
+		String[] tagNames = new String[tagList.size()];
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("[");
+		for(int i=0; i<tagList.size(); i++){
+			tagIds[i] = tagList.get(i).getH_id();
+			tagNames[i] = tagList.get(i).getH_value();
+			sb.append("\"");
+			sb.append("<input type='hidden' name='h_id' value="+tagIds[i]+">");
+			sb.append("<span name='h_value'>"+tagNames[i]+"</span>");
+			sb.append("\"");
+			if(!(i == tagList.size()-1)){
+				sb.append(",");
+			}
+		}
+		sb.append("]");
+		
+		PrintWriter pw = response.getWriter();
+		pw.write(sb.toString());
+		pw.flush();
+		pw.close();
+	}
 }

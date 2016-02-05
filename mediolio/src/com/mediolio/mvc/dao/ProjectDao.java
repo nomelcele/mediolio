@@ -27,6 +27,7 @@ public class ProjectDao {
 	}
 	
 	public List<HashtagVO> autocompleteTags(String h_value){
+		System.out.println("입력한 값: "+h_value);
 		return st.selectList("proj.autocompleteTags",h_value);
 	}
 }
