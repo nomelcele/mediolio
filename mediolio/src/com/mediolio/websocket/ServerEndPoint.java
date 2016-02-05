@@ -4,66 +4,86 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
-import javax.servlet.http.HttpSession;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonWriter;
+import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.springframework.web.socket.WebSocketSession;
-
-import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonWriter;
-
-@ServerEndpoint("/serverEndPoint")
+@ServerEndpoint(value = "/websocket/serverEndPoint", configurator = ServerConfigurator.class)
 public class ServerEndPoint {
 	private static Thread thread;
-    private final Logger logger = LogManager.getLogger(getClass());
     private Set<Session> sessionSet = Collections.synchronizedSet(new HashSet<Session>());
    
     private static boolean start_stop;
     
 	@OnOpen
-	public void handleOpen(Session session){
+	public void handleOpen(EndpointConfig endpointConfig, Session session){
+		//configurator에서 세팅했던 username을 가져와서 session에 넣는다
+		session.getUserProperties().put("userPush", endpointConfig.getUserProperties().get("userPush"));
 		sessionSet.add(session);
-		//HttpSession httpSession = (HttpSession)session.getUserProperties().get("someSessionPropertyName");
 		System.out.println("client is now connected...");
 	}
+	
 	@OnMessage
-	public String handleMessage(String message, Session session) throws IOException{
-		String username = (String) session.getUserProperties().get("username");
-		if(username == null){
-			session.getUserProperties().put("username", message);
-			session.getBasicRemote().sendText(buildJsonData("System", "you are now connected as " +message));
-		}else{
-			Iterator<Session> iterator = sessionSet.iterator();
-			while(iterator.hasNext()) iterator.next().getBasicRemote().sendText(buildJsonData(username, message));
+	public void handleMessage(String message, Session session) throws IOException{
+		//handleOpen에서 넣었던 username 가져와서 사용
+		String username = (String) session.getUserProperties().get("userPush");
+		System.out.println("연결 : " + username + ", " + message);
+		
+		start_stop = true;
+		if(username != null){
+			System.out.println("null이 아님!");
+			thread = new Thread(){
+				int i=0;
+	            @Override
+	            public void run() {
+	            	while (true){
+	                	try {
+	                    	System.out.println(i);
+	                    	buildJsonData("thread"+username, i++);
+	                    	Thread.sleep(1000);
+	                 	} catch (InterruptedException e) {
+	                    	e.printStackTrace();
+	                    	break;
+	                 	} 
+	            	}
+	        	}
+			};
+		    thread.start();
 		}
-		System.out.println("receive from client: " + message);
-		String replyMessage = "echo " + message;
-		System.out.println("send to client: " + replyMessage);
-		return replyMessage;
 	}
 	@OnClose
 	public void handleClose(Session session){
+		start_stop = false;
 		sessionSet.remove(session);
+        Thread.currentThread().interrupt();
 		System.out.println("client is now disconnected...");
 	}
 	
+	@OnError
 	public void handleError(Throwable t){
 		t.printStackTrace();
 	}
 	
-	private String buildJsonData(String username, String message){
-		//JsonObject jsonObject = Json.createObjectBuilder().add("message", username+" : " +message).builder();
-		StringWriter stringWriter = new StringWriter();
-		//try(JsonWriter jsonWriter = Json.createWriter(stringWriter)){jsonWriter.write(jsonObject);}
-		return "";/*stringWriter.toString();*/
+	private void buildJsonData(String username, int i){
+		sessionSet.stream().forEach(x -> {
+			JsonObject jsonObject = Json.createObjectBuilder().add("message", username+": " +i).build();
+			StringWriter stringWriter = new StringWriter();
+			
+			try(JsonWriter jsonWriter = Json.createWriter(stringWriter)){
+				jsonWriter.write(jsonObject);
+				x.getBasicRemote().sendText(stringWriter.toString());
+			}
+			catch(Exception e){e.printStackTrace();}
+		});
+		
 	}
 }
