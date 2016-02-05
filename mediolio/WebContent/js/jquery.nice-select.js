@@ -11,25 +11,36 @@
       var select = $(this);
       
       if (!select.next().hasClass('nice-select')) {
-        select.after('<div class="nice-select ' + (select.attr('class') || '') + (select.attr('disabled') ? 'disabled' : '" tabindex="0') + 
+/*        select.after('<div class="nice-select ' + (select.attr('class') || '') + (select.attr('disabled') ? 'disabled' : '" tabindex="0') + 
           '"><span class="current"></span><ul class="list"></ul></div>');
         
         var dropdown = select.next();
         var options = select.find('option');
-        var selected = select.find('option:selected');
+        var selected = select.find('option:selected');*/
         
         /*dropdown.find('.current').html(selected.data('display') || selected.text());*/
         if(select.attr("id")=="input_gender"){
+        	select.after('<div class="nice-select ' + (select.attr('class') || '') + (select.attr('disabled') ? 'disabled' : '" tabindex="0') + 
+            '"><span class="current" id = "sel_gender"></span><ul class="list"></ul></div>');
+          
+          var dropdown = select.next();
+          var options = select.find('option');
+          var selected = select.find('option:selected');
         	dropdown.find('.current').html(selected.data('display') || "GENDER");
         	options.each(function() {
                 var display = $(this).data('display');
                 dropdown.find('ul').append('<li class="option ' + '' + 
                   '" data-value="' + $(this).val() + '' + '">' + 
                   $(this).text() + '</li>');
-              
               });
         }
         else{
+        	select.after('<div class="nice-select ' + (select.attr('class') || '') + (select.attr('disabled') ? 'disabled' : '" tabindex="0') + 
+            '"><span class="current"></span><ul class="list"></ul></div>');
+          
+          var dropdown = select.next();
+          var options = select.find('option');
+          var selected = select.find('option:selected');
         	dropdown.find('.current').html(selected.data('display') || selected.text());
             options.each(function() {
                 var display = $(this).data('display');
