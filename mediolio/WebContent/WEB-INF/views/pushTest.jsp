@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html PUBLIC>
 <html>
 <head>
@@ -7,15 +8,15 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
-	var wsUri = "ws://localhost:8089/mediolio/websocket/echo";
+	var wsUri = "ws://localhost:8089/mediolio/websocket/serverEndPoint/";
 
 	function init() {
 		output = document.getElementById("output");
 	}
 
-	function send_message() {
+	function send_message(m_id) {
 		// 웹소켓 생성
-		websocket = new WebSocket(wsUri);
+		websocket = new WebSocket(wsUri+m_id);
 		
 		//WebSocket 연결
 		websocket.onopen = function(evt) {
@@ -43,7 +44,9 @@
 	}
 	//메시지 수신	
 	function onMessage(evt) {
-		writeToScreen("Message Received: " + evt.data);
+		var jsonData = JSON.parse(evt.data);
+		if(jsonData.message != null) 
+			writeToScreen("Message Received: " + jsonData.message + "\n");
 	}
 	//전송 에러 발생
 	function onError(evt) {
@@ -57,7 +60,6 @@
 	function doSend(message) {
 		writeToScreen("Message Sent: " + message);
 		websocket.send(message);
-		//websocket.close();
 	}
 
 	function disconnect(){
@@ -77,6 +79,7 @@
 	window.addEventListener("load", init, false);
 	
 	$(function (){
+		
 		$('.l_button').on('click',function(){
 			$.ajax({
 				url : "LoginInfo",
@@ -88,7 +91,7 @@
 				success : function(response) {								
 					if($('.pw').val()==response.m_pw)
 					{
-						send_message();
+						send_message(response.m_id);
 					}
 					else if(response.m_id==null){
 						alert('가입되지 않은 사용자 입니다.');

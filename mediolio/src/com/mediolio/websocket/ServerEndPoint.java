@@ -15,9 +15,10 @@ import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint(value = "/websocket/serverEndPoint", configurator = ServerConfigurator.class)
+@ServerEndpoint(value = "/websocket/serverEndPoint/{usr}", configurator = ServerConfigurator.class)
 public class ServerEndPoint {
 	private static Thread thread;
     private Set<Session> sessionSet = Collections.synchronizedSet(new HashSet<Session>());
@@ -25,7 +26,7 @@ public class ServerEndPoint {
     private static boolean start_stop;
     
 	@OnOpen
-	public void handleOpen(EndpointConfig endpointConfig, Session session){
+	public void handleOpen(EndpointConfig endpointConfig, Session session, @PathParam("usr") String usr){
 		//configurator에서 세팅했던 username을 가져와서 session에 넣는다
 		session.getUserProperties().put("userPush", endpointConfig.getUserProperties().get("userPush"));
 		sessionSet.add(session);
@@ -45,13 +46,14 @@ public class ServerEndPoint {
 				int i=0;
 	            @Override
 	            public void run() {
-	            	while (true){
+	            	while (!Thread.currentThread().isInterrupted()){
 	                	try {
-	                    	System.out.println(i);
 	                    	buildJsonData("thread"+username, i++);
-	                    	Thread.sleep(1000);
+	                    	System.out.println(Thread.currentThread().getName() + " : "+ i);
+	                    	Thread.sleep(3000);
 	                 	} catch (InterruptedException e) {
-	                    	e.printStackTrace();
+	                 		Thread.currentThread().interrupt();
+	                    	System.out.println("thread interrupted");
 	                    	break;
 	                 	} 
 	            	}
@@ -60,11 +62,15 @@ public class ServerEndPoint {
 		    thread.start();
 		}
 	}
+	
+	
 	@OnClose
 	public void handleClose(Session session){
 		start_stop = false;
+		Thread.currentThread().interrupt();
+		System.out.println("멈춰라--" + Thread.currentThread().getName() + " : " + Thread.currentThread().isInterrupted());
 		sessionSet.remove(session);
-        Thread.currentThread().interrupt();
+		System.out.println(Thread.currentThread().getName()+"--------------");
 		System.out.println("client is now disconnected...");
 	}
 	
