@@ -139,8 +139,18 @@ function writeDCategoryModalOpen(){
 	$('#modal_writeDCategory').show();
     
     $('#btn_writeDCategory').on('click',function(){
-    	console.log($(":checked"));
+    	var arr = $(":checkbox:checked");
+     	var str = "";
+    	for(var i=0; i<arr.length; i++){
+    		var el = arr[i];
+    		str += $(el).parent().find(".label_category").html();
+    		if(i<arr.length-1){
+    			str += ", "
+    		}
+    	}
+    	
     	$('.modal_bg, .modal').hide();
+    	$("#write_dCategory a").html(str);
     });
     
     // 1. 선택한 카테고리를 가지고 세부 카테고리 검색
@@ -180,7 +190,14 @@ function writeEmbedModalOpen(){
 	$('#modal_writeEmbed').show();
     
     $('#btn_writeEmbed').on('click',function(){
+    	// 임베드 태그 등록
         $('.modal_bg, .modal').hide();
-    })
+        $("#write_bd").append("<div class='contentBox' data-sort="+order+">"
+    			+"<ul class='text_toolBoxes content_toolBox'>"
+    			+"<li id='text_delete'><a href='#'></a></li>"
+    			+"<li id='text_up'><a href='#'></a></li>"
+    			+"<li id='text_down'><a href='#'></a></li></ul>"
+    			+$("#modal_bd_writeEmbed textarea").val()+"</div>");	
+    });
     
 }

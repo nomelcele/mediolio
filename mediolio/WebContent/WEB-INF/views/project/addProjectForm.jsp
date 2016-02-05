@@ -28,115 +28,8 @@
 <script src="js/write.js"></script>     
 </head>
 <body>
-<div id="header">
-	<div id="headerWrap">
-        <div class="inputStyle" id="search_main">
-        	<div id="selectWrap_main">
-                <select id="select_main">
-                    <option value="title">TITLE</option>
-                    <option value="id">ID</option>
-                    <option value="tag">TAG</option>
-                </select>
-           </div>
-            <input class="input_in" id="text_main" type="text"/>
-            <input class="btn_search" type="button" />
-        </div><!--//search_main-->
-        <input class="btnStyle" id="btn_login" type="button" value="LOGIN" onClick="loginModalOpen()"/>
-    </div><!--//headerWrap-->
-    
-    
-</div>
-    
-
-<div id="aside">
-    <div id="logoWrap"></div>
-	<div class="asideWrap" id="userBox">
-    	<p><a href="#">12LEEYURA</a></p>
-        <ul>
-        	<li id="myPf"><a href="#" class="indent">MyPortfolio</a></li>
-            <li id="likePf"><a href="#" class="indent">Like</a></li>
-            <li id="follow"><a href="#" class="indent">Follow</a></li>
-            <li id="message"><a href="#" class="indent">Message</a></li>
-        </ul>
-    </div><!--//userBox-->
-    <div id="uploadWrap">
-    	<a id="uploadPf" href="#">UPLOAD PORTFOLIO</a>
-    </div><!--//uploadWrap-->
-    <div class="asideWrap" id="categoryTitle">
-    	<p>CATEGORY</p>
-    </div><!--//categoryTitle-->
-    
-    <div id="categoryWrap">
-        <ul id="nav_category">
-    		<li class="nav_group">
-    			<div class="nav_title" id="ct_game"><span></span>GAME</div>
-            	<ul class="nav_sub">
-            		<li><a href="#">프로그래밍</a>
-                    <li><a href="#">태그이름</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">태그이름</a>
-                </ul>
-            </li>
-            
-            <li class="nav_group">
-    			<div class="nav_title" id="ct_video"><span></span>VIDEO</div>
-            	<ul class="nav_sub">
-            		<li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                </ul>
-            </li>
-            
-            <li class="nav_group">
-    			<div class="nav_title" id="ct_sound"><span></span>SOUND</div>
-            	<ul class="nav_sub">
-            		<li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                </ul>
-            </li>
-            
-            <li class="nav_group">
-    			<div class="nav_title" id="ct_webApp"><span></span>WEB &amp; APP</div>
-            	<ul class="nav_sub">
-            		<li><a href="#">tag</a>
-                </ul>
-            </li>
-            
-            <li class="nav_group">
-    			<div class="nav_title" id="ct_design"><span></span>DESIGN</div>
-            	<ul class="nav_sub">
-            		<li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                </ul>
-            </li>
-            
-            <li class="nav_group">
-    			<div class="nav_title" id="ct_3d"><span></span>3D</div>
-            	<ul class="nav_sub">
-            		<li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                </ul>
-            </li>
-    	</ul><!--//nav_category-->
-	</div><!--//categoryWrap-->
-</div><!--//aside-->
-    
-    
+<jsp:include page="../main/header.jsp"></jsp:include>
+<jsp:include page="../main/aside.jsp"></jsp:include>
 <div id="contentsWrap">
     <div class="cardWindow">
         <div class="cardWindow_hd">UPLOAD PORTFOLIO</div>
@@ -207,7 +100,7 @@
         <div id="write_ft">
             <div id="write_tagTitle">#</div>
             <div id="write_tag">
-                <input class="input_in" type="text" placeholder="태그를 입력하세요."/>
+                <input id="write_tagTxt" class="input_in" type="text" placeholder="태그를 입력하세요."/>
             </div>
         </div>
     </div><!--//cardWindow-->
