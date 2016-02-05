@@ -71,8 +71,8 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
-		<!-- WebSocket -->
+
+		<!-- WebSocket + tomcat8 -->
 		<dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -90,6 +90,11 @@
             <artifactId>spring-websocket</artifactId>
             <version>4.1.6.RELEASE</version>
         </dependency>
+        <dependency>
+    		<groupId>org.glassfish</groupId>
+    		<artifactId>javax.json</artifactId>
+    		<version>1.0.4</version>
+		</dependency>
 		<!-- WebSocket 끝 -->
 
 		<dependency>
@@ -137,11 +142,5 @@
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>5.1.37</version>
 		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-		
   </dependencies>
 </project>

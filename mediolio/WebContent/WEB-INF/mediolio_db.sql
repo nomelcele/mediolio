@@ -1,7 +1,3 @@
-ALTER TABLE project ADD COLUMN sc_id INT(5);
-ALTER TABLE hashtag DROP COLUMN cate_id;
-
-
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('기획',1);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('개발',1);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('시나리오',2);
@@ -24,13 +20,6 @@ INSERT into CATEGORY (cate_name) values ('웹&앱');
 INSERT into CATEGORY (cate_name) values ('컴퓨터 그래픽스');
 INSERT into CATEGORY (cate_name) values ('사운드');
 
-
-CREATE TABLE HASHTAG(
-	h_id int(10) PRIMARY KEY auto_increment,
-	h_value VARCHAR(20),
-	p_id int(10),
-	cate_id int(10)
-);
 
 CREATE TABLE MEMBER(	
   m_id int(10) PRIMARY KEY auto_increment,
@@ -60,6 +49,7 @@ CREATE TABLE PROJECT(
   m_id int(10),
   p_title VARCHAR(300),
   cate_id int(5),
+  sc_id int(5),
   p_date datetime,
   p_viewnum int(10),
   p_coverImg VARCHAR(100)
@@ -71,6 +61,12 @@ CREATE TABLE CONTENT(
   c_type VARCHAR(10),
   c_value VARCHAR(1000),
   c_order int(5)
+);
+
+CREATE TABLE HASHTAG(
+	h_id int(10) PRIMARY KEY auto_increment,
+	h_value VARCHAR(20),
+	p_id int(10),
 );
 
 CREATE TABLE CATEGORY(	
