@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,6 +8,7 @@
 <title>Insert title here</title>
 <script src="js/login.js"></script>
 <script src="js/join.js"></script>
+<script src="js/header.js"></script>
 </head>
 <body>
 <div id="header">
@@ -22,7 +24,15 @@
             <input class="input_in" id="text_main" type="text"/>
             <input class="btn_search" type="button" />
         </div><!--//search_main-->
-        <input class="btnStyle" id="btn_login" type="button" value="LOGIN" onClick="loginModalOpen()"/>
+       <!--  <input class="btnStyle" id="btn_login" type="button" value="LOGIN" onClick="loginModalOpen()"/> -->
+    	<c:choose> 
+			<c:when test="${m_id == 0 }">
+				<input class="btnStyle" id="btn_login" type="button" value="LOGIN" onClick="loginModalOpen()"/>
+			</c:when>
+			<c:otherwise>
+				<input class="btnStyle" id="btn_logout" type="button" value="LOGOUT"/>
+			</c:otherwise>
+		</c:choose>
     </div><!--//headerWrap-->   
 </div>
 
