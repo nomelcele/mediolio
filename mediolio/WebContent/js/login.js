@@ -19,7 +19,8 @@ $(function(){
 				success : function(response) {								
 					if($('#pw').val()==response.m_pw)
 					{
-						location.href='menu=loginsuccess';
+						location.href='main';
+						
 					}
 					else if(response.m_id==null){
 						alert('가입되지 않은 사용자 입니다.');

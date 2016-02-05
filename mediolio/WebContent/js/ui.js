@@ -1,5 +1,4 @@
 $('document').ready(function(){
-	
 	// 카테고리 시작
 	var wHeight = $(window).height();
     $('#categoryWrap').css({
