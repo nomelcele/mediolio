@@ -122,3 +122,5 @@
 .autoCompleteBox{width:100px; font-size:13px; background-color:#fff; border:1px solid #cfcbcb; display:none; border-radius:4px; padding:5px 7px;}
 .autoCompleteBox li{margin:6px 0;}
 .autoCompleteBox li:hover{background-color:#BEE4F5;}
+#write_tagTxt span{font-size:14px; margin:5px;}
+#write_tagTxt span:hover{background-color:#e0eef6; color:#529ecc; font-weight:bold;}
