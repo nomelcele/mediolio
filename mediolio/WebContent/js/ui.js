@@ -46,4 +46,20 @@ $('document').ready(function(){
     
     // 체크박스 스타일
     $(":checkbox").labelauty({ label: false });
+    
+    
+  //헤더 알림 호버- 말풍선 띄우기
+    $("#bubble_bell").mCustomScrollbar();
+    $('#bellIcon').hover(function(){
+        $('#bubble_bell, #bubbleAfter').show();
+        
+    },function(){
+        $('#bubble_bell, #bubbleAfter').mouseenter(function(){
+            $('#bubble_bell, #bubbleAfter').show();
+        });
+        $('#bubble_bell, #bubbleAfter').mouseleave(function(){
+            $('#bubble_bell, #bubbleAfter').hide();
+        });
+        $('#bubble_bell, #bubbleAfter').hide();
+    });
 })
