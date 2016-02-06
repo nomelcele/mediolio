@@ -30,9 +30,9 @@ $('document').ready(function(){
         		+'<li id="text_italic"><a href="#"></a></li>'
         		+'<li id="text_under"><a href="#"></a></li></ul>'
         		+'<ul class="text_toolBoxes content_toolBoxes" id="content_toolBox">'
-                +'<li id="text_up"><a href="#"></a></li>'
-                +'<li id="text_down"><a href="#"></a></li>'
-                +'<li id="text_delete"><a href="#"></a></li></ul>'
+                +'<li id="text_up"><a href="#" onclick="moveUpElement(this); return false;"></a></li>'
+                +'<li id="text_down"><a href="#" onclick="moveDownElement(this); return false;"></a></li>'
+                +'<li id="text_delete"><a href="#" onclick="removeElement(this); return false;"></a></li></ul>'
         );
         $(".content_toolBoxes").hide();
         $('.text_toolBoxes').hide();
@@ -115,9 +115,9 @@ $('document').ready(function(){
 					order++;
 					$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
 						+"<ul class='content_toolBoxes' id='content_toolBox'>"
-						+"<li id='text_delete'><a href='#'></a></li>"
-						+"<li id='text_up'><a href='#'></a></li>"
-						+"<li id='text_down'><a href='#'></a></li></ul>"
+						+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+						+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
+						+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
 						+"<iframe src='"+jdata+"' style='width:500px; height:500px;'/></div>");				
 					
 					//contentBox에 mouseover된 경우 content툴박스 보이기
@@ -157,7 +157,7 @@ $('document').ready(function(){
 					+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 					+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
 					+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
-					+"<img src='"+blobURL+"' style='display:block;'/></div>");
+					+"<img src='"+blobURL+"' style='display:block; margin:auto;'/></div>");
 			
 			
 			//contentBox에 mouseover된 경우 content툴박스 보이기
@@ -224,6 +224,7 @@ function moveUpElement(e){
 	var element = e;
 	var order = $(element).closest(".contentBox").attr("data-sort");
 	$(element).closest(".contentBox").attr("data-sort",parseInt(order)-1);
+	$(element).closest(".contentBox").prev(".contentBox").attr("data-sort",parseInt($(element).closest(".contentBox").prev(".contentBox").attr("data-sort"))+1);
 	sortElements();	
 }
 
@@ -232,12 +233,15 @@ function moveDownElement(e){
 	var element = e;
 	var order = $(element).closest(".contentBox").attr("data-sort");
 	$(element).closest(".contentBox").attr("data-sort",parseInt(order)+1);
+	$(element).closest(".contentBox").next(".contentBox").attr("data-sort",parseInt($(element).closest(".contentBox").next(".contentBox").attr("data-sort"))-1);
 	sortElements();	
 }
 
 function removeElement(e){
 	// 엘리먼트 삭제
+	console.log("텍스트 삭제");
 	var element = e;
+	console.log("삭제할 엘리먼트: "+$(element).closest(".contentBox"));
 	$(element).closest(".contentBox").remove();
 }
 
@@ -283,11 +287,12 @@ function writeEmbedModalOpen(){
     $('#btn_writeEmbed').on('click',function(){
     	// 임베드 태그 등록
         $('.modal_bg, .modal').hide();
+        order++;
         $("#write_bd").append("<div class='contentBox' data-sort="+order+">"
     			+"<ul class='content_toolBoxes' id='content_toolBox'>"
-    			+"<li id='text_delete'><a href='#'></a></li>"
-    			+"<li id='text_up'><a href='#'></a></li>"
-    			+"<li id='text_down'><a href='#'></a></li></ul>"
+    			+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+    			+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
+    			+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
     			+$("#modal_bd_writeEmbed textarea").val()+"</div>");
         
       //contentBox에 mouseover된 경우 content툴박스 보이기
