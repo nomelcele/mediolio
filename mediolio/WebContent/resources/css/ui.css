@@ -3,9 +3,10 @@
 
 html, body{ width:100%; height:100%;}
 #header{ width:100%; height:40px; padding-top:10px; background-color:#222; position:fixed; z-index:10;}
-#headerWrap{ width:352px; height:30px; margin-right:20px; float:right; }
+#headerWrap{ width:402px; height:30px; margin-right:20px; float:right; }
 
-#search_main, #btn_login, #select_main, #text_main{ float:left; }
+
+#search_main, #btn_login, #select_main, #text_main, #bellWrap{ float:left; }
 #btn_login{ width:70px;}
 #search_main{ margin-right:20px; }
 #select_main{ width:85px; height:24px;}
@@ -65,3 +66,42 @@ a#uploadPf{ display:block; width:100%; height:60px; font:12px 'Open Sans', sans-
 .nav_sub li a{ font-family:'나눔고딕', 'Nanum Gothic', sans-serif; font-size:12px; color:#999;}
 .nav_sub li a:hover{ color:#eee;}
 .nav_selected{ background-position:-20px center;}
+
+
+
+
+#bellWrap{ position:relative; }
+#bellIcon{ display:block; position:relative; width:30px; height:30px; float:left; 
+margin-right:20px;  background-image:url(../images/bell.png); background-position:center center; background-repeat:no-repeat; background-size:95%; }
+
+#bellIcon span#bellNum{ display:block; position:absolute; z-index:15; top:0; right:0; width:15px; height:15px; border-radius:50%; background:red; color:#fff; font-size:9px; text-align:center; line-height:15px;}
+
+
+
+#bubble_bell{ position:absolute; z-index:17; top:35px; left:-15px; box-sizing: border-box;  
+background:#fff; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border:1px solid #eee; 
+min-width:420px; width:auto; max-width:500px; height:150px; overflow-y:hidden; box-shadow:1px 1px 8px rgba(0,0,0,.3)}
+
+
+#bubble_bell::-webkit-scrollbar { 
+    display: block; 
+}
+
+#bubbleAfter{   display: block;
+    content: "";
+    position: absolute;
+    top: 29px;
+    border-style: solid;
+    border-width: 0 10px 11px;
+    display: none;
+    width: 0;
+    z-index: 1;
+    left:5px; border-color:#fff transparent;}
+
+#bubble_bell li{ width:100%; min-height:30px; height:auto; padding-top:10px; padding-bottom:10px; line-height:20px; box-sizing:border-box; outline:none; }
+
+#bubble_bell li a{ display:block; min-width:200px; width:auto; max-width:500px; height:auto; color:#666; font-size:12px; box-sizing:border-box; padding-left:10px; }
+#bubble_bell li:hover{ background:#eee; }
+
+#bubble_bell li:first-child:hover{ background:#eee; border-radius:10px 10px 0 0; }
+#bubble_bell li:last-child:hover{ background:#eee; border-radius:0 0 10px 10px; }

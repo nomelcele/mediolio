@@ -13,6 +13,19 @@
 <body>
 <div id="header">
 	<div id="headerWrap">
+		<div id="bellWrap">
+            <a id="bellIcon" href="#"><span id="bellNum">0</span></a>
+            <ul class="bubble" id="bubble_bell">
+                <li><a href="#">알림 3아주아주아주아주아주아주아주아주긴알람입니당 긴알람이에요 긴알람긴알람리람ㅇㄴ리ㅏㅁ넝리ㅏㅁㄴㅇ러ㅣㅏㅁㄴㄹㅇ</a></li>
+                <li><a href="#">알림 1</a></li>
+                <li><a href="#">알림 2</a></li>
+                <li><a href="#">알림 3</a></li>
+                <li><a href="#">알림 1</a></li>
+                <li><a href="#">알림 2</a></li>
+            </ul>
+            <span id="bubbleAfter"></span>
+        </div><!--//bellWrap-->
+	        
         <div class="inputStyle" id="search_main">
         	<div id="selectWrap_main">
                 <select id="select_main">
@@ -20,7 +33,7 @@
                     <option value="id">ID</option>
                     <option value="tag">TAG</option>
                 </select>
-           </div>
+           </div><!--//selectWrap -->
             <input class="input_in" id="text_main" type="text"/>
             <input class="btn_search" type="button" />
         </div><!--//search_main-->
