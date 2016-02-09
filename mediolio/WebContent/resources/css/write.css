@@ -22,10 +22,18 @@
 #write_tagTitle{ width:39px; height:100%; float:left; background:#666; border-right:1px solid #ccc; line-height:40px; text-align:center; font-family:'Open Sans', sans-serif; font-size:20px; font-weight:400; color:#fff; }
 
 
-#write_tag{ width:460px; height:100%; float:left; box-sizing:border-box; padding-top:5px;}
+#write_tag{ width:760px; height:100%; float:left; box-sizing:border-box; padding-top:5px;}
+#write_tagBox{width:100%;}
+.write_tagArea{display:inline;}
 
-
-
+.autoCompleteBox{width:100px; font-size:13px; background-color:#fff; border:1px solid #cfcbcb; display:none; border-radius:4px; padding:5px 7px; position:relative;}
+.autoCompleteBox li{margin:6px 0;}
+.autoCompleteBox li:hover{background-color:#BEE4F5;}
+#write_tagTxt{display:inline-block;}
+#write_tagTxt span{font-size:14px; margin:5px;}
+#write_tagTxt span:hover{background-color:#e0eef6; color:#529ecc; font-weight:bold;}
+#write_tagTxt span::before{content:"#";}
+#write_tagInput{width:auto;}
 
 /*글쓰기 추가 버튼, 말풍선*/
 .btn_circle{ display:block; width:40px; height:40px; background:#0F84CF; border-radius:50%; box-shadow:1px 1px 3px #ccc;}
@@ -123,9 +131,3 @@
 
 .contentBox{ margin-bottom:60px; width:auto; height:auto;}
 .contentBox iframe{ display:block; margin:0 auto;}
-
-.autoCompleteBox{width:100px; font-size:13px; background-color:#fff; border:1px solid #cfcbcb; display:none; border-radius:4px; padding:5px 7px;}
-.autoCompleteBox li{margin:6px 0;}
-.autoCompleteBox li:hover{background-color:#BEE4F5;}
-#write_tagTxt span{font-size:14px; margin:5px;}
-#write_tagTxt span:hover{background-color:#e0eef6; color:#529ecc; font-weight:bold;}
