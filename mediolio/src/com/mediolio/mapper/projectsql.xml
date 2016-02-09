@@ -3,16 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="proj">
-  	<insert id="insertTest" parameterType="int">
-  		insert into member_action(act_type, m_id, act_target) values('like',#{m_id},2)
-  	</insert>
-  	<select id="selectTest" resultType="int">
-  		select count(*) from member_action
-  	</select>
   	<select id="subcategoryList" parameterType="int" resultType="scvo">
   		select sc_id, sc_name from subcategory where sc_parent=#{sc_parent}
   	</select>
   	<select id="autocompleteTags" parameterType="String" resultType="hvo">
-  		select h_id, h_value from hashtag where h_value like CONCAT('%', #{h_value}, '%')
+  		select h_id, h_value from hashtag where h_value like CONCAT('%', #{h_value}, '%') 
+  		group by h_value order by h_value
   	</select>
+  	<insert id="uploadContent" parameterType="covo">
+  		insert into content (p_id,c_type,c_value) values(#{p_id},#{c_type},#{c_value})
+  	</insert>
   </mapper>

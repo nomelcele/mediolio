@@ -23,7 +23,9 @@ import com.mediolio.viewer.BoxViewClient;
 import com.mediolio.viewer.BoxViewException;
 import com.mediolio.viewer.Document;
 import com.mediolio.viewer.Session;
+import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.HashtagVO;
+import com.mediolio.vo.ProjectVO;
 import com.mediolio.vo.SubcategoryVO;
 
 @Controller
@@ -39,13 +41,45 @@ public class ProjectModel {
 	}
 	
 	@RequestMapping(value="addProject")
-	public String addProject(){
-		return "project/addProject";
+	public String addProject(ProjectVO pvo, HttpSession session){
+		// 프로젝트 업로드
+		List<MultipartFile> contents = pvo.getContents();
+		System.out.println("파일 수: "+contents.size());
+		if(null != contents & contents.size()>0){
+			for(MultipartFile file:contents){
+				if(file.getOriginalFilename() != ""){
+					String newFileName = fileUpload(file, session); // 파일 업로드
+					String fileExt = newFileName.split("\\.")[1]; // 파일의 확장자
+					ContentVO covo = new ContentVO();
+					covo.setP_id(1); // 프로젝트 id
+					
+					String c_type = "document";
+					String[] imgExt = {"gif","png","jpg","jpeg"};
+					for(String e:imgExt){
+						if(fileExt.contains(e)){
+							c_type = "image";
+						}
+					}
+					covo.setC_type(c_type); // 콘텐츠의 타입(image/document)
+					covo.setC_value(newFileName); // 콘텐츠의 파일 이름
+					pdao.uploadContent(covo); // db에 콘텐츠 정보 업데이트
+				}
+			}
+		}
+		
+		/*  
+		 * c_id int(5) PRIMARY KEY auto_increment,
+		 * p_id int(10),
+		 * c_type VARCHAR(10),
+		 * c_value VARCHAR(1000),
+		 * c_order int(5)*/
+		return "redirect:main";
 	}
 	
 	@RequestMapping(value="showViewer")
-	public void showViewer(MultipartFile projectFile, HttpSession session, HttpServletResponse response) throws IOException{
+	public void showViewer(ProjectVO pvo, HttpSession session, HttpServletResponse response) throws IOException{
 		// doc, ppt, pdf 업로드 했을 때 뷰어 보여주기
+		MultipartFile projectFile = pvo.getContents().get(0);
 		String[] fileFullName = projectFile.getOriginalFilename().split("\\.");
 		System.out.println(projectFile.getOriginalFilename());
 		String fileName = fileFullName[0]; // 파일 이름
@@ -144,4 +178,31 @@ public class ProjectModel {
 		pw.flush();
 		pw.close();
 	}
+	
+	public String fileUpload(MultipartFile projectFile, HttpSession session){
+		String[] fileFullName = projectFile.getOriginalFilename().split("\\.");
+		System.out.println(projectFile.getOriginalFilename());
+		String fileName = fileFullName[0]; // 파일 이름
+		String fileExt = fileFullName[1].toLowerCase(); // 파일 확장자
+		String newFileName = fileName+"_"+System.currentTimeMillis()+"."+fileExt;
+		System.out.println("New File Name: "+newFileName); // 새로운 파일 이름(중복 방지)
+		
+		String realPath = session.getServletContext().getRealPath("/")+"upload\\";
+		StringBuffer path = new StringBuffer();
+		path.append(realPath).append(newFileName);
+		System.out.println("Upload Path: "+path.toString());
+		
+		File file = new File(path.toString());
+		file.mkdirs();
+		try {
+			projectFile.transferTo(file);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} 
+		
+		return newFileName;
+	}
+
+
 }
+
