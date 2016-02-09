@@ -29,6 +29,7 @@
 <body>
 <jsp:include page="../main/header.jsp"></jsp:include>
 <jsp:include page="../main/aside.jsp"></jsp:include>
+<form id="addProjectForm" action="addProject" method="post" enctype="multipart/form-data"></form>
 <div id="contentsWrap">
     <div class="cardWindow">
         <div class="cardWindow_hd">UPLOAD PORTFOLIO</div>
@@ -51,16 +52,22 @@
         </div><!--//write_hd-->
         
         <div id="write_title">
-            <input class="input_in" type="text" placeholder="글 제목을 입력하세요."/>
+            <input class="input_in" id="projectTitle" type="text" placeholder="글 제목을 입력하세요."/>
         </div><!--//write_title-->
         
         <div id="write_bd">
             <a href="#" class="btn_circle" id="btn_addWrite"></a>
             <ul class="bubble" id="bubble_addWrite">
                 <li>
-					<form id="viewerForm" action="showViewer" method="post" enctype="multipart/form-data">
-                		<a id="btn_addFile" href="#"><input type="file" id="contentFile" name="projectFile"/>파일 업로드</a>
-  					</form>
+                	<form id="viewerForm" action="showViewer" method="post" enctype="multipart/form-data">
+                		<input type="hidden" id="p_title" name="p_title">
+						<input type="hidden" id="cate_id" name="cate_id">
+						<input type="hidden" id="sc_id" name="sc_id">
+                		<a id="btn_addFile" href="#">
+                			<input type="file" class="contentFile" id="file0" name="contents[0]"/> 
+                			파일 업로드
+                		</a>
+                	</form>
                 </li>
                 <li><a id="btn_addMedia" href="#" onclick="writeEmbedModalOpen()">미디어 추가</a></li>
                 <li><a id="btn_addText" href="#">텍스트 추가</a></li>
@@ -130,9 +137,8 @@
     </div><!--//cardWrap-->
     
     
-    <input type="submit" id="submit_portfolio" value="SUBMIT"/>
+    <input type="submit" id="submit_portfolio" value="SUBMIT" onclick="addProject();"/>
 </div><!--//contentsWrap-->
-
         
     
     

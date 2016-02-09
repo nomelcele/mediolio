@@ -1,4 +1,5 @@
 var order=0; // 콘텐츠들의 순서
+var fileNum=0; // 업로드할 파일 수
 
 $('document').ready(function(){
     
@@ -95,18 +96,14 @@ $('document').ready(function(){
     })//끝- 텍스트 추가 버튼 누르고 난 후 이벤트
     
     
-    
-    
-    
-    
-    
-    $("#contentFile").change(function(){
+    $(".contentFile").change(function(){
     	// 파일(이미지, 문서) 추가
 		var ext = $(this).val().split('.').pop().toLowerCase(); // 파일의 확장자
 		var file = $(this).prop("files")[0];
 		blobURL = window.URL.createObjectURL(file);
-		if($.inArray(ext,['gif','png','jpg','jpeg']) == -1){
-			// doc, pdf, ppt 파일
+		if($.inArray(ext,['pdf','doc','docx','ppt','pptx','xls','xlsx',
+		                  'txt','py','js','xml','css','md','pl','c','m','json']) == 1){
+			// doc, pdf, ppt 파일 등(문서 형식 파일)
 			// 미리보기 영역에 뷰어 표시
 			$("#viewerForm").ajaxForm({
 				dataType: "text",
@@ -148,7 +145,7 @@ $('document').ready(function(){
 			
 			
 		    
-		} else {
+		} else if($.inArray(ext,['gif','png','jpg','jpeg']) == 1) {
 			// 이미지 파일
 			// 미리보기 영역에 이미지 표시
 			order++;
@@ -178,11 +175,14 @@ $('document').ready(function(){
 		    }); 
 		    
 		    
-		}    
+		} else {
+			// 지원하지 않는 파일을 업로드했을 경우
+			alert("업로드 할 수 없는 유형의 파일입니다.");
+		}
 		
+		fileNum++;
+		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
 		
-		
-    	
     });
     
     $("#selectedCategory").change(function(){
@@ -194,7 +194,7 @@ $('document').ready(function(){
     
     $("#write_tagInput").keyup(function(){
     	// 태그 자동 완성
-    	console.log("입력한 값: "+$(this).val());
+    	if($(this).val().trim() != ""){
     	$.ajax({
     		type: "POST",
     		url: "autocompleteTags",
@@ -214,6 +214,9 @@ $('document').ready(function(){
     			}
     		}
     	});
+    	} else {
+    		$(".autoCompleteBox").css("display","none");
+    	}
     });
     
     $("#write_tagInput").keydown(function(e){
@@ -235,6 +238,7 @@ $('document').ready(function(){
     		$("#write_tagTxt").append("<span>"+newTag+"</span>");
     		$(this).val("");
     		$(this).focus();
+    		$(".autoCompleteBox").css("display","none");
     	}
     })
     
@@ -343,4 +347,101 @@ function addTag(li){
 	$("#write_tagTxt").append("<span>"+$(newTag).find("span").html()+"</span>");
 	$("#write_tagInput").val("");
 	$("#write_tagInput").focus();
+	$(".autoCompleteBox").css("display","none");
+}
+
+function fileChange(file){
+	var newFile = file;
+	// 파일(이미지, 문서) 추가
+	var ext = $(newFile).val().split('.').pop().toLowerCase(); // 파일의 확장자
+	var file = $(newFile).prop("files")[0];
+	blobURL = window.URL.createObjectURL(file);
+	if($.inArray(ext,['gif','png','jpg','jpeg']) == -1){
+		// doc, pdf, ppt 파일
+		// 미리보기 영역에 뷰어 표시
+		$("#viewerForm").ajaxForm({
+			dataType: "text",
+			url: "showViewer",
+			success: function(jdata){
+				order++;
+				$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
+					+"<ul class='content_toolBoxes' id='content_toolBox'>"
+					+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+					+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
+					+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
+					+"<iframe src='"+jdata+"' style='width:500px; height:500px;'/></div>");				
+				
+				//contentBox에 mouseover된 경우 content툴박스 보이기
+			    $('.contentBox').on('mouseover', function(){ 
+			    	$('.content_toolBoxes',newFile).css('top', $(newFile).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
+			        $('.content_toolBoxes',newFile).show();
+			    })
+			    
+			 	//contentBox를 벗어난 경우 content툴박스 숨기기
+			    $('html').mouseover(function(e) {   
+			        if( !$(e.target).is( $('.contentBox')) ) { 
+			           if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
+			                if( !$(e.target).is( $('.content_toolBoxes').find('*') )){
+			                	$(".content_toolBoxes").hide();
+			                }
+			           }
+			        }
+			    }); 
+			    
+				/*
+				 * 	+"<a href='#' onclick='moveUpElement(this); return false;' class='upBtn'>↑</a>"
+					+"<a href='#' onclick='moveDownElement(this); return false;' class='downBtn'>↓</a>"
+					+"<a href='#' onclick='removeElement(this); return false;' class='removeBtn'>X</a>"
+				 * 
+				 * */ 
+			}
+		}).submit();
+		
+		
+	    
+	} else {
+		// 이미지 파일
+		// 미리보기 영역에 이미지 표시
+		order++;
+		$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
+				+"<ul class='content_toolBoxes' id='content_toolBox'>"
+				+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+				+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
+				+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
+				+"<img src='"+blobURL+"' style='display:block; margin:auto;'/></div>");
+		
+		
+		//contentBox에 mouseover된 경우 content툴박스 보이기
+	    $('.contentBox').on('mouseover', function(){ 
+	    	$('.content_toolBoxes',newFile).css('top', $(newFile).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
+	        $('.content_toolBoxes',newFile).show();
+	    })
+	    
+	 	//contentBox를 벗어난 경우 content툴박스 숨기기
+	    $('html').mouseover(function(e) {   
+	        if( !$(e.target).is( $('.contentBox')) ) { 
+	           if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
+	                if( !$(e.target).is( $('.content_toolBoxes').find('*') )){
+	                	$(".content_toolBoxes").hide();
+	                }
+	           }
+	        }
+	    }); 
+	    
+	    
+	}    
+	
+	fileNum++;
+	$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
+	
+}
+
+function addProject(){
+	// 프로젝트 등록
+//	$("#addProjectForm").submit();
+	$("#p_title").val($("#projectTitle").val()); // 프로젝트 이름
+	$("#cate_id").val($("#selectedCategory").val()); // 카테고리 번호
+	// 서브카테고리 번호
+	$("#viewerForm").attr("action","addProject");
+	$("#viewerForm").submit();
 }

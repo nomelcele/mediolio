@@ -1,8 +1,20 @@
 package com.mediolio.vo;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class ProjectVO {
 	private int p_id, m_id, cate_id, p_viewnum;
 	private String p_title, p_hash, p_date, p_coverImg;
+	private List<MultipartFile> contents;
+	
+	public List<MultipartFile> getContents() {
+		return contents;
+	}
+	public void setContents(List<MultipartFile> contents) {
+		this.contents = contents;
+	}
 	public int getP_id() {
 		return p_id;
 	}
