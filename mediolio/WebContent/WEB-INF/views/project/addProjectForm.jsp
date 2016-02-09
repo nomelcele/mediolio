@@ -100,11 +100,13 @@
         <div id="write_ft">
             <div id="write_tagTitle">#</div>
             <div id="write_tag">
-            	<div id="write_tagArea">
+            	<div id="write_tagBox">
             		<div id="write_tagTxt"></div>
-            		<input id="write_tagInput" class="input_in" type="text" placeholder="태그를 입력하세요."/>
+            		<div class="write_tagArea">
+	            		<input id="write_tagInput" class="input_in" type="text" placeholder="태그를 입력하세요."/>
+	            		<div class="autoCompleteBox"><ul id="autoCompleteArea"></ul></div>
+	            	</div>
             	</div>
-				<div class="autoCompleteBox"><ul id="autoCompleteArea"></ul></div>                
             </div>
         </div>
     </div><!--//cardWindow-->

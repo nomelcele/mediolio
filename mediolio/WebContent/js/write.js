@@ -1,4 +1,4 @@
-var order=0;
+var order=0; // 콘텐츠들의 순서
 
 $('document').ready(function(){
     
@@ -216,15 +216,25 @@ $('document').ready(function(){
     	});
     });
     
-    $("#write_tagInput").keyup(function(e){
-    	if(e.keyCode == 8){
+    $("#write_tagInput").keydown(function(e){
+    	if(e.keyCode == 8 && $(this).val() == ""){
     		// 백스페이스 누르면 태그 삭제
-    		console.log($("#write_tagTxt span:last-child").html());
-    		$("#write_tagTxt span:last-child").remove();
-    		if($("#write_tagTxt span").length == 0){
-    			// 입력된 태그가 하나도 없을 경우
-    			$("#write_tagInput").attr("placeholder","태그를 입력하세요.");
-    		}
+	    	$("#write_tagTxt span:last-child").remove();
+	    	if($("#write_tagTxt span").length == 0){
+	    		// 입력된 태그가 하나도 없을 경우
+	    		$("#write_tagInput").attr("placeholder","태그를 입력하세요.");
+	    	}
+    	} 
+    });
+    
+    $("#write_tagInput").keyup(function(e){
+    	if(e.keyCode == 188){
+    		// 컴마 누르면 태그 입력
+    		var newTag = $(this).val().replace(",","");
+    		$(this).attr("placeholder","");
+    		$("#write_tagTxt").append("<span>"+newTag+"</span>");
+    		$(this).val("");
+    		$(this).focus();
     	}
     })
     
@@ -329,9 +339,8 @@ function writeEmbedModalOpen(){
 function addTag(li){
 	// 자동 완성된 태그 클릭 시 태그 추가
 	var newTag = li;
-//	var currentTags = $("#write_tagArea").html();
 	$("#write_tagInput").attr("placeholder","");
-	$("#write_tagTxt").append("<span>#"+$(newTag).find("span").html()+"</span>");
+	$("#write_tagTxt").append("<span>"+$(newTag).find("span").html()+"</span>");
 	$("#write_tagInput").val("");
 	$("#write_tagInput").focus();
 }
