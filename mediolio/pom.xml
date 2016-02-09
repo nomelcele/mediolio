@@ -90,11 +90,6 @@
             <artifactId>spring-websocket</artifactId>
             <version>4.1.6.RELEASE</version>
         </dependency>
-        <dependency>
-    		<groupId>org.glassfish</groupId>
-    		<artifactId>javax.json</artifactId>
-    		<version>1.0.4</version>
-		</dependency>
 		<!-- WebSocket 끝 -->
 
 		<dependency>
