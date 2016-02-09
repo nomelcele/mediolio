@@ -60,9 +60,9 @@
             <ul class="bubble" id="bubble_addWrite">
                 <li>
                 	<form id="viewerForm" action="showViewer" method="post" enctype="multipart/form-data">
-                		<input type="hidden" id="p_title" name="p_title">
-						<input type="hidden" id="cate_id" name="cate_id">
-						<input type="hidden" id="sc_id" name="sc_id">
+<!--                 		<input type="hidden" id="p_title" name="p_title"> -->
+<!-- 						<input type="hidden" id="cate_id" name="cate_id"> -->
+<!-- 						<input type="hidden" id="sc_id" name="sc_id"> -->
                 		<a id="btn_addFile" href="#">
                 			<input type="file" class="contentFile" id="file0" name="contents[0]"/> 
                 			파일 업로드
