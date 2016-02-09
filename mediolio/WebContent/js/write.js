@@ -1,5 +1,6 @@
 var order=0; // 콘텐츠들의 순서
 var fileNum=0; // 업로드할 파일 수
+var orderArr=[];
 
 $('document').ready(function(){
     
@@ -19,7 +20,7 @@ $('document').ready(function(){
     
     //텍스트 추가 버튼 누르고 난 후 이벤트
     $('#btn_addText').on('click',function(){
-        $('#write_bd').append('<div class="write_textarea contentBox" contenteditable="true" onmouseup="getSelectedText()"></div>'
+        $('#write_bd').append('<div class="write_textarea contentBox" contenteditable="true" onmouseup="getSelectedText()" data-sort='+order+'></div>'
         		+'<ul class="text_toolBoxes" id="text_toolBox">'
         		+'<li id="text_size">'
         		+'<select id="select_fontSize" onchange="changeTxtSize(this)">'
@@ -68,7 +69,9 @@ $('document').ready(function(){
         }); 
        
         
-        
+        $(".write_textarea").on('keyup',function(){
+        	orderArr[$(this).attr("data-sort")-1] = $(this).html();
+        });
         
         //div.write_textarea에 mouseover된 경우 content툴박스 보이기
         $('.write_textarea').on('mouseover', function(){     	
@@ -98,11 +101,12 @@ $('document').ready(function(){
     
     $(".contentFile").change(function(){
     	// 파일(이미지, 문서) 추가
+//    	console.log("파일 이름: "+$(this).val().split("\\").pop());
 		var ext = $(this).val().split('.').pop().toLowerCase(); // 파일의 확장자
 		var file = $(this).prop("files")[0];
 		blobURL = window.URL.createObjectURL(file);
 		if($.inArray(ext,['pdf','doc','docx','ppt','pptx','xls','xlsx',
-		                  'txt','py','js','xml','css','md','pl','c','m','json']) == 1){
+		                  'txt','py','js','xml','css','md','pl','c','m','json']) != -1){
 			// doc, pdf, ppt 파일 등(문서 형식 파일)
 			// 미리보기 영역에 뷰어 표시
 			$("#viewerForm").ajaxForm({
@@ -143,9 +147,11 @@ $('document').ready(function(){
 				}
 			}).submit();
 			
-			
-		    
-		} else if($.inArray(ext,['gif','png','jpg','jpeg']) == 1) {
+			orderArr.push($(this).val().split("\\").pop());
+			fileNum++;
+			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
+					    
+		} else if($.inArray(ext,['gif','png','jpg','jpeg']) != -1) {
 			// 이미지 파일
 			// 미리보기 영역에 이미지 표시
 			order++;
@@ -174,14 +180,14 @@ $('document').ready(function(){
 		        }
 		    }); 
 		    
-		    
+		    orderArr.push($(this).val().split("\\").pop());
+		    fileNum++;
+			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
+			
 		} else {
-			// 지원하지 않는 파일을 업로드했을 경우
-			alert("업로드 할 수 없는 유형의 파일입니다.");
+			alert("업로드가 지원되지 않는 파일 형식입니다.");
 		}
 		
-		fileNum++;
-		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
 		
     });
     
@@ -317,6 +323,7 @@ function writeEmbedModalOpen(){
     			+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
     			+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
     			+$("#modal_bd_writeEmbed textarea").val()+"</div>");
+        orderArr.push($("#modal_bd_writeEmbed textarea").val());
         
       //contentBox에 mouseover된 경우 content툴박스 보이기
         $('.contentBox').on('mouseover', function(){ 
@@ -356,7 +363,8 @@ function fileChange(file){
 	var ext = $(newFile).val().split('.').pop().toLowerCase(); // 파일의 확장자
 	var file = $(newFile).prop("files")[0];
 	blobURL = window.URL.createObjectURL(file);
-	if($.inArray(ext,['gif','png','jpg','jpeg']) == -1){
+	if($.inArray(ext,['pdf','doc','docx','ppt','pptx','xls','xlsx',
+	                  'txt','py','js','xml','css','md','pl','c','m','json']) != -1){
 		// doc, pdf, ppt 파일
 		// 미리보기 영역에 뷰어 표시
 		$("#viewerForm").ajaxForm({
@@ -397,9 +405,11 @@ function fileChange(file){
 			}
 		}).submit();
 		
+		orderArr.push($(this).val().split("\\").pop());
+		fileNum++;
+		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
 		
-	    
-	} else {
+	} else if($.inArray(ext,['gif','png','jpg','jpeg']) != -1){
 		// 이미지 파일
 		// 미리보기 영역에 이미지 표시
 		order++;
@@ -428,20 +438,31 @@ function fileChange(file){
 	        }
 	    }); 
 	    
-	    
-	}    
-	
-	fileNum++;
-	$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
-	
+	    orderArr.push($(this).val().split("\\").pop());
+		fileNum++;
+		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
+		
+	} else {
+		alert("업로드가 지원되지 않는 파일 형식입니다.");
+	}
 }
+
+jQuery.ajaxSettings.traditional = true;
+
 
 function addProject(){
 	// 프로젝트 등록
 //	$("#addProjectForm").submit();
-	$("#p_title").val($("#projectTitle").val()); // 프로젝트 이름
-	$("#cate_id").val($("#selectedCategory").val()); // 카테고리 번호
+//	$("#p_title").val($("#projectTitle").val()); // 프로젝트 이름
+//	$("#cate_id").val($("#selectedCategory").val()); // 카테고리 번호
 	// 서브카테고리 번호
-	$("#viewerForm").attr("action","addProject");
-	$("#viewerForm").submit();
+	// 이미지 파일은 잘 되는데 문서 파일 올리면 bad request
+	console.log(orderArr);
+	$("#viewerForm").ajaxForm({
+		url: "addProject",
+		data: {
+			orderArr: orderArr
+		}
+	}).submit();
+	
 }

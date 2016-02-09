@@ -5,10 +5,16 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProjectVO {
-	private int p_id, m_id, cate_id, p_viewnum;
+	private int p_id, m_id, cate_id, p_viewnum, sc_id;
 	private String p_title, p_hash, p_date, p_coverImg;
 	private List<MultipartFile> contents;
-	
+
+	public int getSc_id() {
+		return sc_id;
+	}
+	public void setSc_id(int sc_id) {
+		this.sc_id = sc_id;
+	}
 	public List<MultipartFile> getContents() {
 		return contents;
 	}

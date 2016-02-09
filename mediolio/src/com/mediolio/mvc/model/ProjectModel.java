@@ -41,8 +41,12 @@ public class ProjectModel {
 	}
 	
 	@RequestMapping(value="addProject")
-	public String addProject(ProjectVO pvo, HttpSession session){
+	public String addProject(ProjectVO pvo, String[] orderArr, HttpSession session){
 		// 프로젝트 업로드
+		for(int i=0; i<orderArr.length; i++){
+			System.out.println((i+1)+"번째 콘텐츠: "+orderArr[i]);
+		}
+		
 		List<MultipartFile> contents = pvo.getContents();
 		System.out.println("파일 수: "+contents.size());
 		if(null != contents & contents.size()>0){
@@ -79,7 +83,18 @@ public class ProjectModel {
 	@RequestMapping(value="showViewer")
 	public void showViewer(ProjectVO pvo, HttpSession session, HttpServletResponse response) throws IOException{
 		// doc, ppt, pdf 업로드 했을 때 뷰어 보여주기
-		MultipartFile projectFile = pvo.getContents().get(0);
+		List<MultipartFile> contents = pvo.getContents();
+		MultipartFile projectFile = contents.get(0);
+		String[] imgExt = {"gif","png","jpg","jpeg"};
+		for(MultipartFile file:contents){
+			String ext = file.getOriginalFilename().split("\\.")[1];
+			for(String img:imgExt){
+				if(!(ext.contains(img))){
+					projectFile = file;
+				}
+			}
+		}
+		
 		String[] fileFullName = projectFile.getOriginalFilename().split("\\.");
 		System.out.println(projectFile.getOriginalFilename());
 		String fileName = fileFullName[0]; // 파일 이름
