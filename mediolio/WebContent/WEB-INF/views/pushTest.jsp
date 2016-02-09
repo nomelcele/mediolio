@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
-	var wsUri = "ws://localhost:8089/mediolio/websocket/serverEndPoint/";
+	var wsUri = "ws://localhost:8089/mediolio/websocket?id=2";
 
 	function init() {
 		output = document.getElementById("output");
@@ -16,7 +16,7 @@
 
 	function send_message(m_id) {
 		// 웹소켓 생성
-		websocket = new WebSocket(wsUri+m_id);
+		websocket = new WebSocket(wsUri);
 		
 		//WebSocket 연결
 		websocket.onopen = function(evt) {
@@ -44,9 +44,10 @@
 	}
 	//메시지 수신	
 	function onMessage(evt) {
-		var jsonData = JSON.parse(evt.data);
+		writeToScreen("Message Received: " + evt.data + "\n");
+/* 		var jsonData = JSON.parse(evt.data);
 		if(jsonData.message != null) 
-			writeToScreen("Message Received: " + jsonData.message + "\n");
+			writeToScreen("Message Received: " + jsonData.message + "\n"); */
 	}
 	//전송 에러 발생
 	function onError(evt) {
