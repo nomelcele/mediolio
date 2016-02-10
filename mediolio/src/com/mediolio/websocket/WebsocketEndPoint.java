@@ -56,7 +56,7 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
 	                		//새 push가 0개 이상인 경우에만 client에 알림
 	                		if(msg>0) session.sendMessage(new TextMessage(msg+""));
 	                    	
-	                    	Thread.sleep(5000);
+	                    	Thread.sleep(30000);
 	                 	} catch (InterruptedException | IOException e) {
 	                 		Thread.currentThread().interrupt();
 	                    	System.out.println("thread interrupted");
