@@ -11,6 +11,13 @@
   		group by h_value order by h_value
   	</select>
   	<insert id="uploadContent" parameterType="covo">
-  		insert into content (p_id,c_type,c_value) values(#{p_id},#{c_type},#{c_value})
+  		insert into content (p_id,c_type,c_value,c_order) values(#{p_id},#{c_type},#{c_value},#{c_order})
+  	</insert>
+  	<insert id="addProject" parameterType="pvo" useGeneratedKeys="true" keyProperty="p_id">
+  		insert into project (p_title,cate_id,p_date,p_viewnum) 
+  		values(#{p_title},#{cate_id},sysdate(),0)
+  	</insert>
+  	<insert id="addHashtag" parameterType="hvo">
+  		insert into hashtag (h_value,p_id) values(#{h_value},#{p_id})
   	</insert>
   </mapper>

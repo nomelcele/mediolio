@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.HashtagVO;
+import com.mediolio.vo.ProjectVO;
 import com.mediolio.vo.SubcategoryVO;
 
 @Repository
@@ -25,5 +26,13 @@ public class ProjectDao {
 	
 	public void uploadContent(ContentVO covo){
 		st.insert("proj.uploadContent",covo);
+	}
+	
+	public int addProject(ProjectVO pvo){
+		return st.insert("proj.addProject", pvo);
+	}
+	
+	public void addHashtag(HashtagVO hvo){
+		st.insert("proj.addHashtag", hvo);
 	}
 }
