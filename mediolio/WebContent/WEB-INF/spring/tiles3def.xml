@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+ <tiles-definitions>
+	<!-- empty -->
+	<definition name="empty_layout" template="/WEB-INF/views/template/emptyTemplate.jsp">
+	   <put-attribute name="body" value="" />
+	</definition>
+
+	<definition name="default_layout" template="/WEB-INF/views/template/defaultTemplate.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
+		<put-attribute name="body" value=""/>
+		<put-attribute name="aside" value="/WEB-INF/views/main/aside.jsp"/>
+	</definition>
+	
+	<definition name="project/cropModal" extends="empty_layout">
+		<put-attribute name="body" value="/WEB-INF/views/project/cropModal.jsp"/>
+	</definition>
+	
+	<definition name="*" extends="default_layout">
+		<put-attribute name="body" value="/WEB-INF/views/{1}.jsp"/>
+	</definition>
+	<definition name="*/*" extends="default_layout">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
+	</definition>
+
+
+</tiles-definitions>

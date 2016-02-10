@@ -9,12 +9,25 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 
+	<!-- Tiles Setting -->
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/spring/tiles3def.xml</value>
+			</list>
+		</property>
+	</bean>
+
 	<!-- view Resolver -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="0"></property>
 	</bean>
-	<bean id="viewResolver1" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="order" value="1"/>
+	<bean id="viewResolver1" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<property name="order" value="1" />
+	</bean>
+	<bean id="viewResolver2" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="2"/>
 		<property name="prefix" value="/WEB-INF/views/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
@@ -30,7 +43,8 @@
 		<property name="contentType" value="text/html;charset=UTF-8"/>
 	</bean>
 	
-		<bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
+	<!-- mail -->
+	<bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
         <property name="host" value="smtp.gmail.com" />
         <property name="port" value="587" />
         <property name="defaultEncoding" value="utf-8"/>
@@ -43,14 +57,13 @@
                 <prop key="mail.smtp.auth">true</prop>
             </props>
         </property>
-       
     </bean>
     <bean id="email" class="com.mediolio.email.Email">
     </bean>
     <bean id="emailSender" class="com.mediolio.email.EmailSender">
     </bean>
 
-
+	<!-- websocket(push) -->
 	<bean id="websocket" class="com.mediolio.websocket.WebsocketEndPoint"/>
 	<websocket:handlers>
 	    <websocket:mapping path="/websocket" handler="websocket"/>

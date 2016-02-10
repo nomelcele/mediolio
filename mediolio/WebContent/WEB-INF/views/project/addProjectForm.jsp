@@ -1,34 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>MEDIOLIO</title>
-<link href="resources/css/common.css" rel="stylesheet" type="text/css"/>
-<link href="resources/css/ui.css" rel="stylesheet" type="text/css"/>
-<link href="resources/css/index.css" rel="stylesheet" type="text/css"/>
-<link href="resources/css/modal.css" rel="stylesheet" type="text/css"/>
 <link href="resources/css/write.css" rel="stylesheet" type="text/css"/>
-    
-<link rel="stylesheet" href="resources/css/jquery.mCustomScrollbar.css" />
-<link rel="stylesheet" href="resources/css/nice-select.css"/>
-<link rel="stylesheet" href="resources/css/jquery-labelauty.css"/>
-
-<script src="js/jquery-1.11.3.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="js/jquery.nice-select.js"></script>
-<script src="js/jquery-labelauty.js"></script>
 <script type="text/javascript" src="js/jquery.form.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/modal.js"></script>
-<script src="js/index.js"></script>    
-<script src="js/write.js"></script>     
+<script type="text/javascript" src="js/crop.js"></script> 
 </head>
 <body>
-<jsp:include page="../main/header.jsp"></jsp:include>
-<jsp:include page="../main/aside.jsp"></jsp:include>
+<div id="modalBox"></div>
 <form id="addProjectForm" action="addProject" method="post" enctype="multipart/form-data"></form>
 <div id="contentsWrap">
     <div class="cardWindow">
@@ -119,12 +101,19 @@
         </div>
     </div><!--//cardWindow-->
     
-    
-    
     <div class="cardWrap">
     	<div class="card_hd"></div>
     	<div class="card_img">
-        	<a href="#"><img src="images/default.png"/></a>
+	    	<form method="post" id="coverImg_form" enctype="multipart/form-data">
+				<input type="file" id="cover_img" name="coverImg" onchange="fileValidation()" onclick="emptyValue()">
+			 	<input type="hidden" id="preview_url" name="preview_url">
+			 	<input type="hidden" id="preview_x" name="x" value=""/>
+				<input type="hidden" id="preview_y"name="y" value=""/>
+				<input type="hidden" id="preview_w"name="w" value=""/>
+				<input type="hidden" id="preview_h"name="h" value=""/>
+			</form>
+			<input type="hidden" id="p_coverImg" name="p_coverImg">
+        	<a href="#"><img src="resources/images/default.png"><!-- 미리보기이미지 들어오는곳 --></a>
         </div><!--//card_img-->
     	<div class="card_bd">
         	<p class="card_title ellipsis"><a href="#">글제목입니다.글제목입니다.글제목입니다.</a></p>

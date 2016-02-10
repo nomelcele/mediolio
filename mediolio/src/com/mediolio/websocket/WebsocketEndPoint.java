@@ -7,10 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.websocket.Session;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -36,10 +33,6 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
         System.out.println("Session Connected");
         
         sessionSet.add(session);
-        
-        Map<String, Object> map = session.getAttributes();
-        String id = (String)map.get("usrId");
-        
     }
   
     // 클라이언트에서 send를 이용해서 메시지 발송을 한 경우 이벤트 핸들링
@@ -59,9 +52,9 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
 	            	while (!Thread.currentThread().isInterrupted()){
 	                	try {
 	                		int msg = pdao.checkLatestNews(usrId, session);
-	                		session.sendMessage(new TextMessage(msg+""));
-	                		//if(msg.equals("nothing")) buildJsonData("thread"+usrId, 0);
-	                		//else buildJsonData("thread"+usrId, (int) session.getUserProperties().get("push"));
+	                		
+	                		//새 push가 0개 이상인 경우에만 client에 알림
+	                		if(msg>0) session.sendMessage(new TextMessage(msg+""));
 	                    	
 	                    	Thread.sleep(5000);
 	                 	} catch (InterruptedException | IOException e) {

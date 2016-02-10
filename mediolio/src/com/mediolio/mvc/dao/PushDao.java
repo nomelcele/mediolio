@@ -22,8 +22,7 @@ public class PushDao {
 			System.out.println("첫 로그인 null");
 			//처음 로그인 한 경우, session에 저장하고 새로 도착한 알림 수를 리턴
 			session.getAttributes().put("push-"+userId, pushList);
-			if(pushList>0) return pushList;
-			else return -1;
+			return pushList;
 		}else if( Integer.parseInt(pushedNum)<pushList){
 			System.out.println("pushListMore");
 			//30초 내에 새로 도착한 알림이 있는 경우, session에 새로 저장하고 알림 갯수 리턴
@@ -31,6 +30,6 @@ public class PushDao {
 			return pushList;
 		}else //30초 내에 업데이트된 소식이 없는 경우
 			System.out.println("nothing");
-			return -1;
+			return  -1;
 	}
 }
