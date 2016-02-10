@@ -1,3 +1,5 @@
+jQuery.ajaxSettings.traditional = true;
+
 var order=0; // 콘텐츠들의 순서
 var fileNum=0; // 업로드할 파일 수
 var orderArr=[];
@@ -20,6 +22,7 @@ $('document').ready(function(){
     
     //텍스트 추가 버튼 누르고 난 후 이벤트
     $('#btn_addText').on('click',function(){
+    	order++;
         $('#write_bd').append('<div class="write_textarea contentBox" contenteditable="true" onmouseup="getSelectedText()" data-sort='+order+'></div>'
         		+'<ul class="text_toolBoxes" id="text_toolBox">'
         		+'<li id="text_size">'
@@ -147,7 +150,8 @@ $('document').ready(function(){
 				}
 			}).submit();
 			
-			orderArr.push($(this).val().split("\\").pop());
+			orderArr.push($(this).val().split("\\")[2]);
+			// $(newFile).val().split("\\")[2]
 			fileNum++;
 			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
 					    
@@ -180,7 +184,8 @@ $('document').ready(function(){
 		        }
 		    }); 
 		    
-		    orderArr.push($(this).val().split("\\").pop());
+		    orderArr.push($(this).val().split("\\")[2]);
+		    // $(newFile).val().split("\\")[2]
 		    fileNum++;
 			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
 			
@@ -315,6 +320,7 @@ function writeEmbedModalOpen(){
     
     $('#btn_writeEmbed').on('click',function(){
     	// 임베드 태그 등록
+    	orderArr.push($("#modal_bd_writeEmbed textarea").val());
         $('.modal_bg, .modal').hide();
         order++;
         $("#write_bd").append("<div class='contentBox' data-sort="+order+">"
@@ -323,7 +329,7 @@ function writeEmbedModalOpen(){
     			+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
     			+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
     			+$("#modal_bd_writeEmbed textarea").val()+"</div>");
-        orderArr.push($("#modal_bd_writeEmbed textarea").val());
+        
         
       //contentBox에 mouseover된 경우 content툴박스 보이기
         $('.contentBox').on('mouseover', function(){ 
@@ -405,7 +411,7 @@ function fileChange(file){
 			}
 		}).submit();
 		
-		orderArr.push($(this).val().split("\\").pop());
+		orderArr.push($(newFile).val().split("\\")[2]);
 		fileNum++;
 		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
 		
@@ -438,7 +444,7 @@ function fileChange(file){
 	        }
 	    }); 
 	    
-	    orderArr.push($(this).val().split("\\").pop());
+	    orderArr.push($(newFile).val().split("\\")[2]);
 		fileNum++;
 		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
 		
@@ -446,8 +452,6 @@ function fileChange(file){
 		alert("업로드가 지원되지 않는 파일 형식입니다.");
 	}
 }
-
-jQuery.ajaxSettings.traditional = true;
 
 
 function addProject(){
@@ -458,11 +462,17 @@ function addProject(){
 	// 서브카테고리 번호
 	// 이미지 파일은 잘 되는데 문서 파일 올리면 bad request
 	console.log(orderArr);
-	$("#viewerForm").ajaxForm({
-		url: "addProject",
-		data: {
-			orderArr: orderArr
-		}
-	}).submit();
+	$("#viewerForm").attr("action","addProject");
+	$("#orderArr").val(orderArr);
+	$("#p_title").val($("#projectTitle").val());
+	$("#cate_id").val($("#selectedCategory").val());
+	
+	var hashtags = "";
+	$("#write_tagTxt span").each(function(){
+		hashtags += $(this).html()+"/";
+	});
+	alert("해쉬태그: "+hashtags);
+	$("#hashtags").val(hashtags);
+	$("#viewerForm").submit();
 	
 }
