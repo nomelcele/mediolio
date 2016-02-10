@@ -1,5 +1,47 @@
-$(function(){	
+var websocket;
+
+	function init() {
+		output = document.getElementById("bellIcon");
+	}
+	
+	function send_message(m_id) {
+		console.log("m_id : " + m_id);
+		// 웹소켓 생성
+		var wsUri = "ws://localhost:8089/mediolio/websocket?id="+m_id;
+		websocket = new WebSocket(wsUri);
+		
+		//WebSocket 연결
+		websocket.onopen = function(evt) {
+			websocket.send("login");
+		};
+		
+		//메시지가 왔을 때 호출되는 메소드
+		websocket.onmessage = function(evt) {
+			if(evt.data != '0') $('#bellIcon').append('<span id="bellNum">'+evt.data+'</span>');
+		};
+		
+		//전송 에러 발생
+		websocket.onerror = function(evt) {
+		
+		};
+		//WebSocket 연결 끊기
+		websocket.onclose = function(evt){
+		
+		};
+	}
+
+	function disconnect(){
+        if (websocket) {
+        	websocket.close();
+        	websocket = null;
+        }
+	}
+
+	window.addEventListener("load", init, false);
+
+$(function(){
 	$('#btn_logout').click(function(){
+		disconnect();
 		location.href="logout";
 	});
 });

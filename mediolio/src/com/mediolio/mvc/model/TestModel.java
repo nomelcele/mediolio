@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -34,16 +35,10 @@ public class TestModel {
 		return new ModelAndView("test");
 	}
 	
-	@RequestMapping("pushTest")
-	public ModelAndView pushTest(){
-		return new ModelAndView("pushTest");
-	}
-	
 	@RequestMapping(value = "imgCrop_modal")
-	public String imgCrop_modal(Model model, @RequestParam("url") String url) throws IOException{
+	public String imgCrop_modal(Model model, @RequestParam("url") String url, HttpServletResponse response) throws IOException{
 		model.addAttribute("imgUrl", url);
-		return "cropModal";
-		
+		return "project/cropModal";
 	}
 	
 	@RequestMapping(value = "cropImage", method = RequestMethod.POST)

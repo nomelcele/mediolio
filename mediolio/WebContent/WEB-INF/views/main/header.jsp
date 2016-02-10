@@ -1,31 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
+<link href="resources/css/common.css" rel="stylesheet" type="text/css"/>
+<link href="resources/css/ui.css" rel="stylesheet" type="text/css"/>
+<link href="resources/css/index.css" rel="stylesheet" type="text/css"/>
+<link href="resources/css/modal.css" rel="stylesheet" type="text/css"/>
+
+<link rel="stylesheet" href="resources/css/jquery.mCustomScrollbar.css" />
+<link rel="stylesheet" href="resources/css/nice-select.css"/>
+<link rel="stylesheet" href="resources/css/jquery-labelauty.css"/>
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/jquery.nice-select.js"></script>
+<script src="js/jquery-labelauty.js"></script>
+
+<script src="js/ui.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/index.js"></script>    
+<script src="js/write.js"></script>   
+
+<script src="js/header.js"></script>
 <script src="js/login.js"></script>
 <script src="js/join.js"></script>
-<script src="js/header.js"></script>
-</head>
-<body>
+<script type="text/javascript">
+$(function(){
+	var loginedId="<%=session.getAttribute("id")%>";
+	if(loginedId != "null") send_message(loginedId);
+});
+</script>
 <div id="header">
 	<div id="headerWrap">
-		<div id="bellWrap">
-            <a id="bellIcon" href="#"><span id="bellNum">0</span></a>
-            <ul class="bubble" id="bubble_bell">
-                <li><a href="#">알림 3아주아주아주아주아주아주아주아주긴알람입니당 긴알람이에요 긴알람긴알람리람ㅇㄴ리ㅏㅁ넝리ㅏㅁㄴㅇ러ㅣㅏㅁㄴㄹㅇ</a></li>
-                <li><a href="#">알림 1</a></li>
-                <li><a href="#">알림 2</a></li>
-                <li><a href="#">알림 3</a></li>
-                <li><a href="#">알림 1</a></li>
-                <li><a href="#">알림 2</a></li>
-            </ul>
-            <span id="bubbleAfter"></span>
-        </div><!--//bellWrap-->
-	        
+		<c:choose>
+		<c:when test="${m_id != 0}">
+			<div id="bellWrap">
+	            <a id="bellIcon" href="#"></a>
+	            <ul class="bubble" id="bubble_bell">
+	                <li><a href="#">알림 3아주아주아주아주아주아주아주아주긴알람입니당 긴알람이에요 긴알람긴알람리람ㅇㄴ리ㅏㅁ넝리ㅏㅁㄴㅇ러ㅣㅏㅁㄴㄹㅇ</a></li>
+	                <li><a href="#">알림 1</a></li>
+	                <li><a href="#">알림 2</a></li>
+	                <li><a href="#">알림 3</a></li>
+	                <li><a href="#">알림 1</a></li>
+	                <li><a href="#">알림 2</a></li>
+	            </ul>
+	            <span id="bubbleAfter"></span>
+	        </div><!--//bellWrap-->
+		</c:when>
+		</c:choose>
         <div class="inputStyle" id="search_main">
         	<div id="selectWrap_main">
                 <select id="select_main">
@@ -195,5 +218,3 @@
         
     </div><!--//modal_bd_likeCategory -->
 </div><!--//_modal_likeCategory-->
-</body>
-</html>
