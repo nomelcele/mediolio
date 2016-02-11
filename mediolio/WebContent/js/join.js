@@ -108,5 +108,31 @@ $(function(){
 		}
 		$("#btn_addBookmark").val(strr);
 	});
+	
+	$("#modal_join input").keypress(function(e){
+	    if(e.which == 13) {
+	        $("#btn_mdJoinForm").click();  // 이벤트 실행
+	    }   
+	});
+	/*$("input[name=pw]").keypress(function(e){
+	    if(e.which == 13) {
+	        $("#btn_mdJoinForm").click();  // 이벤트 실행
+	    }   
+	});
+	$("input[name=pw_correct]").keypress(function(e){
+	    if(e.which == 13) {
+	        $("#btn_mdJoinForm").click();  // 이벤트 실행
+	    }   
+	});
+	$("input[name=m_nickname]").keypress(function(e){
+	    if(e.which == 13) {
+	        $("#btn_mdJoinForm").click();  // 이벤트 실행
+	    }   
+	});
+	$("input[name=m_studentID]").keypress(function(e){
+	    if(e.which == 13) {
+	        $("#btn_mdJoinForm").click();  // 이벤트 실행
+	    }   
+	});*/
 
 });
