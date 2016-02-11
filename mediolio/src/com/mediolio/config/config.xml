@@ -13,6 +13,7 @@
   		<typeAlias type="com.mediolio.vo.ReplyVO" alias="rvo"/>
   		<typeAlias type="com.mediolio.vo.SubcategoryVO" alias="scvo"/>
   		<typeAlias type="com.mediolio.vo.HashtagVO" alias="hvo"/>
+  		<typeAlias type="com.mediolio.vo.PushVO" alias="psvo"/>
   	</typeAliases>
   </configuration>
   
