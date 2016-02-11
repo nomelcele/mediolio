@@ -69,9 +69,11 @@ public class JoinModel {
 		ModelAndView mav = new ModelAndView("jsonView");
 		int insertedJoininfo = jdao.InsertJoinInfo(mevo);
 		mav.addObject("m_id", insertedJoininfo);
+		MemberVO selectedPw = jdao.LoginInfo(mevo.getM_mail());
 		if(insertedJoininfo!=0){
-			session.setAttribute("id", insertedJoininfo);
-			session.setAttribute("pw", mevo.getM_pw());
+			/*session.setAttribute("id", insertedJoininfo);
+			session.setAttribute("pw", mevo.getM_pw());*/
+			session.setAttribute("mev",selectedPw);
 		}
 		return mav;
 	}
@@ -97,8 +99,9 @@ public class JoinModel {
 			mav.addObject("m_pw", selectedPw.getM_pw());
 			mav.addObject("m_id", selectedPw.getM_id());
 			if(selectedPw.getM_pw().equals(pw)){
-				session.setAttribute("id", selectedPw.getM_id());
-				session.setAttribute("pw", pw);
+				/*session.setAttribute("id", selectedPw.getM_id());
+				session.setAttribute("pw", pw);*/
+				session.setAttribute("mev",selectedPw);
 			}
 			return mav;
 		}
