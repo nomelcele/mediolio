@@ -26,7 +26,7 @@ private static final Log log = LogFactory.getLog(SessionModel.class);
 		//log.info("현재 로그인하려는 m_id = "+m_id);
 		log.info("현재 로그인하려는 m_id = "+session.getAttribute("id"));
 		if ( session.getAttribute("id") == null) {		//session check
-			response.sendRedirect("menu=login");
+			response.sendRedirect("main");
 			return false;
 		}
 		else{
