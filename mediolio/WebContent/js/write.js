@@ -488,12 +488,22 @@ function addProject(){
 //	$("#sc_id").val(subcategories);
 //	$("#viewerForm").submit();
 	
+	var mainDiv = document.getElementById("main");
+	var startNode = mainDiv.firstChild.firstChild;
+	var endNode = mainDiv.childNodes[2].firstChild;
+
+	var range = document.createRange();
+	range.setStart(startNode, 6); // 6 is the offset of "world" within "Hello world"
+	range.setEnd(endNode, 7); // 7 is the length of "this is"
+	var sel = window.getSelection();
+	sel.removeAllRanges();
+	sel.addRange(range);
+	console.log("sel이 뭡니까 "+sel);
+	
 }
 
 function txtBold(btn){
-	var boldBtn = btn;
-	var textarea = $(boldBtn).closest(".write_textarea");
-	var len = textarea.html().length;
-	console.log("길이: "+len);
-	
+//	var boldBtn = btn;
+//	var textarea = $(boldBtn).closest(".write_textarea");
+
 }
