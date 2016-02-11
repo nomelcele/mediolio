@@ -1,9 +1,15 @@
 package com.mediolio.mvc.dao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.socket.WebSocketSession;
+
+import com.mediolio.vo.MessageVO;
 
 @Repository
 public class PushDao {
@@ -31,5 +37,16 @@ public class PushDao {
 		}else //30초 내에 업데이트된 소식이 없는 경우
 			System.out.println("nothing");
 			return  -1;
+	}
+
+	public List<Object> getNotifications(String m_id) {
+		Map<String, List<Object>> map = new HashMap<String, List<Object>>();
+		//List<MessageVO>  msgList = st.selectList("getNotificationsMsg", m_id);
+		int mem_id = Integer.parseInt(m_id);
+		map.put("msg", st.selectList("getNotificationsMsg", mem_id));
+		map.put("like", st.selectList("getNotificationsLike", mem_id));
+		map.put("follow", st.selectList("getNotificationsFollow", mem_id));
+		map.put("reply", st.selectList("getNotificationsReply", mem_id));
+		return null;
 	}
 }

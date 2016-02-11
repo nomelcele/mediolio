@@ -1,4 +1,8 @@
-var websocket;
+/*
+ *	websocket 시작    **********************
+ * (notification 기능) *********************
+ */
+	var websocket;
 
 	function init() {
 		output = document.getElementById("bellIcon");
@@ -39,7 +43,28 @@ var websocket;
 
 	window.addEventListener("load", init, false);
 
+/*
+ *	websocket 끝    **********************
+ */
+	
+function getNotifications(){
+	$.ajax({
+		url: "getNotifications",
+		type: "POST",
+		data: {m_id :$('#hidden_m_id').val()},
+		dataType:"JSON",
+		success: function(result){
+			alert("success");
+		}
+	});
+	//$('#bubble_bell, #bubbleAfter').show();  
+}
+	
 $(function(){
+	alert("header");
+	var login=$('#hidden_m_id').val();
+	if(typeof login != 'undefined') send_message(login);
+	
 	$('#btn_logout').click(function(){
 		disconnect();
 		location.href="logout";

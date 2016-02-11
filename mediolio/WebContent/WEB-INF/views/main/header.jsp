@@ -26,10 +26,7 @@
 <script src="js/login.js"></script>
 <script src="js/join.js"></script>
 <script type="text/javascript">
-$(function(){
-	var loginedId="<%=session.getAttribute("id")%>";
-	if(loginedId != "null") send_message(loginedId);
-});
+
 </script>
 <div id="header">
 	<div id="headerWrap">
@@ -46,6 +43,7 @@ $(function(){
 	                <li><a href="#">알림 2</a></li>
 	            </ul>
 	            <span id="bubbleAfter"></span>
+	            <input type="hidden" id="hidden_m_id" value="${m_id }"><!-- 로그인한 사람 m_id -->
 	        </div><!--//bellWrap-->
 		</c:when>
 		</c:choose>

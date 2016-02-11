@@ -50,16 +50,15 @@ $('document').ready(function(){
     
   //헤더 알림 호버- 말풍선 띄우기
     $("#bubble_bell").mCustomScrollbar();
-    $('#bellIcon').hover(function(){
-        $('#bubble_bell, #bubbleAfter').show();
-        
-    },function(){
-        $('#bubble_bell, #bubbleAfter').mouseenter(function(){
-            $('#bubble_bell, #bubbleAfter').show();
-        });
-        $('#bubble_bell, #bubbleAfter').mouseleave(function(){
-            $('#bubble_bell, #bubbleAfter').hide();
-        });
-        $('#bubble_bell, #bubbleAfter').hide();
-    });
+    $('#bellIcon').click(function(){
+    	getNotifications(); //header.js 에 있는 함수 
+    });    
+	$(document).click(function(e){
+		var pos = $('#bubble_bell').offset();
+		var menuPos = $('#bubbleAfter').offset();
+		if(($('#bubble_bell').css("display") == "block") && ((e.pageX<pos.left) || (e.pageX>pos.left+480)|| (e.pageY>pos.top+155))){
+			$('#bubble_bell, #bubbleAfter').hide();
+		}
+	});
+    
 })

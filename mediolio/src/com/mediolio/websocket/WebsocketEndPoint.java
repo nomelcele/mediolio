@@ -33,17 +33,15 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
         System.out.println("Session Connected");
         
         sessionSet.add(session);
-    }
+    } 
   
     // 클라이언트에서 send를 이용해서 메시지 발송을 한 경우 이벤트 핸들링
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        String payloadMessage = (String) message.getPayload();
-        System.out.println("서버에 도착한 메시지:"+payloadMessage);
+        //String payloadMessage = (String) message.getPayload();
         
         Map<String, Object> map = session.getAttributes();
         String usrId = (String)map.get("usrId");
-        System.out.println("전송자 아이디:"+usrId);
         
 		if(usrId != null){
 			thread = new Thread(){
@@ -67,7 +65,6 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
 			};
 			//thread 저장
 			threadMap.put(usrId, thread);
-			System.out.println(threadMap.get(usrId));
 		    thread.start();
 		}
         
