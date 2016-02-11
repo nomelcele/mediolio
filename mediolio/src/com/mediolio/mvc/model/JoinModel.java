@@ -29,22 +29,22 @@ public class JoinModel {
 	private Email email;
 
 	
-	@RequestMapping("/menu=login")
+/*	@RequestMapping("/menu=login")
 	public ModelAndView gotoLogin(){
 		return new ModelAndView("/login/login");
-	}
+	}*/
 	@RequestMapping("/menu=password")
 	public ModelAndView gotoPassword(){
 		return new ModelAndView("/login/password");
 	}
-	@RequestMapping("/menu=join")
+/*	@RequestMapping("/menu=join")
 	public ModelAndView gotoJoin(){
 		return new ModelAndView("/login/join");
 	}
 	@RequestMapping("/menu=loginsuccess")
 	public ModelAndView gotoTestmain(){
 		return new ModelAndView("/login/loginsuccess");
-	}
+	}*/
 /*	@RequestMapping("/logout")
 	public ModelAndView logout(HttpSession session) throws Exception{
 		ModelAndView mav = new ModelAndView("redirect:menu=nonlogin");
