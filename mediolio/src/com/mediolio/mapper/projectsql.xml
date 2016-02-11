@@ -13,9 +13,12 @@
   	<insert id="uploadContent" parameterType="covo">
   		insert into content (p_id,c_type,c_value,c_order) values(#{p_id},#{c_type},#{c_value},#{c_order})
   	</insert>
-  	<insert id="addProject" parameterType="pvo" useGeneratedKeys="true" keyProperty="p_id">
-  		insert into project (p_title,cate_id,p_date,p_viewnum) 
-  		values(#{p_title},#{cate_id},sysdate(),0)
+  	<insert id="addProject" parameterType="pvo" useGeneratedKeys="true" keyProperty="p_id" keyColumn="p_id">
+  		insert into project (m_id,p_title,cate_id,p_date,p_viewnum,p_coverImg) 
+  		values(#{m_id},#{p_title},#{cate_id},sysdate(),0,#{p_coverImg})
+  		<selectKey keyProperty="p_id" resultType="Integer" order="AFTER">
+  			select last_insert_id()
+  		</selectKey>
   	</insert>
   	<insert id="addHashtag" parameterType="hvo">
   		insert into hashtag (h_value,p_id) values(#{h_value},#{p_id})

@@ -50,6 +50,7 @@ public class ProjectModel {
 	public String addProject(ProjectVO pvo, String[] orderArr, String hashtags, HttpSession session){
 		// 프로젝트 업로드
 		// 1. 새로운 프로젝트 추가
+//		pvo.setM_id((int)session.getAttribute("id"));
 		int p_id = pdao.addProject(pvo); 
 		
 		// 2. 콘텐츠(이미지, 문서, 임베드 태그, 텍스트) 업로드 및 db에 등록

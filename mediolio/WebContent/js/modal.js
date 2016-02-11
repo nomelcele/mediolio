@@ -143,7 +143,7 @@ function writeDCategoryModalOpen(){
      	var str = "";
     	for(var i=0; i<arr.length; i++){
     		var el = arr[i];
-    		str += $(el).parent().find(".label_category").html();
+    		str += "<span><input type='hidden' class='subCategory' value="+$(el).val()+">"+$(el).parent().find(".label_category").html()+"</span>";
     		if(i<arr.length-1){
     			str += ", "
     		}
