@@ -7,14 +7,14 @@
 	<definition name="empty_layout" template="/WEB-INF/tiles/template/emptyTemplate.jsp">
 	   <put-attribute name="body" value="" />
 	</definition>
-
+	
 	<definition name="default_layout" template="/WEB-INF/tiles/template/defaultTemplate.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/main/header.jsp"/>
 		<put-attribute name="body" value=""/>
 		<put-attribute name="aside" value="/WEB-INF/views/main/aside.jsp"/>
 	</definition>
 	
-	<definition name="project/cropModal" template="empty_layout">
+	<definition name="project/cropModal" extends="empty_layout">
 		<put-attribute name="body" value="/WEB-INF/views/project/cropModal.jsp"/>
 	</definition>
 	
@@ -24,6 +24,5 @@
 	<definition name="*/*" extends="default_layout">
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
 	</definition>
-
 
 </tiles-definitions>
