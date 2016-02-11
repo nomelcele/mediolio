@@ -1,20 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="aside">
     <div id="logoWrap"></div>
 	<div class="asideWrap" id="userBox">
-    	<div id="user_idWrap"><a href="#" id="user_id">12LEEYURA</a></div>
+		<c:choose> 
+			<c:when test="${m_id == 0 }">
+				<div id="user_idWrap"><a onclick="loginModalOpen()" href="#" id="user_id">로그인 하세요.</a></div>
+			</c:when>
+			<c:otherwise>
+				<div id="user_idWrap"><a href="#" id="user_id">${m_nickname}</a></div>
+        			<ul>
+        				<li id="myPf"><a href="#" class="indent">MyPortfolio</a></li>
+            			<li id="likePf"><a href="#" class="indent">Like</a></li>
+            			<li id="follow"><a href="#" class="indent">Follow</a></li>
+            			<li id="message"><a href="#" class="indent">Message</a></li>
+        			</ul>
+			</c:otherwise>
+		</c:choose>
+<!--     	<div id="user_idWrap"><a href="#" id="user_id">12LEEYURA</a></div>
         <ul>
         	<li id="myPf"><a href="#" class="indent">MyPortfolio</a></li>
             <li id="likePf"><a href="#" class="indent">Like</a></li>
             <li id="follow"><a href="#" class="indent">Follow</a></li>
             <li id="message"><a href="#" class="indent">Message</a></li>
-        </ul>
+        </ul> -->
     </div><!--//userBox-->
-    <div id="uploadWrap">
+    <c:choose> 
+			<c:when test="${m_id == 0 }">
+				
+			</c:when>
+			<c:otherwise>
+				<div id="uploadWrap">
+    				<a id="uploadPf" onclick="location='addProjectForm'; return false;" href="#">UPLOAD PORTFOLIO</a>
+    			</div><!--//uploadWrap-->
+			</c:otherwise>
+		</c:choose>
+<!--     <div id="uploadWrap">
     	<a id="uploadPf" onclick="location='addProjectForm'; return false;" href="#">UPLOAD PORTFOLIO</a>
-    </div><!--//uploadWrap-->
+    </div>//uploadWrap -->
     <div class="asideWrap" id="categoryTitle">
     	<p>CATEGORY</p>
     </div><!--//categoryTitle-->
