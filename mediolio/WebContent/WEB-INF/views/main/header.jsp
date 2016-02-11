@@ -106,8 +106,8 @@
         	<div class="login_inputWrap" id="inputWrap_id">
             	<div class="login_smallBox"></div>
             	<input class="inputStyle2" id = "id" name="mail" type="text" placeholder = "ID (EMAIL)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ID (EMAIL)'"/>
-            	<input type="hidden" id="m_mail" name="m_mail" value="">
         	</div>
+        	<input type="hidden" id="m_mail" name="m_mail" value="">
 	        <div class="login_inputWrap" id="inputWrap_pw">
     	        <div class="login_smallBox"></div>
     	        <input class="inputStyle2" id = "jpw" type="password" name="pw" placeholder = "PASSWORD" onfocus="this.placeholder = ''" onblur="this.placeholder = 'PASSWORD'"/>
