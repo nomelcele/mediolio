@@ -16,8 +16,11 @@
 		SELECT count(m_id) FROM MEMBER WHERE m_mail=#{m_mail}
 	</select>
 	
-	<select id="loginIdentify" resultType="mevo" parameterType="String" >
+<!-- 	<select id="loginIdentify" resultType="mevo" parameterType="String" >
 		SELECT m_pw,m_id FROM MEMBER WHERE m_mail=#{m_mail}
+	</select> -->
+	<select id="loginIdentify" resultType="mevo" parameterType="String" >
+		SELECT * FROM MEMBER WHERE m_mail=#{m_mail}
 	</select>
 	<update id="sendpw" parameterType="mevo">
   		UPDATE MEMBER SET m_pw=#{m_pw} WHERE m_mail=#{m_mail}

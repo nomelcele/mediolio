@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mediolio.mvc.dao.MainDao;
+import com.mediolio.vo.MemberVO;
 
 
 
@@ -19,7 +20,7 @@ public class MainModel {
 	
 	@RequestMapping(value={"","main"})
 	public ModelAndView main(HttpSession session){
-		ModelAndView mav = new ModelAndView("main/index");
+/*		ModelAndView mav = new ModelAndView("main/index");
 		int id = 0;
 		String nickname="";
 		try{
@@ -34,6 +35,13 @@ public class MainModel {
 		System.out.println("nickname :"+ nickname);
 		mav.addObject("m_id", id);
 		mav.addObject("m_nickname",nickname);
+		return mav;*/
+		ModelAndView mav = new ModelAndView("main/index");		
+		MemberVO mev = (MemberVO) session.getAttribute("mev");
+		if(mev!=null){
+		System.out.println("id : " +mev.getM_id());
+		System.out.println("nickname : "+mev.getM_nickname());
+		}
 		return mav;
 	}
 }
