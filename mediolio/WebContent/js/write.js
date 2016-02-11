@@ -34,7 +34,7 @@ $('document').ready(function(){
         		+'<option>11px</option>'
         		+'</select></li>'
         		+'<li id="text_color"><a href="#"></a></li>'
-        		+'<li id="text_bold"><a href="#"></a></li>'
+        		+'<li id="text_bold"><a href="#" onclick="txtBold(); return false;"></a></li>'
         		+'<li id="text_italic"><a href="#"></a></li>'
         		+'<li id="text_under"><a href="#"></a></li></ul>'
         		+'<ul class="text_toolBoxes content_toolBoxes" id="content_toolBox">'
@@ -487,5 +487,13 @@ function addProject(){
 //	$("#hashtags").val(hashtags);
 //	$("#sc_id").val(subcategories);
 //	$("#viewerForm").submit();
+	
+}
+
+function txtBold(btn){
+	var boldBtn = btn;
+	var textarea = $(boldBtn).closest(".write_textarea");
+	var len = textarea.html().length;
+	console.log("길이: "+len);
 	
 }
