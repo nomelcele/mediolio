@@ -46,11 +46,12 @@
                 			<input type="file" class="contentFile" id="file0" name="contents[0]"/> 
                 			파일 업로드
                 		</a>
-                		<input type="hidden" id="orderArr" name="orderArr">
-                		<input type="hidden" id="p_title" name="p_title">
-                		<input type="hidden" id="cate_id" name="cate_id">
-                		<input type="hidden" id="hashtags" name="hashtags">
-                		<input type="hidden" id="p_coverImg" name="p_coverImg">
+<!--                 		<input type="hidden" id="orderArr" name="orderArr"> -->
+<!--                 		<input type="hidden" id="p_title" name="p_title"> -->
+<!--                 		<input type="hidden" id="cate_id" name="cate_id"> -->
+<!--                 		<input type="hidden" id="hashtags" name="hashtags"> -->
+<!--                 		<input type="hidden" id="p_coverImg" name="p_coverImg"> -->
+<!--                 		<input type="hidden" id="sc_id" name="sc_id"> -->
                 	</form>
                 </li>
                 <li><a id="btn_addMedia" href="#" onclick="writeEmbedModalOpen()">미디어 추가</a></li>
@@ -117,9 +118,9 @@
         	<a href="#"><img src="resources/images/default.png"><!-- 미리보기이미지 들어오는곳 --></a>
         </div><!--//card_img-->
     	<div class="card_bd">
-        	<p class="card_title ellipsis"><a href="#">글제목입니다.글제목입니다.글제목입니다.</a></p>
+        	<p class="card_title ellipsis"><a href="#"></a></p>
             <p class="card_dscrpt"><a href="#">12이유라</a></p>
-            <p class="card_tag">게임프로그래밍,게임사운드,게임프로그래밍</p>
+            <p class="card_tag"></p>
         </div><!--//card_bd-->
         <div class="card_ct">
         	<p class="p_like"><span></span>12</p>
