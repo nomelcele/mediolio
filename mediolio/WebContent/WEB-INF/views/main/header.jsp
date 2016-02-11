@@ -31,7 +31,7 @@
 <div id="header">
 	<div id="headerWrap">
 		<c:choose>
-		<c:when test="${m_id != 0}">
+		<c:when test="${sessionScope.mev != null }">
 			<div id="bellWrap">
 	            <a id="bellIcon" href="#"></a>
 	            <ul class="bubble" id="bubble_bell">
@@ -43,7 +43,7 @@
 	                <li><a href="#">알림 2</a></li>
 	            </ul>
 	            <span id="bubbleAfter"></span>
-	            <input type="hidden" id="hidden_m_id" value="${m_id }"><!-- 로그인한 사람 m_id -->
+	            <input type="hidden" id="hidden_m_id" value="${sessionScope.mev.m_id}"><!-- 로그인한 사람 m_id -->
 	        </div><!--//bellWrap-->
 		</c:when>
 		</c:choose>
@@ -60,7 +60,7 @@
         </div><!--//search_main-->
        <!--  <input class="btnStyle" id="btn_login" type="button" value="LOGIN" onClick="loginModalOpen()"/> -->
     	<c:choose> 
-			<c:when test="${m_id == 0 }">
+			<c:when test="${sessionScope.mev == null }">
 				<input class="btnStyle" id="btn_login" type="button" value="LOGIN" onClick="loginModalOpen()"/>
 			</c:when>
 			<c:otherwise>
