@@ -1,3 +1,5 @@
+ALTER TABLE project MODIFY sc_id VARCHAR(10);
+
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('기획',1);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('개발',1);
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('시나리오',2);
@@ -49,7 +51,7 @@ CREATE TABLE PROJECT(
   m_id int(10),
   p_title VARCHAR(300),
   cate_id int(5),
-  sc_id int(5),
+  sc_id VARCHAR(10),
   p_date datetime,
   p_viewnum int(10),
   p_coverImg VARCHAR(100)
