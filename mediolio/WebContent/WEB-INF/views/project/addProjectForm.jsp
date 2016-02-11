@@ -119,7 +119,7 @@
         </div><!--//card_img-->
     	<div class="card_bd">
         	<p class="card_title ellipsis"><a href="#"></a></p>
-            <p class="card_dscrpt"><a href="#">12이유라</a></p>
+            <p class="card_dscrpt"><a href="#">${sessionScope.mev.m_studentID} ${sessionScope.mev.m_nickname}</a></p>
             <p class="card_tag"></p>
         </div><!--//card_bd-->
         <div class="card_ct">

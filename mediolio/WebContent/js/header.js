@@ -61,7 +61,6 @@ function getNotifications(){
 }
 	
 $(function(){
-	alert("header");
 	var login=$('#hidden_m_id').val();
 	if(typeof login != 'undefined') send_message(login);
 	
