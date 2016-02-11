@@ -15,13 +15,11 @@ public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor{
 	public boolean beforeHandshake(ServerHttpRequest request,
 			ServerHttpResponse response, WebSocketHandler wsHandler,
 			Map<String, Object> attributes) throws Exception {
-        System.out.println("Before Handshake");
                 
         ServletServerHttpRequest ssreq = (ServletServerHttpRequest) request;
         System.out.println("URI:"+request.getURI());
  
         HttpServletRequest req =  ssreq.getServletRequest();
-        System.out.println("param, id:"+req.getParameter("id"));
          
         String usrId = req.getParameter("id");
         attributes.put("usrId", usrId);

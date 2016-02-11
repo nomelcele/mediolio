@@ -2,18 +2,6 @@
     pageEncoding="UTF-8"%>
 <link href="resources/css/jquery.Jcrop.css" rel="stylesheet" type="text/css" />
 <link href="resources/css/crop.css" rel="stylesheet" type="text/css"/>
-<style type="text/css">
-/* 모달 설정 */
-/* The modal's background */
-.modal { display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0.4); padding-top: 50px; padding-bottom: 50px; z-index: 800;}
-/* Display the modal when targeted */
-.modal:target {display: table; /* table*/ position: absolute;}
-/* The modal box */
-.modal-dialog {display: table-cell; vertical-align: middle;}
-/* The modal's content */
-.modal-dialog .modal-content {margin: auto; background-color: #fff; position: relative; padding: 0; outline: 0; border: 1px #777 solid; text-align: justify; max-width:940px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius:10px; 
-
-</style>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/jquery.Jcrop.js"></script>
 <script type="text/javascript">
@@ -31,7 +19,6 @@
 
 		var imgWidth = $('#target').width();
 		var imgHeight = $('#target').height();
-		console.log(imgWidth + "*" + imgHeight);
 
 		$('#target').Jcrop({
 			boxWidth: 740, 
@@ -48,8 +35,8 @@
 			boundx = bounds[0];
 			boundy= bounds[1];
 			jcrop_api = this;
-
-			// Move the preview into the jcrop container for css positioning
+			
+			$('.modal-content').css({ width: boundx + 210 });
 			$preview.appendTo(jcrop_api.ui.holder);
 		});
 
@@ -101,7 +88,7 @@
 	}
 </script>
 
-<div id="crop" class="modal">
+<div id="crop" class="crop_modal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="jc-demo-box">

@@ -1,11 +1,22 @@
+/* 모달 설정 */
+/* The modal's background */
+.crop_modal { display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0, 0, 0); background-color: rgba(0, 0, 0, 0.4); padding-top: 50px; padding-bottom: 50px; z-index: 800;}
+/* Display the modal when targeted */
+.crop_modal:target {display: table; /* table*/ position: absolute;}
+/* The modal box */
+.modal-dialog {display: table-cell; vertical-align: middle;}
+/* The modal's content */
+.modal-dialog .modal-content {margin: auto; background-color: #fff; position: relative; padding: 20px; border: 1px #777 solid; max-width:960px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius:10px;} 
+
+
 /* jcrop 속성 */
 #preview-pane{ 
-  display: block; position: absolute; z-index: 2000; /* top: 10px;  */right: -220px; border: 1px rgba(0,0,0,.4) solid; background-color: white;
+  display: block; position: absolute; z-index: 2000; /* top: 10px;  */right: -210px; border: 1px rgba(0,0,0,.4) solid; background-color: white;
   -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px;
   -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2); -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* thumbnail preview 창 크기 비율에 따라 crop 비율이 정해짐 */
 #preview-pane .preview-container {
-	width: 180px; height: 180px; overflow: hidden;
+	width: 200px; height: 200px; overflow: hidden;
 }

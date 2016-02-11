@@ -53,8 +53,6 @@ function fileValidation(){
             	}
             	else {
                     $('#preview_url').val(img.src);
-                    $('#target').attr('src', '');
-                    $('#target-preview').attr('src', '');
                     show_cropModal(img.src);
             	}
             };
