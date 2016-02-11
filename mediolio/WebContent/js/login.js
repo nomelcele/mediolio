@@ -32,4 +32,20 @@ $(function(){
 			});
 		} 	
 	});
+	 
+/*	$("input[name=m_mail]").keypress(function(e){
+	    if(e.which == 13) {
+	        $("#btn_mdLogin").click();  // 이벤트 실행
+	    }   
+	});
+	$("input[name=m_pw]").keypress(function(e){
+        if(e.which == 13) {
+            $("#btn_mdLogin").click();  // 이벤트 실행
+        }   
+    });*/modal_login
+    $("#modal_login input").keypress(function(e){
+	    if(e.which == 13) {
+	        $("#btn_mdLogin").click();  // 이벤트 실행
+	    }   
+	});
 });
