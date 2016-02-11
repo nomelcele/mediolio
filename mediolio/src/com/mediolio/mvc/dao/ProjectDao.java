@@ -29,7 +29,8 @@ public class ProjectDao {
 	}
 	
 	public int addProject(ProjectVO pvo){
-		return st.insert("proj.addProject", pvo);
+		st.insert("proj.addProject", pvo);
+		return pvo.getP_id();
 	}
 	
 	public void addHashtag(HashtagVO hvo){

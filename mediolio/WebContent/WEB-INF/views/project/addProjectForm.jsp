@@ -50,6 +50,7 @@
                 		<input type="hidden" id="p_title" name="p_title">
                 		<input type="hidden" id="cate_id" name="cate_id">
                 		<input type="hidden" id="hashtags" name="hashtags">
+                		<input type="hidden" id="p_coverImg" name="p_coverImg">
                 	</form>
                 </li>
                 <li><a id="btn_addMedia" href="#" onclick="writeEmbedModalOpen()">미디어 추가</a></li>
