@@ -5,11 +5,11 @@
     <div id="logoWrap"></div>
 	<div class="asideWrap" id="userBox">
 		<c:choose> 
-			<c:when test="${m_id == 0 }">
+			<c:when test="${sessionScope.mev == null }">
 				<div id="user_idWrap"><a onclick="loginModalOpen()" href="#" id="user_id">로그인 하세요.</a></div>
 			</c:when>
 			<c:otherwise>
-				<div id="user_idWrap"><a href="#" id="user_id">${m_nickname}</a></div>
+				<div id="user_idWrap"><a href="#" id="user_id">${sessionScope.mev.m_studentID} ${sessionScope.mev.m_nickname}</a></div>
         			<ul>
         				<li id="myPf"><a href="#" class="indent">MyPortfolio</a></li>
             			<li id="likePf"><a href="#" class="indent">Like</a></li>
@@ -27,7 +27,7 @@
         </ul> -->
     </div><!--//userBox-->
     <c:choose> 
-			<c:when test="${m_id == 0 }">
+			<c:when test="${sessionScope.mev == null }">
 				
 			</c:when>
 			<c:otherwise>
