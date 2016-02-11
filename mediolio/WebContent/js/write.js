@@ -5,6 +5,9 @@ var fileNum=0; // 업로드할 파일 수
 var orderArr=[];
 
 $('document').ready(function(){
+	$(document).bind("mouseup",function(){
+		console.log(document.activeElement);
+	});
     
     //팝업 쓰기버튼 호버- 말풍선 띄우기
     $('#btn_addWrite').hover(function(){
@@ -198,6 +201,7 @@ $('document').ready(function(){
     
     $("#selectedCategory").change(function(){
     	// 카테고리 새로 선택했을 때 기존에 있던 세부카테고리 초기화
+    	$(".card_tag").html("");
     	if($("#write_dCategory a").html() != "세부 카테고리 선택.."){
     		$("#write_dCategory a").html("세부 카테고리 선택..");
     	}
@@ -251,7 +255,12 @@ $('document').ready(function(){
     		$(this).focus();
     		$(".autoCompleteBox").css("display","none");
     	}
-    })
+    });
+    
+    $("#projectTitle").keyup(function(){
+    	// 글 제목 입력하면 우측 미리보기 박스의 제목 변경
+    	$(".card_title a").html($(this).val());
+    });
     
 });
 
@@ -463,16 +472,20 @@ function addProject(){
 	// 이미지 파일은 잘 되는데 문서 파일 올리면 bad request
 	console.log(orderArr);
 	$("#viewerForm").attr("action","addProject");
-	$("#orderArr").val(orderArr);
-	$("#p_title").val($("#projectTitle").val());
-	$("#cate_id").val($("#selectedCategory").val());
+//	$("#orderArr").val(orderArr);
+//	$("#p_title").val($("#projectTitle").val());
+//	$("#cate_id").val($("#selectedCategory").val());
 	
-	var hashtags = "";
-	$("#write_tagTxt span").each(function(){
-		hashtags += $(this).html()+"/";
-	});
-	alert("해쉬태그: "+hashtags);
-	$("#hashtags").val(hashtags);
-	$("#viewerForm").submit();
+//	var hashtags = "";
+//	$("#write_tagTxt span").each(function(){
+//		hashtags += $(this).html()+"/";
+//	});
+//	var subcategories = "";
+//	$(".subCategory").each(function(){
+//		subcategories += $(this).val()+"/";
+//	});
+//	$("#hashtags").val(hashtags);
+//	$("#sc_id").val(subcategories);
+//	$("#viewerForm").submit();
 	
 }
