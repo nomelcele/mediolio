@@ -85,7 +85,7 @@
             <a href="#" class="text_position" id="btn_textUp"></a>
             <a href="#" class="text_position" id="btn_textDown"></a>
 -->
-            
+<!--             <div id="main" contenteditable="true"> -->
         </div><!--//write_bd-->
         
 
