@@ -37,7 +37,12 @@ public class ProjectModel {
 	private static BoxViewClient boxView;
 	
 	@RequestMapping(value="addProjectForm")
-	public String addForm(){
+	public String addForm(Model model, HttpSession session){
+		int m_id =0;
+		try{
+			m_id = (int)session.getAttribute("id");
+		}catch(Exception e){}
+		model.addAttribute("m_id", m_id);
 		return "project/addProjectForm";
 	}
 	
