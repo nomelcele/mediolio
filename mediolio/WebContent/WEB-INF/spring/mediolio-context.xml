@@ -13,7 +13,7 @@
 	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
 			<list>
-				<value>/WEB-INF/spring/tiles3def.xml</value>
+				<value>/WEB-INF/tiles/tiles3def.xml</value>
 			</list>
 		</property>
 	</bean>
