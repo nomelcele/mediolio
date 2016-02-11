@@ -3,15 +3,12 @@ package com.mediolio.mvc.model;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.BoxView;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,11 +35,6 @@ public class ProjectModel {
 	
 	@RequestMapping(value="addProjectForm")
 	public String addForm(Model model, HttpSession session){
-		int m_id =0;
-		try{
-			m_id = (int)session.getAttribute("id");
-		}catch(Exception e){}
-		model.addAttribute("m_id", m_id);
 		return "project/addProjectForm";
 	}
 	

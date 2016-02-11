@@ -1,6 +1,7 @@
 package com.mediolio.mvc.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +21,8 @@ public class PushController {
 	public ModelAndView getNotifications(@RequestParam("m_id") String m_id){
 		ModelAndView mav = new ModelAndView("jsonView");
 		
-		List<Object> list = pdao.getNotifications(m_id);
-		mav.addObject("list", list);
+		Map<String, List<Object>> map = pdao.getNotifications(m_id);
+		mav.addObject("list", map);
 		return mav;
 	}
 }

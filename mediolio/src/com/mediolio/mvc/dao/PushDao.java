@@ -39,14 +39,11 @@ public class PushDao {
 			return  -1;
 	}
 
-	public List<Object> getNotifications(String m_id) {
+	public Map<String, List<Object>> getNotifications(String m_id) {
 		Map<String, List<Object>> map = new HashMap<String, List<Object>>();
-		//List<MessageVO>  msgList = st.selectList("getNotificationsMsg", m_id);
 		int mem_id = Integer.parseInt(m_id);
 		map.put("msg", st.selectList("getNotificationsMsg", mem_id));
-		map.put("like", st.selectList("getNotificationsLike", mem_id));
-		map.put("follow", st.selectList("getNotificationsFollow", mem_id));
-		map.put("reply", st.selectList("getNotificationsReply", mem_id));
-		return null;
+		map.put("act", st.selectList("getNotificationsAction", mem_id));
+		return map;
 	}
 }
