@@ -3,5 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="main">
+  
+    <select id="select_m_nickname" resultType="string">
+		SELECT m_nickname FROM MEMBER WHERE m_id=#{m_id}
+	</select>
+  
   </mapper>
   
