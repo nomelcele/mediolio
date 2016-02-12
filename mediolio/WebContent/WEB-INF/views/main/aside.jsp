@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="aside">
-    <div id="logoWrap"></div>
+    <div id="logoWrap">
+		<a id="logoIcon" href=""></a>
+    </div>
 	<div class="asideWrap" id="userBox">
 		<c:choose> 
 			<c:when test="${sessionScope.mev == null }">
