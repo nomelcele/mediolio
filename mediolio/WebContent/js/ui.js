@@ -51,7 +51,15 @@ $('document').ready(function(){
   //헤더 알림 호버- 말풍선 띄우기
     $("#bubble_bell").mCustomScrollbar();
     $('#bellIcon').click(function(){
-    	getNotifications(); //header.js 에 있는 함수 
+    	if(!$('#bellNum').length){
+    		//새로 받아올 알림이 없을 때
+    		$('#mCSB_2_container').empty().append("<li class='bell_nothing'>새로운 알림이 없습니다.</li>");
+    		$('#bubble_bell, #bubbleAfter').show();  
+    	}
+    	else{
+    		//받아올 알림이 있을 때
+    		getNotifications(); //header.js 에 있는 함수 
+    	}
     });    
 	$(document).click(function(e){
 		var pos = $('#bubble_bell').offset();
