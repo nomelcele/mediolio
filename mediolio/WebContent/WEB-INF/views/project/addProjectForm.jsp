@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>MEDIOLIO</title>
 <link href="resources/css/write.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" media="screen" type="text/css" href="resources/css/colorpicker.css" />
+<script type="text/javascript" src="js/colorpicker.js"></script>
 <script type="text/javascript" src="js/jquery.form.js"></script>
 <script type="text/javascript" src="js/crop.js"></script> 
 </head>

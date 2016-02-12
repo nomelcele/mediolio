@@ -5,9 +5,9 @@ var fileNum=0; // 업로드할 파일 수
 var orderArr=[];
 
 $('document').ready(function(){
-	$(document).bind("mouseup",function(){
-		console.log(document.activeElement);
-	});
+//	$(document).bind("mouseup",function(){
+//		console.log(document.activeElement);
+//	});
     
     //팝업 쓰기버튼 호버- 말풍선 띄우기
     $('#btn_addWrite').hover(function(){
@@ -33,14 +33,14 @@ $('document').ready(function(){
         		+'<option value="10">10px</option value="11">'
         		+'<option>11px</option>'
         		+'</select></li>'
-        		+'<li id="text_color"><a href="#"></a></li>'
+        		+'<li id="text_color"><a href="#" onclick="txtColor(this); return false;"></a></li>'
         		+'<li id="text_bold"><a href="#" onclick="txtBold(); return false;"></a></li>'
-        		+'<li id="text_italic"><a href="#"></a></li>'
-        		+'<li id="text_under"><a href="#"></a></li></ul>'
+        		+'<li id="text_italic"><a href="#" onclick="txtItalic(); return false;"></a></li>'
+        		+'<li id="text_under"><a href="#" onclick="txtUnderline(); return false;"></a></li></ul>'
         		+'<ul class="text_toolBoxes content_toolBoxes" id="content_toolBox">'
                 +'<li id="text_up"><a href="#" onclick="moveUpElement(this); return false;"></a></li>'
                 +'<li id="text_down"><a href="#" onclick="moveDownElement(this); return false;"></a></li>'
-                +'<li id="text_delete"><a href="#" onclick="removeElement(this); return false;"></a></li></ul>'
+                +'<li id="text_delete"><a href="#" onclick="removeTxt(this); return false;"></a></li></ul>'
         );
         $(".content_toolBoxes").hide();
         $('.text_toolBoxes').hide();
@@ -271,6 +271,8 @@ function moveUpElement(e){
 	$(element).closest(".contentBox").attr("data-sort",parseInt(order)-1);
 	$(element).closest(".contentBox").prev(".contentBox").attr("data-sort",parseInt($(element).closest(".contentBox").prev(".contentBox").attr("data-sort"))+1);
 	sortElements();	
+	// 배열 순서 바꾸기
+	
 }
 
 function moveDownElement(e){
@@ -280,12 +282,23 @@ function moveDownElement(e){
 	$(element).closest(".contentBox").attr("data-sort",parseInt(order)+1);
 	$(element).closest(".contentBox").next(".contentBox").attr("data-sort",parseInt($(element).closest(".contentBox").next(".contentBox").attr("data-sort"))-1);
 	sortElements();	
+	// 배열 순서 바꾸기
+	
 }
 
 function removeElement(e){
 	// 엘리먼트 삭제
 	var element = e;
 	$(element).closest(".contentBox").remove();
+}
+
+function removeTxt(e){
+	var element = e;
+	var toolbox = $(element).parent().parent();
+	console.log($(toolbox));
+	$(toolbox).prev().remove();
+	$(toolbox).prev().remove();
+	$(toolbox).remove();
 }
 
 function sortElements(){
@@ -488,22 +501,101 @@ function addProject(){
 //	$("#sc_id").val(subcategories);
 //	$("#viewerForm").submit();
 	
-	var mainDiv = document.getElementById("main");
-	var startNode = mainDiv.firstChild.firstChild;
-	var endNode = mainDiv.childNodes[2].firstChild;
-
-	var range = document.createRange();
-	range.setStart(startNode, 6); // 6 is the offset of "world" within "Hello world"
-	range.setEnd(endNode, 7); // 7 is the length of "this is"
-	var sel = window.getSelection();
-	sel.removeAllRanges();
-	sel.addRange(range);
-	console.log("sel이 뭡니까 "+sel);
+	
 	
 }
 
-function txtBold(btn){
-//	var boldBtn = btn;
-//	var textarea = $(boldBtn).closest(".write_textarea");
+function txtBold(){
+	var range = window.getSelection().getRangeAt(0);
+	if(getSelectedNode().className.indexOf("txtBold") > -1){
+		// 선택한 부분에 이미 txtBold 클래스가 적용된 부분이 있을 경우
+		// 클래스 삭제
+		console.log("클래스 이름: "+getSelectedNode().className);
+		getSelectedNode().classList.remove("txtBold");
+	} else {
+		var newNode = document.createElement("span");
+		newNode.setAttribute("class", "txtBold");
+		newNode.appendChild(range.extractContents());
+//		range.surroundContents(newNode);
+		range.insertNode(newNode);
+	}
+	
+}
 
+function txtItalic(){
+	var range = window.getSelection().getRangeAt(0);
+	if(getSelectedNode().className.indexOf("txtItalic") > -1){
+		// 선택한 부분에 이미 txtBold 클래스가 적용된 부분이 있을 경우
+		// 클래스 삭제
+		console.log("클래스 이름: "+getSelectedNode().className);
+		getSelectedNode().classList.remove("txtItalic");
+	} else {
+		var newNode = document.createElement("span");
+		newNode.setAttribute("class", "txtItalic");
+		newNode.appendChild(range.extractContents());
+//		range.surroundContents(newNode);
+		range.insertNode(newNode);
+	}
+	
+}
+
+function txtUnderline(){
+	var range = window.getSelection().getRangeAt(0);
+	if(getSelectedNode().className.indexOf("txtUnderline") > -1){
+		// 선택한 부분에 이미 txtBold 클래스가 적용된 부분이 있을 경우
+		// 클래스 삭제
+		console.log("클래스 이름: "+getSelectedNode().className);
+		getSelectedNode().classList.remove("txtUnderline");
+	} else {
+		var newNode = document.createElement("span");
+		newNode.setAttribute("class", "txtUnderline");
+		newNode.a0ppendChild(range.extractContents());
+		
+//		range.surroundContents(newNode);
+		range.insertNode(newNode);
+	}
+	
+}
+
+function txtColor(btn){
+	var palette = btn;
+	var newColor = "";
+
+		$(palette).ColorPicker({
+			color: "#000000",
+			onShow: function(colpkr){
+				$(colpkr).fadeIn(500);
+//				return false;
+			},
+			onHide: function(colpkr){
+				$(colpkr).fadeOut(500);
+//				return false;
+			},
+			onChange: function (hsb, hex, rgb) {
+				newColor = "#"+hex;
+			}
+		});
+	
+	$(".colorpicker_focus").on('click',function(){
+		// 색깔 바꾸기
+		var range = window.getSelection().getRangeAt(0);
+		var newNode = document.createElement("span");
+		newNode.style.color = newColor;
+		newNode.appendChild(range.extractContents());
+		range.insertNode(newNode);
+		// 팔레트 숨기기
+		$(this).parent().fadeOut(500);
+	});
+}
+
+function getSelectedNode()
+{
+    if (document.selection)
+    	return document.selection.createRange().parentElement();
+    else
+    {
+    	var selection = window.getSelection();
+    	if (selection.rangeCount > 0)
+    		return selection.getRangeAt(0).startContainer.parentNode;
+    }
 }
