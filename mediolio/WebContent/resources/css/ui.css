@@ -102,10 +102,15 @@ min-width:420px; width:auto; max-width:500px; height:150px; overflow-y:hidden; b
     z-index: 1;
     left:5px; border-color:#fff transparent;}
 
-#bubble_bell li{ width:100%; min-height:30px; height:auto; padding-top:10px; padding-bottom:10px; line-height:20px; box-sizing:border-box; outline:none; }
+#bubble_bell .bell_content{ width:100%; min-height:30px; height:auto; padding-top:10px; padding-bottom:10px; line-height:20px; box-sizing:border-box; outline:none; }
 
-#bubble_bell li a{ display:block; min-width:200px; width:auto; max-width:500px; height:auto; color:#666; font-size:12px; box-sizing:border-box; padding-left:10px; }
-#bubble_bell li:hover{ background:#eee; }
+#bubble_bell .bell_content a{ display:block; min-width:200px; width:auto; max-width:500px; height:auto; color:#666; font-size:12px; box-sizing:border-box; padding-left:10px; }
+#bubble_bell .bell_content:hover{ background:#eee; }
 
-#bubble_bell li:first-child:hover{ background:#eee; border-radius:10px 10px 0 0; }
-#bubble_bell li:last-child:hover{ background:#eee; border-radius:0 0 10px 10px; }
+#bubble_bell .bell_content:first-child:hover{ background:#eee; border-radius:10px 10px 0 0; }
+#bubble_bell .bell_content:last-child:hover{ background:#eee; border-radius:0 0 10px 10px; }
+
+#bubble_bell .bell_sort{width:100%; height:20px; background:#BDBDBD; font-weight:bold; line-height:20px; padding:5px 10px;}
+#bubble_bell .bell_nothing{width:100%; height:140px; line-height:140px; text-align: center;}
+
+

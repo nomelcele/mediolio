@@ -22,7 +22,8 @@ public class PushController {
 		ModelAndView mav = new ModelAndView("jsonView");
 		
 		Map<String, List<Object>> map = pdao.getNotifications(m_id);
-		mav.addObject("list", map);
+		mav.addObject("msg", map.get("msg"));
+		mav.addObject("act", map.get("act"));
 		return mav;
 	}
 }

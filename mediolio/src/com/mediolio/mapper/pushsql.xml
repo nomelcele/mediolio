@@ -18,7 +18,7 @@
 			ORDER BY msg.msg_id DESC
 	</select>
 	<select id="getNotificationsAction" parameterType="int" resultType="psvo">
-		SELECT m.m_id, m.m_nickname, act.act_date, act.p_id, p.p_title, act.r_id
+		SELECT m.m_id, m.m_nickname, act.act_type, act.act_date, act.p_id, p.p_title, act.r_id
 			FROM member_action act JOIN member m ON act.act_from=m.m_id JOIN project p ON act.p_id=p.p_id
 			WHERE act.act_read='n' AND act.act_to=#{m_id}
 			ORDER BY act.act_date DESC

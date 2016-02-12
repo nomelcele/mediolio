@@ -13,11 +13,13 @@
 		var box_height = 700;
 		
 		// Grab some information about the preview pane
-		$preview = $('#preview-pane'), 
-		$pcnt = $('#preview-pane .preview-container'), 
-		$pimg = $('#preview-pane .preview-container img'),
+		$preview = $('#preview-pane');
+		$pcnt = $('#preview-pane .preview-container');
+		$pimg = $('#preview-pane .preview-container img');
 
-		xsize = $pcnt.width(), ysize = $pcnt.height();
+		var xsize = 200; 
+		var ysize = 200;
+		//xsize = $pcnt.width(), ysize = $pcnt.height();
 
 		var target = document.getElementById("target");
 		var imgWidth = target.width;
@@ -45,20 +47,20 @@
 				//이미지 가로세로 모두 박스 범위보다 클때
 				if(box_width/box_height < boundx/boundy){
 					//비율상 가로가 더 길때
-					$('.modal-content').css({ width: box_width + 210 });
+					$('.modal-content').css({ width: box_width + 210, margin: "-150px auto 0"});
 				}else if(box_width/box_height > boundx/boundy){
 					//비율상 세로가 더 길때
-					$('.modal-content').css({ width: boundx*box_height/boundy + 210 });
+					$('.modal-content').css({ width: boundx*box_height/boundy + 210, margin: "-150px auto 0"});
 				}
 			}else if(boundx>box_width){
 				//이미지 가로만 박스 범위보다 클때
-				$('.modal-content').css({ width: box_width + 210 });
+				$('.modal-content').css({ width: box_width + 210, margin: "-250px auto 0" });
 			}else if(boundy>box_height){
 				//이미지 세로만 박스 범위보다 클때
-				$('.modal-content').css({ width: boundx*box_height/boundy + 210 });
+				$('.modal-content').css({ width: boundx*box_height/boundy + 210, margin: "-100px auto 0" });
 			}else{
 				//이미지가 박스 범위보다 작을 때
-				$('.modal-content').css({ width: boundx + 210 });
+				$('.modal-content').css({ width: boundx + 210, margin: "-250px auto 0" });
 			}
 			console.log($('.modal-content').width());
 			$preview.appendTo(jcrop_api.ui.holder);
@@ -108,6 +110,7 @@
 	}
 	
 	function cancelCrop(){
+		$('#contentsWrap').css({position: 'relative'});
 		$('#crop').remove();
 	}
 </script>
@@ -117,15 +120,17 @@
 		<div class="modal-content">
 			<div class="jc-demo-box">
   				<img src="${imgUrl }" id="target" alt="original image"/>
-					<div id="preview-pane">
-						<div class="preview-container">
-							<img src="${imgUrl }" id="target-preview" class="jcrop-preview" alt="Preview" />
-    					</div>
-					</div>
-					<div class="clearfix"></div>
+				<div id="preview-pane">
+					<div class="preview-container">
+						<img src="${imgUrl }" id="target-preview" class="jcrop-preview" alt="Preview" />
+    				</div>
+				</div>
+
 			</div>
-			<input type="button" value="Crop Image" id="crop_submit" onclick="uploadAjax()"/>
-			<input type="button" value="Cancel" id="crop_cancel" onclick="cancelCrop()">
+			<div class="crop_btns">
+				<input type="button" value="CROP" id="crop_submit" onclick="uploadAjax()" class="btnStyle2"/>
+				<input type="button" value="CANCEL" id="crop_cancel" onclick="cancelCrop()" class="btnStyle2">
+			</div>
 		</div>
 	</div>
 </div>

@@ -6,6 +6,7 @@ function show_cropModal(url){
 			type: "POST",
 			data: {url : $('#preview_url').val()},
 			success: function(result){
+				$('#contentsWrap').css({position: 'fixed'});
 				$("#modalBox").html(result);
 				location.href="#crop";
 			}
