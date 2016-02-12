@@ -147,6 +147,7 @@
 				}
 
 				$object.attr( "id", input_id );
+				$object.parent().find('.label_category').attr('for',input_id);
 			}
 
 			// Now, add necessary tags to make this work
