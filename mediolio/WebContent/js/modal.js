@@ -95,7 +95,9 @@ function joinModalOpen(){
     
     
 }
-    
+
+var likestr="";
+
 function likeCategoryModalOpen(){
     var win_w = $(window).width();
 	var win_h = $(window).height();
@@ -116,6 +118,20 @@ function likeCategoryModalOpen(){
 	$('#modal_likeCategory').show();
     
     $('.modal_bg2, #btn_likeCategory').on('click',function(){
+    	if($(this).attr('class')=='modal_bg2'){
+    		var strarray = likestr.split(',');
+    		$(":checkbox[name='check']:checked").each(function () { 
+    			if($(this).val()!=strarray[0]&&$(this).val()!=strarray[1]&&$(this).val()!=strarray[2])
+    			$(this).attr('checked', false);
+    		});
+    		$(":checkbox[name='check']").removeAttr("disabled");
+    	}
+    	else{
+    		likestr="";
+    		$(":checkbox[name='check']:checked").each(function () {  
+				likestr += $(this).val() + ",";
+			});
+    	}
         $('#modal_likeCategory').hide();
         $('.modal_bg2').hide();
         $('.modal_bg').show();
