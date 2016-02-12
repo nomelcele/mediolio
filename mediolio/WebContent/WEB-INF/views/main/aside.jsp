@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="aside">
     <div id="logoWrap">
-		<a id="logoIcon" href=""></a>
+		<a id="logoIcon" href="main"></a>
     </div>
 	<div class="asideWrap" id="userBox">
 		<c:choose> 
