@@ -43,7 +43,7 @@ function fileValidation(){
             img = new Image();
             img.src = _URL.createObjectURL(file);
             img.onload = function () {
-            	if(img.width<180 || img.height<180){
+            	if(img.width<200 || img.height<200){
             		alert("이미지가 너무 작습니다.");
             		return false;
             	}
