@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style type="text/css">
 .coverImg_box{width:180px; height:180px; display:block; float:left;}
+#total_wrapper{margin:100px 0 0 300px;}
 </style>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/jquery.Jcrop.js"></script>
@@ -356,8 +353,8 @@ $(function (){
 });
 
 </script>
-</head>
-<body>
+<div id="total_wrapper">
+<h2>내 ID : ${sessionScope.mev.m_id }</h2>
 <div>
 	<h2>댓글!!!</h2>
 	<form id="reply_form">
@@ -412,5 +409,4 @@ $(function (){
 <div class="coverImg_box">
 
 </div>
-</body>
-</html>
+</div>
