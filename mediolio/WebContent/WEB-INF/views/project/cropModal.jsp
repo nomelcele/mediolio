@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link href="resources/css/jquery.Jcrop.css" rel="stylesheet" type="text/css" />
-<link href="resources/css/crop.css" rel="stylesheet" type="text/css"/>
 
-<script src="js/jquery.Jcrop.js"></script>
 <script type="text/javascript">
 
 	$(function($) {
@@ -47,20 +44,20 @@
 				//이미지 가로세로 모두 박스 범위보다 클때
 				if(box_width/box_height < boundx/boundy){
 					//비율상 가로가 더 길때
-					$('.modal-content').css({ width: box_width + 210, margin: "-150px auto 0"});
+					$('.modal-content').css({ width: box_width + 210});
 				}else if(box_width/box_height > boundx/boundy){
 					//비율상 세로가 더 길때
-					$('.modal-content').css({ width: boundx*box_height/boundy + 210, margin: "-150px auto 0"});
+					$('.modal-content').css({ width: boundx*box_height/boundy + 210});
 				}
 			}else if(boundx>box_width){
 				//이미지 가로만 박스 범위보다 클때
-				$('.modal-content').css({ width: box_width + 210, margin: "-250px auto 0" });
+				$('.modal-content').css({ width: box_width + 210});
 			}else if(boundy>box_height){
 				//이미지 세로만 박스 범위보다 클때
-				$('.modal-content').css({ width: boundx*box_height/boundy + 210, margin: "-100px auto 0" });
+				$('.modal-content').css({ width: boundx*box_height/boundy + 210 });
 			}else{
 				//이미지가 박스 범위보다 작을 때
-				$('.modal-content').css({ width: boundx + 210, margin: "-250px auto 0" });
+				$('.modal-content').css({ width: boundx + 210});
 			}
 			console.log($('.modal-content').width());
 			$preview.appendTo(jcrop_api.ui.holder);

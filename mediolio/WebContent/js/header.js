@@ -55,35 +55,27 @@ function getNotifications(){
 		dataType:"JSON",
 		success: function(result){
 			$('#mCSB_2_container').empty();
-			var msg_length = result.msg.length;
-			var act_length = result.act.length;
-			console.log(msg_length + " , " + act_length);
-			if(msg_length==0 && act_length==0){
-				$('#mCSB_2_container').append("<li class='bell_nothing'>새로운 알림이 없습니다.</li>");
-			}else{
-				var appendMsg= '';
-				var appendAct ='';
-				if(msg_length>0){
-					$.each(result.msg, function(index, entry){
-						appendMsg += '<li class="bell_content"><a href="#">'+entry.msg_from_nickname+'님이 메시지를 보냈습니다.</a></li>';
-					});
-					$('#mCSB_2_container').append('<li class="bell_sort">메시지</li>'+appendMsg);
-					console.log(appendMsg);
-				}
-				if(act_length>0){
-					$.each(result.act, function(index, entry){
-						if(entry.act_type == 'like'){
-							appendAct += '<li class="bell_content"><a href="#">'+entry.m_nickname+'님이 '+entry.p_title+' 프로젝트를 <span class="bell_like">좋아요</span> 하였습니다.</a></li>';
-						}else if(entry.act_type == 'follow'){
-							appendAct += '<li class="bell_content"><a href="#">'+entry.m_nickname+'님이 <span class="bell_follow">팔로우</span> 하였습니다.</a></li>';
-						}else if(entry.act_type=="reply"){
-							appendAct += '<li class="bell_content"><a href="#">'+entry.m_nickname+'님이 '+entry.p_title+' 프로젝트에 <span class="bell_reply">댓글</span>을 달았습니다.</a></li>';
-						}
-					});
-					console.log(appendAct);
-					$('#mCSB_2_container').append('<li class="bell_sort">소식</li>'+appendAct);
-				}
-			}//else문
+			
+			var appendMsg= '';
+			var appendAct ='';
+			if(result.msg.length>0){
+				$.each(result.msg, function(index, entry){
+					appendMsg += '<li class="bell_content"><a href="#">'+entry.msg_from_nickname+'님이 메시지를 보냈습니다.</a></li>';
+				});
+				$('#mCSB_2_container').append('<li class="bell_sort">메시지</li>'+appendMsg);
+			}
+			if(result.act.length>0){
+				$.each(result.act, function(index, entry){
+					if(entry.act_type == 'like'){
+						appendAct += '<li class="bell_content"><a href="#">'+entry.m_nickname+'님이 '+entry.p_title+' 프로젝트를 <span class="bell_like">좋아요</span> 하였습니다.</a></li>';
+					}else if(entry.act_type == 'follow'){
+						appendAct += '<li class="bell_content"><a href="#">'+entry.m_nickname+'님이 <span class="bell_follow">팔로우</span> 하였습니다.</a></li>';
+					}else if(entry.act_type=="reply"){
+						appendAct += '<li class="bell_content"><a href="#">'+entry.m_nickname+'님이 '+entry.p_title+' 프로젝트에 <span class="bell_reply">댓글</span>을 달았습니다.</a></li>';
+					}
+				});
+				$('#mCSB_2_container').append('<li class="bell_sort">소식</li>'+appendAct);
+			}
 			$('#bubble_bell, #bubbleAfter').show();  
 		}//success함수 끝
 	});
