@@ -94,12 +94,11 @@
 
 .write_textarea{ width:100%; min-height:80px; height:auto; position:relative; box-sizing: border-box; padding:10px; margin-bottom:20px; box-shadow:0 0 5px #0F84CF;}
 
-.text_toolBoxes, .content_toolBoxes {
+.text_toolBoxes, .content_toolBoxes { 
     width:350px; height:40px; position:absolute; background:#333; top:20px; display:none; }
+#text_toolBox{ width:230px; right:140px; top:-41px;}
 
-#text_toolBox{ width:230px; right:140px;}
-
-#content_toolBox{width:120px; right:20px; }
+#content_toolBox{width:120px; right:20px;}
 
 .text_toolBoxes li, .content_toolBoxes li{  float:left; width:39px; height:40px; line-height:40px; line-height:40px;  text-indent:10px; color:#fff; border-right:1px solid #555;}
 
@@ -131,3 +130,9 @@
 
 .contentBox{ margin-bottom:60px; width:auto; height:auto;}
 .contentBox iframe{ display:block; margin:0 auto;}
+
+
+/* 텍스트 스타일 적용 클래스 */
+.txtBold{font-weight:bold;}
+.txtItalic{font-style:italic;}
+.txtUnderline{text-decoration:underline;}
