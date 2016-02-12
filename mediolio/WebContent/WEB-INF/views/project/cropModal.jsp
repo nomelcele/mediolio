@@ -101,6 +101,7 @@
 				
 					$('#p_coverImg').val(result.result);
 				}
+				$('#contentsWrap').css({position: 'relative'});
 				$('#crop').remove();
 			}
 		});
