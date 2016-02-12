@@ -177,4 +177,65 @@ function writeDCategoryModalOpen(){
     });
 
 }    
+
+function writeEmbedModalOpen(){
+    var win_w = $(window).width();
+	var win_h = $(window).height();
+	
+	var movImg_w = $('#modal_writeEmbed').width();
+	var movImg_h = $('#modal_writeEmbed').height();
+	
+	var movImg_posX = (win_w - movImg_w)/2;
+	var movImg_posY = (win_h - movImg_h)/2;
+		
+	$('#modal_writeEmbed').css({ left: movImg_posX, top: movImg_posY });
+    $('.modal_bg').show();
+	$('#modal_writeEmbed').show();
+    
+    $('#btn_writeEmbed').on('click',function(){
+        $('.modal_bg, .modal').hide();
+    })
+    
+}
+
+
+//인덱스 모달 추가
+function contentModalOpen(){
+    var win_w = $(window).width();
+	var win_h = $(window).height();
+	
+	var movImg_w = $('#modal_content').width();
+	var movImg_h = $('#modal_content').height();
+	
+	var movImg_posX = (win_w - movImg_w)/2;
+	var movImg_posY = (win_h - movImg_h)/2;
+		
+	$('#modal_content').css({ left: movImg_posX-150, top: 100 });
+    $('#modal_content_userInfo').css({ left: movImg_posX+670, top: 100 });
+    $('.modal_bg').show();
+	$('#modal_content').show();
+    $('#modal_content_userInfo').show();
+    
+//    $('#btn_writeEmbed').on('click',function(){
+//        $('.modal_bg, .modal').hide();
+//    })
+    
+    
+    
+    $(document).scroll(function(){
+        if( $(window).scrollTop() >0){
+//          $('#modal_content_userInfo').stop().animate( {top: $(window).scrollTop() } )
+            $('#modal_content_userInfo').css( {top: $(window).scrollTop() } )
+
+        }
+        
+        else if( $(window).scrollTop() <100){
+//          $('#modal_content_userInfo').stop().animate( {top: 100 } )
+            $('#modal_content_userInfo').css( {top: 100})
+        }
+        
+             
+    })
+    
+}
     
