@@ -2,14 +2,16 @@
     pageEncoding="UTF-8"%>
 <link href="resources/css/jquery.Jcrop.css" rel="stylesheet" type="text/css" />
 <link href="resources/css/crop.css" rel="stylesheet" type="text/css"/>
-<script src="js/jquery-1.11.3.min.js"></script>
+
 <script src="js/jquery.Jcrop.js"></script>
 <script type="text/javascript">
 
 	$(function($) {
 		// Create variables (in this scope) to hold the API and image size
 		var jcrop_api, boundx, boundy;
-
+		var box_width = 740;
+		var box_height = 700;
+		
 		// Grab some information about the preview pane
 		$preview = $('#preview-pane'), 
 		$pcnt = $('#preview-pane .preview-container'), 
@@ -17,13 +19,15 @@
 
 		xsize = $pcnt.width(), ysize = $pcnt.height();
 
-		var imgWidth = $('#target').width();
-		var imgHeight = $('#target').height();
-
+		var target = document.getElementById("target");
+		var imgWidth = target.width;
+		var imgHeight = target.height;
+		console.log("target W/H : " + imgWidth + " , " + imgHeight);
+		
 		$('#target').Jcrop({
-			boxWidth: 740, 
-			boxHeight: 700,
-			minSize:[180, 180],
+			boxWidth: box_width, 
+			boxHeight: box_height,
+			minSize:[200, 200],
 			setSelect:[imgWidth/2-90, imgHeight/2-90, imgWidth/2+90, imgHeight/2+90],
 			onChange : updatePreview,
 			onSelect : updatePreview,
@@ -36,7 +40,27 @@
 			boundy= bounds[1];
 			jcrop_api = this;
 			
-			$('.modal-content').css({ width: boundx + 210 });
+			//모달 크기 결정----------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			if(boundx>box_width && boundy>box_height){
+				//이미지 가로세로 모두 박스 범위보다 클때
+				if(box_width/box_height < boundx/boundy){
+					//비율상 가로가 더 길때
+					$('.modal-content').css({ width: box_width + 210 });
+				}else if(box_width/box_height > boundx/boundy){
+					//비율상 세로가 더 길때
+					$('.modal-content').css({ width: boundx*box_height/boundy + 210 });
+				}
+			}else if(boundx>box_width){
+				//이미지 가로만 박스 범위보다 클때
+				$('.modal-content').css({ width: box_width + 210 });
+			}else if(boundy>box_height){
+				//이미지 세로만 박스 범위보다 클때
+				$('.modal-content').css({ width: boundx*box_height/boundy + 210 });
+			}else{
+				//이미지가 박스 범위보다 작을 때
+				$('.modal-content').css({ width: boundx + 210 });
+			}
+			console.log($('.modal-content').width());
 			$preview.appendTo(jcrop_api.ui.holder);
 		});
 
