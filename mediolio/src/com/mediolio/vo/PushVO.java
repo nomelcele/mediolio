@@ -2,8 +2,14 @@ package com.mediolio.vo;
 
 public class PushVO {
 	private int m_id, p_id, r_id;
-	private String m_nickname, act_date, p_title, act_type;
+	private String m_studentID, m_nickname, act_date, p_title, act_type;
 	
+	public String getM_studentID() {
+		return m_studentID;
+	}
+	public void setM_studentID(String m_studentID) {
+		this.m_studentID = m_studentID;
+	}
 	public int getM_id() {
 		return m_id;
 	}

@@ -46,7 +46,44 @@
 /*
  *	websocket 끝    **********************
  */
+
+//sql datetime 타입을 javascript Date 형식으로 변환
+function timeGapCalculate(pushed_date){	
+	var conversion = (pushed_date).split(/[- :]/);
+	var old = new Date(conversion[0], conversion[1]-1, conversion[2], conversion[3], conversion[4], conversion[5]);
+    var now = new Date();
+    
+    var dateGap = now.getTime() - old.getTime();
+    var timeGap = new Date(0, 0, 0, 0, 0, 0, now - old);
+    
+    var diffDay  = Math.floor(dateGap / (1000 * 60 * 60 * 24)); // 일수       
+    var diffHour = timeGap.getHours();       // 시간
+    var diffMin  = timeGap.getMinutes();      // 분
+    var diffSec  = timeGap.getSeconds();      // 초
 	
+    var timeDisplay;
+    if(diffDay>30){
+    	//1달 이상의 시간차는 날짜 표시
+    	var dateArr = (pushed_date).split(" ");
+    	var date = dateArr[0].replace(/-/gi, ".");
+    	timeDisplay = date;
+    }else if(diffDay){
+    	//하루 이상 한달 이내의 시간차
+    	timeDisplay = diffDay+"일 전";
+    }else if(diffHour){
+    	//하루 이내의 시간차
+    	timeDisplay = diffHour+"시간 " +diffMin+ "분 전";
+    }else if(diffMin){
+    	//한시간 이내의 시간차
+    	timeDisplay = diffMin+"분 전";
+    }else if(diffSec){
+    	//1분 이내의 시간차
+    	timeDisplay = diffSec +"초 전";
+    };
+    return timeDisplay;
+}
+
+//푸쉬알림 목록 받아오기
 function getNotifications(){
 	$.ajax({
 		url: "getNotifications",
@@ -60,21 +97,48 @@ function getNotifications(){
 			var appendAct ='';
 			if(result.msg.length>0){
 				$.each(result.msg, function(index, entry){
-					appendMsg += '<li class="bell_content"><a href="#">'+entry.msg_from_nickname+'님이 메시지를 보냈습니다.</a></li>';
+					appendMsg += '<li class="bell_content">'
+											+'<img src="resources/images/push/push_msg.png">'
+											+'<a href="#">'
+												+'<span>'+entry.msg_from_studentID +' '+entry.msg_from_nickname+'님이 메시지를 보냈습니다.</span>'
+												+'<span class="bell_date">'+timeGapCalculate(entry.msg_date)+'</span>'
+												+'<span class="ellipsis msg_text"> >> '+entry.msg_text+'</span>'
+											+'</a>'
+										+'</li>';
 				});
-				$('#mCSB_2_container').append('<li class="bell_sort">메시지</li>'+appendMsg);
+				$('#mCSB_2_container').append(appendMsg);
 			}
 			if(result.act.length>0){
 				$.each(result.act, function(index, entry){
 					if(entry.act_type == 'like'){
-						appendAct += '<li class="bell_content"><a href="#">'+entry.m_nickname+'님이 '+entry.p_title+' 프로젝트를 <span class="bell_like">좋아요</span> 하였습니다.</a></li>';
+						appendAct += '<li class="bell_content">'
+												+'<img src="resources/images/push/push_like.png">'
+												+'<a href="#">'
+													+'<span>'+entry.m_studentID +' '+entry.m_nickname+'님이 </span>'
+													+'<span class="ellipsis">'+entry.p_title+'</span><span>를 좋아합니다</span>'
+													+'<span class="bell_date">'+timeGapCalculate(entry.act_date)+'</span>'
+												+'</a>'
+											+'</li>';
 					}else if(entry.act_type == 'follow'){
-						appendAct += '<li class="bell_content"><a href="#">'+entry.m_nickname+'님이 <span class="bell_follow">팔로우</span> 하였습니다.</a></li>';
+						appendAct += '<li class="bell_content">'
+												+'<img src="resources/images/push/push_follow.png">'
+												+'<a href="#">'
+													+'<span>'+entry.m_studentID +' '+entry.m_nickname+'님이 회원님을 팔로우합니다</span>'
+													+'<span class="bell_date">'+timeGapCalculate(entry.act_date)+'</span>'
+												+'</a>'
+											+'</li>';
 					}else if(entry.act_type=="reply"){
-						appendAct += '<li class="bell_content"><a href="#">'+entry.m_nickname+'님이 '+entry.p_title+' 프로젝트에 <span class="bell_reply">댓글</span>을 달았습니다.</a></li>';
+						appendAct += '<li class="bell_content">'
+												+'<img src="resources/images/push/push_reply.png">'
+												+'<a href="#">'
+													+'<span>'+entry.m_studentID +' '+entry.m_nickname+'님이 </span>'
+													+'<span class="ellipsis">'+entry.p_title+'</span><span>에 댓글을 달았습니다</span>'
+													+'<span class="bell_date">'+timeGapCalculate(entry.act_date)+'</span>'
+												+'</a>'
+											+'</li>';
 					}
 				});
-				$('#mCSB_2_container').append('<li class="bell_sort">소식</li>'+appendAct);
+				$('#mCSB_2_container').append(appendAct);
 			}
 			$('#bubble_bell, #bubbleAfter').show();  
 		}//success함수 끝

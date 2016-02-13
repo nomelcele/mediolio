@@ -57,8 +57,14 @@ $('document').ready(function(){
     		$('#bubble_bell, #bubbleAfter').show();  
     	}
     	else{
-    		//받아올 알림이 있을 때
-    		getNotifications(); //header.js 에 있는 함수 
+    	//받아올 알림이 있을 때	
+    		if($('#bubble_bell').css("display") == "block"){
+    			//알림창이 열려있을땐 받아오지 않음
+    			$('#bubble_bell, #bubbleAfter').hide();
+    		}else{
+    			//알림목록 받아오는 함수 호출
+    			getNotifications(); //header.js 에 있는 함수 
+    		}
     	}
     });    
 	$(document).click(function(e){
