@@ -220,17 +220,34 @@ function contentModalOpen(){
     var win_w = $(window).width();
 	var win_h = $(window).height();
 	
-	var movImg_w = $('#modal_content').width();
-	var movImg_h = $('#modal_content').height();
+	$.ajax({
+		url : "projectDetail",
+		type : "POST",
+		data : {p_id: 1},
+		success : function(data) {
+			console.log("success");
+			//var detail = data.detail;
+			//var tag = data.tag;
+			$("#modalBox").html(data);
+			location.href="#detail";
+			//$('.cate_parent').text(detail.cate_name);
+			//$('#modal_hd_content')
+			
+			var movImg_w = $('#modal_content').width();
+			var movImg_h = $('#modal_content').height();
+			
+			var movImg_posX = (win_w - movImg_w)/2;
+			var movImg_posY = (win_h - movImg_h)/2;
+			
+			$('#modal_content').css({ left: movImg_posX-150, top: 100 });
+		    $('#modal_content_userInfo').css({ left: movImg_posX+670, top: 100 });
+		    $('.modal_bg').show();
+			$('#modal_content').show();
+		    $('#modal_content_userInfo').show();
+		}
+	});
 	
-	var movImg_posX = (win_w - movImg_w)/2;
-	var movImg_posY = (win_h - movImg_h)/2;
-		
-	$('#modal_content').css({ left: movImg_posX-150, top: 100 });
-    $('#modal_content_userInfo').css({ left: movImg_posX+670, top: 100 });
-    $('.modal_bg').show();
-	$('#modal_content').show();
-    $('#modal_content_userInfo').show();
+
     
 //    $('#btn_writeEmbed').on('click',function(){
 //        $('.modal_bg, .modal').hide();
@@ -266,6 +283,7 @@ function noteModalOpen(){
 	var movImg_posY = (win_h - movImg_h)/2;
 		
 	$('#writeNoteWrap').css({ left: movImg_posX, top: movImg_posY });
+	
     $('.modal_bg').show();
 	$('#writeNoteWrap').show();
     

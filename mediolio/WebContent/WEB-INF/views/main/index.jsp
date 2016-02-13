@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 
 <div id="contentsWrap">
-
+<div id="modalBox"></div>
     <div class="cardWrap">
     	<div class="card_hd"></div>
     	<div class="card_img">
-            <a href="#" onClick="contentModalOpen()">
+            <a href="#" onClick="contentModalOpen()"> 
                 <div>
                     <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p>
                 </div>
@@ -158,12 +158,12 @@
 
 </div>
 
-<div class="modal" id="modal_content">
+<!-- <div class="modal" id="modal_content">
 	<div class="modal_hd" id="modal_hd_content">
         <p id="content_categoryWrap">
-            <span>GAME</span>
+            <span class="cate_parent">GAME</span>
             <span> > </span>
-            <span>게임프로그래밍</span>
+            <span class="cate_child">게임프로그래밍</span>
         </p>
         <h2>글제목입니다.글제목입니다.</h2>
         <h3 id="content_userId"><a href="#">12LEEYURA</a></h3>
@@ -183,7 +183,7 @@
             <span>#게임디자인</span>
             
         </div>
-    </div><!--//modal_bd_content -->
+    </div>//modal_bd_content
     <hr>
     <div class="modal_ft" id="modal_ft_content">
         
@@ -196,7 +196,7 @@
             <div class="replyContent">
                 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 안녕하세요. 댓글입니다. 
             </div>
-        </div><!--//replyContentWrap-->
+        </div>//replyContentWrap
         
         <div class="replyContentWrap">
             <p>
@@ -206,7 +206,7 @@
             <div class="replyContent">
                 안녕하세요. 댓글입니다.  
             </div>
-        </div><!--//replyContentWrap-->
+        </div>//replyContentWrap
        
         <div id="writeReplyWrap">
             <textarea placeholder="댓글 내용을 입력하세요."></textarea>
@@ -215,7 +215,7 @@
         
         
     </div>
-</div><!--//modal_content-->
+</div>//modal_content
     
     
     
@@ -227,7 +227,7 @@
     <div id="modal_bd_content_userFavorite">게임프로그래밍</div>
     <div class="modal_bd" id="modal_bd_content_userInfo">
     	안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 
-    </div><!--//modal_bd_content -->
+    </div>//modal_bd_content
     
     <div class="modal_ft" id="modal_ft_content_userInfo">
         <ul>
@@ -236,4 +236,4 @@
         </ul>
         
     </div>
-</div><!--//modal_content_userInfo-->
+</div>//modal_content_userInfo -->

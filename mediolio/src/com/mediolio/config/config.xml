@@ -15,6 +15,7 @@
   		<typeAlias type="com.mediolio.vo.HashtagVO" alias="hvo"/>
   		<typeAlias type="com.mediolio.vo.PushVO" alias="psvo"/>
   		<typeAlias type="com.mediolio.vo.PushMsgVO" alias="pmvo"/>
+  		<typeAlias type="com.mediolio.vo.ProjectDetailVO" alias="pdvo"/>
   	</typeAliases>
   </configuration>
   
