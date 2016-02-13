@@ -11,15 +11,15 @@
 			SELECT act_id FROM member_action WHERE act_to = #{m_id} AND act_read = 'n'
 	     )x;
 	</select>
-	<select id="getNotificationsMsg" parameterType="int" resultType="msvo">
-		SELECT m.m_id, m.m_nickname AS msg_from_nickname, msg.msg_id, msg.msg_date, msg.msg_text 
+	<select id="getNotificationsMsg" parameterType="int" resultType="pmvo">
+		SELECT m.m_id, m.m_nickname AS msg_from_nickname, m.m_studentID AS msg_from_studentID, msg.msg_id, msg.msg_date, msg.msg_text 
 			FROM message msg JOIN member m ON m.m_id=msg.msg_from
 			WHERE msg.msg_to_status='no-read' AND msg.msg_to=#{m_id }
 			ORDER BY msg.msg_id DESC
 	</select>
 	<select id="getNotificationsAction" parameterType="int" resultType="psvo">
-		SELECT m.m_id, m.m_nickname, act.act_type, act.act_date, act.p_id, p.p_title, act.r_id
-			FROM member_action act JOIN member m ON act.act_from=m.m_id JOIN project p ON act.p_id=p.p_id
+		SELECT m.m_id, m.m_nickname, m.m_studentID, act.act_type, act.act_date, act.p_id, p.p_title, act.r_id
+			FROM member_action act JOIN member m ON act.act_from=m.m_id LEFT JOIN project p ON act.p_id=p.p_id
 			WHERE act.act_read='n' AND act.act_to=#{m_id}
 			ORDER BY act.act_date DESC
 	</select> 
