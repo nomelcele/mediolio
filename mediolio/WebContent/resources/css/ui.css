@@ -117,3 +117,9 @@ min-width:420px; width:auto; max-width:500px; height:150px; overflow-y:hidden; b
 #bubble_bell .bell_nothing{width:100%; height:140px; line-height:140px; text-align: center;}
 
 
+/* 쪽지 페이지 */
+.rmcnWrap{ position:fixed; right:40px; bottom:20px; width:40px; height:100px; }
+.btn_rmcn{ display:block; width:40px; height:40px; background:#fff; margin-bottom:5px; box-sizing: border-box; border:1px solid #999; border-radius:10px; box-shadow:1px 1px 5px rgba(0,0,0,.5); }
+
+#btn_rmcnUp{ background-image:url(../images/up_grey.png); background-repeat:no-repeat; background-position:center center; }
+#btn_rmcnDown{ background-image:url(../images/down_grey.png); background-repeat:no-repeat; background-position:center center; }

@@ -16,7 +16,7 @@
         				<li id="myPf"><a href="#" class="indent">MyPortfolio</a></li>
             			<li id="likePf"><a href="#" class="indent">Like</a></li>
             			<li id="follow"><a href="#" class="indent">Follow</a></li>
-            			<li id="message"><a href="#" class="indent">Message</a></li>
+            			<li id="message"><a href="message" class="indent">Message</a></li>
         			</ul>
 			</c:otherwise>
 		</c:choose>

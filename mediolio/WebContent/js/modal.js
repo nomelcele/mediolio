@@ -249,9 +249,27 @@ function contentModalOpen(){
 //          $('#modal_content_userInfo').stop().animate( {top: 100 } )
             $('#modal_content_userInfo').css( {top: 100})
         }
-        
-             
-    })
+    });
     
 }
+
+
+//쪽지보내기 모달
+function noteModalOpen(){
+    var win_w = $(window).width();
+	var win_h = $(window).height();
+	
+	var movImg_w = $('#writeNoteWrap').width();
+	var movImg_h = $('#writeNoteWrap').height();
+	
+	var movImg_posX = (win_w - movImg_w)/2;
+	var movImg_posY = (win_h - movImg_h)/2;
+		
+	$('#writeNoteWrap').css({ left: movImg_posX, top: movImg_posY });
+    $('.modal_bg').show();
+	$('#writeNoteWrap').show();
     
+    $('#btn_sendNote').on('click',function(){
+        $('.modal_bg, .modal').hide();
+    });
+}

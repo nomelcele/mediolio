@@ -22,6 +22,18 @@ public class MemberActionModel {
 	@Autowired
 	private MemberActionDao maDao;
 	
+	//쪽지페이지 이동
+	@RequestMapping("message")
+	public ModelAndView message(HttpSession session){
+		ModelAndView mav = new ModelAndView("mypage/message");
+		
+		MemberVO mev = (MemberVO)session.getAttribute("mev");
+		if(mev!=null){
+			mav.addObject("list", maDao.getMsgListSent(mev.getM_id()));
+		}
+		return mav;
+	}
+	
 	//쪽지 보내기
 	@RequestMapping("msgSend")
 	public ModelAndView msgSend(MessageVO vo, HttpSession session){

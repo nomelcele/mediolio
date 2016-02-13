@@ -75,4 +75,15 @@ $('document').ready(function(){
 		}
 	});
     
+	
+	//쪽지페이지 리모콘
+    $("#btn_rmcnUp").click(function() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+    });
+    
+    $("#btn_rmcnDown").click(function() {
+        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+        return false;
+    });
 })
