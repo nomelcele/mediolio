@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mediolio.mvc.dao.PushDao;
 
 @Controller
-public class PushController {
+public class PushModel {
 	
 	@Autowired
 	private PushDao pdao;
