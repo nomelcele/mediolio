@@ -96,7 +96,7 @@
 
 .text_toolBoxes, .content_toolBoxes { 
     width:350px; height:40px; position:absolute; background:#333; top:20px; display:none; }
-#text_toolBox{ width:230px; right:120px; top:-41px;}
+#text_toolBox{ width:230px; right:140px; top:-41px;}
 
 #content_toolBox{width:120px; right:20px;}
 

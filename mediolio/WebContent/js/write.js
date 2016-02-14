@@ -71,7 +71,7 @@ $('document').ready(function(){
         );
         order++;
   
-
+        
     	$(".palette").ColorPicker({
     		color: "#000000",
     		onShow: function(colpkr){
@@ -93,6 +93,9 @@ $('document').ready(function(){
         $('.text_toolBoxes').hide();
         $('select').niceSelect();
         
+      
+	    
+	 	
         //div.write_textarea에 focus된 경우 툴박스 보이기
         $('.write_textarea').on('focus', function(){
         	
@@ -101,7 +104,7 @@ $('document').ready(function(){
             $(".text_toolBoxes").hide();
             
             $(this).children().css('top', -40  );    //툴박스 위치
-            $(this).children().next().css('top', 0 );    //툴박스 위치
+            $(this).children().next().css('top', -40 );    //툴박스 위치
             $(this).children().show();
             $(this).children().next().show();
             
@@ -123,13 +126,14 @@ $('document').ready(function(){
         	orderArr[$(this).attr("data-sort")] = $(this).html();
         });
         
-        //div.write_textarea에 mouseover된 경우 content툴박스 보이기
-        $('.write_textarea').on('mouseover', function(){     	
-        	$(this).next().next().css('top', $(this).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
-            $(this).next().next().show();
-        })
         
-       
+        
+       //contentBox에 mouseover된 경우 content툴박스 보이기
+	    $('.contentBox').on('mouseover', function(){ 
+	    	$('#content_toolBox',this).css('top', - 40 );    //툴박스 위치
+	        $('#content_toolBox',this).show();
+	    })
+        
         
         
         var focused = document.activeElement;
@@ -209,7 +213,25 @@ $('document').ready(function(){
 			
 			fileNum++;
 			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
-					    
+			
+			//contentBox에 mouseover된 경우 content툴박스 보이기
+		    $('.contentBox').on('mouseover', function(){ 
+		    	$('.content_toolBoxes',this).css('top', -40 );    //툴박스 위치
+		        $('.content_toolBoxes',this).show();
+		    })
+		    
+		  //contentBox를 벗어난 경우 content툴박스 숨기기
+		    $('html').mouseover(function(e) {   
+		        if( !$(e.target).is( $('.contentBox')) ) { 
+		           if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
+		                if( !$(e.target).is( $('.content_toolBoxes').find('*') )){
+		                	$(".content_toolBoxes").hide();
+		                }
+		           }
+		        }
+		    }); 
+			
+			
 		} else if($.inArray(ext,['gif','png','jpg','jpeg']) != -1) {
 			// 이미지 파일
 			// 미리보기 영역에 이미지 표시
@@ -224,7 +246,7 @@ $('document').ready(function(){
 			
 			//contentBox에 mouseover된 경우 content툴박스 보이기
 		    $('.contentBox').on('mouseover', function(){ 
-		    	$('.content_toolBoxes',this).css('top', $(this).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
+		    	$('.content_toolBoxes',this).css('top', -40 );    //툴박스 위치
 		        $('.content_toolBoxes',this).show();
 		    })
 		    
