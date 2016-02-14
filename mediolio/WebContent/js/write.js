@@ -6,13 +6,27 @@ var orderArr=[];
 
 
 function test(){
-	$("#viewerForm").ajaxForm({
-		dataType: "text",
-		url: "showViewer",
-		success: function(jdata){
-			alert(jdata);
+//	$("#viewerForm").ajaxForm({
+//		dataType: "text",
+//		url: "showViewer",
+//		success: function(jdata){
+//			alert(jdata);
+//		}
+//	}).submit();
+	
+	var formData = new FormData();
+	formData.append("testFile",$("input[id=file0")[0].files[0]);
+	
+	$.ajax({
+		url: "addProjectTest",
+		processData: false,
+		contentType: false,
+		data: formData,
+		type: "POST",
+		success: function(result){
+			alert("테스트");
 		}
-	}).submit();
+	});
 }
 
 $('document').ready(function(){
