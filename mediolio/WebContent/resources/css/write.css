@@ -128,7 +128,7 @@
 
 #submit_portfolio { display:inline-block; clear:both; width:200px; height:50px; border:none; background:#0F84CF; color:#fff; font-size:16px; box-shadow:1px 1px 3px rgba(0,0,0,.5); cursor:pointer; }
 
-.contentBox{ margin-bottom:60px; width:auto; height:auto;}
+.contentBox{ margin-bottom:60px; width:auto; height:auto; position:relative;}
 .contentBox iframe{ display:block; margin:0 auto;}
 
 
