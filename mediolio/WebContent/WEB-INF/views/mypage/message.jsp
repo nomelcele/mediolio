@@ -4,6 +4,7 @@
 <script src="js/note.js"></script> 
 
 <div id="contentsWrap">
+<div id="modalBox"></div>
     <div class="rmcnWrap">
             <a class="btn_rmcn" id="btn_rmcnUp" href="#"></a>
             <a class="btn_rmcn" id="btn_rmcnDown" href="#"></a>
@@ -12,7 +13,7 @@
     	<div class="card_hd" id="card_note_hd">
             <a class="btn_receiveView" href="#">받은 쪽지함</a>
             <a class="btn_sendView" href="#">보낸 쪽지함</a>
-            <input type="button" class="btnStyle3" id="btn_writeNote" value="쪽지보내기" onclick="noteModalOpen()"/>
+            <input type="button" class="btnStyle3" id="btn_writeNote" value="쪽지보내기" onclick="noteModalOpen(1)"/>
         </div>
         
         <div class="card_note_bd" id="card_receiveNote_bd">
@@ -150,7 +151,7 @@
 </div>
 
 <!-- 쪽지보내기 모달 -->
-    <div class="modal" id="writeNoteWrap">
+<!--     <div class="modal" id="writeNoteWrap">
         <div class="modal_hd"  id="writeNoteWrap_hd">SEND NOTE
             <input class="btnStyle3" id="btn_sendNote" type="button" value="SEND"/>
         </div>
@@ -158,4 +159,4 @@
             <input type="text" placeholder="받는 사람" id="input_noteTo"/>
             <textarea placeholder="내용을 입력하세요."></textarea>
         </div>
-    </div>
+    </div> -->

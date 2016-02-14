@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script src="js/memberAction.js"></script> 
+<script src="js/memberAction.js"></script>
 
 <div class="modal" id="modal_content">
 	<div class="modal_hd" id="modal_hd_content">
 	<input type="hidden" id="other_m_id" value="${detail.m_id }"> <!-- !!!!!!!!!!!!  작성자 ID input hidden   !!!!!!!!!! -->
 	<input type="hidden" id="this_p_id" value="${detail.p_id }"><!-- !!!!!!!!!!!!  현재 프로젝트 ID input hidden   !!!!!!!!!! -->
+    <input type="hidden" id="other_nickname" value="${detail.m_studentID } ${detail.m_nickname}">
         <p id="content_categoryWrap">
             <span class="cate_parent">${detail.cate_name }</span>
             <span> > </span>
@@ -118,7 +119,7 @@
 			    </c:otherwise>
 			</c:choose>
             </li>
-            <li><a href="#">MESSAGE</a></li>
+            <li><a onclick="noteModalOpen(2)">MESSAGE</a></li>
         </ul>
     </div>
     </c:if>

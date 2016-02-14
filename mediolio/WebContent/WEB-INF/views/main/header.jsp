@@ -7,6 +7,7 @@
 <link href="resources/css/ui.css" rel="stylesheet" type="text/css"/>
 <link href="resources/css/index.css" rel="stylesheet" type="text/css"/>
 <link href="resources/css/modal.css" rel="stylesheet" type="text/css"/>
+<link href="resources/css/note.css" rel="stylesheet" type="text/css"/>
 
 <link rel="stylesheet" href="resources/css/jquery.mCustomScrollbar.css" />
 <link rel="stylesheet" href="resources/css/nice-select.css"/>
@@ -72,7 +73,9 @@
 
 <div class="modal_bg"></div>
 <div class="modal_bg2"></div>
-    
+<div id="modalBox"></div>
+<div id="modalBox2"></div>
+
 <div class="modal" id="modal_login">
 	<div class="modal_hd"></div> 
     <div class="modal_bd" id="modal_bd_login">
