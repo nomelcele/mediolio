@@ -49,7 +49,7 @@
 
 //sql datetime 타입을 javascript Date 형식으로 변환
 function timeGapCalculate(pushed_date){	
-	var conversion = (pushed_date).split(/[- :]/);
+	var conversion = (pushed_date).split(/[. :]/);
 	var old = new Date(conversion[0], conversion[1]-1, conversion[2], conversion[3], conversion[4], conversion[5]);
     var now = new Date();
     
@@ -65,8 +65,7 @@ function timeGapCalculate(pushed_date){
     if(diffDay>30){
     	//1달 이상의 시간차는 날짜 표시
     	var dateArr = (pushed_date).split(" ");
-    	var date = dateArr[0].replace(/-/gi, ".");
-    	timeDisplay = date;
+    	timeDisplay = dateArr[0];
     }else if(diffDay){
     	//하루 이상 한달 이내의 시간차
     	timeDisplay = diffDay+"일 전";

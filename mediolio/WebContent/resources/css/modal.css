@@ -152,7 +152,7 @@
 .replyContentWrap p{  padding-bottom:3px; border-bottom:1px solid #ccc;  position:relative; text-indent:10px;}
 .replyContentWrap p a{ line-height:20px; font-size:14px; font-weight:600; }
 
-.replyContentWrap p #btn_deleteReply{ position:absolute; background-color:#666; color:#fff; text-align:center; text-indent:0; border-radius:50%; margin-left:10px; width:15px; height:15px; border:1px solid #eee; font-weight:400; line-height:15px; font-size:12px;  }
+.replyContentWrap p .btn_deleteReply{cursor:pointer; position:absolute; background-color:#666; color:#fff; text-align:center; text-indent:0; border-radius:50%; margin-left:10px; width:15px; height:15px; border:1px solid #eee; font-weight:400; line-height:15px; font-size:12px;  }
 
 .replyContentWrap p span{ color:#999; font-size:12px; font-weight:500; float:right; padding-right:10px;}
 

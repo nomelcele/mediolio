@@ -192,35 +192,6 @@ public class MemberActionModel {
 		return mav;
 	}
 	
-	//댓글 달기
-	@RequestMapping("submitReply")
-	public ModelAndView submitReply(ReplyVO vo, @RequestParam("act_to") String act_to, HttpSession session){
-		ModelAndView mav = new ModelAndView("jsonView");
-		
-		MemberVO mev = (MemberVO)session.getAttribute("mev");
-		if(mev!=null){			
-			vo.setM_id(mev.getM_id());
 
-			mav.addObject("reply", maDao.submitReply(vo, act_to));
-			System.out.println("댓글 내용 : " + vo.getR_text() + ", projectID : " + vo.getP_id() + ", m_id : " + vo.getM_id());
-		}
-		
-		return mav;
-	}
-	
-	//댓글 삭제
-	@RequestMapping("deleteReply")
-	public ModelAndView deleteReply(@RequestParam("r_id") String r_id){
-		ModelAndView mav = new ModelAndView("jsonView");
-		maDao.deleteReply(Integer.parseInt(r_id));	
-		return mav;
-	}
-	
-	//프로젝트에 딸린 댓글 모두 가져오기
-	@RequestMapping("getReplyList")
-	public ModelAndView getReplyList(@RequestParam("p_id") String p_id){
-		ModelAndView mav = new ModelAndView("jsonView");
-		mav.addObject("list", maDao.getReplyList(Integer.parseInt(p_id))); 
-		return mav;
-	}
+
 }

@@ -383,9 +383,7 @@ $(function (){
 </div>
 <div>
 	<h2>쪽지!!!</h2>
-	<form id="msg_form">
-		<span>to</span><input type="text" name="msg_to" value="2"><br>
-		<textarea name="msg_text"></textarea>
+	<form id="msg_form">     
 		<input type="button" value="보내기" class="msgSend">
 		<input type="button" value="취소" class="msgCancel">
 	</form>

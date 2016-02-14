@@ -106,7 +106,7 @@ min-width:420px; width:auto; max-width:500px; height:150px; overflow-y:hidden; b
 #bubble_bell .bell_content img{height:16px; width:auto; float:left; display:inline-block; padding:4px 2px; margin:0 5px;}
 #bubble_bell .bell_content a{display:block; min-width:200px; width:auto; max-width:500px; height:auto; color:#666; font-size:12px; box-sizing:border-box; padding-left:10px; }
 #bubble_bell .bell_content a span{float:left;}
-#bubble_bell .bell_content .ellipsis{max-width:100px; -o-text-overflow:ellipsis; word-wrap:normal !important; display: inline-block; font-weight:bold; margin:0 4px;}
+#bubble_bell .bell_content .ellipsis{width:auto; max-width:100px; -o-text-overflow:ellipsis; word-wrap:normal !important; display: inline-block; font-weight:bold; margin:0 4px;}
 #bubble_bell .bell_content .msg_text{max-width:390px; font-weight:normal;}
 #bubble_bell .bell_content .bell_date{float:right; margin-right:20px;}
 #bubble_bell .bell_content:hover{ background:#eee; }

@@ -2,9 +2,21 @@ package com.mediolio.vo;
 
 public class ReplyVO {
 	private int r_id, m_id, p_id;
-	private String r_text, r_date;
+	private String r_text, r_date, m_studentID, m_nickname;
 	
 	
+	public String getM_studentID() {
+		return m_studentID;
+	}
+	public void setM_studentID(String m_studentID) {
+		this.m_studentID = m_studentID;
+	}
+	public String getM_nickname() {
+		return m_nickname;
+	}
+	public void setM_nickname(String m_nickname) {
+		this.m_nickname = m_nickname;
+	}
 	public int getP_id() {
 		return p_id;
 	}
