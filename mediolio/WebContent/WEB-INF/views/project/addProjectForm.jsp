@@ -18,7 +18,12 @@
 </head>
 <body>
 <div id="modalBox"></div>
-<form id="addProjectForm" action="addProject" method="post" enctype="multipart/form-data"></form>
+<!--  		<input type="hidden" id="orderArr" name="orderArr"> -->
+<!--  		<input type="hidden" id="p_title" name="p_title"> -->
+<!--  		<input type="hidden" id="cate_id" name="cate_id"> -->
+<!--  		<input type="hidden" id="hashtags" name="hashtags"> -->
+<!--  		<input type="hidden" id="p_coverImg" name="p_coverImg"> -->
+<!--  		<input type="hidden" id="sc_id" name="sc_id"> -->
 <div id="contentsWrap">
     <div class="cardWindow">
         <div class="cardWindow_hd">UPLOAD PORTFOLIO</div>
@@ -50,15 +55,9 @@
                 <li>
                 	<form id="viewerForm" action="showViewer" method="post" enctype="multipart/form-data">
                 		<a id="btn_addFile" href="#">
-                			<input type="file" class="contentFile" id="file0" name="contents[0]"/> 
+                			<input type="file" class="contentFile" id="file0" name="contents"/> 
                 			파일 업로드
                 		</a>
-<!--                 		<input type="hidden" id="orderArr" name="orderArr"> -->
-<!--                 		<input type="hidden" id="p_title" name="p_title"> -->
-<!--                 		<input type="hidden" id="cate_id" name="cate_id"> -->
-<!--                 		<input type="hidden" id="hashtags" name="hashtags"> -->
-<!--                 		<input type="hidden" id="p_coverImg" name="p_coverImg"> -->
-<!--                 		<input type="hidden" id="sc_id" name="sc_id"> -->
                 	</form>
                 </li>
                 <li><a id="btn_addMedia" href="#" onclick="writeEmbedModalOpen()">미디어 추가</a></li>
@@ -136,7 +135,7 @@
     </div><!--//cardWrap-->
     
     
-    <input type="submit" id="submit_portfolio" value="SUBMIT"/>
+    <input type="button" id="submit_portfolio" value="SUBMIT"/>
 </div><!--//contentsWrap-->
         
     
