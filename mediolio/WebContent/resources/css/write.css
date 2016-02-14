@@ -24,9 +24,9 @@
 
 #write_tag{ width:760px; height:100%; float:left; box-sizing:border-box; padding-top:5px;}
 #write_tagBox{width:100%;}
-.write_tagArea{display:inline;}
+.write_tagArea{display:inline; position:relative;}
 
-.autoCompleteBox{width:100px; font-size:13px; background-color:#fff; border:1px solid #cfcbcb; display:none; border-radius:4px; padding:5px 7px; position:relative;}
+.autoCompleteBox{width:100px; font-size:13px; background-color:#fff; border:1px solid #cfcbcb; display:none; border-radius:4px; padding:5px 7px; position:absolute; top:30px; left:0;}
 .autoCompleteBox li{margin:6px 0;}
 .autoCompleteBox li:hover{background-color:#BEE4F5;}
 #write_tagTxt{display:inline-block;}
