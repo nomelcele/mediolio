@@ -12,15 +12,50 @@ import com.mediolio.mvc.dao.MemberActionDao;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.Member_actionVO;
 import com.mediolio.vo.MessageVO;
-import com.mediolio.vo.ReplyVO;
 
 /*
- * Member Action : 쪽지, 좋아요, 팔로우, 푸쉬알림
+ * Member Action : 쪽지, 팔로우, 푸쉬알림
  */
 @Controller
 public class MemberActionModel {
 	@Autowired
 	private MemberActionDao maDao;
+	
+	//프로젝트 좋아요
+	@RequestMapping("projectLike")
+	public ModelAndView projectLike(@RequestParam("p_id") String p_id, @RequestParam("act_to") String act_to, HttpSession session){
+		ModelAndView mav = new ModelAndView("jsonView");
+		
+		MemberVO mev = (MemberVO)session.getAttribute("mev");
+		if(mev!=null){		
+			Member_actionVO maVo = new Member_actionVO();
+			maVo.setAct_from(mev.getM_id());
+			maVo.setAct_to(Integer.parseInt(act_to));
+			maVo.setP_id(Integer.parseInt(p_id));
+			
+			//좋아요 수 추가 & 현재 프로젝트의 좋아요 수 받아오기
+			mav.addObject("likeNum", maDao.projectLike(maVo));
+		}
+		return mav;
+	}
+	
+	//프로젝트 좋아요 취소
+	@RequestMapping("projectLikeCancel")
+	public ModelAndView projectLikeCancel(@RequestParam("p_id") String p_id, @RequestParam("act_to") String act_to, HttpSession session){
+		ModelAndView mav = new ModelAndView("jsonView");
+
+		MemberVO mev = (MemberVO)session.getAttribute("mev");
+		if(mev!=null){
+			Member_actionVO maVo = new Member_actionVO();
+			maVo.setAct_from(mev.getM_id());
+			maVo.setAct_to(Integer.parseInt(act_to));
+			maVo.setP_id(Integer.parseInt(p_id));
+			
+			maDao.projectLikeCancel(maVo);
+		}
+		
+		return mav;
+	}
 	
 	//쪽지페이지 이동
 	@RequestMapping("message")
@@ -95,44 +130,6 @@ public class MemberActionModel {
 		return mav;
 	}
 	
-	//프로젝트 좋아요
-	@RequestMapping("projectLike")
-	public ModelAndView projectLike(@RequestParam("p_id") String p_id, @RequestParam("act_to") String act_to, HttpSession session){
-		ModelAndView mav = new ModelAndView("jsonView");
-		
-		MemberVO mev = (MemberVO)session.getAttribute("mev");
-		if(mev!=null){
-			mav.addObject("list", maDao.getMsgListSent(mev.getM_id()));
-			System.out.println("projectID : " + p_id +", m_id : " + mev.getM_id());
-		
-			Member_actionVO maVo = new Member_actionVO();
-			maVo.setAct_from(mev.getM_id());
-			maVo.setAct_to(Integer.parseInt(act_to));
-			maVo.setP_id(Integer.parseInt(p_id));
-			
-			//좋아요 수 추가 & 현재 프로젝트의 좋아요 수 받아오기
-			mav.addObject("likeNum", maDao.projectLike(maVo));
-		}
-		return mav;
-	}
-	
-	//프로젝트 좋아요 취소
-	@RequestMapping("projectLikeCancel")
-	public ModelAndView projectLikeCancel(@RequestParam("p_id") String p_id, @RequestParam("act_to") String act_to, HttpSession session){
-		ModelAndView mav = new ModelAndView("jsonView");
-
-		MemberVO mev = (MemberVO)session.getAttribute("mev");
-		if(mev!=null){
-			Member_actionVO maVo = new Member_actionVO();
-			maVo.setAct_from(mev.getM_id());
-			maVo.setAct_to(Integer.parseInt(act_to));
-			maVo.setP_id(Integer.parseInt(p_id));
-			
-			maDao.projectLikeCancel(maVo);
-		}
-		
-		return mav;
-	}
 	
 	//팔로우하기
 	@RequestMapping("followMember")

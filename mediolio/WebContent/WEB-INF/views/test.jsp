@@ -176,152 +176,7 @@ function readMsgReceived($div){
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  */
 
- 
- /*
-  * ***** 좋아요 관련 시작 *****
-  * *********************
-  */
-function projectLike(){
-	$.ajax({
-		url: "projectLike",
-		type: "POST",
-		data: {p_id:$('#p_id').val(), act_to:$('#m_id').val()},
-		dataType : "json",
-		success: function(result){
-			$('#likeNum').val(result.likeNum);
-		}
-	});
-}
 
-function projectLikeCancel(){
-	$.ajax({
-		url: "projectLikeCancel",
-		type: "POST",
-		data: {p_id:$('#p_id').val(), act_to:$('#m_id').val()},
-		dataType : "json",
-		success: function(result){
-			alert("success");
-		}
-	});
-}
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- * ***** 좋아요 관련 끝 *****
- * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- */
-
- 
- /*
-  * ***** 팔로우 관련 시작 *****
-  * *********************
-  */
-function followMember(){
-	$.ajax({
-		url: "followMember",
-		type: "POST",
-		data: {m_id:$('#m_id').val()},
-		dataType : "json",
-		success: function(result){
-			alert("success");
-		}
-	});
-}
-
-function followCancel(){
-	$.ajax({
-		url: "followCancel",
-		type: "POST",
-		data: {m_id:$('#m_id').val()},
-		dataType : "json",
-		success: function(result){
-			alert("success");
-		}
-	});
-}
-
-function followCheck(){
-	$.ajax({
-		url: "followCheck",
-		type: "POST",
-		data: {m_id:$('#m_id').val()},
-		dataType : "json",
-		success: function(result){
-			if(result.isFollowed == 'y'){
-				$('.followCheck_result').text("팔로우 되어 있습니다.");
-			}else if(result.isFollowed == 'n'){
-				$('.followCheck_result').text("팔로우 된 상태가 아닙니다.");
-			}
-		}
-	});
-}
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- * ***** 팔로우 관련 끝 *****
- * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- */
-
- 
- /*
-  * ***** 댓글 관련 시작 *****
-  * *********************
-  */
-function submitReply(){
-	$.ajax({
-		url: "submitReply",
-		type: "POST",
-		data: $('#reply_form').serialize()+"&act_to="+$('#m_id').val(),
-		dataType : "json",
-		success: function(result){
-			$('#appendReply').append(returnReplyList(result.reply.m_id, result.reply.r_text, result.reply.r_date, result.reply.r_id));
-		}
-	});
-}
-
-function deleteReply($div){
-	//var reply_rid = $div.find('input.reply_rid').val();
-	$.ajax({
-		url: "deleteReply",
-		type: "POST",
-		data: {r_id:$div.find('input.reply_rid').val()},
-		dataType : "json",
-		success: function(result){
-			$div.remove();
-			alert("success");
-		}
-	});
-}
-
-function returnReplyList(m_id, r_text, r_date, r_id){
-	var resultDateTime = r_date;
-	var dateArr = resultDateTime.split(" ");
-	var date = dateArr[0].replace(/-/gi, ".");
-	var time = dateArr[1].substring(0, dateArr[1].lastIndexOf(":"));
-	var aReply = '';
-	aReply += '<div>';
-	aReply += '<span>M_ID : </span><span>'+ m_id +'</span><span> '+ r_text+' </span>'
-	aReply += '<span>'+ date +' '+time+'</span>';
-	aReply += '<input type="hidden" value="'+r_id+'" class="reply_rid"><input type="button" value="삭제" class="deleteReply">';
-	aReply += '</div>';
-	return aReply;
-}
-
-function getReplyList(){
-	$.ajax({
-		url: "getReplyList",
-		type: "POST",
-		data: {p_id:$('#p_id').val()},
-		dataType : "json",
-		success: function(result){
-			var replyList='';
-			$.each(result.list, function(index, entry){
-				replyList += returnReplyList(entry.m_id, entry.r_text, entry.r_date, entry.r_id);
-			});
-			$('#appendReply').empty().append(replyList);
-		}
-	});
-}
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- * ***** 댓글 관련 끝 *****
- * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- */
  
 $(function (){
 	
@@ -338,34 +193,16 @@ $(function (){
 		readMsgReceived($(this).parent());
 	});
 	
-	$('.projectLike').click(projectLike);
-	$('.projectLikeCancel').click(projectLikeCancel);
-	
 	$('.followMember').click(followMember);
 	$('.followCancel').click(followCancel);
 	$('.followCheck').click(followCheck);
-	
-	$('.submitReply').click(submitReply);
-	$('.getReplyList').click(getReplyList);
-	$('#appendReply').on('click', '.deleteReply', function(){
-		deleteReply($(this).parent());
-	});
+
 });
 
 </script>
 <div id="total_wrapper">
 <h2>내 ID : ${sessionScope.mev.m_id }</h2>
-<div>
-	<h2>댓글!!!</h2>
-	<form id="reply_form">
-		<span>P_ID : </span><input type="text" value="1" name="p_id"><br>
-		<textarea name="r_text"></textarea>
-		<input type="button" value="댓글등록" class="submitReply">
-	</form>
-	<input type="button" value="이 프로젝트의 모든 댓글 가져오기" class="getReplyList">
-	<div id="appendReply">		
-	</div>
-</div>
+
 <div>
 	<h2>팔로우!!!</h2>
 	<span>내가 팔로우할 대상 m_id : </span><input type="text" value="2" id="m_id">

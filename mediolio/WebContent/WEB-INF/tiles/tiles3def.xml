@@ -14,8 +14,8 @@
 		<put-attribute name="aside" value="/WEB-INF/views/main/aside.jsp"/>
 	</definition>
 	
-	<definition name="project/cropModal" extends="empty_layout">
-		<put-attribute name="body" value="/WEB-INF/views/project/cropModal.jsp"/>
+	<definition name="modal/cropModal" extends="empty_layout">
+		<put-attribute name="body" value="/WEB-INF/views/modal/cropModal.jsp"/>
 	</definition>
 	<definition name="project/projectDetail" extends="empty_layout">
 		<put-attribute name="body" value="/WEB-INF/views/project/projectDetail.jsp"/>

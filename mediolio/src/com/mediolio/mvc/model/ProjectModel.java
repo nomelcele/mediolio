@@ -290,7 +290,7 @@ public class ProjectModel {
 	@RequestMapping(value = "imgCrop_modal")
 	public String imgCrop_modal(Model model, @RequestParam("url") String url, HttpServletResponse response) throws IOException{
 		model.addAttribute("imgUrl", url);
-		return "project/cropModal";
+		return "modal/cropModal";
 	}
 	
 	@RequestMapping(value = "cropImage", method = RequestMethod.POST)

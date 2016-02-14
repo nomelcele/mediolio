@@ -24,6 +24,8 @@ public class ProjectDetailModel {
 	@Autowired
 	private ProjectDetailDao pddao;
 	
+
+	
 	@RequestMapping("projectDetail")
 	public String projectDetail(Model model, @RequestParam("p_id") String p_id, @RequestParam("m_id") String m_id, HttpSession session){
 		MemberVO mev = (MemberVO)session.getAttribute("mev");

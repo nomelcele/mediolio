@@ -3,6 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="ma">
+    <insert id="projectLike" parameterType="mavo">
+		INSERT INTO member_action (act_type, act_to, act_from, p_id, act_date, act_read) VALUES ('like', #{act_to}, #{act_from},#{p_id}, now(), 'n')
+	</insert>
+	
+	<delete id="projectLikeCancel" parameterType="mavo">
+		DELETE FROM member_action WHERE act_type='like' AND act_from=#{act_from} AND p_id=#{p_id}
+	</delete>
+		
+  	<select id="getProjectLike" parameterType="int" resultType="int">
+		SELECT count(*) from member_action WHERE act_type='like' AND p_id=#{p_id}
+	</select>
+	
   	<insert id="msgSend" parameterType="msvo">
 		INSERT INTO message (msg_from, msg_to, msg_text, msg_date, msg_from_status, msg_to_status) VALUES (#{msg_from}, #{msg_to}, #{msg_text}, now(), 'sent', 'no-read')
 	</insert>
@@ -27,18 +39,6 @@
 		UPDATE message SET msg_to_status='read' WHERE msg_id = #{msg_id}
 	</update>
 	
-  	<insert id="projectLike" parameterType="mavo">
-		INSERT INTO member_action (act_type, act_to, act_from, p_id, act_date, act_read) VALUES ('like', #{act_to}, #{act_from},#{p_id}, now(), 'n')
-	</insert>
-	
-	<delete id="projectLikeCancel" parameterType="mavo">
-		DELETE FROM member_action WHERE act_type='like' AND act_from=#{act_from} AND p_id=#{p_id}
-	</delete>
-	
-  	<select id="getProjectLike" parameterType="int" resultType="int">
-		SELECT count(*) from member_action WHERE act_type='like' AND p_id=#{p_id}
-	</select>
-	
 	<insert id="followMember" parameterType="mavo">
 		INSERT INTO member_action (act_type, act_to, act_from, act_date, act_read) VALUES ('follow', #{act_to}, #{act_from}, now(), 'n')
 	</insert>
@@ -50,8 +50,6 @@
 	<select id="followCheck" parameterType = "mavo" resultType="int">
 		SELECT count(*) from member_action WHERE act_type='follow' AND act_from=#{act_from} AND act_to=#{act_to}
 	</select>
-	
-
 
   </mapper>
   
