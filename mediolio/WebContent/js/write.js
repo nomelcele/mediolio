@@ -31,6 +31,8 @@ function test(){
 
 $('document').ready(function(){
 	
+	    	
+	
 	
 //	$(document).bind("mouseup",function(){
 //		console.log(document.activeElement);
@@ -52,6 +54,8 @@ $('document').ready(function(){
     
     //텍스트 추가 버튼 누르고 난 후 이벤트
     $('#btn_addText').on('click',function(){
+    	addContent();
+    	
         $('#write_bd').append('<div class="write_textarea contentBox" contenteditable="true" onmouseup="getSelectedText()" data-sort='+order+'>'
         		+'<ul class="text_toolBoxes" id="text_toolBox">'
         		+'<li id="text_size">'
@@ -70,7 +74,7 @@ $('document').ready(function(){
                 +'</div>'
         );
         order++;
-  
+        addContent();
         
     	$(".palette").ColorPicker({
     		color: "#000000",
@@ -89,8 +93,7 @@ $('document').ready(function(){
     		}
     	});
     	
-        $(".content_toolBoxes").hide();
-        $('.text_toolBoxes').hide();
+        
         $('select').niceSelect();
         
       
@@ -99,7 +102,6 @@ $('document').ready(function(){
         //div.write_textarea에 focus된 경우 툴박스 보이기
         $('.write_textarea').on('focus', function(){
         	
-         	
             $(".content_toolBoxes").hide();
             $(".text_toolBoxes").hide();
             
@@ -108,51 +110,40 @@ $('document').ready(function(){
             $(this).children().show();
             $(this).children().next().show();
             
+            addContent();
         })
         
-        //다른 곳을 클릭했을 때 툴박스 숨기기
-        $('html').click(function(e) {   
-            if( !$(e.target).is( $('.write_textarea')) ) { 
-               if( !$(e.target).is( $('.write_textarea').find('*') ) ){                    
-                    if( !$(e.target).is( $('.text_toolBoxes').find('*') )){                    
-                        $(".text_toolBoxes, .content_toolBoxes").hide();
-                    }
-               }
-            }
-        }); 
-       
         
         $(".write_textarea").on('keyup',function(){
         	orderArr[$(this).attr("data-sort")] = $(this).html();
         });
         
         
+
         
-       //contentBox에 mouseover된 경우 content툴박스 보이기
-	    $('.contentBox').on('mouseover', function(){ 
-	    	$('#content_toolBox',this).css('top', - 40 );    //툴박스 위치
-	        $('#content_toolBox',this).show();
-	    })
-        
-        
-        
-        var focused = document.activeElement;
-     	
         $('html').mouseover(function(e) {   
-            if( !$(e.target).is( $('.write_textarea')) ) { 
-               if( !$(e.target).is( $('.write_textarea').find('*') ) ){                    
+            if( !$(e.target).is( $('.contentBox')) ) { 
+               if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
                     if( !$(e.target).is( $('.text_toolBoxes').find('*') )){
                     	$(".content_toolBoxes").hide();
-                    	document.activeElement.nextElementSibling.nextElementSibling.style.display = 'block';
+                    	$("#write_bd .text_toolBoxes").hide();
+                    	
                     }
                }
             }
         }); 
         
         
+        
+        
     })//끝- 텍스트 추가 버튼 누르고 난 후 이벤트
     
+    
+  
+    
+    
     $(".contentFile").change(function(){
+    	
     	// 파일(이미지, 문서) 추가
 //    	console.log("파일 이름: "+$(this).val().split("\\").pop());
     	console.log($(this).val().split('.')[1]);
@@ -212,24 +203,10 @@ $('document').ready(function(){
 //			}).submit();
 			
 			fileNum++;
-			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
+			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");
+			addContent()
 			
-			//contentBox에 mouseover된 경우 content툴박스 보이기
-		    $('.contentBox').on('mouseover', function(){ 
-		    	$('.content_toolBoxes',this).css('top', -40 );    //툴박스 위치
-		        $('.content_toolBoxes',this).show();
-		    })
-		    
-		  //contentBox를 벗어난 경우 content툴박스 숨기기
-		    $('html').mouseover(function(e) {   
-		        if( !$(e.target).is( $('.contentBox')) ) { 
-		           if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
-		                if( !$(e.target).is( $('.content_toolBoxes').find('*') )){
-		                	$(".content_toolBoxes").hide();
-		                }
-		           }
-		        }
-		    }); 
+			
 			
 			
 		} else if($.inArray(ext,['gif','png','jpg','jpeg']) != -1) {
@@ -244,25 +221,30 @@ $('document').ready(function(){
 			orderArr[order] = $(this).val().split("\\")[2];
 			order++;
 			
-			//contentBox에 mouseover된 경우 content툴박스 보이기
-		    $('.contentBox').on('mouseover', function(){ 
-		    	$('.content_toolBoxes',this).css('top', -40 );    //툴박스 위치
-		        $('.content_toolBoxes',this).show();
-		    })
-		    
-		 	//contentBox를 벗어난 경우 content툴박스 숨기기
-		    $('html').mouseover(function(e) {   
-		        if( !$(e.target).is( $('.contentBox')) ) { 
-		           if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
-		                if( !$(e.target).is( $('.content_toolBoxes').find('*') )){
-		                	$(".content_toolBoxes").hide();
-		                }
-		           }
-		        }
-		    }); 
-		    
+			
 		    fileNum++;
-			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
+		    
+//		  //contentBox에 mouseover된 경우 content툴박스 보이기
+//	        $('.contentBox').on('mouseover', function(){ 
+//	        	$('.content_toolBoxes',this).css('top', - 40 );    //툴박스 위치
+//	            $('.content_toolBoxes',this).show();
+//	        })
+//	        
+//	     	//contentBox를 벗어난 경우 content툴박스 숨기기
+//	        $('html').mouseover(function(e) {   
+//	            if( !$(e.target).is( $('.contentBox')) ) { 
+//	               if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
+//	                    if( !$(e.target).is( $('.content_toolBoxes').find('*') )){
+//	                    	$(".content_toolBoxes").hide();
+//	                    }
+//	               }
+//	            }
+//	        }); 
+		    
+	        
+		    
+			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");
+			addContent();
 			
 		} else {
 			alert("업로드가 지원되지 않는 파일 형식입니다.");
@@ -333,6 +315,8 @@ $('document').ready(function(){
     	// 글 제목 입력하면 우측 미리보기 박스의 제목 변경
     	$(".card_title a").html($(this).val());
     });
+    
+    addContent();
     
 });
 
@@ -448,22 +432,6 @@ function writeEmbedModalOpen(){
         orderArr[order] = $("#modal_bd_writeEmbed textarea").val();
         order++;
         
-      //contentBox에 mouseover된 경우 content툴박스 보이기
-        $('.contentBox').on('mouseover', function(){ 
-        	$('.content_toolBoxes',this).css('top', $(this).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
-            $('.content_toolBoxes',this).show();
-        })
-        
-     	//contentBox를 벗어난 경우 content툴박스 숨기기
-        $('html').mouseover(function(e) {   
-            if( !$(e.target).is( $('.contentBox')) ) { 
-               if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
-                    if( !$(e.target).is( $('.content_toolBoxes').find('*') )){
-                    	$(".content_toolBoxes").hide();
-                    }
-               }
-            }
-        }); 
     });
     
   
@@ -502,22 +470,8 @@ function fileChange(file){
 					+"<iframe src='"+jdata+"' style='width:500px; height:500px;'/></div>");				
 				orderArr[order] = $(newFile).val().split("\\")[2];
 				order++;
-				//contentBox에 mouseover된 경우 content툴박스 보이기
-			    $('.contentBox').on('mouseover', function(){ 
-			    	$('.content_toolBoxes',this).css('top', $(this).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
-			        $('.content_toolBoxes',this).show();
-			    })
-			    
-			 	//contentBox를 벗어난 경우 content툴박스 숨기기
-			    $('html').mouseover(function(e) {   
-			        if( !$(e.target).is( $('.contentBox')) ) { 
-			           if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
-			                if( !$(e.target).is( $('.content_toolBoxes').find('*') )){
-			                	$(".content_toolBoxes").hide();
-			                }
-			           }
-			        }
-			    }); 
+				
+				
 			    
 				/*
 				 * 	+"<a href='#' onclick='moveUpElement(this); return false;' class='upBtn'>↑</a>"
@@ -529,7 +483,8 @@ function fileChange(file){
 		}).submit();
 		
 		fileNum++;
-		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
+		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");
+		addContent();
 		
 	} else if($.inArray(ext,['gif','png','jpg','jpeg']) != -1){
 		// 이미지 파일
@@ -542,30 +497,19 @@ function fileChange(file){
 				+"<img src='"+blobURL+"' style='display:block; margin:auto;'/></div>");
 		orderArr[order] = $(newFile).val().split("\\")[2];
 		order++;
-		
-		//contentBox에 mouseover된 경우 content툴박스 보이기
-	    $('.contentBox').on('mouseover', function(){ 
-	    	$('.content_toolBoxes',this).css('top', $(this).offset().top - $('#write_bd').offset().top - 40 );    //툴박스 위치
-	        $('.content_toolBoxes',this).show();
-	    })
-	    
-	 	//contentBox를 벗어난 경우 content툴박스 숨기기
-	    $('html').mouseover(function(e) {   
-	        if( !$(e.target).is( $('.contentBox')) ) { 
-	           if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
-	                if( !$(e.target).is( $('.content_toolBoxes').find('*') )){
-	                	$(".content_toolBoxes").hide();
-	                }
-	           }
-	        }
-	    }); 
+		addContent();
+//		
 	    
 		fileNum++;
-		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");	
+		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents["+fileNum+"]' onchange='fileChange(this)'/>");
+		
 		
 	} else {
 		alert("업로드가 지원되지 않는 파일 형식입니다.");
 	}
+	
+	
+    
 }
 
 
@@ -696,4 +640,13 @@ function getSelectedNode()
     }
 }
 
-
+function addContent(){
+	$('#write_bd .contentBox').hover(function(){
+    	$('.content_toolBoxes',this).css('top', - 40 );    //툴박스 위치
+        $('.content_toolBoxes',this).show();
+    }, function(){
+    	$('.content_toolBoxes',this).hide();
+    	
+    })
+	
+}
