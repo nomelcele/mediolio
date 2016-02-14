@@ -223,15 +223,10 @@ function contentModalOpen(){
 	$.ajax({
 		url : "projectDetail",
 		type : "POST",
-		data : {p_id: 1},
+		data : {p_id: 1, m_id: 1},
 		success : function(data) {
-			console.log("success");
-			//var detail = data.detail;
-			//var tag = data.tag;
 			$("#modalBox").html(data);
 			location.href="#detail";
-			//$('.cate_parent').text(detail.cate_name);
-			//$('#modal_hd_content')
 			
 			var movImg_w = $('#modal_content').width();
 			var movImg_h = $('#modal_content').height();
@@ -247,8 +242,6 @@ function contentModalOpen(){
 		}
 	});
 	
-
-    
 //    $('#btn_writeEmbed').on('click',function(){
 //        $('.modal_bg, .modal').hide();
 //    })
@@ -291,3 +284,6 @@ function noteModalOpen(){
         $('.modal_bg, .modal').hide();
     });
 }
+
+
+

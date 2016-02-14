@@ -51,28 +51,7 @@
 		SELECT count(*) from member_action WHERE act_type='follow' AND act_from=#{act_from} AND act_to=#{act_to}
 	</select>
 	
-	<insert id="submitReply" parameterType="rvo" useGeneratedKeys="true" keyProperty="r_id">
-		INSERT INTO reply (m_id, r_text, r_date, p_id) values (#{m_id}, #{r_text}, now(), #{p_id})
-	</insert>
-	
-	<insert id="actionReplySumbitted" parameterType="mavo">
-		INSERT INTO member_action (act_type, act_to, act_from, p_id, r_id, act_date, act_read) VALUES ('reply', #{act_to}, #{act_from}, #{p_id}, #{r_id}, now(), 'n')
-	</insert>
-	
-	<select id="selectInsertedReply" parameterType="int" resultType="rvo">
-		SELECT * FROM reply WHERE r_id = #{r_id}
-	</select>
-	
-	<delete id="deleteReply" parameterType="int">
-		DELETE FROM reply WHERE r_id=#{r_id}
-	</delete>
-	
-	<delete id="actionDeleteReply" parameterType="int">
-		DELETE FROM member_action WHERE r_id=#{r_id}
-	</delete>
-	
-	<select id="getReplyList" parameterType="int" resultType="rvo">
-		SELECT * FROM reply WHERE p_id=#{p_id} ORDER BY p_id DESC
-	</select>
+
+
   </mapper>
   

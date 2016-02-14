@@ -60,30 +60,4 @@ public class MemberActionDao {
 		st.delete("ma.projectLikeCancel", maVo);
 	}
 
-	public ReplyVO submitReply(ReplyVO vo, String act_to) {
-		//댓글 등록
-		st.insert("ma.submitReply", vo);
-		
-		//push 알림을 위한 member_action 테이블에 등록
-		Member_actionVO maVo = new Member_actionVO();
-		maVo.setAct_from(vo.getM_id());
-		maVo.setAct_to(Integer.parseInt(act_to));
-		maVo.setP_id(vo.getP_id());
-		
-		int insertedR_id = vo.getR_id();
-		maVo.setR_id(insertedR_id);//방금 reply테이블에 insert된 r_id 값이 ReplyVO에 자동저장됨
-		
-		st.insert("ma.actionReplySumbitted", maVo);
-		return st.selectOne("ma.selectInsertedReply", insertedR_id);
-	}
-
-	public void deleteReply(int r_id) {
-		st.delete("ma.deleteReply", r_id);
-		st.delete("ma.actionDeleteReply", r_id);
-	}
-
-	public List<ReplyVO> getReplyList(int p_id) {
-		return st.selectList("ma.getReplyList", p_id);
-	}
-
 }

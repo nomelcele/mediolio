@@ -5,13 +5,17 @@
   <mapper namespace="pd">
   
 	<select id="getReplyList" parameterType="int" resultType="rvo">
-		SELECT * FROM reply WHERE p_id=#{p_id} ORDER BY p_id DESC
+		SELECT r.r_id, r.m_id, r.p_id, r.r_text, DATE_FORMAT(r.r_date, '%Y.%m.%d %H:%i:%s') AS r_date, m.m_studentID, m.m_nickname 
+			FROM reply r JOIN member m ON r.m_id=m.m_id 
+			WHERE r.p_id=#{p_id} ORDER BY p_id DESC
 	</select>
-  
-  	<select id="projectDetail" parameterType="int" resultType="pdvo">
+	
+  	<select id="projectDetail" parameterType="java.util.Map" resultType="pdvo">
   		SELECT p.p_id, m.m_id, p.cate_id, p.p_viewnum, m.m_studentID, m.m_nickname, m.m_introduce, m.m_interestingPart, 
-  		p.sc_id, c.cate_name, p.p_title, p.p_date,
-  		(SELECT count(*) FROM member_action WHERE act_type='like' AND p_id=#{p_id}) p_likenum
+  		p.sc_id, c.cate_name, p.p_title, DATE_FORMAT(p.p_date, '%Y.%m.%d %H:%i:%s') AS p_date,
+  		(SELECT count(*) FROM member_action WHERE act_type='like' AND p_id=#{p_id}) p_likenum,
+  		(SELECT count(*) FROM member_action WHERE act_type='follow' AND act_from=#{m_id} AND act_to=#{p_m_id}) follow_or_not,
+  		(SELECT count(*) FROM member_action WHERE act_type='like' AND p_id=#{p_id} AND act_from=#{m_id}) like_or_not
   			FROM project p JOIN member m ON p.m_id=m.m_id JOIN category c ON p.cate_id=c.cate_id
   			WHERE p.p_id=#{p_id}
   	</select>
@@ -19,5 +23,40 @@
   	<select id="projectHash" parameterType="int" resultType="hvo">
   		SELECT h_id, h_value FROM hashtag WHERE p_id=#{p_id}
   	</select>
+  	
+  	<select id="likeProjectOrNOT" parameterType="mavo" resultType="int">
+  		SELECT count(*) FROM member_action WHERE act_type='like' AND p_id=#{p_id} AND act_from=#{act_from}
+  	</select>
+  	
+  	<select id="getSubcategoryName" resultType="cnvo" parameterType="java.lang.String">
+  		SELECT sc.sc_id, sc.sc_name, c.cate_id, c.cate_name 
+  			FROM subcategory sc JOIN category c ON sc.sc_parent=c.cate_id 
+  			WHERE
+	  		<foreach item="item" collection="list" separator="OR">
+	        	 sc_id=#{item}
+	    	</foreach>
+  	</select>
+  	
+  	<insert id="submitReply" parameterType="rvo" useGeneratedKeys="true" keyProperty="r_id">
+		INSERT INTO reply (m_id, r_text, r_date, p_id) values (#{m_id}, #{r_text}, now(), #{p_id})
+	</insert>
+	
+	<insert id="actionReplySumbitted" parameterType="mavo">
+		INSERT INTO member_action (act_type, act_to, act_from, p_id, r_id, act_date, act_read) VALUES ('reply', #{act_to}, #{act_from}, #{p_id}, #{r_id}, now(), 'n')
+	</insert>
+	
+	<select id="selectInsertedReply" parameterType="int" resultType="rvo">
+		SELECT r.r_id, r.m_id, r.p_id, r.r_text, DATE_FORMAT(r.r_date, '%Y.%m.%d %H:%i:%s') AS r_date, m.m_studentID, m.m_nickname 
+			FROM reply r JOIN member m ON r.m_id=m.m_id
+			WHERE r_id = #{r_id}
+	</select>
+	
+	<delete id="deleteReply" parameterType="int">
+		DELETE FROM reply WHERE r_id=#{r_id}
+	</delete>
+	
+	<delete id="actionDeleteReply" parameterType="int">
+		DELETE FROM member_action WHERE r_id=#{r_id}
+	</delete>
   </mapper>
 	
