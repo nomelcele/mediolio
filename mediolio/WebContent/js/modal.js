@@ -265,24 +265,49 @@ function contentModalOpen(){
 
 
 //쪽지보내기 모달
-function noteModalOpen(){
+function noteModalOpen(step){
     var win_w = $(window).width();
 	var win_h = $(window).height();
+	var sent_to, sent_to_name;
+	if(step=='1'){
+		//페이지 상세보기 페이지에서 열었을 경우
+		sent_to=0;
+		sent_to_name='';
+	}else if(step=='2'){
+		//메세지 페이지에서 열었을 경우
+		sent_to = $('#other_m_id').val();
+		sent_to_name = $('#other_nickname').val();
+	}
 	
-	var movImg_w = $('#writeNoteWrap').width();
-	var movImg_h = $('#writeNoteWrap').height();
-	
-	var movImg_posX = (win_w - movImg_w)/2;
-	var movImg_posY = (win_h - movImg_h)/2;
-		
-	$('#writeNoteWrap').css({ left: movImg_posX, top: movImg_posY });
-	
-    $('.modal_bg').show();
-	$('#writeNoteWrap').show();
-    
-    $('#btn_sendNote').on('click',function(){
-        $('.modal_bg, .modal').hide();
-    });
+	$.ajax({
+		url : "msgModalOpen",
+		type : "POST",
+		data : {m_id: sent_to, m_nickname: sent_to_name},
+		success : function(data) {
+			$("#modalBox2").html(data);
+			location.href="#sendmsg";
+			
+			var movImg_w = $('#writeNoteWrap').width();
+			var movImg_h = $('#writeNoteWrap').height();
+			
+			var movImg_posX = (win_w - movImg_w)/2;
+			var movImg_posY = (win_h - movImg_h)/2;
+				
+			$('#writeNoteWrap').css({ left: movImg_posX, top: movImg_posY });
+			
+		    $('.modal_bg').hide();
+		    $('.modal_bg2').show();
+			$('#writeNoteWrap').show();
+		    
+		    $('.modal_bg2, #btn_sendNote').on('click',function(){
+		        $('.modal_bg2, #writeNoteWrap').hide();
+		        if(step=='2'){
+		        	//프로젝트 상세보기 모달에서 열었을 경우
+		        	$('.modal_bg').show();
+		        }
+		    });
+		}
+	});
 }
 
 

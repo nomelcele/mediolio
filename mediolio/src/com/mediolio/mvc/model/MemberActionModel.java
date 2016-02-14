@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -67,6 +68,15 @@ public class MemberActionModel {
 			mav.addObject("list", maDao.getMsgListSent(mev.getM_id()));
 		}
 		return mav;
+	}
+	
+	//쪽지보내기 모달 오픈
+	@RequestMapping("msgModalOpen")
+	public String msgModalOpen(Model model, @RequestParam("m_id") String m_id, @RequestParam("m_nickname") String m_nickname){
+		System.out.println(m_id + ", " + m_nickname);
+		model.addAttribute("m_id", m_id);
+		model.addAttribute("m_nickname", m_nickname);
+		return "modal/messageModal";
 	}
 	
 	//쪽지 보내기
