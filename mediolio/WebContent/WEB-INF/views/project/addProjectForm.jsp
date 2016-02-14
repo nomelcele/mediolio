@@ -12,6 +12,7 @@
 
 <script type="text/javascript" src="js/jquery.Jcrop.js"></script>
 <script type="text/javascript" src="js/colorpicker.js"></script>
+<script type="text/javascript" src="js/jscolor.js"></script>
 <script type="text/javascript" src="js/jquery.form.js"></script>
 <script type="text/javascript" src="js/crop.js"></script> 
 </head>
@@ -135,7 +136,7 @@
     </div><!--//cardWrap-->
     
     
-    <input type="submit" id="submit_portfolio" value="SUBMIT" onclick="addProject();"/>
+    <input type="submit" id="submit_portfolio" value="SUBMIT"/>
 </div><!--//contentsWrap-->
         
     
