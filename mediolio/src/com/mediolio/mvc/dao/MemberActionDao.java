@@ -8,13 +8,21 @@ import org.springframework.stereotype.Repository;
 
 import com.mediolio.vo.Member_actionVO;
 import com.mediolio.vo.MessageVO;
-import com.mediolio.vo.ReplyVO;
 
 @Repository
 public class MemberActionDao {
 	@Autowired
 	private SqlSessionTemplate st;
+	
+	public int projectLike(Member_actionVO maVo) {
+		st.insert("ma.projectLike", maVo);
+		return st.selectOne("ma.getProjectLike", maVo.getP_id());
+	}
 
+	public void projectLikeCancel(Member_actionVO maVo) {
+		st.delete("ma.projectLikeCancel", maVo);
+	}
+	
 	public void msgSend(MessageVO vo) {
 		st.insert("ma.msgSend", vo);		
 	}
@@ -38,12 +46,7 @@ public class MemberActionDao {
 	public void readMsgReceived(int msg_id) {
 		st.update("ma.readMsgReceived", msg_id);
 	}
-
-	public int projectLike(Member_actionVO maVo) {
-		st.insert("ma.projectLike", maVo);
-		return st.selectOne("ma.getProjectLike", maVo.getP_id());
-	}
-
+	
 	public void followMember(Member_actionVO maVo) {
 		st.insert("ma.followMember", maVo);
 	}
@@ -56,8 +59,5 @@ public class MemberActionDao {
 		return st.selectOne("ma.followCheck", maVo);
 	}
 
-	public void projectLikeCancel(Member_actionVO maVo) {
-		st.delete("ma.projectLikeCancel", maVo);
-	}
 
 }

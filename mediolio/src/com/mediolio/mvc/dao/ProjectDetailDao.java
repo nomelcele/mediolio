@@ -18,6 +18,7 @@ public class ProjectDetailDao {
 	@Autowired
 	private SqlSessionTemplate st;
 	
+	
 	public List<ReplyVO> getReplyList(int p_id) {
 		return st.selectList("pd.getReplyList", p_id);
 	}
@@ -28,10 +29,6 @@ public class ProjectDetailDao {
 
 	public List<HashtagVO> projectHash(int p_id) {
 		return st.selectList("pd.projectHash", p_id);
-	}
-
-	public int likeProjectOrNOT(Member_actionVO mavo) {
-		return st.selectOne("pd.likeProjectOrNOT", mavo);
 	}
 
 	public List<CategoryNameVO> getSubcategoryName(List<String> list) {
