@@ -7,6 +7,9 @@ var orderArr=[];
 
 $('document').ready(function(){
 	
+	
+	
+	
 	$("#submit_portfolio").click(function(){
 		// 프로젝트 등록
 		// 서브카테고리 번호
@@ -283,6 +286,10 @@ $('document').ready(function(){
     	}
     });
     
+    
+    
+    
+    
     $("#write_tagInput").keyup(function(){
     	// 태그 자동 완성
     	if($(this).val().trim() != ""){
@@ -314,6 +321,27 @@ $('document').ready(function(){
     	if(e.keyCode == 8 && $(this).val() == ""){
     		// 백스페이스 누르면 태그 삭제
 	    	$("#write_tagTxt span:last-child").remove();
+
+    		
+    		
+    		if( $('#write_tagTxt span').last().length == 0){
+    			$('#write_tagInput').css({
+        			left: 0
+        		})
+    		}
+    		else if( $('#write_tagTxt span').last().length == 1){
+    			var lastSpanOffset = $('#write_tagTxt span').last().offset().left;
+        		var lastSpanWidth = $('#write_tagTxt span').last().width();
+        		
+    			$('#write_tagInput').css({
+	    			left: lastSpanOffset+lastSpanWidth-280,
+	    			top: $('#write_tagTxt').height()-30
+	    		})
+	    		$('#write_tagTitle').css({
+	    			height:$('#write_ft').height()
+	    		})
+    		}
+    		
 	    	if($("#write_tagTxt span").length == 0){
 	    		// 입력된 태그가 하나도 없을 경우
 	    		$("#write_tagInput").attr("placeholder","태그를 입력하세요.");
@@ -321,15 +349,38 @@ $('document').ready(function(){
     	} 
     });
     
+    
+	
+	
+	
     $("#write_tagInput").keyup(function(e){
     	if(e.keyCode == 188){
     		// 컴마 누르면 태그 입력
     		var newTag = $(this).val().replace(",","");
     		$(this).attr("placeholder","");
     		$("#write_tagTxt").append("<span>"+newTag+"</span>");
+    		
+    		var lastSpanOffset = $('#write_tagTxt span').last().offset().left;
+    		var lastSpanWidth = $('#write_tagTxt span').last().width();
+    		
+//    		var lastSpanOffset = $newTag.offset().left;
+//    		var lastSpanWidth = newTag.length;
+    		
+    		
     		$(this).val("");
     		$(this).focus();
+    		
+    		$('#write_tagInput').css({
+    			left: lastSpanOffset+lastSpanWidth-280,
+    			top: $('#write_tagTxt').height()-30
+    		})
+    		$('#write_tagTitle').css({
+    			height:$('#write_ft').height()
+    		})
+    		
+    		
     		$(".autoCompleteBox").css("display","none");
+    		
     	}
     });
     
