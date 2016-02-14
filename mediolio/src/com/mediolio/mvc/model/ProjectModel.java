@@ -52,8 +52,14 @@ public class ProjectModel {
 		return "project/addProjectForm";
 	}
 	
+	@RequestMapping(value="addProjectTest")
+	public void test(MultipartFile testFile){
+		System.out.println("테스트 파일 이름: "+testFile.getOriginalFilename());
+	}
+	
 	@RequestMapping(value="addProject")
 	public String addProject(ProjectVO pvo, HttpSession session){
+		System.out.println("들어오냐?"+pvo.getContents().get(0).getOriginalFilename());
 		// 프로젝트 업로드
 		// 1. 새로운 프로젝트 추가
 		// String[] orderArr, String hashtags, 
