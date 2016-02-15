@@ -153,7 +153,7 @@ public class ProjectModel {
 		 * c_type VARCHAR(10),
 		 * c_value VARCHAR(1000),
 		 * c_order int(5)*/
-		return "project.main";
+		return "main.index";
 	}
 	
 	@RequestMapping(value="showViewer")
@@ -300,7 +300,7 @@ public class ProjectModel {
 	@RequestMapping(value = "imgCrop_modal")
 	public String imgCrop_modal(Model model, @RequestParam("url") String url, HttpServletResponse response) throws IOException{
 		model.addAttribute("imgUrl", url);
-		return "modal/cropModal";
+		return "modal.cropModal";
 	}
 	
 	@RequestMapping(value = "cropImage", method = RequestMethod.POST)
