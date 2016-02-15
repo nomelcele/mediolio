@@ -93,7 +93,7 @@
         
         <input type="button" class="btnStyle2" id="btn_mdLogin" value="LOGIN"/>
         
-        <p><a href="#">FIND PASSWORD</a></p>
+        <p><a href="#" onclick="pwModalOpen()">FIND PASSWORD</a></p>
         
         <hr>
         <input type="button" class="btnStyle2" id="btn_mdJoin" value="JOIN" onClick="joinModalOpen()"/>
@@ -219,3 +219,16 @@
         
     </div><!--//modal_bd_likeCategory -->
 </div><!--//_modal_likeCategory-->
+
+
+
+<div class="modal" id="modal_findPw">
+    <div class="modal_hd" id="modal_findPw_hd">FIND PASSWORD</div> 
+    <div class="modal_bd" id="modal_findPw_bd">
+        <div class="login_inputWrap" id="textWrap_findPw">
+            <input class="inputStyle2" type="text" placeholder="E-MAIL" id="fpw_email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-MAIL'"/>
+            <input type="button" value="send" class="btnStyle2" id="btn_pwSend"/>
+        </div>
+    </div>
+    
+</div><!-- //modal_findPw -->
