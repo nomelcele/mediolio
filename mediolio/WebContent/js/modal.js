@@ -264,9 +264,10 @@ function contentModalOpen(){
 }
 
 
+
 //쪽지보내기 모달
 function noteModalOpen(step){
-    var win_w = $(window).width();
+  var win_w = $(window).width();
 	var win_h = $(window).height();
 	var sent_to, sent_to_name;
 	if(step=='1'){
@@ -306,6 +307,7 @@ function noteModalOpen(step){
 		    $('.modal_bg2').on('click',function(){
 		        $('.modal_bg2, #writeNoteWrap').hide();
 		        if(step=='2'){
+		        	console.log('2');
 		        	//프로젝트 상세보기 모달에서 열었을 경우
 		        	$('.modal_bg').show();
 		        }
@@ -331,6 +333,7 @@ function msgSend(step){
 		}
 	});
 }
+
 function pwModalOpen() {
 	var win_w = $(window).width();
 	var win_h = $(window).height();
