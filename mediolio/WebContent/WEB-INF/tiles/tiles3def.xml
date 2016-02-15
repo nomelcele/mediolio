@@ -17,14 +17,9 @@
 	<definition name="project.main" extends="empty_layout">
 		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp"/>
 	</definition>
-	<definition name="modal/messageModal" extends="empty_layout">
-		<put-attribute name="body" value="/WEB-INF/views/modal/messageModal.jsp"/>
-	</definition>
-	<definition name="modal/cropModal" extends="empty_layout">
-		<put-attribute name="body" value="/WEB-INF/views/modal/cropModal.jsp"/>
-	</definition>
-	<definition name="project/projectDetail" extends="empty_layout">
-		<put-attribute name="body" value="/WEB-INF/views/project/projectDetail.jsp"/>
+	
+	<definition name="*.*" extends="empty_layout">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
 	</definition>
 
 	<definition name="*" extends="default_layout">
