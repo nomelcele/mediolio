@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ProjectVO {
 	private int p_id, m_id, cate_id, p_viewnum;
-	private String p_title, p_hash, p_date, p_coverImg, sc_id;
+	private String p_title, p_hash, p_date, p_coverImg, sc_id, hashtags;
 	private List<MultipartFile> contents;
 
 	public String getSc_id() {
@@ -68,6 +68,12 @@ public class ProjectVO {
 	}
 	public void setP_coverImg(String p_coverImg) {
 		this.p_coverImg = p_coverImg;
+	}
+	public String getHashtags() {
+		return hashtags;
+	}
+	public void setHashtags(String hashtags) {
+		this.hashtags = hashtags;
 	}
 	
 	
