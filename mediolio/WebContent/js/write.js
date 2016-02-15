@@ -59,7 +59,10 @@ $('document').ready(function(){
 //			dataType:"JSON",
 			success: function(result){
 				alert("업로드 완료");
-				$("#indexWrap").html(result);
+				$('#default_body').empty().append(result);
+/*				$("#contentsWrap").html("");
+				alert(result);
+				$("#contentsWrap").html(result);*/
 			}
 		});
 		
@@ -100,6 +103,9 @@ $('document').ready(function(){
                 +'<li id="text_delete"><a href="#" onclick="removeTxt(this); return false;"></a></li></ul>'
                 +'</div>'
         );
+        
+        $("ul").find('*').attr('contenteditable','false');
+        
         order++;
         addContent();
         
