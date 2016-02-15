@@ -153,8 +153,7 @@ public class ProjectModel {
 		 * c_type VARCHAR(10),
 		 * c_value VARCHAR(1000),
 		 * c_order int(5)*/
-		
-		return "main/index";
+		return "project.main";
 	}
 	
 	@RequestMapping(value="showViewer")

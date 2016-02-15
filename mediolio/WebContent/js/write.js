@@ -56,8 +56,10 @@ $('document').ready(function(){
 			contentType: false,
 			data: formData,
 			type: "POST",
+//			dataType:"JSON",
 			success: function(result){
-				$("#contentsWrap").html(result);
+				alert("업로드 완료");
+				$("#indexWrap").html(result);
 			}
 		});
 		
