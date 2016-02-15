@@ -63,7 +63,7 @@ public class MemberActionModel {
 	public String message(HttpSession session, Model model){		
 		MemberVO mev = (MemberVO)session.getAttribute("mev");
 		if(mev!=null){
-			model.addAttribute("list", maDao.getMsgListSent(mev.getM_id()));
+			model.addAttribute("list", maDao.getMsgListReceived(mev.getM_id()));
 		}
 		return "mypage.message";
 	}
@@ -71,7 +71,6 @@ public class MemberActionModel {
 	//쪽지보내기 모달 오픈
 	@RequestMapping("msgModalOpen")
 	public String msgModalOpen(Model model, @RequestParam("m_id") String m_id, @RequestParam("m_nickname") String m_nickname){
-		System.out.println(m_id + ", " + m_nickname);
 		model.addAttribute("m_id", m_id);
 		model.addAttribute("m_nickname", m_nickname);
 		return "modal.messageModal";

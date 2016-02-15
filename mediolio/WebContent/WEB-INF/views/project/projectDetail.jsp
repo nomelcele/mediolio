@@ -119,7 +119,7 @@
 			    </c:otherwise>
 			</c:choose>
             </li>
-            <li><a onclick="noteModalOpen(2)">MESSAGE</a></li>
+            <li><a onclick="noteModalOpen('modal')">MESSAGE</a></li>
         </ul>
     </div>
     </c:if>
