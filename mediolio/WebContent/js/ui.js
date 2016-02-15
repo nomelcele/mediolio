@@ -88,14 +88,16 @@ $('document').ready(function(){
     });
     
     
-    $('#userBox #message a').click(function(){
-    	$.ajax({
-    		url: "message",
-    		type: "POST",
-    		success : function(result) {
-    			$('#default_body').empty().append(result);
-    		}
-    	});
-    	
-    });
-})
+    $('#userBox #message a').click(openMyMsgPage);
+});
+
+//aside에서 메세지 아이콘 누르거나, 알림 말풍선에서 도착한 메세지 눌렀을 때
+function openMyMsgPage(){
+	$.ajax({
+		url: "message",
+		type: "POST",
+		success : function(result) {
+			$('#default_body').empty().append(result);
+		}
+	});
+}

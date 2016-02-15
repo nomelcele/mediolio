@@ -98,7 +98,7 @@ function getNotifications(){
 				$.each(result.msg, function(index, entry){
 					appendMsg += '<li class="bell_content">'
 											+'<img src="resources/images/push/push_msg.png">'
-											+'<a href="#">'
+											+'<a href="#" class="bell_msg">'
 												+'<span>'+entry.msg_from_studentID +' '+entry.msg_from_nickname+'님이 메시지를 보냈습니다.</span>'
 												+'<span class="bell_date">'+timeGapCalculate(entry.msg_date)+'</span>'
 												+'<span class="ellipsis msg_text"> >> '+entry.msg_text+'</span>'
@@ -153,4 +153,6 @@ $(function(){
 		disconnect();
 		location.href="logout";
 	});
+	
+	$(document).on('click', '.bell_msg', openMyMsgPage);
 });
