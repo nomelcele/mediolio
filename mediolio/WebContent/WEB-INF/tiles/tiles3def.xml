@@ -14,6 +14,9 @@
 		<put-attribute name="aside" value="/WEB-INF/views/main/aside.jsp"/>
 	</definition>
 	
+	<definition name="project.main" extends="empty_layout">
+		<put-attribute name="body" value="/WEB-INF/views/main/index.jsp"/>
+	</definition>
 	<definition name="modal/messageModal" extends="empty_layout">
 		<put-attribute name="body" value="/WEB-INF/views/modal/messageModal.jsp"/>
 	</definition>
