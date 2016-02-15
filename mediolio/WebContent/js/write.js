@@ -32,7 +32,7 @@ $('document').ready(function(){
 		$("#cate_id").val($("#selectedCategory").val());
 		// 6. 서브카테고리 아이디 목록
 		var subcategories = "";
-		$(".subCategory").each(function(){
+		$("#write_dCategory .subCategory").each(function(){
 			subcategories += $(this).val()+"/";
 		});
 		$("#sc_id").val(subcategories);

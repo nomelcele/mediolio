@@ -3,6 +3,7 @@
 <link href="resources/css/note.css" rel="stylesheet" type="text/css"/>    
 <script src="js/note.js"></script> 
 
+<div id="contentsWrap">
 <div id="modalBox"></div>
     <div class="rmcnWrap">
             <a class="btn_rmcn" id="btn_rmcnUp" href="#"></a>
@@ -147,6 +148,7 @@
             </div><!--//noteWrap -->
         </div><!--//card_sendNote_bd -->
     </div>
+   </div>
 
 <!-- 쪽지보내기 모달 -->
 <!--     <div class="modal" id="writeNoteWrap">

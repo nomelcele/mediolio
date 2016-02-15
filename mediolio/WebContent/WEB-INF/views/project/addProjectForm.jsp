@@ -26,6 +26,7 @@
  		<input type="hidden" id="p_coverImgName" name="p_coverImg">
  		<input type="hidden" id="sc_id" name="sc_id">
 </form>
+<div id="contentsWrap">
     <div class="cardWindow">
         <div class="cardWindow_hd">UPLOAD PORTFOLIO</div>
         <div id="write_hd">
@@ -137,7 +138,7 @@
     
     
     <input type="button" id="submit_portfolio" value="SUBMIT"/>
-        
+</div> <!-- contentsWrap -->        
     
     
     

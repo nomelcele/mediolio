@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+	<div id="contentsWrap">
     <div class="cardWrap">
     	<div class="card_hd"></div>
     	<div class="card_img">
@@ -154,7 +155,7 @@
         </div><!--//card_ct-->
     </div><!--//cardWrap-->
 
-
+</div>
 <!-- <div class="modal" id="modal_content">
 	<div class="modal_hd" id="modal_hd_content">
         <p id="content_categoryWrap">
