@@ -2,8 +2,20 @@ package com.mediolio.vo;
 
 public class PushMsgVO {
 	private int msg_id, msg_from;
-	private String msg_text, msg_date, msg_from_nickname, msg_from_studentID;
+	private String msg_text, msg_date, msg_from_nickname, msg_from_studentID, msg_to_nickname, msg_to_studentID;
 	
+	public String getMsg_to_nickname() {
+		return msg_to_nickname;
+	}
+	public void setMsg_to_nickname(String msg_to_nickname) {
+		this.msg_to_nickname = msg_to_nickname;
+	}
+	public String getMsg_to_studentID() {
+		return msg_to_studentID;
+	}
+	public void setMsg_to_studentID(String msg_to_studentID) {
+		this.msg_to_studentID = msg_to_studentID;
+	}
 	public String getMsg_from_nickname() {
 		return msg_from_nickname;
 	}

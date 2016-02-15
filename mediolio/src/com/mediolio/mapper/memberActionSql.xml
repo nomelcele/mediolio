@@ -19,12 +19,18 @@
 		INSERT INTO message (msg_from, msg_to, msg_text, msg_date, msg_from_status, msg_to_status) VALUES (#{msg_from}, #{msg_to}, #{msg_text}, now(), 'sent', 'no-read')
 	</insert>
 	
-	<select id="getMsgListReceived" parameterType="int" resultType="msvo">
-		SELECT * FROM message WHERE msg_to = #{msg_to} AND msg_to_status != 'deleted' ORDER BY msg_id DESC
+	<select id="getMsgListReceived" parameterType="int" resultType="pmvo">
+		SELECT msg.msg_id, msg.msg_from, msg.msg_text, DATE_FORMAT(msg.msg_date, '%Y.%m.%d %H:%i:%s') AS msg_date, 
+			msg.msg_to_status, m.m_studentID AS msg_from_studentID, m.m_nickname AS msg_from_nickname
+			FROM message msg, member m 
+				WHERE msg.msg_from=m.m_id AND msg.msg_to=#{m_id} AND msg.msg_to_status != 'deleted' ORDER BY msg.msg_to_status ASC, msg.msg_id DESC
 	</select>
 	
-	<select id="getMsgListSent" parameterType="int" resultType="msvo">
-		SELECT * FROM message WHERE msg_from = #{from} AND msg_from_status = 'sent' ORDER BY msg_id DESC
+	<select id="getMsgListSent" parameterType="int" resultType="pmvo">
+		SELECT msg.msg_id, msg.msg_to, msg.msg_text, DATE_FORMAT(msg.msg_date, '%Y.%m.%d %H:%i:%s') AS msg_date, 
+			m.m_studentID AS msg_to_studentID, m.m_nickname AS msg_to_nickname
+			FROM message msg, member m 
+				WHERE msg.msg_to=m.m_id AND msg.msg_from=#{m_id} AND msg.msg_from_status = 'sent' ORDER BY msg.msg_id DESC
 	</select>
 	
 	<update id="deleteMsgSent" parameterType="int">

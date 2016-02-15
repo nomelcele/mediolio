@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mediolio.vo.Member_actionVO;
 import com.mediolio.vo.MessageVO;
+import com.mediolio.vo.PushMsgVO;
 
 @Repository
 public class MemberActionDao {
@@ -27,11 +28,11 @@ public class MemberActionDao {
 		st.insert("ma.msgSend", vo);		
 	}
 
-	public List<MessageVO> getMsgListReceived(int msg_to) {
+	public List<PushMsgVO> getMsgListReceived(int msg_to) {
 		return st.selectList("ma.getMsgListReceived", msg_to);
 	}
 	
-	public List<MessageVO> getMsgListSent(int msg_from) {
+	public List<PushMsgVO> getMsgListSent(int msg_from) {
 		return st.selectList("ma.getMsgListSent", msg_from);
 	}
 

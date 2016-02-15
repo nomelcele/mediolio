@@ -266,28 +266,33 @@ function contentModalOpen(){
 
 
 //쪽지보내기 모달
-function noteModalOpen(step){
+function noteModalOpen(step, oponent_id, oponent_name){
   var win_w = $(window).width();
 	var win_h = $(window).height();
-	var sent_to, sent_to_name;
-	if(step=='1'){
+	var send_to, send_to_name;
+	if(step=='page'){
 		//페이지 상세보기 페이지에서 열었을 경우
-		sent_to=0;
-		sent_to_name='';
-	}else if(step=='2'){
+		send_to=0;
+		send_to_name='';
+	}else if(step=='modal'){
 		//메세지 페이지에서 열었을 경우
-		sent_to = $('#other_m_id').val();
-		sent_to_name = $('#other_nickname').val();
+		send_to = $('#other_m_id').val();
+		send_to_name = $('#other_nickname').val();
+	}else if(step=='reply'){
+		//받은쪽지 목록에서 답장하는 경우
+		console.log(oponent_id + ", " + oponent_name);
+		send_to = oponent_id;
+		send_to_name=oponent_name;
 	}
 	
 	$.ajax({
 		url : "msgModalOpen",
 		type : "POST",
-		data : {m_id: sent_to, m_nickname: sent_to_name},
+		data : {m_id: send_to, m_nickname: send_to_name},
 		success : function(data) {
 			$("#modalBox2").html(data);
 			location.href="#msgSend";
-			
+			console.log('success : ' + step);
 			var movImg_w = $('#writeNoteWrap').width();
 			var movImg_h = $('#writeNoteWrap').height();
 			
@@ -306,8 +311,7 @@ function noteModalOpen(step){
 			
 		    $('.modal_bg2').on('click',function(){
 		        $('.modal_bg2, #writeNoteWrap').hide();
-		        if(step=='2'){
-		        	console.log('2');
+		        if(step=='modal'){
 		        	//프로젝트 상세보기 모달에서 열었을 경우
 		        	$('.modal_bg').show();
 		        }
@@ -326,7 +330,7 @@ function msgSend(step){
 			alert("쪽지를 보냈습니다.");
 			
 			$('.modal_bg2, #writeNoteWrap').hide();
-			if(step=='2'){
+			if(step=='modal'){
 		    	//프로젝트 상세보기 모달에서 열었을 경우
 		    	$('.modal_bg').show();
 			}
