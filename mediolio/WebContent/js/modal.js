@@ -285,7 +285,7 @@ function noteModalOpen(step){
 		data : {m_id: sent_to, m_nickname: sent_to_name},
 		success : function(data) {
 			$("#modalBox2").html(data);
-			location.href="#sendmsg";
+			location.href="#msgSend";
 			
 			var movImg_w = $('#writeNoteWrap').width();
 			var movImg_h = $('#writeNoteWrap').height();
@@ -299,13 +299,35 @@ function noteModalOpen(step){
 		    $('.modal_bg2').show();
 			$('#writeNoteWrap').show();
 		    
-		    $('.modal_bg2, #btn_sendNote').on('click',function(){
+			$('#btn_sendNote').on('click', function(){
+				msgSend(step);
+			});
+			
+		    $('.modal_bg2').on('click',function(){
 		        $('.modal_bg2, #writeNoteWrap').hide();
 		        if(step=='2'){
 		        	//프로젝트 상세보기 모달에서 열었을 경우
 		        	$('.modal_bg').show();
 		        }
 		    });
+		}
+	});
+}
+
+function msgSend(step){
+	$.ajax({
+		url: "msgSend",
+		type: "POST",
+		data: $('#msgForm').serialize(),
+		dataType : "json",
+		success : function(data) {
+			alert("쪽지를 보냈습니다.");
+			
+			$('.modal_bg2, #writeNoteWrap').hide();
+			if(step=='2'){
+		    	//프로젝트 상세보기 모달에서 열었을 경우
+		    	$('.modal_bg').show();
+			}
 		}
 	});
 }

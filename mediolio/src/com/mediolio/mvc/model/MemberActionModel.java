@@ -60,14 +60,12 @@ public class MemberActionModel {
 	
 	//쪽지페이지 이동
 	@RequestMapping("message")
-	public ModelAndView message(HttpSession session){
-		ModelAndView mav = new ModelAndView("mypage/message");
-		
+	public String message(HttpSession session, Model model){		
 		MemberVO mev = (MemberVO)session.getAttribute("mev");
 		if(mev!=null){
-			mav.addObject("list", maDao.getMsgListSent(mev.getM_id()));
+			model.addAttribute("list", maDao.getMsgListSent(mev.getM_id()));
 		}
-		return mav;
+		return "mypage.message";
 	}
 	
 	//쪽지보내기 모달 오픈
@@ -76,7 +74,7 @@ public class MemberActionModel {
 		System.out.println(m_id + ", " + m_nickname);
 		model.addAttribute("m_id", m_id);
 		model.addAttribute("m_nickname", m_nickname);
-		return "modal/messageModal";
+		return "modal.messageModal";
 	}
 	
 	//쪽지 보내기

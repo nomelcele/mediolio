@@ -55,7 +55,7 @@ public class ProjectDetailModel {
 		List<String> subCategory_list = Arrays.asList((pdvo.getSc_id()).split(","));
 		model.addAttribute("subcategory", pddao.getSubcategoryName(subCategory_list));
 				
-		return "project/projectDetail";
+		return "project.projectDetail";
 	}
 	
 	//댓글 달기

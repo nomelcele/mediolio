@@ -86,4 +86,16 @@ $('document').ready(function(){
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");
         return false;
     });
+    
+    
+    $('#userBox #message a').click(function(){
+    	$.ajax({
+    		url: "message",
+    		type: "POST",
+    		success : function(result) {
+    			$('#default_body').empty().append(result);
+    		}
+    	});
+    	
+    });
 })
