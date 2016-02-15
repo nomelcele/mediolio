@@ -331,6 +331,36 @@ function msgSend(step){
 		}
 	});
 }
+function pwModalOpen() {
+	var win_w = $(window).width();
+	var win_h = $(window).height();
+
+	var movImg_w = $('#modal_findPw').width();
+	var movImg_h = $('#modal_findPw').height();
+
+	var movImg_posX = (win_w - movImg_w) / 2;
+	var movImg_posY = (win_h - movImg_h) / 2;
+
+	$('#modal_findPw').hide();
+
+	$('#modal_findPw').css({
+		left : movImg_posX,
+		top : movImg_posY
+	});
+
+	$('.modal_bg').hide();
+	$('.modal_bg2').show();
+	$('#modal_findPw').show();
+
+	$('.modal_bg2').on('click', function() {
+		$('#modal_findPw').hide();
+		$('.modal_bg2').hide();
+		$('.modal_bg').show();
+		$('#fpw_email').val("");
+		
+	})
+
+}
 
 
 
