@@ -38,6 +38,7 @@ import com.mediolio.viewer.Document;
 import com.mediolio.viewer.Session;
 import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.HashtagVO;
+import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectVO;
 import com.mediolio.vo.SubcategoryVO;
 
@@ -52,13 +53,23 @@ public class ProjectModel {
 	public String addForm(Model model, HttpSession session){
 		return "project/addProjectForm";
 	}
+	
+//	@RequestMapping(value="uploadProjectFiles")
+//	public void uploadProjectFiles(ProjectVO pvo, String[] orderArr, HttpSession session){
+//		// 프로젝트 관련 파일들 업로드(이미지, 문서)
+//		List<MultipartFile> contents = pvo.getContents();
+//		System.out.println("파일 들어오세요? "+contents.get(0).getOriginalFilename());
+//		System.out.println("첫번째 파일: "+orderArr[0]);
+//		System.out.println("프로젝트 제목: "+pvo.getP_title());
+//	}
 
 	@RequestMapping(value="addProject")
-	public String addProject(ProjectVO pvo, String[] orderArr, String hashtags, HttpSession session){
+	public String addProject(ProjectVO pvo, String[] orderArr, HttpSession session){
+		
 		System.out.println("들어오냐?"+pvo.getContents().get(0).getOriginalFilename());
 		// 프로젝트 업로드
 		// 1. 새로운 프로젝트 추가
-		pvo.setM_id((int)session.getAttribute("id"));
+		pvo.setM_id(((MemberVO)session.getAttribute("mev")).getM_id());
 		int p_id = pdao.addProject(pvo); 
 		
 		// 2. 콘텐츠(이미지, 문서, 임베드 태그, 텍스트) 업로드 및 db에 등록
@@ -104,7 +115,7 @@ public class ProjectModel {
 		}
 		
 		// 3. 해쉬태그 db에 등록
-		String[] hashtagArr = hashtags.split("/");
+		String[] hashtagArr = pvo.getHashtags().split("/");
 		for(String tag:hashtagArr){
 			HashtagVO hvo = new HashtagVO();
 			hvo.setH_value(tag);

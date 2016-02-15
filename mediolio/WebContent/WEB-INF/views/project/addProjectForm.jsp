@@ -18,13 +18,14 @@
 </head>
 <body>
 <div id="modalBox"></div>
+<form id="addProjectForm" action="addProject" method="post">
 <!--  		<input type="hidden" id="orderArr" name="orderArr"> -->
-<!--  		<input type="hidden" id="p_title" name="p_title"> -->
-<!--  		<input type="hidden" id="cate_id" name="cate_id"> -->
-<!--  		<input type="hidden" id="hashtags" name="hashtags"> -->
-<!--  		<input type="hidden" id="p_coverImg" name="p_coverImg"> -->
-<!--  		<input type="hidden" id="sc_id" name="sc_id"> -->
-<div id="contentsWrap">
+ 		<input type="hidden" id="p_title" name="p_title">
+ 		<input type="hidden" id="cate_id" name="cate_id">
+ 		<input type="hidden" id="hashtags" name="hashtags">
+ 		<input type="hidden" id="p_coverImgName" name="p_coverImg">
+ 		<input type="hidden" id="sc_id" name="sc_id">
+</form>
     <div class="cardWindow">
         <div class="cardWindow_hd">UPLOAD PORTFOLIO</div>
         <div id="write_hd">
@@ -136,7 +137,6 @@
     
     
     <input type="button" id="submit_portfolio" value="SUBMIT"/>
-</div><!--//contentsWrap-->
         
     
     

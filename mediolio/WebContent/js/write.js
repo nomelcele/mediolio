@@ -7,19 +7,8 @@ var orderArr=[];
 
 $('document').ready(function(){
 	
-	
-	
-	
 	$("#submit_portfolio").click(function(){
 		// 프로젝트 등록
-		// 서브카테고리 번호
-		// 이미지 파일은 잘 되는데 문서 파일 올리면 bad request
-//		$("#viewerForm").attr("action","addProject");
-//		$("#orderArr").val(orderArr);
-//		$("#p_title").val($("#projectTitle").val());
-//		$("#cate_id").val($("#selectedCategory").val());
-		
-
 		
 		// 파일 업로드
 		// 서버로 보내야 할 파라미터 목록
@@ -29,34 +18,37 @@ $('document').ready(function(){
 			console.log($("input[name=contents]")[i]);
 			formData.append("contents",$("input[name=contents]")[i].files[0]);
 		};
-//		for(var i=0; i<$("input[type=file]").length; i++){
-//			var fileId = "input[id=file"+i+"]";
-//			console.log("파일 아이디: "+fileId);
-//			var file = $(fileId)[0].files[0];
-//			formData.append("contents["+i+"]",file);
-//		}
-//		// 2. 임베드 태그, 텍스트: orderArr에 있음
-//		// 3. orderArr: 콘텐츠 순서 정보 저장
-//		console.log("콘텐츠 순서: "+orderArr);
-//		formData.append("orderArr",orderArr);
-//		// 4. 프로젝트 제목
-//		formData.append("p_title",$("#projectTitle").val());
-//		// 5. 카테고리 아이디
-//		formData.append("cate_id",$("#selectedCategory").val());
-//		// 6. 서브카테고리 아이디 목록
-//		var subcategories = "";
-//		$(".subCategory").each(function(){
-//			subcategories += $(this).val()+"/";
-//		});
-//		formData.append("sc_id",subcategories);
-//		// 7. 커버 이미지 파일 이름
-//		formData.append("p_coverImg",$("#p_coverImg").val());
-//		// 8. 해쉬태그
-//		var hashtags = "";
-//		$("#write_tagTxt span").each(function(){
-//			hashtags += $(this).html()+"/";
-//		});
-//		formData.append("hashtags",hashtags);
+		
+		
+		// 2. 임베드 태그, 텍스트: orderArr에 있음
+		// 3. orderArr: 콘텐츠 순서 정보 저장
+		console.log("콘텐츠 순서: "+orderArr);
+		for(var i=0; i<orderArr.length; i++){
+			formData.append("orderArr",orderArr[i]);
+		}
+		// 4. 프로젝트 제목
+		$("#p_title").val($("#projectTitle").val());
+		// 5. 카테고리 아이디
+		$("#cate_id").val($("#selectedCategory").val());
+		// 6. 서브카테고리 아이디 목록
+		var subcategories = "";
+		$(".subCategory").each(function(){
+			subcategories += $(this).val()+"/";
+		});
+		$("#sc_id").val(subcategories);
+		// 7. 커버 이미지 파일 이름
+		$("#p_coverImgName").val($("#p_coverImg").val());
+		// 8. 해쉬태그
+		var hashtags = "";
+		$("#write_tagTxt span").each(function(){
+			hashtags += $(this).html()+"/";
+		});
+		$("#hashtags").val(hashtags);
+
+		var other_data = $("#addProjectForm").serializeArray();
+	    $.each(other_data,function(key,input){
+	        formData.append(input.name,input.value);
+	    });
 		
 		$.ajax({
 			url: "addProject",
@@ -65,7 +57,7 @@ $('document').ready(function(){
 			data: formData,
 			type: "POST",
 			success: function(result){
-				alert("테스트");
+				$("#contentsWrap").html(result);
 			}
 		});
 		
@@ -440,9 +432,19 @@ function removeElement(e){
 	var element = e;
 	var order = $(element).closest(".contentBox").attr("data-sort");
 	$(element).closest(".contentBox").remove();
-	
-	console.log(order)
+
+	// 파일 삭제했을 경우 그 파일의 input file 삭제
+//	$("input[name=contents]").each(function(){
+//		if($(this).val().split("\\")[2] == orderArr[order]){
+//			console.log("삭제할 파일: "+$(this).val());
+//			$(this).remove();
+//		}
+//	});
+//	   
+	console.log($("input[name=contents]"));
+	console.log(order);
 	console.log(orderArr.splice(order,1));
+	console.log(orderArr);
 }
 
 function removeTxt(e){
