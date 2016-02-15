@@ -15,8 +15,6 @@
 	<tiles:insertAttribute name="aside"/>
 	
 	<!-- 바디 영역 -->
-	<div id="contentsWrap">
-		<tiles:insertAttribute name="body"/>
-	</div>
+	<tiles:insertAttribute name="body"/>
 </body>
 </html>

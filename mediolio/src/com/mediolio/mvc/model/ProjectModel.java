@@ -154,7 +154,7 @@ public class ProjectModel {
 		 * c_value VARCHAR(1000),
 		 * c_order int(5)*/
 		
-		return "redirect:main";
+		return "main/index";
 	}
 	
 	@RequestMapping(value="showViewer")
