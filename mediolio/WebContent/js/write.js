@@ -3,7 +3,9 @@ jQuery.ajaxSettings.traditional = true;
 var order=0; // 콘텐츠들의 순서
 var fileNum=0; // 업로드할 파일 수
 var orderArr=[];
-
+var colorRange;
+var colorNum=0;
+var colorId=0;
 
 $('document').ready(function(){
 	
@@ -123,6 +125,8 @@ $('document').ready(function(){
     		color: "#000000",
     		onShow: function(colpkr){
     			$(colpkr).fadeIn(500);
+    			colorRange = getColorRange();
+    			colorNum = 0;
     			return false;
     		},
     		onHide: function(colpkr){
@@ -130,9 +134,19 @@ $('document').ready(function(){
     			return false;
     		},
     		onChange: function (hsb, hex, rgb) {
-    			console.log(window.getSelection());
-    			var newColor = "#"+hex;
-    			txtColor(newColor);
+    			colorNum++;
+    			if(colorNum == 1){
+	    			console.log(colorRange);
+	        		var newNode = document.createElement("span");
+	        		newNode.style.color = "#"+hex;
+	        		colorId++;
+	        		newNode.id = "color"+colorId;
+	        		newNode.appendChild(colorRange.extractContents());
+	        		colorRange.insertNode(newNode);
+    			} else {
+    				var spanId = "#color"+colorId;
+    				$(spanId).css("color","#"+hex);
+    			}
     		}
     	});
     	
@@ -625,4 +639,9 @@ function addContent(){
     	
     })
 	
+}
+
+function getColorRange(){
+	var range = window.getSelection().getRangeAt(0);
+	return range;
 }
