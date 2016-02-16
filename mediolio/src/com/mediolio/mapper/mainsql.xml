@@ -8,12 +8,20 @@
 		SELECT m_nickname FROM MEMBER WHERE m_id=#{m_id}
 	</select>
 	<select id="mainProjects" resultType="pvo">
-		select p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID authorID, m.m_nickname authorName,
+		select p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID authorID, m.m_nickname authorName, p.sc_id,
 		(select count(*) from member_action where p_id=p.p_id) p_likenum, p.p_viewnum 
 		from project p, member m where p.m_id=m.m_id order by p.p_date desc
 	</select>
-	<select id="projectHashtags" parameterType="int" resultType="hvo">
-		select h_id, h_value from hashtag where p_id=#{p_id}
+	<select id="projectHashtags" resultType="hvo">
+		SELECT*FROM HASHTAG
+	</select>
+	
+	<select id="subcatelists" resultType="scvo">
+		SELECT*FROM SUBCATEGORY
+	</select>
+	
+	<select id="catelists" resultType="cavo">
+		SELECT*FROM CATEGORY
 	</select>
   
   </mapper>
