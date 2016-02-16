@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="ma">
+
     <insert id="projectLike" parameterType="mavo">
 		INSERT INTO member_action (act_type, act_to, act_from, p_id, act_date, act_read) VALUES ('like', #{act_to}, #{act_from},#{p_id}, now(), 'n')
 	</insert>
@@ -57,5 +58,35 @@
 		SELECT count(*) from member_action WHERE act_type='follow' AND act_from=#{act_from} AND act_to=#{act_to}
 	</select>
 
+	<select id="getFollowingList" parameterType="int" resultType="fvo">
+		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_nickname) AS m_name, m.m_introduce, m.m_interestingPart, 
+			SUBSTRING_INDEX(m_interestingPart,',',1) AS m_interestingId1, 
+			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',2),',',-1) AS m_interestingId2, 
+			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',3),',',-1) AS m_interestingId3,
+			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId1) AS m_interestingText1,
+			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId2) AS m_interestingText2,
+			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId3) AS m_interestingText3,
+			(SELECT GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/') FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC LIMIT 3) AS projects
+				FROM member m, member_action ma WHERE m.m_id=ma.act_to AND ma.act_type='follow' AND ma.act_from=#{m_id}
+	</select>
+	
+	<select id="getFollowerList" parameterType="int" resultType="fvo">
+		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_nickname) AS m_name, m.m_introduce, m.m_interestingPart, 
+			SUBSTRING_INDEX(m_interestingPart,',',1) AS m_interestingId1, 
+			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',2),',',-1) AS m_interestingId2, 
+			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',3),',',-1) AS m_interestingId3,
+			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId1) AS m_interestingText1,
+			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId2) AS m_interestingText2,
+			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId3) AS m_interestingText3,
+			(SELECT GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/') FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC LIMIT 3) AS projects
+				FROM member m, member_action ma WHERE m.m_id=ma.act_from AND ma.act_type='follow' AND ma.act_to=#{m_id}
+	</select>
+	
+  	<select id="friendCnt" parameterType="int" resultType="java.util.HashMap">
+  		SELECT
+			(SELECT count(*) from member_action WHERE act_type = 'follow' AND act_from = #{m_id } ) AS following,
+			(SELECT count(*) from member_action WHERE act_type = 'follow' AND act_to = #{m_id } ) AS follower
+		FROM dual 	
+  	</select>
   </mapper>
   

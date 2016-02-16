@@ -1,0 +1,29 @@
+.friendWrap{ width:800px; min-height:180px; height:auto; }
+
+.friendwrap_content{ width:100%; box-sizing:border-box;}
+.friendwrap_hd{ height:50px; background:#0F84CF; line-height:50px; padding:0 20px; color:#fff;}
+
+.friendTab span{ display:inline-block; width:auto;  margin-left:10px; }
+ul.friendwrap_tab{ height:49px; border-bottom:1px solid #ccc; }
+ul.friendwrap_tab li{ width:400px; height:inherit; float:left; }
+ul.friendwrap_tab li a{ display:block; box-sizing:border-box;  height:inherit; line-height:50px; text-align:center; font-size:13px;  }
+/*ul.friendwrap_tab li a:hover{ border-bottom:2px solid #0F84CF; color:#0F84CF; font-weight:500;}*/
+
+.friendList_id input{ background:none; width:15px; height:15px; border:1px solid #0F84CF; border-radius:50%; color:#0F84CF; font-size:10px; margin-left:5px; padding:0; cursor:pointer;}
+.friendList_id input:hover{ background:#0F84CF; color:#fff;}
+
+.friendTabClick{border-bottom:2px solid #0F84CF; color:#0F84CF; font-weight:500;}
+
+.friendwrap_bd{ min-height:100px; height:auto;  }
+.friendWrap_bd_content ul{ min-height:50px; margin-top:10px;  }
+.friendWrap_bd_content ul li{ width:100%; height:95px; position:relative;  padding-top:10px; border-bottom:1px solid #ccc;}
+.friendWrap_bd_content ul li:last-child{ padding-bottom:20px;}
+.friendWrap_bd_content ul li p{ width:350px; margin-left:30px; }
+.friendList_id a{font-size:14px; line-height:30px; font-weight:500; }
+.friendList_id a:hover{ text-decoration:underline;}
+.friendList_intro{ max-height:30px; font-size:12px; line-height:15px; overflow:hidden; }
+.friendList_like{ height:20px; line-height:20px; font-size:12px; color:#777;}
+
+.friendList_project{ width:270px; height:80px; position:absolute; right:30px;top:10px;}
+.friendList_project a{ float:left; margin-left:10px;}
+
