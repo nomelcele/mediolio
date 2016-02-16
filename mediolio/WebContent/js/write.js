@@ -249,6 +249,7 @@ $('document').ready(function(){
 		} else if($.inArray(ext,['gif','png','jpg','jpeg']) != -1) {
 			// 이미지 파일
 			// 미리보기 영역에 이미지 표시
+			console.log(order);
 			$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
 					+"<ul class='content_toolBoxes' id='content_toolBox'>"
 					+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
@@ -258,6 +259,7 @@ $('document').ready(function(){
 			orderArr[order] = $(this).val().split("\\")[2];
 			
 			order = parseInt(order)+1;
+			console.log(order);
 		    fileNum++;
 			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents' onchange='fileChange(this)'/>");	
 			addContent();
@@ -463,12 +465,11 @@ function moveDownElement(e){
 function removeElement(e){
 	// 엘리먼트 삭제
 	var element = e;
-	var order = $(element).closest(".contentBox").attr("data-sort");
+	var elementOrder = $(element).closest(".contentBox").attr("data-sort");
 	var nextElements = $("#write_bd").find(".contentBox").filter(function(){
 		// 삭제하려는 엘리먼트보다 뒤에 있는 엘리먼트 선택
-		return $(this).attr("data-sort") > order;
+		return $(this).attr("data-sort") > elementOrder;
 	});
-	console.log(nextElements.length);
 	for(var i=0; i<nextElements.length; i++){
 		var e = nextElements[i];
 		e.setAttribute("data-sort",parseInt(e.getAttribute("data-sort"))-1);
@@ -485,13 +486,13 @@ function removeElement(e){
 //	});
 //	   
 	// 삭제하면 한칸씩 밀어야함...
-	var arr1 = orderArr.slice(0,order);
-	var arr2 = orderArr.slice(parseInt(order)+1,orderArr.length);
+	var arr1 = orderArr.slice(0,elementOrder);
+	var arr2 = orderArr.slice(parseInt(elementOrder)+1,orderArr.length);
 	orderArr = arr1.concat(arr2);
 	
 	console.log(orderArr);
 	
-	order = order-1;
+	order = parseInt(order-1);
 	console.log(order);
 }
 
@@ -613,6 +614,7 @@ function fileChange(file){
 	} else if($.inArray(ext,['gif','png','jpg','jpeg']) != -1){
 		// 이미지 파일
 		// 미리보기 영역에 이미지 표시
+		console.log(order);
 		$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
 				+"<ul class='content_toolBoxes' id='content_toolBox'>"
 				+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
@@ -622,6 +624,7 @@ function fileChange(file){
 		orderArr[order] = $(newFile).val().split("\\")[2];
 		
 		order = parseInt(order)+1;
+		console.log(order);
 		fileNum++;
 		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents' onchange='fileChange(this)'/>");	
 		addContent();
