@@ -61,4 +61,8 @@ public class ProjectDetailDao {
 	public List<ContentVO> projectContents(int p_id){
 		return st.selectList("pd.projectContents", p_id);
 	}
+	
+	public void increaseHits(int p_id){
+		st.update("pd.increaseHits",p_id);
+	}
 }

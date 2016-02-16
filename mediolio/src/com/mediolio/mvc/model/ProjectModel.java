@@ -31,6 +31,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mediolio.fileupload.ImageUtil;
+import com.mediolio.mvc.dao.MainDao;
 import com.mediolio.mvc.dao.ProjectDao;
 import com.mediolio.viewer.BoxViewClient;
 import com.mediolio.viewer.BoxViewException;
@@ -46,7 +47,9 @@ import com.mediolio.vo.SubcategoryVO;
 public class ProjectModel {
 	@Autowired
 	private ProjectDao pdao;
-	
+	@Autowired
+	private MainDao mdao;
+		
 	private static BoxViewClient boxView;
 	
 	@RequestMapping(value="addProjectForm")
@@ -64,7 +67,7 @@ public class ProjectModel {
 //	}
 
 	@RequestMapping(value="addProject")
-	public String addProject(ProjectVO pvo, String[] orderArr, HttpSession session){
+	public String addProject(ProjectVO pvo, String[] orderArr, HttpSession session, Model model){
 		
 		// 프로젝트 업로드
 		// 1. 새로운 프로젝트 추가
@@ -160,6 +163,11 @@ public class ProjectModel {
 //				}
 //			}
 				
+		MemberVO mev = (MemberVO) session.getAttribute("mev");
+		model.addAttribute("mainProjects", mdao.mainProjects());
+		model.addAttribute("hashtag", mdao.projectHashtags());
+		model.addAttribute("subcategory",mdao.subcatelist());
+		model.addAttribute("category",mdao.catelist());
 		return "main.index";
 	}
 	
