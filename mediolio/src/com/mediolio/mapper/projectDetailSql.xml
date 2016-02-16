@@ -54,5 +54,9 @@
 	<delete id="actionDeleteReply" parameterType="int">
 		DELETE FROM member_action WHERE r_id=#{r_id}
 	</delete>
+	
+	<select id="projectContents" parameterType="int" resultType="covo">
+		select c_type, c_value, c_order from content where p_id=#{p_id} order by c_order asc
+	</select>
   </mapper>
 	

@@ -4,9 +4,11 @@
 	<div id="contentsWrap">
     <c:forEach var="mainProjects" items="${mainProjects}">
 	    <div class="cardWrap">
+	    <input type="hidden" class="projectId" value="${mainProjects.p_id}">
+	    <input type="hidden" class="memberId" value="${mainProjects.m_id}">
 	    	<div class="card_hd"></div>
 	    	<div class="card_img">
-	            <a href="#" onClick="contentModalOpen()">
+	            <a href="#" onClick="contentModalOpen(this)">
 	                <div>
 	                    <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p>
 	                </div>

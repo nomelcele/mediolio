@@ -131,8 +131,8 @@
             <p class="card_tag"></p>
         </div><!--//card_bd-->
         <div class="card_ct">
-        	<p class="p_like"><span></span>12</p>
-            <p class="p_view"><span></span>12</p>
+        	<p class="p_like"><span></span>0</p>
+            <p class="p_view"><span></span>0</p>
         </div><!--//card_ct-->
     </div><!--//cardWrap-->
     

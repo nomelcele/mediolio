@@ -216,14 +216,18 @@ function writeEmbedModalOpen(){
 
 
 //인덱스 모달 추가
-function contentModalOpen(){
+function contentModalOpen(a){
+	var anchor = a;
     var win_w = $(window).width();
 	var win_h = $(window).height();
 	
 	$.ajax({
 		url : "projectDetail",
 		type : "POST",
-		data : {p_id: 1, m_id: 1},
+		data : {
+			p_id: $(anchor).closest(".cardWrap").find(".projectId").val(), 
+			m_id: $(anchor).closest(".cardWrap").find(".memberId").val()
+		},
 		success : function(data) {
 			$("#modalBox").html(data);
 			location.href="#detail";

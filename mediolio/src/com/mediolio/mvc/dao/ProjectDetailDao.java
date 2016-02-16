@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mediolio.vo.CategoryNameVO;
+import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.Member_actionVO;
 import com.mediolio.vo.ProjectDetailVO;
@@ -55,5 +56,9 @@ public class ProjectDetailDao {
 	public void deleteReply(int r_id) {
 		st.delete("pd.deleteReply", r_id);
 		st.delete("pd.actionDeleteReply", r_id);
+	}
+	
+	public List<ContentVO> projectContents(int p_id){
+		return st.selectList("pd.projectContents", p_id);
 	}
 }
