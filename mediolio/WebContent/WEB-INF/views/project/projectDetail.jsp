@@ -56,11 +56,13 @@
     				</c:when>
     				<c:when test="${contents.c_type eq 'document'}">
     					<!-- 문서 -->
-    					<div class="contentBox"><iframe src="${contents.c_value}" style="width:500px; height:800px;"></iframe></div>
+    					<div class="contentBox"><iframe src="${contents.c_value}" style="width:570px; height:740px;"></iframe></div>
     				</c:when>
     				<c:otherwise>
     					<!-- 임베드 태그, 텍스트 -->
-    					<div class="contentBox">${contents.c_value}</div>
+    					<c:if test="${contents.c_type eq 'html' && contents.c_value ne 'undefined'}">
+    						<div class="contentBox">${contents.c_value}</div>
+    					</c:if>
     				</c:otherwise>
     			</c:choose>
     		</c:forEach>
@@ -117,7 +119,15 @@
     </div> 
     <div id="modal_bd_content_userFavorite">
     	<c:forEach var="aItem" items="${interesting }" varStatus="status">
-    		${aItem.cate_name } ${aItem.sc_name }<c:if test="${not status.last}">, </c:if>
+    		<c:choose>
+    			<c:when test="${aItem.sc_id eq '11'||aItem.sc_id eq '12'||aItem.sc_id eq '13'}">
+    		    	${aItem.cate_name }
+    			</c:when>
+    			<c:otherwise>
+    				${aItem.cate_name } ${aItem.sc_name }
+    			</c:otherwise>
+    		</c:choose>
+    		<c:if test="${not status.last}">, </c:if>
     	</c:forEach>
     </div>
     <div class="modal_bd" id="modal_bd_content_userInfo">

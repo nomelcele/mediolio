@@ -58,5 +58,9 @@
 	<select id="projectContents" parameterType="int" resultType="covo">
 		select c_type, c_value, c_order from content where p_id=#{p_id} order by c_order asc
 	</select>
+	
+	<update id="increaseHits" parameterType="int">
+		update project set p_viewnum=p_viewnum+1 where p_id=#{p_id}
+	</update>
   </mapper>
 	
