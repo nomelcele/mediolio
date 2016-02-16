@@ -42,6 +42,7 @@ public class MainModel {
 		System.out.println("id : " +mev.getM_id());
 		System.out.println("nickname : "+mev.getM_nickname());
 		}
+		mav.addObject("mainProjects", mdao.mainProjects());
 		return mav;
 	}
 }
