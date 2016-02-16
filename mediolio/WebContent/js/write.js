@@ -230,7 +230,7 @@ $('document').ready(function(){
 						+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 						+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
 						+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
-						+"<iframe src='"+jdata+"' style='width:500px; height:500px;'/></div>");		
+						+"<iframe src='"+jdata+"' style='width:500px; height:800px;'/></div>");		
 					console.log("파일 이름: "+$(newFile).val().split("\\")[2]);
 					orderArr[order] = $(newFile).val().split("\\")[2];
 					order++;

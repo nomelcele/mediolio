@@ -1,5 +1,6 @@
 package com.mediolio.mvc.model;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mediolio.mvc.dao.ProjectDetailDao;
+import com.mediolio.viewer.BoxViewClient;
+import com.mediolio.viewer.BoxViewException;
+import com.mediolio.viewer.Document;
+import com.mediolio.viewer.Session;
+import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectDetailVO;
 import com.mediolio.vo.ReplyVO;
@@ -24,7 +30,7 @@ public class ProjectDetailModel {
 	@Autowired
 	private ProjectDetailDao pddao;
 	
-
+	private static BoxViewClient boxView;
 	
 	@RequestMapping("projectDetail")
 	public String projectDetail(Model model, @RequestParam("p_id") String p_id, @RequestParam("m_id") String m_id, HttpSession session){
@@ -43,7 +49,28 @@ public class ProjectDetailModel {
 		model.addAttribute("detail", pdvo);
 		
 		// 프로젝트 콘텐츠
-		model.addAttribute("contents", pddao.projectContents(Integer.parseInt(p_id)));
+		List<ContentVO> contents = pddao.projectContents(Integer.parseInt(p_id));
+		for(ContentVO covo:contents){
+			if(covo.getC_type().equals("document")){
+				// 문서 파일 뷰어 url 넣기
+				File file = new File(session.getServletContext().getRealPath("/")+"upload\\"+covo.getC_value());
+				Map<String, Object> params = new HashMap<String, Object>();
+				params.put("name", covo.getC_value());
+				params.put("nonSvg", true);
+				
+				try {
+					boxView = new BoxViewClient("3e7kxpyozin7r0kbknmiwa2dmpcoyq3w");
+					Document doc = boxView.upload(file,params);
+					Session viewSession = doc.createSession();
+					String viewUrl = viewSession.getViewUrl();
+					covo.setC_value(viewUrl);
+
+				} catch (BoxViewException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		model.addAttribute("contents", contents);
 		
 		//해쉬태그
 		model.addAttribute("tag", pddao.projectHash(Integer.parseInt(p_id)));
