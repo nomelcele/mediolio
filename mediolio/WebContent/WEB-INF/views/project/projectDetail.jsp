@@ -56,7 +56,7 @@
     				</c:when>
     				<c:when test="${contents.c_type eq 'document'}">
     					<!-- 문서 -->
-    					<div class="contentBox">${contents.c_value}</div>
+    					<div class="contentBox"><iframe src="${contents.c_value}" style="width:500px; height:800px;"></iframe></div>
     				</c:when>
     				<c:otherwise>
     					<!-- 임베드 태그, 텍스트 -->
