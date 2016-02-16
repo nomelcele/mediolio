@@ -66,7 +66,6 @@ public class ProjectModel {
 	@RequestMapping(value="addProject")
 	public String addProject(ProjectVO pvo, String[] orderArr, HttpSession session){
 		
-		System.out.println("들어오냐?"+pvo.getContents().get(0).getOriginalFilename());
 		// 프로젝트 업로드
 		// 1. 새로운 프로젝트 추가
 		pvo.setM_id(((MemberVO)session.getAttribute("mev")).getM_id());
@@ -74,45 +73,59 @@ public class ProjectModel {
 		
 		// 2. 콘텐츠(이미지, 문서, 임베드 태그, 텍스트) 업로드 및 db에 등록
 		List<MultipartFile> contents = pvo.getContents();
-		String[] contentNames = new String[contents.size()];
-		for(int i=0; i<contentNames.length; i++){
-			contentNames[i] = contents.get(i).getOriginalFilename();
-		}
-		
-		System.out.println("파일 수: "+contents.size());
-		for(int i=0; i<orderArr.length; i++){
-			System.out.println((i+1)+"번째 콘텐츠: "+orderArr[i]);
-			ContentVO covo = new ContentVO();
-
-			if(Arrays.asList(contentNames).contains(orderArr[i])){
-				// 2-1. 이미지, 문서 파일일 경우
-				int idx = Arrays.asList(contentNames).indexOf(orderArr[i]);
-				MultipartFile file = contents.get(idx); 
-				String newFileName = fileUpload(file, session); // 파일 업로드
-				String fileExt = newFileName.split("\\.")[1]; // 파일의 확장자
-				
-				String c_type = "document";
-				String[] imgExt = {"gif","png","jpg","jpeg"};
-				for(String e:imgExt){
-					if(fileExt.contains(e)){
-						c_type = "image";
-					}
-				}
-				
-				covo.setC_type(c_type); // 콘텐츠의 타입(image/document)
-				covo.setC_value(newFileName); // 콘텐츠의 파일 이름
-
-			} else {
-				// 2-2. 임베드 태그, 텍스트 db에 등록
-				covo.setC_type("html");
-				covo.setC_value(orderArr[i]);
+		String[] contentNames;
+		if(contents != null){
+			contentNames = new String[contents.size()];
+			for(int i=0; i<contentNames.length; i++){
+				contentNames[i] = contents.get(i).getOriginalFilename();
 			}
 			
-			covo.setP_id(p_id); // 프로젝트 id
-			covo.setC_order(i); // 콘텐츠 순서
-			pdao.uploadContent(covo); // db에 콘텐츠 정보 업데이트
-			
+			for(int i=0; i<orderArr.length; i++){
+				System.out.println((i+1)+"번째 콘텐츠: "+orderArr[i]);
+				ContentVO covo = new ContentVO();
+
+				if(Arrays.asList(contentNames).contains(orderArr[i])){
+					// 2-1. 이미지, 문서 파일일 경우
+					int idx = Arrays.asList(contentNames).indexOf(orderArr[i]);
+					MultipartFile file = contents.get(idx); 
+					String newFileName = fileUpload(file, session); // 파일 업로드
+					String fileExt = newFileName.split("\\.")[1]; // 파일의 확장자
+					
+					String c_type = "document";
+					String[] imgExt = {"gif","png","jpg","jpeg"};
+					for(String e:imgExt){
+						if(fileExt.contains(e)){
+							c_type = "image";
+						}
+					}
+					
+					covo.setC_type(c_type); // 콘텐츠의 타입(image/document)
+					covo.setC_value(newFileName); // 콘텐츠의 파일 이름
+
+				} else {
+					// 2-2. 임베드 태그, 텍스트 db에 등록
+					covo.setC_type("html");
+					covo.setC_value(orderArr[i]);
+				}
+				
+				covo.setP_id(p_id); // 프로젝트 id
+				covo.setC_order(i); // 콘텐츠 순서
+				pdao.uploadContent(covo); // db에 콘텐츠 정보 업데이트
+				
+			}
+		} else {
+			// 파일을 업로드하지 않았을 경우
+			for(int i=0; i<orderArr.length; i++){
+				ContentVO covo = new ContentVO();
+				covo.setC_type("html");
+				covo.setC_value(orderArr[i]);
+				covo.setP_id(p_id);
+				covo.setC_order(i);
+				pdao.uploadContent(covo);
+			}
 		}
+		
+
 		
 		// 3. 해쉬태그 db에 등록
 		String[] hashtagArr = pvo.getHashtags().split("/");
@@ -147,12 +160,6 @@ public class ProjectModel {
 //				}
 //			}
 				
-		/*  
-		 * c_id int(5) PRIMARY KEY auto_increment,
-		 * p_id int(10),
-		 * c_type VARCHAR(10),
-		 * c_value VARCHAR(1000),
-		 * c_order int(5)*/
 		return "main.index";
 	}
 	

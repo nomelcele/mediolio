@@ -1,160 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 	<div id="contentsWrap">
-    <div class="cardWrap">
-    	<div class="card_hd"></div>
-    	<div class="card_img">
-            <a href="#" onClick="contentModalOpen()"> 
-                <div>
-                    <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p>
-                </div>
-                <img src="resources/images/default.png"/>
-            </a>
-        </div><!--//card_img-->
-    	<div class="card_bd">
-        	<p class="card_title ellipsis"><a href="#">글제목입니다.글제목입니다.글제목입니다.</a></p>
-            <p class="card_dscrpt"><a href="#">12이유라</a></p>
-            <p class="card_tag">게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,</p>
-        </div><!--//card_bd-->
-        <div class="card_ct">
-        	<p class="p_like"><span></span>12</p>
-            <p class="p_view"><span></span>12</p>
-        </div><!--//card_ct-->
-    </div><!--//cardWrap-->
+    <c:forEach var="mainProjects" items="${mainProjects}">
+	    <div class="cardWrap">
+	    	<div class="card_hd"></div>
+	    	<div class="card_img">
+	            <a href="#" onClick="contentModalOpen()">
+	                <div>
+	                    <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p>
+	                </div>
+	                <c:if test="${mainProjects.p_coverImg ne '' && mainProjects.p_coverImg ne null}">
+	                	<img src="resources/images/projectCover/${mainProjects.p_coverImg}"/>
+	                </c:if>
+	                <c:if test="${mainProjects.p_coverImg eq '' || mainProjects.p_coverImg eq null}">
+		                <img src="resources/images/default.png"/>
+	                </c:if>
+	            </a>
+	        </div><!--//card_img-->
+	    	<div class="card_bd">
+	        	<p class="card_title ellipsis"><a href="#">${mainProjects.p_title}</a></p>
+	            <p class="card_dscrpt"><a href="#">${mainProjects.authorID} ${mainProjects.authorName}</a></p>
+	            <p class="card_tag">게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,</p>
+	        </div><!--//card_bd-->
+	        <div class="card_ct">
+	        	<p class="p_like"><span></span>${mainProjects.p_likenum}</p>
+	            <p class="p_view"><span></span>${mainProjects.p_viewnum}</p>
+	        </div><!--//card_ct-->
+	    </div><!--//cardWrap-->
+    </c:forEach>
+  
+<!--     <div class="cardWrap"> -->
+<!--     	<div class="card_hd"></div> -->
+<!--     	<div class="card_img"> -->
+<!--             <a href="#" onClick="contentModalOpen()"> -->
+<!--                 <div> -->
+<!--                     <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p> -->
+<!--                 </div> -->
+<!--                 <img src="resources/images/default.png"/> -->
+<!--             </a> -->
+<!--         </div>//card_img -->
+<!--     	<div class="card_bd"> -->
+<!--         	<p class="card_title ellipsis"><a href="#">글제목입니다.글제목입니다.글제목입니다.</a></p> -->
+<!--             <p class="card_dscrpt"><a href="#">12이유라</a></p> -->
+<!--             <p class="card_tag">게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,</p> -->
+<!--         </div>//card_bd -->
+<!--         <div class="card_ct"> -->
+<!--         	<p class="p_like"><span></span>12</p> -->
+<!--             <p class="p_view"><span></span>12</p> -->
+<!--         </div>//card_ct -->
+<!--     </div>//cardWrap -->
     
-    
-    <div class="cardWrap">
-    	<div class="card_hd"></div>
-    	<div class="card_img">
-            <a href="#" onClick="contentModalOpen()">
-                <div>
-                    <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p>
-                </div>
-                <img src="resources/images/default.png"/>
-            </a>
-        </div><!--//card_img-->
-    	<div class="card_bd">
-        	<p class="card_title ellipsis"><a href="#">글제목입니다.글제목입니다.글제목입니다.</a></p>
-            <p class="card_dscrpt"><a href="#">12이유라</a></p>
-            <p class="card_tag">게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,</p>
-        </div><!--//card_bd-->
-        <div class="card_ct">
-        	<p class="p_like"><span></span>12</p>
-            <p class="p_view"><span></span>12</p>
-        </div><!--//card_ct-->
-    </div><!--//cardWrap-->
-    
-    
-    <div class="cardWrap">
-    	<div class="card_hd"></div>
-    	<div class="card_img">
-            <a href="#" onClick="contentModalOpen()">
-                <div>
-                    <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p>
-                </div>
-                <img src="resources/images/default.png"/>
-            </a>
-        </div><!--//card_img-->
-    	<div class="card_bd">
-        	<p class="card_title ellipsis"><a href="#">글제목입니다.글제목입니다.글제목입니다.</a></p>
-            <p class="card_dscrpt"><a href="#">12이유라</a></p>
-            <p class="card_tag">게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,</p>
-        </div><!--//card_bd-->
-        <div class="card_ct">
-        	<p class="p_like"><span></span>12</p>
-            <p class="p_view"><span></span>12</p>
-        </div><!--//card_ct-->
-    </div><!--//cardWrap-->
-    
-    
-    <div class="cardWrap">
-    	<div class="card_hd"></div>
-    	<div class="card_img">
-            <a href="#" onClick="contentModalOpen()">
-                <div>
-                    <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p>
-                </div>
-                <img src="resources/images/default.png"/>
-            </a>
-        </div><!--//card_img-->
-    	<div class="card_bd">
-        	<p class="card_title ellipsis"><a href="#">글제목입니다.글제목입니다.글제목입니다.</a></p>
-            <p class="card_dscrpt"><a href="#">12이유라</a></p>
-            <p class="card_tag">게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,</p>
-        </div><!--//card_bd-->
-        <div class="card_ct">
-        	<p class="p_like"><span></span>12</p>
-            <p class="p_view"><span></span>12</p>
-        </div><!--//card_ct-->
-    </div><!--//cardWrap-->
-    
-    
-    <div class="cardWrap">
-    	<div class="card_hd"></div>
-    	<div class="card_img">
-            <a href="#" onClick="contentModalOpen()">
-                <div>
-                    <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p>
-                </div>
-                <img src="resources/images/default.png"/>
-            </a>
-        </div><!--//card_img-->
-    	<div class="card_bd">
-        	<p class="card_title ellipsis"><a href="#">글제목입니다.글제목입니다.글제목입니다.</a></p>
-            <p class="card_dscrpt"><a href="#">12이유라</a></p>
-            <p class="card_tag">게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,</p>
-        </div><!--//card_bd-->
-        <div class="card_ct">
-        	<p class="p_like"><span></span>12</p>
-            <p class="p_view"><span></span>12</p>
-        </div><!--//card_ct-->
-    </div><!--//cardWrap-->
-    
-    
-    <div class="cardWrap">
-    	<div class="card_hd"></div>
-    	<div class="card_img">
-            <a href="#" onClick="contentModalOpen()">
-                <div>
-                    <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p>
-                </div>
-                <img src="resources/images/default.png"/>
-            </a>
-        </div><!--//card_img-->
-    	<div class="card_bd">
-        	<p class="card_title ellipsis"><a href="#">글제목입니다.글제목입니다.글제목입니다.</a></p>
-            <p class="card_dscrpt"><a href="#">12이유라</a></p>
-            <p class="card_tag">게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,</p>
-        </div><!--//card_bd-->
-        <div class="card_ct">
-        	<p class="p_like"><span></span>12</p>
-            <p class="p_view"><span></span>12</p>
-        </div><!--//card_ct-->
-    </div><!--//cardWrap-->
-    
-    
-    <div class="cardWrap">
-    	<div class="card_hd"></div>
-    	<div class="card_img">
-            <a href="#" onClick="contentModalOpen()">
-                <div>
-                    <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p>
-                </div>
-                <img src="resources/images/default.png"/>
-            </a>
-        </div><!--//card_img-->
-    	<div class="card_bd">
-        	<p class="card_title ellipsis"><a href="#">글제목입니다.글제목입니다.글제목입니다.</a></p>
-            <p class="card_dscrpt"><a href="#">12이유라</a></p>
-            <p class="card_tag">게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,</p>
-        </div><!--//card_bd-->
-        <div class="card_ct">
-        	<p class="p_like"><span></span>12</p>
-            <p class="p_view"><span></span>12</p>
-        </div><!--//card_ct-->
-    </div><!--//cardWrap-->
-
 </div>
 <!-- <div class="modal" id="modal_content">
 	<div class="modal_hd" id="modal_hd_content">

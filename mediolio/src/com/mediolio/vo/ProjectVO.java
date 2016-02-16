@@ -5,10 +5,23 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProjectVO {
-	private int p_id, m_id, cate_id, p_viewnum;
-	private String p_title, p_hash, p_date, p_coverImg, sc_id, hashtags;
+	private int p_id, m_id, cate_id, p_viewnum, p_likenum;
+	private String p_title, p_hash, p_date, p_coverImg, 
+	sc_id, hashtags, authorID, authorName;
 	private List<MultipartFile> contents;
-
+	
+	public String getAuthorID() {
+		return authorID;
+	}
+	public void setAuthorID(String authorID) {
+		this.authorID = authorID;
+	}
+	public String getAuthorName() {
+		return authorName;
+	}
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
 	public String getSc_id() {
 		return sc_id;
 	}
@@ -74,6 +87,12 @@ public class ProjectVO {
 	}
 	public void setHashtags(String hashtags) {
 		this.hashtags = hashtags;
+	}
+	public int getP_likenum() {
+		return p_likenum;
+	}
+	public void setP_likenum(int p_likenum) {
+		this.p_likenum = p_likenum;
 	}
 	
 	

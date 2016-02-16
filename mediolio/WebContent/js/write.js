@@ -16,10 +16,13 @@ $('document').ready(function(){
 		// 서버로 보내야 할 파라미터 목록
 		// 1. 파일(이미지, 문서): formdata로 전송
 		var formData = new FormData();
-		for(var i=0; i<$("input[name=contents]").length; i++){
-			console.log($("input[name=contents]")[i]);
-			formData.append("contents",$("input[name=contents]")[i].files[0]);
-		};
+		var firstFile = $("input[name=contents]")[0];
+		if($(firstFile).val() != ""){
+			for(var i=0; i<$("input[name=contents]").length; i++){
+				console.log($("input[name=contents]")[i]);
+				formData.append("contents",$("input[name=contents]")[i].files[0]);
+			};
+		}
 		
 		
 		// 2. 임베드 태그, 텍스트: orderArr에 있음
@@ -58,13 +61,9 @@ $('document').ready(function(){
 			contentType: false,
 			data: formData,
 			type: "POST",
-//			dataType:"JSON",
 			success: function(result){
 				alert("업로드 완료");
 				$('#default_body').empty().append(result);
-/*				$("#contentsWrap").html("");
-				alert(result);
-				$("#contentsWrap").html(result);*/
 			}
 		});
 		
@@ -114,6 +113,10 @@ $('document').ready(function(){
     		newNode.style.fontSize = $(this).val()+"px";
     		newNode.appendChild(range.extractContents());
     		range.insertNode(newNode);
+    		
+    		console.log($(this).closest(".write_textarea"));
+        	var value = $(this).closest(".write_textarea").html();
+        	orderArr[$(this).closest(".write_textarea").attr("data-sort")] = value.split("<ul")[0];
         });
         
         $("ul").find('*').attr('contenteditable','false');
@@ -147,6 +150,9 @@ $('document').ready(function(){
     				var spanId = "#color"+colorId;
     				$(spanId).css("color","#"+hex);
     			}
+    			console.log($(this));
+            	var value = $(this).closest(".write_textarea").html();
+            	orderArr[$(this).closest(".write_textarea").attr("data-sort")] = value.split("<ul")[0];
     		}
     	});
     	
@@ -172,7 +178,16 @@ $('document').ready(function(){
         
         
         $(".write_textarea").on('keyup',function(){
-        	orderArr[$(this).attr("data-sort")] = $(this).html();
+        	var value = $(this).html();
+        	console.log("장난하니???????");
+        	console.log(value.split("<ul")[0]);
+        	orderArr[$(this).attr("data-sort")] = value.split("<ul")[0];
+        });
+        
+        $(".write_textarea ul").on('click',function(){
+        	console.log($(this).parent());
+        	var value = $(this).parent().html();
+        	orderArr[$(this).parent().attr("data-sort")] = value.split("<ul")[0];
         });
         
         

@@ -52,7 +52,7 @@ public class ProjectDetailModel {
 		model.addAttribute("interesting", pddao.getSubcategoryName(interesting_list));
 		
 		//해당 프로젝트의 하위 카테고리
-		List<String> subCategory_list = Arrays.asList((pdvo.getSc_id()).split(","));
+		List<String> subCategory_list = Arrays.asList((pdvo.getSc_id()).split("/"));
 		model.addAttribute("subcategory", pddao.getSubcategoryName(subCategory_list));
 				
 		return "project.projectDetail";
