@@ -17,10 +17,34 @@ import com.mediolio.vo.MessageVO;
 /*
  * Member Action : 쪽지, 팔로우, 푸쉬알림
  */
+
 @Controller
 public class MemberActionModel {
 	@Autowired
 	private MemberActionDao maDao;
+	
+	
+	
+	//쪽지페이지 이동
+	@RequestMapping("message")
+	public String message(HttpSession session, Model model){		
+		MemberVO mev = (MemberVO)session.getAttribute("mev");
+		if(mev!=null){
+			model.addAttribute("list", maDao.getMsgListReceived(mev.getM_id()));
+		}
+		return "mypage.message";
+	}
+	
+	//팔로워페이지 이동
+	@RequestMapping("follow")
+	public String friend(HttpSession session, Model model){
+		MemberVO mev = (MemberVO)session.getAttribute("mev");
+		if(mev!=null){
+			model.addAttribute("list", maDao.getFollowingList(mev.getM_id()));
+			model.addAttribute("cnt", maDao.friendCnt(mev.getM_id()));
+		}
+		return "mypage.friend";
+	}
 	
 	//프로젝트 좋아요
 	@RequestMapping("projectLike")
@@ -57,16 +81,7 @@ public class MemberActionModel {
 		
 		return mav;
 	}
-	
-	//쪽지페이지 이동
-	@RequestMapping("message")
-	public String message(HttpSession session, Model model){		
-		MemberVO mev = (MemberVO)session.getAttribute("mev");
-		if(mev!=null){
-			model.addAttribute("list", maDao.getMsgListReceived(mev.getM_id()));
-		}
-		return "mypage.message";
-	}
+
 	
 	//쪽지보내기 모달 오픈
 	@RequestMapping("msgModalOpen")
@@ -196,6 +211,24 @@ public class MemberActionModel {
 		return mav;
 	}
 	
-
+	//following list 받아오기
+	@RequestMapping("getFollowingList")
+	public ModelAndView getFollowingList(HttpSession session, Model model){
+		MemberVO mev = (MemberVO)session.getAttribute("mev");
+		if(mev!=null){
+			model.addAttribute("list", maDao.getFollowingList(mev.getM_id()));
+		}
+		return new ModelAndView("jsonView");
+	}
+	
+	//follower list 받아오기
+	@RequestMapping("getFollowerList")
+	public ModelAndView getFollowerList(HttpSession session, Model model){
+		MemberVO mev = (MemberVO)session.getAttribute("mev");
+		if(mev!=null){
+			model.addAttribute("list", maDao.getFollowerList(mev.getM_id()));
+		}
+		return new ModelAndView("jsonView");
+	}
 
 }

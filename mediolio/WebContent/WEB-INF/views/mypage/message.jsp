@@ -5,7 +5,6 @@
 <script src="js/note.js"></script> 
 
 <div id="contentsWrap">
-<div id="modalBox"></div>
     <div class="rmcnWrap">
             <a class="btn_rmcn" id="btn_rmcnUp" href="#"></a>
             <a class="btn_rmcn" id="btn_rmcnDown" href="#"></a>

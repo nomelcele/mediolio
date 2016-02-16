@@ -1,11 +1,13 @@
 package com.mediolio.mvc.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mediolio.vo.FriendVO;
 import com.mediolio.vo.Member_actionVO;
 import com.mediolio.vo.MessageVO;
 import com.mediolio.vo.PushMsgVO;
@@ -60,5 +62,15 @@ public class MemberActionDao {
 		return st.selectOne("ma.followCheck", maVo);
 	}
 
+	public List<FriendVO> getFollowingList(int m_id) {
+		return st.selectList("ma.getFollowingList", m_id);
+	}
 
+	public List<FriendVO> getFollowerList(int m_id) {
+		return st.selectList("ma.getFollowerList", m_id);
+	}
+
+	public HashMap<String, Integer> friendCnt(int m_id) {
+		return st.selectOne("ma.friendCnt", m_id);
+	}
 }

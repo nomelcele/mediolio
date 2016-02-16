@@ -87,9 +87,21 @@ $('document').ready(function(){
         return false;
     });
     
-    
+    //aside 쪽지 아이콘 클릭
     $('#userBox #message a').click(openMyMsgPage);
+    //aside 팔로워 아이콘 클릭
+    $('#userBox #follow a').click(openMyFriendPage);
 });
+
+function openMyFriendPage(){
+	$.ajax({
+		url: "follow",
+		type: "POST",
+		success : function(result){
+			$('#default_body').empty().append(result);
+		}
+	});
+}
 
 //aside에서 메세지 아이콘 누르거나, 알림 말풍선에서 도착한 메세지 눌렀을 때
 function openMyMsgPage(){

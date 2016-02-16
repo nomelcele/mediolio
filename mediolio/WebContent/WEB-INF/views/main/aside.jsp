@@ -14,9 +14,9 @@
 			<c:otherwise>
 				<div id="user_idWrap"><a href="#" id="user_id">${sessionScope.mev.m_studentID} ${sessionScope.mev.m_nickname}</a></div>
         			<ul>
-        				<li id="myPf"><a href="#" class="indent">MyPortfolio</a></li>
-            			<li id="likePf"><a href="#" class="indent">Like</a></li>
-            			<li id="follow"><a href="#" class="indent">Follow</a></li>
+        				<li id="myPf"><a class="indent" >MyPortfolio</a></li>
+            			<li id="likePf"><a class="indent">Like</a></li>
+            			<li id="follow"><a class="indent">Follow</a></li>
             			<li id="message"><a class="indent">Message</a></li>
         			</ul>
 			</c:otherwise>
