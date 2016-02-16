@@ -1,5 +1,7 @@
 package com.mediolio.mvc.model;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mediolio.mvc.dao.MainDao;
+import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.MemberVO;
+import com.mediolio.vo.ProjectVO;
+import com.mediolio.vo.SubcategoryVO;
 
 
 
@@ -42,7 +47,13 @@ public class MainModel {
 		System.out.println("id : " +mev.getM_id());
 		System.out.println("nickname : "+mev.getM_nickname());
 		}
+		
 		mav.addObject("mainProjects", mdao.mainProjects());
+		mav.addObject("hashtag", mdao.projectHashtags());
+		mav.addObject("subcategory",mdao.subcatelist());
+		mav.addObject("category",mdao.catelist());
+		/*List<SubcategoryVO> list = mdao.subcatelist();
+		System.out.println(list.get(1).getSc_name());*/
 		return mav;
 	}
 }
