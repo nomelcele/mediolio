@@ -121,7 +121,7 @@ $('document').ready(function(){
         
         $("ul").find('*').attr('contenteditable','false');
         
-        order++;
+        
         addContent();
         
     	$(".palette").ColorPicker({
@@ -202,9 +202,7 @@ $('document').ready(function(){
             }
         }); 
         
-        
-        
-        
+        order = parseInt(order)+1;
     })//끝- 텍스트 추가 버튼 누르고 난 후 이벤트
     
   
@@ -233,13 +231,14 @@ $('document').ready(function(){
 						+"<iframe src='"+jdata+"' style='width:570px; height:740px;'/></div>");		
 					console.log("파일 이름: "+$(newFile).val().split("\\")[2]);
 					orderArr[order] = $(newFile).val().split("\\")[2];
-					order++;
+					
 
 				    addContent();
 				
 				}
 			}).submit();
 			
+			order = parseInt(order)+1;
 			fileNum++;
 			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents' onchange='fileChange(this)'/>");	
 			
@@ -257,8 +256,8 @@ $('document').ready(function(){
 					+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
 					+"<img src='"+blobURL+"' style='display:block; margin:auto;'/></div>");
 			orderArr[order] = $(this).val().split("\\")[2];
-			order++;
-			    
+			
+			order = parseInt(order)+1;
 		    fileNum++;
 			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents' onchange='fileChange(this)'/>");	
 			addContent();
@@ -338,6 +337,8 @@ $('document').ready(function(){
 	    		// 입력된 태그가 하나도 없을 경우
 	    		$("#write_tagInput").attr("placeholder","태그를 입력하세요.");
 	    	}
+	    	
+	    	$(".autoCompleteBox").css("display","none");
     	} 
     });
     
@@ -346,33 +347,69 @@ $('document').ready(function(){
 	
 	
     $("#write_tagInput").keyup(function(e){
-    	if(e.keyCode == 188){
+    	if(e.keyCode == 188 || e.keyCode == 13){
     		// 컴마 누르면 태그 입력
-    		var newTag = $(this).val().replace(",","");
-    		$(this).attr("placeholder","");
+    		if(($.trim($(this).val()) != "") || ($(this).val() != ",")){
+    			// 왜 이프문 먹통
+	    		var newTag = $(this).val().replace(",","");
+	    		$(this).attr("placeholder","");
+	    		$("#write_tagTxt").append("<span>"+newTag+"</span>");
+	    		
+	    		var lastSpanOffset = $('#write_tagTxt span').last().offset().left;
+	    		var lastSpanWidth = $('#write_tagTxt span').last().width();
+	    		
+	//    		var lastSpanOffset = $newTag.offset().left;
+	//    		var lastSpanWidth = newTag.length;
+	    		
+	    		
+	    		$(this).val("");
+	    		$(this).focus();
+	    		
+	    		$('#write_tagInput').css({
+	    			left: lastSpanOffset+lastSpanWidth-280,
+	    			top: $('#write_tagTxt').height()-30
+	    		})
+	    		$('#write_tagTitle').css({
+	    			height:$('#write_ft').height()
+	    		})
+	    		
+	    		
+	    		$(".autoCompleteBox").css("display","none");
+    		}
+    	}
+    });
+    
+    $('#contentsWrap').click(function(){
+    	if($.trim($("#write_tagInput").val()) != ""){
+    		var newTag = $("#write_tagInput").val().replace(",","");
+    		$("#write_tagInput").attr("placeholder","");
     		$("#write_tagTxt").append("<span>"+newTag+"</span>");
+    		$("#write_tagInput").val("");
+
+    		if( $('#write_tagTxt span').last().length == 0){
+    			$('#write_tagInput').css({
+        			left: 0
+        		})
+    		}
+    		else if( $('#write_tagTxt span').last().length == 1){
+    			var lastSpanOffset = $('#write_tagTxt span').last().offset().left;
+        		var lastSpanWidth = $('#write_tagTxt span').last().width();
+        		
+    			$('#write_tagInput').css({
+	    			left: lastSpanOffset+lastSpanWidth-280,
+	    			top: $('#write_tagTxt').height()-30
+	    		})
+	    		$('#write_tagTitle').css({
+	    			height:$('#write_ft').height()
+	    		})
+    		}
     		
-    		var lastSpanOffset = $('#write_tagTxt span').last().offset().left;
-    		var lastSpanWidth = $('#write_tagTxt span').last().width();
-    		
-//    		var lastSpanOffset = $newTag.offset().left;
-//    		var lastSpanWidth = newTag.length;
-    		
-    		
-    		$(this).val("");
-    		$(this).focus();
-    		
-    		$('#write_tagInput').css({
-    			left: lastSpanOffset+lastSpanWidth-280,
-    			top: $('#write_tagTxt').height()-30
-    		})
-    		$('#write_tagTitle').css({
-    			height:$('#write_ft').height()
-    		})
-    		
-    		
+	    	if($("#write_tagTxt span").length == 0){
+	    		// 입력된 태그가 하나도 없을 경우
+	    		$("#write_tagInput").attr("placeholder","태그를 입력하세요.");
+	    	}
+	    	
     		$(".autoCompleteBox").css("display","none");
-    		
     	}
     });
     
@@ -400,6 +437,8 @@ function moveUpElement(e){
 		orderArr[order-1] = origin;
 		
 		sortElements();	
+		
+		console.log(orderArr);
 	}
 }
 
@@ -417,12 +456,24 @@ function moveDownElement(e){
 	
 	sortElements();	
 	
+	console.log(orderArr);
+	
 }
 
 function removeElement(e){
 	// 엘리먼트 삭제
 	var element = e;
 	var order = $(element).closest(".contentBox").attr("data-sort");
+	var nextElements = $("#write_bd").find(".contentBox").filter(function(){
+		// 삭제하려는 엘리먼트보다 뒤에 있는 엘리먼트 선택
+		return $(this).attr("data-sort") > order;
+	});
+	console.log(nextElements.length);
+	for(var i=0; i<nextElements.length; i++){
+		var e = nextElements[i];
+		e.setAttribute("data-sort",parseInt(e.getAttribute("data-sort"))-1);
+	}
+	
 	$(element).closest(".contentBox").remove();
 
 	// 파일 삭제했을 경우 그 파일의 input file 삭제
@@ -433,10 +484,15 @@ function removeElement(e){
 //		}
 //	});
 //	   
-	console.log($("input[name=contents]"));
-	console.log(order);
-	console.log(orderArr.splice(order,1));
+	// 삭제하면 한칸씩 밀어야함...
+	var arr1 = orderArr.slice(0,order);
+	var arr2 = orderArr.slice(parseInt(order)+1,orderArr.length);
+	orderArr = arr1.concat(arr2);
+	
 	console.log(orderArr);
+	
+	order = order-1;
+	console.log(order);
 }
 
 function sortElements(){
@@ -481,7 +537,7 @@ function writeEmbedModalOpen(){
     			+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
     			+$("#modal_bd_writeEmbed textarea").val()+"</div>");
         orderArr[order] = $("#modal_bd_writeEmbed textarea").val();
-        order++;
+        order = parseInt(order)+1;
         addContent();
         
     });
@@ -498,6 +554,29 @@ function addTag(li){
 	$("#write_tagInput").val("");
 	$("#write_tagInput").focus();
 	$(".autoCompleteBox").css("display","none");
+	
+	if( $('#write_tagTxt span').last().length == 0){
+		$('#write_tagInput').css({
+			left: 0
+		})
+	}
+	else if( $('#write_tagTxt span').last().length == 1){
+		var lastSpanOffset = $('#write_tagTxt span').last().offset().left;
+		var lastSpanWidth = $('#write_tagTxt span').last().width();
+		
+		$('#write_tagInput').css({
+			left: lastSpanOffset+lastSpanWidth-280,
+			top: $('#write_tagTxt').height()-30
+		})
+		$('#write_tagTitle').css({
+			height:$('#write_ft').height()
+		})
+	}
+	
+	if($("#write_tagTxt span").length == 0){
+		// 입력된 태그가 하나도 없을 경우
+		$("#write_tagInput").attr("placeholder","태그를 입력하세요.");
+	}
 }
 
 function fileChange(file){
@@ -521,12 +600,12 @@ function fileChange(file){
 					+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
 					+"<iframe src='"+jdata+"' style='width:500px; height:500px;'/></div>");				
 				orderArr[order] = $(newFile).val().split("\\")[2];
-				order++;
 				
 				addContent();
 			}
 		}).submit();
 		
+		order = parseInt(order)+1;
 		fileNum++;
 		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents' onchange='fileChange(this)'/>");	
 //		addContent();
@@ -541,8 +620,8 @@ function fileChange(file){
 				+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
 				+"<img src='"+blobURL+"' style='display:block; margin:auto;'/></div>");
 		orderArr[order] = $(newFile).val().split("\\")[2];
-		order++;
-	    
+		
+		order = parseInt(order)+1;
 		fileNum++;
 		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents' onchange='fileChange(this)'/>");	
 		addContent();
