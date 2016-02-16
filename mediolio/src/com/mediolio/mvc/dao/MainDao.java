@@ -6,8 +6,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mediolio.vo.CategoryVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.ProjectVO;
+import com.mediolio.vo.SubcategoryVO;
 
 @Repository
 public class MainDao {
@@ -23,7 +25,15 @@ public class MainDao {
 		return st.selectList("main.mainProjects");
 	}
 	
-	public List<HashtagVO> projectHashtags(int p_id){
-		return st.selectList("main.projectHashtags",p_id);
+	public List<HashtagVO> projectHashtags(){
+		return st.selectList("main.projectHashtags");
+	}
+	
+	public List<SubcategoryVO> subcatelist(){
+		return st.selectList("main.subcatelists");
+	}
+	
+	public List<CategoryVO> catelist(){
+		return st.selectList("main.catelists");
 	}
 }
