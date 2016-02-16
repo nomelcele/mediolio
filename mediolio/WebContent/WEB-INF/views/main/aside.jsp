@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="js/aside.js"></script>
 <div id="aside">
     <div id="logoWrap">
 		<a id="logoIcon" href="main"></a>
@@ -50,8 +51,8 @@
     		<li class="nav_group">
     			<div class="nav_title" id="ct_game"><span></span>GAME</div>
             	<ul class="nav_sub">
-            		<li><a href="#">기획</a>
-                    <li><a href="#">개발</a>
+            		<li><a href="#" class='selsub'>기획</a>
+                    <li><a href="#" class='selsub'>개발</a>
                     <!-- <li><a href="#">tag</a>
                     <li><a href="#">tag</a>
                     <li><a href="#">tag</a>
@@ -70,18 +71,18 @@
             <li class="nav_group">
     			<div class="nav_title" id="ct_webApp"><span></span>WEB &amp; APP</div>
             	<ul class="nav_sub">
-            		<li><a href="#">기획</a>
-            		<li><a href="#">개발</a>
+            		<li><a href="#" class='selsub'>기획</a>
+            		<li><a href="#" class='selsub'>개발</a>
                 </ul>
             </li>
             
             <li class="nav_group">
     			<div class="nav_title" id="ct_video"><span></span>VIDEO</div>
             	<ul class="nav_sub">
-            		<li><a href="#">시나리오</a>
-                    <li><a href="#">연출</a>
-                    <li><a href="#">촬영</a>
-                    <li><a href="#">OAP</a>
+            		<li><a href="#" class='selsub'>시나리오</a>
+                    <li><a href="#" class='selsub'>연출</a>
+                    <li><a href="#" class='selsub'>촬영</a>
+                    <li><a href="#" class='selsub'>OAP</a>
                     <!-- <li><a href="#">tag</a>
                     <li><a href="#">tag</a>
                     <li><a href="#">tag</a> -->
@@ -91,8 +92,8 @@
             <li class="nav_group">
     			<div class="nav_title" id="ct_3d"><span></span>3D</div>
             	<ul class="nav_sub">
-            		<li><a href="#">모델링</a>
-                    <li><a href="#">애니메이션</a>
+            		<li><a href="#" class='selsub'>모델링</a>
+                    <li><a href="#" class='selsub'>애니메이션</a>
                 </ul>
             </li>  
             
@@ -116,4 +117,5 @@
 
     	</ul><!--//nav_category-->
 	</div><!--//categoryWrap-->
+	<input type='hidden' id='selectcat' >
 </div><!--//aside-->
