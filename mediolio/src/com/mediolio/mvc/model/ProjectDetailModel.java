@@ -42,6 +42,9 @@ public class ProjectDetailModel {
 		ProjectDetailVO pdvo = pddao.projectDetail(map);
 		model.addAttribute("detail", pdvo);
 		
+		// 프로젝트 콘텐츠
+		model.addAttribute("contents", pddao.projectContents(Integer.parseInt(p_id)));
+		
 		//해쉬태그
 		model.addAttribute("tag", pddao.projectHash(Integer.parseInt(p_id)));
 		//댓글목록
