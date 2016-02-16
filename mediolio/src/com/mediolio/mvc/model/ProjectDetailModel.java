@@ -44,9 +44,10 @@ public class ProjectDetailModel {
 		}else{
 			map.put("m_id", 0);
 		}
-		
+
 		// 조회수 증가(자기가 올린 프로젝트가 아닌 경우)
-		if(!map.get("m_id").equals(m_id)){
+		if(Integer.parseInt(m_id) != map.get("m_id").intValue()){
+			System.out.println("조회수 증가");
 			pddao.increaseHits(Integer.parseInt(p_id));
 		}
 		//프로젝트 타이틀, 좋아요 여부, 상위 카테고리 이름, 하위 카테고리 ID, 작성자닉넴, 작성자 소개, 팔로우 여부, 좋아요수, 관심분야ID 받아옴
