@@ -1,3 +1,4 @@
+ALTER TABLE project add sc_id VARCHAR(10);
 ALTER TABLE project MODIFY sc_id VARCHAR(10);
 
 INSERT into SUBCATEGORY (sc_name, sc_parent) values ('기획',1);

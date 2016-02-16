@@ -8,6 +8,9 @@ $(function(){
 		else if(!regex.test(email)){
 			alert('이메일 형식에 맞지 않습니다.');
 		}
+		else if($('#pw').val()==""){
+			alert('비밀번호를 입력해주세요.');
+		}
 		else{
 			$.ajax({
 				url : "LoginInfo",

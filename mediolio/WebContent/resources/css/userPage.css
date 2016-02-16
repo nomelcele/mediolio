@@ -1,0 +1,43 @@
+#userInfoWrap{ width:800px; min-height:100px; height:auto;}
+
+#userInfoWrap_hd {background-color:#0f84cf; width:inherit; height:50px; padding:0 20px;  box-sizing:border-box; }
+
+
+#btnWrap_userInfo{ float:right; width:90px; height:50px;}
+#userInfoWrap_hd span{ line-height:50px; font-weight:500; color:#fff;}
+#userInfoWrap_hd a.btn_userInfo{ display:block;  width:30px; box-sizing:border-box;height:30px;  border-radius:50%; line-height:30px; margin-top:10px;
+ margin-left:15px; float:left;}
+
+#userInfoWrap_hd a#btn_addFriend{ background:url(../images/addFriend.png) center center no-repeat; }
+#userInfoWrap_hd a#btn_userNote{ background:url(../images/mail.png) center center no-repeat; }
+
+#userInfoWrap_bd{ width:100%; min-height:300px; height:auto; }
+
+.box_userInfo{box-sizing: border-box;  padding:30px 30px; border-bottom:1px solid #ccc;}
+
+.title_userInfo{ display:inline-block; height:25px; width:100%; font-size:14px; color:dodgerblue;}
+.content_userInfo{ display:inline-block; width:100%; min-height:inherit; height:auto; font-size:14px;}
+
+
+
+
+#userIntro {  font-size:14px; color:#666; width:100%; height:auto; overflow:auto; }
+
+#userFavorite{ width:100%; border-bottom:1px solid #ccc; line-height:20px; color:#666;  font-size:12px;}
+
+.gallery{ position:relative;}
+.gallery ul{ width:670px; min-height:10px; height:auto; overflow:auto; max-height:240px;  padding-top:10px; margin:0 auto;}
+.gallery ul li{ width:325px; height:70px; float:left; margin-bottom:10px; margin-right:10px;}
+.gallery ul li img{ float:left;}
+.gallery ul li p{ padding:0 10px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap;}
+.gallery ul li p.userProject_category{ color:#999; font-size:11px; margin-top:5px; line-height:20px;}
+.gallery ul li p.userProject_title{ font-size:14px; line-height:px;}
+
+.gallery ul li p.userProject_tag{ min-height:inherit; height:auto; font-size:12px; line-height:20px; color:#666;}
+
+
+a.gallery_arrows{ display:block; width:15px; height:36px; position:absolute; top:164px; left:30px;  display:none;}
+.gallery_left{ background-image:url(../images/left.png); background-repeat:no-repeat; }
+.gallery_right{ background-image:url(../images/right.png); background-repeat:no-repeat;}
+#gallery_right{  left:750px;}
+
