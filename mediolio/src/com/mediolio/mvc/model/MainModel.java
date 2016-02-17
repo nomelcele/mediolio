@@ -98,6 +98,9 @@ public class MainModel {
 		else if(selcat.equals("DESIGN")){
 			cat="11";
 		}
+		else if(selcat.equals("COMPUTER GRAPHICS")){
+			cat="12";
+		}
 		else if(selcat.equals("SOUND")){
 			cat="13";
 		}
