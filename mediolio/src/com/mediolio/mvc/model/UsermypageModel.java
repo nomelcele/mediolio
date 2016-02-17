@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class UsermypageModel {
-	@RequestMapping("/menu=usermypage")
+	@RequestMapping("/usermypage")
 	public ModelAndView gotousermypage(){
 		return new ModelAndView("usermypage/usermypage");
 	}
