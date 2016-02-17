@@ -146,57 +146,65 @@ function likeCategoryModalOpen(){
 
 
 function writeDCategoryModalOpen(){
-	var win_w = $(window).width();
-	var win_h = $(window).height();
-	
-	var movImg_w = $('#modal_writeDCategory').width();
-	var movImg_h = $('#modal_writeDCategory').height();
-	
-	var movImg_posX = (win_w - movImg_w)/2;
-	var movImg_posY = (win_h - movImg_h)/2;
+   	// 카테고리 선택 안 하고 세부카테고리 선택 클릭했을 때
+	if($("#selectedCategory").val() == 0){
+		alert("카테고리를 선택해주세요.");
+	} else {
+		var win_w = $(window).width();
+		var win_h = $(window).height();
 		
-	$('#modal_writeDCategory').css({ left: movImg_posX, top: movImg_posY });
-    $('.modal_bg').show();
-	$('#modal_writeDCategory').show();
-    
-    $('#btn_writeDCategory').on('click',function(){
-    	var arr = $(":checkbox:checked");
-     	var str = "";
-     	$(".card_tag").html("");
-    	for(var i=0; i<arr.length; i++){
-    		var el = arr[i];
-    		str += "<span><input type='hidden' class='subCategory' value="+$(el).val()+">"+$(el).parent().find(".label_category").html()+"</span>";
-    		$(".card_tag").append("<span><input type='hidden' class='subCategory' value="+$(el).val()+">"+$(el).parent().find(".label_category").html()+"</span>");
-    		if(i<arr.length-1){
-    			str += ", "
-    			$(".card_tag").append(", ");
-    		}
-    	}
-    	
-    	$('.modal_bg, .modal').hide();
-    	$("#write_dCategory a").html(str);
-    });
-    
-    // 1. 선택한 카테고리를 가지고 세부 카테고리 검색
-    $.ajax({
-    	type: "POST",
-    	url: "subcategoryList",
-    	data: {
-    		sc_parent: $("#selectedCategory").val()
-    	},
-    	dataType: "json",
-    	success: function(jdata){
-    		var scList = jdata;
-    		var codes = "";
-    		for(var i=0; i<scList.length; i++){
-    			codes += "<li>"+scList[i]+"</li>";
-    		}
-    	    // 2. 세부 카테고리 목록 출력
-    	    $("#modal_bd_writeDCategory ul").html(codes);
-    	    $(":checkbox").labelauty({ label: false });
-    	}
-    });
-
+		var movImg_w = $('#modal_writeDCategory').width();
+		var movImg_h = $('#modal_writeDCategory').height();
+		
+		var movImg_posX = (win_w - movImg_w)/2;
+		var movImg_posY = (win_h - movImg_h)/2;
+			
+		$('#modal_writeDCategory').css({ left: movImg_posX, top: movImg_posY });
+	    $('.modal_bg').show();
+		$('#modal_writeDCategory').show();
+	    
+	    $('#btn_writeDCategory').on('click',function(){
+	    	var arr = $(":checkbox:checked");
+	     	var str = "";
+	     	if($(arr).size() == 0){
+	     		alert("세부카테고리를 선택해주세요.");
+	     	} else {
+		     	$(".card_tag").html("");
+		    	for(var i=0; i<arr.length; i++){
+		    		var el = arr[i];
+		    		str += "<span><input type='hidden' class='subCategory' value="+$(el).val()+">"+$(el).parent().find(".label_category").html()+"</span>";
+		    		$(".card_tag").append("<span><input type='hidden' class='subCategory' value="+$(el).val()+">"+$(el).parent().find(".label_category").html()+"</span>");
+		    		if(i<arr.length-1){
+		    			str += ", "
+		    			$(".card_tag").append(", ");
+		    		}
+		    	}
+		    	
+		    	$('.modal_bg, .modal').hide();
+		    	$("#write_dCategory a").html(str);
+	     	}
+	    });
+	    
+	    // 1. 선택한 카테고리를 가지고 세부 카테고리 검색
+	    $.ajax({
+	    	type: "POST",
+	    	url: "subcategoryList",
+	    	data: {
+	    		sc_parent: $("#selectedCategory").val()
+	    	},
+	    	dataType: "json",
+	    	success: function(jdata){
+	    		var scList = jdata;
+	    		var codes = "";
+	    		for(var i=0; i<scList.length; i++){
+	    			codes += "<li>"+scList[i]+"</li>";
+	    		}
+	    	    // 2. 세부 카테고리 목록 출력
+	    	    $("#modal_bd_writeDCategory ul").html(codes);
+	    	    $(":checkbox").labelauty({ label: false });
+	    	}
+	    });
+	}
 }    
 
 function writeEmbedModalOpen(){
