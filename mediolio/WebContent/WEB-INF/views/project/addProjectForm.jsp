@@ -32,7 +32,7 @@
         <div id="write_hd">
             <div id="write_category">
                 <select id="selectedCategory">
-                	<option>카테고리</option>
+                	<option value="0">카테고리</option>
                     <option value="1">게임</option>
                     <option value="2">영상</option>
                     <option value="3">3D</option>
