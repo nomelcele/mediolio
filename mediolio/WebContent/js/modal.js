@@ -230,6 +230,9 @@ function writeEmbedModalOpen(){
 
 //인덱스 모달 추가
 function contentModalOpen(a, type){
+    $('.modal_bg').show();
+    $(".project_loading").css("display","block");
+
 	var anchor = a;
     var win_w = $(window).width();
 	var win_h = $(window).height();
@@ -270,6 +273,7 @@ function contentModalOpen(a, type){
 			$('#modal_content').css({ left: movImg_posX-150, top: 100 });
 		    $('#modal_content_userInfo').css({ left: movImg_posX+670, top: 100 });
 		    $('.modal_bg').show();
+		    $(".project_loading").css("display","none");
 			$('#modal_content').show();
 		    $('#modal_content_userInfo').show();
 		}
