@@ -38,6 +38,7 @@ public class ProjectDetailDao {
 
 	public ReplyVO submitReply(ReplyVO vo, String act_to) {
 		//댓글 등록
+		vo.setR_text(vo.getR_text().replaceAll("\r\n", "<br>"));
 		st.insert("pd.submitReply", vo);
 		
 		//push 알림을 위한 member_action 테이블에 등록
