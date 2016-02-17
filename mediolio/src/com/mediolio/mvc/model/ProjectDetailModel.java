@@ -103,7 +103,6 @@ public class ProjectDetailModel {
 		MemberVO mev = (MemberVO)session.getAttribute("mev");
 		if(mev!=null){			
 			vo.setM_id(mev.getM_id());
-
 			mav.addObject("reply", pddao.submitReply(vo, act_to));
 			System.out.println("댓글 내용 : " + vo.getR_text() + ", projectID : " + vo.getP_id() + ", m_id : " + vo.getM_id());
 		}
