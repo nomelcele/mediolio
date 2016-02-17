@@ -22,7 +22,7 @@ $(document).ready(function(){
     			type : "POST",
     			dataType : "JSON",
     			success : function(data) {
-    				$('#friendWrap_bd_following ul').append(returnFriendList(data.list, "following"));		
+    				$('#friendWrap_bd_following ul').empty().append(returnFriendList(data.list, "following"));		
     	            
     				$('.friendTab').removeClass("friendTabClick");
     	            $("#friendWrap_bd_follower").hide();
@@ -48,7 +48,7 @@ $(document).ready(function(){
     			type : "POST",
     			dataType : "JSON",
     			success : function(data) {
-    				$('#friendWrap_bd_follower ul').append(returnFriendList(data.list, "follower"));
+    				$('#friendWrap_bd_follower ul').empty().append(returnFriendList(data.list, "follower"));
     	            
     				$('.friendTab').removeClass("friendTabClick");
     	            $("#friendWrap_bd_following").hide();
@@ -64,7 +64,7 @@ function cancelFollow($li){
 	$.ajax({
 		url: "followCancel",
 		type: "POST",
-		data: {m_id:$li.find('.this_m_id').val()},
+		data: {m_id:$li.find('.memberId').val()},
 		dataType : "json",
 		success: function(result){
 			$li.remove();
@@ -73,24 +73,36 @@ function cancelFollow($li){
 }
 
 function returnFriendList(list, type){
-	var aRow;
+	var aRow='';
 	$.each(list, function(index, entry){
 		aRow += '<li>'
-					+'<p class="friendList_id"><input type="hidden" value="'+entry.m_id+'" class="this_m_id"/>'
+					+'<p class="friendList_id"><input type="hidden" value="'+entry.m_id+'" class="memberId"/>'
 						+'<a href="#">'+entry.m_name+'</a>';
 		if(type=="following"){
 			aRow += '<input type="button" value="X" class="btn_cancelFollow"/>';
 		}
 		aRow		+='</p>'
-					+'<p class="friendList_intro">'+entry.m_introduce+'</p>'
-					+'<p class="friendList_like">관심분야 : <span>'+entry.m_interestingText1+ ', ' +entry.m_interestingText2+ ', ' +entry.m_interestingText3+ '</span></p>'
+					+'<p class="friendList_intro">';
+		if(entry.m_introduce != null) aRow += entry.m_introduce;
+		aRow +='</p>'
+				+'<p class="friendList_like">관심분야 : <span>'+entry.m_interestingText1;
+		if(entry.m_interestingText2 != null){
+			aRow += ', ' +entry.m_interestingText2;
+			if(entry.m_interestingText3 != null) aRow += ', ' +entry.m_interestingText3;
+		}
+		aRow += '</span></p>'
 					+'<div class="friendList_project">';
 		var projectArr = (entry.projects).split("/"); //projectArr에는 프로젝트 1, 2, 3에 관한 정보 나눠서 들어감
 		//projectArr[0]에 "id,img" 붙어있음 
 		for(var i=0; i<projectArr.length; i++){
 			var aSetArr = projectArr[i].split(",");
 			//aSetArr[0]에는 p_id가, aSetArr[1]에는 coverImg가 들어있음
-			aRow += '<a href="#detail?p_id='+aSetArr[0]+'"><img src="resources/images/projectCover/'+aSetArr[1]+'" width=80 height=80/></a>';
+			if(aSetArr[1].length){
+				aRow += '<a href="#detail?p_id='+aSetArr[0]+'" onclick="contentModalOpen(this, '+'\'friend\''+')"><img src="resources/images/projectCover/'+aSetArr[1]+'" width="80" height="80"/></a>';
+			}else{
+				aRow += '<a href="#detail?p_id='+aSetArr[0]+'" onclick="contentModalOpen(this, '+'\'friend\''+')"><img src="resources/images/default.png" width="80" height="80"/></a>';
+			}
+			
 		}
 		aRow +='</div>'
 				+'</li>';

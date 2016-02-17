@@ -221,17 +221,29 @@ function writeEmbedModalOpen(){
 
 
 //인덱스 모달 추가
-function contentModalOpen(a){
+function contentModalOpen(a, type){
 	var anchor = a;
     var win_w = $(window).width();
 	var win_h = $(window).height();
+	
+	var open_p_id;
+	var open_m_id;
+	console.log(type);
+	
+	if(type=="index"){
+		open_p_id = $(anchor).closest(".cardWrap").find(".projectId").val();
+		open_m_id = $(anchor).closest(".cardWrap").find(".memberId").val();
+	}else if(type=="friend"){
+		open_p_id = (($(anchor).attr('href')).split('='))[1];
+		open_m_id = $(anchor).closest("li").find(".memberId").val();
+	}
 	
 	$.ajax({
 		url : "projectDetail",
 		type : "POST",
 		data : {
-			p_id: $(anchor).closest(".cardWrap").find(".projectId").val(), 
-			m_id: $(anchor).closest(".cardWrap").find(".memberId").val()
+			p_id: open_p_id, 
+			m_id: open_m_id
 		},
 		success : function(data) {
 			$("#modalBox").html(data);
