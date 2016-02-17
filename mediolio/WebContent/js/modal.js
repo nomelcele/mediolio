@@ -391,6 +391,27 @@ function pwModalOpen() {
 	})
 
 }
+/*$(function(){
+	$("#reply_form textarea").keypress(function(e){
+	    if(e.which == 13) {
+	    	submitReply();  // 이벤트 실행
+	    }   
+	});
+});*/
+/*function handleEnter (field, event, num) {
+    // 눌려진 키 코드를 가져온다.
+    var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;   
+
+    // Enter 키가 눌린 경우
+    	if (keyCode == 13) {
+    		event.keyCode = null;
+            	if(num == 1){
+            		if($('#writeReplyWrap textarea').val()!='')
+            		submitReply();// 엔터키가 눌렸을 때 처리할 코드
+                }
+        }
+
+}*/
 
 
 
