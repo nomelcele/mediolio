@@ -30,7 +30,7 @@
 	        </div><!--//card_img-->
 	    	<div class="card_bd">
 	        	<p class="card_title ellipsis"><a href="#">${mainProjects.p_title}</a></p>
-	            <p class="card_dscrpt"><a href="#">${mainProjects.authorID} ${mainProjects.authorName}</a></p>
+	            <p class="card_dscrpt"><a href="userpage?usr_id=${mainProjects.authorID }" class="user_id">${mainProjects.authorID} ${mainProjects.authorName}</a></p>
 	            <p class="card_tag">
 	            	<!-- 게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,게임프로그래밍,게임사운드, -->
 	            	<c:forEach items="${fn:split(mainProjects.sc_id,'/')}" var="sc">

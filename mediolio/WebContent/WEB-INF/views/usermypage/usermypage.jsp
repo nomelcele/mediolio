@@ -118,7 +118,6 @@
                         <p class="userProject_tag">#태그 #태그</p>
                     </li>
 
-                    
                 </ul>
             </div>
         </div><!--//userLike-->
