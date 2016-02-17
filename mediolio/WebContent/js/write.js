@@ -88,6 +88,7 @@ $('document').ready(function(){
 //    	addContent();
     	
         $('#write_bd').append('<div class="write_textarea contentBox" contenteditable="true" data-sort='+order+'>'
+        		+'<div contenteditable="true" style="height:inherit;"></div>'
         		+'<ul class="text_toolBoxes" id="text_toolBox">'
         		+'<li id="text_size">'
         		+'<select id="select_fontSize" class="txtSize">'
@@ -190,11 +191,12 @@ $('document').ready(function(){
         
         order = parseInt(order)+1;
         
+        
+        
         //div.write_textarea에 focus된 경우 툴박스 보이기
         $('.write_textarea').on('click', function(){
             $(".content_toolBoxes").hide();
             $(".text_toolBoxes").hide();
-//            $(this).trigger("focus");
             
             $(this).children().css('top', -40  );    //툴박스 위치
             $(this).children().next().css('top', -40 );    //툴박스 위치
@@ -203,7 +205,15 @@ $('document').ready(function(){
             
             addContent();
             
-            $(this).trigger("focus");
+//            $(this).focus();
+//            
+//            var range = document.createRange(),
+//                selection = window.getSelection();
+//            
+//            range.setStartAfter($(this).get(0).lastChild);
+//            
+//            selection.removeAllRanges();
+//            selection.addRange(range);
             
         });
     });//끝- 텍스트 추가 버튼 누르고 난 후 이벤트
