@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link href="resources/css/userPage.css" rel="stylesheet" type="text/css"/>    
 <script src="js/userPage.js"></script> 
 
 <div id="contentsWrap">
        <div class="cardWrap" id="userInfoWrap">
 	<div id="userInfoWrap_hd">
-        <span>12LEEYURA</span>
+        <span>${memberInfo.m_name }</span>
         <div id="btnWrap_userInfo">
             <a class="btn_userInfo" id="btn_addFriend" href="#" data-click-state="0"></a>
             <a class="btn_userInfo" id="btn_userNote" href="#" onclick="noteModalOpen()"></a>
@@ -17,17 +18,22 @@
         <div class="box_userInfo" id="userIntro">
             <div class="title_userInfo">INTRODUCE</div>
             <div class="content_userInfo">
-
-               안녕하세요. 자기소개입니다. <br/>
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam cumque a doloribus, explicabo obcaecati! Ex deleniti consequatur corrupti necessitatibus, dignissimos iste id asperiores cumque laboriosam nobis quisquam quia adipisci, vel.
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam repudiandae non voluptas. Natus distinctio pariatur dolore, nam, libero dignissimos reprehenderit aliquam doloribus. Expedita ducimus nihil voluptatum commodi earum rem consectetur!<br/>
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam pariatur voluptas totam quasi, dignissimos fugiat, vel illo culpa fugit porro sapiente nesciunt saepe ullam minima earum amet numquam aliquam adipisci.
-
+				${memberInfo.m_introduce }
             </div>
         </div><!--//modal_bd_content -->
         <div class="box_userInfo" id="userFavorite">
             <div class="title_userInfo">FAVORITE</div>
-            <div class="content_userInfo">게임프로그래밍</div>
+            <div class="content_userInfo">
+            	<c:if test="${fn:length(memberInfo.m_interestingText1) ne 0}">
+                	${memberInfo.m_interestingText1 }
+                    	<c:if test="${fn:length(memberInfo.m_interestingText2) ne 0}">
+                        	, ${memberInfo.m_interestingText2 }
+	                    	<c:if test="${fn:length(memberInfo.m_interestingText3) ne 0}">
+	                        	, ${memberInfo.m_interestingText3 }
+	                    	</c:if>
+                	</c:if>
+            	</c:if>
+			</div>
         </div>
         <div class="box_userInfo gallery" id="userProject">
             <a class="gallery_arrows gallery_left"  href="#"></a>
@@ -35,36 +41,28 @@
             <div class="title_userInfo">PROJECT</div>
             <div class="content_userInfo">
                 <ul>
-
+					<c:forEach var="a" items="${myProjects }">
                     <li>
-                        <a href="#"><img src="resources/images/default.png" width="70" height="70"/></a>
-                        <p class="userProject_category"><span>GAME</span><span> / </span><span>게임프로그래밍</span></p>
-                        <p class="userProject_title">프로젝트 이름입니다. 프로젝트 이름입니다. 프로젝트 이름입니다.</p>
-                        <p class="userProject_tag">#태그 #태그</p>
-                    </li>
-                    
-                    <li>
-                        <a href="#"><img src="resources/images/default.png" width="70" height="70"/></a>
-                        <p class="userProject_category"><span>GAME</span><span> / </span><span>게임프로그래밍</span></p>
-                        <p class="userProject_title">프로젝트 이름입니다.</p>
-                        <p class="userProject_tag">#태그 #태그</p>
-                    </li>
-                   
-                    <li>
-                        <a href="#"><img src="resources/images/default.png" width="70" height="70"/></a>
-                        <p class="userProject_category"><span>GAME</span><span> / </span><span>게임프로그래밍</span></p>
-                        <p class="userProject_title">프로젝트 이름입니다.</p>
-                        <p class="userProject_tag">#태그 #태그</p>
-                    </li>
-                    
-                    <li>
-                        <a href="#"><img src="resources/images/default.png" width="70" height="70"/></a>
-                        <p class="userProject_category"><span>GAME</span><span> / </span><span>게임프로그래밍</span></p>
-                        <p class="userProject_title">프로젝트 이름입니다.</p>
-                        <p class="userProject_tag">#태그 #태그</p>
-                    </li>
-                   
-                    
+                    	<c:choose>
+                        	<c:when test="${a.p_coverImg eq ''}">
+                        		<a href="#detail?p_id=${a.project_id }" onclick="contentModalOpen(this, 'myProj')"><img src="resources/images/default.png" width="70" height="70"/></a>         	
+                        	</c:when>
+	                        <c:otherwise>
+								<a href="#detail?p_id=${a.project_id }" onclick="contentModalOpen(this, 'myProj')"><img src="resources/images/projectCover/${a.p_coverImg }" width="70" height="70"/></a>
+							</c:otherwise>
+                        </c:choose>
+                        <p class="userProject_category"><span>${a.cate_name }</span></p>
+                        <p class="userProject_title">${a.p_title }</p>
+                        <c:if test="${a.hashtags ne null }">
+                           	<c:set var="tagArr" value="${fn:split(a.hashtags, ',') }"/>
+                           	<p class="userProject_tag">
+                           		<c:forEach var="tag" items="${tagArr }">
+                           			#${tag } 
+                           		</c:forEach>
+                        	</p>
+                        </c:if>
+                    </li>					
+					</c:forEach>
                 </ul>
             </div>
         </div><!--//userProject-->
@@ -75,49 +73,28 @@
             <div class="title_userInfo">LIKE</div>
             <div class="content_userInfo">
                 <ul>
-
-                    <li>
-                        <a href="#"><img src="resources/images/default.png" width="70" height="70"/></a>
-                        <p class="userProject_category"><span>GAME</span><span> / </span><span>게임프로그래밍</span></p>
-                        <p class="userProject_title">프로젝트 이름입니다. 프로젝트 이름입니다. 프로젝트 이름입니다.</p>
-                        <p class="userProject_tag">#태그 #태그</p>
-                    </li>
-                    
-                    <li>
-                        <a href="#"><img src="resources/images/default.png" width="70" height="70"/></a>
-                        <p class="userProject_category"><span>GAME</span><span> / </span><span>게임프로그래밍</span></p>
-                        <p class="userProject_title">프로젝트 이름입니다.</p>
-                        <p class="userProject_tag">#태그 #태그</p>
-                    </li>
-                    
-                    <li>
-                        <a href="#"><img src="resources/images/default.png" width="70" height="70"/></a>
-                        <p class="userProject_category"><span>GAME</span><span> / </span><span>게임프로그래밍</span></p>
-                        <p class="userProject_title">프로젝트 이름입니다.</p>
-                        <p class="userProject_tag">#태그 #태그</p>
-                    </li>
-                    
-                    <li>
-                        <a href="#"><img src="resources/images/default.png" width="70" height="70"/></a>
-                        <p class="userProject_category"><span>GAME</span><span> / </span><span>게임프로그래밍</span></p>
-                        <p class="userProject_title">프로젝트 이름입니다.</p>
-                        <p class="userProject_tag">#태그 #태그</p>
-                    </li>
-                    
-                    <li>
-                        <a href="#"><img src="resources/images/default.png" width="70" height="70"/></a>
-                        <p class="userProject_category"><span>GAME</span><span> / </span><span>게임프로그래밍</span></p>
-                        <p class="userProject_title">프로젝트 이름입니다.</p>
-                        <p class="userProject_tag">#태그 #태그</p>
-                    </li>
-                    
-                    <li>
-                        <a href="#"><img src="resources/images/default.png" width="70" height="70"/></a>
-                        <p class="userProject_category"><span>GAME</span><span> / </span><span>게임프로그래밍</span></p>
-                        <p class="userProject_title">프로젝트 이름입니다.</p>
-                        <p class="userProject_tag">#태그 #태그</p>
-                    </li>
-
+					<c:forEach var="a" items="${likeProjects }">
+						<li>
+							<c:choose>
+	                        	<c:when test="${a.p_coverImg eq ''}">
+	                        		<a href="#detail?p_id=${a.project_id }" onclick="contentModalOpen(this, 'friend')"><img src="resources/images/default.png" width="70" height="70"/></a>         	
+	                        	</c:when>
+		                        <c:otherwise>
+									<a href="#detail?p_id=${a.project_id }" onclick="contentModalOpen(this, 'friend')"><img src="resources/images/projectCover/${a.p_coverImg }" width="70" height="70"/></a>
+								</c:otherwise>
+	                        </c:choose>
+	                        <p class="userProject_category"><span>${a.cate_name }</span></p>
+	                        <p class="userProject_title">${a.p_title }</p>
+		                    <c:if test="${a.hashtags ne null }">
+	                           	<c:set var="tagArr" value="${fn:split(a.hashtags, ',') }"/>
+	                           	<p class="userProject_tag">
+	                           		<c:forEach var="tag" items="${tagArr }">
+	                           			#${tag } 
+	                           		</c:forEach>
+	                        	</p>
+	                        </c:if>
+	                    </li>
+					</c:forEach>
                 </ul>
             </div>
         </div><!--//userLike-->

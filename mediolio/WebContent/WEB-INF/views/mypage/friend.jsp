@@ -29,7 +29,19 @@
                             <input type="button" value="X" class="btn_cancelFollow"/>
                         </p>
                         <p class="friendList_intro">${a.m_introduce }</p>
-                        <p class="friendList_like">관심분야 : <span>${a.m_interestingText1 }, ${a.m_interestingText2 }, ${a.m_interestingText3 }</span></p>
+                        <p class="friendList_like">관심분야 : 
+                        	<span>
+                        	<c:if test="${fn:length(a.m_interestingText1) ne 0}">
+                        		${a.m_interestingText1 }
+                        		<c:if test="${fn:length(a.m_interestingText2) ne 0}">
+                        			, ${a.m_interestingText2 }
+                        			<c:if test="${fn:length(a.m_interestingText3) ne 0}">
+                        				, ${a.m_interestingText3 }
+                        			</c:if>
+                        		</c:if>
+                        	</c:if>
+                        	</span>
+                        </p>
                         <div class="friendList_project">
                         	<c:set var="projects" value="${a.projects }"/>
                         	<c:set var="projectArr" value="${fn:split(projects, '/') }"/>

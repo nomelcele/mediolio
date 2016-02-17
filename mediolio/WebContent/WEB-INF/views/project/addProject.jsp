@@ -21,9 +21,9 @@
 	.downBtn{}
 	.removeBtn{}
 </style>
-<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="js/jscolor.min.js"></script>
-<script type="text/javascript" src="js/jquery.form.js"></script>
+<script type="text/javascript" src="js/jQuery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/jQuery/jscolor.min.js"></script>
+<script type="text/javascript" src="js/jQuery/jquery.form.js"></script>
 <script>
 	var order = 0;
 	var txtId = 0;

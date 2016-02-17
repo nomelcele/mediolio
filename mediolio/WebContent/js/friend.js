@@ -92,17 +92,19 @@ function returnFriendList(list, type){
 		}
 		aRow += '</span></p>'
 					+'<div class="friendList_project">';
-		var projectArr = (entry.projects).split("/"); //projectArr에는 프로젝트 1, 2, 3에 관한 정보 나눠서 들어감
-		//projectArr[0]에 "id,img" 붙어있음 
-		for(var i=0; i<projectArr.length; i++){
-			var aSetArr = projectArr[i].split(",");
-			//aSetArr[0]에는 p_id가, aSetArr[1]에는 coverImg가 들어있음
-			if(aSetArr[1].length){
-				aRow += '<a href="#detail?p_id='+aSetArr[0]+'" onclick="contentModalOpen(this, '+'\'friend\''+')"><img src="resources/images/projectCover/'+aSetArr[1]+'" width="80" height="80"/></a>';
-			}else{
-				aRow += '<a href="#detail?p_id='+aSetArr[0]+'" onclick="contentModalOpen(this, '+'\'friend\''+')"><img src="resources/images/default.png" width="80" height="80"/></a>';
+		if(entry.projects != null){
+			var projectArr = (entry.projects).split("/"); //projectArr에는 프로젝트 1, 2, 3에 관한 정보 나눠서 들어감
+			//projectArr[0]에 "id,img" 붙어있음 
+			for(var i=0; i<projectArr.length; i++){
+				var aSetArr = projectArr[i].split(",");
+				//aSetArr[0]에는 p_id가, aSetArr[1]에는 coverImg가 들어있음
+				if(aSetArr[1].length){
+					aRow += '<a href="#detail?p_id='+aSetArr[0]+'" onclick="contentModalOpen(this, '+'\'friend\''+')"><img src="resources/images/projectCover/'+aSetArr[1]+'" width="80" height="80"/></a>';
+				}else{
+					aRow += '<a href="#detail?p_id='+aSetArr[0]+'" onclick="contentModalOpen(this, '+'\'friend\''+')"><img src="resources/images/default.png" width="80" height="80"/></a>';
+				}
+				
 			}
-			
 		}
 		aRow +='</div>'
 				+'</li>';

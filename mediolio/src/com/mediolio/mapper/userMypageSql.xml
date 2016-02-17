@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="userpage">
+  
+    <select id="getMemberInfo" parameterType="int" resultType="fvo">
+		SELECT m_id, CONCAT_WS(' ', m_studentID, m_nickname) AS m_name, m_introduce, m_interestingPart, 
+			SUBSTRING_INDEX(m_interestingPart,',',1) AS m_interestingId1, 
+			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',2),',',-1) AS m_interestingId2, 
+			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',3),',',-1) AS m_interestingId3,
+			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId1) AS m_interestingText1,
+			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId2) AS m_interestingText2,
+			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId3) AS m_interestingText3
+				FROM member m WHERE m_id=#{m_id}
+	</select>
+	
+	<select id="getProjectsUploaded" parameterType="int" resultType="upvo">
+		SELECT * FROM (
+			SELECT @NO := @NO + 1 AS ROWNUM, A.*
+				FROM(
+					SELECT p_id AS project_id, m_id, p_title, p_coverImg, cate_id AS category_id,
+						(SELECT cate_name FROM category WHERE cate_id = category_id) AS cate_name,
+					    (SELECT SUBSTRING_INDEX(GROUP_CONCAT(h_value SEPARATOR ','), ',', 3) FROM hashtag WHERE p_id=project_id) AS hashtags
+							FROM project WHERE m_id=#{m_id}
+				) A,
+			  (SELECT @NO := 0 ) B
+			) C
+		WHERE C.ROWNUM <![CDATA[>=]]> 1 AND C.ROWNUM <![CDATA[<=]]> 6
+	</select>
+  
+  	<select id="getProjectsLiked" parameterType="int" resultType="upvo">
+		SELECT * FROM (
+			SELECT @NO := @NO + 1 AS ROWNUM, A.*
+				FROM(
+					SELECT p.p_id AS project_id, p.m_id, p.p_title, p.p_coverImg, p.cate_id AS category_id,
+						(SELECT cate_name FROM category WHERE cate_id = category_id) AS cate_name,
+						(SELECT SUBSTRING_INDEX(GROUP_CONCAT(h_value SEPARATOR ','), ',', 3) FROM hashtag WHERE p_id=project_id) AS hashtags
+							FROM project p, member_action ma 
+			                WHERE ma.act_to=p.m_id AND ma.p_id=p.p_id AND ma.act_type='like' AND ma.act_from=#{m_id}
+				) A,
+			  (SELECT @NO := 0 ) B
+			) C
+		WHERE C.ROWNUM <![CDATA[>=]]> 1 AND C.ROWNUM <![CDATA[<=]]> 6
+	</select>
+  </mapper>
