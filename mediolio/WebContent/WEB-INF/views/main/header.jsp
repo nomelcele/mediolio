@@ -74,7 +74,7 @@
     </div><!--//headerWrap-->   
 </div>
 
-<div class="modal_bg"></div>
+<div class="modal_bg"><div class="loading_wrap"><img class="project_loading" src="resources/images/project_loading.gif"></div></div>
 <div class="modal_bg2"></div>
 <div id="modalBox"></div>
 <div id="modalBox2"></div>
