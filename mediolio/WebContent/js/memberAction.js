@@ -84,18 +84,25 @@ function cancelLikeProject(){
  * *********************
  */
 function submitReply(){
-	$.ajax({
-		url: "submitReply",
-		type: "POST",
-		data: $('#reply_form').serialize()+"&act_to="+$('#other_m_id').val(),
-		dataType : "json",
-		success: function(data){
-			$('#writeReplyWrap textarea').val('');
-			$('.replyContentsTotalWrap').append(
-					returnReplyList(data.reply.m_id, data.reply.m_studentID, data.reply.m_nickname, data.reply.r_text, data.reply.r_date, data.reply.r_id)
-				);
-		}
-	});
+	/*$('#writeReplyWrap textarea').val().replace(/\n/g, '<br>');*/ 
+	if(!$.trim($("#writeReplyWrap textarea").val())){
+		alert('댓글을 입력해주세요');
+	}
+	else{
+		
+		$.ajax({
+			url: "submitReply",
+			type: "POST",
+			data: $('#reply_form').serialize()+"&act_to="+$('#other_m_id').val(),
+			dataType : "json",
+			success: function(data){
+				$('#writeReplyWrap textarea').val('');
+				$('.replyContentsTotalWrap').append(
+						returnReplyList(data.reply.m_id, data.reply.m_studentID, data.reply.m_nickname, data.reply.r_text, data.reply.r_date, data.reply.r_id)
+					);
+			}
+		});
+	}
 }
 
 function deleteReply($div){
