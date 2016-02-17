@@ -103,7 +103,7 @@
         	     <div id="writeReplyWrap">
 		        	<form id="reply_form">
 		        		<input type="hidden" name="p_id" value="${detail.p_id }">
-		        	    <textarea placeholder="댓글 내용을 입력하세요." name="r_text"></textarea>
+		        	    <textarea placeholder="댓글 내용을 입력하세요." name="r_text" onkeypress="return handleEnter(this, event, 1)"></textarea>
 		            	<input type="button" value="입력" onclick="submitReply()"/>
 		        	</form>
 		        </div>
