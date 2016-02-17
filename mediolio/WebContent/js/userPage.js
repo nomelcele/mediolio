@@ -24,14 +24,14 @@ $(function(){
     
     $("#btn_addFriend").on('click',function(){
         if($(this).attr('data-click-state') == 0) {
-            $(this).css({ background:'url(../images/removeFriend.png) center center no-repeat'
-            })
+            $(this).css({ background: 'url(/mediolio/resources/images/removeFriend.png) center center no-repeat'
+            });
             $(this).attr('data-click-state',1);
         }
         
         else if($(this).attr('data-click-state') == 1) {
-            $(this).css({ background:'url(../images/addFriend.png) center center no-repeat'
-            })
+            $(this).css({ background:'url(/mediolio/resources/images/addFriend.png) center center no-repeat'
+            });
             $(this).attr('data-click-state',0);
         }
         return false;
