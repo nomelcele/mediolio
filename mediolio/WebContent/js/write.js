@@ -232,7 +232,7 @@ $('document').ready(function(){
 						+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 						+"</ul>"
 						+"<iframe src='"+jdata+"' style='width:570px; height:740px;'/></div>");		
-					console.log("파일 이름: "+$(newFile).val().split("\\")[2]);
+					console.log("파일 이름: "+$(newFile).val());
 					if($(newFile).val().split("\\")[2] == undefined){
 						orderArr[order] = $(newFile).val();
 					} else {
