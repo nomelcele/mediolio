@@ -123,7 +123,11 @@
 				<input type="hidden" id="preview_h"name="h" value=""/>
 			</form>
 			<input type="hidden" id="p_coverImg" name="p_coverImg">
-        	<a href="#"><img src="resources/images/default.png"><!-- 미리보기이미지 들어오는곳 --></a>
+        	<a href="#">
+        		<img src="resources/images/default_upload.png"><!-- 미리보기이미지 들어오는곳 -->
+        		<span id="text_uploadCover">UPLOAD IMAGE</span>
+        	</a>
+        	
         </div><!--//card_img-->
     	<div class="card_bd">
         	<p class="card_title ellipsis"><a href="#"></a></p>

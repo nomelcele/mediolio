@@ -1,5 +1,8 @@
 $('document').ready(function(){
     //윈도우 크기변경 시 모달 위치 조정
+	
+	
+	
 	$(window).resize(function(){
 		var win_w = $(window).width();
 		var win_h = $(window).height();
@@ -22,6 +25,8 @@ $('document').ready(function(){
     //모달 스크롤 스타일
     $('.modal_bd_dCategory').mCustomScrollbar();
     
+	
+	
 })
 
 function selectCategory(){
@@ -238,8 +243,9 @@ function contentModalOpen(a){
 			var movImg_posX = (win_w - movImg_w)/2;
 			var movImg_posY = (win_h - movImg_h)/2;
 			
-			$('#modal_content').css({ left: movImg_posX-150, top: 100 });
-		    $('#modal_content_userInfo').css({ left: movImg_posX+670, top: 100 });
+			
+			$('#modal_content').css({ left: movImg_posX-150, top: $(window).scrollTop()+100 });
+		    $('#modal_content_userInfo').css({ left: movImg_posX+670, top: $(window).scrollTop()+100 });
 		    $('.modal_bg').show();
 			$('#modal_content').show();
 		    $('#modal_content_userInfo').show();
@@ -261,7 +267,7 @@ function contentModalOpen(a){
         
         else if( $(window).scrollTop() <100){
 //          $('#modal_content_userInfo').stop().animate( {top: 100 } )
-            $('#modal_content_userInfo').css( {top: 100})
+            $('#modal_content_userInfo').css( {top: $(window).scrollTop()})
         }
     });
     

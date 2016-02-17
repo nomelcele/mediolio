@@ -82,12 +82,11 @@ $('document').ready(function(){
         $('#bubble_addWrite').hide();
     });
     
-    
     //텍스트 추가 버튼 누르고 난 후 이벤트
     $('#btn_addText').on('click',function(){
 //    	addContent();
     	
-        $('#write_bd').append('<div class="write_textarea contentBox" contenteditable="true" onmouseup="getSelectedText()" data-sort='+order+'>'
+        $('#write_bd').append('<div class="write_textarea contentBox" contenteditable="true" data-sort='+order+'>'
         		+'<ul class="text_toolBoxes" id="text_toolBox">'
         		+'<li id="text_size">'
         		+'<select id="select_fontSize" class="txtSize">'
@@ -104,6 +103,8 @@ $('document').ready(function(){
                 +'<li id="text_delete"><a href="#" onclick="removeElement(this); return false;"></a></li></ul>'
                 +'</div>'
         );
+        
+        $(".write_textarea:last").trigger("focus");
         
         $(".txtSize").on("change",function(){
         	var range = window.getSelection().getRangeAt(0);
@@ -159,29 +160,13 @@ $('document').ready(function(){
         
         $('select').niceSelect();
         
-      
 	    
 	 	
-        //div.write_textarea에 focus된 경우 툴박스 보이기
-        $('.write_textarea').on('click', function(){
-        	
-            $(".content_toolBoxes").hide();
-            $(".text_toolBoxes").hide();
-            
-            $(this).children().css('top', -40  );    //툴박스 위치
-            $(this).children().next().css('top', -40 );    //툴박스 위치
-            $(this).children().show();
-            $(this).children().next().show();
-            
-            addContent();
-        })
-        
-        
         $(".write_textarea").on('keyup',function(){
         	var value = $(this).html();
         	orderArr[$(this).attr("data-sort")] = value.split("<ul")[0];
         });
-        
+       
         $(".write_textarea ul").on('click',function(){
         	var value = $(this).parent().html();
         	orderArr[$(this).parent().attr("data-sort")] = value.split("<ul")[0];
@@ -203,7 +188,24 @@ $('document').ready(function(){
         }); 
         
         order = parseInt(order)+1;
-    })//끝- 텍스트 추가 버튼 누르고 난 후 이벤트
+        
+        //div.write_textarea에 focus된 경우 툴박스 보이기
+        $('.write_textarea').on('click', function(){
+            $(".content_toolBoxes").hide();
+            $(".text_toolBoxes").hide();
+//            $(this).trigger("focus");
+            
+            $(this).children().css('top', -40  );    //툴박스 위치
+            $(this).children().next().css('top', -40 );    //툴박스 위치
+            $(this).children().show();
+            $(this).children().next().show();
+            
+            addContent();
+            
+            $(this).trigger("focus");
+            
+        });
+    });//끝- 텍스트 추가 버튼 누르고 난 후 이벤트
     
   
     $(".contentFile").change(function(){
@@ -225,9 +227,10 @@ $('document').ready(function(){
 				success: function(jdata){
 					$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
 						+"<ul class='content_toolBoxes' id='content_toolBox'>"
-						+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 						+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
-						+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
+						+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
+						+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+						+"</ul>"
 						+"<iframe src='"+jdata+"' style='width:570px; height:740px;'/></div>");		
 					console.log("파일 이름: "+$(newFile).val().split("\\")[2]);
 					orderArr[order] = $(newFile).val().split("\\")[2];
@@ -252,9 +255,10 @@ $('document').ready(function(){
 			console.log(order);
 			$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
 					+"<ul class='content_toolBoxes' id='content_toolBox'>"
-					+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 					+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
-					+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
+					+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
+					+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+					+"</ul>"
 					+"<img src='"+blobURL+"' style='display:block; margin:auto;'/></div>");
 			orderArr[order] = $(this).val().split("\\")[2];
 			
@@ -302,6 +306,7 @@ $('document').ready(function(){
     			if(arr.length>0){
     				$("#autoCompleteArea").html(codes);
         			$(".autoCompleteBox").css("display","block");
+            		moveAutoCompleteBox();
     			}
     		}
     	});
@@ -341,6 +346,22 @@ $('document').ready(function(){
 	    	}
 	    	
 	    	$(".autoCompleteBox").css("display","none");
+	    	
+	    	if($("#write_tagTxt span").size() < 2){
+	    		$(".autoCompleteBox").css({
+	    			left: 0,
+	    			top: 30
+	    		});
+	    		
+	    	} else {
+		    	var lastSpanOffset = $('#write_tagTxt span').last().offset().left;
+		    	var lastSpanWidth = $('#write_tagTxt span').last().width();
+		    	
+		    	$('.autoCompleteBox').css({
+		    		left: lastSpanOffset+lastSpanWidth-100,
+		    		top: $('#write_tagTxt').height()
+		    	});
+	    	}
     	} 
     });
     
@@ -367,6 +388,7 @@ $('document').ready(function(){
 	    		$(this).val("");
 	    		$(this).focus();
 	    		
+	    		
 	    		$('#write_tagInput').css({
 	    			left: lastSpanOffset+lastSpanWidth-280,
 	    			top: $('#write_tagTxt').height()-30
@@ -377,6 +399,7 @@ $('document').ready(function(){
 	    		
 	    		
 	    		$(".autoCompleteBox").css("display","none");
+	    		moveAutoCompleteBox();
     		}
     	}
     });
@@ -412,6 +435,7 @@ $('document').ready(function(){
 	    	}
 	    	
     		$(".autoCompleteBox").css("display","none");
+    		moveAutoCompleteBox();
     	}
     });
     
@@ -420,7 +444,7 @@ $('document').ready(function(){
     	$(".card_title a").html($(this).val());
     });
     
-    addContent();
+//    addContent();
     
 });
 
@@ -533,9 +557,10 @@ function writeEmbedModalOpen(){
         $('.modal_bg, .modal').hide();
         $("#write_bd").append("<div class='contentBox' data-sort="+order+">"
     			+"<ul class='content_toolBoxes' id='content_toolBox'>"
-    			+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
     			+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
-    			+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
+    			+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
+    			+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+    			+"</ul>"
     			+$("#modal_bd_writeEmbed textarea").val()+"</div>");
         orderArr[order] = $("#modal_bd_writeEmbed textarea").val();
         order = parseInt(order)+1;
@@ -596,9 +621,10 @@ function fileChange(file){
 			success: function(jdata){
 				$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
 					+"<ul class='content_toolBoxes' id='content_toolBox'>"
-					+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 					+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
-					+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
+					+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
+					+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+					+"</ul>"
 					+"<iframe src='"+jdata+"' style='width:500px; height:500px;'/></div>");				
 				orderArr[order] = $(newFile).val().split("\\")[2];
 				
@@ -617,9 +643,10 @@ function fileChange(file){
 		console.log(order);
 		$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
 				+"<ul class='content_toolBoxes' id='content_toolBox'>"
-				+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 				+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
-				+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li></ul>"
+				+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
+				+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+				+"</ul>"
 				+"<img src='"+blobURL+"' style='display:block; margin:auto;'/></div>");
 		orderArr[order] = $(newFile).val().split("\\")[2];
 		
@@ -734,10 +761,23 @@ function addContent(){
     	$('.content_toolBoxes',this).hide();
     	
     })
+    
+    $(this).trigger("focus");
 	
 }
 
 function getColorRange(){
 	var range = window.getSelection().getRangeAt(0);
 	return range;
+}
+
+
+function moveAutoCompleteBox(){
+	var lastSpanOffset = $('#write_tagTxt span').last().offset().left;
+	var lastSpanWidth = $('#write_tagTxt span').last().width();
+	
+	$('.autoCompleteBox').css({
+		left: lastSpanOffset+lastSpanWidth-280,
+		top: $('#write_tagTxt').height()
+	});
 }

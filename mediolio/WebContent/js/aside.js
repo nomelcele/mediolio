@@ -27,6 +27,7 @@ $(function(){
 			data : {selcat: str},
 			success : function(data) {
 				$('#default_body').empty().append(data);
+				tagHover();
 			}
 		});
 		
