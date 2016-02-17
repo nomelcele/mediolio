@@ -233,7 +233,11 @@ $('document').ready(function(){
 						+"</ul>"
 						+"<iframe src='"+jdata+"' style='width:570px; height:740px;'/></div>");		
 					console.log("파일 이름: "+$(newFile).val().split("\\")[2]);
-					orderArr[order] = $(newFile).val().split("\\")[2];
+					if($(newFile).val().split("\\")[2] == undefined){
+						orderArr[order] = $(newFile).val();
+					} else {
+						orderArr[order] = $(newFile).val().split("\\")[2];
+					}
 					
 
 				    addContent();
@@ -260,7 +264,13 @@ $('document').ready(function(){
 					+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 					+"</ul>"
 					+"<img src='"+blobURL+"' style='display:block; margin:auto;'/></div>");
-			orderArr[order] = $(this).val().split("\\")[2];
+//			orderArr[order] = $(this).val().split("\\")[2];
+			if($(this).val().split("\\")[2] == undefined){
+				// 파이어폭스
+				orderArr[order] = $(this).val();
+			} else {
+				orderArr[order] = $(this).val().split("\\")[2];
+			}
 			
 			order = parseInt(order)+1;
 			console.log(order);
@@ -626,7 +636,14 @@ function fileChange(file){
 					+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 					+"</ul>"
 					+"<iframe src='"+jdata+"' style='width:500px; height:500px;'/></div>");				
-				orderArr[order] = $(newFile).val().split("\\")[2];
+//				orderArr[order] = $(newFile).val().split("\\")[2];
+				if($(newFile).val().split("\\")[2] == undefined){
+					// 파이어폭스
+					orderArr[order] = $(newFile).val();
+				} else {
+					orderArr[order] = $(newFile).val().split("\\")[2];
+				}
+				
 				
 				addContent();
 			}
@@ -648,11 +665,18 @@ function fileChange(file){
 				+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 				+"</ul>"
 				+"<img src='"+blobURL+"' style='display:block; margin:auto;'/></div>");
-		orderArr[order] = $(newFile).val().split("\\")[2];
+//		orderArr[order] = $(newFile).val().split("\\")[2];
+		if($(newFile).val().split("\\")[2] == undefined){
+			// 파이어폭스
+			orderArr[order] = $(newFile).val();
+		} else {
+			orderArr[order] = $(newFile).val().split("\\")[2];
+		}
 		
 		order = parseInt(order)+1;
 		console.log(order);
 		fileNum++;
+		console.log("파일 이름: "+$(newFile).val());
 		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents' onchange='fileChange(this)'/>");	
 		addContent();
 		
