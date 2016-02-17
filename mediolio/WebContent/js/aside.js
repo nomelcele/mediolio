@@ -1,5 +1,5 @@
 $(function(){
-	$(".selsub, #ct_design, #ct_sound").on('click',function(){
+	$(".selsub, #ct_design, #ct_sound, #ct_graphics").on('click',function(){
 		var str="";
 		if($(this).text()=='기획'){
 			if(($(this).parent().parent().parent().contents(":first-child").text()=='GAME')){
