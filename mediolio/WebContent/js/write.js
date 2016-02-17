@@ -64,6 +64,7 @@ $('document').ready(function(){
 			success: function(result){
 				alert("업로드 완료");
 				$('#default_body').empty().append(result);
+				tagHover();
 			}
 		});
 		
@@ -805,3 +806,4 @@ function moveAutoCompleteBox(){
 		top: $('#write_tagTxt').height()
 	});
 }
+
