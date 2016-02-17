@@ -3,15 +3,18 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link href="resources/css/userPage.css" rel="stylesheet" type="text/css"/>    
-<script src="js/userPage.js"></script> 
+<script src="js/userPage.js"></script>
 
 <div id="contentsWrap">
-       <div class="cardWrap" id="userInfoWrap">
+<div class="cardWrap" id="userInfoWrap">
 	<div id="userInfoWrap_hd">
         <span>${memberInfo.m_name }</span>
+        <input type="hidden" value="${memberInfo.m_id }" class="memberId"/>
         <div id="btnWrap_userInfo">
-            <a class="btn_userInfo" id="btn_addFriend" href="#" data-click-state="0"></a>
-            <a class="btn_userInfo" id="btn_userNote" href="#" onclick="noteModalOpen()"></a>
+        	<c:if test="${sessionScope.mev != null }">
+        	    <a class="btn_userInfo" id="btn_addFriend" href="#" data-click-state="0"></a>
+            	<a class="btn_userInfo" id="btn_userNote" href="#" onclick="noteModalOpen()"></a>
+        	</c:if>
         </div>
     </div> 
     <div id="userInfoWrap_bd">
@@ -77,10 +80,10 @@
 						<li>
 							<c:choose>
 	                        	<c:when test="${a.p_coverImg eq ''}">
-	                        		<a href="#detail?p_id=${a.project_id }" onclick="contentModalOpen(this, 'friend')"><img src="resources/images/default.png" width="70" height="70"/></a>         	
+	                        		<a href="#detail?p_id=${a.project_id }?writer=${a.m_id}" onclick="contentModalOpen(this, 'likeProj')"><img src="resources/images/default.png" width="70" height="70"/></a>         	
 	                        	</c:when>
 		                        <c:otherwise>
-									<a href="#detail?p_id=${a.project_id }" onclick="contentModalOpen(this, 'friend')"><img src="resources/images/projectCover/${a.p_coverImg }" width="70" height="70"/></a>
+									<a href="#detail?p_id=${a.project_id }?writer=${a.m_id}" onclick="contentModalOpen(this, 'likeProj')"><img src="resources/images/projectCover/${a.p_coverImg }" width="70" height="70"/></a>
 								</c:otherwise>
 	                        </c:choose>
 	                        <p class="userProject_category"><span>${a.cate_name }</span></p>

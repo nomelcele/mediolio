@@ -9,15 +9,21 @@
 	<div class="asideWrap" id="userBox">
 		<c:choose> 
 			<c:when test="${sessionScope.mev == null }">
-				<div id="user_idWrap"><a onclick="loginModalOpen()" href="#" id="user_id">로그인 하세요.</a></div>
+				<div id="user_idWrap"><a onclick="loginModalOpen()" href="#" id="user_id">로그인 하세요</a></div>
+				    <ul>
+        				<li id="unlog_myPf"><a class="indent" >MyPortfolio</a></li>
+            			<li id="unlog_likePf"><a class="indent">Like</a></li>
+            			<li id="unlog_follow"><a class="indent">Follow</a></li>
+            			<li id="unlog_message"><a class="indent">Message</a></li>
+        			</ul>				
 			</c:when>
 			<c:otherwise>
 				<div id="user_idWrap"><a href="userpage?usr_id=${sessionScope.mev.m_id }" class="user_id">${sessionScope.mev.m_studentID} ${sessionScope.mev.m_nickname}</a></div>
         			<ul>
-        				<li id="myPf"><a class="indent" >MyPortfolio</a></li>
-            			<li id="likePf"><a class="indent">Like</a></li>
-            			<li id="follow"><a class="indent">Follow</a></li>
-            			<li id="message"><a class="indent">Message</a></li>
+        				<li id="myPf" class="logon"><a class="indent" >MyPortfolio</a></li>
+            			<li id="likePf" class="logon"><a class="indent">Like</a></li>
+            			<li id="follow" class="logon"><a class="indent">Follow</a></li>
+            			<li id="message" class="logon"><a class="indent">Message</a></li>
         			</ul>
 			</c:otherwise>
 		</c:choose>

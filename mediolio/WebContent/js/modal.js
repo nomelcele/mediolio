@@ -239,7 +239,6 @@ function contentModalOpen(a, type){
 	
 	var open_p_id;
 	var open_m_id;
-	console.log(type);
 	
 	if(type=="index"){
 		open_p_id = $(anchor).closest(".cardWrap").find(".projectId").val();
@@ -248,10 +247,14 @@ function contentModalOpen(a, type){
 		open_p_id = (($(anchor).attr('href')).split('='))[1];
 		open_m_id = $(anchor).closest("li").find(".memberId").val();
 	}else if(type=="myProj"){
+		open_p_id = (($(anchor).attr('href')).split('='))[1];
+		open_m_id = $('#contentsWrap').find('.memberId').val();
+	}else if(type=="likeProj"){
 		var href= $(anchor).attr('href');
-		open_p_id = href.substr(href.indexOf("p_id="),1);
-		open_m_id = href.substr(href.indexOf("usr_id="),1);
+		open_p_id = href.substr(href.indexOf("=")+1, 1);
+		open_m_id = href.substr(href.lastIndexOf("=")+1, 1);
 	}
+	
 	$.ajax({
 		url : "projectDetail",
 		type : "POST",

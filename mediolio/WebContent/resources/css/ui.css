@@ -46,8 +46,13 @@ html, body{ width:100%; height:100%;}
 #userBox ul li#follow{ background:#f4c10f; background-image:url(../images/follow.png); background-position:center center; background-repeat:no-repeat;}
 #userBox ul li#message{ background:#29ae5d; margin-right:0; background-image:url(../images/message.png); background-position:center center; background-repeat:no-repeat;}
 
-#userBox ul li a{cursor:pointer; width:35px; height:35px; }
+#userBox ul li#unlog_myPf{ background:#A6A6A6; background-image:url(../images/myPortfolio.png); background-position:center center; background-repeat:no-repeat;}
+#userBox ul li#unlog_likePf{ background:#A6A6A6; background-image:url(../images/like.png); background-position:center center; background-repeat:no-repeat;}
+#userBox ul li#unlog_follow{ background:#A6A6A6; background-image:url(../images/follow.png); background-position:center center; background-repeat:no-repeat;}
+#userBox ul li#unlog_message{ background:#A6A6A6; margin-right:0; background-image:url(../images/message.png); background-position:center center; background-repeat:no-repeat;}
 
+#userBox ul li a{width:35px; height:35px; }
+#userBox ul li.logon a{cursor:pointer;}
 
 a#uploadPf{ display:block; width:100%; height:60px; font:12px 'Open Sans', sans-serif; letter-spacing:1px; font-weight:bold; color:#eee; line-height:60px; text-indent:23px; text-align:center; background:url(../images/write.png) 20px center no-repeat;}
 
