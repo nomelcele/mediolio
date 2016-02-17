@@ -64,7 +64,7 @@ public class MainModel {
 	}
 	
 	@RequestMapping("selcatcard")
-	public String msgModalOpen(HttpSession session, Model model, @RequestParam("selcat") String selcat){
+	public String selcatcard(HttpSession session, Model model, @RequestParam("selcat") String selcat){
 		if(selcat.equals("게임기획")){
 			cat="1";
 		}
@@ -121,5 +121,38 @@ public class MainModel {
 		model.addAttribute("category",mdao.catelist());
 		model.addAttribute("selcat", cat);
 		return "main.selectcategory";
+	}
+	
+	@RequestMapping("selectmypage")
+	public String selectmypage(HttpSession session, Model model){
+		ModelAndView mav = new ModelAndView("main/index");		
+		MemberVO mev = (MemberVO) session.getAttribute("mev");
+		if(mev!=null){
+		System.out.println("id : " +mev.getM_id());
+		System.out.println("nickname : "+mev.getM_nickname());
+		}
+		
+		model.addAttribute("mainProjects", mdao.mainProjects());
+		model.addAttribute("hashtag", mdao.projectHashtags());
+		model.addAttribute("subcategory",mdao.subcatelist());
+		model.addAttribute("category",mdao.catelist());
+		return "main.selectmypage";
+	}
+	
+	@RequestMapping("selectlikepage")
+	public String selectlikepage(HttpSession session, Model model){
+		ModelAndView mav = new ModelAndView("main/index");		
+		MemberVO mev = (MemberVO) session.getAttribute("mev");
+		if(mev!=null){
+		System.out.println("id : " +mev.getM_id());
+		System.out.println("nickname : "+mev.getM_nickname());
+		}
+		
+		//model.addAttribute("mainProjects", mdao.mainProjects());
+		model.addAttribute("hashtag", mdao.projectHashtags());
+		model.addAttribute("subcategory",mdao.subcatelist());
+		model.addAttribute("category",mdao.catelist());
+		model.addAttribute("likepage",mdao.likelist(mev.getM_id()));
+		return "main.selectlikepage";
 	}
 }
