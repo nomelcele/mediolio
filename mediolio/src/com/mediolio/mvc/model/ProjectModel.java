@@ -294,6 +294,7 @@ public class ProjectModel {
 		String newFileName = fileName+"_"+System.currentTimeMillis()+"."+fileExt;
 		System.out.println("New File Name: "+newFileName); // 새로운 파일 이름(중복 방지)
 		
+		System.out.println("임시경로:"+session.getServletContext().getRealPath("/"));
 		String realPath = session.getServletContext().getRealPath("/")+"upload\\";
 		StringBuffer path = new StringBuffer();
 		path.append(realPath).append(newFileName);
