@@ -132,6 +132,11 @@
 .contentBox iframe{ display:block; margin:0 auto;}
 
 
+#cover_img{ position:absolute; z-index:100; width:200px; height:200px; cursor:pointer; opacity:0;}
+#text_uploadCover{ position:absolute; display:inline-block; width:200px; height:20px; top:140px; 
+color:#fff; line-height:20px; text-align:center; font-size:14px; font-weight:500; z-index:101;}
+
+
 /* 텍스트 스타일 적용 클래스 */
 .txtBold{font-weight:bold;}
 .txtBoldRemove{font-weight:normal;}

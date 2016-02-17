@@ -7,4 +7,14 @@ $('document').ready(function(){
         $('div', this).removeClass("card_hover");
         $('p',this).hide();
     });
-})
+});
+
+function tagHover(){
+	$(".card_img").hover(function(){
+        $('div', this).addClass("card_hover");
+        $('p',this).show();
+    },function(){
+        $('div', this).removeClass("card_hover");
+        $('p',this).hide();
+    });
+}

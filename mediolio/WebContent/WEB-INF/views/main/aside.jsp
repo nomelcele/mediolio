@@ -4,7 +4,7 @@
 <script src="js/aside.js"></script>
 <div id="aside">
     <div id="logoWrap">
-		<a id="logoIcon" href="main"></a>
+		<a href="main"><img src="resources/images/mediolio.png"></a>
     </div>
 	<div class="asideWrap" id="userBox">
 		<c:choose> 
@@ -108,6 +108,14 @@
             
             <li class="nav_group">
     			<div class="nav_title" id="ct_sound"><span></span>SOUND</div>
+            	<!-- <ul class="nav_sub">
+            		<li><a href="#">tag</a>
+                    <li><a href="#">tag</a>
+                </ul> -->
+            </li>
+            
+            <li class="nav_group">
+    			<div class="nav_title" id="ct_graphics"><span></span>COMPUTER GRAPHICS</div>
             	<!-- <ul class="nav_sub">
             		<li><a href="#">tag</a>
                     <li><a href="#">tag</a>
