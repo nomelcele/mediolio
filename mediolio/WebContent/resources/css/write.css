@@ -130,7 +130,7 @@
 
 .contentBox{ margin-bottom:60px; width:auto; height:auto; position:relative;}
 .contentBox iframe{ display:block; margin:0 auto;}
-
+.viewerBg{background-color:#767575; height:740px; width:570px; position:absolute; left:0; right:0; margin:0 auto;}
 
 #cover_img{ position:absolute; z-index:100; width:200px; height:200px; cursor:pointer; opacity:0;}
 #text_uploadCover{ position:absolute; display:inline-block; width:200px; height:20px; top:140px; 

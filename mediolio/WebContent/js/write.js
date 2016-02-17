@@ -250,17 +250,28 @@ $('document').ready(function(){
     		                  'txt','py','js','xml','css','md','pl','c','m','json']) != -1){
     			// doc, pdf, ppt 파일 등(문서 형식 파일)
     			// 미리보기 영역에 뷰어 표시
+				$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
+						+"<div class='viewerBg'><div class='loading_wrap'><img class='project_loading' src='resources/images/project_loading.gif'></div></div>"
+						+"<ul class='content_toolBoxes' id='content_toolBox'>"
+						+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
+						+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
+						+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+						+"</ul>"
+						+"<iframe style='width:570px; height:740px;'/></div>");		
+				$(".viewerBg .project_loading:last").css("display","block");
     			$("#viewerForm").ajaxForm({
     				dataType: "text",
     				url: "showViewer",
     				success: function(jdata){
-    					$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
-    						+"<ul class='content_toolBoxes' id='content_toolBox'>"
-    						+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
-    						+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
-    						+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
-    						+"</ul>"
-    						+"<iframe src='"+jdata+"' style='width:570px; height:740px;'/></div>");		
+    					$("#write_bd .contentBox:last").find("iframe").attr("src",jdata);
+    					$("#write_bd .viewerBg:last").css("display","none");
+//    					$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
+//    						+"<ul class='content_toolBoxes' id='content_toolBox'>"
+//    						+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
+//    						+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
+//    						+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+//    						+"</ul>"
+//    						+"<iframe src='"+jdata+"' style='width:570px; height:740px;'/></div>");		
     					console.log("파일 이름: "+$(newFile).val());
     					if($(newFile).val().split("\\")[2] == undefined){
     						orderArr[order] = $(newFile).val();
@@ -649,17 +660,21 @@ function fileChange(file){
 	                  'txt','py','js','xml','css','md','pl','c','m','json']) != -1){
 		// doc, pdf, ppt 파일
 		// 미리보기 영역에 뷰어 표시
+		$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
+				+"<div class='viewerBg'><div class='loading_wrap'><img class='project_loading' src='resources/images/project_loading.gif'></div></div>"
+				+"<ul class='content_toolBoxes' id='content_toolBox'>"
+				+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
+				+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
+				+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+				+"</ul>"
+				+"<iframe style='width:570px; height:740px;'/></div>");		
+		$(".viewerBg .project_loading:last").css("display","block");
 		$("#viewerForm").ajaxForm({
 			dataType: "text",
 			url: "showViewer",
 			success: function(jdata){
-				$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
-					+"<ul class='content_toolBoxes' id='content_toolBox'>"
-					+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
-					+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
-					+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
-					+"</ul>"
-					+"<iframe src='"+jdata+"' style='width:500px; height:500px;'/></div>");				
+				$("#write_bd .contentBox:last").find("iframe").attr("src",jdata);
+				$("#write_bd .viewerBg:last").css("display","none");							
 //				orderArr[order] = $(newFile).val().split("\\")[2];
 				if($(newFile).val().split("\\")[2] == undefined){
 					// 파이어폭스
