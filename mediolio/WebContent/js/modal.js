@@ -322,7 +322,7 @@ function noteModalOpen(step, oponent_id, oponent_name){
 			var movImg_posY = (win_h - movImg_h)/2;
 				
 			$('#writeNoteWrap').css({ left: movImg_posX, top: movImg_posY });
-			
+
 		    $('.modal_bg').hide();
 		    $('.modal_bg2').show();
 			$('#writeNoteWrap').show();
