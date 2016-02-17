@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mediolio.mvc.dao.UsermypageDao;
+import com.mediolio.vo.FriendVO;
 
 @Controller
 public class UsermypageModel {
@@ -21,8 +22,11 @@ public class UsermypageModel {
 		ModelAndView mav = new ModelAndView("usermypage/usermypage");
 		
 		int usr_id = Integer.parseInt(m_id);
-		mav.addObject("memberInfo", udao.getMemberInfo(usr_id));
-		
+		FriendVO vo = udao.getMemberInfo(usr_id);
+		mav.addObject("memberInfo", vo);
+		mav.addObject("myProjects", udao.getProjectsUploaded(usr_id));
+		mav.addObject("likeProjects", udao.getProjectsLiked(usr_id));
+		System.out.println("끝");
 		return mav;
 	}
 }

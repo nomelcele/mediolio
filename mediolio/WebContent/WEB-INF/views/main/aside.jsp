@@ -12,7 +12,7 @@
 				<div id="user_idWrap"><a onclick="loginModalOpen()" href="#" id="user_id">로그인 하세요.</a></div>
 			</c:when>
 			<c:otherwise>
-				<div id="user_idWrap"><a href="userpage?usr_id=${sessionScope.mev.m_studentID }" class="user_id">${sessionScope.mev.m_studentID} ${sessionScope.mev.m_nickname}</a></div>
+				<div id="user_idWrap"><a href="userpage?usr_id=${sessionScope.mev.m_id }" class="user_id">${sessionScope.mev.m_studentID} ${sessionScope.mev.m_nickname}</a></div>
         			<ul>
         				<li id="myPf"><a class="indent" >MyPortfolio</a></li>
             			<li id="likePf"><a class="indent">Like</a></li>

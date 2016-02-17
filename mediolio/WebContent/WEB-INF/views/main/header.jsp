@@ -14,10 +14,12 @@
 <link rel="stylesheet" href="resources/css/nice-select.css"/>
 <link rel="stylesheet" href="resources/css/jquery-labelauty.css"/>
 
-<script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="js/jquery.nice-select.js"></script>
-<script src="js/jquery-labelauty.js"></script>
+<script src="js/jQuery/jquery-1.11.3.min.js"></script>
+<script src="js/jQuery/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/jQuery/jquery.nice-select.js"></script>
+<script src="js/jQuery/jquery-labelauty.js"></script>
+<script src="js/jQuery/jquery.mousewheel.min.js"></script>
+<script src="js/jQuery/jquery-confirm.js"></script>
 
 <script src="js/ui.js"></script>
 <script src="js/modal.js"></script>

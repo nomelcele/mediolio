@@ -18,6 +18,7 @@
   		<typeAlias type="com.mediolio.vo.ProjectDetailVO" alias="pdvo"/>
   		<typeAlias type="com.mediolio.vo.CategoryNameVO" alias="cnvo"/>
   		<typeAlias type="com.mediolio.vo.FriendVO" alias="fvo"/>
+  		<typeAlias type="com.mediolio.vo.UserProjectsVO" alias="upvo"/>
   	</typeAliases>
   </configuration>
   

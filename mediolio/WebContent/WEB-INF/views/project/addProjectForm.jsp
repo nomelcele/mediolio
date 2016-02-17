@@ -10,10 +10,10 @@
 <link href="resources/css/jquery.Jcrop.css" rel="stylesheet" type="text/css" />
 <link href="resources/css/crop.css" rel="stylesheet" type="text/css"/>
 
-<script type="text/javascript" src="js/jquery.Jcrop.js"></script>
-<script type="text/javascript" src="js/colorpicker.js"></script>
-<script type="text/javascript" src="js/jscolor.js"></script>
-<script type="text/javascript" src="js/jquery.form.js"></script>
+<script type="text/javascript" src="js/jQuery/jquery.Jcrop.js"></script>
+<script type="text/javascript" src="js/jQuery/colorpicker.js"></script>
+<script type="text/javascript" src="js/jQuery/jscolor.js"></script>
+<script type="text/javascript" src="js/jQuery/jquery.form.js"></script>
 <script type="text/javascript" src="js/crop.js"></script> 
 </head>
 <body>

@@ -1,21 +1,19 @@
 $('document').ready(function(){
     //윈도우 크기변경 시 모달 위치 조정
 	
-	
-	
-	$(window).resize(function(){
-		var win_w = $(window).width();
-		var win_h = $(window).height();
-		
-		var movImg_w = $('.modal').width();
-		var movImg_h = $('.modal').height();
-		
-		var movImg_posX = (win_w - movImg_w)/2;
-		var movImg_posY = (win_h - movImg_h)/2;
-		
-		$('.modal').css({ left: movImg_posX, top: movImg_posY });
-		
-	}).resize();
+//	$(window).resize(function(){
+//		var win_w = $(window).width();
+//		var win_h = $(window).height();
+//		
+//		var movImg_w = $('.modal').width();
+//		var movImg_h = $('.modal').height();
+//		
+//		var movImg_posX = (win_w - movImg_w)/2;
+//		var movImg_posY = (win_h - movImg_h)/2;
+//		
+//		$('.modal').css({ left: movImg_posX, top: movImg_posY });
+//		
+//	}).resize();
 	
     //모달 닫기-클래스
 	$('.modal_bg').on('click', function(){
@@ -55,7 +53,9 @@ function modalClose(){
 	$(":checkbox[name='check']:checked").each(function () {  
 		$(this).attr('checked', false);
 	});
-	
+	$('body').css({
+        position:'relative'
+    })
 }
 
 function loginModalOpen(){
@@ -244,8 +244,11 @@ function contentModalOpen(a, type){
 	}else if(type=="friend"){
 		open_p_id = (($(anchor).attr('href')).split('='))[1];
 		open_m_id = $(anchor).closest("li").find(".memberId").val();
+	}else if(type=="myProj"){
+		var href= $(anchor).attr('href');
+		open_p_id = href.substr(href.indexOf("p_id="),1);
+		open_m_id = href.substr(href.indexOf("usr_id="),1);
 	}
-	
 	$.ajax({
 		url : "projectDetail",
 		type : "POST",
@@ -264,33 +267,50 @@ function contentModalOpen(a, type){
 			var movImg_posY = (win_h - movImg_h)/2;
 			
 			
-			$('#modal_content').css({ left: movImg_posX-150, top: $(window).scrollTop()+100 });
-		    $('#modal_content_userInfo').css({ left: movImg_posX+670, top: $(window).scrollTop()+100 });
+			$('#modal_content').css({ left: movImg_posX-150, top: 100 });
+		    $('#modal_content_userInfo').css({ left: movImg_posX+670, top: 100 });
 		    $('.modal_bg').show();
 			$('#modal_content').show();
 		    $('#modal_content_userInfo').show();
 		}
 	});
 	
-//    $('#btn_writeEmbed').on('click',function(){
-//        $('.modal_bg, .modal').hide();
-//    })
-    
-    
-    
-    $(document).scroll(function(){
-        if( $(window).scrollTop() >0){
-//          $('#modal_content_userInfo').stop().animate( {top: $(window).scrollTop() } )
-            $('#modal_content_userInfo').css( {top: $(window).scrollTop() } )
-
-        }
-        
-        else if( $(window).scrollTop() <100){
-//          $('#modal_content_userInfo').stop().animate( {top: 100 } )
-            $('#modal_content_userInfo').css( {top: $(window).scrollTop()})
-        }
+    $('body').css({
+        position:'fixed'
     });
     
+    $('.modal_bg, .modal').mousewheel(function(e, delta){ 
+        
+        var currentTop = $('#modal_content').offset().top;
+        scrollAmount = 200;
+        
+        if( delta > 0 ) {  //delta > 0 : 마우스 휠을 위로 올림
+            prevSize = $(this).prev().height();
+            $('#modal_content').stop().animate( {top:currentTop + scrollAmount} )          
+            if(currentTop >= 0 ){
+                $('#modal_content_userInfo').stop().animate({
+                    top: 100
+                });
+                $('#modal_content').stop().animate({
+                    top: 100
+                });
+            }
+        }//마우스휠 위로 올릴 때 끝
+        
+        else {  //마우스휠 아래로 내릴 때
+            nextSize = $(this).next().height();
+            $('#modal_content').stop().animate( {top: currentTop - scrollAmount} )
+            
+            if(currentTop <= -($('#modal_content').height() - $(window).height()) ){
+                $('#modal_content').stop();
+            }      
+            if(currentTop <= 100){
+                $('#modal_content_userInfo').stop().animate({
+                    top: 0 
+                });
+            }          
+        }//마우스휠 아래로 내릴 때 끝   
+    });
 }
 
 
