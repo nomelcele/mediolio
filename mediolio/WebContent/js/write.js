@@ -12,61 +12,77 @@ $('document').ready(function(){
 	$("#submit_portfolio").click(function(){
 		// 프로젝트 등록
 		
-		// 파일 업로드
-		// 서버로 보내야 할 파라미터 목록
-		// 1. 파일(이미지, 문서): formdata로 전송
-		var formData = new FormData();
-		var firstFile = $("input[name=contents]")[0];
-		if($(firstFile).val() != ""){
-			for(var i=0; i<$("input[name=contents]").length; i++){
-				console.log($("input[name=contents]")[i]);
-				formData.append("contents",$("input[name=contents]")[i].files[0]);
-			};
-		}
-		
-		
-		// 2. 임베드 태그, 텍스트: orderArr에 있음
-		// 3. orderArr: 콘텐츠 순서 정보 저장
-		console.log("콘텐츠 순서: "+orderArr);
-		for(var i=0; i<orderArr.length; i++){
-			formData.append("orderArr",orderArr[i]);
-		}
-		// 4. 프로젝트 제목
-		$("#p_title").val($("#projectTitle").val());
-		// 5. 카테고리 아이디
-		$("#cate_id").val($("#selectedCategory").val());
-		// 6. 서브카테고리 아이디 목록
-		var subcategories = "";
-		$("#write_dCategory .subCategory").each(function(){
-			subcategories += $(this).val()+"/";
-		});
-		$("#sc_id").val(subcategories);
-		// 7. 커버 이미지 파일 이름
-		$("#p_coverImgName").val($("#p_coverImg").val());
-		// 8. 해쉬태그
-		var hashtags = "";
-		$("#write_tagTxt span").each(function(){
-			hashtags += $(this).html()+"/";
-		});
-		$("#hashtags").val(hashtags);
-
-		var other_data = $("#addProjectForm").serializeArray();
-	    $.each(other_data,function(key,input){
-	        formData.append(input.name,input.value);
-	    });
-		
-		$.ajax({
-			url: "addProject",
-			processData: false,
-			contentType: false,
-			data: formData,
-			type: "POST",
-			success: function(result){
-				alert("업로드 완료");
-				$('#default_body').empty().append(result);
-				tagHover();
+		// 유효성 검사
+		if($("#selectedCategory").val() == 0){
+			// 1. 카테고리 선택
+			alert("카테고리를 선택해주세요.");
+		} else if($("#write_dCategory a").html() == "세부 카테고리 선택.."){
+			// 2. 세부카테고리 선택
+			alert("세부카테고리를 선택해주세요.");
+		} else if($.trim($("#projectTitle").val()) == ""){
+			// 3. 글 제목 입력
+			alert("제목을 입력해주세요.");
+		} else if($("#write_bd .contentBox").size() == 0){
+			// 4. 내용 입력
+			// $("#write_tagTxt span").size()
+			alert("내용을 입력해주세요.");
+		} else{
+			// 파일 업로드
+			// 서버로 보내야 할 파라미터 목록
+			// 1. 파일(이미지, 문서): formdata로 전송
+			var formData = new FormData();
+			var firstFile = $("input[name=contents]")[0];
+			if($(firstFile).val() != ""){
+				for(var i=0; i<$("input[name=contents]").length; i++){
+					console.log($("input[name=contents]")[i]);
+					formData.append("contents",$("input[name=contents]")[i].files[0]);
+				};
 			}
-		});
+			
+			
+			// 2. 임베드 태그, 텍스트: orderArr에 있음
+			// 3. orderArr: 콘텐츠 순서 정보 저장
+			console.log("콘텐츠 순서: "+orderArr);
+			for(var i=0; i<orderArr.length; i++){
+				formData.append("orderArr",orderArr[i]);
+			}
+			// 4. 프로젝트 제목
+			$("#p_title").val($("#projectTitle").val());
+			// 5. 카테고리 아이디
+			$("#cate_id").val($("#selectedCategory").val());
+			// 6. 서브카테고리 아이디 목록
+			var subcategories = "";
+			$("#write_dCategory .subCategory").each(function(){
+				subcategories += $(this).val()+"/";
+			});
+			$("#sc_id").val(subcategories);
+			// 7. 커버 이미지 파일 이름
+			$("#p_coverImgName").val($("#p_coverImg").val());
+			// 8. 해쉬태그
+			var hashtags = "";
+			$("#write_tagTxt span").each(function(){
+				hashtags += $(this).html()+"/";
+			});
+			$("#hashtags").val(hashtags);
+	
+			var other_data = $("#addProjectForm").serializeArray();
+		    $.each(other_data,function(key,input){
+		        formData.append(input.name,input.value);
+		    });
+			
+			$.ajax({
+				url: "addProject",
+				processData: false,
+				contentType: false,
+				data: formData,
+				type: "POST",
+				success: function(result){
+					alert("업로드 완료");
+					$('#default_body').empty().append(result);
+					tagHover();
+				}
+			});
+		}
 		
 	});
 
@@ -299,9 +315,9 @@ $('document').ready(function(){
     $("#selectedCategory").change(function(){
     	// 카테고리 새로 선택했을 때 기존에 있던 세부카테고리 초기화
     	$(".card_tag").html("");
-    	if($("#write_dCategory a").html() != "세부 카테고리 선택.."){
+//    	if($("#write_dCategory a").html() != "세부 카테고리 선택.."){
     		$("#write_dCategory a").html("세부 카테고리 선택..");
-    	}
+//    	}
     });
     
     
@@ -795,9 +811,8 @@ function addContent(){
     }, function(){
     	$('.content_toolBoxes',this).hide();
     	
-    })
+    });
     
-    $(this).trigger("focus");
 	
 }
 
