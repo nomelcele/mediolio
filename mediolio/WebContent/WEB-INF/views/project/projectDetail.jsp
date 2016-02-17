@@ -115,7 +115,7 @@
 
 <div class="modal" id="modal_content_userInfo">
 	<div class="modal_hd" id="modal_hd_content_userInfo">
-        <a href="#">${detail.m_studentID } ${detail.m_nickname }</a>
+        <a href="userpage?usr_id=${detail.m_id}">${detail.m_studentID } ${detail.m_nickname }</a>
     </div> 
     <div id="modal_bd_content_userFavorite">
     	<c:forEach var="aItem" items="${interesting }" varStatus="status">

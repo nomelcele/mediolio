@@ -7,14 +7,12 @@ $(function(){
         }
     }, function(){
         $(".gallery_arrows", this).fadeOut(500).hide();
-        
-    })
+    });
     
     $(".gallery_left").on('click',function(){
-        
-        
-        return false;
-    })
+       
+    	return false;
+    });
     
     $(".gallery_right").on('click',function(){
         
@@ -23,21 +21,31 @@ $(function(){
     })
     
     $("#btn_addFriend").on('click',function(){
-        if($(this).attr('data-click-state') == 0) {
-            $(this).css({ background: 'url(/mediolio/resources/images/removeFriend.png) center center no-repeat'
-            });
-            $(this).attr('data-click-state',1);
+        if($(this).attr('data-click-state') == 0) {//친추 안되어 있는 상태. 팔로하고 싶을 때 클릭
+        	$.ajax({
+        		url: "followMember",
+        		type: "POST",
+        		data: {m_id:$('#contentsWrap').find('.memberId').val()},
+        		dataType : "json",
+        		success: function(result){
+                    $("#btn_addFriend").css({ background: 'url(/mediolio/resources/images/removeFriend.png) center center no-repeat'});
+                    $("#btn_addFriend").attr('data-click-state',1);
+        		}
+        	}); 
         }
-        
-        else if($(this).attr('data-click-state') == 1) {
-            $(this).css({ background:'url(/mediolio/resources/images/addFriend.png) center center no-repeat'
-            });
-            $(this).attr('data-click-state',0);
+        else if($(this).attr('data-click-state') == 1) { //친추된 상태. 팔로 취소하고 싶을 때 클릭
+        	$.ajax({
+        		url: "followCancel",
+        		type: "POST",
+        		data: {m_id:$('#contentsWrap').find('.memberId').val()},
+        		dataType : "json",
+        		success: function(result){
+                    $("#btn_addFriend").css({ background:'url(/mediolio/resources/images/addFriend.png) center center no-repeat'});
+                    $("#btn_addFriend").attr('data-click-state',0);
+        		}
+        	});
         }
         return false;
-    })
+    });
     
-    
-    
-    
-})
+});
