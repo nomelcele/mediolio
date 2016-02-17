@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mediolio.vo.CategoryVO;
 import com.mediolio.vo.HashtagVO;
+import com.mediolio.vo.Member_actionVO;
 import com.mediolio.vo.ProjectVO;
 import com.mediolio.vo.SubcategoryVO;
 
@@ -35,5 +36,10 @@ public class MainDao {
 	
 	public List<CategoryVO> catelist(){
 		return st.selectList("main.catelists");
+	}
+	
+	public List<ProjectVO> likelist(int m_id){
+		System.out.println("likelist");
+		return st.selectList("main.selectlike",m_id);
 	}
 }
