@@ -448,5 +448,35 @@ function pwModalOpen() {
 
 }*/
 
-
+function modalScroll(){
+    var currentTop = $('#modal_content').offset().top;
+    scrollAmount = 200;
+    
+    if( delta > 0 ) {  //delta > 0 : 마우스 휠을 위로 올림
+        prevSize = $(this).prev().height();
+        $('#modal_content').stop().animate( {top:currentTop + scrollAmount} )          
+        if(currentTop >= 0 ){
+            $('#modal_content_userInfo').stop().animate({
+                top: 100
+            });
+            $('#modal_content').stop().animate({
+                top: 100
+            });
+        }
+    }//마우스휠 위로 올릴 때 끝
+    
+    else {  //마우스휠 아래로 내릴 때
+        nextSize = $(this).next().height();
+        $('#modal_content').stop().animate( {top: currentTop - scrollAmount} )
+        
+        if(currentTop <= -($('#modal_content').height() - $(window).height()) ){
+            $('#modal_content').stop();
+        }      
+        if(currentTop <= 100){
+            $('#modal_content_userInfo').stop().animate({
+                top: 0 
+            });
+        }          
+    }//마우스휠 아래로 내릴 때 끝   
+}
 
