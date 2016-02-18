@@ -11,7 +11,7 @@
 	    <input type="hidden" class="memberId" value="${mainProjects.m_id}">
 	    	<div class="card_hd"></div>
 	    	<div class="card_img">
-	            <a href="#" onClick="contentModalOpen(this)">
+	            <a href="#" onClick="contentModalOpen(this, 'index')">
 	                <div>
 	                	<p>
 	                	<c:forEach var="hashtag" items="${hashtag}">
