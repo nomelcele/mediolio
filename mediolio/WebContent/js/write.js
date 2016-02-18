@@ -16,6 +16,7 @@ $('document').ready(function(){
 		if($("#selectedCategory").val() == 0){
 			// 1. 카테고리 선택
 			alert("카테고리를 선택해주세요.");
+			console.log(orderArr);
 		} else if($("#write_dCategory a").html() == "세부 카테고리 선택.."){
 			// 2. 세부카테고리 선택
 			alert("세부카테고리를 선택해주세요.");
@@ -79,7 +80,7 @@ $('document').ready(function(){
 				success: function(result){
 					alert("업로드 완료");
 					$('#default_body').empty().append(result);
-					tagHover();
+					tagHover_write();
 				}
 			});
 		}
@@ -258,6 +259,8 @@ $('document').ready(function(){
 						+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 						+"</ul>"
 						+"<iframe style='width:570px; height:740px;'/></div>");		
+				var curOrder = order;
+				order = parseInt(order)+1;
 				$(".viewerBg .project_loading:last").css("display","block");
     			$("#viewerForm").ajaxForm({
     				dataType: "text",
@@ -274,9 +277,9 @@ $('document').ready(function(){
 //    						+"<iframe src='"+jdata+"' style='width:570px; height:740px;'/></div>");		
     					console.log("파일 이름: "+$(newFile).val());
     					if($(newFile).val().split("\\")[2] == undefined){
-    						orderArr[order] = $(newFile).val();
+    						orderArr[curOrder] = $(newFile).val();
     					} else {
-    						orderArr[order] = $(newFile).val().split("\\")[2];
+    						orderArr[curOrder] = $(newFile).val().split("\\")[2];
     					}
     					
 
@@ -285,7 +288,7 @@ $('document').ready(function(){
     				}
     			}).submit();
     			
-    			order = parseInt(order)+1;
+    			
     			fileNum++;
     			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents' onchange='fileChange(this)'/>");	
     			
@@ -300,15 +303,17 @@ $('document').ready(function(){
     					+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
     					+"</ul>"
     					+"<img src='"+blobURL+"' style='display:block; margin:auto;'/></div>");
-
+    			var curOrder = order;
+    			order = parseInt(order)+1;
+    			
     			if($(this).val().split("\\")[2] == undefined){
     				// 파이어폭스
-    				orderArr[order] = $(this).val();
+    				orderArr[curOrder] = $(this).val();
     			} else {
-    				orderArr[order] = $(this).val().split("\\")[2];
+    				orderArr[curOrder] = $(this).val().split("\\")[2];
     			}
     			
-    			order = parseInt(order)+1;
+    			
     			console.log(order);
     		    fileNum++;
     			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents' onchange='fileChange(this)'/>");	
@@ -667,7 +672,10 @@ function fileChange(file){
 				+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
 				+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 				+"</ul>"
-				+"<iframe style='width:570px; height:740px;'/></div>");		
+				+"<iframe style='width:570px; height:740px;'/></div>");
+		var curOrder = order;
+		order = parseInt(order)+1;
+		
 		$(".viewerBg .project_loading:last").css("display","block");
 		$("#viewerForm").ajaxForm({
 			dataType: "text",
@@ -678,9 +686,9 @@ function fileChange(file){
 //				orderArr[order] = $(newFile).val().split("\\")[2];
 				if($(newFile).val().split("\\")[2] == undefined){
 					// 파이어폭스
-					orderArr[order] = $(newFile).val();
+					orderArr[curOrder] = $(newFile).val();
 				} else {
-					orderArr[order] = $(newFile).val().split("\\")[2];
+					orderArr[curOrder] = $(newFile).val().split("\\")[2];
 				}
 				
 				
@@ -688,7 +696,6 @@ function fileChange(file){
 			}
 		}).submit();
 		
-		order = parseInt(order)+1;
 		fileNum++;
 		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents' onchange='fileChange(this)'/>");	
 //		addContent();
@@ -704,15 +711,17 @@ function fileChange(file){
 				+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
 				+"</ul>"
 				+"<img src='"+blobURL+"' style='display:block; margin:auto;'/></div>");
-//		orderArr[order] = $(newFile).val().split("\\")[2];
+		var curOrder = order;
+		order = parseInt(order)+1;
+				
+		
 		if($(newFile).val().split("\\")[2] == undefined){
 			// 파이어폭스
-			orderArr[order] = $(newFile).val();
+			orderArr[curOrder] = $(newFile).val();
 		} else {
-			orderArr[order] = $(newFile).val().split("\\")[2];
+			orderArr[curOrder] = $(newFile).val().split("\\")[2];
 		}
 		
-		order = parseInt(order)+1;
 		console.log(order);
 		fileNum++;
 		console.log("파일 이름: "+$(newFile).val());
@@ -845,4 +854,15 @@ function moveAutoCompleteBox(){
 		left: lastSpanOffset+lastSpanWidth-280,
 		top: $('#write_tagTxt').height()
 	});
+}
+
+
+function tagHover_write(){
+	$(".card_img").hover(function(){
+        $('div', this).addClass("card_hover");
+        $('p',this).show();
+    },function(){
+        $('div', this).removeClass("card_hover");
+        $('p',this).hide();
+    });
 }
