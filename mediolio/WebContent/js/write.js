@@ -769,20 +769,21 @@ function txtBold(){
 
 function txtItalic(){
 	var range = window.getSelection().getRangeAt(0);
-	console.log(range);
-	console.log(getSelectedNode());
-//	if(getSelectedNode().className.indexOf("txtItalic") > -1){
-//		// 선택한 부분에 이미 txtBold 클래스가 적용된 부분이 있을 경우
-//		// 클래스 삭제
-//		console.log("클래스 이름: "+getSelectedNode().className);
-//		getSelectedNode().classList.remove("txtItalic");
-//	} else {
-//		var newNode = document.createElement("span");
-//		newNode.setAttribute("class", "txtItalic");
-//		newNode.appendChild(range.extractContents());
-////		range.surroundContents(newNode);
-//		range.insertNode(newNode);
-//	}
+	if(getSelectedNode().className.indexOf("txtItalic") > -1){
+		// 선택한 부분에 이미 txtBold 클래스가 적용된 부분이 있을 경우
+		// 클래스 삭제
+		var newNode = document.createElement("span");
+		newNode.setAttribute("class", "txtItalicRemove");
+		newNode.appendChild(range.extractContents());
+		range.insertNode(newNode);		
+		
+	} else {
+		var newNode = document.createElement("span");
+		newNode.setAttribute("class", "txtItalic");
+		newNode.appendChild(range.extractContents());
+//		range.surroundContents(newNode);
+		range.insertNode(newNode);
+	}
 	
 }
 
@@ -791,13 +792,15 @@ function txtUnderline(){
 	if(getSelectedNode().className.indexOf("txtUnderline") > -1){
 		// 선택한 부분에 이미 txtBold 클래스가 적용된 부분이 있을 경우
 		// 클래스 삭제
-		console.log("클래스 이름: "+getSelectedNode().className);
-		getSelectedNode().classList.remove("txtUnderline");
+		var newNode = document.createElement("span");
+		newNode.setAttribute("class", "txtUnderlineRemove");
+		newNode.appendChild(range.extractContents());
+		range.insertNode(newNode);		
+		
 	} else {
 		var newNode = document.createElement("span");
 		newNode.setAttribute("class", "txtUnderline");
 		newNode.appendChild(range.extractContents());
-		
 //		range.surroundContents(newNode);
 		range.insertNode(newNode);
 	}

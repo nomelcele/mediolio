@@ -141,4 +141,6 @@ color:#fff; line-height:20px; text-align:center; font-size:14px; font-weight:500
 .txtBold{font-weight:bold;}
 .txtBoldRemove{font-weight:normal;}
 .txtItalic{font-style:italic;}
+.txtItalicRemove{font-style:normal;}
 .txtUnderline{text-decoration:underline;}
+.txtUnderlineRemove{text-decoration:blink;}
