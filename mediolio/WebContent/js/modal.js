@@ -286,7 +286,7 @@ function contentModalOpen(a, type){
         position:'fixed'
     });
     
-    $('.modal_bg, .modal').mousewheel(function(e, delta){ 
+    $('.modal_bg, #modalBox').mousewheel(function(e, delta){ 
         
         var currentTop = $('#modal_content').offset().top;
         scrollAmount = 200;
