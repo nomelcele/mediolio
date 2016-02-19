@@ -79,6 +79,7 @@ $('document').ready(function(){
 				type: "POST",
 				success: function(result){
 					alert("업로드 완료");
+					$(".colorpicker_field").css("display","none");
 					$('#default_body').empty().append(result);
 					tagHover_write();
 				}
