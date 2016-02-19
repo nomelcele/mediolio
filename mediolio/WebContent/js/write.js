@@ -267,7 +267,10 @@ $('document').ready(function(){
     				dataType: "text",
     				url: "showViewer",
     				success: function(jdata){
-    					$("#write_bd .contentBox:last").find("iframe").attr("src",jdata);
+    					
+//    					$("#write_bd .contentBox:last").find("iframe")v.attr("src",jdata);
+    					$("[data-sort="+curOrder+"]").find("iframe").attr("src",jdata);
+    					
     					$("#write_bd .viewerBg:last").css("display","none");
 //    					$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
 //    						+"<ul class='content_toolBoxes' id='content_toolBox'>"
@@ -856,7 +859,6 @@ function moveAutoCompleteBox(){
 		top: $('#write_tagTxt').height()
 	});
 }
-
 
 function tagHover_write(){
 	$(".card_img").hover(function(){

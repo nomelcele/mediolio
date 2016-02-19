@@ -1,19 +1,7 @@
 $('document').ready(function(){
     //윈도우 크기변경 시 모달 위치 조정
 	
-//	$(window).resize(function(){
-//		var win_w = $(window).width();
-//		var win_h = $(window).height();
-//		
-//		var movImg_w = $('.modal').width();
-//		var movImg_h = $('.modal').height();
-//		
-//		var movImg_posX = (win_w - movImg_w)/2;
-//		var movImg_posY = (win_h - movImg_h)/2;
-//		
-//		$('.modal').css({ left: movImg_posX, top: movImg_posY });
-//		
-//	}).resize();
+
 	
     //모달 닫기-클래스
 	$('.modal_bg').on('click', function(){
@@ -59,6 +47,7 @@ function modalClose(){
 }
 
 function loginModalOpen(){
+	
     var win_w = $(window).width();
 	var win_h = $(window).height();
 	
@@ -68,10 +57,12 @@ function loginModalOpen(){
 	var movImg_posX = (win_w - movImg_w)/2;
 	var movImg_posY = (win_h - movImg_h)/2;
     
+	
+	
     $('#modal_login').css({ left: movImg_posX, top: movImg_posY });
 	$('.modal_bg, #modal_login').show();
 	
-
+	modalResize();
     
 	return false;
 }
@@ -93,7 +84,7 @@ function joinModalOpen(){
 	$('#modal_join').show();
 	
 	
-    
+	
 /*    $('#btn_mdJoinForm').on('click',function(){
         $('.modal_bg, .modal').hide();
     })*/
@@ -141,6 +132,8 @@ function likeCategoryModalOpen(){
         $('.modal_bg2').hide();
         $('.modal_bg').show();
     })
+    
+    
     
 }
 
@@ -273,11 +266,38 @@ function contentModalOpen(a, type){
 			var movImg_posY = (win_h - movImg_h)/2;
 			
 			
-			$('#modal_content').css({ left: movImg_posX-150, top: 100 });
-		    $('#modal_content_userInfo').css({ left: movImg_posX+670, top: 100 });
+			$(window).resize(function(){
+		        var win_w = $(window).width();
+		        var win_h = $(window).height();
+
+		        var movImg_w = $('.modal').width();
+		        var movImg_h = $('.modal').height();
+
+		        var movImg_posX = (win_w - movImg_w)/2;
+		        var movImg_posY = (win_h - movImg_h)/2;
+
+		        $('#modal_content').css({ left: '10%', top: 100 });
+		        $('#modal_content_userInfo').css({ 
+		            left: '10%',
+		            marginLeft: $('#modal_content').width()+20,
+		            top: 100
+		        });
+
+		    }).resize();
+
+		    
+		    
+		   $('#modal_content').css({ 
+		        left: '10%', 
+		        top: 100 
+		    });
+		    $('#modal_content_userInfo').css({ 
+		        left: '10%',
+		        marginLeft: $('#modal_content').width()+20,
+		        top: 100
+		    });
 		    $('.modal_bg').show();
-		    $(".project_loading").css("display","none");
-			$('#modal_content').show();
+		   $('#modal_content').show();
 		    $('#modal_content_userInfo').show();
 		}
 	});
@@ -350,19 +370,25 @@ function noteModalOpen(step, oponent_id, oponent_name){
 			$("#modalBox2").html(data);
 			location.href="#msgSend";
 			console.log('success : ' + step);
+			
+			var win_w = $(window).width();
+	        var win_h = $(window).height();
+			
 			var movImg_w = $('#writeNoteWrap').width();
 			var movImg_h = $('#writeNoteWrap').height();
 			
 			var movImg_posX = (win_w - movImg_w)/2;
 			var movImg_posY = (win_h - movImg_h)/2;
-				
-			$('#writeNoteWrap').css({ left: movImg_posX, top: $(window).scrollTop()+50 });
 			
+			$('#writeNoteWrap').css({ position:'fixed', left: movImg_posX, top: $(window).scrollTop()+50 });
+
+			modalResize();
 
 		    $('.modal_bg').hide();
 		    $('.modal_bg2').show();
 			$('#writeNoteWrap').show();
 		    
+			
 			$('#btn_sendNote').on('click', function(){
 				msgSend(step);
 			});
@@ -376,6 +402,7 @@ function noteModalOpen(step, oponent_id, oponent_name){
 		    });
 		}
 	});
+	
 }
 
 function msgSend(step){
@@ -480,3 +507,18 @@ function modalScroll(){
     }//마우스휠 아래로 내릴 때 끝   
 }
 
+function modalResize(){
+	$(window).resize(function(){
+		var win_w = $(window).width();
+		var win_h = $(window).height();
+		
+		var movImg_w = $('.modal').width();
+		var movImg_h = $('.modal').height();
+		
+		var movImg_posX = (win_w - movImg_w)/2;
+		var movImg_posY = (win_h - movImg_h)/2;
+		
+		$('.modal').css({ left: movImg_posX, top: movImg_posY });
+		
+	}).resize();
+}
