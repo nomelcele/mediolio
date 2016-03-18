@@ -34,17 +34,16 @@
                 <select id="selectedCategory">
                 	<option value="0">카테고리</option>
                     <option value="1">게임</option>
-                    <option value="2">영상</option>
-                    <option value="3">3D</option>
-                    <option value="4">디자인</option>
-                    <option value="5">웹 & 앱</option>
-                    <option value="6">컴퓨터 그래픽스</option>
-                    <option value="7">사운드</option>
+                    <option value="2">웹 & 앱</option>
+                    <option value="3">영상 & 사운드</option>
+                    <option value="4">3D</option>
+                    <option value="5">디자인</option>
+                    <option value="6">기타</option>
                 </select>
             </div><!--//write_category-->
             <div id="write_dCategory">
-                <a href="#" onclick="writeDCategoryModalOpen()">세부 카테고리 선택..</a>
-            </div>
+					<a href="#" onclick="writeDCategoryModalOpen()">세부 카테고리 선택..</a>
+				</div>
         </div><!--//write_hd-->
         
         <div id="write_title">
@@ -131,7 +130,7 @@
         </div><!--//card_img-->
     	<div class="card_bd">
         	<p class="card_title ellipsis"><a href="#"></a></p>
-            <p class="card_dscrpt"><a href="#">${sessionScope.mev.m_studentID} ${sessionScope.mev.m_nickname}</a></p>
+            <p class="card_dscrpt"><a href="#">${sessionScope.mev.m_studentID} ${sessionScope.mev.m_name}</a></p>
             <p class="card_tag"></p>
         </div><!--//card_bd-->
         <div class="card_ct">

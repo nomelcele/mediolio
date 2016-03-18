@@ -278,17 +278,18 @@ function addcat(){
 <div class = "interest">
 <input type="checkbox"  name='check' value="1"> 게임 기획<br>
 <input type="checkbox"  name='check' value="2"> 게임 개발<br>
-<input type="checkbox"  name='check' value="3"> 영상 시나리오<br>
-<input type="checkbox"  name='check' value="4"> 영상 연출<br>
-<input type="checkbox"  name='check' value="5"> 영상 촬영<br>
-<input type="checkbox"  name='check' value="6"> 영상 OAP<br>
-<input type="checkbox"  name='check' value="7"> 3D 모델링<br>
-<input type="checkbox"  name='check' value="8"> 3D 애니메이션<br>
-<input type="checkbox"  name='check' value="11"> 디자인<br>
-<input type="checkbox"  name='check' value="9"> 웹&앱 기획<br>
-<input type="checkbox"  name='check' value="10"> 웹&앱 개발<br>
-<input type="checkbox"  name='check' value="12"> 컴퓨터그래픽스<br>
-<input type="checkbox"  name='check' value="13"> 사운드<br>
+<input type="checkbox"  name='check' value="3"> 웹&앱 기획<br>
+<input type="checkbox"  name='check' value="4"> 웹&앱 개발<br>
+<input type="checkbox"  name='check' value="5"> 영상 시나리오<br>
+<input type="checkbox"  name='check' value="6"> 영상 연출<br>
+<input type="checkbox"  name='check' value="7"> 영상 촬영<br>
+<input type="checkbox"  name='check' value="8"> 영상 OAP<br>
+<input type="checkbox"  name='check' value="9"> 사운드<br>
+<input type="checkbox"  name='check' value="10"> 3D 모델링<br>
+<input type="checkbox"  name='check' value="11"> 3D 애니메이션<br>
+<input type="checkbox"  name='check' value="12"> 디자인<br>
+
+
 <!-- <div class = 'interesting0'>
 <select class = 'printerest0' onchange='subcat(this.value,0)'>
 	<option value='0' selected='selected'>관심분야</option>	
@@ -336,7 +337,7 @@ function addcat(){
 <br>
 닉네임
 <div>
-<input type = "text" name="m_nickname" class = "m_nickname" maxlength="14" placeholder = "닉네임을 입력해 주세요 (최대 14자)" onfocus="this.placeholder = ''" onblur="this.placeholder = '닉네임을 입력해 주세요 (최대 14자)'">
+<input type = "text" name="m_name" class = "m_nickname" maxlength="14" placeholder = "닉네임을 입력해 주세요 (최대 14자)" onfocus="this.placeholder = ''" onblur="this.placeholder = '닉네임을 입력해 주세요 (최대 14자)'">
 </div>
 <br>
 자기소개

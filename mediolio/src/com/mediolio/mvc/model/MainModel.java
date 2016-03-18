@@ -50,7 +50,7 @@ public class MainModel {
 		MemberVO mev = (MemberVO) session.getAttribute("mev");
 		if(mev!=null){
 		System.out.println("id : " +mev.getM_id());
-		System.out.println("nickname : "+mev.getM_nickname());
+		System.out.println("nickname : "+mev.getM_name());
 		}
 		
 		mav.addObject("mainProjects", mdao.mainProjects());
@@ -112,7 +112,7 @@ public class MainModel {
 		MemberVO mev = (MemberVO) session.getAttribute("mev");
 		if(mev!=null){
 		System.out.println("id : " +mev.getM_id());
-		System.out.println("nickname : "+mev.getM_nickname());
+		System.out.println("nickname : "+mev.getM_name());
 		}
 		
 		model.addAttribute("mainProjects", mdao.mainProjects());
@@ -129,7 +129,7 @@ public class MainModel {
 		MemberVO mev = (MemberVO) session.getAttribute("mev");
 		if(mev!=null){
 		System.out.println("id : " +mev.getM_id());
-		System.out.println("nickname : "+mev.getM_nickname());
+		System.out.println("nickname : "+mev.getM_name());
 		}
 		
 		model.addAttribute("mainProjects", mdao.mainProjects());
@@ -145,7 +145,7 @@ public class MainModel {
 		MemberVO mev = (MemberVO) session.getAttribute("mev");
 		if(mev!=null){
 		System.out.println("id : " +mev.getM_id());
-		System.out.println("nickname : "+mev.getM_nickname());
+		System.out.println("nickname : "+mev.getM_name());
 		}
 		
 		//model.addAttribute("mainProjects", mdao.mainProjects());

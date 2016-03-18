@@ -98,7 +98,7 @@ function submitReply(){
 			success: function(data){
 				$('#writeReplyWrap textarea').val('');
 				$('.replyContentsTotalWrap').append(
-						returnReplyList(data.reply.m_id, data.reply.m_studentID, data.reply.m_nickname, data.reply.r_text, data.reply.r_date, data.reply.r_id)
+						returnReplyList(data.reply.m_id, data.reply.m_studentID, data.reply.m_name, data.reply.r_text, data.reply.r_date, data.reply.r_id)
 					);
 			}
 		});
@@ -117,14 +117,14 @@ function deleteReply($div){
 	});
 }
 
-function returnReplyList(m_id, m_studentID, m_nickname, r_text, r_date, r_id){
+function returnReplyList(m_id, m_studentID, m_name, r_text, r_date, r_id){
 /*	var resultDateTime = r_date;
 	var dateArr = resultDateTime.split(" ");
 	var date = dateArr[0].replace(/-/gi, ".");
 	var time = dateArr[1].substring(0, dateArr[1].lastIndexOf(":"));*/
 	var inserted = '<div class="replyContentWrap">'
 							+'<p>'
-								+'<a href="#">'+m_studentID+' '+m_nickname+'</a>'
+								+'<a href="#">'+m_studentID+' '+m_name+'</a>'
 								+'<c:choose>'
 									+'<c:when test="${sessionScope.mev.m_id == '+m_id+' }">'
 										+'<a class="btn_deleteReply">X<input type="hidden" value="'+r_id+'"></a>'

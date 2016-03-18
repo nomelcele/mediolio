@@ -2,7 +2,7 @@ package com.mediolio.vo;
 
 public class MemberVO {
 	private int m_id;
-	private String m_mail, m_pw, m_nickname, m_gender,
+	private String m_mail, m_pw, m_name, m_gender,
 	m_studentID, m_interestingPart, m_introduce, m_joindate;
 	
 	public int getM_id() {
@@ -23,11 +23,11 @@ public class MemberVO {
 	public void setM_pw(String m_pw) {
 		this.m_pw = m_pw;
 	}
-	public String getM_nickname() {
-		return m_nickname;
+	public String getM_name() {
+		return m_name;
 	}
-	public void setM_nickname(String m_nickname) {
-		this.m_nickname = m_nickname;
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
 	}
 	public String getM_gender() {
 		return m_gender;

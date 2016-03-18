@@ -5,7 +5,7 @@
   <mapper namespace="userpage">
   
     <select id="getMemberInfo" parameterType="int" resultType="fvo">
-		SELECT m_id, CONCAT_WS(' ', m_studentID, m_nickname) AS m_name, m_introduce, m_interestingPart, 
+		SELECT m_id, CONCAT_WS(' ', m_studentID, m_name) AS m_name, m_introduce, m_interestingPart, 
 			SUBSTRING_INDEX(m_interestingPart,',',1) AS m_interestingId1, 
 			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',2),',',-1) AS m_interestingId2, 
 			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',3),',',-1) AS m_interestingId3,
@@ -37,7 +37,7 @@
 						(SELECT cate_name FROM category WHERE cate_id = category_id) AS cate_name,
 						(SELECT SUBSTRING_INDEX(GROUP_CONCAT(h_value SEPARATOR ','), ',', 3) FROM hashtag WHERE p_id=project_id) AS hashtags
 							FROM project p, member_action ma 
-			                WHERE ma.act_to=p.m_id AND ma.p_id=p.p_id AND ma.act_type='like' AND ma.act_from=#{m_id}
+			                WHERE ma.act_to=p.m_id AND ma.act_target=p.p_id AND ma.act_type='like' AND ma.act_from=#{m_id}
 				) A,
 			  (SELECT @NO := 0 ) B
 			) C

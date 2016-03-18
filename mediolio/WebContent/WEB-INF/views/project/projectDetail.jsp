@@ -8,7 +8,7 @@
 	<div class="modal_hd" id="modal_hd_content">
 	<input type="hidden" id="other_m_id" value="${detail.m_id }"> <!-- !!!!!!!!!!!!  작성자 ID input hidden   !!!!!!!!!! -->
 	<input type="hidden" id="this_p_id" value="${detail.p_id }"><!-- !!!!!!!!!!!!  현재 프로젝트 ID input hidden   !!!!!!!!!! -->
-    <input type="hidden" id="other_nickname" value="${detail.m_studentID } ${detail.m_nickname}">
+    <input type="hidden" id="other_nickname" value="${detail.m_studentID } ${detail.m_name}">
         <p id="content_categoryWrap">
             <span class="cate_parent">${detail.cate_name }</span>
             <span> > </span>
@@ -20,7 +20,7 @@
         </p>
         <h2>${detail.p_title }</h2>
         <h3 id="content_userId">
-        	<a href="#">${detail.m_studentID } ${detail.m_nickname }</a>
+        	<a href="#">${detail.m_studentID } ${detail.m_name }</a>
         </h3>
         <h3 id="content_date">${detail.p_date }</h3>
         <h3 id="content_hits"><span>${detail.p_viewnum }</span> views</h3>
@@ -82,7 +82,7 @@
         <c:forEach var="aReply" items="${reply }">
 	        <div class="replyContentWrap">
 	            <p>
-	                <a href="#">${aReply.m_studentID } ${aReply.m_nickname }</a>
+	                <a href="#">${aReply.m_studentID } ${aReply.m_name }</a>
 	                <c:choose>
 			     		<c:when test="${sessionScope.mev.m_id == aReply.m_id }">
 			     			<!-- 로그인한 사람과 댓글단 사람이 같을 경우 삭제버튼 등장 -->
@@ -115,7 +115,7 @@
 
 <div class="modal" id="modal_content_userInfo">
 	<div class="modal_hd" id="modal_hd_content_userInfo">
-        <a href="userpage?usr_id=${detail.m_id}">${detail.m_studentID } ${detail.m_nickname }</a>
+        <a href="userpage?usr_id=${detail.m_id}">${detail.m_studentID } ${detail.m_name }</a>
     </div> 
     <div id="modal_bd_content_userFavorite">
     	<c:forEach var="aItem" items="${interesting }" varStatus="status">

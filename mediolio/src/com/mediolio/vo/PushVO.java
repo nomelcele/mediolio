@@ -2,7 +2,7 @@ package com.mediolio.vo;
 
 public class PushVO {
 	private int m_id, p_id, r_id;
-	private String m_studentID, m_nickname, act_date, p_title, act_type;
+	private String m_studentID, m_name, act_date, p_title, act_type;
 	
 	public String getM_studentID() {
 		return m_studentID;
@@ -28,11 +28,11 @@ public class PushVO {
 	public void setR_id(int r_id) {
 		this.r_id = r_id;
 	}
-	public String getM_nickname() {
-		return m_nickname;
+	public String getM_name() {
+		return m_name;
 	}
-	public void setM_nickname(String m_nickname) {
-		this.m_nickname = m_nickname;
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
 	}
 	public String getAct_date() {
 		return act_date;

@@ -18,7 +18,7 @@
         			</ul>				
 			</c:when>
 			<c:otherwise>
-				<div id="user_idWrap"><a href="userpage?usr_id=${sessionScope.mev.m_id }" class="user_id">${sessionScope.mev.m_studentID} ${sessionScope.mev.m_nickname}</a></div>
+				<div id="user_idWrap"><a href="userpage?usr_id=${sessionScope.mev.m_id }" class="user_id">${sessionScope.mev.m_studentID} ${sessionScope.mev.m_name}</a></div>
         			<ul>
         				<li id="myPf" class="logon"><a class="indent" >MyPortfolio</a></li>
             			<li id="likePf" class="logon"><a class="indent">Like</a></li>
@@ -83,12 +83,13 @@
             </li>
             
             <li class="nav_group">
-    			<div class="nav_title" id="ct_video"><span></span>VIDEO</div>
+    			<div class="nav_title" id="ct_video"><span></span>VIDEO  &amp;  SOUND</div>
             	<ul class="nav_sub">
             		<li><a href="#" class='selsub'>시나리오</a>
                     <li><a href="#" class='selsub'>연출</a>
                     <li><a href="#" class='selsub'>촬영</a>
                     <li><a href="#" class='selsub'>OAP</a>
+                    <li><a href="#" class='selsub'>SOUND</a>
                     <!-- <li><a href="#">tag</a>
                     <li><a href="#">tag</a>
                     <li><a href="#">tag</a> -->
@@ -112,16 +113,16 @@
                 </ul> -->
             </li>
             
-            <li class="nav_group">
+<!--             <li class="nav_group">
     			<div class="nav_title" id="ct_sound"><span></span>SOUND</div>
-            	<!-- <ul class="nav_sub">
+            	<ul class="nav_sub">
             		<li><a href="#">tag</a>
                     <li><a href="#">tag</a>
-                </ul> -->
-            </li>
+                </ul>
+            </li> -->
             
             <li class="nav_group">
-    			<div class="nav_title" id="ct_graphics"><span></span>COMPUTER GRAPHICS</div>
+    			<div class="nav_title" id="ct_graphics"><span></span>MISC</div>
             	<!-- <ul class="nav_sub">
             		<li><a href="#">tag</a>
                     <li><a href="#">tag</a>

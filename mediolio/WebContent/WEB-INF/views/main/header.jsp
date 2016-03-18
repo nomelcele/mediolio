@@ -125,7 +125,7 @@
         	<input type="hidden" id="m_pw" name="m_pw" value="">
         	<div class="login_inputWrap" id="inputWrap_name">
             	<div class="login_smallBox"></div>
-            	<input class="inputStyle2" type="text"  name="m_nickname" id = "m_nickname" maxlength="14" placeholder = "NICKNAME" onfocus="this.placeholder = ''" onblur="this.placeholder = 'NICKNAME'"/>
+            	<input class="inputStyle2" type="text"  name="m_name" id = "m_nickname" maxlength="14" placeholder = "NAME" onfocus="this.placeholder = ''" onblur="this.placeholder = 'NICKNAME'"/>
         	</div>
         	<div class="login_inputWrap join_inputWrap" id="inputWrap_gender">
             	<div class="login_smallBox"></div>
@@ -170,53 +170,54 @@
                 <label class="label_category">게임 개발</label>
             </li>
             <li>
-                <input type="checkbox" name='check' data-labelauty="웹&앱 기획" value="9"/>
+                <input type="checkbox" name='check' data-labelauty="웹&앱 기획" value="3"/>
                 <label class="label_category">웹&앱 기획</label>
             </li>
             <li>
-                <input type="checkbox" name='check' data-labelauty="웹&앱 개발" value="10"/>
+                <input type="checkbox" name='check' data-labelauty="웹&앱 개발" value="4"/>
                 <label class="label_category">웹&앱 개발</label>
             </li>
         </ul>
         <ul>
             <li>
-                <input type="checkbox" name='check' data-labelauty="영상 시나리오" value="3"/>
+                <input type="checkbox" name='check' data-labelauty="영상 시나리오" value="5"/>
                 <label class="label_category">영상 시나리오</label>
             </li>
             <li>
-                <input type="checkbox" name='check' data-labelauty="영상 연출" value="4"/>
+                <input type="checkbox" name='check' data-labelauty="영상 연출" value="6"/>
                 <label class="label_category">영상 연출</label>
             </li>
             <li>
-                <input type="checkbox" name='check' data-labelauty="영상 촬영" value="5"/>
+                <input type="checkbox" name='check' data-labelauty="영상 촬영" value="7"/>
                 <label class="label_category">영상 촬영</label>
             </li>
             <li>
-                <input type="checkbox" name='check' data-labelauty="영상 OAP" value="6"/>
+                <input type="checkbox" name='check' data-labelauty="영상 OAP" value="8"/>
                 <label class="label_category">영상 OAP</label>
             </li>
             <li>
-                <input type="checkbox" name='check' data-labelauty="3D 모델링" value="7"/>
+                <input type="checkbox" name='check' data-labelauty="사운드" value="9"/>
+                <label class="label_category">사운드</label>
+            </li>
+            <li>
+                <input type="checkbox" name='check' data-labelauty="3D 모델링" value="10"/>
                 <label class="label_category">3D 모델링</label>
             </li>
             <li>
-                <input type="checkbox" name='check' data-labelauty="3D 애니메이션" value="8"/>
+                <input type="checkbox" name='check' data-labelauty="3D 애니메이션" value="11"/>
                 <label class="label_category">3D 애니메이션</label>
             </li>
         </ul>
         <ul>
             <li>
-                <input type="checkbox" name='check' data-labelauty="디자인" value="11"/>
+                <input type="checkbox" name='check' data-labelauty="디자인" value="12"/>
                 <label class="label_category">디자인</label>
             </li>
-            <li>
+<!--             <li>
                 <input type="checkbox" name='check' data-labelauty="컴퓨터 그래픽스" value="12"/>
                 <label class="label_category">컴퓨터 그래픽스</label>
             </li>
-            <li>
-                <input type="checkbox" name='check' data-labelauty="사운드" value="13"/>
-                <label class="label_category">사운드</label>
-            </li>
+ -->
         </ul>
         
         

@@ -22,14 +22,14 @@
 	
 	<select id="getMsgListReceived" parameterType="int" resultType="pmvo">
 		SELECT msg.msg_id, msg.msg_from, msg.msg_text, DATE_FORMAT(msg.msg_date, '%Y.%m.%d %H:%i:%s') AS msg_date, 
-			msg.msg_to_status, m.m_studentID AS msg_from_studentID, m.m_nickname AS msg_from_nickname
+			msg.msg_to_status, m.m_studentID AS msg_from_studentID, m.m_name AS msg_from_nickname
 			FROM message msg, member m 
 				WHERE msg.msg_from=m.m_id AND msg.msg_to=#{m_id} AND msg.msg_to_status != 'deleted' ORDER BY msg.msg_to_status ASC, msg.msg_id DESC
 	</select>
 	
 	<select id="getMsgListSent" parameterType="int" resultType="pmvo">
 		SELECT msg.msg_id, msg.msg_to, msg.msg_text, DATE_FORMAT(msg.msg_date, '%Y.%m.%d %H:%i:%s') AS msg_date, 
-			m.m_studentID AS msg_to_studentID, m.m_nickname AS msg_to_nickname
+			m.m_studentID AS msg_to_studentID, m.m_name AS msg_to_nickname
 			FROM message msg, member m 
 				WHERE msg.msg_to=m.m_id AND msg.msg_from=#{m_id} AND msg.msg_from_status = 'sent' ORDER BY msg.msg_id DESC
 	</select>
@@ -59,7 +59,7 @@
 	</select>
 
 	<select id="getFollowingList" parameterType="int" resultType="fvo">
-		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_nickname) AS m_name, m.m_introduce, m.m_interestingPart, 
+		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_name) AS m_name, m.m_introduce, m.m_interestingPart, 
 			SUBSTRING_INDEX(m_interestingPart,',',1) AS m_interestingId1, 
 			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',2),',',-1) AS m_interestingId2, 
 			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',3),',',-1) AS m_interestingId3,
@@ -71,7 +71,7 @@
 	</select>
 	
 	<select id="getFollowerList" parameterType="int" resultType="fvo">
-		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_nickname) AS m_name, m.m_introduce, m.m_interestingPart, 
+		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_name) AS m_name, m.m_introduce, m.m_interestingPart, 
 			SUBSTRING_INDEX(m_interestingPart,',',1) AS m_interestingId1, 
 			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',2),',',-1) AS m_interestingId2, 
 			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',3),',',-1) AS m_interestingId3,

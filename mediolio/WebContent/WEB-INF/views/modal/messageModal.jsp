@@ -8,7 +8,7 @@
             <input class="btnStyle3" id="btn_sendNote" type="button" value="SEND"/>
         </div>
         <div class="modal_bd" id="writeNoteWrap_bd">
-        	<input type="text" placeholder="받는 사람" id="input_noteTo" value="${m_nickname }"/>
+        	<input type="text" placeholder="받는 사람" id="input_noteTo" value="${m_name }"/>
 	        <form id="msgForm">
 	        	<input type="hidden" name="msg_to" value="${m_id }">
 	            <textarea placeholder="내용을 입력하세요." name="msg_text"></textarea>

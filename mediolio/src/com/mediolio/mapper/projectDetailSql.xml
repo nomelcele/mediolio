@@ -5,13 +5,13 @@
   <mapper namespace="pd">
   	
 	<select id="getReplyList" parameterType="int" resultType="rvo">
-		SELECT r.r_id, r.m_id, r.p_id, r.r_text, DATE_FORMAT(r.r_date, '%Y.%m.%d %H:%i:%s') AS r_date, m.m_studentID, m.m_nickname 
+		SELECT r.r_id, r.m_id, r.p_id, r.r_text, DATE_FORMAT(r.r_date, '%Y.%m.%d %H:%i:%s') AS r_date, m.m_studentID, m.m_name 
 			FROM reply r JOIN member m ON r.m_id=m.m_id 
 			WHERE r.p_id=#{p_id} ORDER BY p_id DESC
 	</select>
 	
   	<select id="projectDetail" parameterType="java.util.Map" resultType="pdvo">
-  		SELECT p.p_id, m.m_id, p.cate_id, p.p_viewnum, m.m_studentID, m.m_nickname, m.m_introduce, m.m_interestingPart, 
+  		SELECT p.p_id, m.m_id, p.cate_id, p.p_viewnum, m.m_studentID, m.m_name, m.m_introduce, m.m_interestingPart, 
   		p.sc_id, c.cate_name, p.p_title, DATE_FORMAT(p.p_date, '%Y.%m.%d %H:%i:%s') AS p_date,
   		(SELECT count(*) FROM member_action WHERE act_type='like' AND p_id=#{p_id}) p_likenum,
   		(SELECT count(*) FROM member_action WHERE act_type='follow' AND act_from=#{m_id} AND act_to=#{p_m_id}) follow_or_not,
@@ -42,7 +42,7 @@
 	</insert>
 	
 	<select id="selectInsertedReply" parameterType="int" resultType="rvo">
-		SELECT r.r_id, r.m_id, r.p_id, r.r_text, DATE_FORMAT(r.r_date, '%Y.%m.%d %H:%i:%s') AS r_date, m.m_studentID, m.m_nickname 
+		SELECT r.r_id, r.m_id, r.p_id, r.r_text, DATE_FORMAT(r.r_date, '%Y.%m.%d %H:%i:%s') AS r_date, m.m_studentID, m.m_name 
 			FROM reply r JOIN member m ON r.m_id=m.m_id
 			WHERE r_id = #{r_id}
 	</select>
