@@ -2,7 +2,7 @@ package com.mediolio.vo;
 
 public class ProjectDetailVO {
 	private int p_id, m_id, cate_id, p_viewnum, p_likenum, p_replynum, follow_or_not, like_or_not;
-	private String m_studentID, m_nickname, m_introduce, m_interestingPart, sc_id, cate_name, p_title, p_date;
+	private String m_studentID, m_name, m_introduce, m_interestingPart, sc_id, cate_name, p_title, p_date;
 	
 	
 	public int getFollow_or_not() {
@@ -65,11 +65,11 @@ public class ProjectDetailVO {
 	public void setM_studentID(String m_studentID) {
 		this.m_studentID = m_studentID;
 	}
-	public String getM_nickname() {
-		return m_nickname;
+	public String getM_name() {
+		return m_name;
 	}
-	public void setM_nickname(String m_nickname) {
-		this.m_nickname = m_nickname;
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
 	}
 	public String getM_introduce() {
 		return m_introduce;

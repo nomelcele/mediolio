@@ -12,13 +12,13 @@
 	     )x;
 	</select>
 	<select id="getNotificationsMsg" parameterType="int" resultType="pmvo">
-		SELECT m.m_id, m.m_nickname AS msg_from_nickname, m.m_studentID AS msg_from_studentID, msg.msg_id, DATE_FORMAT(msg.msg_date, '%Y.%m.%d %H:%i:%s') AS msg_date, msg.msg_text 
+		SELECT m.m_id, m.m_name AS msg_from_nickname, m.m_studentID AS msg_from_studentID, msg.msg_id, DATE_FORMAT(msg.msg_date, '%Y.%m.%d %H:%i:%s') AS msg_date, msg.msg_text 
 			FROM message msg JOIN member m ON m.m_id=msg.msg_from
 			WHERE msg.msg_to_status='no-read' AND msg.msg_to=#{m_id } AND msg.msg_from != #{m_id}
 			ORDER BY msg.msg_id DESC
 	</select>
 	<select id="getNotificationsAction" parameterType="int" resultType="psvo">
-		SELECT m.m_id, m.m_nickname, m.m_studentID, act.act_type, DATE_FORMAT(act.act_date, '%Y.%m.%d %H:%i:%s') AS act_date, act.p_id, p.p_title, act.r_id
+		SELECT m.m_id, m.m_name, m.m_studentID, act.act_type, DATE_FORMAT(act.act_date, '%Y.%m.%d %H:%i:%s') AS act_date, act.p_id, p.p_title, act.r_id
 			FROM member_action act JOIN member m ON act.act_from=m.m_id LEFT JOIN project p ON act.p_id=p.p_id
 			WHERE act.act_read='n' AND act.act_to=#{m_id} AND act.act_from !=#{m_id}
 			ORDER BY act.act_date DESC

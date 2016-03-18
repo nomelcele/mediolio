@@ -85,9 +85,9 @@ public class MemberActionModel {
 	
 	//쪽지보내기 모달 오픈
 	@RequestMapping("msgModalOpen")
-	public String msgModalOpen(Model model, @RequestParam("m_id") String m_id, @RequestParam("m_nickname") String m_nickname){
+	public String msgModalOpen(Model model, @RequestParam("m_id") String m_id, @RequestParam("m_nickname") String m_name){
 		model.addAttribute("m_id", m_id);
-		model.addAttribute("m_nickname", m_nickname);
+		model.addAttribute("m_name", m_name);
 		return "modal.messageModal";
 	}
 	
