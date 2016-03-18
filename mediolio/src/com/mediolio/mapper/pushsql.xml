@@ -8,7 +8,7 @@
 		SELECT count(*) FROM(
 			Select msg_id From message WHERE msg_to = #{m_id} AND msg_to_status = 'no-read' 
 			Union
-			SELECT act_id FROM member_action WHERE act_to = #{m_id} AND act_read = 'n' AND act_from != #{m_id}
+			SELECT act_id FROM member_action WHERE act_to = #{m_id} AND act_read = 0 AND act_from != #{m_id}
 	     )x;
 	</select>
 	<select id="getNotificationsMsg" parameterType="int" resultType="pmvo">

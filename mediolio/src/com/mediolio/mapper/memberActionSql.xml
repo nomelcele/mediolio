@@ -5,7 +5,7 @@
   <mapper namespace="ma">
 
     <insert id="projectLike" parameterType="mavo">
-		INSERT INTO member_action (act_type, act_to, act_from, p_id, act_date, act_read) VALUES ('like', #{act_to}, #{act_from},#{p_id}, now(), 'n')
+		INSERT INTO member_action (act_type, act_to, act_from, p_id, act_date, act_read) VALUES ('like', #{act_to}, #{act_from},#{p_id}, now(), 0)
 	</insert>
 	
 	<delete id="projectLikeCancel" parameterType="mavo">
@@ -47,7 +47,7 @@
 	</update>
 	
 	<insert id="followMember" parameterType="mavo">
-		INSERT INTO member_action (act_type, act_to, act_from, act_date, act_read) VALUES ('follow', #{act_to}, #{act_from}, now(), 'n')
+		INSERT INTO member_action (act_type, act_to, act_from, act_date, act_read) VALUES ('follow', #{act_to}, #{act_from}, now(), 0)
 	</insert>
 	
 	<delete id="followCancel" parameterType="mavo">
