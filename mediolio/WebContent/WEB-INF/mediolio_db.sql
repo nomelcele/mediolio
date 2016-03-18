@@ -26,7 +26,8 @@ CREATE TABLE MEMBER_ACTION(
   act_type VARCHAR(10),
   act_from int(10),
   act_to int(10),
-  act_target int(10),
+  p_id int(10),
+  r_id int(10),
   act_date datetime,
   act_read int(2)
 );
