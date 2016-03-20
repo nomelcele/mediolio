@@ -11,9 +11,9 @@
         <span>${memberInfo.m_name }</span>
         <input type="hidden" value="${memberInfo.m_id }" class="memberId"/>
         <div id="btnWrap_userInfo">
-        	<c:if test="${sessionScope.mev != null }">
+        	<c:if test="${sessionScope.mev != null && sessionScope.mev.m_id != memberInfo.m_id}">
         	    <a class="btn_userInfo" id="btn_addFriend" href="#" data-click-state="0"></a>
-            	<a class="btn_userInfo" id="btn_userNote" href="#" onclick="noteModalOpen()"></a>
+            	<a class="btn_userInfo" id="btn_userNote" href="#" onclick="noteModalOpen('certain', '${memberInfo.m_id }', '${memberInfo.m_name }')"></a>
         	</c:if>
         </div>
     </div> 

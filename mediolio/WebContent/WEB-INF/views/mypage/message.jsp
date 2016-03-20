@@ -14,7 +14,7 @@
     	<div class="card_hd" id="card_note_hd">
             <a class="btn_receiveView" href="#">받은 쪽지함</a>
             <a class="btn_sendView" href="#">보낸 쪽지함</a>
-            <input type="button" class="btnStyle3" id="btn_writeNote" value="쪽지보내기" onclick="noteModalOpen('page')"/>
+            <input type="button" class="btnStyle3" id="btn_writeNote" value="쪽지보내기" onclick="noteModalOpen('somebody')"/>
         </div>
         
         <!-- 받은쪽지 내용물-->

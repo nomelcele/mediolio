@@ -1,6 +1,8 @@
 package com.mediolio.mvc.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mediolio.mvc.dao.MainDao;
+import com.mediolio.vo.FriendVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectVO;
@@ -72,43 +75,42 @@ public class MainModel {
 			cat="2";
 		}
 		else if(selcat.equals("웹기획")){
-			cat="9";
-		}
-		else if(selcat.equals("웹개발")){
-			cat="10";
-		}
-		else if(selcat.equals("시나리오")){
 			cat="3";
 		}
-		else if(selcat.equals("연출")){
+		else if(selcat.equals("웹개발")){
 			cat="4";
 		}
-		else if(selcat.equals("촬영")){
+		else if(selcat.equals("시나리오")){
 			cat="5";
 		}
-		else if(selcat.equals("OAP")){
+		else if(selcat.equals("연출")){
 			cat="6";
 		}
-		else if(selcat.equals("모델링")){
+		else if(selcat.equals("촬영")){
 			cat="7";
 		}
-		else if(selcat.equals("애니메이션")){
+		else if(selcat.equals("OAP")){
 			cat="8";
 		}
-		else if(selcat.equals("DESIGN")){
+		else if(selcat.equals("SOUND")){
+			cat="9";
+		}
+		else if(selcat.equals("모델링")){
+			cat="10";
+		}
+		else if(selcat.equals("애니메이션")){
 			cat="11";
 		}
-		else if(selcat.equals("COMPUTER GRAPHICS")){
+		else if(selcat.equals("DESIGN")){
 			cat="12";
 		}
-		else if(selcat.equals("SOUND")){
+		else if(selcat.equals("MISC")){
 			cat="13";
 		}
 		else{
 			cat="100";
 		}
 		System.out.println(cat);
-		ModelAndView mav = new ModelAndView("main/index");		
 		MemberVO mev = (MemberVO) session.getAttribute("mev");
 		if(mev!=null){
 		System.out.println("id : " +mev.getM_id());
@@ -125,7 +127,6 @@ public class MainModel {
 	
 	@RequestMapping("selectmypage")
 	public String selectmypage(HttpSession session, Model model){
-		ModelAndView mav = new ModelAndView("main/index");		
 		MemberVO mev = (MemberVO) session.getAttribute("mev");
 		if(mev!=null){
 		System.out.println("id : " +mev.getM_id());
@@ -141,11 +142,10 @@ public class MainModel {
 	
 	@RequestMapping("selectlikepage")
 	public String selectlikepage(HttpSession session, Model model){
-		ModelAndView mav = new ModelAndView("main/index");		
 		MemberVO mev = (MemberVO) session.getAttribute("mev");
 		if(mev!=null){
-		System.out.println("id : " +mev.getM_id());
-		System.out.println("nickname : "+mev.getM_name());
+			System.out.println("id : " +mev.getM_id());
+			System.out.println("nickname : "+mev.getM_name());
 		}
 		
 		//model.addAttribute("mainProjects", mdao.mainProjects());
@@ -155,4 +155,26 @@ public class MainModel {
 		model.addAttribute("likepage",mdao.likelist(mev.getM_id()));
 		return "main.selectlikepage";
 	}
+
+	@RequestMapping("search")
+	public ModelAndView search(@RequestParam("key") String key, @RequestParam("section") String section){
+		ModelAndView mav = new ModelAndView("jsonView");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("key", key);
+		map.put("section", section);
+		
+		//List<Object> resultList;
+		
+		if(key.equals("USER")) {
+			List<FriendVO> resultList = mdao.searchUser(key);
+		}else if(key.equals("TAG")){
+			List<ProjectVO> resultList = mdao.searchTag(key);
+		}else{
+			List<ProjectVO> resultList = mdao.searchProjects(map);
+		}
+		
+		
+		return mav;
+	}
+
 }
