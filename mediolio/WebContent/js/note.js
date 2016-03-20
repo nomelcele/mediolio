@@ -31,7 +31,7 @@ $(function(){
 	  }
   });
   $(document).on('click', '.replyNote', function(){
-	  noteModalOpen('reply', $(this).parent().find('.this_msg_m_id').val(), $(this).parent().find('.noteId').text());
+	  noteModalOpen('certain', $(this).parent().find('.this_msg_m_id').val(), $(this).parent().find('.noteId').text());
   });
   
     $('#card_note_hd a').on('click',function(){

@@ -3,7 +3,7 @@ package com.mediolio.vo;
 public class FriendVO {
 
 	private int m_id, m_interestingId1, m_interestingId2, m_interestingId3;
-	private String m_name, m_introduce, m_interestingPart, m_interestingText1, m_interestingText2, m_interestingText3, projects;
+	private String m_nickname, m_introduce, m_interestingPart, m_interestingText1, m_interestingText2, m_interestingText3, projects;
 	
 	public String getProjects() {
 		return projects;
@@ -17,11 +17,11 @@ public class FriendVO {
 	public void setM_id(int m_id) {
 		this.m_id = m_id;
 	}
-	public String getM_name() {
-		return m_name;
+	public String getM_nickname() {
+		return m_nickname;
 	}
-	public void setM_name(String m_name) {
-		this.m_name = m_name;
+	public void setM_nickname(String m_nickname) {
+		this.m_nickname = m_nickname;
 	}
 	public String getM_introduce() {
 		return m_introduce;
