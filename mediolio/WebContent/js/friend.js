@@ -77,7 +77,7 @@ function returnFriendList(list, type){
 	$.each(list, function(index, entry){
 		aRow += '<li>'
 					+'<p class="friendList_id"><input type="hidden" value="'+entry.m_id+'" class="memberId"/>'
-						+'<a href="userpage?usr_id='+entry.m_id+'">'+entry.m_name+'</a>';
+						+'<a href="userpage?usr_id='+entry.m_id+'">'+entry.m_nickname+'</a>';
 		if(type=="following"){
 			aRow += '<input type="button" value="X" class="btn_cancelFollow"/>';
 		}

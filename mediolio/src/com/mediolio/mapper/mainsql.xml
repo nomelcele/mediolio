@@ -40,7 +40,7 @@
 					FROM project p, member m, hashtag t
 					WHERE p.p_id=t.p_id AND p.m_id=m.m_id
 						AND t.h_value=#{key}
-				) A,(SELECT @NO := 0 ) B
+								) A,(SELECT @NO := 0 ) B
 			) C
 		WHERE C.ROWNUM <![CDATA[>=]]> 1 AND C.ROWNUM <![CDATA[<=]]> 6
   	</select>

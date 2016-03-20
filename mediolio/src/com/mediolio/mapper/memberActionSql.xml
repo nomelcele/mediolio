@@ -59,7 +59,7 @@
 	</select>
 
 	<select id="getFollowingList" parameterType="int" resultType="fvo">
-		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_name) AS m_name, m.m_introduce, m.m_interestingPart, 
+		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_name) AS m_nickname, m.m_introduce, m.m_interestingPart, 
 			SUBSTRING_INDEX(m_interestingPart,',',1) AS m_interestingId1, 
 			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',2),',',-1) AS m_interestingId2, 
 			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',3),',',-1) AS m_interestingId3,
@@ -71,7 +71,7 @@
 	</select>
 	
 	<select id="getFollowerList" parameterType="int" resultType="fvo">
-		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_name) AS m_name, m.m_introduce, m.m_interestingPart, 
+		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_name) AS m_nickname, m.m_introduce, m.m_interestingPart, 
 			SUBSTRING_INDEX(m_interestingPart,',',1) AS m_interestingId1, 
 			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',2),',',-1) AS m_interestingId2, 
 			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',3),',',-1) AS m_interestingId3,
