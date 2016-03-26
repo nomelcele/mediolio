@@ -5,13 +5,9 @@
   <mapper namespace="userpage">
   
     <select id="getMemberInfo" parameterType="int" resultType="fvo">
-		SELECT m_id, CONCAT_WS(' ', m_studentID, m_name) AS m_name, m_introduce, m_interestingPart, 
-			SUBSTRING_INDEX(m_interestingPart,',',1) AS m_interestingId1, 
-			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',2),',',-1) AS m_interestingId2, 
-			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',3),',',-1) AS m_interestingId3,
-			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId1) AS m_interestingText1,
-			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId2) AS m_interestingText2,
-			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId3) AS m_interestingText3
+		SELECT m_id, CONCAT_WS(' ', m_studentID, m_name) AS m_name, m_introduce, m_interesting1, m.m_interesting2,
+			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
+			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
 				FROM member m WHERE m_id=#{m_id}
 	</select>
 	

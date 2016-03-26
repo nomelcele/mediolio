@@ -276,18 +276,11 @@ function addcat(){
 <br>
 관심분야
 <div class = "interest">
-<input type="checkbox"  name='check' value="1"> 게임 기획<br>
-<input type="checkbox"  name='check' value="2"> 게임 개발<br>
-<input type="checkbox"  name='check' value="3"> 웹&앱 기획<br>
-<input type="checkbox"  name='check' value="4"> 웹&앱 개발<br>
-<input type="checkbox"  name='check' value="5"> 영상 시나리오<br>
-<input type="checkbox"  name='check' value="6"> 영상 연출<br>
-<input type="checkbox"  name='check' value="7"> 영상 촬영<br>
-<input type="checkbox"  name='check' value="8"> 영상 OAP<br>
-<input type="checkbox"  name='check' value="9"> 사운드<br>
-<input type="checkbox"  name='check' value="10"> 3D 모델링<br>
-<input type="checkbox"  name='check' value="11"> 3D 애니메이션<br>
-<input type="checkbox"  name='check' value="12"> 디자인<br>
+<input type="checkbox"  name='check' value="1"> 게임<br>
+<input type="checkbox"  name='check' value="2"> 웹&앱<br>
+<input type="checkbox"  name='check' value="3"> 영상&사운드<br>
+<input type="checkbox"  name='check' value="4"> 3D<br>
+<input type="checkbox"  name='check' value="5"> 디자인<br>
 
 
 <!-- <div class = 'interesting0'>

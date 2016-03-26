@@ -162,65 +162,30 @@
     <div class="modal_bd modal_bd_dCategory">
         <ul>
             <li>
-                <input type="checkbox" name='check' data-labelauty="게임 기획" value="1"/>
-                <label class="label_category">게임 기획</label>
+                <input type="checkbox" name='check' data-labelauty="게임" value="1"/>
+                <label class="label_category">게임</label>
             </li>
             <li>
-                <input type="checkbox" name='check' data-labelauty="게임 개발" value="2"/>
-                <label class="label_category">게임 개발</label>
-            </li>
-            <li>
-                <input type="checkbox" name='check' data-labelauty="웹&앱 기획" value="3"/>
-                <label class="label_category">웹&앱 기획</label>
-            </li>
-            <li>
-                <input type="checkbox" name='check' data-labelauty="웹&앱 개발" value="4"/>
-                <label class="label_category">웹&앱 개발</label>
+                <input type="checkbox" name='check' data-labelauty="웹&앱" value="2"/>
+                <label class="label_category">웹&앱</label>
             </li>
         </ul>
         <ul>
             <li>
-                <input type="checkbox" name='check' data-labelauty="영상 시나리오" value="5"/>
-                <label class="label_category">영상 시나리오</label>
+                <input type="checkbox" name='check' data-labelauty="영상&사운드" value="3"/>
+                <label class="label_category">영상</label>
             </li>
             <li>
-                <input type="checkbox" name='check' data-labelauty="영상 연출" value="6"/>
-                <label class="label_category">영상 연출</label>
-            </li>
-            <li>
-                <input type="checkbox" name='check' data-labelauty="영상 촬영" value="7"/>
-                <label class="label_category">영상 촬영</label>
-            </li>
-            <li>
-                <input type="checkbox" name='check' data-labelauty="영상 OAP" value="8"/>
-                <label class="label_category">영상 OAP</label>
-            </li>
-            <li>
-                <input type="checkbox" name='check' data-labelauty="사운드" value="9"/>
-                <label class="label_category">사운드</label>
-            </li>
-            <li>
-                <input type="checkbox" name='check' data-labelauty="3D 모델링" value="10"/>
-                <label class="label_category">3D 모델링</label>
-            </li>
-            <li>
-                <input type="checkbox" name='check' data-labelauty="3D 애니메이션" value="11"/>
-                <label class="label_category">3D 애니메이션</label>
+                <input type="checkbox" name='check' data-labelauty="3D" value="4"/>
+                <label class="label_category">3D</label>
             </li>
         </ul>
         <ul>
             <li>
-                <input type="checkbox" name='check' data-labelauty="디자인" value="12"/>
+                <input type="checkbox" name='check' data-labelauty="디자인" value="5"/>
                 <label class="label_category">디자인</label>
             </li>
-<!--             <li>
-                <input type="checkbox" name='check' data-labelauty="컴퓨터 그래픽스" value="12"/>
-                <label class="label_category">컴퓨터 그래픽스</label>
-            </li>
- -->
         </ul>
-        
-        
     </div><!--//modal_bd_likeCategory -->
 </div><!--//_modal_likeCategory-->
 

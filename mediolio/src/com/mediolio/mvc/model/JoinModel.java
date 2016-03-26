@@ -64,7 +64,8 @@ public class JoinModel {
 		System.out.println(mevo.getM_mail());
 		System.out.println(mevo.getM_pw());
 		System.out.println(mevo.getM_gender());
-		System.out.println(mevo.getM_interestingPart());
+		System.out.println(mevo.getM_interesting1());
+		System.out.println(mevo.getM_interesting2());
 		System.out.println(mevo.getM_joindate());
 		ModelAndView mav = new ModelAndView("jsonView");
 		int insertedJoininfo = jdao.InsertJoinInfo(mevo);
