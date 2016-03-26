@@ -9,16 +9,11 @@ import org.springframework.stereotype.Repository;
 import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.ProjectVO;
-import com.mediolio.vo.SubcategoryVO;
 
 @Repository
 public class ProjectDao {
 	@Autowired
 	private SqlSessionTemplate st;
-	
-	public List<SubcategoryVO> subcategoryList(int sc_parent){
-		return st.selectList("proj.subcategoryList", sc_parent);
-	}
 	
 	public List<HashtagVO> autocompleteTags(String h_value){
 		return st.selectList("proj.autocompleteTags",h_value);

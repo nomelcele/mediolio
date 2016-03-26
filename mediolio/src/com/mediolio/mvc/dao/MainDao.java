@@ -12,7 +12,6 @@ import com.mediolio.vo.FriendVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.Member_actionVO;
 import com.mediolio.vo.ProjectVO;
-import com.mediolio.vo.SubcategoryVO;
 
 @Repository
 public class MainDao {
@@ -30,10 +29,6 @@ public class MainDao {
 	
 	public List<HashtagVO> projectHashtags(){
 		return st.selectList("main.projectHashtags");
-	}
-	
-	public List<SubcategoryVO> subcatelist(){
-		return st.selectList("main.subcatelists");
 	}
 	
 	public List<CategoryVO> catelist(){

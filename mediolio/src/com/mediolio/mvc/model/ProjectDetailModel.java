@@ -1,7 +1,6 @@
 package com.mediolio.mvc.model;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,14 +83,8 @@ public class ProjectDetailModel {
 		model.addAttribute("reply", pddao.getReplyList(Integer.parseInt(p_id)));
 		
 		//작성자 관심분야
-		List<String> interesting_list = Arrays.asList((pdvo.getM_interestingPart()).split(","));
-		model.addAttribute("interesting", pddao.getSubcategoryName(interesting_list));
 		
-		//해당 프로젝트의 하위 카테고리
-		List<String> subCategory_list = Arrays.asList((pdvo.getSc_id()).split("/"));
-		model.addAttribute("subcategory", pddao.getSubcategoryName(subCategory_list));
-		
-				
+						
 		return "project.projectDetail";
 	}
 	

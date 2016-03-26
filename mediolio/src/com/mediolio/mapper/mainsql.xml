@@ -8,7 +8,7 @@
 		SELECT m_name FROM MEMBER WHERE m_id=#{m_id}
 	</select>
 	<select id="mainProjects" resultType="pvo">
-		select p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID authorID, m.m_name authorName, p.sc_id,
+		select p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID authorID, m.m_name authorName,
 		(select count(*) from member_action where p_id=p.p_id) p_likenum, p.p_viewnum 
 		from project p, member m where p.m_id=m.m_id order by p.p_date desc
 	</select>
@@ -16,16 +16,12 @@
 		SELECT*FROM HASHTAG
 	</select>
 	
-	<select id="subcatelists" resultType="scvo">
-		SELECT*FROM SUBCATEGORY
-	</select>
-	
 	<select id="catelists" resultType="cavo">
 		SELECT*FROM CATEGORY
 	</select>
 	
 	<select id="selectlike" parameterType ='int' resultType="pvo">
-		select p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID authorID, m.m_name authorName, p.sc_id,
+		select p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID authorID, m.m_name authorName,
 		(select count(*) from member_action where p_id=p.p_id) p_likenum, p.p_viewnum 
 		from project p, member m, member_action ma where p.m_id=m.m_id and p.p_id=ma.p_id and ma.act_type='like' and ma.act_from=#{m_id}
 		order by p.p_date desc
@@ -35,7 +31,7 @@
   		SELECT * FROM (
 			SELECT @NO := @NO + 1 AS ROWNUM, A.*
 				FROM(
-				SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID, m.m_name, p.sc_id,
+				SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID, m.m_name,
 					(SELECT count(*) FROM member_action WHERE p_id=p.p_id AND act_type='like') p_likenum, p.p_viewnum
 					FROM project p, member m, hashtag t
 					WHERE p.p_id=t.p_id AND p.m_id=m.m_id
@@ -49,13 +45,9 @@
 		SELECT * FROM (
 			SELECT @NO := @NO + 1 AS ROWNUM, A.*
 				FROM(
-		  		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_name) AS m_nickname, m.m_introduce, m.m_interestingPart, 
-					SUBSTRING_INDEX(m_interestingPart,',',1) AS m_interestingId1, 
-					SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',2),',',-1) AS m_interestingId2, 
-					SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',3),',',-1) AS m_interestingId3,
-					(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId1) AS m_interestingText1,
-					(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId2) AS m_interestingText2,
-					(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId3) AS m_interestingText3,
+		  		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_name) AS m_nickname, m.m_introduce, m.m_interesting1, m.m_interesting2,
+					(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
+					(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
 					(SELECT SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/'), ',', 3) FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC) AS projects
 						FROM member m HAVING m_nickname LIKE #{key}
 				) A,(SELECT @NO := 0 ) B

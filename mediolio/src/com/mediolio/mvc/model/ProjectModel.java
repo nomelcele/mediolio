@@ -41,7 +41,6 @@ import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectVO;
-import com.mediolio.vo.SubcategoryVO;
 
 @Controller
 public class ProjectModel {
@@ -166,7 +165,6 @@ public class ProjectModel {
 		MemberVO mev = (MemberVO) session.getAttribute("mev");
 		model.addAttribute("mainProjects", mdao.mainProjects());
 		model.addAttribute("hashtag", mdao.projectHashtags());
-		model.addAttribute("subcategory",mdao.subcatelist());
 		model.addAttribute("category",mdao.catelist());
 		return "main.index";
 	}
@@ -230,7 +228,7 @@ public class ProjectModel {
 		
 	}
 	
-	@RequestMapping(value="subcategoryList")
+/*	@RequestMapping(value="subcategoryList")
 	public void subcategoryList(int sc_parent, HttpServletResponse response) throws IOException{
 		// 카테고리 선택 후 서브카테고리 추가 영역을 클릭했을 때
 		// 해당하는 서브카테고리의 목록 출력
@@ -256,7 +254,7 @@ public class ProjectModel {
 		pw.write(sb.toString());
 		pw.flush();
 		pw.close();
-	}
+	}*/
 	
 	@RequestMapping(value="autocompleteTags")
 	public void autocompleteTags(String h_value, HttpServletResponse response) throws IOException{

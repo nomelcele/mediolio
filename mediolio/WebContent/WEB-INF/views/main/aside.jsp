@@ -56,77 +56,46 @@
         <ul id="nav_category">
     		<li class="nav_group">
     			<div class="nav_title" id="ct_game"><span></span>GAME</div>
-            	<ul class="nav_sub">
+<!--             	<ul class="nav_sub">
             		<li><a href="#" class='selsub'>기획</a>
                     <li><a href="#" class='selsub'>개발</a>
-                    <!-- <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">태그이름</a> -->
-                </ul>
+                </ul> -->
             </li>
             
             <li class="nav_group">
     			<div class="nav_title" id="ct_webApp"><span></span>WEB &amp; APP</div>
-            	<ul class="nav_sub">
+<!--             	<ul class="nav_sub">
             		<li><a href="#" class='selsub'>기획</a>
             		<li><a href="#" class='selsub'>개발</a>
-                </ul>
+                </ul> -->
             </li>
             
             <li class="nav_group">
     			<div class="nav_title" id="ct_video"><span></span>VIDEO  &amp;  SOUND</div>
-            	<ul class="nav_sub">
+<!--             	<ul class="nav_sub">
             		<li><a href="#" class='selsub'>시나리오</a>
                     <li><a href="#" class='selsub'>연출</a>
                     <li><a href="#" class='selsub'>촬영</a>
                     <li><a href="#" class='selsub'>OAP</a>
                     <li><a href="#" class='selsub'>SOUND</a>
-                    <!-- <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a> -->
-                </ul>
+                </ul> -->
             </li>
 
             <li class="nav_group">
     			<div class="nav_title" id="ct_3d"><span></span>3D</div>
-            	<ul class="nav_sub">
+<!--             	<ul class="nav_sub">
             		<li><a href="#" class='selsub'>모델링</a>
                     <li><a href="#" class='selsub'>애니메이션</a>
-                </ul>
+                </ul> -->
             </li>  
             
             <li class="nav_group">
     			<div class="nav_title" id="ct_design"><span></span>DESIGN</div>
-            	<!-- <ul class="nav_sub">
-            		<li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                </ul> -->
             </li>
-            
-<!--             <li class="nav_group">
-    			<div class="nav_title" id="ct_sound"><span></span>SOUND</div>
-            	<ul class="nav_sub">
-            		<li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                </ul>
-            </li> -->
+
             
             <li class="nav_group">
-    			<div class="nav_title" id="ct_graphics"><span></span>MISC</div>
-            	<!-- <ul class="nav_sub">
-            		<li><a href="#">tag</a>
-                    <li><a href="#">tag</a>
-                </ul> -->
+    			<div class="nav_title" id="ct_misc"><span></span>MISC</div>
             </li>
             
 

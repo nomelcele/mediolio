@@ -59,25 +59,17 @@
 	</select>
 
 	<select id="getFollowingList" parameterType="int" resultType="fvo">
-		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_name) AS m_nickname, m.m_introduce, m.m_interestingPart, 
-			SUBSTRING_INDEX(m_interestingPart,',',1) AS m_interestingId1, 
-			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',2),',',-1) AS m_interestingId2, 
-			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',3),',',-1) AS m_interestingId3,
-			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId1) AS m_interestingText1,
-			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId2) AS m_interestingText2,
-			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId3) AS m_interestingText3,
+		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_name) AS m_nickname, m.m_introduce, m.m_interesting1, m.m_interesting2,
+			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
+			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
 			(SELECT SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/'), ',', 3) FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC) AS projects
 				FROM member m, member_action ma WHERE m.m_id=ma.act_to AND ma.act_type='follow' AND ma.act_from=#{m_id}
 	</select>
 	
 	<select id="getFollowerList" parameterType="int" resultType="fvo">
-		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_name) AS m_nickname, m.m_introduce, m.m_interestingPart, 
-			SUBSTRING_INDEX(m_interestingPart,',',1) AS m_interestingId1, 
-			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',2),',',-1) AS m_interestingId2, 
-			SUBSTRING_INDEX(SUBSTRING_INDEX(m_interestingPart,',',3),',',-1) AS m_interestingId3,
-			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId1) AS m_interestingText1,
-			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId2) AS m_interestingText2,
-			(SELECT CONCAT_WS(' ', c.cate_name,sc.sc_name) FROM category c, subcategory sc WHERE c.cate_id=sc.sc_parent AND sc.sc_id=m_interestingId3) AS m_interestingText3,
+		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_name) AS m_nickname, m.m_introduce, m.m_interesting1, m.m_interesting2, 
+			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
+			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
 			(SELECT SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/'), ',', 3) FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC) AS projects
 				FROM member m, member_action ma WHERE m.m_id=ma.act_from AND ma.act_type='follow' AND ma.act_to=#{m_id}
 	</select>

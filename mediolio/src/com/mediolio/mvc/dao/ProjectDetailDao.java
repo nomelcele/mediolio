@@ -32,10 +32,6 @@ public class ProjectDetailDao {
 		return st.selectList("pd.projectHash", p_id);
 	}
 
-	public List<CategoryNameVO> getSubcategoryName(List<String> list) {
-		return  st.selectList("pd.getSubcategoryName", list);
-	}
-
 	public ReplyVO submitReply(ReplyVO vo, String act_to) {
 		//댓글 등록
 		vo.setR_text(vo.getR_text().replaceAll("\r\n", "<br>"));

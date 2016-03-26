@@ -18,7 +18,7 @@ import com.mediolio.vo.FriendVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectVO;
-import com.mediolio.vo.SubcategoryVO;
+
 
 
 
@@ -58,7 +58,6 @@ public class MainModel {
 		
 		mav.addObject("mainProjects", mdao.mainProjects());
 		mav.addObject("hashtag", mdao.projectHashtags());
-		mav.addObject("subcategory",mdao.subcatelist());
 		mav.addObject("category",mdao.catelist());
 		mav.addObject("selcat", cat);
 		/*List<SubcategoryVO> list = mdao.subcatelist();
@@ -68,44 +67,23 @@ public class MainModel {
 	
 	@RequestMapping("selcatcard")
 	public String selcatcard(HttpSession session, Model model, @RequestParam("selcat") String selcat){
-		if(selcat.equals("게임기획")){
+		if(selcat.equals("ct_game")){
 			cat="1";
 		}
-		else if(selcat.equals("게임개발")){
+		else if(selcat.equals("ct_webApp")){
 			cat="2";
 		}
-		else if(selcat.equals("웹기획")){
+		else if(selcat.equals("ct_video")){
 			cat="3";
 		}
-		else if(selcat.equals("웹개발")){
+		else if(selcat.equals("ct_3d")){
 			cat="4";
 		}
-		else if(selcat.equals("시나리오")){
+		else if(selcat.equals("ct_design")){
 			cat="5";
 		}
-		else if(selcat.equals("연출")){
+		else if(selcat.equals("ct_misc")){
 			cat="6";
-		}
-		else if(selcat.equals("촬영")){
-			cat="7";
-		}
-		else if(selcat.equals("OAP")){
-			cat="8";
-		}
-		else if(selcat.equals("SOUND")){
-			cat="9";
-		}
-		else if(selcat.equals("모델링")){
-			cat="10";
-		}
-		else if(selcat.equals("애니메이션")){
-			cat="11";
-		}
-		else if(selcat.equals("DESIGN")){
-			cat="12";
-		}
-		else if(selcat.equals("MISC")){
-			cat="13";
 		}
 		else{
 			cat="100";
@@ -119,7 +97,6 @@ public class MainModel {
 		
 		model.addAttribute("mainProjects", mdao.mainProjects());
 		model.addAttribute("hashtag", mdao.projectHashtags());
-		model.addAttribute("subcategory",mdao.subcatelist());
 		model.addAttribute("category",mdao.catelist());
 		model.addAttribute("selcat", cat);
 		return "main.selectcategory";
@@ -135,7 +112,6 @@ public class MainModel {
 		
 		model.addAttribute("mainProjects", mdao.mainProjects());
 		model.addAttribute("hashtag", mdao.projectHashtags());
-		model.addAttribute("subcategory",mdao.subcatelist());
 		model.addAttribute("category",mdao.catelist());
 		return "main.selectmypage";
 	}
@@ -150,7 +126,6 @@ public class MainModel {
 		
 		//model.addAttribute("mainProjects", mdao.mainProjects());
 		model.addAttribute("hashtag", mdao.projectHashtags());
-		model.addAttribute("subcategory",mdao.subcatelist());
 		model.addAttribute("category",mdao.catelist());
 		model.addAttribute("likepage",mdao.likelist(mev.getM_id()));
 		return "main.selectlikepage";
