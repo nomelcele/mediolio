@@ -161,7 +161,7 @@ function goSearch(){
 
 $(function(){
 	var login=$('#hidden_m_id').val();
-	if(typeof login != 'undefined') send_message(login);
+	//if(typeof login != 'undefined') send_message(login);
 	
 	$('#btn_logout').click(function(){
 		disconnect();
