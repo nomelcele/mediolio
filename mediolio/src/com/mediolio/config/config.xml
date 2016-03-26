@@ -18,6 +18,12 @@
   		<typeAlias type="com.mediolio.vo.CategoryNameVO" alias="cnvo"/>
   		<typeAlias type="com.mediolio.vo.FriendVO" alias="fvo"/>
   		<typeAlias type="com.mediolio.vo.UserProjectsVO" alias="upvo"/>
+  		<typeAlias type="com.mediolio.vo.BranchVO" alias="brvo"/>
+  		<typeAlias type="com.mediolio.vo.ClassVO" alias="clvo"/>
+  		<typeAlias type="com.mediolio.vo.HistoryVO" alias="htvo"/>
+  		<typeAlias type="com.mediolio.vo.MemberSkillVO" alias="mkvo"/>
+  		<typeAlias type="com.mediolio.vo.SkillsVO" alias="skvo"/>
+  		<typeAlias type="com.mediolio.vo.TeamMemberVO" alias="tmvo"/>
   	</typeAliases>
   </configuration>
   

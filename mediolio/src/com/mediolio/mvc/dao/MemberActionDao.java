@@ -19,7 +19,7 @@ public class MemberActionDao {
 	
 	public int projectLike(Member_actionVO maVo) {
 		st.insert("ma.projectLike", maVo);
-		return st.selectOne("ma.getProjectLike", maVo.getP_id());
+		return st.selectOne("ma.getProjectLike", maVo.getAct_what());
 	}
 
 	public void projectLikeCancel(Member_actionVO maVo) {

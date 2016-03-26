@@ -56,7 +56,7 @@ public class MemberActionModel {
 			Member_actionVO maVo = new Member_actionVO();
 			maVo.setAct_from(mev.getM_id());
 			maVo.setAct_to(Integer.parseInt(act_to));
-			maVo.setP_id(Integer.parseInt(p_id));
+			maVo.setAct_what(Integer.parseInt(p_id));
 			
 			//좋아요 수 추가 & 현재 프로젝트의 좋아요 수 받아오기
 			mav.addObject("likeNum", maDao.projectLike(maVo));
@@ -74,7 +74,7 @@ public class MemberActionModel {
 			Member_actionVO maVo = new Member_actionVO();
 			maVo.setAct_from(mev.getM_id());
 			maVo.setAct_to(Integer.parseInt(act_to));
-			maVo.setP_id(Integer.parseInt(p_id));
+			maVo.setAct_what(Integer.parseInt(p_id));
 			
 			maDao.projectLikeCancel(maVo);
 		}
