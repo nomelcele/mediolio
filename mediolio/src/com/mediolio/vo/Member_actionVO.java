@@ -1,7 +1,7 @@
 package com.mediolio.vo;
 
 public class Member_actionVO {
-	private int act_id, act_to, act_from, p_id, r_id;
+	private int act_id, act_to, act_from, act_what;
 	private String act_type, act_read, act_date;
 	public int getAct_id() {
 		return act_id;
@@ -21,17 +21,12 @@ public class Member_actionVO {
 	public void setAct_from(int act_from) {
 		this.act_from = act_from;
 	}
-	public int getP_id() {
-		return p_id;
+
+	public int getAct_what() {
+		return act_what;
 	}
-	public void setP_id(int p_id) {
-		this.p_id = p_id;
-	}
-	public int getR_id() {
-		return r_id;
-	}
-	public void setR_id(int r_id) {
-		this.r_id = r_id;
+	public void setAct_what(int act_what) {
+		this.act_what = act_what;
 	}
 	public String getAct_type() {
 		return act_type;

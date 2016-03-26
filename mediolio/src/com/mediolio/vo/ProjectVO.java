@@ -5,11 +5,17 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProjectVO {
-	private int p_id, m_id, cate_id, p_viewnum, p_likenum;
+	private int p_id, m_id, cate_id, p_viewnum, p_likenum, p_type;
 	private String p_title, p_hash, p_date, p_coverImg, 
 	sc_id, hashtags, authorID, authorName;
 	private List<MultipartFile> contents;
 	
+	public int getP_type() {
+		return p_type;
+	}
+	public void setP_type(int p_type) {
+		this.p_type = p_type;
+	}
 	public String getAuthorID() {
 		return authorID;
 	}

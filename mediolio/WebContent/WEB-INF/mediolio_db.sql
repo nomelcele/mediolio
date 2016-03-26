@@ -36,6 +36,7 @@ CREATE TABLE PROJECT(
   p_id int(10) PRIMARY KEY auto_increment,
   m_id int(10),
   p_title VARCHAR(300),
+  p_type int(2),
   p_prjname VARCHAR(10),
   p_summary VARCHAR(2000),
   p_workfrom DATE,
