@@ -1,5 +1,7 @@
 /* 아래 ALTER문은 3월 31일 이전에 수정된 DB 생성한 사람만 실행해주세요*/
 ALTER TABLE member MODIFY m_mail VARCHAR(50);
+ALTER TABLE history MODIFY ht_title VARCHAR(100);
+ALTER TABLE project MODIFY p_prjname VARCHAR(50);
 
 DROP TABLE member;
 DROP TABLE member_action;
@@ -16,7 +18,7 @@ CREATE TABLE MEMBER(
   m_id int(10) PRIMARY KEY auto_increment,
   m_mail VARCHAR(50),
   m_pw VARCHAR(50),
-  m_name VARCHAR(50),
+  m_name VARCHAR(30),
   m_gender VARCHAR(10),
   m_studentID VARCHAR(10),
   m_interesting1 int(10),
@@ -40,7 +42,7 @@ CREATE TABLE PROJECT(
   m_id int(10),
   p_title VARCHAR(300),
   p_type int(2),
-  p_prjname VARCHAR(10),
+  p_prjname VARCHAR(50),
   p_summary VARCHAR(2000),
   p_workfrom DATE,
   p_workto DATE,
@@ -115,7 +117,7 @@ CREATE TABLE MESSAGE(
 
 CREATE TABLE HISTORY(
   ht_id int(10) PRIMARY KEY auto_increment,
-  ht_title VARCHAR(10),
+  ht_title VARCHAR(100),
   ht_introduce VARCHAR(500),
   cl_id int(3),
   ht_color VARCHAR(10),
