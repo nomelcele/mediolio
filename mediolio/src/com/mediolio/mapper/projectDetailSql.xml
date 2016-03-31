@@ -29,7 +29,7 @@
 	</insert>
 	
 	<insert id="actionReplySumbitted" parameterType="mavo">
-		INSERT INTO member_action (act_type, act_to, act_from, p_id, r_id, act_date, act_read) VALUES ('reply', #{act_to}, #{act_from}, #{p_id}, #{r_id}, now(), 0)
+		INSERT INTO member_action (act_type, act_to, act_from, act_what, act_date, act_read) VALUES ('reply', #{act_to}, #{act_from}, #{act_what}, now(), 0)
 	</insert>
 	
 	<select id="selectInsertedReply" parameterType="int" resultType="rvo">
