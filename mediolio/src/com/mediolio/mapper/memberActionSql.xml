@@ -5,15 +5,15 @@
   <mapper namespace="ma">
 
     <insert id="projectLike" parameterType="mavo">
-		INSERT INTO member_action (act_type, act_to, act_from, p_id, act_date, act_read) VALUES ('like', #{act_to}, #{act_from},#{p_id}, now(), 0)
+		INSERT INTO member_action (act_type, act_to, act_from, act_what, act_date, act_read) VALUES ('like', #{act_to}, #{act_from},#{act_what}, now(), 0)
 	</insert>
 	
 	<delete id="projectLikeCancel" parameterType="mavo">
-		DELETE FROM member_action WHERE act_type='like' AND act_from=#{act_from} AND p_id=#{p_id}
+		DELETE FROM member_action WHERE act_type='like' AND act_from=#{act_from} AND act_what=#{act_what}
 	</delete>
 		
   	<select id="getProjectLike" parameterType="int" resultType="int">
-		SELECT count(*) from member_action WHERE act_type='like' AND p_id=#{p_id}
+		SELECT count(*) from member_action WHERE act_type='like' AND act_what=#{act_what}
 	</select>
 	
   	<insert id="msgSend" parameterType="msvo">
