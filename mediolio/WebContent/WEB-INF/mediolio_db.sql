@@ -1,3 +1,6 @@
+/* 아래 ALTER문은 3월 31일 이전에 수정된 DB 생성한 사람만 실행해주세요*/
+ALTER TABLE member MODIFY m_mail VARCHAR(50);
+
 DROP TABLE member;
 DROP TABLE member_action;
 DROP TABLE category;
@@ -11,7 +14,7 @@ DROP TABLE message;
 
 CREATE TABLE MEMBER(
   m_id int(10) PRIMARY KEY auto_increment,
-  m_mail VARCHAR(10),
+  m_mail VARCHAR(50),
   m_pw VARCHAR(50),
   m_name VARCHAR(50),
   m_gender VARCHAR(10),
