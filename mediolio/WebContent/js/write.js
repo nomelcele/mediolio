@@ -17,10 +17,14 @@ $('document').ready(function(){
 			// 1. 카테고리 선택
 			alert("카테고리를 선택해주세요.");
 			console.log(orderArr);
-		} else if($("#write_dCategory a").html() == "세부 카테고리 선택.."){
-			// 2. 세부카테고리 선택
-			alert("세부카테고리를 선택해주세요.");
-		} else if($.trim($("#projectTitle").val()) == ""){
+		} 
+		
+//		else if($("#write_dCategory a").html() == "세부 카테고리 선택.."){
+//			// 2. 세부카테고리 선택
+//			alert("세부카테고리를 선택해주세요.");
+//		} 
+		
+		else if($.trim($("#projectTitle").val()) == ""){
 			// 3. 글 제목 입력
 			alert("제목을 입력해주세요.");
 		} else if($("#write_bd .contentBox").size() == 0){
@@ -51,12 +55,12 @@ $('document').ready(function(){
 			$("#p_title").val($("#projectTitle").val());
 			// 5. 카테고리 아이디
 			$("#cate_id").val($("#selectedCategory").val());
-			// 6. 서브카테고리 아이디 목록
-			var subcategories = "";
-			$("#write_dCategory .subCategory").each(function(){
-				subcategories += $(this).val()+"/";
-			});
-			$("#sc_id").val(subcategories);
+//			// 6. 서브카테고리 아이디 목록
+//			var subcategories = "";
+//			$("#write_dCategory .subCategory").each(function(){
+//				subcategories += $(this).val()+"/";
+//			});
+//			$("#sc_id").val(subcategories);
 			// 7. 커버 이미지 파일 이름
 			$("#p_coverImgName").val($("#p_coverImg").val());
 			// 8. 해쉬태그

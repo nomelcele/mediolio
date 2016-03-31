@@ -11,7 +11,7 @@
 	</select>
 	
   	<select id="projectDetail" parameterType="java.util.Map" resultType="pdvo">
-  		SELECT p.p_id, m.m_id, p.cate_id, p.p_viewnum, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2
+  		SELECT p.p_id, m.m_id, p.cate_id, p.p_viewnum, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2,
   		c.cate_name, p.p_title, DATE_FORMAT(p.p_date, '%Y.%m.%d %H:%i:%s') AS p_date,
   		(SELECT count(*) FROM member_action WHERE act_type='like' AND p_id=#{p_id}) p_likenum,
   		(SELECT count(*) FROM member_action WHERE act_type='follow' AND act_from=#{m_id} AND act_to=#{p_m_id}) follow_or_not,
