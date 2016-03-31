@@ -338,6 +338,9 @@ function contentModalOpen(a, type){
             }          
         }//마우스휠 아래로 내릴 때 끝   
     });
+    
+    $(".project_loading").css("display","none");
+
 }
 
 
