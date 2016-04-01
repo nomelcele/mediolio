@@ -48,6 +48,7 @@ body.modal-open {
 
 /*로그인 모달*/
 #modal_bd_login, #modal_bd_join{ height:360px; padding:20px 30px;}
+#modal_bd_login{ padding-top:45px;}
 .login_inputWrap{ width:340px; height:40px; border-radius:0; margin-bottom:10px;}
 
 .login_inputWrap .login_smallBox{ display:block; width:40px; height:40px; background-color:#555; float:left;}
@@ -115,7 +116,7 @@ body.modal-open {
     float:right; width:70px;
 }
 
-#btn_addBookmark {
+#btn_addBookmark,#btn_addTool {
     text-align:left; width:300px; cursor:pointer;
 }
 

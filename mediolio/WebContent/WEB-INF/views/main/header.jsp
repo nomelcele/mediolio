@@ -84,10 +84,10 @@
     <div class="modal_scroll">
 		<div class="modal" id="modal_login">
 		    <div class="modal_bd" id="modal_bd_login">
-				<div id="otherLoginWrap">
-		            <!-- <a id="link_facebook" href="#"></a>
-		            <span id="otherLogin">LOGIN WITH FACEBOOK</span> -->
-		        </div>
+				<!--<div id="otherLoginWrap">
+		             <a id="link_facebook" href="#"></a>
+		            <span id="otherLogin">LOGIN WITH FACEBOOK</span> 
+		        </div>-->
 		        
 		        <div class="login_inputWrap inputWrap_id">
 		            <div class="login_smallBox"></div><input class="inputStyle2" name="m_mail" type="text" placeholder = "아이디" onfocus="this.placeholder = ''" onblur="this.placeholder = 'EMAIL'" id = "mail"/>
@@ -107,7 +107,7 @@
 		
 		
 		<div class="modal" id="modal_join">
-		    <div class="modal_bd" id="modal_bd_login">
+		    <div class="modal_bd" id="modal_bd_join">
 		    	<div id="joinTitle">JOIN FORM</div>
 		        <form action = "" method="post" name="sendForm">
 		        	<div class="login_inputWrap inputWrap_id">
@@ -152,7 +152,7 @@
 		        	
 		        	<div class="login_inputWrap" id="inputWrap_tool" >
 		                <div class="login_smallBox"></div>
-		                <input class="inputStyle2" id="btn_addTool type="button" value="보유 기술" onClick="toolModalOpen()"/>
+		                <input class="inputStyle2" id="btn_addTool" type="button" value="보유 기술" onClick="toolModalOpen()"/>
 		            </div>
 		        	<input type="hidden" name="m_interestingPart" id="m_interestingPart" value="">
 		        </form>
