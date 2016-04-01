@@ -80,7 +80,7 @@ body.modal-open {
 
 .join_inputWrap{ width:auto; float:left; margin-right:0; }
 .input_join{ width:105px; float:left; }
-#inputWrap_gender{ margin-right:10px; }
+#inputWrap_gender{ margin-right:10px; font-size:12px; }
 
 #selectWrap_gender, #selectWrap_bookmark{ border-radius:0; background-color:#eee; color:#666; width:125px; height:40px; line-height:40px; float:left;   }
 
