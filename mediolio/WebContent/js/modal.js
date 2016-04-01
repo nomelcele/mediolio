@@ -194,8 +194,8 @@ function contentModalOpen(a, type){
 	var open_m_id;
 	
 	if(type=="index"){
-		open_p_id = $(anchor).closest(".cardWrap").find(".projectId").val();
-		open_m_id = $(anchor).closest(".cardWrap").find(".memberId").val();
+/*		open_p_id = $(anchor).closest(".cardWrap").find(".projectId").val();
+		open_m_id = $(anchor).closest(".cardWrap").find(".memberId").val();*/
 	}else if(type=="friend"){
 		open_p_id = (($(anchor).attr('href')).split('='))[1];
 		open_m_id = $(anchor).closest("li").find(".memberId").val();
@@ -209,7 +209,7 @@ function contentModalOpen(a, type){
 	}
 	
 	$.ajax({
-		url : "projectDetail",
+		url : "projectView",
 		type : "POST",
 		data : {
 			p_id: open_p_id, 

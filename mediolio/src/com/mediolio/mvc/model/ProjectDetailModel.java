@@ -31,6 +31,14 @@ public class ProjectDetailModel {
 	
 	private static BoxViewClient boxView;
 	
+	@RequestMapping("projectView")
+	public ModelAndView projectView(Model model, @RequestParam("p_id") String p_id, @RequestParam("m_id") String m_id, HttpSession session){
+		ModelAndView mav = new ModelAndView("project/projectView");
+		
+		return mav; 
+	}
+	
+	//*****구버전*****
 	@RequestMapping("projectDetail")
 	public String projectDetail(Model model, @RequestParam("p_id") String p_id, @RequestParam("m_id") String m_id, HttpSession session){
 		MemberVO mev = (MemberVO)session.getAttribute("mev");
