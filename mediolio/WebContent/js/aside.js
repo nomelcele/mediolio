@@ -14,7 +14,7 @@ $(function(){
 		});
 		
 	});
-	$("#userBox #myPf a").click(function(){
+/*	$("#userBox #myPf a").click(function(){
 		$.ajax({
 			url : "selectmypage",
 			type : "POST",
@@ -23,7 +23,8 @@ $(function(){
 				tagHover();
 			}
 		});
-	});
+	});*/
+	
 	
 	$("#userBox #likePf a").click(function(){
 		$.ajax({

@@ -5,11 +5,11 @@
 	<div id="contentsWrap">
     <c:forEach var="mainProjects" items="${mainProjects}">
 	    <div class="cardWrap">
-	    <input type="hidden" class="projectId" value="${mainProjects.p_id}">
-	    <input type="hidden" class="memberId" value="${mainProjects.m_id}">
+<%-- 	    <input type="hidden" class="projectId" value="${mainProjects.p_id}">
+	    <input type="hidden" class="memberId" value="${mainProjects.m_id}"> --%>
 	    	<div class="card_hd"></div>
 	    	<div class="card_img">
-	            <a href="#" onClick="contentModalOpen(this, 'index'); return false;">
+	            <a href="projectView?m_id=${mainProjects.m_id}&p_id=${mainProjects.p_id}"/><!--  onClick="contentModalOpen(this, 'index'); return false; -->
 	                <div>
 	                	<p>
 	                	<c:forEach var="hashtag" items="${hashtag}">

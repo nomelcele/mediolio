@@ -17,7 +17,6 @@
 <script type="text/javascript" src="js/crop.js"></script> 
 </head>
 <body>
-<div id="modalBox"></div>
 <form id="addProjectForm" action="addProject" method="post">
 <!--  		<input type="hidden" id="orderArr" name="orderArr"> -->
  		<input type="hidden" id="p_title" name="p_title">

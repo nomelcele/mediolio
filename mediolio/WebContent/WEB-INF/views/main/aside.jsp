@@ -11,7 +11,7 @@
 			<c:when test="${sessionScope.mev == null }">
 				<div id="user_idWrap"><a onclick="loginModalOpen()" href="#" id="user_id">로그인 하세요</a></div>
 				    <ul>
-        				<li id="unlog_myPf"><a class="indent" >MyPortfolio</a></li>
+        				<li id="unlog_myPf"><a class="indent">MyPortfolio</a></li>
             			<li id="unlog_likePf"><a class="indent">Like</a></li>
             			<li id="unlog_follow"><a class="indent">Follow</a></li>
             			<li id="unlog_message"><a class="indent">Message</a></li>
@@ -20,7 +20,7 @@
 			<c:otherwise>
 				<div id="user_idWrap"><a href="userpage?usr_id=${sessionScope.mev.m_id }" class="user_id">${sessionScope.mev.m_studentID} ${sessionScope.mev.m_name}</a></div>
         			<ul>
-        				<li id="myPf" class="logon"><a class="indent" >MyPortfolio</a></li>
+        				<li id="myPf" class="logon"><a class="indent"  href="gotoMyPage">MyPortfolio</a></li>
             			<li id="likePf" class="logon"><a class="indent">Like</a></li>
             			<li id="follow" class="logon"><a class="indent">Follow</a></li>
             			<li id="message" class="logon"><a class="indent">Message</a></li>

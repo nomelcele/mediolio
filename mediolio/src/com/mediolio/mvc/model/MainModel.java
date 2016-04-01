@@ -102,7 +102,7 @@ public class MainModel {
 		return "main.selectcategory";
 	}
 	
-	@RequestMapping("selectmypage")
+/*	@RequestMapping("selectmypage")
 	public String selectmypage(HttpSession session, Model model){
 		MemberVO mev = (MemberVO) session.getAttribute("mev");
 		if(mev!=null){
@@ -114,6 +114,12 @@ public class MainModel {
 		model.addAttribute("hashtag", mdao.projectHashtags());
 		model.addAttribute("category",mdao.catelist());
 		return "main.selectmypage";
+	}*/
+	
+	@RequestMapping("gotoMyPage")
+	public ModelAndView gotoMyPage(){
+		
+		return new ModelAndView("mypage/mypage");
 	}
 	
 	@RequestMapping("selectlikepage")
