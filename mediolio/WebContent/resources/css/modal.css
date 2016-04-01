@@ -6,34 +6,66 @@ body.modal-open {
     position: fixed;
 }
 
-.modal{ display:none; position:absolute; left:350px; z-index:102; box-shadow:1px 1px 20px rgba(0,0,0,.8); background-color:#fff;}
-.modal_bg{ background-color:rgba(0,0,0,.7); width:100%; height:100%; position:fixed; z-index:100; display:none; cursor:pointer;} 
-.modal_bg2{ background-color:rgba(0,0,0,.7); width:100%; height:100%; position:fixed; z-index:104; display:none; cursor:pointer;} 
+.preventScroll{ overflow:hidden;}
+
+
+.modal_bg{ background-color:rgba(0,0,0,.7); width:100%; height:100%; position:fixed; z-index:100; display:none; cursor:pointer; position:fixed; overflow-y:hidden; } 
+.modal_bg2{ background-color:rgba(0,0,0,.7); width:100%; height:100%; position:fixed; z-index:104; display:none; cursor:pointer; overflow-y:hidden; } 
+.modal_scroll{ width:100%; height:auto;  cursor:pointer}
+.modal_scroll:after{ visibility:hidden; display:table; content:" "; font-size:0; clear:both; height:0; }
+.modal_bg *, .modal_scroll *{ cursor:auto;}
+ 
 .modal_hd{ width:100%; height:50px; background:#555;}
 .modal_bd{ width:100%; box-sizing:border-box;}
 
 .loading_wrap{margin:250px auto;}
 .project_loading{width:50px; margin:0 auto; display:none;}
 
+
+.modal{ display:none; position:absolute; left:50%; top:50%; z-index:102; box-shadow:1px 1px 20px rgba(0,0,0,.8); background-color:#fff; box-sizing:border-box;}
+
+
+
+/* .modal ID LIST */
+#modal_login{ width:400px; height:350px; z-index:103; margin-left:-200px; margin-top:-175px;}
+#modal_join{ display:none; width:400px; height:520px; margin-left:-200px; margin-top:-260px;}
+#modal_findPw{ width:500px; height:200px; z-index:105; margin-left:-250px; margin-top:-100px;}
+#modal_likeCategory, #modal_tool {
+    width:400px; height:340px; z-index:105; margin-left:-200px; margin-top:-170px;
+}
+
+#writeNoteWrap{ width:600px; min-height:400px; display:none; margin-left:-300px; margin-top:-200px;}
+
+.modal_dCategory {
+    width:640px; height:320px; background:#fff;
+    box-sizing:border-box;
+    margin-left:-320px; margin-top:-160px;
+}
+.modal_dCategory#modal_writeEmbed { height:250px; margin-top:-125px;}
+
+
+
+
 /*로그인 모달*/
-#modal_login{ width:400px; height:400px; background:#fff; z-index:103;}
-#modal_bd_login{ height:360px; padding:20px 30px;}
+#modal_bd_login, #modal_bd_join{ height:360px; padding:20px 30px;}
 .login_inputWrap{ width:340px; height:40px; border-radius:0; margin-bottom:10px;}
 
 .login_inputWrap .login_smallBox{ display:block; width:40px; height:40px; background-color:#555; float:left;}
 
-.inputStyle2{ width:280px; padding:0 10px; height:40px; float:left; border-left:0; background-color:#eee; border:none; color:#666;}
+.inputStyle2{ width:280px; padding:0 10px; height:40px; float:left; border-left:0; background-color:#eee; border:none; color:#666; font-size:12px; }
 
-#inputWrap_id .login_smallBox{ background-image:url(../images/id.png); background-position:center center; background-repeat:no-repeat; background-size:40%}
-#inputWrap_pw .login_smallBox{ background-image:url(../images/password.png); background-position:center center; background-repeat:no-repeat; background-size:40%}
+.inputWrap_id .login_smallBox{ background-image:url(../images/id.png); background-position:center center; background-repeat:no-repeat; background-size:40%}
+.inputWrap_pw .login_smallBox{ background-image:url(../images/password.png); background-position:center center; background-repeat:no-repeat; background-size:40%}
+
 #inputWrap_name .login_smallBox{ background-image:url(../images/name.png); background-position:center center; background-repeat:no-repeat; background-size:55%}
 #inputWrap_gender .login_smallBox{ background-image:url(../images/gender.png); background-position:center center; background-repeat:no-repeat; background-size:55%}
 #inputWrap_studNum .login_smallBox{ background-image:url(../images/student.png); background-position:center center; background-repeat:no-repeat; background-size:60%}
 #inputWrap_bookmark .login_smallBox{ background-image:url(../images/bookmark.png); background-position:center center; background-repeat:no-repeat; background-size:40%}
+#inputWrap_tool .login_smallBox{ background-image:url(../images/tool.png); background-position:center center; background-repeat:no-repeat; background-size:55%}
 
 #btn_mdLogin, #btn_mdJoinForm{ width:340px; height:40px; background:#555; margin-top:10px; margin-bottom:15px; }
 
-#otherLoginWrap{ width:100%; /* height:32px; */ height:12px; margin-bottom:10px;}
+#otherLoginWrap{ width:100%; /* height:32px; */ height:32px; margin-bottom:10px;}
 #link_facebook{ display:block; width:32px; height:32px; background:url(../images/facebook.png) center center no-repeat; float:right;}
 #otherLogin{ display:inline-block; line-height:32px; color:#999; font-size:11px; float:right; margin-right:10px;}
 #btn_mdJoin{ width:338px; height:38px; background:#fff; margin-bottom:10px; border:1px solid #ccc; color:#666; margin-top:15px;}
@@ -46,12 +78,12 @@ body.modal-open {
 /*회원가입 모달*/
 #joinTitle{ width:100%; height:32px; margin-bottom:10px; font-size:16px; line-height:32px; color:#666;}
 
-#modal_join{ display:none; width:400px; height:530px; background:#fff;}
 .join_inputWrap{ width:auto; float:left; margin-right:0; }
-.input_join{ width:105px; float:left; font-size:11.5px;}
+.input_join{ width:105px; float:left; }
 #inputWrap_gender{ margin-right:10px; }
 
-#selectWrap_gender, #selectWrap_bookmark{ border-radius:0; background-color:#eee; color:#666; width:125px; height:40px; line-height:40px; float:left; font-size:13px;  }
+#selectWrap_gender, #selectWrap_bookmark{ border-radius:0; background-color:#eee; color:#666; width:125px; height:40px; line-height:40px; float:left;   }
+
 #selectWrap_bookmark{ width:300px;   }
 
 #btn_mdJoinForm{ margin-top:40px;}
@@ -63,26 +95,20 @@ body.modal-open {
 
 
 /*카테고리 모달-글쓰기창*/
-.modal_dCategory {
-    width:640px; height:320px; background:#fff;
-    box-sizing:border-box; 
-}
 
-#modal_likeCategory {
-    width:640px; height:340px; background:#fff;
-    box-sizing:border-box; z-index:105;
-}
+
+
 
 .modal_hd_dCategory{ width:100%; height:40px; line-height:25px; font-size:16px; box-sizing:border-box; padding:15px 20px 0; background:#fff; }
 
 .modal_bd_dCategory{ width:100%; height:280px; padding:15px 20px; overflow-y:scroll;}
 .modal_bd_dCategory::-webkit-scrollbar{ display:none;}
 
-.modal_bd_dCategory ul{ display:block; width:200px; height:auto; float:left;}
+.modal_bd_dCategory ul{ display:block; width:95%; height:auto; float:left;}
 .modal_bd_dCategory ul li{ width:100%; height:20px; margin-bottom:10px; line-height:25px; clear:both;}
 
 .modal_bd_dCategory label{
-    font-size:12px; float:left; line-height:20px; margin-left:5px; }
+    width:85%; font-size:12px; float:left; line-height:20px; margin-left:5px; }
 
 .label_category{ width:150px;}
 .btn_category {
@@ -111,7 +137,6 @@ body.modal-open {
     height:315px;
 }
 
-#modal_writeEmbed { height:250px;}
 
 #modal_bd_writeEmbed { height:205px; padding:0; padding-top:10px; }
 #modal_bd_writeEmbed textarea{ width:100%; height:190px;  background:#eee;}
@@ -120,9 +145,9 @@ body.modal-open {
 
 
 /*콘텐츠 모달-글보기창*/
-#modal_content{ width:800px; min-height:500px; height:auto; padding-bottom:20px;}
+#modal_content{ width:63%; height:auto; float:left; margin:100px 2% 0 5%;  min-height:500px; padding-bottom:20px;}
 
-#modal_hd_content{ background-color:#fff; height:140px;  box-sizing:border-box;  padding:20px 20px; position:relative;}
+#modal_hd_content{ background-color:#fff; height:140px;  box-sizing:border-box;  padding:20px 5%; position:relative;}
 
 #content_categoryWrap{ font-size:12px; color:#999; padding-bottom:25px;  }
 #modal_hd_content h2{ font-size:18px; font-weight:800;  }
@@ -133,65 +158,61 @@ body.modal-open {
 #modal_hd_content h3#content_date, #content_hits{ color:#888;}
 
 
-#contentHeart{cursor:pointer; width:50px; height:50px; border-radius:50%; border:1px solid #999; position:absolute; top:40px; right:30px; overflow:hidden; }
+#contentHeart{ width:50px; height:50px; border-radius:50%; border:1px solid #999; position:absolute; top:40px; right:30px; overflow:hidden; }
 #contentHeart img{ margin:11px 9px;}
 #heartNum{ display:block; width:50px;  text-align:center; font-size:11px;position:absolute; top:95px; right:30px; }
 
-#modal_bd_content{ width:auto; height:auto; margin:0 20px 30px;}
-#content_imgWrap{ width:760px; min-height:500px; height:auto;  }
+#modal_bd_content{ width:auto; height:auto; margin:0 5% 30px;}
+#content_imgWrap{ width:100%; min-height:500px; height:auto; background:#f5f5f5; }
 #content_imgWrap img, #content_imgWrap iframe{ margin:0 auto;}
 
-#content_tagWrap{width:100%; min-height:60px; height:auto; padding:0 10px; margin-top:20px;}
+#content_tagWrap{width:100%; min-height:60px; height:auto; padding:0; margin-top:20px;}
 #content_tagWrap p{ font-weight:600; font-size:16px; line-height:30px;}
 #content_tagWrap span{ display:inline-block; width:auto; height:20px;  line-height:20px; margin-right:5px; border-radius:8px; padding:5px 8px; background:#999; color:#fff; margin-bottom:8px; font-size:12px;}
 
 #modal_content hr{ margin-bottom:20px;}
 
 
-#modal_ft_content{ width:760px; min-height:80px; height:auto; margin:0 20px;  }
+#modal_ft_content{ width:100%; min-height:80px; height:auto; box-sizing: border-box; padding:0 5%;  }
 
 #writeReplyWrap{ width:100%; height:60px; padding:20px 0; }
-#writeReplyWrap textarea { width:660px; height:60px; background:#eee; float:left;}
-#writeReplyWrap input{ width:100px; height:60px; border:none; background:#0f84cf; color:#fff; float:left; cursor:pointer;}
+#writeReplyWrap textarea { width:85%; height:60px; background:#eee; float:left;}
+#writeReplyWrap input{ width:15%; height:60px; border:none; background:#0f84cf; color:#fff; float:left; cursor:pointer;}
 
 
 .replyContentWrap{ width:100%; min-height:60px; height:auto; padding-bottom:10px;}
-.replyContentWrap p{  padding-bottom:3px; border-bottom:1px solid #ccc;  position:relative; text-indent:10px;}
+.replyContentWrap p{  padding-bottom:3px; border-bottom:1px solid #ccc;  position:relative; }
 .replyContentWrap p a{ line-height:20px; font-size:14px; font-weight:600; }
 
-.replyContentWrap p .btn_deleteReply{cursor:pointer; position:absolute; background-color:#666; color:#fff; text-align:center; text-indent:0; border-radius:50%; margin-left:10px; width:15px; height:15px; border:1px solid #eee; font-weight:400; line-height:15px; font-size:12px;  }
+.replyContentWrap p #btn_deleteReply{ position:absolute; background-color:#666; color:#fff; text-align:center; text-indent:0; border-radius:50%; margin-left:10px; width:15px; height:15px; border:1px solid #eee; font-weight:400; line-height:15px; font-size:12px;  }
 
 .replyContentWrap p span{ color:#999; font-size:12px; font-weight:500; float:right; padding-right:10px;}
 
-.replyContentWrap .replyContent{ width:100%; min-height:30px; height:auto; box-sizing: border-box;  padding:5px 10px; font-size:12px; line-height:20px;}
+.replyContentWrap .replyContent{ width:100%; min-height:30px; height:auto; box-sizing: border-box;  padding:5px 0; font-size:12px; line-height:20px;}
 
 
 
-#modal_content_userInfo{ width:300px; min-height:400px; height:auto;}
+#modal_content_userInfo{ width:25%; min-height:400px; height:auto; margin-right:5%; margin-top:100px; float:left;}
 
-#modal_hd_content_userInfo{ background-color:#0f84cf; width:300px; height:50px;}
-#modal_hd_content_userInfo a{ display:block; width:300px; height:50px; padding:0 20px; line-height:50px; box-sizing:border-box; font-weight:500; color:#fff; background:url(../images/user_circle.png) 250px center no-repeat; }
+#modal_hd_content_userInfo{ background-color:#0f84cf; width:100%; height:50px;}
+#modal_hd_content_userInfo a{ display:block; width:100%; height:50px; padding:0 5%; line-height:50px; box-sizing:border-box; font-weight:500; color:#fff; background:url(../images/user_circle.png) 95% center no-repeat; }
 
 
-#modal_bd_content_userInfo{ padding:20px; font-size:14px; color:#666; line-height:20px; min-height:250px; height:auto;}
+#modal_bd_content_userInfo{ padding:20px 5%; font-size:14px; color:#666; line-height:20px; min-height:250px; height:auto;}
 
-#modal_bd_content_userFavorite{ width:100%; height:49px; border-bottom:1px solid #ccc; line-height:49px; background-image:url(../images/star.png); background-repeat:no-repeat; background-position:15px center; background-size:8%; color:#666; text-indent:50px; font-size:12px;}
+#modal_bd_content_userFavorite{ width:100%; min-height:49px; height:auto; border-bottom:1px solid #ccc; line-height:49px; background-image:url(../images/star.png); background-repeat:no-repeat; background-position:5% center; background-size:7%; color:#666; text-indent:15%; font-size:12px;}
 
 #modal_ft_content_userInfo{ width:100%; height:50px; }
 
 #modal_ft_content_userInfo ul{ height:49px; border-top:1px solid #ccc;}
-#modal_ft_content_userInfo ul li{ width:150px; float:left;}
-#modal_ft_content_userInfo ul li:first-child{ width:149px; border-right:1px solid #ccc;}
-#modal_ft_content_userInfo ul li a{cursor:pointer; display:block; width:100%; height:49px; line-height:49px; text-align:center; font-size:12px; color:#999;}
-#modal_ft_content_userInfo .followMember{background-color:#fff;}
-#modal_ft_content_userInfo .unfollowMember{ background-color:#0f84cf; color:#fff;}
+#modal_ft_content_userInfo ul li{ width:50%; float:left;}
+#modal_ft_content_userInfo ul li:first-child{ width:49%; border-right:1px solid #ccc;}
+#modal_ft_content_userInfo ul li a{ display:block; width:100%; height:49px; line-height:49px; text-align:center; background-color:#fff; font-size:12px; color:#999;}
 #modal_ft_content_userInfo ul li a:hover{ background:#eee; color:#666}
 
 
 
-#modal_findPw{ width:500px; height:200px; background:#fff;
-    box-sizing:border-box; z-index:105;}
-    
+/* 비밀번호 찾기 모달 */    
 #modal_findPw_hd{ height:80px; background:#fff; box-sizing: border-box; padding:40px 30px 0;}
 #modal_findPw_bd{ height:90px; box-sizing: border-box; padding:20px 30px;}
 

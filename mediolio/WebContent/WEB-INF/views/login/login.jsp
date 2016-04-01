@@ -74,10 +74,10 @@
             <span id="otherLogin">LOGIN WITH FACEBOOK</span>
         </div>
         
-        <div class="login_inputWrap" id="inputWrap_id">
+        <div class="login_inputWrap inputWrap_id">
             <div class="login_smallBox"></div><input class="inputStyle2" type="text" placeholder="ID"/>
         </div>
-        <div class="login_inputWrap" id="inputWrap_pw">
+        <div class="login_inputWrap inputWrap_pw">
             <div class="login_smallBox"></div><input class="inputStyle2" type="password" placeholder="PASSWORD"/>
         </div>
         
