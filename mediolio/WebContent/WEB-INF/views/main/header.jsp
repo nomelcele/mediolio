@@ -74,130 +74,206 @@
     </div><!--//headerWrap-->   
 </div>
 
-<div class="modal_bg"><div class="loading_wrap"><img class="project_loading" src="resources/images/project_loading.gif"></div></div>
-<div class="modal_bg2"></div>
+
 <div id="modalBox"></div>
 <div id="modalBox2"></div>
 
-<div class="modal" id="modal_login">
-	<div class="modal_hd"></div> 
-    <div class="modal_bd" id="modal_bd_login">
-		<div id="otherLoginWrap">
-            <!-- <a id="link_facebook" href="#"></a>
-            <span id="otherLogin">LOGIN WITH FACEBOOK</span> -->
+
+<div class="modal_bg">
+	<div class="loading_wrap"><img class="project_loading" src="resources/images/project_loading.gif"></div>
+    <div class="modal_scroll">
+		<div class="modal" id="modal_login">
+		    <div class="modal_bd" id="modal_bd_login">
+				<div id="otherLoginWrap">
+		            <!-- <a id="link_facebook" href="#"></a>
+		            <span id="otherLogin">LOGIN WITH FACEBOOK</span> -->
+		        </div>
+		        
+		        <div class="login_inputWrap inputWrap_id">
+		            <div class="login_smallBox"></div><input class="inputStyle2" name="m_mail" type="text" placeholder = "아이디" onfocus="this.placeholder = ''" onblur="this.placeholder = 'EMAIL'" id = "mail"/>
+		        </div>
+		        <div class="login_inputWrap inputWrap_pw">
+		            <div class="login_smallBox"></div><input class="inputStyle2" name="m_pw" type="password" placeholder = "비밀번호" onfocus="this.placeholder = ''" onblur="this.placeholder = 'PASSWORD'" id = "pw"/>
+		        </div>
+		        
+		        <input type="button" class="btnStyle2" id="btn_mdLogin" value="LOGIN"/>
+		        
+		        <p><a href="#" onclick="pwModalOpen()">FIND PASSWORD</a></p>
+		        
+		        <hr>
+		        <input type="button" class="btnStyle2" id="btn_mdJoin" value="JOIN" onClick="joinModalOpen()"/>
+		    </div><!--//modal_bd -->
+		</div><!--//modal_login-->
+		
+		
+		<div class="modal" id="modal_join">
+		    <div class="modal_bd" id="modal_bd_login">
+		    	<div id="joinTitle">JOIN FORM</div>
+		        <form action = "" method="post" name="sendForm">
+		        	<div class="login_inputWrap inputWrap_id">
+		            	<div class="login_smallBox"></div>
+		            	<input class="inputStyle2" id = "id" name="mail" type="text" placeholder = "아이디" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ID (EMAIL)'"/>
+		        	</div>
+		        	<input type="hidden" id="m_mail" name="m_mail" value="">
+			        <div class="login_inputWrap inputWrap_pw">
+		    	        <div class="login_smallBox"></div>
+		    	        <input class="inputStyle2" id = "jpw" type="password" name="pw" placeholder = "비밀번호" onfocus="this.placeholder = ''" onblur="this.placeholder = 'PASSWORD'"/>
+		    	    </div>
+		       		<div class="login_inputWrap inputWrap_pw">
+		            	<div class="login_smallBox"></div>
+		            	<input class="inputStyle2" id = "jpw_correct" type="password" name="pw_correct" placeholder = "비밀번호 확인" onfocus="this.placeholder = ''" onblur="this.placeholder = 'PASSWORD CORRECT'"/>
+		        	</div>
+		        	<input type="hidden" id="m_pw" name="m_pw" value="">
+		        	<div class="login_inputWrap" id="inputWrap_name">
+		            	<div class="login_smallBox"></div>
+		            	<input class="inputStyle2" type="text"  name="m_name" id = "m_nickname" maxlength="14" placeholder = "이름" onfocus="this.placeholder = ''" onblur="this.placeholder = 'NICKNAME'"/>
+		        	</div>
+		        	
+		        	<div class="login_inputWrap">
+			        	<div class="login_inputWrap join_inputWrap" id="inputWrap_gender">
+			            	<div class="login_smallBox"></div>
+			            	<div id="selectWrap_gender">
+			                	<select class="inputStyle2 input_join" id="input_gender" name="m_gender">
+			                		<!-- <option value="" disabled selected style="display: none;">GENDER</option> -->
+			                    	<option value="male">남자</option>
+			                    	<option value="female">여자</option>
+			                	</select>
+			            	</div>
+			        	</div>
+			        	<div class="login_inputWrap join_inputWrap" id="inputWrap_studNum">
+			            	<div class="login_smallBox"></div>
+			            	<input class="inputStyle2 input_join" type = "text" name="m_studentID" maxlength="2" id = "m_studentID" placeholder = "학번" onfocus="this.placeholder = ''" onblur="this.placeholder = 'STUDENT NUMBER'"/>
+			        	</div>
+		        	</div>
+		        	<div class="login_inputWrap" id="inputWrap_bookmark" >
+		           		<div class="login_smallBox"></div>
+		            	<input class="inputStyle2" id="btn_addBookmark" type="button" value="관심분야" onClick="likeCategoryModalOpen()"/>
+		        	</div>
+		        	
+		        	<div class="login_inputWrap" id="inputWrap_tool" >
+		                <div class="login_smallBox"></div>
+		                <input class="inputStyle2" id="btn_addTool type="button" value="보유 기술" onClick="toolModalOpen()"/>
+		            </div>
+		        	<input type="hidden" name="m_interestingPart" id="m_interestingPart" value="">
+		        </form>
+		        <input type="button" class="btnStyle2" id="btn_mdJoinForm" value="JOIN"/>
+		        
+		    </div><!--//modal_bd -->
+		</div><!--//modal_join-->
+	</div><!--//modal_scroll-->
+</div><!--//modal_bg-->
+		    
+<div class="modal_bg2">
+	<div class="modal modal_dCategory" id="modal_likeCategory">
+	    <div class="modal_hd modal_hd_dCategory">관심분야
+	        <input class="btnStyle btn_category" id="btn_likeCategory" type="button" value="등록"/>
+	    </div>
+	    <div class="modal_bd modal_bd_dCategory">
+	        <ul>
+	            <li>
+	                <input type="checkbox" name='check' data-labelauty="게임" value="1"/>
+	                <label class="label_category">게임</label>
+	            </li>
+	            <li>
+	                <input type="checkbox" name='check' data-labelauty="웹&앱" value="2"/>
+	                <label class="label_category">웹&앱</label>
+	            </li>
+	        </ul>
+	        <ul>
+	            <li>
+	                <input type="checkbox" name='check' data-labelauty="영상&사운드" value="3"/>
+	                <label class="label_category">영상</label>
+	            </li>
+	            <li>
+	                <input type="checkbox" name='check' data-labelauty="3D" value="4"/>
+	                <label class="label_category">3D</label>
+	            </li>
+	        </ul>
+	        <ul>
+	            <li>
+	                <input type="checkbox" name='check' data-labelauty="디자인" value="5"/>
+	                <label class="label_category">디자인</label>
+	            </li>
+	        </ul>
+	    </div><!--//modal_bd_likeCategory -->
+	</div><!--//_modal_likeCategory-->
+	
+	<div class="modal modal_dCategory" id="modal_tool">
+        <div class="modal_hd modal_hd_dCategory">보유 기술
+            <input class="btnStyle btn_category" id="btn_tool" type="button" value="등록"/>
         </div>
-        
-        <div class="login_inputWrap" id="inputWrap_id">
-            <div class="login_smallBox"></div><input class="inputStyle2" name="m_mail" type="text" placeholder = "EMAIL" onfocus="this.placeholder = ''" onblur="this.placeholder = 'EMAIL'" id = "mail"/>
-        </div>
-        <div class="login_inputWrap" id="inputWrap_pw">
-            <div class="login_smallBox"></div><input class="inputStyle2" name="m_pw" type="password" placeholder = "PASSWORD" onfocus="this.placeholder = ''" onblur="this.placeholder = 'PASSWORD'" id = "pw"/>
-        </div>
-        
-        <input type="button" class="btnStyle2" id="btn_mdLogin" value="LOGIN"/>
-        
-        <p><a href="#" onclick="pwModalOpen()">FIND PASSWORD</a></p>
-        
-        <hr>
-        <input type="button" class="btnStyle2" id="btn_mdJoin" value="JOIN" onClick="joinModalOpen()"/>
-    </div><!--//modal_bd -->
-</div><!--//modal_login-->
+        <div class="modal_bd modal_bd_dCategory">
+            <ul>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">보유기술1</label>
+                </li>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">게임프로그래밍</label>
+                </li>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">게임프로그래밍</label>
+                </li>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">게임프로그래밍</label>
+                </li>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">게임프로그래밍</label>
+                </li>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">게임프로그래밍</label>
+                </li>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">게임프로그래밍</label>
+                </li>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">게임프로그래밍</label>
+                </li>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">게임프로그래밍</label>
+                </li>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">게임프로그래밍</label>
+                </li>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">게임프로그래밍ul 1개만!</label>
+                </li>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">게임프로그래밍ul 1개만!</label>
+                </li>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">게임프로그래밍ul 1개만!</label>
+                </li>
+                <li>
+                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
+                    <label class="label_category">보유기술 끝 ul 1개만!</label>
+                </li>
+            </ul>
 
 
-<div class="modal" id="modal_join">
-	<div class="modal_hd"></div> 
-    <div class="modal_bd" id="modal_bd_login">
-    	<div id="joinTitle">JOIN FORM</div>
-        <form action = "" method="post" name="sendForm">
-        	<div class="login_inputWrap" id="inputWrap_id">
-            	<div class="login_smallBox"></div>
-            	<input class="inputStyle2" id = "id" name="mail" type="text" placeholder = "ID (EMAIL)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ID (EMAIL)'"/>
-        	</div>
-        	<input type="hidden" id="m_mail" name="m_mail" value="">
-	        <div class="login_inputWrap" id="inputWrap_pw">
-    	        <div class="login_smallBox"></div>
-    	        <input class="inputStyle2" id = "jpw" type="password" name="pw" placeholder = "PASSWORD" onfocus="this.placeholder = ''" onblur="this.placeholder = 'PASSWORD'"/>
-    	    </div>
-       		<div class="login_inputWrap" id="inputWrap_pw">
-            	<div class="login_smallBox"></div>
-            	<input class="inputStyle2" id = "jpw_correct" type="password" name="pw_correct" placeholder = "PASSWORD CORRECT" onfocus="this.placeholder = ''" onblur="this.placeholder = 'PASSWORD CORRECT'"/>
-        	</div>
-        	<input type="hidden" id="m_pw" name="m_pw" value="">
-        	<div class="login_inputWrap" id="inputWrap_name">
-            	<div class="login_smallBox"></div>
-            	<input class="inputStyle2" type="text"  name="m_name" id = "m_nickname" maxlength="14" placeholder = "NAME" onfocus="this.placeholder = ''" onblur="this.placeholder = 'NICKNAME'"/>
-        	</div>
-        	<div class="login_inputWrap join_inputWrap" id="inputWrap_gender">
-            	<div class="login_smallBox"></div>
-            	<div id="selectWrap_gender">
-                	<select class="inputStyle2 input_join" id="input_gender" name="m_gender">
-                		<!-- <option value="" disabled selected style="display: none;">GENDER</option> -->
-                    	<option value="male">MALE</option>
-                    	<option value="female">FEMALE</option>
-                	</select>
-            	</div>
-        	</div>
-        	<div class="login_inputWrap join_inputWrap" id="inputWrap_studNum">
-            	<div class="login_smallBox"></div>
-            	<input class="inputStyle2 input_join" type = "text" name="m_studentID" maxlength="2" id = "m_studentID" placeholder = "STUDENT NUMBER" onfocus="this.placeholder = ''" onblur="this.placeholder = 'STUDENT NUMBER'"/>
-        	</div>
-        
-        	<div class="login_inputWrap" id="inputWrap_bookmark" >
-           		<div class="login_smallBox"></div>
-            	<input class="inputStyle2" id="btn_addBookmark" type="button" value="LIKE" onClick="likeCategoryModalOpen()"/>
-        	</div>
-        	<input type="hidden" name="m_interestingPart" id="m_interestingPart" value="">
-        </form>
-        <input type="button" class="btnStyle2" id="btn_mdJoinForm" value="JOIN"/>
-        
-    </div><!--//modal_bd -->
-</div><!--//modal_join-->
-
-
-    
-<div class="modal modal_dCategory" id="modal_likeCategory">
-    <div class="modal_hd modal_hd_dCategory">CATEGORY
-        <input class="btnStyle btn_category" id="btn_likeCategory" type="button" value="REGIST"/>
-    </div>
-    <div class="modal_bd modal_bd_dCategory">
-        <ul>
-            <li>
-                <input type="checkbox" name='check' data-labelauty="게임" value="1"/>
-                <label class="label_category">게임</label>
-            </li>
-            <li>
-                <input type="checkbox" name='check' data-labelauty="웹&앱" value="2"/>
-                <label class="label_category">웹&앱</label>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <input type="checkbox" name='check' data-labelauty="영상&사운드" value="3"/>
-                <label class="label_category">영상</label>
-            </li>
-            <li>
-                <input type="checkbox" name='check' data-labelauty="3D" value="4"/>
-                <label class="label_category">3D</label>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <input type="checkbox" name='check' data-labelauty="디자인" value="5"/>
-                <label class="label_category">디자인</label>
-            </li>
-        </ul>
-    </div><!--//modal_bd_likeCategory -->
-</div><!--//_modal_likeCategory-->
-
-
-
-<div class="modal" id="modal_findPw">
-    <div class="modal_hd" id="modal_findPw_hd">FIND PASSWORD</div> 
-    <div class="modal_bd" id="modal_findPw_bd">
-        <div class="login_inputWrap" id="textWrap_findPw">
-            <input class="inputStyle2" type="text" placeholder="E-MAIL" id="fpw_email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-MAIL'"/>
-            <input type="button" value="send" class="btnStyle2" id="btn_pwSend"/>
-        </div>
-    </div>
-    
-</div><!-- //modal_findPw -->
+        </div><!--//modal_bd_tool -->
+    </div><!--//_modal_tool-->
+	
+	<div class="modal" id="modal_findPw">
+	    <div class="modal_hd" id="modal_findPw_hd">FIND PASSWORD</div> 
+	    <div class="modal_bd" id="modal_findPw_bd">
+	        <div class="login_inputWrap" id="textWrap_findPw">
+	            <input class="inputStyle2" type="text" placeholder="E-MAIL" id="fpw_email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-MAIL'"/>
+	            <input type="button" value="send" class="btnStyle2" id="btn_pwSend"/>
+	        </div>
+	    </div>
+	    
+	</div><!-- //modal_findPw -->
+</div><!-- //modal_bg2 -->

@@ -1,12 +1,16 @@
 $('document').ready(function(){
-    //윈도우 크기변경 시 모달 위치 조정
-	
-
-	
+    
     //모달 닫기-클래스
-	$('.modal_bg').on('click', function(){
-		modalClose();
-	})	
+	$('.modal_bg, .modal_scroll').click(function(e) {   
+		if( !$(e.target).is( $('.modal_scroll').find('*')) &&  !$(e.target).is( $('.modal_bg2').find('*')) ) {
+            $('body').removeClass('preventScroll');
+            modalClose();
+            
+            $('body').css({
+                position: 'static'
+            })
+        }
+	})
     
     //모달 스크롤 스타일
     $('.modal_bd_dCategory').mCustomScrollbar();
@@ -20,13 +24,13 @@ function selectCategory(){
 	$('.selectbox label').text(search_category);
 }
 
-function modalOpen(){
-	$('.modal_bg, .modal').show();	
-	return false;
-}
-
 function modalClose(){
-    $('.modal_bg').css('z-index','100');
+	$('.modal').attr('style','');
+    
+    $('.modal_bg').css({
+        zIndex:100,
+        overflowY:'hidden'
+    });
 	$('.modal_bg, .modal').hide();
 	
 	$('#mail').val("");
@@ -41,79 +45,40 @@ function modalClose(){
 	$(":checkbox[name='check']:checked").each(function () {  
 		$(this).attr('checked', false);
 	});
-	$('body').css({
-        position:'relative'
-    })
 }
 
 function loginModalOpen(){
-	
-    var win_w = $(window).width();
-	var win_h = $(window).height();
-	
-	var movImg_w = $('#modal_login').width();
-	var movImg_h = $('#modal_login').height();
-	
-	var movImg_posX = (win_w - movImg_w)/2;
-	var movImg_posY = (win_h - movImg_h)/2;
-    
-	
-	
-    $('#modal_login').css({ left: movImg_posX, top: movImg_posY });
+	$('body').addClass('preventScroll');
 	$('.modal_bg, #modal_login').show();
 	
-	modalResize();
-    
 	return false;
 }
     
     
     
 function joinModalOpen(){
-	var win_w = $(window).width();
-	var win_h = $(window).height();
-	
-	var movImg_w = $('#modal_join').width();
-	var movImg_h = $('#modal_join').height();
-	
-	var movImg_posX = (win_w - movImg_w)/2;
-	var movImg_posY = (win_h - movImg_h)/2;
-		
+    $('body').addClass('preventScroll');
 	$('#modal_login').hide();
-	$('#modal_join').css({ left: movImg_posX, top: movImg_posY });
 	$('#modal_join').show();
-	
-	
-	
-/*    $('#btn_mdJoinForm').on('click',function(){
+    $('#btn_mdJoinForm').on('click',function(){
         $('.modal_bg, .modal').hide();
-    })*/
-    
-    
+    })
 }
 
 var likestr="";
 
 function likeCategoryModalOpen(){
-    var win_w = $(window).width();
-	var win_h = $(window).height();
-	
-	var movImg_w = $('#modal_likeCategory').width();
-	var movImg_h = $('#modal_likeCategory').height();
-	
-	var movImg_posX = (win_w - movImg_w)/2;
-	var movImg_posY = (win_h - movImg_h)/2;
-    
-    $('#modal_likeCategory').hide();
+   
     $(":checkbox").labelauty({ label: false });
     
-	$('#modal_likeCategory').css({ left: movImg_posX, top: movImg_posY });
-    
     $('.modal_bg').hide();
-    $('.modal_bg2').show();
-	$('#modal_likeCategory').show();
+    $('.modal_bg2, #modal_likeCategory').show();
+    $('#btn_likeCategory').on('click',function(){
+        $('#modal_likeCategory, .modal_bg2').hide();
+        $('.modal_bg').show();
+    })
     
-    $('.modal_bg2, #btn_likeCategory').on('click',function(){
+    $('#btn_likeCategory').on('click',function(){
     	if($(this).attr('class')=='modal_bg2'){
     		var strarray = likestr.split(',');
     		$(":checkbox[name='check']:checked").each(function () { 
@@ -128,12 +93,22 @@ function likeCategoryModalOpen(){
 				likestr += $(this).val() + ",";
 			});
     	}
-        $('#modal_likeCategory').hide();
-        $('.modal_bg2').hide();
-        $('.modal_bg').show();
     })
     
     
+    
+}
+
+
+function toolModalOpen(){
+    $(":checkbox").labelauty({ label: false });
+    
+    $('.modal_bg').hide();
+    $('.modal_bg2, #modal_tool').show();
+    $('#btn_tool').on('click',function(){
+        $('#modal_tool, .modal_bg2').hide();
+        $('.modal_bg').show();
+    })
     
 }
 
@@ -143,18 +118,9 @@ function writeDCategoryModalOpen(){
 	if($("#selectedCategory").val() == 0){
 		alert("카테고리를 선택해주세요.");
 	} else {
-		var win_w = $(window).width();
-		var win_h = $(window).height();
-		
-		var movImg_w = $('#modal_writeDCategory').width();
-		var movImg_h = $('#modal_writeDCategory').height();
-		
-		var movImg_posX = (win_w - movImg_w)/2;
-		var movImg_posY = (win_h - movImg_h)/2;
-			
-		$('#modal_writeDCategory').css({ left: movImg_posX, top: movImg_posY });
-	    $('.modal_bg').show();
-		$('#modal_writeDCategory').show();
+		$('body').addClass('preventScroll');
+	    $('.modal_bg, #modal_writeDCategory').show();
+	    
 	    
 	    $('#btn_writeDCategory').on('click',function(){
 	    	var arr = $(":checkbox:checked");
@@ -201,35 +167,29 @@ function writeDCategoryModalOpen(){
 }    
 
 function writeEmbedModalOpen(){
-    var win_w = $(window).width();
-	var win_h = $(window).height();
-	
-	var movImg_w = $('#modal_writeEmbed').width();
-	var movImg_h = $('#modal_writeEmbed').height();
-	
-	var movImg_posX = (win_w - movImg_w)/2;
-	var movImg_posY = (win_h - movImg_h)/2;
-		
-	$('#modal_writeEmbed').css({ left: movImg_posX, top: movImg_posY });
-    $('.modal_bg').show();
-	$('#modal_writeEmbed').show();
+	$('body').addClass('preventScroll');
+    $('.modal_bg, #modal_writeEmbed').show();
     
     $('#btn_writeEmbed').on('click',function(){
         $('.modal_bg, .modal').hide();
     })
-    
 }
 
 
 //인덱스 모달 추가
 function contentModalOpen(a, type){
-    $('.modal_bg').show();
+	$('body').addClass('preventScroll');
+    $('#modal_content').parents('.modal_bg').animate({ scrollTop: 0 })
+    
+    $('.modal').css({ 
+        position:'static',
+        left:0,
+        top:0
+    });
     $(".project_loading").css("display","block");
 
 	var anchor = a;
-    var win_w = $(window).width();
-	var win_h = $(window).height();
-	
+    
 	var open_p_id;
 	var open_m_id;
 	
@@ -256,89 +216,12 @@ function contentModalOpen(a, type){
 			m_id: open_m_id
 		},
 		success : function(data) {
-			$("#modalBox").html(data);
-			location.href="#detail";
-			
-			var movImg_w = $('#modal_content').width();
-			var movImg_h = $('#modal_content').height();
-			
-			var movImg_posX = (win_w - movImg_w)/2;
-			var movImg_posY = (win_h - movImg_h)/2;
-			
-			
-			$(window).resize(function(){
-		        var win_w = $(window).width();
-		        var win_h = $(window).height();
+			$('.modal_bg').css({ overflowY:'scroll'});
+		    $('.modal_bg, #modal_content, #modal_content_userInfo').show();
 
-		        var movImg_w = $('.modal').width();
-		        var movImg_h = $('.modal').height();
-
-		        var movImg_posX = (win_w - movImg_w)/2;
-		        var movImg_posY = (win_h - movImg_h)/2;
-
-		        $('#modal_content').css({ left: '10%', top: 100 });
-		        $('#modal_content_userInfo').css({ 
-		            left: '10%',
-		            marginLeft: $('#modal_content').width()+20,
-		            top: 100
-		        });
-
-		    }).resize();
-
-		    
-		    
-		   $('#modal_content').css({ 
-		        left: '10%', 
-		        top: 100 
-		    });
-		    $('#modal_content_userInfo').css({ 
-		        left: '10%',
-		        marginLeft: $('#modal_content').width()+20,
-		        top: 100
-		    });
-		    $('.modal_bg').show();
-		   $('#modal_content').show();
-		    $('#modal_content_userInfo').show();
 		}
 	});
 	
-    $('body').css({
-        position:'fixed'
-    });
-    
-    $('.modal_bg, #modalBox').mousewheel(function(e, delta){ 
-        
-        var currentTop = $('#modal_content').offset().top;
-        scrollAmount = 200;
-        
-        if( delta > 0 ) {  //delta > 0 : 마우스 휠을 위로 올림
-            prevSize = $(this).prev().height();
-            $('#modal_content').stop().animate( {top:currentTop + scrollAmount} )          
-            if(currentTop >= 0 ){
-                $('#modal_content_userInfo').stop().animate({
-                    top: 100
-                });
-                $('#modal_content').stop().animate({
-                    top: 100
-                });
-            }
-        }//마우스휠 위로 올릴 때 끝
-        
-        else {  //마우스휠 아래로 내릴 때
-            nextSize = $(this).next().height();
-            $('#modal_content').stop().animate( {top: currentTop - scrollAmount} )
-            
-            if(currentTop <= -($('#modal_content').height() - $(window).height()) ){
-                $('#modal_content').stop();
-            }      
-            if(currentTop <= 100){
-                $('#modal_content_userInfo').stop().animate({
-                    top: 0 
-                });
-            }          
-        }//마우스휠 아래로 내릴 때 끝   
-    });
-    
     $(".project_loading").css("display","none");
 
 }
@@ -347,8 +230,6 @@ function contentModalOpen(a, type){
 
 //쪽지보내기 모달
 function noteModalOpen(step, oponent_id, oponent_name){
-  var win_w = $(window).width();
-	var win_h = $(window).height();
 	var send_to, send_to_name;
 	if(step=='somebody'){
 		//메세지 페이지에서 열었을 경우
@@ -376,30 +257,16 @@ function noteModalOpen(step, oponent_id, oponent_name){
 			location.href="#msgSend";
 			//console.log('success : ' + step);
 			
-			var win_w = $(window).width();
-	        var win_h = $(window).height();
-			
-			var movImg_w = $('#writeNoteWrap').width();
-			var movImg_h = $('#writeNoteWrap').height();
-			
-			var movImg_posX = (win_w - movImg_w)/2;
-			var movImg_posY = (win_h - movImg_h)/2;
-			
-			$('#writeNoteWrap').css({ position:'fixed', left: movImg_posX, top: $(window).scrollTop()+50 });
-
-			modalResize();
-
-		    $('.modal_bg').hide();
-		    $('.modal_bg2').show();
-			$('#writeNoteWrap').show();
+			$('body').addClass('preventScroll');
+		    $('.modal_bg, #writeNoteWrap').show();
 		    
-			
+		    
 			$('#btn_sendNote').on('click', function(){
 				msgSend(step);
 			});
 			
 		    $('.modal_bg2').on('click',function(){
-		        $('.modal_bg2, #writeNoteWrap').hide();
+		    	$('.modal_bg, .modal').hide();
 		        if(step=='modal'){
 		        	//프로젝트 상세보기 모달에서 열었을 경우
 		        	$('.modal_bg').show();
@@ -429,29 +296,11 @@ function msgSend(step){
 }
 
 function pwModalOpen() {
-	var win_w = $(window).width();
-	var win_h = $(window).height();
-
-	var movImg_w = $('#modal_findPw').width();
-	var movImg_h = $('#modal_findPw').height();
-
-	var movImg_posX = (win_w - movImg_w) / 2;
-	var movImg_posY = (win_h - movImg_h) / 2;
-
-	$('#modal_findPw').hide();
-
-	$('#modal_findPw').css({
-		left : movImg_posX,
-		top : movImg_posY
-	});
-
-	$('.modal_bg').hide();
-	$('.modal_bg2').show();
-	$('#modal_findPw').show();
-
-	$('.modal_bg2').on('click', function() {
-		$('#modal_findPw').hide();
-		$('.modal_bg2').hide();
+	$('#modal_findPw, .modal_bg').hide();
+	$('.modal_bg2, #modal_findPw').show();
+	
+	$('.modal_bg2, #btn_pwSend').on('click', function() {
+		$('#modal_findPw, .modal_bg2').hide();
 		$('.modal_bg').show();
 		$('#fpw_email').val("");
 		
