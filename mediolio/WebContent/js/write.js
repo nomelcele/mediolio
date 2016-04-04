@@ -109,8 +109,9 @@ $('document').ready(function(){
     $('#btn_addText').on('click',function(){
 //    	addContent();
     	
-        $('#write_bd').append('<div class="write_textarea contentBox" contenteditable="true" data-sort='+order+'>'
+        $('#write_bd').append('<div class="write_textarea contentBox"  data-sort='+order+'>'
         		+'<div contenteditable="true" style="min-height:inherit; height:auto;"></div>'
+        		+'<div contenteditable="false">'
         		+'<ul class="text_toolBoxes" id="text_toolBox">'
         		+'<li id="text_size">'
         		+'<select id="select_fontSize" class="txtSize">'
@@ -125,6 +126,7 @@ $('document').ready(function(){
                 +'<li id="text_up"><a href="#" onclick="moveUpElement(this); return false;"></a></li>'
                 +'<li id="text_down"><a href="#" onclick="moveDownElement(this); return false;"></a></li>'
                 +'<li id="text_delete"><a href="#" onclick="removeElement(this); return false;"></a></li></ul>'
+                +'</div>'
                 +'</div>'
         );
         
