@@ -40,7 +40,7 @@ function modalClose(){
 	$('#jpw_correct').val("");
 	$('#m_nickname').val("");
 	$('#m_studentID').val("");
-	$('#btn_addBookmark').val("LIKE");
+	$('#btn_addBookmark').val("관심분야 (필수 2개)");
 	$("#sel_gender").text("GENDER");
 	$(":checkbox[name='check']:checked").each(function () {  
 		$(this).attr('checked', false);
@@ -73,16 +73,18 @@ function likeCategoryModalOpen(){
     
     $('.modal_bg').hide();
     $('.modal_bg2, #modal_likeCategory').show();
+/*    $('#btn_likeCategory').on('click',function(){
+        $('#modal_likeCategory, .modal_bg2').hide();
+        $('.modal_bg').show();
+    })*/
+    
     $('#btn_likeCategory').on('click',function(){
         $('#modal_likeCategory, .modal_bg2').hide();
         $('.modal_bg').show();
-    })
-    
-    $('#btn_likeCategory').on('click',function(){
     	if($(this).attr('class')=='modal_bg2'){
     		var strarray = likestr.split(',');
     		$(":checkbox[name='check']:checked").each(function () { 
-    			if($(this).val()!=strarray[0]&&$(this).val()!=strarray[1]&&$(this).val()!=strarray[2])
+    			if($(this).val()!=strarray[0]&&$(this).val()!=strarray[1])
     			$(this).attr('checked', false);
     		});
     		$(":checkbox[name='check']").removeAttr("disabled");
@@ -93,6 +95,7 @@ function likeCategoryModalOpen(){
 				likestr += $(this).val() + ",";
 			});
     	}
+
     })
     
     
