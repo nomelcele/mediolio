@@ -86,7 +86,7 @@ $(function(){
 	});
 	
 	$(":checkbox[name='check']").change(function() {
-        if( $(":checkbox[name='check']:checked").length==3 ) {
+        if( $(":checkbox[name='check']:checked").length==2 ) {
             $(":checkbox[name='check']:not(:checked)").attr("disabled", "disabled");
         }
         // 체크된 갯수가 다르면 활성화 시킴
@@ -101,7 +101,7 @@ $(function(){
 		});
 		var strr = "";
 		if(str==""){
-			strr="LIKE";
+			strr="관심분야 (필수 2개)";
 		}
 		else{
 			strr = str.slice(0,-2);
