@@ -112,21 +112,21 @@
 		        <form action = "" method="post" name="sendForm">
 		        	<div class="login_inputWrap inputWrap_id">
 		            	<div class="login_smallBox"></div>
-		            	<input class="inputStyle2" id = "id" name="mail" type="text" placeholder = "아이디" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ID (EMAIL)'"/>
+		            	<input class="inputStyle2" id = "id" name="mail" type="text" placeholder = "아이디" onfocus="this.placeholder = ''" onblur="this.placeholder = '아이디'"/>
 		        	</div>
 		        	<input type="hidden" id="m_mail" name="m_mail" value="">
 			        <div class="login_inputWrap inputWrap_pw">
 		    	        <div class="login_smallBox"></div>
-		    	        <input class="inputStyle2" id = "jpw" type="password" name="pw" placeholder = "비밀번호" onfocus="this.placeholder = ''" onblur="this.placeholder = 'PASSWORD'"/>
+		    	        <input class="inputStyle2" id = "jpw" type="password" name="pw" placeholder = "비밀번호" onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호'"/>
 		    	    </div>
 		       		<div class="login_inputWrap inputWrap_pw">
 		            	<div class="login_smallBox"></div>
-		            	<input class="inputStyle2" id = "jpw_correct" type="password" name="pw_correct" placeholder = "비밀번호 확인" onfocus="this.placeholder = ''" onblur="this.placeholder = 'PASSWORD CORRECT'"/>
+		            	<input class="inputStyle2" id = "jpw_correct" type="password" name="pw_correct" placeholder = "비밀번호 확인" onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호 확인'"/>
 		        	</div>
 		        	<input type="hidden" id="m_pw" name="m_pw" value="">
 		        	<div class="login_inputWrap" id="inputWrap_name">
 		            	<div class="login_smallBox"></div>
-		            	<input class="inputStyle2" type="text"  name="m_name" id = "m_nickname" maxlength="14" placeholder = "이름" onfocus="this.placeholder = ''" onblur="this.placeholder = 'NICKNAME'"/>
+		            	<input class="inputStyle2" type="text"  name="m_name" id = "m_nickname" maxlength="14" placeholder = "이름" onfocus="this.placeholder = ''" onblur="this.placeholder = '이름'"/>
 		        	</div>
 		        	
 		        	<div class="login_inputWrap">
@@ -142,12 +142,12 @@
 			        	</div>
 			        	<div class="login_inputWrap join_inputWrap" id="inputWrap_studNum">
 			            	<div class="login_smallBox"></div>
-			            	<input class="inputStyle2 input_join" type = "text" name="m_studentID" maxlength="2" id = "m_studentID" placeholder = "학번" onfocus="this.placeholder = ''" onblur="this.placeholder = 'STUDENT NUMBER'"/>
+			            	<input class="inputStyle2 input_join" type = "text" name="m_studentID" maxlength="9" id = "m_studentID" placeholder = "학번" onfocus="this.placeholder = ''" onblur="this.placeholder = '학번'"/>
 			        	</div>
 		        	</div>
 		        	<div class="login_inputWrap" id="inputWrap_bookmark" >
 		           		<div class="login_smallBox"></div>
-		            	<input class="inputStyle2" id="btn_addBookmark" type="button" value="관심분야" onClick="likeCategoryModalOpen()"/>
+		            	<input class="inputStyle2" id="btn_addBookmark" type="button" value="관심분야 (필수 2개)" onClick="likeCategoryModalOpen()"/>
 		        	</div>
 		        	
 		        	<div class="login_inputWrap" id="inputWrap_tool" >
@@ -205,60 +205,128 @@
         <div class="modal_bd modal_bd_dCategory">
             <ul>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">보유기술1</label>
+                    <input type="checkbox" name='skill' data-labelauty="C" value="1"/>
+                    <label class="label_category">C</label>
                 </li>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">게임프로그래밍</label>
+                    <input type="checkbox" name='skill' data-labelauty="C#" value="2"/>
+                    <label class="label_category">C#</label>
                 </li>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">게임프로그래밍</label>
+                    <input type="checkbox" name='skill' data-labelauty="C++" value="3"/>
+                    <label class="label_category">C++</label>
                 </li>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">게임프로그래밍</label>
+                    <input type="checkbox" name='skill' data-labelauty="Unity" value="4"/>
+                    <label class="label_category">Unity</label>
                 </li>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">게임프로그래밍</label>
+                    <input type="checkbox" name='skill' data-labelauty="COCOS-2D" value="5"/>
+                    <label class="label_category">COCOS-2D</label>
                 </li>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">게임프로그래밍</label>
+                    <input type="checkbox" name='skill' data-labelauty="게임샐러드" value="6"/>
+                    <label class="label_category">게임샐러드</label>
                 </li>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">게임프로그래밍</label>
+                    <input type="checkbox" name='skill' data-labelauty="언리얼엔진4" value="7"/>
+                    <label class="label_category">언리얼엔진4</label>
                 </li>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">게임프로그래밍</label>
+                    <input type="checkbox" name='skill' data-labelauty="DirectX" value="8"/>
+                    <label class="label_category">DirectX</label>
                 </li>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">게임프로그래밍</label>
+                    <input type="checkbox" name='skill' data-labelauty="OpenGL" value="9"/>
+                    <label class="label_category">OpenGL</label>
                 </li>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">게임프로그래밍</label>
+                    <input type="checkbox" name='skill' data-labelauty="JAVA" value="10"/>
+                    <label class="label_category">JAVA</label>
                 </li>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">게임프로그래밍ul 1개만!</label>
+                    <input type="checkbox" name='skill' data-labelauty="Javascript" value="11"/>
+                    <label class="label_category">Javascript</label>
                 </li>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">게임프로그래밍ul 1개만!</label>
+                    <input type="checkbox" name='skill' data-labelauty="Python" value="12"/>
+                    <label class="label_category">Python</label>
                 </li>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">게임프로그래밍ul 1개만!</label>
+                    <input type="checkbox" name='skill' data-labelauty="PHP" value="13"/>
+                    <label class="label_category">PHP</label>
                 </li>
                 <li>
-                    <input type="checkbox" data-labelauty="게임프로그래밍"/>
-                    <label class="label_category">보유기술 끝 ul 1개만!</label>
+                    <input type="checkbox" name='skill' data-labelauty="JSP" value="14"/>
+                    <label class="label_category">JSP</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="Android" value="15"/>
+                    <label class="label_category">Android</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="IOS" value="16"/>
+                    <label class="label_category">IOS</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="MySQL" value="17"/>
+                    <label class="label_category">MySQL</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="Oracle" value="18"/>
+                    <label class="label_category">Oracle</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="MS-SQL" value="19"/>
+                    <label class="label_category">MS-SQL</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="아두이노" value="20"/>
+                    <label class="label_category">아두이노</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="라즈베리파이" value="21"/>
+                    <label class="label_category">라즈베리파이</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="premiere" value="22"/>
+                    <label class="label_category">premiere</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="After Effect" value="23"/>
+                    <label class="label_category">After Effect</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="NUKE" value="24"/>
+                    <label class="label_category">NUKE</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="촬영" value="25"/>
+                    <label class="label_category">촬영</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="PROTOOLS" value="26"/>
+                    <label class="label_category">PROTOOLS</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="MAYA" value="27"/>
+                    <label class="label_category">MAYA</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="3DMAX" value="28"/>
+                    <label class="label_category">3DMAX</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="포토샵" value="29"/>
+                    <label class="label_category">포토샵</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="일러스트레이터" value="30"/>
+                    <label class="label_category">일러스트레이터</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="인디자인" value="31"/>
+                    <label class="label_category">인디자인</label>
                 </li>
             </ul>
 
