@@ -54,5 +54,12 @@
 			) C
 		WHERE C.ROWNUM <![CDATA[>=]]> 1 AND C.ROWNUM <![CDATA[<=]]> 6
   	</select>
+  	
+  	<select id="searchbyclass" parameterType="int" resultType="pvo">
+  		SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID, m.m_name, c.cl_name,
+			(SELECT count(*) FROM member_action WHERE p_id=p.p_id AND act_type='like') p_likenum, p.p_viewnum
+				FROM project p, member m, class c WHERE p.m_id=m.m_id AND p.cl_id = c.cl_id
+				AND p.cl_id=#{key}
+  	</select>
   </mapper>
   
