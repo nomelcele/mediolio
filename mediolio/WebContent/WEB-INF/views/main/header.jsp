@@ -154,7 +154,8 @@
 		                <div class="login_smallBox"></div>
 		                <input class="inputStyle2" id="btn_addTool" type="button" value="보유 기술" onClick="toolModalOpen()"/>
 		            </div>
-		        	<input type="hidden" name="m_interestingPart" id="m_interestingPart" value="">
+		        	<input type="hidden" name="m_interesting1" id="m_interesting1" value="">
+		        	<input type="hidden" name="m_interesting2" id="m_interesting2" value="">
 		        </form>
 		        <input type="button" class="btnStyle2" id="btn_mdJoinForm" value="JOIN"/>
 		        
