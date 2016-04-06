@@ -37,8 +37,8 @@ $(function(){
 		else if(stdid>16&&stdid<98||$("#m_studentID").val().length==0||$("#m_studentID").val().length==1){
 			alert('학번을 올바르게 입력해주세요');
 		}
-		else if($('#m_interestingPart').val()=="LIKE"){
-			alert('관심분야를 하나이상 입력해주세요');
+		else if($('#m_interesting1').val()==""||$('#m_interesting2').val()==""){
+			alert('관심분야를 2개 입력해주세요(필수)');
 		}
 		else{
 			$.ajax({
@@ -67,6 +67,21 @@ $(function(){
 										alert('회원가입 실패');	
 									}
 									else{
+										$(":checkbox[name='skill']:checked").each(function() {
+											var allData = {"m_id" : data.m_id,  "sk_id" : $(this).val()};
+											$.ajax({
+												url: "InsertSkillInfo",
+												data: allData,
+												dataType: 'JSON',
+												async: false,
+												type: 'POST',
+												success: function (data1) {
+													if(data1.m_id==null){
+														alert('관련기술 입력 실패');
+													}
+												}
+											});
+										});
 										alert('회원가입 성공');
 										location.href="main";
 									}
@@ -96,8 +111,17 @@ $(function(){
     });
 	$("#btn_likeCategory").on('click',function(){
 		var str="";
+		var count=0;
 		$(":checkbox[name='check']:checked").each(function () {  
 			  str += $(this).parent().find(".label_category").text() + ", ";
+			  if(count==0){
+				  $("#m_interesting1").val($(this).val());
+				  count++;
+			  }
+			  else{
+				  $("#m_interesting2").val($(this).val());
+				  count=0;
+			  }
 		});
 		var strr = "";
 		if(str==""){
@@ -107,6 +131,29 @@ $(function(){
 			strr = str.slice(0,-2);
 		}
 		$("#btn_addBookmark").val(strr);
+	});
+	
+	$("#btn_tool").on('click',function(){
+		var str="";
+		var count=0;
+		$(":checkbox[name='skill']:checked").each(function () {
+			if(str.length<30){
+			  str += $(this).parent().find(".label_category").text() + ", ";
+			  count++;
+			}
+			count--;
+		});
+		var strr = "";
+		if(str==""){
+			strr="보유 기술";
+		}
+		else{
+			strr = str.slice(0,-2);
+			if(count<0){
+				strr+="...";
+			}
+		}
+		$("#btn_addTool").val(strr);
 	});
 	
 	$("#modal_join input").keypress(function(e){

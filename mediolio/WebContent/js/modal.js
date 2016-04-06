@@ -41,8 +41,12 @@ function modalClose(){
 	$('#m_nickname').val("");
 	$('#m_studentID').val("");
 	$('#btn_addBookmark').val("관심분야 (필수 2개)");
+	$('#btn_addTool').val("보유 기술");
 	$("#sel_gender").text("GENDER");
 	$(":checkbox[name='check']:checked").each(function () {  
+		$(this).attr('checked', false);
+	});
+	$(":checkbox[name='skill']:checked").each(function () {  
 		$(this).attr('checked', false);
 	});
 }
@@ -228,7 +232,6 @@ function contentModalOpen(a, type){
     $(".project_loading").css("display","none");
 
 }
-
 
 
 //쪽지보내기 모달
