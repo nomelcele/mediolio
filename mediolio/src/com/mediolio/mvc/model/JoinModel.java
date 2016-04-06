@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mediolio.email.Email;
 import com.mediolio.email.EmailSender;
 import com.mediolio.mvc.dao.JoinDao;
+import com.mediolio.vo.MemberSkillVO;
 import com.mediolio.vo.MemberVO;
 
 
@@ -76,6 +77,18 @@ public class JoinModel {
 			session.setAttribute("pw", mevo.getM_pw());*/
 			session.setAttribute("mev",selectedPw);
 		}
+		return mav;
+	}
+	
+	@RequestMapping(value="InsertSkillInfo", method = RequestMethod.POST)
+	public ModelAndView InsertSkillInfo(MemberSkillVO mkvo, HttpSession session){
+		// 관련기술 입력
+		//int m_id= acvo.getM_id();
+		System.out.println(mkvo.getM_id());
+
+		ModelAndView mav = new ModelAndView("jsonView");
+		int insertedSkillinfo = jdao.InsertSkillInfo(mkvo);
+		mav.addObject("m_id", insertedSkillinfo);
 		return mav;
 	}
 	
