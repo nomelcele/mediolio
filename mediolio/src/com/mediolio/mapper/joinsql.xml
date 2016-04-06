@@ -11,6 +11,10 @@
 	<insert id="InsertJoinInfo" parameterType="mevo">
 		INSERT INTO MEMBER (m_mail,m_pw,m_name,m_gender,m_studentID,m_interesting1, m_interesting2, m_introduce,m_joindate) VALUES(#{m_mail}, #{m_pw}, #{m_name}, #{m_gender}, #{m_studentID}, #{m_interesting1}, #{m_interesting2}, #{m_introduce}, SYSDATE())
 	</insert>
+	
+	<insert id="InsertSkillInfo" parameterType="mkvo">
+		INSERT INTO MEMBERSKILL (m_id,sk_id) VALUES(#{m_id}, #{sk_id})
+	</insert>
   
   	<select id="doubleInfo" resultType="string" parameterType="string" >
 		SELECT count(m_id) FROM MEMBER WHERE m_mail=#{m_mail}
