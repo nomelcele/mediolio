@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mediolio.vo.MemberSkillVO;
 import com.mediolio.vo.MemberVO;
 
 
@@ -18,6 +19,12 @@ public class JoinDao {
 	public int InsertJoinInfo(MemberVO mevo){
 		// 회원가입 정보삽입
 		st.insert("join.InsertJoinInfo", mevo);
+		return st.selectOne("join.select_m_id");
+	}
+	
+	public int InsertSkillInfo(MemberSkillVO mkvo){
+		// 관련기술 삽입
+		st.insert("join.InsertSkillInfo", mkvo);
 		return st.selectOne("join.select_m_id");
 	}
 	
