@@ -1,6 +1,8 @@
 /* 4월 8일 
- * history 테이블 m_id 컬럼 추가, ht_color 컬럼 삭제 */
-alter table history add m_id int(10);
+ * history 테이블 m_id, ht_public 컬럼 추가
+ * ht_color 컬럼 삭제 */
+alter table history add m_id int(10); -- 히스토리 작성자
+alter table history add ht_public int(2); -- 히스토리 공개 여부
 alter table history drop ht_color;
 
 /* 아래 ALTER문은 3월 31일 이전에 수정된 DB 생성한 사람만 실행해주세요*/

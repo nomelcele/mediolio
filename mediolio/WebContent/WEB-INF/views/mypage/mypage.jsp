@@ -271,21 +271,21 @@
             <table cellspacing="0" cellpadding="0" class="historyList_addTable">
                 <tr>
                     <td class="historyList_border historyList_addName">
-                        <input type="text" placeholder="히스토리 제목을 입력하세요.">
+                        <input type="text" name="ht_title" placeholder="히스토리 제목을 입력하세요.">
                     </td>
                 </tr>
                 <tr>
                     <td class="historyList_border historyList_addContentWrap clear">
-                        <textarea placeholder="내용을 입력하세요."></textarea>
+                        <textarea name="ht_introduce" placeholder="내용을 입력하세요."></textarea>
                         <span>관련과목 : </span>
-                        <textarea placeholder="예)웹앱프로그래밍" class="historyList_addRelated"></textarea>
+                        <textarea name="cl_id" placeholder="예)웹앱프로그래밍" class="historyList_addRelated"></textarea>
                         <div class="timeCard_writeDisplayWrap">
                             <input type="radio"><label>공개</label>
                             <input type="radio"><label>비공개</label>
                         </div>
                         <div class="timeCard_btnBox">
                             <input class="btnStyle_timeCard_left" type="button" value="취소">
-                            <input class="btnStyle_timeCard_right" type="button" value="완료">
+                            <input id="addHistoryBtn" class="btnStyle_timeCard_right" type="button" value="완료">
                         </div>
                     </td>
                 </tr>

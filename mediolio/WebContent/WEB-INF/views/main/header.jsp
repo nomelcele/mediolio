@@ -29,6 +29,7 @@
 <script src="js/header.js"></script>
 <script src="js/login.js"></script>
 <script src="js/join.js"></script>
+<script src="js/history.js"></script>
 <script type="text/javascript">
 
 </script>
