@@ -1,3 +1,8 @@
+/* 4월 8일 
+ * history 테이블 m_id 컬럼 추가, ht_color 컬럼 삭제 */
+alter table history add m_id int(10);
+alter table history drop ht_color;
+
 /* 아래 ALTER문은 3월 31일 이전에 수정된 DB 생성한 사람만 실행해주세요*/
 ALTER TABLE member MODIFY m_mail VARCHAR(50);
 ALTER TABLE history MODIFY ht_title VARCHAR(100);
