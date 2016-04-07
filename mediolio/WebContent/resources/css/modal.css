@@ -146,7 +146,7 @@ body.modal-open {
 
 
 /*콘텐츠 모달-글보기창*/
-#modal_content{ width:63%; height:auto; float:left; margin:100px 2% 0 5%;  min-height:500px; padding-bottom:20px;}
+#modal_content{ width:63%; height:auto; float:left; margin:0 10px 0 0;  min-height:500px; padding-bottom:20px;}
 
 #modal_hd_content{ background-color:#fff; height:140px;  box-sizing:border-box;  padding:20px 5%; position:relative;}
 
@@ -193,7 +193,7 @@ body.modal-open {
 
 
 
-#modal_content_userInfo{ width:25%; min-height:400px; height:auto; margin-right:5%; margin-top:100px; float:left;}
+#modal_content_userInfo{ width:25%; min-height:400px; height:auto; float:left;}
 
 #modal_hd_content_userInfo{ background-color:#0f84cf; width:100%; height:50px;}
 #modal_hd_content_userInfo a{ display:block; width:100%; height:50px; padding:0 5%; line-height:50px; box-sizing:border-box; font-weight:500; color:#fff; background:url(../images/user_circle.png) 95% center no-repeat; }
