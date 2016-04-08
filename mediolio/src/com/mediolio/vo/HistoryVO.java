@@ -1,8 +1,21 @@
 package com.mediolio.vo;
 
 public class HistoryVO {
-	private int ht_id, cl_id;
-	private String ht_title, ht_introduce, ht_color, ht_lastedit, ht_createdate;
+	private int ht_id, cl_id, m_id, ht_public;
+	private String ht_title, ht_introduce, ht_lastedit, ht_createdate;
+	
+	public int getHt_public() {
+		return ht_public;
+	}
+	public void setHt_public(int ht_public) {
+		this.ht_public = ht_public;
+	}
+	public int getM_id() {
+		return m_id;
+	}
+	public void setM_id(int m_id) {
+		this.m_id = m_id;
+	}
 	public int getHt_id() {
 		return ht_id;
 	}
@@ -26,12 +39,6 @@ public class HistoryVO {
 	}
 	public void setHt_introduce(String ht_introduce) {
 		this.ht_introduce = ht_introduce;
-	}
-	public String getHt_color() {
-		return ht_color;
-	}
-	public void setHt_color(String ht_color) {
-		this.ht_color = ht_color;
 	}
 	public String getHt_lastedit() {
 		return ht_lastedit;
