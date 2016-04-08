@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mediolio.mvc.dao.HistoryDao;
 import com.mediolio.mvc.dao.MainDao;
 import com.mediolio.vo.FriendVO;
 import com.mediolio.vo.HashtagVO;
@@ -29,6 +30,8 @@ public class MainModel {
 	
 	@Autowired
 	private MainDao mdao;
+	@Autowired
+	private HistoryDao htdao;
 	
 	@RequestMapping(value={"","main"})
 	public ModelAndView main(HttpSession session){
@@ -117,9 +120,9 @@ public class MainModel {
 	}*/
 	
 	@RequestMapping("gotoMyPage")
-	public ModelAndView gotoMyPage(){
-		
-		return new ModelAndView("mypage/mypage");
+	public String gotoMyPage(Model model, HttpSession session){
+		model.addAttribute("htList",htdao.historyList(((MemberVO)session.getAttribute("mev")).getM_id()));
+		return "mypage/mypage";
 	}
 	
 	@RequestMapping("selectlikepage")

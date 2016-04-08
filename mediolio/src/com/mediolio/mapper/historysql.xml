@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="ht">
+  	<select id="historyList" parameterType="int" resultType="htvo">
+  		select ht_id, ht_title, ht_public, ht_introduce from history where m_id=#{m_id}
+  	</select>
+  	<insert id="addHistory" parameterType="htvo">
+  		insert into history (ht_title,ht_introduce,ht_createdate,m_id,ht_public) 
+  		values (#{ht_title},#{ht_introduce},sysdate(),#{m_id},#{ht_public})
+  	</insert>
+  	<delete id="deleteHistory" parameterType="int">
+  		delete from history where ht_id=#{ht_id}
+  	</delete>
+  </mapper>
