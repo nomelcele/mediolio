@@ -41,19 +41,35 @@
 			</c:when>
 			<c:otherwise>
 				<div id="uploadWrap">
-    				<a id="uploadPf" onclick="location='addProjectForm'; return false;" href="#">UPLOAD PORTFOLIO</a>
+    				<a id="uploadPf" onclick="location='addProjectForm'; return false;" href="#">게시글 작성하기</a>
     			</div><!--//uploadWrap-->
 			</c:otherwise>
 		</c:choose>
 <!--     <div id="uploadWrap">
     	<a id="uploadPf" onclick="location='addProjectForm'; return false;" href="#">UPLOAD PORTFOLIO</a>
     </div>//uploadWrap -->
-    <div class="asideWrap" id="categoryTitle">
-    	<p>CATEGORY</p>
+    <div class="asideWrap categoryTitle">
+    	<p>프로젝트</p>
+    </div><!--//categoryTitle-->
+    <div class="categoryWrap">
+        <ul class="nav_category">
+    		<li class="nav_group">
+    			<div class="nav_title" id="ct_game"><span></span>PROJECT</div>
+<!--             	<ul class="nav_sub">
+            		<li><a href="#" class='selsub'>기획</a>
+                    <li><a href="#" class='selsub'>개발</a>
+                </ul> -->
+            </li>
+   		</ul>
+    </div>
+    
+    
+    <div class="asideWrap categoryTitle">
+    	<p>과제</p>
     </div><!--//categoryTitle-->
     
-    <div id="categoryWrap">
-        <ul id="nav_category">
+    <div class="categoryWrap" id="categoryWrap2">
+        <ul class="nav_category">
     		<li class="nav_group">
     			<div class="nav_title" id="ct_game"><span></span>GAME</div>
 <!--             	<ul class="nav_sub">

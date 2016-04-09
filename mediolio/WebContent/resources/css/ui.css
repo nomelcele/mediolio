@@ -27,12 +27,12 @@ html, body{ width:100%; height:100%;}
 #logoWrap{ width:100%; height:50px; background:#111;}
 .asideWrap{ width:190px; padding-left:20px;}
 
-#uploadWrap{ width:100%; height:60px; background:#444;}
+#uploadWrap{ width:100%; height:60px; background:#444; }
 
-#categoryTitle{ height:25px; background:#111;}
-#categoryTitle p{ font:12px/25px 'Open Sans', sans-serif; color:#999; font-weight:bold;}
+.categoryTitle{ height:25px; background:#111;}
+.categoryTitle p{ font:12px/25px 'Open Sans', sans-serif; color:#999; font-weight:bold;}
 
-#categoryWrap{ width:210px; }
+.categoryWrap{ width:210px; }
 
 
 #userBox{ height:90px; background:#222;  }
@@ -54,7 +54,7 @@ html, body{ width:100%; height:100%;}
 #userBox ul li a{width:35px; height:35px; }
 #userBox ul li.logon a{cursor:pointer;}
 
-a#uploadPf{ display:block; width:100%; height:60px; font:12px 'Open Sans', sans-serif; letter-spacing:1px; font-weight:bold; color:#eee; line-height:60px; text-indent:23px; text-align:center; background:url(../images/write.png) 20px center no-repeat;}
+a#uploadPf{ display:block; width:100%; height:60px; font:13px 'Open Sans', sans-serif; color:#eee; line-height:60px; text-indent:20px; letter-spacing:1px; text-align:center; background:url(../images/write.png) 30px center no-repeat;}
 
 
 
@@ -66,7 +66,6 @@ a#uploadPf{ display:block; width:100%; height:60px; font:12px 'Open Sans', sans-
 #ct_webApp span{ background-image:url(../images/web.png);}
 #ct_design span{ background-image:url(../images/design.png);}
 #ct_3d span{ background-image:url(../images/_3d.png);}
-#ct_misc { font-size:14px; letter-spacing:0px;}
 #ct_misc span{ background-image:url(../images/graphics.png);}
 
 .choose_menuText{ color:#fff; background-color:#0f84cf;	}

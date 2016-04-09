@@ -1,5 +1,5 @@
 $(function(){
-	$("#nav_category>li>div").on('click',function(){
+	$(".nav_category>li>div").on('click',function(){
 		var str="";
 		str = $(this).attr('id');
 		
