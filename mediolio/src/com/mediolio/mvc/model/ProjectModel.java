@@ -365,6 +365,11 @@ public class ProjectModel {
 		}	
 		return mav;
 	}
+	
+	@RequestMapping(value="gotoStep2")
+	public String gotoStep2(){
+		return "project/addProjectForm2";
+	}
 
 }
 

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mediolio.vo.BranchVO;
 import com.mediolio.vo.HistoryVO;
 
 @Repository
@@ -26,5 +27,10 @@ public class HistoryDao {
 	public void deleteHistory(int ht_id){
 		// 히스토리 삭제
 		st.delete("ht.deleteHistory", ht_id);
+	}
+	
+	public List<BranchVO> branchList(int ht_id){
+		// 히스토리의 브랜치 불러오기
+		return st.selectList("ht.branchList", ht_id);
 	}
 }
