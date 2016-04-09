@@ -145,7 +145,7 @@
     
     
 		<div class="write_submitWrap clear">
-	    	<input type="button" id="submit_step2" value="프로젝트 정보 작성"/>
+	    	<input type="button" id="submit_step2" value="프로젝트 정보 작성" onclick="location='gotoStep2'"/>
 	    	<input type="button" id="submit_portfolio" value="작성 완료"/>
 	    </div>
     </div> <!-- writeWrap -->

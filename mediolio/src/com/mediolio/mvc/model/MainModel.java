@@ -15,8 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mediolio.mvc.dao.HistoryDao;
 import com.mediolio.mvc.dao.MainDao;
+import com.mediolio.vo.BranchVO;
 import com.mediolio.vo.FriendVO;
 import com.mediolio.vo.HashtagVO;
+import com.mediolio.vo.HistoryVO;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectVO;
 
@@ -121,7 +123,13 @@ public class MainModel {
 	
 	@RequestMapping("gotoMyPage")
 	public String gotoMyPage(Model model, HttpSession session){
-		model.addAttribute("htList",htdao.historyList(((MemberVO)session.getAttribute("mev")).getM_id()));
+		// 전체 히스토리 리스트
+		List<HistoryVO> htList = htdao.historyList(((MemberVO)session.getAttribute("mev")).getM_id());
+		model.addAttribute("htList", htList);
+		// 가장 최근에 업데이트 된 히스토리의 브랜치들 불러오기
+		HistoryVO recentHt = htList.get(0);
+		model.addAttribute("recentHtTitle", recentHt.getHt_title());
+		model.addAttribute("branches",htdao.branchList(recentHt.getHt_id()));
 		return "mypage/mypage";
 	}
 	

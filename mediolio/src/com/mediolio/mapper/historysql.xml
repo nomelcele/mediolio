@@ -4,13 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="ht">
   	<select id="historyList" parameterType="int" resultType="htvo">
-  		select ht_id, ht_title, ht_public, ht_introduce from history where m_id=#{m_id}
+  		select ht_id, ht_title, ht_public, ht_introduce from history 
+  		where m_id=#{m_id} order by ht_lastedit desc
   	</select>
   	<insert id="addHistory" parameterType="htvo">
-  		insert into history (ht_title,ht_introduce,ht_createdate,m_id,ht_public) 
-  		values (#{ht_title},#{ht_introduce},sysdate(),#{m_id},#{ht_public})
+  		insert into history (ht_title,ht_introduce,ht_lastedit,ht_createdate,m_id,ht_public) 
+  		values (#{ht_title},#{ht_introduce},sysdate(),sysdate(),#{m_id},#{ht_public})
   	</insert>
   	<delete id="deleteHistory" parameterType="int">
   		delete from history where ht_id=#{ht_id}
   	</delete>
+  	<select id="branchList" parameterType="int" resultType="brvo">
+  		select * from branch where ht_id=#{ht_id}
+  	</select>
   </mapper>
