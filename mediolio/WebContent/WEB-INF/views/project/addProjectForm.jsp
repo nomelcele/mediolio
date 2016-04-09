@@ -26,124 +26,129 @@
  		<input type="hidden" id="sc_id" name="sc_id">
 </form>
 <div id="contentsWrap">
-    <div class="cardWindow">
-        <div class="cardWindow_hd">UPLOAD PORTFOLIO</div>
-        <div id="write_hd">
-            <div id="write_category">
-                <select id="selectedCategory">
-                	<option value="0">카테고리</option>
-                    <option value="1">게임</option>
-                    <option value="2">웹 & 앱</option>
-                    <option value="3">영상 & 사운드</option>
-                    <option value="4">3D</option>
-                    <option value="5">디자인</option>
-                    <option value="6">기타</option>
-                </select>
-            </div><!--//write_category-->
-            <div id="write_dCategory">
-					<a href="#" onclick="writeDCategoryModalOpen()">세부 카테고리 선택..</a>
-				</div>
-        </div><!--//write_hd-->
-        
-        <div id="write_title">
-            <input class="input_in" id="projectTitle" type="text" placeholder="글 제목을 입력하세요."/>
-        </div><!--//write_title-->
-        
-        <div id="write_bd">
-            <a href="#" class="btn_circle" id="btn_addWrite"></a>
-            <ul class="bubble" id="bubble_addWrite">
-                <li>
-                	<form id="viewerForm" action="showViewer" method="post" enctype="multipart/form-data">
-                		<a id="btn_addFile" href="#">
-                			<input type="file" class="contentFile" id="file0" name="contents"/> 
-                			파일 업로드
-                		</a>
-                	</form>
-                </li>
-                <li><a id="btn_addMedia" href="#" onclick="writeEmbedModalOpen()">미디어 추가</a></li>
-                <li><a id="btn_addText" href="#">텍스트 추가</a></li>
-            </ul>
-            <!--  url: 파일 주소(서버에 올려진 주소) -->
-<!--             <iframe src="http://docs.google.com/viewer?url=http://infolab.stanford.edu/pub/papers/google.pdf&embedded=true" style="width:600px; height:500px;" frameborder="0"></iframe> -->
- 
- 
- <!--
-            <div class="write_textarea" contenteditable>
-                
-            </div>
-            
-
-            <ul class="text_toolBoxes" id="text_toolBox">
-                <li id="text_size">
-                    <select id="select_fontSize">
-                        <option>10px</option>
-                        <option>11px</option>
-                    </select>
-                </li>
-                <li id="text_color"><a href="#"></a></li>
-                <li id="text_bold"><a href="#"></a></li>
-                <li id="text_italic"><a href="#"></a></li>
-                <li id="text_under"><a href="#"></a></li>
-            </ul>
-            
-            <ul class="text_toolBoxes" id="content_toolBox">
-                <li id="text_up"><a href="#"></a></li>
-                <li id="text_down"><a href="#"></a></li>
-                <li id="text_delete"><a href="#"></a></li>
-            </ul>
-
-            <a href="#" class="text_position" id="btn_textUp"></a>
-            <a href="#" class="text_position" id="btn_textDown"></a>
--->
-<!--             <div id="main" contenteditable="true"> -->
-        </div><!--//write_bd-->
-        
-
-        <div id="write_ft">
-            <div id="write_tagTitle">#</div>
-            <div id="write_tag">
-            	<div id="write_tagBox">
-            		<div id="write_tagTxt"></div>
-            		<div class="write_tagArea">
-	            		<input id="write_tagInput" class="input_in" type="text" placeholder="태그를 입력하세요."/>
-	            		<div class="autoCompleteBox"><ul id="autoCompleteArea"></ul></div>
+	<div class="writeWrap clear">
+	    <div class="cardWindow">
+	        <div class="cardWindow_hd">UPLOAD PORTFOLIO</div>
+	        <div id="write_hd">
+	            <div id="write_category">
+	                <select id="selectedCategory">
+	                	<option value="0">카테고리</option>
+	                    <option value="1">게임</option>
+	                    <option value="2">웹 & 앱</option>
+	                    <option value="3">영상 & 사운드</option>
+	                    <option value="4">3D</option>
+	                    <option value="5">디자인</option>
+	                    <option value="6">기타</option>
+	                </select>
+	            </div><!--//write_category-->
+	            <div id="write_dCategory">
+						<a href="#" onclick="writeDCategoryModalOpen()">세부 카테고리 선택..</a>
+					</div>
+	        </div><!--//write_hd-->
+	        
+	        <div id="write_title">
+	            <input class="input_in" id="projectTitle" type="text" placeholder="글 제목을 입력하세요."/>
+	        </div><!--//write_title-->
+	        
+	        <div id="write_bd">
+	            <a href="#" class="btn_circle" id="btn_addWrite"></a>
+	            <ul class="bubble" id="bubble_addWrite">
+	                <li>
+	                	<form id="viewerForm" action="showViewer" method="post" enctype="multipart/form-data">
+	                		<a id="btn_addFile" href="#">
+	                			<input type="file" class="contentFile" id="file0" name="contents"/> 
+	                			파일 업로드
+	                		</a>
+	                	</form>
+	                </li>
+	                <li><a id="btn_addMedia" href="#" onclick="writeEmbedModalOpen()">미디어 추가</a></li>
+	                <li><a id="btn_addText" href="#">텍스트 추가</a></li>
+	            </ul>
+	            <!--  url: 파일 주소(서버에 올려진 주소) -->
+	<!--             <iframe src="http://docs.google.com/viewer?url=http://infolab.stanford.edu/pub/papers/google.pdf&embedded=true" style="width:600px; height:500px;" frameborder="0"></iframe> -->
+	 
+	 
+	 <!--
+	            <div class="write_textarea" contenteditable>
+	                
+	            </div>
+	            
+	
+	            <ul class="text_toolBoxes" id="text_toolBox">
+	                <li id="text_size">
+	                    <select id="select_fontSize">
+	                        <option>10px</option>
+	                        <option>11px</option>
+	                    </select>
+	                </li>
+	                <li id="text_color"><a href="#"></a></li>
+	                <li id="text_bold"><a href="#"></a></li>
+	                <li id="text_italic"><a href="#"></a></li>
+	                <li id="text_under"><a href="#"></a></li>
+	            </ul>
+	            
+	            <ul class="text_toolBoxes" id="content_toolBox">
+	                <li id="text_up"><a href="#"></a></li>
+	                <li id="text_down"><a href="#"></a></li>
+	                <li id="text_delete"><a href="#"></a></li>
+	            </ul>
+	
+	            <a href="#" class="text_position" id="btn_textUp"></a>
+	            <a href="#" class="text_position" id="btn_textDown"></a>
+	-->
+	<!--             <div id="main" contenteditable="true"> -->
+	        </div><!--//write_bd-->
+	        
+	
+	        <div id="write_ft">
+	            <div id="write_tagTitle">#</div>
+	            <div id="write_tag">
+	            	<div id="write_tagBox">
+	            		<div id="write_tagTxt"></div>
+	            		<div class="write_tagArea">
+		            		<input id="write_tagInput" class="input_in" type="text" placeholder="태그를 입력하세요."/>
+		            		<div class="autoCompleteBox"><ul id="autoCompleteArea"></ul></div>
+		            	</div>
 	            	</div>
-            	</div>
-            </div>
-        </div>
-    </div><!--//cardWindow-->
+	            </div>
+	        </div>
+	    </div><!--//cardWindow-->
     
-    <div class="cardWrap">
-    	<div class="card_hd"></div>
-    	<div class="card_img">
-	    	<form method="post" id="coverImg_form" enctype="multipart/form-data">
-				<input type="file" id="cover_img" name="coverImg" onchange="fileValidation()" onclick="emptyValue()">
-			 	<input type="hidden" id="preview_url" name="preview_url">
-			 	<input type="hidden" id="preview_x" name="x" value=""/>
-				<input type="hidden" id="preview_y"name="y" value=""/>
-				<input type="hidden" id="preview_w"name="w" value=""/>
-				<input type="hidden" id="preview_h"name="h" value=""/>
-			</form>
-			<input type="hidden" id="p_coverImg" name="p_coverImg">
-        	<a href="#">
-        		<img src="resources/images/default_upload.png"><!-- 미리보기이미지 들어오는곳 -->
-        		<span id="text_uploadCover">UPLOAD IMAGE</span>
-        	</a>
-        	
-        </div><!--//card_img-->
-    	<div class="card_bd">
-        	<p class="card_title ellipsis"><a href="#"></a></p>
-            <p class="card_dscrpt"><a href="#">${sessionScope.mev.m_studentID} ${sessionScope.mev.m_name}</a></p>
-            <p class="card_tag"></p>
-        </div><!--//card_bd-->
-        <div class="card_ct">
-        	<p class="p_like"><span></span>0</p>
-            <p class="p_view"><span></span>0</p>
-        </div><!--//card_ct-->
-    </div><!--//cardWrap-->
+	    <div class="cardWrap">
+	    	<div class="card_hd"></div>
+	    	<div class="card_img">
+		    	<form method="post" id="coverImg_form" enctype="multipart/form-data">
+					<input type="file" id="cover_img" name="coverImg" onchange="fileValidation()" onclick="emptyValue()">
+				 	<input type="hidden" id="preview_url" name="preview_url">
+				 	<input type="hidden" id="preview_x" name="x" value=""/>
+					<input type="hidden" id="preview_y"name="y" value=""/>
+					<input type="hidden" id="preview_w"name="w" value=""/>
+					<input type="hidden" id="preview_h"name="h" value=""/>
+				</form>
+				<input type="hidden" id="p_coverImg" name="p_coverImg">
+	        	<a href="#">
+	        		<img src="resources/images/default_upload.png"><!-- 미리보기이미지 들어오는곳 -->
+	        		<span id="text_uploadCover">UPLOAD IMAGE</span>
+	        	</a>
+	        	
+	        </div><!--//card_img-->
+	    	<div class="card_bd">
+	        	<p class="card_title ellipsis"><a href="#"></a></p>
+	            <p class="card_dscrpt"><a href="#">${sessionScope.mev.m_studentID} ${sessionScope.mev.m_name}</a></p>
+	            <p class="card_tag"></p>
+	        </div><!--//card_bd-->
+	        <div class="card_ct">
+	        	<p class="p_like"><span></span>0</p>
+	            <p class="p_view"><span></span>0</p>
+	        </div><!--//card_ct-->
+	    </div><!--//cardWrap-->
     
     
-    <input type="button" id="submit_portfolio" value="SUBMIT"/>
+		<div class="write_submitWrap clear">
+	    	<input type="button" id="submit_step2" value="프로젝트 정보 작성"/>
+	    	<input type="button" id="submit_portfolio" value="작성 완료"/>
+	    </div>
+    </div> <!-- writeWrap -->
 </div> <!-- contentsWrap -->        
     
     

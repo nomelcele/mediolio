@@ -1,7 +1,7 @@
 $('document').ready(function(){
 	// 카테고리 시작
 	var wHeight = $(window).height();
-    $('#categoryWrap').css({
+    $('#categoryWrap2').css({
         'height' : (wHeight-225) + 'px'   
     }); 
 	
@@ -34,9 +34,9 @@ $('document').ready(function(){
 		$('span', this).not('.nav_selected span').css('background-position','left center');
 		$(this).not('.nav_selected').removeClass('choose_menuText');
 	})
-	
-	$("#categoryWrap").mCustomScrollbar();
-	// 카테고리 끝
+//	
+//	$(".categoryWrap").mCustomScrollbar();
+//	// 카테고리 끝
 	
 	
 	
