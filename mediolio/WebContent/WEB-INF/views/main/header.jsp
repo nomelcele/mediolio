@@ -55,14 +55,17 @@
         <div class="inputStyle" id="search_main">
         	<div id="selectWrap_main">
                 <select id="select_main">
-                    <option value="title">TITLE</option>
-                    <option value="id">USER</option>
-                    <option value="tag">TAG</option>
+                    <option value="title">팀원 검색</option>
+                    <option value="id">글제목 검색</option>
+                    <option value="tag">태그 검색</option>
+                    <option value="subject">과목 검색</option>
                 </select>
            </div><!--//selectWrap -->
             <input class="input_in" id="text_main" type="text" onkeydown="if(event.keyCode==13){goSearch();}"/>
-            <input class="btn_search" type="button" />
+            <input class="btn_search indent" type="button" />
         </div><!--//search_main-->
+        <a class="btn_close"></a>
+        
        <!--  <input class="btnStyle" id="btn_login" type="button" value="LOGIN" onClick="loginModalOpen()"/> -->
     	<c:choose> 
 			<c:when test="${sessionScope.mev == null }">
@@ -72,8 +75,137 @@
 				<input class="btnStyle" id="btn_logout" type="button" value="LOGOUT"/>
 			</c:otherwise>
 		</c:choose>
-    </div><!--//headerWrap-->   
-</div>
+    </div><!--//headerWrap-->
+    <div class="searchTermWrap teamSearchWrap">
+        <div class="clear">
+            <span>분야 선택</span>
+            <div class="team_category">
+                <input type="button" value="게임" class="btnStyle2 btn_555" id="teamCategory_game">
+                <input type="button" value="웹 & 앱" class="btnStyle2 btn_555" id="teamCategory_webApp">
+                <input type="button" value="디자인" class="btnStyle2 btn_555" id="teamCategory_design">
+                <input type="button" value="영상" class="btnStyle2 btn_555" id="teamCategory_video">
+                <input type="button" value="3D" class="btnStyle2 btn_555" id="teamCategory_3d">
+                <input type="button" value="기타" class="btnStyle2 btn_555" id="teamCategory_etc">
+            </div>
+        </div>
+        <div class="clear">
+            <span>보유 기술</span>
+            <div class="team_techWrap techWrap_game">
+                <div>
+                    <input type="radio"><label>JAVA</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVA</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVA</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVASCRIPT</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVA</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVASCRIPT</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVA</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVASCRIPT</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVA</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVASCRIPT</label>
+                </div>
+            </div><!--//team_techWrap -->
+            
+            <div class="team_techWrap techWrap_webApp">
+                <div>
+                    <input type="radio"><label>Webapp</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVA</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVA</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVASCRIPT</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVA</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVASCRIPT</label>
+                </div>
+            </div><!--//team_techWrap -->
+            
+            <div class="team_techWrap techWrap_design">
+                <div>
+                    <input type="radio"><label>포토샵</label>
+                </div>
+                <div>
+                    <input type="radio"><label>일러스트레이터</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVA</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVASCRIPT</label>
+                </div>
+            </div><!--//team_techWrap -->
+            
+            <div class="team_techWrap techWrap_video">
+                <div>
+                    <input type="radio"><label>프리미어</label>
+                </div>
+                <div>
+                    <input type="radio"><label>일러스트레이터</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVA</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVASCRIPT</label>
+                </div>
+            </div><!--//team_techWrap -->
+            
+            <div class="team_techWrap techWrap_3d">
+                <div>
+                    <input type="radio"><label>마야</label>
+                </div>
+                <div>
+                    <input type="radio"><label>일러스트레이터</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVA</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVASCRIPT</label>
+                </div>
+            </div><!--//team_techWrap -->
+            
+            <div class="team_techWrap techWrap_etc">
+                <div>
+                    <input type="radio"><label>R언어</label>
+                </div>
+                <div>
+                    <input type="radio"><label>IOT</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVA</label>
+                </div>
+                <div>
+                    <input type="radio"><label>JAVASCRIPT</label>
+                </div>
+            </div><!--//team_techWrap -->
+        </div>
+    </div><!--//searchTermWrap-->   
+</div><!-- //header -->
 
 
 <div id="modalBox"></div>

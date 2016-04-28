@@ -65,19 +65,32 @@
     <div class="modal_hd" id="modal_hd_content_userInfo">
         <a href="#">12LEEYURA</a>
     </div> 
+    <div class="modal_bd" id="modal_bd_content_userInfo">
+    	<strong>자기소개</strong>
+    	<p>
+    	안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다.
+    	</p> 
+    </div><!--//modal_bd_content -->
+
+	<div class="modal_ft" id="modal_ft_content_userInfo">
+    	
+    </div>
+</div><!--//modal_content_userInfo-->
+
+<div class="cardWrap" id="modal_content_userInfo">
+    <div class="modal_hd" id="modal_hd_content_userInfo">
+        <a href="#">12LEEYURA</a>
+    </div> 
     <div id="modal_bd_content_userFavorite">게임프로그래밍</div>
     <div class="modal_bd" id="modal_bd_content_userInfo">
         안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 안녕하세요. 자기소개입니다. 
     </div><!--//modal_bd_content -->
 
-<div class="modal_ft" id="modal_ft_content_userInfo">
-    <ul>
-        <li><a href="#">FOLLOW</a></li>
-        <li><a href="#" onclick="noteModalOpen(); return false;">MESSAGE</a></li>
+	<div class="modal_ft" id="modal_ft_content_userInfo">
+    	<ul>
+	        <li><a href="#">FOLLOW</a></li>
+	        <li><a href="#" onclick="noteModalOpen(); return false;">MESSAGE</a></li>
         </ul>
-
     </div>
 </div><!--//modal_content_userInfo-->
-
-
 </div>

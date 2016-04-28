@@ -8,7 +8,21 @@ var colorNum=0;
 var colorId=0;
 
 $('document').ready(function(){
-	
+	/* 프로젝트 개요 작성칸 height 조절*/
+	$('.writeLongLineWrap').on( 'keyup', 'textarea', function (e){
+        $(this).css('height', 'auto' );
+        $(this).height( this.scrollHeight );
+    });
+    $('.writeLongLineWrap').find( 'textarea' ).keyup();
+    
+    
+    /* 팀원 추가 버튼 */
+    $('#btn_addTeamMate').on('click', function(){
+        var newTeamInput = '<div class="write_teamMateWrap"><div class="threeCell shortCell"><input class="writeLine_text" type="text" placeholder="이름"></div><div class="threeCell shortCell"><input class="writeLine_text" type="text" placeholder="역할"></div><div class="threeCell"><input class="writeLine_text" type="text" placeholder="소개"></div></div>';
+        
+        $('#teamMateGroup').append(newTeamInput);
+    })
+    
 	$("#submit_portfolio").click(function(){
 		// 프로젝트 등록
 		
@@ -599,18 +613,9 @@ function getSelectedText(){
 
 function writeEmbedModalOpen(){
 	// 미디어 태그 추가
-    var win_w = $(window).width();
-	var win_h = $(window).height();
-	
-	var movImg_w = $('#modal_writeEmbed').width();
-	var movImg_h = $('#modal_writeEmbed').height();
-	
-	var movImg_posX = (win_w - movImg_w)/2;
-	var movImg_posY = (win_h - movImg_h)/2;
-		
-	$('#modal_writeEmbed').css({ left: movImg_posX, top: movImg_posY });
-    $('.modal_bg').show();
-	$('#modal_writeEmbed').show();
+	$('body').addClass('preventScroll');
+    $('.modal_bg, #modal_writeEmbed').show();
+    
     
     $('#btn_writeEmbed').on('click',function(){
     	// 임베드 태그 등록

@@ -4,9 +4,72 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>MIDIOLIO</title>
+<link href="resources/css/write.css" rel="stylesheet" type="text/css"/>
+<link href="resources/css/write2.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-	step2
+<div id="contentsWrap">
+	<div class="writeWrap clear">
+	    <div class="cardWindow cardWindow_write2">
+            <div class="cardWindow_hd">2단계 : 프로젝트 정보 작성</div>
+            <div class="writeLineWrap">
+                <div class="writeLine_1">작업 이름</div>
+                <div class="writeLine_2">
+                    <input class="writeLine_text" type="text" placeholder="예) 미디어학과 포트폴리오 공유 사이트-미디올리오">
+                </div>
+            </div><!--//writeLineWrap-->
+            <div class="writeLineWrap">
+                <div class="writeLine_1">작업 기간</div>
+                <div class="writeLine_2">
+                    <span class="dateSpan">시작 : </span>
+                    <div class="twoCell">
+                        <input class="writeLine_text" type="date">
+                    </div>
+                    <span class="dateSpan">종료 : </span>
+                    <div class="twoCell">
+                        <input class="writeLine_text" type="date">
+                    </div>
+                </div>
+            </div><!--//writeLineWrap-->
+            <div class="writeLineWrap">
+                <div class="writeLine_1">관련 과목</div>
+                <div class="writeLine_2">
+                    <a href="#"  onclick="subjectModalOpen()">과목 선택..</a>
+                </div>
+            </div><!--//writeLineWrap-->
+            <div class="writeLineWrap clear">
+                <div class="writeLine_1 writeLine_1Long">팀원 소개</div>
+                <div class="writeLine_2 writeLine_2Long clear" id="teamMateGroup">
+                    <div class="write_teamMateWrap">
+                        <div class="threeCell shortCell">
+                            <input class="writeLine_text" type="text" placeholder="이름">
+                        </div>
+                        <div class="threeCell shortCell">
+                            <input class="writeLine_text" type="text" placeholder="역할">
+                        </div>
+                        <div class="threeCell">
+                            <input class="writeLine_text" type="text" placeholder="소개">
+                        </div>
+                    </div>
+                    
+                    <input type="button" value="+" id="btn_addTeamMate">
+                </div>
+            </div><!--//writeLineWrap-->
+            <div class="writeLineWrap writeLongLineWrap clear">
+                <div class="writeLine_1 writeLine_1Long">작업 개요</div>
+                <div class="writeLine_2 writeLine_2Long">
+                    <textarea class="writeLine_textarea" type="text" placeholder="작업 내용을 입력해주세요."></textarea>
+                </div>
+            </div><!--//writeLineWrap-->
+        </div><!--//cardWindow-->
+        
+        <input type="button" class="write_submit" id="submit_step1" value="글 내용 작성" onclick="location='gotoStep2'"/>
+        <input type="button" class="write_submit" id="submit_portfolio" value="작성 완료"/>
+    </div> <!-- writeWrap -->
+</div> <!-- contentsWrap -->        
+
+
+
 </body>
 </html>
