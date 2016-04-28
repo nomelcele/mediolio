@@ -91,6 +91,61 @@ $('document').ready(function(){
     $('#userBox #message a').click(openMyMsgPage);
     //aside 팔로워 아이콘 클릭
     $('#userBox #follow a').click(openMyFriendPage);
+    
+    
+    //header 검색창
+    $('#search_main').on('click',function(){
+        $('#bellWrap, #btn_login, #btn_logout').hide();
+        $('#headerWrap .btn_close, .searchTermWrap').show();
+        $('#headerWrap').css({ width:'100%', paddingLeft:250});/*402*/
+        $('#search_main').css({ width:'95%', margin:'0 auto'})/*260*/
+        $('#selectWrap_main').css({ width:120});
+    })
+    
+    $('#headerWrap .btn_close').on('click', function(){
+        $('#bellWrap, #btn_login, #btn_logout').show();
+        $('#headerWrap .btn_close, .searchTermWrap').hide();
+        $('#headerWrap').css({ width:502, paddingLeft:0});/*402*/
+        $('#search_main').css({ width:360, margin:'0 20px 0 0'})/*260*/
+        $('#selectWrap_main').css({ width:103});
+    })
+    
+    $('#teamCategory_game').on('click', function(){
+        $('.team_category input[type="button"]').removeClass('btn_222');
+        $(this).addClass('btn_222');
+        $('.searchTermWrap .team_techWrap').hide();
+        $('.techWrap_game').show();
+    })
+    $('#teamCategory_webApp').on('click', function(){
+        $('.team_category input[type="button"]').removeClass('btn_222');
+        $(this).addClass('btn_222');
+        $('.searchTermWrap .team_techWrap').hide();
+        $('.techWrap_webApp').show();
+    })
+    $('#teamCategory_design').on('click', function(){
+        $('.team_category input[type="button"]').removeClass('btn_222');
+        $(this).addClass('btn_222');
+        $('.searchTermWrap .team_techWrap').hide();
+        $('.techWrap_design').show();
+    })
+    $('#teamCategory_video').on('click', function(){
+        $('.team_category input[type="button"]').removeClass('btn_222');
+        $(this).addClass('btn_222');
+        $('.searchTermWrap .team_techWrap').hide();
+        $('.techWrap_video').show();
+    })
+    $('#teamCategory_3d').on('click', function(){
+        $('.team_category input[type="button"]').removeClass('btn_222');
+        $(this).addClass('btn_222');
+        $('.searchTermWrap .team_techWrap').hide();
+        $('.techWrap_3d').show();
+    })
+    $('#teamCategory_etc').on('click', function(){
+        $('.team_category input[type="button"]').removeClass('btn_222');
+        $(this).addClass('btn_222');
+        $('.searchTermWrap .team_techWrap').hide();
+        $('.techWrap_etc').show();
+    })
 });
 
 function openMyFriendPage(){

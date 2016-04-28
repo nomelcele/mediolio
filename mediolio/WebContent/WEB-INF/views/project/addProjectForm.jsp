@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>MEDIOLIO</title>
+
 <link href="resources/css/write.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" media="screen" type="text/css" href="resources/css/colorpicker.css" />
 <link href="resources/css/jquery.Jcrop.css" rel="stylesheet" type="text/css" />
@@ -28,7 +29,7 @@
 <div id="contentsWrap">
 	<div class="writeWrap clear">
 	    <div class="cardWindow">
-	        <div class="cardWindow_hd">UPLOAD PORTFOLIO</div>
+	        <div class="cardWindow_hd">1단계 : 글 내용 작성</div>
 	        <div id="write_hd">
 	            <div id="write_category">
 	                <select id="selectedCategory">
@@ -142,13 +143,11 @@
 	            <p class="p_view"><span></span>0</p>
 	        </div><!--//card_ct-->
 	    </div><!--//cardWrap-->
+    	<input type="button" class="write_submit" id="submit_step2" value="프로젝트 정보 작성" onclick="location='gotoStep2'"/>
     
-    
-		<div class="write_submitWrap clear">
-	    	<input type="button" id="submit_step2" value="프로젝트 정보 작성" onclick="location='gotoStep2'"/>
-	    	<input type="button" id="submit_portfolio" value="작성 완료"/>
-	    </div>
+		
     </div> <!-- writeWrap -->
+    
 </div> <!-- contentsWrap -->        
     
     

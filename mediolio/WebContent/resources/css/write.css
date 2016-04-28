@@ -1,6 +1,6 @@
-.writeWrap{ width:1020px; height:auto;}
+.writeWrap{ width:900px; height:auto;}
 
-.cardWindow{ width:800px; min-height:640px; height:auto; background:#fff;  float:left;  box-shadow:0 1px 4px #999; margin-right:20px;}
+.cardWindow{ width:680px; min-height:640px; height:auto; background:#fff;  float:left;  box-shadow:0 1px 4px #999; margin-right:20px;}
 .writeWrap .cardWrap{ margin-right:0;}
 
 .cardWindow_hd{ width:100%; height:39px; border-bottom:1px solid #ccc; background:#333; line-height:39px; box-sizing:border-box; padding:0 20px; font-family:'Open Sans', sans-serif; font-size:14px; color:#eee;}
@@ -12,7 +12,7 @@
 #write_title{ width:100%; height:40px; border-bottom:1px solid #ccc; box-sizing:border-box; padding-top:5px; padding-left:10px; }
 #write_title input{ font-size:12px;}
 
-#write_dCategory{ width:550px; height:auto;float:left;}
+#write_dCategory{ width:450px; height:auto;float:left;}
 #write_dCategory a {
     display:block; width:100%; height:100%; font-size:12px; line-height:39px; box-sizing:border-box; padding-left:20px; color:#666;
 }
@@ -128,10 +128,14 @@
 .text_position{ width:30px; height:30px; border-radius:50%; background:#333; position:absolute; z-index:3; left:50%;}
 
 
-.write_submitWrap{ height:50px; float:right; clear:both; box-sizing:border-box; margin:80px 0 0 0; padding:0 0 0 0; }
-.write_submitWrap input{ width:120px; height:40px; border:none; font-size:14px; box-shadow:1px 1px 3px rgba(0,0,0,.5); margin-left:10px; }
-#submit_step2{ width:200px; background:url(../images/next.png) 20px center no-repeat;  background-color:#eee;  text-indent:20px; }
-#submit_portfolio {  background:#0F84CF; color:#fff;}
+.write_submitWrap{ width:100%; height:50px; clear:both; box-sizing:border-box; margin:40px 0 0 0; padding:0 100px 0 0; }
+
+.write_submit{ width:200px; height:40px; border:none; font-size:14px; box-shadow:1px 1px 3px rgba(0,0,0,.5);}
+#submit_step1{  background:url(../images/prev.png) 20px center no-repeat;  background-color:#eee;  text-indent:20px; float:left; }
+#submit_step2{  background:url(../images/next.png) 20px center no-repeat;  background-color:#0F84CF; color:#fff; text-indent:20px; float:right;}
+#submit_portfolio {  background:#0F84CF; color:#fff; float:right;}
+
+
 .hrMargin{ margin-bottom:20px;}
 
 .contentBox{ margin-bottom:60px; width:auto; height:auto; position:relative;}

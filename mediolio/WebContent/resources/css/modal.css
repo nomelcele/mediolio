@@ -36,14 +36,8 @@ body.modal-open {
 
 #writeNoteWrap{ width:600px; min-height:400px; display:none; margin-left:-300px; margin-top:-200px;}
 
-.modal_dCategory {
-    width:640px; height:320px; background:#fff;
-    box-sizing:border-box;
-    margin-left:-320px; margin-top:-160px;
-}
-.modal_dCategory#modal_writeEmbed { height:250px; margin-top:-125px;}
-
-
+#modal_writeDCategory{ width:300px; height:380px; margin-left:-150px; margin-top:-190px;}
+#modal_writeEmbed{ width:600px; height:250px; margin-left:-300px; margin-top:-125px; }
 
 
 /*로그인 모달*/
@@ -120,9 +114,6 @@ body.modal-open {
     text-align:left; width:300px; cursor:pointer;
 }
 
-#modal_writeDCategory {
-    width:300px; height:380px;
-}
 
 #modal_writeDCategory ul {
     width:260px;

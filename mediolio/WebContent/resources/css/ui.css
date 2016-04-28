@@ -1,21 +1,44 @@
 @charset "utf-8";
 /* CSS Document */
 
-html, body{ width:100%; height:100%;}
+html, body{ width:100%; height:100%; font-size:12px;}
 #header{ width:100%; height:40px; padding-top:10px; background-color:#222; position:fixed; z-index:10;}
-#headerWrap{ width:402px; height:30px; margin-right:20px; float:right; }
+#headerWrap{ width:502px; height:30px; margin-right:20px; float:right; box-sizing:border-box; }
 
 
 #search_main, #btn_login, #select_main, #text_main, #bellWrap{ float:left; }
 #btn_login{ width:70px;}
-#search_main{ margin-right:20px; }
+#search_main{ width:360px; margin-right:20px; }
 #select_main{ width:85px; height:24px;}
-#text_main{ width:120px; height:24px;}
+#text_main{ width:60%; height:24px;}
 
-#selectWrap_main{ width:73px; padding-left:10px; height:22px; float:left; line-height:22px; margin-top:3px; margin-left:3px; background:#fff; border-radius:30px; font-size:12px; border:1px solid #999;}
+#selectWrap_main{ width:103px; padding-left:10px; height:22px; float:left; line-height:22px; margin-top:3px; margin-left:3px; background:#fff; border-radius:30px; font-size:12px; border:1px solid #999;}
 
 
+.btn_close{ display:block; float:right;  width:5%; height:30px; background:url(../images/close.png) center right no-repeat; background-size:auto 70%; display:none;}
 
+/* searchTerm */
+.searchTermWrap{ display:none; width:100%; min-height:80px; box-sizing:border-box; padding:15px 30px 5px 240px; position:absolute; top:50px; left:0; background:#333; box-shadow:0 2px 4px rgba(0,0,0,0.5); border-bottom:1px solid #222; overflow:hidden;}
+
+
+/* teamSearchWrap*/
+.teamSearchWrap>div{ width:100%; min-height:30px; padding:0 0 9px 0;}
+.teamSearchWrap span{ display:inline-block; width:125px; height:30px; line-height:30px; float:left; color:#eee;}
+.team_category, .team_techWrap{ width:700px; min-height:30px; float:left;}
+.team_category>input[type="button"]{ width:109px; font-size:12px; margin:0 5px 0 0; color:#eee;}
+.btn_555{ background:#555;}
+.btn_222{ background:#222;}
+.team_category>input[type="button"]:last-child{ margin-right:0;}
+.team_category>input[type="button"]:hover{ background:#222;}
+
+
+/* team_techWrap */
+.team_techWrap{ display:none; width:700px; border:1px solid rgba(255,255,255,.1); border-radius:5px; line-height:30px; box-sizing:border-box; padding:0 10px; background:rgba(0,0,0,.2)}
+.team_techWrap.techWrap_game{ display:block; }
+
+.team_techWrap div{ width:auto; float:left;}
+.team_techWrap input[type="radio"]{ display:block; float:left; margin:9px 4px 0 0;}
+.team_techWrap label{ min-width:80px; float:left; margin:0 15px 0 0; color:#aaa; }
 
 
 
@@ -54,7 +77,7 @@ html, body{ width:100%; height:100%;}
 #userBox ul li a{width:35px; height:35px; }
 #userBox ul li.logon a{cursor:pointer;}
 
-a#uploadPf{ display:block; width:100%; height:60px; font:13px 'Open Sans', sans-serif; color:#eee; line-height:60px; text-indent:20px; letter-spacing:1px; text-align:center; background:url(../images/write.png) 30px center no-repeat;}
+a#uploadPf{ display:block; width:100%; height:60px; font-size:13px; font-family:'나눔고딕', 'Nanum Gothic', sans-serif;  color:#eee; line-height:60px; text-indent:20px; letter-spacing:1px; text-align:center; background:url(../images/write.png) 30px center no-repeat;}
 
 
 
