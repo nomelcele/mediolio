@@ -15,7 +15,7 @@
   		delete from history where ht_id=#{ht_id}
   	</delete>
   	<select id="branchList" parameterType="int" resultType="brvo">
-  		select * from branch where ht_id=#{ht_id}
+  		select * from branch where ht_id=#{ht_id} order by br_date desc
   	</select>
   	<insert id="addBranch" parameterType="brvo">
   		insert into branch (ht_id,br_title,br_img1,br_img2,br_img3,br_text,br_date,br_public) 

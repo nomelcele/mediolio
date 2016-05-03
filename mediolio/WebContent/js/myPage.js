@@ -54,6 +54,9 @@ $(document).ready(function(){
     
     
     $('.historyList_name').on('click',function(e){
+    	// 선택한 히스토리 보여주기
+    	
+    	
         $('.historyList_name .history_popMenuWrap').not($(this).find('.history_popMenuWrap')).hide();
         
         /*-- 선택한 것 이외의 것들 숨기기 --*/
@@ -75,7 +78,7 @@ $(document).ready(function(){
         btn_historyList_pop = !btn_historyList_pop; 
         if(btn_historyList_pop){
             $(this).next('.history_popMenuWrap').show();//hide();
-            
+
         }
         else{
             $('.history_popMenuWrap').hide();

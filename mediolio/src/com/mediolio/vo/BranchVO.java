@@ -1,9 +1,21 @@
 package com.mediolio.vo;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class BranchVO {
 	private int br_id, ht_id, br_public;
 	private String br_title, br_img1, br_img2, br_img3, br_text, br_date;
+	private List<MultipartFile> imgFiles;
 	
+	
+	public List<MultipartFile> getImgFiles() {
+		return imgFiles;
+	}
+	public void setImgFiles(List<MultipartFile> imgFiles) {
+		this.imgFiles = imgFiles;
+	}
 	public int getBr_id() {
 		return br_id;
 	}
