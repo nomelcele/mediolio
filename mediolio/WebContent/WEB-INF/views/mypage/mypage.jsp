@@ -19,57 +19,59 @@
         
         
         <div class="timeLineWrap clear">
-            
+            <form action="addBranch" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="ht_id" value="${recentHtId}">
             <div class="timeCardWrap clear">
                 <div class="timeCircle"></div>
                 <div class="cardWrap timeCard">
                     <div class="timeCard_hd">
-                        <input type="text" class="timeCard_writeInput timeCard_writeTitle" placeholder="글제목을 입력하세요.">
+                        <input type="text" name="br_title" class="timeCard_writeInput timeCard_writeTitle" placeholder="글제목을 입력하세요.">
                     </div>
                     
                     <div class="timeCard_content">
-                        <textarea class="timeCard_writeInput timeCard_writeContent"></textarea>
+                        <textarea name="br_text" class="timeCard_writeInput timeCard_writeContent"></textarea>
                         <input type="button" class="btn_timeCard_addImage" value="사진 추가">
                         <div class="timeCard_addImageWrap clear">
-                            <label>파일이름1</label>
-                            <a class="btn_timeCard_delImage" href="#">X</a>
-                            <div class="fileWrap_timeCard">
-                                <span>파일 추가</span>
-                                <input type="file" class="file_timeCard">
+	                        <div id="imgFileBox1">
+	                            <label></label>
+	                            <a class="btn_timeCard_delImage" href="#">X</a>
+	                            <div class="fileWrap_timeCard">
+	                                <span>파일 추가</span>
+	                                <input type="file" name="br_img1" class="file_timeCard">
+	                            </div>
                             </div>
                             
-                            <label>파일이름2.png</label>
-                            <a class="btn_timeCard_delImage" href="#">X</a>
-                            <div class="fileWrap_timeCard">
-                                <span>파일 추가</span>
-                                <input type="file" class="file_timeCard">
+                            <div id="imgFileBox2" style="display:none;">
+	                            <label></label>
+	                            <a class="btn_timeCard_delImage" href="#">X</a>
+	                            <div class="fileWrap_timeCard">
+	                                <span>파일 추가</span>
+	                                <input type="file" name="br_img2" class="file_timeCard">
+	                            </div>
+                            </div>
+                            
+                            <div id="imgFileBox3" style="display:none;">
+	                            <label></label>
+	                            <a class="btn_timeCard_delImage" href="#">X</a>
+	                            <div class="fileWrap_timeCard">
+	                                <span>파일 추가</span>
+	                                <input type="file" name="br_img3" class="file_timeCard">
+	                            </div>
                             </div>
                         </div>
                         
                     </div><!--//timeCard_content-->
                     <div class="timeCard_writeDisplayWrap">
-                        <input type="radio"><label>공개</label>
-                        <input type="radio"><label>비공개</label>
+                        <input type="radio" name="br_public" value="1" checked><label>공개</label>
+                        <input type="radio" name="br_public" value="0"><label>비공개</label>
                     </div>
                     <div class="timeCard_btnBox">
                         <input class="btnStyle_timeCard_left" type="button" value="취소">
-                        <input class="btnStyle_timeCard_right" type="button" value="완료">
+                        <input class="btnStyle_timeCard_right" type="submit" value="완료">
                     </div>
                 </div><!--//timeCard-->
             </div><!--//timeCardWrap-->
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            </form>
             
             
             
