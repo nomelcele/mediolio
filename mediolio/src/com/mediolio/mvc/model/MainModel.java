@@ -128,6 +128,7 @@ public class MainModel {
 		model.addAttribute("htList", htList);
 		// 가장 최근에 업데이트 된 히스토리의 브랜치들 불러오기
 		HistoryVO recentHt = htList.get(0);
+		model.addAttribute("recentHtId", recentHt.getHt_id());
 		model.addAttribute("recentHtTitle", recentHt.getHt_title());
 		model.addAttribute("branches",htdao.branchList(recentHt.getHt_id()));
 		return "mypage/mypage";

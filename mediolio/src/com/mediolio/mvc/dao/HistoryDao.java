@@ -33,4 +33,9 @@ public class HistoryDao {
 		// 히스토리의 브랜치 불러오기
 		return st.selectList("ht.branchList", ht_id);
 	}
+	
+	public void addBranch(BranchVO brvo){
+		// 히스토리에 브랜치 추가
+		st.insert("ht.addBranch", brvo);
+	}
 }

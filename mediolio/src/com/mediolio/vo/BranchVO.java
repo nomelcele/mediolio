@@ -1,8 +1,9 @@
 package com.mediolio.vo;
 
 public class BranchVO {
-	int br_id, ht_id, br_public;
-	String br_title, br_img1, br_img2, br_img3, br_text, br_date;
+	private int br_id, ht_id, br_public;
+	private String br_title, br_img1, br_img2, br_img3, br_text, br_date;
+	
 	public int getBr_id() {
 		return br_id;
 	}
