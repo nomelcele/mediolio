@@ -37,7 +37,7 @@
 	                            <a class="btn_timeCard_delImage" href="#">X</a>
 	                            <div class="fileWrap_timeCard">
 	                                <span>파일 추가</span>
-	                                <input type="file" name="br_img1" class="file_timeCard">
+	                                <input type="file" name="imgFiles[0]" class="file_timeCard">
 	                            </div>
                             </div>
                             
@@ -46,7 +46,7 @@
 	                            <a class="btn_timeCard_delImage" href="#">X</a>
 	                            <div class="fileWrap_timeCard">
 	                                <span>파일 추가</span>
-	                                <input type="file" name="br_img2" class="file_timeCard">
+	                                <input type="file" name="imgFiles[1]" class="file_timeCard">
 	                            </div>
                             </div>
                             
@@ -55,7 +55,7 @@
 	                            <a class="btn_timeCard_delImage" href="#">X</a>
 	                            <div class="fileWrap_timeCard">
 	                                <span>파일 추가</span>
-	                                <input type="file" name="br_img3" class="file_timeCard">
+	                                <input type="file" name="imgFiles[2]" class="file_timeCard">
 	                            </div>
                             </div>
                         </div>
@@ -99,15 +99,21 @@
 	                    </div>
 	                    <div class="timeCard_visualWrap slider">
 	                        <ul class="timeCard_imgWrap">
-	                            <li><a href="#">
-	                                <img src="images/${branches.br_img1}" class="timeLine_img">
-	                            </a></li>
-	                            <li><a href="#">
-	                                <img src="images/${branches.br_img2}" class="timeLine_img">
-	                            </a></li>
-	                            <li><a href="#">
-	                                <img src="images/${branches.br_img3}" class="timeLine_img">
-	                            </a></li>
+	                        	<c:if test="${branches.br_img1 != null}">
+		                            <li><a href="#">
+		                                <img src="upload/history/${branches.br_img1}" class="timeLine_img">
+		                            </a></li>
+	                            </c:if>
+	                            <c:if test="${branches.br_img2 != null}">
+		                            <li><a href="#">
+		                                <img src="upload/history/${branches.br_img2}" class="timeLine_img">
+		                            </a></li>
+	                            </c:if>
+	                            <c:if test="${branches.br_img3 != null}">
+		                            <li><a href="#">
+		                                <img src="upload/history/${branches.br_img3}" class="timeLine_img">
+		                            </a></li>
+	                            </c:if>
 	                        </ul>
 	                    </div><!--//timeCard_visualWrap -->
 	                    <div class="timeCard_content">
@@ -192,12 +198,13 @@
 	            <table cellspacing="0" cellpadding="0">
 	                <tr>
 	                    <td class="historyList_border historyList_name">
+	                    	<input type="hidden" value="${htList.ht_id}">
 	                        <p class="historyList_arco ellipsis">${htList.ht_title}</p>
 	                        <a class="historyList_pop" href="#"></a>
 	                        <div class="history_popMenuWrap">
 	                            <ul class="history_popMenu">
 	                                <li><a href="#">히스토리 수정</a></li>
-	                                <li><a href="javascript:deleteHistroy(${htList.ht_id});">히스토리 삭제</a></li>
+	                                <li><a href="javascript:deleteHistory(${htList.ht_id});">히스토리 삭제</a></li>
 	                                <li><a href="#">공개설정 : 
 		                                <c:if test="${htList.ht_public eq 1}">
 		                                	공개
