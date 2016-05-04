@@ -30,6 +30,7 @@
 <script src="js/login.js"></script>
 <script src="js/join.js"></script>
 <script src="js/history.js"></script>
+<script src="js/search.js"></script> 
 <script type="text/javascript">
 
 </script>
@@ -54,9 +55,9 @@
 		</c:choose>
         <div class="inputStyle" id="search_main">
         	<div id="selectWrap_main">
-                <select id="select_main">
-                    <option value="title">팀원 검색</option>
-                    <option value="id">글제목 검색</option>
+                <select id="select_main" onchange="selectChanged();">
+                    <option value="member">학우 검색</option>
+                    <option value="title">글제목 검색</option>
                     <option value="tag">태그 검색</option>
                     <option value="subject">과목 검색</option>
                 </select>
@@ -77,7 +78,7 @@
 		</c:choose>
     </div><!--//headerWrap-->
     <div class="searchTermWrap teamSearchWrap">
-        <div class="clear">
+        <div class="clear" id="category_select">
             <span>분야 선택</span>
             <div class="team_category">
                 <input type="button" value="게임" class="btnStyle2 btn_555" id="teamCategory_game">
@@ -88,7 +89,7 @@
                 <input type="button" value="기타" class="btnStyle2 btn_555" id="teamCategory_etc">
             </div>
         </div>
-        <div class="clear">
+        <div class="clear" id="skill_select">
             <span>보유 기술</span>
             <div class="team_techWrap techWrap_game">
                 <div>
