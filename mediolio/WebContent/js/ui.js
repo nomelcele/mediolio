@@ -94,13 +94,31 @@ $('document').ready(function(){
     
     
     //header 검색창
-    $('#search_main').on('click',function(){
+    $('#selectWrap_main').on('click',function(){
         $('#bellWrap, #btn_login, #btn_logout').hide();
-        $('#headerWrap .btn_close, .searchTermWrap').show();
+        $('#headerWrap .btn_close').show();
         $('#headerWrap').css({ width:'100%', paddingLeft:250});/*402*/
         $('#search_main').css({ width:'95%', margin:'0 auto'})/*260*/
         $('#selectWrap_main').css({ width:120});
-    })
+    });
+    $('#text_main').on('click',function(){
+        $('#bellWrap, #btn_login, #btn_logout').hide();
+        $('#headerWrap .btn_close').show();
+        
+        //오지은 추가
+        var select = document.getElementById('select_main');
+    	var selectbox_val = select.options[select.selectedIndex].value;
+        if( selectbox_val == 'tag' || selectbox_val == 'subject'){
+        	$('.searchTermWrap').hide();
+        }else{
+        	$('.searchTermWrap').show();
+        }
+        //추가 끝
+        
+        $('#headerWrap').css({ width:'100%', paddingLeft:250});/*402*/
+        $('#search_main').css({ width:'95%', margin:'0 auto'})/*260*/
+        $('#selectWrap_main').css({ width:120});
+    });
     
     $('#headerWrap .btn_close').on('click', function(){
         $('#bellWrap, #btn_login, #btn_logout').show();
