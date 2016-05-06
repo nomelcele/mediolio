@@ -20,7 +20,7 @@
         
         <div class="timeLineWrap clear">
             <form action="addBranch" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="ht_id" value="${recentHtId}">
+            <input type="hidden" id="recentHtId" name="ht_id" value="${recentHtId}">
             <div class="timeCardWrap clear">
                 <div class="timeCircle"></div>
                 <div class="cardWrap timeCard">
@@ -121,7 +121,8 @@
 	                    </div><!--//timeCard_content-->
 	                    <div class="timeCard_btnBox">
 	                        <input class="btnStyle_timeCard_left" type="button" value="수정">
-	                        <input class="btnStyle_timeCard_right" type="button" value="삭제">
+	                        <input class="btnStyle_timeCard_right br_delete_btn" type="button" value="삭제">
+	                        <input type="hidden" class="branch_id" value="${branches.br_id}">
 	                    </div>
 	                </div><!--//timeCard-->
 	            </div><!--//timeCardWrap-->
@@ -198,8 +199,8 @@
 	            <table cellspacing="0" cellpadding="0">
 	                <tr>
 	                    <td class="historyList_border historyList_name">
-	                    	<input type="hidden" value="${htList.ht_id}">
-	                        <p class="historyList_arco ellipsis">${htList.ht_title}</p>
+	                    	<input type="hidden" class="history_id" value="${htList.ht_id}">
+	                        <p class="historyList_arco ellipsis history_title">${htList.ht_title}</p>
 	                        <a class="historyList_pop" href="#"></a>
 	                        <div class="history_popMenuWrap">
 	                            <ul class="history_popMenu">

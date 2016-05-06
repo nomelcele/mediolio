@@ -43,5 +43,21 @@ $(function(){
 		// input 파일 내용 비우기
 	});
 	
+	$(".br_delete_btn").click(function(){
+		// 브랜치 삭제
+		$.ajax({
+			type: "POST",
+			url: "deleteBranch",
+			data: {
+				br_id: $(this).parent().find(".branch_id").val(),
+				ht_id: $("#recentHtId").val()
+			}, 
+			success: function(result){
+				
+			}
+		});
+	});
+	
+	
 });
 
