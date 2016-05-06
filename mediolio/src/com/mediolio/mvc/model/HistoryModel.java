@@ -2,8 +2,10 @@ package com.mediolio.mvc.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mediolio.mvc.dao.HistoryDao;
 import com.mediolio.vo.BranchVO;
+import com.mediolio.vo.ClassVO;
 import com.mediolio.vo.HistoryVO;
 import com.mediolio.vo.MemberVO;
 
@@ -98,5 +101,38 @@ public class HistoryModel {
 		model.addAttribute("htId", htvo.getHt_id());
 		model.addAttribute("htTitle", htvo.getHt_title());
 		return "mypage.history";
+	}
+	
+	@RequestMapping(value="autocompleteClass")
+	public void autocompleteClass(String cl_name,HttpServletResponse response) throws IOException{
+		// 관련 과목 입력 시 자동 완성
+		List<ClassVO> classList = htdao.autocompleteClass(cl_name);
+		int classNum = classList.size();
+		int[] cl_ids = new int[classNum];
+		String[] cl_names = new String[classNum];
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("[");
+		for(int i=0; i<classNum; i++){
+			ClassVO cl = classList.get(i);
+			cl_ids[i] = cl.getCl_id();
+			cl_names[i] = cl.getCl_name();
+			sb.append("\"");
+			sb.append("<input type='hidden' class='classId' value="+cl_ids[i]+">");
+			sb.append("<span class='className'>"+cl_names[i]+"</span>");
+			sb.append("\"");
+			if(i != classNum-1){
+				sb.append(",");
+			}
+			
+		}
+		sb.append("]");
+		
+		PrintWriter pw = response.getWriter();
+		pw.write(sb.toString());
+		pw.flush();
+		pw.close();
+		
+		
 	}
 }
