@@ -21,4 +21,10 @@
   		insert into branch (ht_id,br_title,br_img1,br_img2,br_img3,br_text,br_date,br_public) 
   		values (#{ht_id},#{br_title},#{br_img1},#{br_img2},#{br_img3},#{br_text},sysdate(),#{br_public})
   	</insert>
+  	<delete id="deleteBranch" parameterType="int">
+  		delete from branch where br_id=#{br_id}
+  	</delete>
+  	<update id="updateLastEdit" parameterType="int">
+  		update history set ht_lastedit=sysdate() where ht_id=#{ht_id}
+  	</update>
   </mapper>

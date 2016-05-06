@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -74,6 +75,28 @@ public class HistoryModel {
 		}
 		
 		htdao.addBranch(brvo);
+		htdao.updateLastEdit(brvo.getHt_id());
 		return "redirect:gotoMyPage";
+	}
+	
+	@RequestMapping(value="deleteBranch")
+	public String deleteBranch(BranchVO brvo){
+		// 브랜치 삭제
+		htdao.deleteBranch(brvo.getBr_id());
+		htdao.updateLastEdit(brvo.getHt_id());
+		return "redirect:gotoMyPage";
+	}
+	
+	@RequestMapping(value="historyDetail")
+	public String historyDetail(HistoryVO htvo,Model model){
+		// 목록에서 히스토리 선택 시 그 히스토리의 브랜치 표시
+		List<BranchVO> list = htdao.branchList(htvo.getHt_id());
+		for(BranchVO e:list){
+			System.out.println("뭐가 문제임"+e.getBr_title());
+		}
+		model.addAttribute("branchList", list);
+		model.addAttribute("htId", htvo.getHt_id());
+		model.addAttribute("htTitle", htvo.getHt_title());
+		return "mypage.history";
 	}
 }

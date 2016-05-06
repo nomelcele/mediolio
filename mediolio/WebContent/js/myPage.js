@@ -55,7 +55,17 @@ $(document).ready(function(){
     
     $('.historyList_name').on('click',function(e){
     	// 선택한 히스토리 보여주기
-    	
+		$.ajax({
+			type: "POST",
+			url: "historyDetail",
+			data: {
+				ht_id: $(this).find(".history_id").val(),
+				ht_title: $(this).find(".history_title").html(),
+			},
+			success: function(result){
+				$(".historyWrap").html(result);
+			}
+		});
     	
         $('.historyList_name .history_popMenuWrap').not($(this).find('.history_popMenuWrap')).hide();
         

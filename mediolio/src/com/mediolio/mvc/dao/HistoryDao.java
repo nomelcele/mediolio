@@ -38,4 +38,14 @@ public class HistoryDao {
 		// 히스토리에 브랜치 추가
 		st.insert("ht.addBranch", brvo);
 	}
+	
+	public void deleteBranch(int br_id){
+		// 브랜치 삭제
+		st.delete("ht.deleteBranch", br_id);
+	}
+	
+	public void updateLastEdit(int ht_id){
+		// 히스토리 편집 날짜 업데이트
+		st.update("ht.updateLastEdit", ht_id);
+	}
 }
