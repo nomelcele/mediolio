@@ -160,6 +160,7 @@ top: 20px;
 .historyExWrap{ width:300px; min-height:240px; height:auto; float:left; margin-top:10px; overflow:visible; }
 
 .hd_historyEx{ box-sizing:border-box; height:40px; background:#333; color:#fff; line-height:40px; font-size:14px; padding:0 10px; }
+.classBox{left:25px;}
 
 #btn_addHistory{ margin-top:8px; height:24px;}
 #btn_addHistory:hover{ background:#222; border-color:#ddd;}

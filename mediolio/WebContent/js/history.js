@@ -58,6 +58,47 @@ $(function(){
 		});
 	});
 	
+	$(".historyList_addRelated").keyup(function(){
+		// 관련 과목 입력 시 자동 완성
+		if($(this).val().trim() != ""){
+	    	$.ajax({
+	    		type: "POST",
+	    		url: "autocompleteClass",
+	    		data: {
+	    			cl_name: $(this).val()
+	    		},
+	    		dataType: "json",
+	    		success: function(jdata){
+	    			var codes = "";
+	    			var arr = jdata;
+	    			for(var i=0; i<arr.length; i++){
+	    				codes += "<li onclick='addClass(this)'>"+arr[i]+"</li>";
+	    			}
+	    			if(arr.length>0){
+	    				$("#autoCompleteArea").html(codes);
+	        			$(".autoCompleteBox").css({
+	        				display: "block",
+	        				top: $(".historyList_addRelated").offset().top-108
+	        			});
+	        			
+	            		// moveAutoCompleteBox();
+	        			// 자동 완성 목록 위치 변경: 현재 커서 위치에 맞게
+	    			}
+	    		}
+	    	});
+    	} else {
+    		$(".autoCompleteBox").css("display","none");
+    	}
+
+	})
 	
 });
 
+function addClass(li){
+	// 자동 완성 목록에서 항목 클릭 시 관련 과목 영역에 추가
+	var newClass = li;
+	console.log("과목: "+$(newClass).find("span").html());
+	$(".historyList_addRelated").val($(newClass).find("span").html());
+	$(".autoCompleteBox").css("display","none");
+	$(".timeCard_writeDisplayWrap").append("<input type='hidden' name='cl_id' value="+$(newClass).find(".classId").val()+">");
+}

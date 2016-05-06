@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mediolio.vo.BranchVO;
+import com.mediolio.vo.ClassVO;
 import com.mediolio.vo.HistoryVO;
 
 @Repository
@@ -47,5 +48,10 @@ public class HistoryDao {
 	public void updateLastEdit(int ht_id){
 		// 히스토리 편집 날짜 업데이트
 		st.update("ht.updateLastEdit", ht_id);
+	}
+	
+	public List<ClassVO> autocompleteClass(String cl_name){
+		// 관련 과목 입력 시 자동 완성
+		return st.selectList("ht.autocompleteClass", cl_name);
 	}
 }
