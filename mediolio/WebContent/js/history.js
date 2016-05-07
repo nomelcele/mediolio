@@ -102,3 +102,23 @@ function addClass(li){
 	$(".autoCompleteBox").css("display","none");
 	$(".timeCard_writeDisplayWrap").append("<input type='hidden' name='cl_id' value="+$(newClass).find(".classId").val()+">");
 }
+
+function deleteHistory(ht_id){
+	// 히스토리 삭제
+	$("#deleteHt"+ht_id).submit();
+}
+
+function changeHtPublic(ht_id,ht_public){
+	// 공개 여부 변경
+	$.ajax({
+		type: "POST",
+		url: "changeHtPublic",
+		data: {
+			ht_id: ht_id,
+			ht_public: ht_public
+		}, 
+		success: function(result){
+			$(".historyExWrap").html(result);
+		}
+	});
+}
