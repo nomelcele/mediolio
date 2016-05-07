@@ -62,7 +62,7 @@
                     <option value="subject">과목 검색</option>
                 </select>
            </div><!--//selectWrap -->
-            <input class="input_in" id="text_main" type="text"/> <!-- onkeydown="if(event.keyCode==13){goSearch();}" -->
+            <input class="input_in" id="text_main" type="text"/>
             <div class="searchAutoCompleteBox"><ul id="searchAutoCompleteArea"></ul></div>
             <input class="btn_search indent" type="button" />
         </div><!--//search_main-->
@@ -86,7 +86,7 @@
                 <input type="button" value="게임" class="btnStyle2 btn_555" id="teamCategory_game">
                 <input type="button" value="웹 & 앱" class="btnStyle2 btn_555" id="teamCategory_webApp">
                 <input type="button" value="디자인" class="btnStyle2 btn_555" id="teamCategory_design">
-                <input type="button" value="영상" class="btnStyle2 btn_555" id="teamCategory_video">
+                <input type="button" value="영상 & 사운드" class="btnStyle2 btn_555" id="teamCategory_video">
                 <input type="button" value="3D" class="btnStyle2 btn_555" id="teamCategory_3d">
                 <input type="button" value="기타" class="btnStyle2 btn_555" id="teamCategory_etc">
             </div>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="search">
+  
+  	<select id="searchtag" parameterType="string" resultType="pvo">
+  		SELECT * FROM (
+			SELECT @NO := @NO + 1 AS ROWNUM, A.*
+				FROM(
+				SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID, m.m_name,
+					(SELECT count(*) FROM member_action WHERE act_what=p.p_id AND act_type='like') p_likenum, p.p_viewnum
+					FROM project p, member m, hashtag t
+					WHERE p.p_id=t.p_id AND p.m_id=m.m_id
+						AND t.h_value=#{key}
+				) A,(SELECT @NO := 0 ) B
+			) C
+		WHERE C.ROWNUM <![CDATA[>=]]> 1 AND C.ROWNUM <![CDATA[<=]]> 6
+  	</select>
+  	
+  	<select id="searchuser" parameterType="String" resultType="fvo">
+		SELECT * FROM (
+			SELECT @NO := @NO + 1 AS ROWNUM, A.*
+				FROM(
+		  		SELECT m.m_id, CONCAT_WS(' ', m.m_studentID, m.m_name) AS m_nickname, m.m_introduce, m.m_interesting1, m.m_interesting2,
+					(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
+					(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
+					(SELECT SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/'), ',', 3) FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC) AS projects
+						FROM member m HAVING m_nickname LIKE #{key}
+				) A,(SELECT @NO := 0 ) B
+			) C
+		WHERE C.ROWNUM <![CDATA[>=]]> 1 AND C.ROWNUM <![CDATA[<=]]> 6
+  	</select>
+  	
+  	<select id="searchSbj" parameterType="int" resultType="pvo">
+  		SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID, m.m_name, c.cl_name,
+			(SELECT count(*) FROM member_action WHERE act_what=p.p_id AND act_type='like') p_likenum, p.p_viewnum
+				FROM project p, member m, class c WHERE p.m_id=m.m_id AND p.cl_id = c.cl_id
+				AND p.cl_id=#{key}
+  	</select>
+	
+  </mapper>

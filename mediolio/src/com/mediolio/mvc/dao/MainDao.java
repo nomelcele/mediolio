@@ -40,18 +40,5 @@ public class MainDao {
 		return st.selectList("main.selectlike",m_id);
 	}
 
-	public List<FriendVO> searchUser(String key) {
-		return st.selectList("main.searchuser", "%"+key+"%");
-	}
-
-	public List<ProjectVO> searchProjects(Map<String, String> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<ProjectVO> searchTag(String key) {
-		return st.selectList("main.searchtag", key);
-	}
-	
 	
 }

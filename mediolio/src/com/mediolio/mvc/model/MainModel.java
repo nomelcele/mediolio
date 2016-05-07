@@ -149,31 +149,4 @@ public class MainModel {
 		return "main.selectlikepage";
 	}
 
-	@RequestMapping("search")
-	public ModelAndView search(@RequestParam("key") String key, @RequestParam("section") String section){
-		ModelAndView mav = new ModelAndView("jsonView");
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("key", key);
-		map.put("section", section);
-		
-		System.out.println("search 함수 : " + key);
-		
-		if(key.equals("USER")) {
-			List<FriendVO> resultList = mdao.searchUser(key);
-			for(int i=0; i<resultList.size(); i++){
-				System.out.println(resultList.get(i).getM_nickname());
-			}
-		}else if(key.equals("TAG")){
-			List<ProjectVO> resultList = mdao.searchTag(key);
-			for(int i=0; i<resultList.size(); i++){
-				System.out.println(resultList.get(i).getP_title());
-			}
-		}else{
-			List<ProjectVO> resultList = mdao.searchProjects(map);
-		}
-		
-		
-		return mav;
-	}
-
 }
