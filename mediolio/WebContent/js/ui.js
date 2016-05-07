@@ -100,6 +100,7 @@ $('document').ready(function(){
         $('#headerWrap').css({ width:'100%', paddingLeft:250});/*402*/
         $('#search_main').css({ width:'95%', margin:'0 auto'})/*260*/
         $('#selectWrap_main').css({ width:120});
+        
     });
     $('#text_main').on('click',function(){
         $('#bellWrap, #btn_login, #btn_logout').hide();
@@ -108,7 +109,12 @@ $('document').ready(function(){
         //오지은 추가
         var select = document.getElementById('select_main');
     	var selectbox_val = select.options[select.selectedIndex].value;
-        if( selectbox_val == 'tag' || selectbox_val == 'subject'){
+    	if(selectbox_val == 'member'){
+    		//학우 검색 시 전체검색이 default로 나타나도록.
+    		$('#teamCategory_total').click();
+    		$('.searchTermWrap').show();
+    	}
+    	else if( selectbox_val == 'tag' || selectbox_val == 'subject'){
         	$('.searchTermWrap').hide();
         }else{
         	$('.searchTermWrap').show();
@@ -128,17 +134,23 @@ $('document').ready(function(){
         $('#selectWrap_main').css({ width:103});
     })
     
+    $('#teamCategory_total').on('click', function(){
+        $('.team_category input[type="button"]').removeClass('btn_222');
+        $(this).addClass('btn_222');
+        $('.searchTermWrap .team_techWrap').hide();
+        $('.techWrap_language, .techWrap_game, .techWrap_webApp, .techWrap_design, .techWrap_video, .techWrap_3d, .techWrap_etc').show();
+    })
     $('#teamCategory_game').on('click', function(){
         $('.team_category input[type="button"]').removeClass('btn_222');
         $(this).addClass('btn_222');
         $('.searchTermWrap .team_techWrap').hide();
-        $('.techWrap_game').show();
+        $('.techWrap_language, .techWrap_game').show();
     })
     $('#teamCategory_webApp').on('click', function(){
         $('.team_category input[type="button"]').removeClass('btn_222');
         $(this).addClass('btn_222');
         $('.searchTermWrap .team_techWrap').hide();
-        $('.techWrap_webApp').show();
+        $('.techWrap_language, .techWrap_webApp').show();
     })
     $('#teamCategory_design').on('click', function(){
         $('.team_category input[type="button"]').removeClass('btn_222');
@@ -156,13 +168,13 @@ $('document').ready(function(){
         $('.team_category input[type="button"]').removeClass('btn_222');
         $(this).addClass('btn_222');
         $('.searchTermWrap .team_techWrap').hide();
-        $('.techWrap_3d').show();
+        $('.techWrap_3d, .techWrap_design').show();
     })
     $('#teamCategory_etc').on('click', function(){
         $('.team_category input[type="button"]').removeClass('btn_222');
         $(this).addClass('btn_222');
         $('.searchTermWrap .team_techWrap').hide();
-        $('.techWrap_etc').show();
+        $('.techWrap_language, .techWrap_etc').show();
     })
 });
 

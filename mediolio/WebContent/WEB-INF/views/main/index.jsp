@@ -11,7 +11,7 @@
 	    	<div class="card_img">
 	            <a href="projectView?m_id=${mainProjects.m_id}&p_id=${mainProjects.p_id}"><!--  onClick="contentModalOpen(this, 'index'); return false; -->
 	                <div>
-	                	<p>
+	                	<p class="card_tag">
 	                	<c:forEach var="hashtag" items="${hashtag}">
 	                		<c:if test="${mainProjects.p_id eq hashtag.p_id && hashtag.h_value ne ''}">
 	                    <!-- <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p> -->
