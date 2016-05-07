@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="resources/css/jquery.mCustomScrollbar.css" />
 <link rel="stylesheet" href="resources/css/nice-select.css"/>
 <link rel="stylesheet" href="resources/css/jquery-labelauty.css"/>
-<link rel="stylesheet" href="resources/css/jquery.autocomplete.css"/>
 
 <script src="js/jQuery/jquery-1.11.3.min.js"></script>
 <script src="js/jQuery/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -21,7 +20,6 @@
 <script src="js/jQuery/jquery-labelauty.js"></script>
 <script src="js/jQuery/jquery.mousewheel.min.js"></script>
 <script src="js/jQuery/jquery-confirm.js"></script>
-<script src="js/jQuery/jquery.autocomplete.js"></script>
 
 <script src="js/ui.js"></script>
 <script src="js/modal.js"></script>
@@ -151,7 +149,7 @@
                     <input type="radio" name="skills" value="14"><label>JSP</label>
                 </div>
                 <div>
-                    <input type="radio" name="skills" value="34"><label>node.js</label>
+                    <input type="radio" name="skills" value="35"><label>node.js</label>
                 </div>
             </div><!--//team_techWrap -->
             
@@ -201,6 +199,9 @@
                 </div>
                 <div>
                     <input type="radio" name="skills" value="33"><label>하둡</label>
+                </div>
+                <div>
+                    <input type="radio" name="skills" value="34"><label>루비</label>
                 </div>
                 <div>
                     <input type="radio" name="skills" value="17"><label>MySQL</label>
