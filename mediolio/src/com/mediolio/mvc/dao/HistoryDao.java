@@ -54,4 +54,9 @@ public class HistoryDao {
 		// 관련 과목 입력 시 자동 완성
 		return st.selectList("ht.autocompleteClass", cl_name);
 	}
+	
+	public void changeHtPublic(HistoryVO htvo){
+		// 히스토리 공개 상태 변경
+		st.update("ht.changeHtPublic", htvo);
+	}
 }

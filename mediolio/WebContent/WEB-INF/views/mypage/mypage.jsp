@@ -146,8 +146,13 @@
 	                        <div class="history_popMenuWrap">
 	                            <ul class="history_popMenu">
 	                                <li><a href="#">히스토리 수정</a></li>
-	                                <li><a href="javascript:deleteHistory(${htList.ht_id});">히스토리 삭제</a></li>
-	                                <li><a href="#">공개설정 : 
+	                                <li>
+	                                	<form action="deleteHistory" id="deleteHt${htList.ht_id}">
+	                                		<input type="hidden" name="ht_id" value="${htList.ht_id}">
+	                                	</form>
+	                                	<a href="javascript:deleteHistory(${htList.ht_id});">히스토리 삭제</a>
+	                                </li>
+	                                <li><a href="javascript:changeHtPublic(${htList.ht_id},${htList.ht_public});">공개설정 : 
 		                                <c:if test="${htList.ht_public eq 1}">
 		                                	공개
 		                                </c:if>
@@ -169,69 +174,6 @@
 	            </table>
             </c:forEach>
          <!-- 히스토리 목록 -->
-            
-<!--             <table cellspacing="0" cellpadding="0"> -->
-<!--                 <tr> -->
-<!--                     <td class="historyList_border historyList_name"> -->
-<!--                         <p class="historyList_arco ellipsis">JUICY 반응형 웹사이트</p> -->
-<!--                         <a class="historyList_pop" href="#"></a> -->
-<!--                         <div class="history_popMenuWrap"> -->
-<!--                             <ul class="history_popMenu"> -->
-<!--                                 <li><a href="#">히스토리 수정</a></li> -->
-<!--                                 <li><a href="#">히스토리 삭제</a></li> -->
-<!--                                 <li><a href="#">공개설정 : 공개</a></li> -->
-<!--                             </ul> -->
-<!--                         </div> -->
-<!--                     </td> -->
-<!--                 </tr> -->
-<!--                 <tr> -->
-<!--                     <td class="historyList_border historyList_contentWrap"> -->
-<!--                         <p class="history_content">반응형 웹사이트 UI기획, 디자인 및 퍼블리싱<br/> -->
-<!--                             IE9이상, 크롬, 파이어폭스<br/> -->
-<!--                             웹표준, 크로스브라우징, 웹접근성 -->
-<!--                         </p> -->
-<!--                         <p><span>관련과목 : </span>그래픽디자인, 인터페이스디자인, 웹앱프로그래밍</p> -->
-                        
-<!--                     </td> -->
-<!--                 </tr> -->
-<!--             </table> -->
-            
-<!--             <table cellspacing="0" cellpadding="0"> -->
-<!--                 <tr> -->
-<!--                     <td class="historyList_border historyList_name"> -->
-<!--                         <p class="historyList_arco ellipsis">JUICY 반응형 웹사이트</p> -->
-<!--                         <a class="historyList_pop" href="#"></a> -->
-<!--                         <div class="history_popMenuWrap"> -->
-<!--                             <ul class="history_popMenu"> -->
-<!--                                 <li><a href="#">히스토리 수정</a></li> -->
-<!--                                 <li><a href="#">히스토리 삭제</a></li> -->
-<!--                                 <li><a href="#">공개설정 : 비공개</a></li> -->
-<!--                             </ul> -->
-<!--                         </div> -->
-<!--                     </td> -->
-<!--                 </tr> -->
-<!--                 <tr> -->
-<!--                     <td class="historyList_border historyList_contentWrap"> -->
-<!--                         <p class="history_content">반응형 웹사이트 UI기획, 디자인 및 퍼블리싱<br/> -->
-<!--                             IE9이상, 크롬, 파이어폭스<br/> -->
-<!--                             웹표준, 크로스브라우징, 웹접근성 -->
-<!--                         </p> -->
-<!--                         <p><span>관련과목 : </span>그래픽디자인, 인터페이스디자인, 웹앱프로그래밍</p> -->
-                        
-<!--                     </td> -->
-<!--                 </tr> -->
-<!--             </table> -->
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
             <form id="addHistoryForm" action="addHistory" method="post">
             <table cellspacing="0" cellpadding="0" class="historyList_addTable">
                 <tr>

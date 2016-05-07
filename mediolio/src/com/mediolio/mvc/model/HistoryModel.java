@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -93,11 +94,7 @@ public class HistoryModel {
 	@RequestMapping(value="historyDetail")
 	public String historyDetail(HistoryVO htvo,Model model){
 		// 목록에서 히스토리 선택 시 그 히스토리의 브랜치 표시
-		List<BranchVO> list = htdao.branchList(htvo.getHt_id());
-		for(BranchVO e:list){
-			System.out.println("뭐가 문제임"+e.getBr_title());
-		}
-		model.addAttribute("branchList", list);
+		model.addAttribute("branchList", htdao.branchList(htvo.getHt_id()));
 		model.addAttribute("htId", htvo.getHt_id());
 		model.addAttribute("htTitle", htvo.getHt_title());
 		return "mypage.history";
@@ -134,5 +131,13 @@ public class HistoryModel {
 		pw.close();
 		
 		
+	}
+	
+	@RequestMapping(value="changeHtPublic")
+	public String changeHtPublic(HistoryVO htvo,Model model,HttpSession session){
+		// 히스토리 공개 상태 변경
+		htdao.changeHtPublic(htvo);
+		model.addAttribute("htList", htdao.historyList(((MemberVO)(session.getAttribute("mev"))).getM_id()));
+		return "mypage.historyList";
 	}
 }

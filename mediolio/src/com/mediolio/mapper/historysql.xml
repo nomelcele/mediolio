@@ -31,4 +31,7 @@
   		select * from class where cl_name like CONCAT('%',#{cl_name},'%') 
   		order by cl_name
   	</select>
+  	<update id="changeHtPublic" parameterType="htvo">
+		update history set ht_public=#{ht_public} where ht_id=#{ht_id}  	
+  	</update>
   </mapper>
