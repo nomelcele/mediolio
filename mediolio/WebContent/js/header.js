@@ -144,19 +144,6 @@ function getNotifications(){
 	});
 	
 }
-	
-function goSearch(){
-
-	$.ajax({
-		url : "search",
-		type : "POST",
-		data : {key : $('#text_main').val(), section : $('#select_main').val()},
-		dataType : "JSON",
-		success : function(data) {
-			
-		}
-	});
-}
 
 
 $(function(){

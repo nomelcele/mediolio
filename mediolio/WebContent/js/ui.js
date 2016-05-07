@@ -95,6 +95,7 @@ $('document').ready(function(){
     
     //header 검색창
     $('#selectWrap_main').on('click',function(){
+    	$('#searchAutoCompleteArea').empty().hide().parent().hide();
         $('#bellWrap, #btn_login, #btn_logout').hide();
         $('#headerWrap .btn_close').show();
         $('#headerWrap').css({ width:'100%', paddingLeft:250});/*402*/

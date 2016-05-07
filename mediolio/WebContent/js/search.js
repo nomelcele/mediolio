@@ -1,5 +1,7 @@
 /* 오지은
  * header.jsp 의 id 'select_main'의 onchange 이벤트 */
+
+//검색옵션 select 값 변경 시 호출되는 함수
 function selectChanged(){
 	var select = document.getElementById('select_main');
 	var option_value = select.options[select.selectedIndex].value;
@@ -15,6 +17,9 @@ function selectChanged(){
 	}
 	//글 제목 검색
 	else if(option_value == 'title'){
+        $('.team_category input[type="button"]').removeClass('btn_222');
+        $('#teamCategory_total').addClass('btn_222');
+		
 		//보유기술란 숨기기
 		$('#category_select').show();
 		$('#skill_select').hide();
@@ -27,25 +32,25 @@ function selectChanged(){
 	}
 }
 
+//과목 자동완성
 function autoRecommendClass(classname){
-	console.log(classname);
-    // 태그 자동 완성
     if( classname.trim() != ""){
     	$.ajax({
     		type: "POST",
-    		url: "autocompleteClass",
+    		url: "searchAutoCompleteClass",
     		data: {
     			cl_name:  classname.trim()
     		},
     		dataType: "json",
-    		success: function(jdata){
+    		success: function(data){
     			var codes = "";
-    			var arr = jdata;
-    			for(var i=0; i<arr.length; i++){
-    				codes += "<li onclick='addClass(this)'>"+arr[i]+"</li>";
-    			}
-    			if(arr.length>0){
-    				$("#searchAutoCompleteArea").html(codes);
+    			$.each(data.list, function(index, entry){
+    				codes += "<li onclick='search("+entry.cl_id+", " + '\"subject\"' + ")'>"
+    								+"<span class='className'>"+entry.cl_name+"</span>"
+    							+"</li>";
+    			});
+    			if(data.list.length>0){
+    				$("#searchAutoCompleteArea").html(codes).show();
         			$(".searchAutoCompleteBox").css({
         				display: "block",
         				left: 120
@@ -57,13 +62,43 @@ function autoRecommendClass(classname){
     }
 }
 
-function moveAutoCompleteBox(){
-	var lastSpanOffset = $('#write_tagTxt span').last().offset().left;
-	var lastSpanWidth = $('#write_tagTxt span').last().width();
-	
-	$('.autoCompleteBox').css({
-		left: lastSpanOffset+lastSpanWidth-280,
-		top: $('#write_tagTxt').height()
+
+function search(keyword, option){
+	alert(keyword + ", " + option);
+	$.ajax({
+		url : "search",
+		type : "POST",
+		data : {key : keyword, section : option},
+		dataType : "JSON",
+		success : function(data) {
+			
+		}
+	});
+}
+function searchDeatil(keyword, option, category){
+	//option : 검색옵션(학우검색, 제목검색..) , category : 검색결과를 뽑고 싶은 카테고리(웹앱, 게임 ...)
+	alert(keyword +", " + option + ", " + category);
+	$.ajax({
+		url : "searchTitle",
+		type : "POST",
+		data : {key : keyword.trim(), section : option, ct : category},
+		dataType : "JSON",
+		success : function(data) {
+			
+		}
+	});
+}
+
+function searchMember(keyword, option, category, skill){
+	alert(keyword +", " + option + ", " + category + "," + skill);
+	$.ajax({
+		url : "searchMember",
+		type : "POST",
+		data : {key : keyword.trim(), section : option, ct : category, sk : skill},
+		dataType : "JSON",
+		success : function(data) {
+			
+		}
 	});
 }
 
@@ -81,11 +116,23 @@ $('document').ready(function(){
 	var keyword = document.getElementById('text_main');
 	
 	//과목검색 시 과목 자동완성
-	$('#text_main').on('keydown',function(){
+	$('#text_main').on('keydown',function(event){
 		var option_value = select.options[select.selectedIndex].value;
-		if(option_value == 'subject'){
-			var keyword = document.getElementById('text_main');
-			autoRecommendClass(keyword.value);
+		var keyword = document.getElementById('text_main');
+		
+		if(event.keyCode==13){
+			if(option_value == 'subject') alert("제시된 목록에서 선택하세요.");
+			else if(option_value == 'tag' ) search(keyword.value, option_value);
+			else if(option_value == 'title'){
+				searchTitle(keyword.value, option_value, $('.team_category').find('.btn_222').val());
+			}
+			else if(option_value == 'member'){
+				searchMember(keyword.value, option_value, $('.team_category').find('.btn_222').val(), 
+						$('.team_techWrap input:radio[name="skills"]:checked').val());
+			}
+		}
+		else if(option_value == 'subject'){
+			autoRecommendClass(keyword.value, option_value);
 		}
 	});
 
