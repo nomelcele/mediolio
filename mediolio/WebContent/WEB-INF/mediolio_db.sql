@@ -1,3 +1,10 @@
+/*
+ * 5.7 보유기술 추가
+ */
+INSERT INTO `mediolio`.`skills` (`sk_id`, `sk_name`) VALUES ('32', 'R');
+INSERT INTO `mediolio`.`skills` (`sk_id`, `sk_name`) VALUES ('33', '하둡');
+INSERT INTO `mediolio`.`skills` (`sk_id`, `sk_name`) VALUES ('34', 'node.js');
+
 /* 4월 8일 
  * history 테이블 m_id, ht_public 컬럼 추가
  * ht_color 컬럼 삭제 */

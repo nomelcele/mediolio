@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="resources/css/jquery.mCustomScrollbar.css" />
 <link rel="stylesheet" href="resources/css/nice-select.css"/>
 <link rel="stylesheet" href="resources/css/jquery-labelauty.css"/>
+<link rel="stylesheet" href="resources/css/jquery.autocomplete.css"/>
 
 <script src="js/jQuery/jquery-1.11.3.min.js"></script>
 <script src="js/jQuery/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -20,6 +21,7 @@
 <script src="js/jQuery/jquery-labelauty.js"></script>
 <script src="js/jQuery/jquery.mousewheel.min.js"></script>
 <script src="js/jQuery/jquery-confirm.js"></script>
+<script src="js/jQuery/jquery.autocomplete.js"></script>
 
 <script src="js/ui.js"></script>
 <script src="js/modal.js"></script>
@@ -62,7 +64,8 @@
                     <option value="subject">과목 검색</option>
                 </select>
            </div><!--//selectWrap -->
-            <input class="input_in" id="text_main" type="text" onkeydown="if(event.keyCode==13){goSearch();}"/>
+            <input class="input_in" id="text_main" type="text"/> <!-- onkeydown="if(event.keyCode==13){goSearch();}" -->
+            <div class="searchAutoCompleteBox"><ul id="searchAutoCompleteArea"></ul></div>
             <input class="btn_search indent" type="button" />
         </div><!--//search_main-->
         <a class="btn_close"></a>
@@ -81,6 +84,7 @@
         <div class="clear" id="category_select">
             <span>분야 선택</span>
             <div class="team_category">
+            	<input type="button" value="전체" class="btnStyle2 btn_555" id="teamCategory_total">
                 <input type="button" value="게임" class="btnStyle2 btn_555" id="teamCategory_game">
                 <input type="button" value="웹 & 앱" class="btnStyle2 btn_555" id="teamCategory_webApp">
                 <input type="button" value="디자인" class="btnStyle2 btn_555" id="teamCategory_design">
@@ -91,119 +95,130 @@
         </div>
         <div class="clear" id="skill_select">
             <span>보유 기술</span>
+            <div style="float: left; width:700px;">
+            <div class="team_techWrap techWrap_language">
+	         	<div>
+	             	<input type="radio" name="skills" value="1"><label>C</label>
+	         	</div>
+	            <div>
+	            	<input type="radio" name="skills" value="2"><label>C#</label>
+	        	</div>
+	        	<div>
+	            	<input type="radio" name="skills" value="3"><label>C++</label>
+	         	</div>	        	
+	         	<div>
+	            	<input type="radio" name="skills" value="10"><label>JAVA</label>
+	         	</div>
+	        	<div>
+	            	<input type="radio" name="skills" value="15"><label>Android</label>
+	        	</div>
+	        	<div>
+	            	<input type="radio" name="skills" value="16"><label>iOS</label>
+	        	</div>
+            </div><!--//team_techWrap -->
             <div class="team_techWrap techWrap_game">
-                <div>
-                    <input type="radio"><label>JAVA</label>
-                </div>
-                <div>
-                    <input type="radio"><label>JAVA</label>
-                </div>
-                <div>
-                    <input type="radio"><label>JAVA</label>
-                </div>
-                <div>
-                    <input type="radio"><label>JAVASCRIPT</label>
-                </div>
-                <div>
-                    <input type="radio"><label>JAVA</label>
-                </div>
-                <div>
-                    <input type="radio"><label>JAVASCRIPT</label>
-                </div>
-                <div>
-                    <input type="radio"><label>JAVA</label>
-                </div>
-                <div>
-                    <input type="radio"><label>JAVASCRIPT</label>
-                </div>
-                <div>
-                    <input type="radio"><label>JAVA</label>
-                </div>
-                <div>
-                    <input type="radio"><label>JAVASCRIPT</label>
-                </div>
+	         	<div>
+	             	<input type="radio" name="skills" value="4"><label>Unity</label>
+	         	</div>
+	            <div>
+	            	<input type="radio" name="skills" value="5"><label>COCOS-2D</label>
+	        	</div>
+	        	<div>
+	            	<input type="radio" name="skills" value="6"><label>게임샐러드</label>
+	         	</div>
+	        	<div>
+	            	<input type="radio" name="skills" value="7"><label>언리얼엔진</label>
+	        	</div>
+	        	<div>
+	            	<input type="radio" name="skills" value="8"><label>DirectX</label>
+	        	</div>
+	        	<div>
+	            	<input type="radio" name="skills" value="9"><label>OpenGL</label>
+	        	</div>
             </div><!--//team_techWrap -->
             
             <div class="team_techWrap techWrap_webApp">
                 <div>
-                    <input type="radio"><label>Webapp</label>
+                    <input type="radio" name="skills" value="11"><label>javascript</label>
                 </div>
                 <div>
-                    <input type="radio"><label>JAVA</label>
+                    <input type="radio" name="skills" value="12"><label>phthon</label>
                 </div>
                 <div>
-                    <input type="radio"><label>JAVA</label>
+                    <input type="radio" name="skills" value="13"><label>PHP</label>
                 </div>
                 <div>
-                    <input type="radio"><label>JAVASCRIPT</label>
+                    <input type="radio" name="skills" value="14"><label>JSP</label>
                 </div>
                 <div>
-                    <input type="radio"><label>JAVA</label>
-                </div>
-                <div>
-                    <input type="radio"><label>JAVASCRIPT</label>
+                    <input type="radio" name="skills" value="34"><label>node.js</label>
                 </div>
             </div><!--//team_techWrap -->
             
             <div class="team_techWrap techWrap_design">
                 <div>
-                    <input type="radio"><label>포토샵</label>
+                    <input type="radio" name="skills" value="29"><label>포토샵</label>
                 </div>
                 <div>
-                    <input type="radio"><label>일러스트레이터</label>
+                    <input type="radio" name="skills" value="30"><label>일러스트레이터</label>
                 </div>
                 <div>
-                    <input type="radio"><label>JAVA</label>
+                    <input type="radio" name="skills" value="31"><label>인디자인</label>
                 </div>
-                <div>
-                    <input type="radio"><label>JAVASCRIPT</label>
-                </div>
+
             </div><!--//team_techWrap -->
             
             <div class="team_techWrap techWrap_video">
                 <div>
-                    <input type="radio"><label>프리미어</label>
+                    <input type="radio" name="skills" value="25"><label>촬영</label>
                 </div>
                 <div>
-                    <input type="radio"><label>일러스트레이터</label>
+                    <input type="radio" name="skills" value="22"><label>프리미어</label>
                 </div>
                 <div>
-                    <input type="radio"><label>JAVA</label>
+                    <input type="radio" name="skills" value="23"><label>에프터이펙트</label>
                 </div>
                 <div>
-                    <input type="radio"><label>JAVASCRIPT</label>
+                    <input type="radio" name="skills" value="24"><label>NUKE</label>
+                </div>                
+                <div>
+                    <input type="radio" name="skills" value="26"><label>PROTOOLS</label>
                 </div>
             </div><!--//team_techWrap -->
             
             <div class="team_techWrap techWrap_3d">
                 <div>
-                    <input type="radio"><label>마야</label>
+                    <input type="radio" name="skills" value="27"><label>MAYA</label>
                 </div>
                 <div>
-                    <input type="radio"><label>일러스트레이터</label>
-                </div>
-                <div>
-                    <input type="radio"><label>JAVA</label>
-                </div>
-                <div>
-                    <input type="radio"><label>JAVASCRIPT</label>
+                    <input type="radio" name="skills" value="28"><label>3DMAX</label>
                 </div>
             </div><!--//team_techWrap -->
             
             <div class="team_techWrap techWrap_etc">
                 <div>
-                    <input type="radio"><label>R언어</label>
+                    <input type="radio" name="skills" value="32"><label>R</label>
                 </div>
                 <div>
-                    <input type="radio"><label>IOT</label>
+                    <input type="radio" name="skills" value="33"><label>하둡</label>
                 </div>
                 <div>
-                    <input type="radio"><label>JAVA</label>
+                    <input type="radio" name="skills" value="17"><label>MySQL</label>
                 </div>
                 <div>
-                    <input type="radio"><label>JAVASCRIPT</label>
+                    <input type="radio" name="skills" value="18"><label>Oracle</label>
+                </div>                
+                <div>
+                    <input type="radio" name="skills" value="19"><label>MSSQL</label>
+                </div>
+                <div>
+                    <input type="radio" name="skills" value="20"><label>아두이노</label>
+                </div>
+                <div>
+                    <input type="radio" name="skills" value="21"><label>라즈베리파이</label>
                 </div>
             </div><!--//team_techWrap -->
+            </div>
         </div>
     </div><!--//searchTermWrap-->   
 </div><!-- //header -->
