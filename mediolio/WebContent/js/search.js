@@ -75,7 +75,7 @@ function search(keyword, option){
 		}
 	});
 }
-function searchDeatil(keyword, option, category){
+function searchTitle(keyword, option, category){
 	//option : 검색옵션(학우검색, 제목검색..) , category : 검색결과를 뽑고 싶은 카테고리(웹앱, 게임 ...)
 	alert(keyword +", " + option + ", " + category);
 	$.ajax({
@@ -91,6 +91,7 @@ function searchDeatil(keyword, option, category){
 
 function searchMember(keyword, option, category, skill){
 	alert(keyword +", " + option + ", " + category + "," + skill);
+	if(skill == null || skill == undefined) skill = '0';
 	$.ajax({
 		url : "searchMember",
 		type : "POST",
@@ -124,11 +125,13 @@ $('document').ready(function(){
 			if(option_value == 'subject') alert("제시된 목록에서 선택하세요.");
 			else if(option_value == 'tag' ) search(keyword.value, option_value);
 			else if(option_value == 'title'){
-				searchTitle(keyword.value, option_value, $('.team_category').find('.btn_222').val());
+				if(keyword.value.length !=0) alert("검색어를 입력하십시오.");
+				else searchTitle(keyword.value, option_value, $('.team_category').find('.btn_222').val());
 			}
 			else if(option_value == 'member'){
-				searchMember(keyword.value, option_value, $('.team_category').find('.btn_222').val(), 
-						$('.team_techWrap input:radio[name="skills"]:checked').val());
+				var skVal = $('.team_techWrap input:radio[name="skills"]:checked').val();
+				if(keyword.value.length == 0 && skVal === undefined) alert("검색어를 입력하거나 보유기술을 선택하십시오.");
+				else searchMember(keyword.value, option_value, $('.team_category').find('.btn_222').val(), skVal);
 			}
 		}
 		else if(option_value == 'subject'){

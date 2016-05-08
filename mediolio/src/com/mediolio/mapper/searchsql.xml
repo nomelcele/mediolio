@@ -32,6 +32,7 @@
 		WHERE C.ROWNUM <![CDATA[>=]]> 1 AND C.ROWNUM <![CDATA[<=]]> 6
   	</select>
   	
+	     			
   	<select id="searchSbj" parameterType="int" resultType="pvo">
   		SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID, m.m_name, c.cl_name,
 			(SELECT count(*) FROM member_action WHERE act_what=p.p_id AND act_type='like') p_likenum, p.p_viewnum
@@ -39,4 +40,59 @@
 				AND p.cl_id=#{key}
   	</select>
 	
+	<select id="searchTitle" parameterType="java.util.Map" resultType="pvo">
+  				SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, p.p_prjname, m.m_studentID, m.m_name, p.p_date, 
+  					(SELECT count(*) FROM member_action WHERE act_what=p.p_id AND act_type='like') p_likenum, p.p_viewnum
+						FROM member m, project p WHERE m.m_id=p.m_id
+					<if test="cate != 0"> <!-- 특정 카테고리 내 검색 -->
+						AND p.cate_id = #{cate} 
+					</if>
+						HAVING
+						<foreach collection="keys" item="item" separator="OR">
+	      					p.p_title LIKE #{item} OR p.p_prjname LIKE #{item}
+	     				</foreach>
+	     			ORDER BY p.p_id DESC
+  	</select>
+  	
+	<select id="searchMemberInCategory" parameterType="java.util.Map" resultType="fvo">
+		SELECT DISTINCT m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2,
+			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
+			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
+			(SELECT SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/'), ',', 3) FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC) AS projects
+			FROM
+				(SELECT DISTINCT m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2 FROM member m, project p WHERE m.m_id=p.m_id AND p.cate_id=2 order by m.m_studentID DESC) m, memberskill mk 
+		        WHERE m.m_id = mk.m_id 
+				<choose>
+				    <when test="sk != 0"><!-- 선택한 기술이 있을 경우 -->
+				    	AND mk.sk_id = #{sk}
+				    </when>				
+    				<when test="keys != null"><!-- 검색어에 학우의 학번이나 이름을 넣은 경우 -->
+        				HAVING
+						<foreach collection="keys" item="item" separator="OR">
+	      					m.m_name LIKE #{item} OR m.m_studentID LIKE #{item}
+	     				</foreach>
+				    </when>
+				</choose>
+  	</select>
+  	
+	<select id="searchMemberInTotal" parameterType="java.util.Map" resultType="fvo">
+		SELECT DISTINCT m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2,
+			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
+			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
+			(SELECT SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/'), ',', 3) FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC) AS projects
+			FROM (SELECT )
+				(SELECT count(p.p_id) AS cnt, m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2 FROM member m, project p WHERE m.m_id = p.m_id group by m.m_id ORDER BY cnt DESC, m.m_id DESC) m, memberskill mk 
+		        WHERE m.m_id = mk.m_id 
+				<choose>
+				    <when test="sk != 0"><!-- 선택한 기술이 있을 경우 -->
+				    	AND mk.sk_id = #{sk}
+				    </when>				
+    				<when test="keys != null"><!-- 검색어에 학우의 학번이나 이름을 넣은 경우 -->
+        				HAVING
+						<foreach collection="keys" item="item" separator="OR">
+	      					m.m_name LIKE #{item} OR m.m_studentID LIKE #{item}
+	     				</foreach>
+				    </when>
+				</choose>
+  	</select>
   </mapper>

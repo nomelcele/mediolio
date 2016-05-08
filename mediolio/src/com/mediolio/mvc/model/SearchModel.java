@@ -1,5 +1,6 @@
 package com.mediolio.mvc.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mediolio.mvc.dao.HistoryDao;
 import com.mediolio.mvc.dao.SearchDao;
-import com.mediolio.vo.FriendVO;
 import com.mediolio.vo.ProjectVO;
 
 @Controller
@@ -31,6 +31,7 @@ public class SearchModel {
 		return mav;
 	}
 	
+	//태그 검색, 과목으로 검색
 	@RequestMapping("search")
 	public ModelAndView search(@RequestParam("key") String key, @RequestParam("section") String section){
 		ModelAndView mav = new ModelAndView("jsonView");
@@ -41,12 +42,7 @@ public class SearchModel {
 		
 		System.out.println("search 함수 : " + key);
 		
-		if(section.equals("member")) {
-			List<FriendVO> resultList = sdao.searchUser(key);
-			for(int i=0; i<resultList.size(); i++){
-				System.out.println(resultList.get(i).getM_nickname());
-			}
-		}else if(section.equals("tag")){
+		if(section.equals("tag")){
 			key = key.replaceAll(" ", "");
 			List<ProjectVO> resultList = sdao.searchTag(key);
 			for(int i=0; i<resultList.size(); i++){
@@ -63,22 +59,54 @@ public class SearchModel {
 		return mav;
 	}
 	
-	@RequestMapping("searchDetail")
+	//글 제목으로 검색
+	@RequestMapping("searchTitle")
 	public ModelAndView searchTitle(@RequestParam("key") String key, @RequestParam("section") String section, 
+			@RequestParam("ct") String category){
+		ModelAndView mav = new ModelAndView("jsonView");
+		System.out.println("searchDetail : " + key + ", " + section + ", " + category);
+		
+		//검색어 가공 - 띄어쓰기로 구분
+		key = key.trim();
+		String[] splitKey =  key.split(" ");
+		List<String> keys = new ArrayList<>();
+		
+		for (int i=0; i<splitKey.length; i++){
+			System.out.println("검색어 : " + splitKey[i]);
+			keys.add("%"+splitKey[i]+"%");
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("key", keys);
+		map.put("cate", returnCateVal(category));
+
+		mav.addObject("list", sdao.searchTitle(map));
+		return mav;
+	}
+	
+	//학우 검색
+	@RequestMapping("searchMember")
+	public ModelAndView searchMember(@RequestParam("key") String key, @RequestParam("section") String section, 
 			@RequestParam("ct") String category, @RequestParam("sk") String skill){
 		ModelAndView mav = new ModelAndView("jsonView");
 		System.out.println("searchDetail : " + key + ", " + section + ", " + category + ", " + skill);
 		
+		
+		//!!!!! 검색어 자르는 기능 추가하기 !!!!
+		
 		Map<String, String> map = new HashMap<String, String>();
 		key = key.trim();
 		map.put("key", key);
-		map.put("section", section);
-		map.put("cate", returnCateVal(category));
+		map.put("sk", skill);
+		
+		category =  returnCateVal(category);
+		if(category.equals("0")){//전체에서 검색
+			mav.addObject("list", sdao.searchMemberInTotal(map));
+		}else{//특정 카테고리에 글을 쓴 학우 내에서 검색
+			map.put("cate", category);
+			mav.addObject("list", sdao.searchMemberInCategory(map));
+		}
 
-		
-		List<ProjectVO> resultList = sdao.searchProjects(map);
-		
-		
 		return mav;
 	}
 	
