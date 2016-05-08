@@ -15,16 +15,6 @@ public class SearchDao {
 
 	@Autowired
 	private SqlSessionTemplate st;
-	
-
-	public List<FriendVO> searchUser(String key) {
-		return st.selectList("search.searchuser", "%"+key+"%");
-	}
-
-	public List<ProjectVO> searchProjects(Map<String, String> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public List<ProjectVO> searchTag(String key) {
 		return st.selectList("search.searchtag", key);
@@ -32,5 +22,17 @@ public class SearchDao {
 
 	public List<ProjectVO> searchSubject(String key) {
 		return st.selectList("search.searchSbj", Integer.parseInt(key));
+	}
+
+	public List<ProjectVO> searchTitle(Map<String, Object> map) {
+		return st.selectList("search.searchTitle", map);
+	}
+
+	public List<FriendVO> searchMemberInTotal(Map<String, String> map) {
+		return st.selectList("search.searchMemberInTotal", map);
+	}
+
+	public List<FriendVO> searchMemberInCategory(Map<String, String> map) {
+		return st.selectList("search.searchMemberInCategory", map);
 	}
 }

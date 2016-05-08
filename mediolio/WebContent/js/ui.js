@@ -107,13 +107,17 @@ $('document').ready(function(){
         $('#bellWrap, #btn_login, #btn_logout').hide();
         $('#headerWrap .btn_close').show();
         
-        //오지은 추가
+        /*
+         *  오지은 추가
+         */
         var select = document.getElementById('select_main');
     	var selectbox_val = select.options[select.selectedIndex].value;
     	if(selectbox_val == 'member'){
     		//학우 검색 시 전체검색이 default로 나타나도록.
-    		$('#teamCategory_total').click();
-    		$('.searchTermWrap').show();
+    		if(!$('.team_category input').hasClass('btn_222')){
+        		$('#teamCategory_total').click();
+        		$('.searchTermWrap').show();
+    		}
     	}
     	else if( selectbox_val == 'tag' || selectbox_val == 'subject'){
         	$('.searchTermWrap').hide();
