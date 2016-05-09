@@ -62,48 +62,51 @@ function autoRecommendClass(classname){
     }
 }
 
-
-function search(keyword, option){
-	alert(keyword + ", " + option);
-	$.ajax({
-		url : "search",
-		type : "POST",
-		data : {key : keyword, section : option},
-		dataType : "JSON",
-		success : function(data) {
-			
+//검색 옵션에 따라 각각 다른 처리 컨트롤러로 이동
+function handlingSearch(option, keyword){
+	if(option == 'tag' ) {
+		if(keyword.length ==0) alert("검색어를 입력하십시오.");
+		else location.href="searchH?key="+keyword;		
+	}
+	else if(option == 'title'){
+		if(keyword.length ==0) alert("검색어를 입력하십시오.");
+		else {
+			var ctgr = returnCategoryVal($('.team_category').find('.btn_222').val());
+			location.href="searchT?key="+keyword+"&ct="+ctgr;
 		}
-	});
-}
-function searchTitle(keyword, option, category){
-	//option : 검색옵션(학우검색, 제목검색..) , category : 검색결과를 뽑고 싶은 카테고리(웹앱, 게임 ...)
-	alert(keyword +", " + option + ", " + category);
-	$.ajax({
-		url : "searchTitle",
-		type : "POST",
-		data : {key : keyword.trim(), section : option, ct : category},
-		dataType : "JSON",
-		success : function(data) {
-			
+	}
+	else if(option == 'member'){
+		var skVal = $('.team_techWrap input:radio[name="skills"]:checked').val();
+		if(keyword.length == 0 && skVal === undefined) alert("검색어를 입력하거나 보유기술을 선택하십시오.");
+		else {
+			if(skVal == null || skVal == undefined) skVal = '0';
+			var ctgr = returnCategoryVal($('.team_category').find('.btn_222').val());
+			alert(keyword +", " + option + ", " + ctgr + "," + skVal);
+			location.href="searchM?key="+keyword+"&ct="+ctgr+"&sk="+skVal;
 		}
-	});
+	}
 }
 
-function searchMember(keyword, option, category, skill){
-	alert(keyword +", " + option + ", " + category + "," + skill);
-	if(skill == null || skill == undefined) skill = '0';
-	$.ajax({
-		url : "searchMember",
-		type : "POST",
-		data : {key : keyword.trim(), section : option, ct : category, sk : skill},
-		dataType : "JSON",
-		success : function(data) {
-			
-		}
-	});
+function returnCategoryVal(text){
+	var cateIntVal = "0";
+	if(text == "게임") cateIntVal = "1";
+	else if(text == "웹 & 앱") cateIntVal = "2";
+	else if(text == "디자인") cateIntVal = "5";
+	else if(text == "영상 & 사운드") cateIntVal = "3";
+	else if(text == "3D") cateIntVal = "4";
+	else if(text == "기타") cateIntVal = "6";
+	return cateIntVal;
 }
 
 $('document').ready(function(){
+	
+	$(document).on('click', '#search_main .btn_search', function(){
+		var option_value = select.options[select.selectedIndex].value;
+		var keyword = document.getElementById('text_main');
+		
+		handlingSearch(option_value, keyword.value);
+	});
+	
 /*	if(isFireFox()) {
 	    element.bind("keypress", function (event) {
 	        var keyCode = event.which || event.keyCode;
@@ -123,16 +126,7 @@ $('document').ready(function(){
 		
 		if(event.keyCode==13){
 			if(option_value == 'subject') alert("제시된 목록에서 선택하세요.");
-			else if(option_value == 'tag' ) search(keyword.value, option_value);
-			else if(option_value == 'title'){
-				if(keyword.value.length !=0) alert("검색어를 입력하십시오.");
-				else searchTitle(keyword.value, option_value, $('.team_category').find('.btn_222').val());
-			}
-			else if(option_value == 'member'){
-				var skVal = $('.team_techWrap input:radio[name="skills"]:checked').val();
-				if(keyword.value.length == 0 && skVal === undefined) alert("검색어를 입력하거나 보유기술을 선택하십시오.");
-				else searchMember(keyword.value, option_value, $('.team_category').find('.btn_222').val(), skVal);
-			}
+			else handlingSearch(option_value, keyword.value);
 		}
 		else if(option_value == 'subject'){
 			autoRecommendClass(keyword.value, option_value);

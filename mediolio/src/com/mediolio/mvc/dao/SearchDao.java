@@ -28,11 +28,11 @@ public class SearchDao {
 		return st.selectList("search.searchTitle", map);
 	}
 
-	public List<FriendVO> searchMemberInTotal(Map<String, String> map) {
+	public List<FriendVO> searchMemberInTotal(Map<String, Object> map) {
 		return st.selectList("search.searchMemberInTotal", map);
 	}
 
-	public List<FriendVO> searchMemberInCategory(Map<String, String> map) {
+	public List<FriendVO> searchMemberInCategory(Map<String, Object> map) {
 		return st.selectList("search.searchMemberInCategory", map);
 	}
 }
