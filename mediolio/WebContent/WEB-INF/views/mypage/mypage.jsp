@@ -13,6 +13,7 @@
     <hr>
     
     <div class="historyWrap clear">
+    	<input type="hidden" id="recentHtTitle" name="ht_title" value="${recentHtTitle}">
         <h2 class="historyTitle ellipsis"><span>제목</span>${recentHtTitle}</h2>
 <!--        <input class="btnStyle2 btn_card" id="btn_editAllCards" type="button" value="편집">-->
         <input class="btnStyle2 btn_card" id="btn_addCard" type="button" value="글쓰기">

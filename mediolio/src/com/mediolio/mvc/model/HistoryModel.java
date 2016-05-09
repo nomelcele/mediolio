@@ -84,11 +84,13 @@ public class HistoryModel {
 	}
 	
 	@RequestMapping(value="deleteBranch")
-	public String deleteBranch(BranchVO brvo){
+	public String deleteBranch(BranchVO brvo,String ht_title,Model model){
 		// 브랜치 삭제
 		htdao.deleteBranch(brvo.getBr_id());
-		htdao.updateLastEdit(brvo.getHt_id());
-		return "redirect:gotoMyPage";
+		model.addAttribute("htId", brvo.getHt_id());
+		model.addAttribute("htTitle", ht_title);
+		model.addAttribute("branchList", htdao.branchList(brvo.getHt_id()));
+		return "mypage.history";
 	}
 	
 	@RequestMapping(value="historyDetail")
