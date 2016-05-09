@@ -48,7 +48,7 @@
 						AND p.cate_id = #{cate} 
 					</if>
 						HAVING
-						<foreach collection="keys" item="item" separator="OR">
+						<foreach collection="keyGroup" item="item" separator="OR">
 	      					p.p_title LIKE #{item} OR p.p_prjname LIKE #{item}
 	     				</foreach>
 	     			ORDER BY p.p_id DESC
@@ -60,16 +60,16 @@
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
 			(SELECT SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/'), ',', 3) FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC) AS projects
 			FROM
-				(SELECT DISTINCT m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2 FROM member m, project p WHERE m.m_id=p.m_id AND p.cate_id=2 order by m.m_studentID DESC) m, memberskill mk 
+				(SELECT DISTINCT m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2 FROM member m, project p WHERE m.m_id=p.m_id AND p.cate_id=#{cate} order by m.m_studentID DESC) m, memberskill mk 
 		        WHERE m.m_id = mk.m_id 
 				<choose>
 				    <when test="sk != 0"><!-- 선택한 기술이 있을 경우 -->
 				    	AND mk.sk_id = #{sk}
 				    </when>				
-    				<when test="keys != null"><!-- 검색어에 학우의 학번이나 이름을 넣은 경우 -->
+    				<when test="keyGroup != null"><!-- 검색어에 학우의 학번이나 이름을 넣은 경우 -->
         				HAVING
-						<foreach collection="keys" item="item" separator="OR">
-	      					m.m_name LIKE #{item} OR m.m_studentID LIKE #{item}
+						<foreach collection="keyGroup" item="item" separator="OR">
+	      					m.m_name LIKE #{item} OR m.m_studentID LIKE #{item} 
 	     				</foreach>
 				    </when>
 				</choose>
@@ -80,17 +80,17 @@
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
 			(SELECT SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/'), ',', 3) FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC) AS projects
-			FROM (SELECT )
+			FROM
 				(SELECT count(p.p_id) AS cnt, m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2 FROM member m, project p WHERE m.m_id = p.m_id group by m.m_id ORDER BY cnt DESC, m.m_id DESC) m, memberskill mk 
 		        WHERE m.m_id = mk.m_id 
 				<choose>
 				    <when test="sk != 0"><!-- 선택한 기술이 있을 경우 -->
 				    	AND mk.sk_id = #{sk}
 				    </when>				
-    				<when test="keys != null"><!-- 검색어에 학우의 학번이나 이름을 넣은 경우 -->
+    				<when test="keyGroup != null"><!-- 검색어에 학우의 학번이나 이름을 넣은 경우 -->
         				HAVING
-						<foreach collection="keys" item="item" separator="OR">
-	      					m.m_name LIKE #{item} OR m.m_studentID LIKE #{item}
+						<foreach collection="keyGroup" item="item" separator="OR">
+	      					m.m_name LIKE #{item} OR m.m_studentID LIKE #{item} 
 	     				</foreach>
 				    </when>
 				</choose>
