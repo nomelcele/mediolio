@@ -151,25 +151,34 @@ function writeDCategoryModalOpen(){
 	     	}
 	    });
 	    
+//		sb.append("\"<input type='checkbox' value="+scIds[i]+" data-labelauty='"+scNames[i]+"'/>");
+//		sb.append("<label class='label_category'>"+scNames[i]+"</label>");
+
+//	    $("#modal_bd_writeDCategory ul").html("<li>"+scList[i]+"</li>");
+		$("#modal_bd_writeDCategory ul").html("<li><input type='checkbox' value='0' data-labelauty='프로젝트'/><label class='label_category'>프로젝트</label></li>"+
+				"<li><input type='checkbox' value='1' data-labelauty='과제'/><label class='label_category'>과제</label></li>");
+		
+		$(":checkbox").labelauty({ label: false });
+	    
 	    // 1. 선택한 카테고리를 가지고 세부 카테고리 검색
-	    $.ajax({
-	    	type: "POST",
-	    	url: "subcategoryList",
-	    	data: {
-	    		sc_parent: $("#selectedCategory").val()
-	    	},
-	    	dataType: "json",
-	    	success: function(jdata){
-	    		var scList = jdata;
-	    		var codes = "";
-	    		for(var i=0; i<scList.length; i++){
-	    			codes += "<li>"+scList[i]+"</li>";
-	    		}
-	    	    // 2. 세부 카테고리 목록 출력
-	    	    $("#modal_bd_writeDCategory ul").html(codes);
-	    	    $(":checkbox").labelauty({ label: false });
-	    	}
-	    });
+//	    $.ajax({
+//	    	type: "POST",
+//	    	url: "subcategoryList",
+//	    	data: {
+//	    		sc_parent: $("#selectedCategory").val()
+//	    	},
+//	    	dataType: "json",
+//	    	success: function(jdata){
+//	    		var scList = jdata;
+//	    		var codes = "";
+//	    		for(var i=0; i<scList.length; i++){
+//	    			codes += "<li>"+scList[i]+"</li>";
+//	    		}
+//	    	    // 2. 세부 카테고리 목록 출력
+//	    	    $("#modal_bd_writeDCategory ul").html(codes);
+//	    	    $(":checkbox").labelauty({ label: false });
+//	    	}
+//	    });
 	}
 }    
 

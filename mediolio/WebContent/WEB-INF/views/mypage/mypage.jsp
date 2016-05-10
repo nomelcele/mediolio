@@ -76,12 +76,6 @@
             
             
             
-            
-            
-            
-            
-            
-            
             <c:forEach var="branches" items="${branches}">
 	            <div class="timeCardWrap clear">
 	                <div class="timeCircle"></div>
