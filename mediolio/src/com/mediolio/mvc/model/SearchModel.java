@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mediolio.mvc.dao.HistoryDao;
 import com.mediolio.mvc.dao.SearchDao;
+import com.mediolio.vo.FriendVO;
+import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.ProjectVO;
 
 @Controller
@@ -33,26 +35,43 @@ public class SearchModel {
 	@RequestMapping("searchH")
 	public ModelAndView searchH(@RequestParam("key") String key){
 		ModelAndView mav = new ModelAndView("search/search");
+		mav.addObject("key", key);
+		mav.addObject("type", "태그");
 		key = key.trim();
 		key = key.replaceAll(" ", ""); //해쉬태그 띄어쓰기 없애기
 		
-		List<ProjectVO> resultList = sdao.searchTag(key);
+		List<Object> resultList = sdao.searchTag(key);
 		for(int i=0; i<resultList.size(); i++){
-			System.out.println(resultList.get(i).getP_title());
+			System.out.println(((ProjectVO) resultList.get(i)).getP_title());
+		}
+		
+		if(resultList.size() > 0){
+			List<HashtagVO> hashList = sdao.getHashList(resultList);
+			mav.addObject("hashList", hashList);
 		}
 		return mav;
 	}
 	
-	//태그 검색, 과목으로 검색
+	//과목으로 검색
 	@RequestMapping("searchC")
-	public ModelAndView search(@RequestParam("key") String key){
+	public ModelAndView search(@RequestParam("cl_id") String cl_id, @RequestParam("cl_n") String cl_name){
 		ModelAndView mav = new ModelAndView("search/search");
-	
-		List<ProjectVO> resultList = sdao.searchSubject(key);
+		mav.addObject("key", cl_name);
+		mav.addObject("type", "과목");
+		
+		List<Object> resultList = sdao.searchSubject(cl_id);
+		mav.addObject("list", resultList);
+		mav.addObject("total", resultList.size());
+		
 		for(int i=0; i<resultList.size(); i++){
-			System.out.println(resultList.get(i).getP_title());
+			System.out.println(((ProjectVO) resultList.get(i)).getP_title());
 		}
 		
+		if(resultList.size() > 0){
+			System.out.println("null아님");
+			List<HashtagVO> hashList = sdao.getHashList(resultList);
+			mav.addObject("hashList", hashList);
+		}
 		return mav;
 	}
 	
@@ -60,6 +79,8 @@ public class SearchModel {
 	@RequestMapping("searchT")
 	public ModelAndView searchTitle(@RequestParam("key") String key, @RequestParam("ct") String category){
 		ModelAndView mav = new ModelAndView("search/search");
+		mav.addObject("key", key);
+		mav.addObject("type", "제목");
 		System.out.println("searchDetail : " + key + ", " + category);
 		
 		//검색어 가공 - 띄어쓰기로 구분
@@ -71,19 +92,28 @@ public class SearchModel {
 			System.out.println("검색어 : " + splitKey[i]);
 			keys.add("%"+splitKey[i]+"%");
 		}
-		System.out.println("검색어 array 크기 : " + keys.size());
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyGroup", keys);
 		map.put("cate", category);
 
-		mav.addObject("list", sdao.searchTitle(map));
+		List<Object> resultList = sdao.searchTitle(map);
+		mav.addObject("list", resultList);
+		mav.addObject("total", resultList.size());
+		
+		if(resultList.size() > 0){
+			List<HashtagVO> hashList = sdao.getHashList(resultList);
+			mav.addObject("hashList", hashList);
+		}
 		return mav;
 	}
 	
 	//학우 검색
 	@RequestMapping("searchM")
 	public ModelAndView searchMember(@RequestParam("key") String key, @RequestParam("ct") String category, @RequestParam("sk") String skill){
-		ModelAndView mav = new ModelAndView("search/search");
+		ModelAndView mav = new ModelAndView("search/searchm");
+		mav.addObject("key", key);
+		mav.addObject("type", "학우");
 		System.out.println("searchDetail : " + key  + ", " + category + ", " + skill);
 		
 		
@@ -103,14 +133,23 @@ public class SearchModel {
 		map.put("keyGroup", keys);
 		map.put("sk", skill);
 		
+		List<Object> resultList;
+		
 		if(category.equals("0")){//전체에서 검색
 			System.out.println("전체검색");
-			mav.addObject("list", sdao.searchMemberInTotal(map));
+			resultList = sdao.searchMemberInTotal(map);
+			mav.addObject("list", resultList);
 		}else{//특정 카테고리에 글을 쓴 학우 내에서 검색
 			map.put("cate", category);
-			mav.addObject("list", sdao.searchMemberInCategory(map));
+			resultList = sdao.searchMemberInCategory(map);
+			mav.addObject("list", resultList);
 		}
-
+		mav.addObject("total", resultList.size());
+		
+		if(resultList.size() > 0){
+			List<HashtagVO> hashList = sdao.getHashList(resultList);
+			mav.addObject("hashList", hashList);
+		}
 		return mav;
 	}
 

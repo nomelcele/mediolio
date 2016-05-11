@@ -45,7 +45,7 @@ function autoRecommendClass(classname){
     		success: function(data){
     			var codes = "";
     			$.each(data.list, function(index, entry){
-    				codes += "<li onclick='search("+entry.cl_id+", " + '\"subject\"' + ")'>"
+    				codes += "<li onclick='searchbyClass("+entry.cl_id+ ",\"" +entry.cl_name+"\")'>"
     								+"<span class='className'>"+entry.cl_name+"</span>"
     							+"</li>";
     			});
@@ -60,6 +60,10 @@ function autoRecommendClass(classname){
     		}
     	});
     }
+}
+
+function searchbyClass(cl_id, cl_name){
+	location.href="searchC?cl_id="+cl_id+"&cl_n="+cl_name;
 }
 
 //검색 옵션에 따라 각각 다른 처리 컨트롤러로 이동
