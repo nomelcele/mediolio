@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+.searchResultWrap{ width:850px; height:50px; box-sizing:border-box; padding:0 20px; margin-bottom:0px; background:#0F84CF; border-radius:5px 5px 0 0; text-align:center; }
+.searchResult{ display:inline-block; width:auto; font-size:14px;  color:#666; line-height:50px;  color:#fff;  background:url(../images/search_white.png) left center no-repeat; text-indent:25px;  }
+
+.searchLine{ width:850px; margin:10px 0 10px;}
+
+.searchWrap{ width:850px; min-height:100px; height:100px; margin-bottom:10px; }
+
+
+.searchWrap a:hover{ text-decoration:underline; }
+.searchWrap > a{ width:100px; }
+.searchWrap img{ float:left; width:100px; }
+
+.searchWrap .search_contentWrap{ float:left; height:inherit; box-sizing:border-box; padding:10px 20px;}
+
+.searchWrap .search_title{ font-size:13px; font-weight:bold;}
+.searchWrap p a{ display:inline-block; width:auto; max-width:100%; line-height:20px;   }
+
+.searchWrap .search_tag{ display:block; line-height:20px; margin-top:15px; color:#666; }
