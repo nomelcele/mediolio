@@ -34,14 +34,21 @@
   	
 	     			
   	<select id="searchSbj" parameterType="int" resultType="pvo">
-  		SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID, m.m_name, c.cl_name,
+  		SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID "authorID", m.m_name "authorName", c.cl_name,
 			(SELECT count(*) FROM member_action WHERE act_what=p.p_id AND act_type='like') p_likenum, p.p_viewnum
 				FROM project p, member m, class c WHERE p.m_id=m.m_id AND p.cl_id = c.cl_id
-				AND p.cl_id=#{key}
+				AND p.cl_id=#{cl_id }
   	</select>
 	
+	<select id="getHashList" parameterType="java.util.List" resultType="hvo">
+		SELECT h_id, h_value, p_id FROM hashtag WHERE p_id IN
+		<foreach collection="list" item="item" separator="," open="(" close=")">
+	   		#{item.p_id}
+	    </foreach>
+	</select>
+	
 	<select id="searchTitle" parameterType="java.util.Map" resultType="pvo">
-  				SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, p.p_prjname, m.m_studentID, m.m_name, p.p_date, 
+  				SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, p.p_prjname, m.m_studentID "authorID", m.m_name "authorName", p.p_date, 
   					(SELECT count(*) FROM member_action WHERE act_what=p.p_id AND act_type='like') p_likenum, p.p_viewnum
 						FROM member m, project p WHERE m.m_id=p.m_id
 					<if test="cate != 0"> <!-- 특정 카테고리 내 검색 -->
@@ -55,7 +62,7 @@
   	</select>
   	
 	<select id="searchMemberInCategory" parameterType="java.util.Map" resultType="fvo">
-		SELECT DISTINCT m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2,
+		SELECT DISTINCT m.m_id, m.m_studentID "authorID", m.m_name "authorName", m.m_introduce, m.m_interesting1, m.m_interesting2,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
 			(SELECT SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/'), ',', 3) FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC) AS projects
@@ -76,7 +83,7 @@
   	</select>
   	
 	<select id="searchMemberInTotal" parameterType="java.util.Map" resultType="fvo">
-		SELECT DISTINCT m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2,
+		SELECT DISTINCT m.m_id, m.m_studentID "authorID", m.m_name "authorName", m.m_introduce, m.m_interesting1, m.m_interesting2,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
 			(SELECT SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/'), ',', 3) FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC) AS projects
