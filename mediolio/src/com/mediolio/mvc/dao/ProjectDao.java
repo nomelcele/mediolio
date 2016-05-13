@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.HashtagVO;
+import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectVO;
+import com.mediolio.vo.TeamMemberVO;
 
 @Repository
 public class ProjectDao {
@@ -30,5 +32,20 @@ public class ProjectDao {
 	
 	public void addHashtag(HashtagVO hvo){
 		st.insert("proj.addHashtag", hvo);
+	}
+	
+	public List<MemberVO> autocompleteMember(String m_name){
+		// 팀원 추가 시 학생 이름 자동 완성
+		return st.selectList("proj.autocompleteMember", m_name);
+	}
+	
+	public void addProjectInfo(ProjectVO pvo){
+		// 프로젝트 정보 추가
+		st.update("proj.addProjectInfo", pvo);
+	}
+	
+	public void addTeamMember(TeamMemberVO tmvo){
+		// 팀원 소개 추가
+		st.insert("proj.addTeamMember", tmvo);
 	}
 }

@@ -18,7 +18,7 @@ $('document').ready(function(){
     
     /* 팀원 추가 버튼 */
     $('#btn_addTeamMate').on('click', function(){
-        var newTeamInput = '<div class="write_teamMateWrap"><div class="threeCell shortCell"><input class="writeLine_text" type="text" placeholder="이름"></div><div class="threeCell shortCell"><input class="writeLine_text" type="text" placeholder="역할"></div><div class="threeCell"><input class="writeLine_text" type="text" placeholder="소개"></div></div>';
+        var newTeamInput = '<div class="write_teamMateWrap"><div class="threeCell shortCell"><input class="writeLine_text teamMateName" type="text" onkeyup="autoCompleteMember(this)" placeholder="이름"><div class="autoCompleteBox classBox autoMember"><ul class="autoCompleteArea autoMemberArea"></ul></div></div><div class="threeCell shortCell"><input class="writeLine_text" type="text" placeholder="역할"></div><div class="threeCell"><input class="writeLine_text" type="text" placeholder="소개"></div></div>';
         
         $('#teamMateGroup').append(newTeamInput);
     })
@@ -520,6 +520,79 @@ $('document').ready(function(){
     
 //    addContent();
     
+    ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////
+    // 2단계: 프로젝트 정보 작성
+    $(".project_related_class").keyup(function(){
+    	// 관련 과목 자동 완성
+    	// div 위치가 이상한 데 뜸
+    	console.log("관련 과목");
+		if($(this).val().trim() != ""){
+	    	$.ajax({
+	    		type: "POST",
+	    		url: "autocompleteClass",
+	    		data: {
+	    			cl_name: $(this).val()
+	    		},
+	    		dataType: "json",
+	    		success: function(jdata){
+	    			var codes = "";
+	    			var arr = jdata;
+	    			for(var i=0; i<arr.length; i++){
+	    				codes += "<li onclick='addClass(this)'>"+arr[i]+"</li>";
+	    			}
+	    			if(arr.length>0){
+	    				$(".autoClassArea").html(codes);
+	        			$(".autoClass").css({
+	        				display: "block"
+//	        				top: $(".historyList_addRelated").offset().top-108
+	        			});
+	        			
+	            		// moveAutoCompleteBox();
+	        			// 자동 완성 목록 위치 변경: 현재 커서 위치에 맞게
+	    			}
+	    		}
+	    	});
+    	} else {
+    		$(".autoCompleteBox").css("display","none");
+    	}
+    });
+    
+    $(".writeLine_text").keyup(function(){
+    	// 학생 이름 자동 완성
+		if($(this).val().trim() != ""){
+	    	$.ajax({
+	    		type: "POST",
+	    		url: "autocompleteMember",
+	    		data: {
+	    			m_name: $(this).val()
+	    		},
+	    		dataType: "json",
+	    		success: function(jdata){
+	    			var codes = "";
+	    			var arr = jdata;
+	    			for(var i=0; i<arr.length; i++){
+	    				codes += "<li onclick='addMember(this)'>"+arr[i]+"</li>";
+	    			}
+	    			if(arr.length>0){
+	    				$(".autoMemberArea").html(codes);
+	        			$(".autoMember").css({
+	        				display: "block"
+//	        				top: $(".historyList_addRelated").offset().top-108
+	        			});
+	        			
+	            		// moveAutoCompleteBox();
+	        			// 자동 완성 목록 위치 변경: 현재 커서 위치에 맞게
+	    			}
+	    		}
+	    	});
+    	} else {
+    		$(".autoMember").css("display","none");
+    	}
+    });
+    
 });
 
 function moveUpElement(e){
@@ -879,4 +952,46 @@ function tagHover_write(){
         $('div', this).removeClass("card_hover");
         $('p',this).hide();
     });
+}
+
+function addMember(li){
+	// 자동 완성 목록에서 항목 클릭 시 팀원 영역에 추가
+	var newMember = li;
+	$(newMember).parent().parent().parent().find(".teamMateName").val($(newMember).find("span").html());
+	$(".autoMember").css("display","none");
+	$(".cardWindow_write2").append("<input type='hidden' name='m_id' value="+$(newMember).find(".memId").val()+">");
+}
+
+function autoCompleteMember(txt){
+	// 팀원 입력 시 이름 자동 완성
+	var input = txt;
+	if($(input).val().trim() != ""){
+    	$.ajax({
+    		type: "POST",
+    		url: "autocompleteMember",
+    		data: {
+    			m_name: $(input).val()
+    		},
+    		dataType: "json",
+    		success: function(jdata){
+    			var codes = "";
+    			var arr = jdata;
+    			for(var i=0; i<arr.length; i++){
+    				codes += "<li onclick='addMember(this)'>"+arr[i]+"</li>";
+    			}
+    			if(arr.length>0){
+    				$(".autoMemberArea").html(codes);
+        			$(".autoMember").css({
+        				display: "block"
+//        				top: $(".historyList_addRelated").offset().top-108
+        			});
+        			
+            		// moveAutoCompleteBox();
+        			// 자동 완성 목록 위치 변경: 현재 커서 위치에 맞게
+    			}
+    		}
+    	});
+	} else {
+		$(".autoMember").css("display","none");
+	}
 }

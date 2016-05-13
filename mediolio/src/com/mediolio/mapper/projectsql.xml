@@ -11,13 +11,25 @@
   		insert into content (p_id,c_type,c_value,c_order) values(#{p_id},#{c_type},#{c_value},#{c_order})
   	</insert>
   	<insert id="addProject" parameterType="pvo" useGeneratedKeys="true" keyProperty="p_id" keyColumn="p_id">
-  		insert into project (m_id,p_title,cate_id,p_date,p_viewnum,p_coverImg) 
-  		values(#{m_id},#{p_title},#{cate_id},sysdate(),0,#{p_coverImg})
+  		insert into project (m_id,p_title,p_type,cate_id,p_date,p_viewnum,p_coverImg) 
+  		values(#{m_id},#{p_title},#{p_type},#{cate_id},sysdate(),0,#{p_coverImg})
   		<selectKey keyProperty="p_id" resultType="Integer" order="AFTER">
   			select last_insert_id()
   		</selectKey>
   	</insert>
   	<insert id="addHashtag" parameterType="hvo">
   		insert into hashtag (h_value,p_id) values(#{h_value},#{p_id})
+  	</insert>
+  	<select id="autocompleteMember" parameterType="String" resultType="mevo">
+  		select m_id, m_name, m_studentID from member where m_name like CONCAT('%',#{m_name},'%') 
+  		order by m_name
+  	</select>
+  	<update id="addProjectInfo" parameterType="pvo">
+  		update project set p_prjname=#{p_prjname}, p_summary=#{p_summary},
+  		p_workfrom=#{p_workfrom}, p_workto=#{p_workto}, cl_id=#{cl_id} 
+  		where p_id=#{p_id}
+  	</update>
+  	<insert id="addTeamMember" parameterType="tmvo">
+  		insert into teammember (p_id,m_id,tm_role) values(#{p_id},#{m_id},#{tm_role})
   	</insert>
   </mapper>

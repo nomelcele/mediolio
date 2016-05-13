@@ -37,6 +37,7 @@ import com.mediolio.viewer.BoxViewClient;
 import com.mediolio.viewer.BoxViewException;
 import com.mediolio.viewer.Document;
 import com.mediolio.viewer.Session;
+import com.mediolio.vo.ClassVO;
 import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.MemberVO;
@@ -49,6 +50,7 @@ public class ProjectModel {
 	@Autowired
 	private MainDao mdao;
 		
+	
 	private static BoxViewClient boxView;
 	
 	@RequestMapping(value="addProjectForm")
@@ -369,6 +371,40 @@ public class ProjectModel {
 	@RequestMapping(value="gotoStep2")
 	public String gotoStep2(){
 		return "project/addProjectForm2";
+	}
+	
+	@RequestMapping(value="autocompleteMember")
+	public void autocompleteMember(String m_name,HttpServletResponse response) throws IOException{
+		// 팀원 입력 시 이름 자동 완성
+		List<MemberVO> memList = pdao.autocompleteMember(m_name);
+		int memNum = memList.size();
+		int[] m_ids = new int[memNum];
+		String[] m_names = new String[memNum];
+		String[] m_studentIDs = new String[memNum];
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("[");
+		for(int i=0; i<memNum; i++){
+			MemberVO m = memList.get(i);
+			m_ids[i] = m.getM_id();
+			m_names[i] = m.getM_name();
+			System.out.println("학생 이름: "+m_names[i]);
+			m_studentIDs[i] = m.getM_studentID();
+			sb.append("\"");
+			sb.append("<input type='hidden' class='memId' value="+m_ids[i]+">");
+			sb.append("<span class='memName'>"+m_studentIDs[i]+" "+m_names[i]+"</span>");
+			sb.append("\"");
+			if(i != memNum-1){
+				sb.append(",");
+			}
+			
+		}
+		sb.append("]");
+		
+		PrintWriter pw = response.getWriter();
+		pw.write(sb.toString());
+		pw.flush();
+		pw.close();
 	}
 
 }
