@@ -7,9 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.mediolio.vo.FriendVO;
 import com.mediolio.vo.HashtagVO;
-import com.mediolio.vo.ProjectVO;
 
 @Repository
 public class SearchDao {

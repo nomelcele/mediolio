@@ -21,7 +21,6 @@ import com.mediolio.viewer.Document;
 import com.mediolio.viewer.Session;
 import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.MemberVO;
-import com.mediolio.vo.ProjectDetailVO;
 import com.mediolio.vo.ReplyVO;
 
 @Controller
@@ -32,10 +31,27 @@ public class ProjectDetailModel {
 	private static BoxViewClient boxView;
 	
 	@RequestMapping("projectView")
-	public ModelAndView projectView(Model model, @RequestParam("p_id") String p_id, @RequestParam("m_id") String m_id, HttpSession session){
-		ModelAndView mav = new ModelAndView("project/projectView");
+	public String projectView(Model model, @RequestParam("p_id") String p_id, @RequestParam("m_id") String m_id, HttpSession session){
+		MemberVO mev = (MemberVO)session.getAttribute("mev");
 		
-		return mav; 
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("p_id", Integer.parseInt(p_id)); 
+		map.put("p_m_id", Integer.parseInt(m_id)); //프로젝트 작성자 m_id
+		
+		if(mev!=null){
+			map.put("m_id", mev.getM_id()); //로그인 한 사람의 m_id
+		}else{
+			map.put("m_id", 0);
+		}
+		//프로젝트 관련 정보 - 프로젝트 타이틀, 카테고리, 작업정보,  좋아요수 등
+		model.addAttribute("detail", pddao.projectDetailRelatedProject(p_id));
+				
+		//프로젝트 작성자 정보 - 이름, 관심분야, 좋아요 여부 등
+		model.addAttribute("writer", pddao.projectDetailRelatedMember(map));
+		
+		//댓글목록
+		model.addAttribute("reply", pddao.getReplyList(Integer.parseInt(p_id)));
+		return "project/projectView";
 	}
 	
 	//*****구버전*****
@@ -58,8 +74,8 @@ public class ProjectDetailModel {
 			pddao.increaseHits(Integer.parseInt(p_id));
 		}
 		//프로젝트 타이틀, 좋아요 여부, 상위 카테고리 이름, 하위 카테고리 ID, 작성자닉넴, 작성자 소개, 팔로우 여부, 좋아요수, 관심분야ID 받아옴
-		ProjectDetailVO pdvo = pddao.projectDetail(map);
-		model.addAttribute("detail", pdvo);
+		//ProjectDetailVO pdvo = pddao.projectDetail(map);
+		//model.addAttribute("detail", pdvo);
 		
 		// 프로젝트 콘텐츠
 		List<ContentVO> contents = pddao.projectContents(Integer.parseInt(p_id));

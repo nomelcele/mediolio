@@ -11,6 +11,7 @@ import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.Member_actionVO;
 import com.mediolio.vo.ProjectDetailVO;
+import com.mediolio.vo.ProjectWriterVO;
 import com.mediolio.vo.ReplyVO;
 
 @Repository
@@ -23,10 +24,14 @@ public class ProjectDetailDao {
 		return st.selectList("pd.getReplyList", p_id);
 	}
 
-	public ProjectDetailVO projectDetail(Map<String, Integer> map) {
-		return st.selectOne("pd.projectDetail", map);
+	public ProjectDetailVO projectDetailRelatedProject(String p_id) {
+		return st.selectOne("pd.projectDetailRelatedProject", Integer.parseInt(p_id));
 	}
 
+	public ProjectWriterVO projectDetailRelatedMember(Map<String, Integer> map) {
+		return st.selectOne("pd.projectDetailRelatedMember", map);
+	}
+	
 	public List<HashtagVO> projectHash(int p_id) {
 		return st.selectList("pd.projectHash", p_id);
 	}
@@ -60,4 +65,5 @@ public class ProjectDetailDao {
 	public void increaseHits(int p_id){
 		st.update("pd.increaseHits",p_id);
 	}
+
 }

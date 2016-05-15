@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mediolio.mvc.dao.HistoryDao;
 import com.mediolio.mvc.dao.SearchDao;
-import com.mediolio.vo.FriendVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.ProjectVO;
 
@@ -49,6 +48,8 @@ public class SearchModel {
 			List<HashtagVO> hashList = sdao.getHashList(resultList);
 			mav.addObject("hashList", hashList);
 		}
+		mav.addObject("list", resultList);
+		mav.addObject("total", resultList.size());
 		return mav;
 	}
 	
@@ -68,7 +69,6 @@ public class SearchModel {
 		}
 		
 		if(resultList.size() > 0){
-			System.out.println("null아님");
 			List<HashtagVO> hashList = sdao.getHashList(resultList);
 			mav.addObject("hashList", hashList);
 		}
