@@ -10,14 +10,21 @@
 			WHERE r.p_id=#{p_id} ORDER BY p_id DESC
 	</select>
 	
-  	<select id="projectDetail" parameterType="java.util.Map" resultType="pdvo">
-  		SELECT p.p_id, m.m_id, p.cate_id, p.p_viewnum, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2,
-  		c.cate_name, p.p_title, DATE_FORMAT(p.p_date, '%Y.%m.%d %H:%i:%s') AS p_date,
-  		(SELECT count(*) FROM member_action WHERE act_type='like' AND p_id=#{p_id}) p_likenum,
-  		(SELECT count(*) FROM member_action WHERE act_type='follow' AND act_from=#{m_id} AND act_to=#{p_m_id}) follow_or_not,
-  		(SELECT count(*) FROM member_action WHERE act_type='like' AND p_id=#{p_id} AND act_from=#{m_id}) like_or_not
-  			FROM project p JOIN member m ON p.m_id=m.m_id JOIN category c ON p.cate_id=c.cate_id
-  			WHERE p.p_id=#{p_id}
+  	<select id="projectDetailRelatedProject" parameterType="int" resultType="pdvo">
+	  	SELECT p.p_id, p.p_type, p.p_title, p.p_prjname, p.p_summary, p.cl_id, c.cl_name,
+	  	DATE_FORMAT(p.p_workfrom, '%Y.%m.%d') AS p_workfrom, DATE_FORMAT(p.p_workto, '%Y.%m.%d') AS p_workto,
+	  		p.ht_id, p.cate_id, ct.cate_name, DATE_FORMAT(p.p_date, '%Y.%m.%d %H:%i:%s') AS p_date, p.p_viewnum,
+	  		(SELECT count(*) FROM member_action WHERE act_type='like' AND act_what=#{p_id}) p_likenum
+	  			FROM project p, class c, category ct WHERE p.cl_id = c.cl_id AND p.cate_id = ct.cate_id
+	  			AND p.p_id=#{p_id}
+  	</select>
+  	
+  	<select id="projectDetailRelatedMember" parameterType="java.util.Map" resultType="pwvo">
+  		SELECT m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2,
+  			(SELECT cate_name FROM category WHERE cate_id = m.m_interesting1) AS m_interesting1_text,
+  			(SELECT cate_name FROM category WHERE cate_id = m.m_interesting2) AS m_interesting2_text,
+  			(SELECT count(*) FROM member_action WHERE act_type='like' AND act_what=#{p_id} AND act_from=#{m_id}) like_or_not
+  			FROM member m WHERE m.m_id=#{p_m_id}
   	</select>
   	
   	<select id="projectHash" parameterType="int" resultType="hvo">

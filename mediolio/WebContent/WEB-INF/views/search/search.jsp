@@ -10,12 +10,12 @@
     </div><!--//rmcnWrap-->
     
     <div class="cardWrap searchResultWrap">
-        <p class="searchResult"><strong>"${key }"</strong> ${type } 검색결과 ${total }건</p>
+        <p class="searchResult">"<strong>${key }</strong>"&nbsp;<span>${type }</span> 검색결과 ${total }건</p>
     </div>
     
     <c:forEach var="prj" items="${list}">
 	    <div class="cardWrap searchWrap">
-	        <a href="#">
+	        <a href="projectView?m_id=${prj.m_id}&p_id=${prj.p_id}">
 		        <c:if test="${prj.p_coverImg ne '' && prj.p_coverImg ne null}">
 		        	<img src="resources/images/projectCover/${prj.p_coverImg}" width="100" height="100" alt="포트폴리오 이미지"/>
 		        </c:if>
@@ -24,7 +24,7 @@
 		        </c:if>
 	        </a>
 	        <div class="search_contentWrap">
-	            <p class="search_title"><a class="ellipsis" href="#">${prj.p_title}</a></p>
+	            <p class="search_title"><a class="ellipsis" href="projectView?m_id=${prj.m_id}&p_id=${prj.p_id}">${prj.p_title}</a></p>
 	            <p class="search_writer"><a class="ellipsis" href="#">${prj.authorID } ${prj.authorName }</a></p>
 	            <p class="search_tag ellipsis">
 	            	<c:forEach var="aTag" items="${hashList }">

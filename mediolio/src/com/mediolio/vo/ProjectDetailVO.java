@@ -1,34 +1,15 @@
 package com.mediolio.vo;
 
 public class ProjectDetailVO {
-	private int p_id, m_id, cate_id, p_viewnum, p_likenum, p_replynum, follow_or_not, like_or_not;
-	private String m_studentID, m_name, m_introduce, m_interesting1, m_interesting2, sc_id, cate_name, p_title, p_date;
+	private int p_id, p_type, m_id, cate_id, p_viewnum, p_likenum, p_replynum, ht_id, cl_id;
+	private String p_title, p_prjname, p_summary, p_workfrom, p_workto, cate_name, p_date, cl_name;
 	
 	
-	public int getFollow_or_not() {
-		return follow_or_not;
+	public int getP_type() {
+		return p_type;
 	}
-	public void setFollow_or_not(int follow_or_not) {
-		this.follow_or_not = follow_or_not;
-	}
-	public int getLike_or_not() {
-		return like_or_not;
-	}
-	public void setLike_or_not(int like_or_not) {
-		this.like_or_not = like_or_not;
-	}
-
-	public String getM_interesting1() {
-		return m_interesting1;
-	}
-	public void setM_interesting1(String m_interesting1) {
-		this.m_interesting1 = m_interesting1;
-	}
-	public String getM_interesting2() {
-		return m_interesting2;
-	}
-	public void setM_interesting2(String m_interesting2) {
-		this.m_interesting2 = m_interesting2;
+	public void setP_type(int p_type) {
+		this.p_type = p_type;
 	}
 	public int getP_id() {
 		return p_id;
@@ -66,35 +47,17 @@ public class ProjectDetailVO {
 	public void setP_replynum(int p_replynum) {
 		this.p_replynum = p_replynum;
 	}
-	public String getM_studentID() {
-		return m_studentID;
+	public int getHt_id() {
+		return ht_id;
 	}
-	public void setM_studentID(String m_studentID) {
-		this.m_studentID = m_studentID;
+	public void setHt_id(int ht_id) {
+		this.ht_id = ht_id;
 	}
-	public String getM_name() {
-		return m_name;
+	public int getCl_id() {
+		return cl_id;
 	}
-	public void setM_name(String m_name) {
-		this.m_name = m_name;
-	}
-	public String getM_introduce() {
-		return m_introduce;
-	}
-	public void setM_introduce(String m_introduce) {
-		this.m_introduce = m_introduce;
-	}
-	public String getSc_id() {
-		return sc_id;
-	}
-	public void setSc_id(String sc_id) {
-		this.sc_id = sc_id;
-	}
-	public String getCate_name() {
-		return cate_name;
-	}
-	public void setCate_name(String cate_name) {
-		this.cate_name = cate_name;
+	public void setCl_id(int cl_id) {
+		this.cl_id = cl_id;
 	}
 	public String getP_title() {
 		return p_title;
@@ -102,12 +65,48 @@ public class ProjectDetailVO {
 	public void setP_title(String p_title) {
 		this.p_title = p_title;
 	}
+	public String getP_prjname() {
+		return p_prjname;
+	}
+	public void setP_prjname(String p_prjname) {
+		this.p_prjname = p_prjname;
+	}
+	public String getP_summary() {
+		return p_summary;
+	}
+	public void setP_summary(String p_summary) {
+		this.p_summary = p_summary;
+	}
+	public String getP_workfrom() {
+		return p_workfrom;
+	}
+	public void setP_workfrom(String p_workfrom) {
+		this.p_workfrom = p_workfrom;
+	}
+	public String getP_workto() {
+		return p_workto;
+	}
+	public void setP_workto(String p_workto) {
+		this.p_workto = p_workto;
+	}
+	public String getCate_name() {
+		return cate_name;
+	}
+	public void setCate_name(String cate_name) {
+		this.cate_name = cate_name;
+	}
 	public String getP_date() {
 		return p_date;
 	}
 	public void setP_date(String p_date) {
 		this.p_date = p_date;
 	}
-	
+	public String getCl_name() {
+		return cl_name;
+	}
+	public void setCl_name(String cl_name) {
+		this.cl_name = cl_name;
+	}
+
 	
 }

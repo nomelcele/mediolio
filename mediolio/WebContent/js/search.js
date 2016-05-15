@@ -103,7 +103,18 @@ function returnCategoryVal(text){
 }
 
 $('document').ready(function(){
+	//검색창에 검색중인 옵션 표시
+	$('#text_main').val($('.searchResult strong').text());
+	var searched_option = $('.searchResult span').text();
 	
+	$('#selectWrap_main .nice-select .current').text(searched_option+' 검색');
+	$('#selectWrap_main .list li').removeClass("selected");
+	if(searched_option == '학우') $('#selectWrap_main .list li:eq(0)').addClass("selected");
+	else if(searched_option == '제목') $('#selectWrap_main .list li:eq(1)').addClass("selected");
+	else if(searched_option == '태그') $('#selectWrap_main .list li:eq(2)').addClass("selected");
+	else if(searched_option == '과목') $('#selectWrap_main .list li:eq(3)').addClass("selected");
+	
+	//검색버튼 클릭 시 액션
 	$(document).on('click', '#search_main .btn_search', function(){
 		var option_value = select.options[select.selectedIndex].value;
 		var keyword = document.getElementById('text_main');

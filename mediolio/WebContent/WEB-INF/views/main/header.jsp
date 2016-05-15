@@ -57,7 +57,7 @@
         	<div id="selectWrap_main">
                 <select id="select_main" onchange="selectChanged();">
                     <option value="member">학우 검색</option>
-                    <option value="title">글제목 검색</option>
+                    <option value="title">제목 검색</option>
                     <option value="tag">태그 검색</option>
                     <option value="subject">과목 검색</option>
                 </select>
