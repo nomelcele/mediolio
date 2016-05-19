@@ -25,7 +25,7 @@
                     <li>
                         <p class="friendList_id">
                         	<input type="hidden" value="${a.m_id }" class="memberId"/>
-                            <a href="userpage?usr_id=${a.m_id }">${a.m_nickname }</a>
+                            <a href="userpage?usr_id=${a.m_id }">${a.m_studentID } ${a.m_name }</a>
                             <input type="button" value="X" class="btn_cancelFollow"/>
                         </p>
                         <p class="friendList_intro">${a.m_introduce }</p>

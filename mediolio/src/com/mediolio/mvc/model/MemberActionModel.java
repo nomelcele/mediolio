@@ -50,7 +50,7 @@ public class MemberActionModel {
 	@RequestMapping("projectLike")
 	public ModelAndView projectLike(@RequestParam("p_id") String p_id, @RequestParam("act_to") String act_to, HttpSession session){
 		ModelAndView mav = new ModelAndView("jsonView");
-		
+		System.out.println("여기");
 		MemberVO mev = (MemberVO)session.getAttribute("mev");
 		if(mev!=null){		
 			Member_actionVO maVo = new Member_actionVO();

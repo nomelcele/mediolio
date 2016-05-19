@@ -51,6 +51,9 @@ public class ProjectDetailModel {
 		
 		//댓글목록
 		model.addAttribute("reply", pddao.getReplyList(Integer.parseInt(p_id)));
+		
+		//해쉬태그
+		model.addAttribute("tag", pddao.projectHash(Integer.parseInt(p_id)));
 		return "project/projectView";
 	}
 	
