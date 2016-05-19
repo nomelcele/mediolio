@@ -23,6 +23,22 @@ $('document').ready(function(){
         $('#teamMateGroup').append(newTeamInput);
     })
     
+    $("#projTab1").click(function(){
+    	// 1단계 이동
+    	$("#contentArea").css("display","block");
+    	$(".cardWrap").css("display","block");
+    	$("#projInfoArea").css("display","none");
+    	$("#projBtnArea").css("display","none");    	
+    });
+
+    $("#projTab2").click(function(){
+    	// 2단계 이동
+    	$("#contentArea").css("display","none");
+    	$(".cardWrap").css("display","none");
+    	$("#projInfoArea").css("display","block");
+    	$("#projBtnArea").css("display","block");
+    });
+    
 	$("#submit_portfolio").click(function(){
 		// 프로젝트 등록
 		
@@ -65,18 +81,23 @@ $('document').ready(function(){
 			for(var i=0; i<orderArr.length; i++){
 				formData.append("orderArr",orderArr[i]);
 			}
+			
 			// 4. 프로젝트 제목
 			$("#p_title").val($("#projectTitle").val());
+			
 			// 5. 카테고리 아이디
 			$("#cate_id").val($("#selectedCategory").val());
+			
 //			// 6. 서브카테고리 아이디 목록
 //			var subcategories = "";
 //			$("#write_dCategory .subCategory").each(function(){
 //				subcategories += $(this).val()+"/";
 //			});
 //			$("#sc_id").val(subcategories);
+			
 			// 7. 커버 이미지 파일 이름
 			$("#p_coverImgName").val($("#p_coverImg").val());
+			
 			// 8. 해쉬태그
 			var hashtags = "";
 			$("#write_tagTxt span").each(function(){
@@ -84,11 +105,23 @@ $('document').ready(function(){
 			});
 			$("#hashtags").val(hashtags);
 	
+			// 9. 프로젝트 정보
+			// 9-1. 작업 이름
+			
+			// 9-2. 작업 기간
+			
+			// 9-3. 관련 과목
+			
+			// 9-4. 팀원 소개
+			
+			// 9-5. 작업 개요
+			
+			
 			var other_data = $("#addProjectForm").serializeArray();
 		    $.each(other_data,function(key,input){
 		        formData.append(input.name,input.value);
 		    });
-			
+		  
 			$.ajax({
 				url: "addProject",
 				processData: false,
@@ -593,6 +626,11 @@ $('document').ready(function(){
     	}
     });
     
+    $("#submit_step1").click(function(){
+    	// location='gotoStep2';
+    	history.back();
+    });
+    
 });
 
 function moveUpElement(e){
@@ -703,7 +741,7 @@ function writeEmbedModalOpen(){
         orderArr[order] = $("#modal_bd_writeEmbed textarea").val();
         order = parseInt(order)+1;
         addContent();
-        
+    	$('body').removeClass('preventScroll');
     });
     
   

@@ -68,7 +68,7 @@
             </div><!--//writeLineWrap-->
         </div><!--//cardWindow-->
         
-        <input type="button" class="write_submit" id="submit_step1" value="글 내용 작성" onclick="location='gotoStep2'"/>
+        <input type="button" class="write_submit" id="submit_step1" value="글 내용 작성"/>
         <input type="button" class="write_submit" id="submit_portfolio" value="작성 완료"/>
     </form>
     </div> <!-- writeWrap -->
