@@ -23,7 +23,7 @@
 	<select id="selectlike" parameterType ='int' resultType="pvo">
 		select p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID authorID, m.m_name authorName,
 		(select count(*) from member_action where p_id=p.p_id) p_likenum, p.p_viewnum 
-		from project p, member m, member_action ma where p.m_id=m.m_id and p.p_id=ma.p_id and ma.act_type='like' and ma.act_from=#{m_id}
+		from project p, member m, member_action ma where p.m_id=m.m_id and p.p_id=ma.act_what and ma.act_type='like' and ma.act_from=#{m_id}
 		order by p.p_date desc
 	</select>
   

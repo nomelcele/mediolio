@@ -50,7 +50,7 @@
 	</delete>
 	
 	<delete id="actionDeleteReply" parameterType="int">
-		DELETE FROM member_action WHERE r_id=#{r_id}
+		DELETE FROM member_action WHERE act_type='reply' AND act_what=#{r_id}
 	</delete>
 	
 	<select id="projectContents" parameterType="int" resultType="covo">

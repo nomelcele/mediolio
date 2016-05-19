@@ -1,3 +1,5 @@
+//오지은 - 좋아요, 팔로우, 댓글달기
+
 $('document').ready(function(){
 	$('#modal_ft_content').on('click', '.btn_deleteReply', function(){
 		deleteReply($(this).closest('.replyContentWrap'));

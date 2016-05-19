@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="resources/css/projectView.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="js/projectView.js"></script>
+<script type="text/javascript" src="js/memberAction.js"></script>
 
 <div id="contentsWrap">
 	<div class="cardWrap clear" id="modal_content">
@@ -50,14 +51,15 @@
                 <div id="content_imgWrap"></div>
                 <div id="content_tagWrap">
                     <p>연관 태그</p>
-                    <span>#겜프</span>
-                    <span>#게임디자인</span>
-
+		            <c:forEach var="aTag" items="${tag }">
+			            <span>#${aTag.h_value }</span>
+		            </c:forEach>
                 </div>
             </div><!--//modal_bd_content -->
             <hr>
             <div class="modal_ft" id="modal_ft_content">
 		        <!-- 댓글내용란 -->
+		        <div class="replyContentsTotalWrap">
 		        <c:forEach var="aReply" items="${reply }">
 			        <div class="replyContentWrap">
 			            <p>
@@ -75,13 +77,14 @@
 			             </div>
 			        </div><!--//replyContentWrap-->
 				</c:forEach>
+				</div>
 					<!-- 댓글입력란 -->
 					<c:choose>
 			        	<c:when test="${sessionScope.mev != null }">
 			        	     <div id="writeReplyWrap">
 					        	<form id="reply_form">
 					        		<input type="hidden" name="p_id" value="${detail.p_id }">
-					        	    <textarea placeholder="댓글 내용을 입력하세요." name="r_text" onkeypress="return handleEnter(this, event, 1)"></textarea>
+					        	    <textarea placeholder="댓글 내용을 입력하세요." name="r_text" onkeypress="if(event.keyCode==13) submitReply();"></textarea>
 					            	<input type="button" value="입력" onclick="submitReply()"/>
 					        	</form>
 					        </div>
@@ -149,7 +152,6 @@
 	    <li><a href="#">유저 히스토리</a></li>
 	</ul><!-- userPopWrap -->
 	
-	
-	
-	
+	<input type="hidden" id="other_m_id" value="${writer.m_id }"> <!-- !!!!!!!!!!!!  작성자 ID input hidden   !!!!!!!!!! -->
+	<input type="hidden" id="this_p_id" value="${detail.p_id }"><!-- !!!!!!!!!!!!  현재 프로젝트 ID input hidden   !!!!!!!!!! -->
 </div>
