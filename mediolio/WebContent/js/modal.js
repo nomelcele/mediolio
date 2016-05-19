@@ -148,6 +148,8 @@ function writeDCategoryModalOpen(){
 		    	
 		    	$('.modal_bg, .modal').hide();
 		    	$("#write_dCategory a").html(str);
+		    	$('body').removeClass('preventScroll');
+
 	     	}
 	    });
 	    
@@ -188,6 +190,7 @@ function writeEmbedModalOpen(){
     
     $('#btn_writeEmbed').on('click',function(){
         $('.modal_bg, .modal').hide();
+    	$('body').removeClass('preventScroll');
     })
 }
 

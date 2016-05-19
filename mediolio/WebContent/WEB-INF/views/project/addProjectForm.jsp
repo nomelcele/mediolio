@@ -7,6 +7,7 @@
 <title>MEDIOLIO</title>
 
 <link href="resources/css/write.css" rel="stylesheet" type="text/css"/>
+<link href="resources/css/write2.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" media="screen" type="text/css" href="resources/css/colorpicker.css" />
 <link href="resources/css/jquery.Jcrop.css" rel="stylesheet" type="text/css" />
 <link href="resources/css/crop.css" rel="stylesheet" type="text/css"/>
@@ -28,7 +29,10 @@
 </form>
 <div id="contentsWrap">
 	<div class="writeWrap clear">
-	    <div class="cardWindow">
+	<!-- 탭 -->
+	        <h1 class="pageTitle"><a id="projTab1" href="#">1. 글 내용 작성</a><span class="pageTitleNext"><a id="projTab2" href="#">2. 프로젝트 정보 작성</a></span></h1>
+    	<!-- 탭 -->
+	    <div class="cardWindow" id="contentArea">
 	        <div class="cardWindow_hd">1단계 : 글 내용 작성</div>
 	        <div id="write_hd">
 	            <div id="write_category">
@@ -143,9 +147,77 @@
 	            <p class="p_view"><span></span>0</p>
 	        </div><!--//card_ct-->
 	    </div><!--//cardWrap-->
-    	<input type="button" class="write_submit" id="submit_step2" value="프로젝트 정보 작성" onclick="location='gotoStep2'"/>
+<!--     	<input type="button" class="write_submit" id="submit_step2" value="프로젝트 정보 작성" onclick="location='gotoStep2'"/> -->
     
 		
+		
+		<!-- 2단계 (S) -->
+		
+	    <div class="cardWindow cardWindow_write2" id="projInfoArea">
+	    <form method="post">
+            <div class="cardWindow_hd">2단계 : 프로젝트 정보 작성</div>
+            <div class="writeLineWrap">
+                <div class="writeLine_1">작업 이름</div>
+                <div class="writeLine_2">
+                    <input class="writeLine_text" type="text" name="p_prjname" placeholder="예) 미디어학과 포트폴리오 공유 사이트-미디올리오">
+                </div>
+            </div><!--//writeLineWrap-->
+            <div class="writeLineWrap">
+                <div class="writeLine_1">작업 기간</div>
+                <div class="writeLine_2">
+                    <span class="dateSpan">시작 : </span>
+                    <div class="twoCell">
+                        <input class="writeLine_text" type="date" name="p_workfrom">
+                    </div>
+                    <span class="dateSpan">종료 : </span>
+                    <div class="twoCell">
+                        <input class="writeLine_text" type="date" name="p_workto">
+                    </div>
+                </div>
+            </div><!--//writeLineWrap-->
+            <div class="writeLineWrap">
+                <div class="writeLine_1">관련 과목</div>
+                <div class="writeLine_2">
+                	<input class="writeLine_text project_related_class" type="text">
+<!--                     <a href="#"  onclick="subjectModalOpen()">과목 선택..</a> -->
+					<div class="autoCompleteBox classBox autoClass"><ul class="autoCompleteArea autoClassArea"></ul></div>
+                </div>
+            </div><!--//writeLineWrap-->
+            <div class="writeLineWrap clear">
+                <div class="writeLine_1 writeLine_1Long">팀원 소개</div>
+                <div class="writeLine_2 writeLine_2Long clear" id="teamMateGroup">
+                    <div class="write_teamMateWrap">
+                        <div class="threeCell shortCell">
+                            <input class="writeLine_text teamMateName" type="text" placeholder="이름">
+                            <div class="autoCompleteBox classBox autoMember"><ul class="autoCompleteArea autoMemberArea"></ul></div>
+                        </div>
+                        <div class="threeCell shortCell">
+                            <input class="writeLine_text" type="text" placeholder="역할">
+                        </div>
+                        <div class="threeCell">
+                            <input class="writeLine_text" type="text" placeholder="소개">
+                        </div>
+                    </div>
+                    
+                    <input type="button" value="+" id="btn_addTeamMate">
+                </div>
+            </div><!--//writeLineWrap-->
+            <div class="writeLineWrap writeLongLineWrap clear">
+                <div class="writeLine_1 writeLine_1Long">작업 개요</div>
+                <div class="writeLine_2 writeLine_2Long">
+                    <textarea class="writeLine_textarea" type="text" placeholder="작업 내용을 입력해주세요."></textarea>
+                </div>
+            </div><!--//writeLineWrap-->
+             </form>
+            
+        </div><!--//cardWindow-->
+        
+        <div id="projBtnArea">
+<!--          <input type="button" class="write_submit" id="submit_step1" value="글 내용 작성"/> -->
+        <input type="button" class="write_submit" id="submit_portfolio" value="작성 완료"/>
+        </div>
+   
+		<!-- 2단계 (E) -->
     </div> <!-- writeWrap -->
     
 </div> <!-- contentsWrap -->        
@@ -158,7 +230,7 @@
     
 <div class="modal modal_dCategory" id="modal_writeDCategory">
     <div class="modal_hd modal_hd_dCategory">CATEGORY
-        <input class="btnStyle btn_category" id="btn_writeDCategory" type="button" value="REGIST"/>
+        <input class="btnStyle btn_category" id="btn_writeDCategory" type="button" value="REGISTER"/>
     </div>
     <div class="modal_bd modal_bd_dCategory" id="modal_bd_writeDCategory">
         <ul>
@@ -180,7 +252,7 @@
     
 <div class="modal modal_dCategory" id="modal_writeEmbed">
     <div class="modal_hd modal_hd_dCategory">EMBED TAG
-        <input class="btnStyle btn_category" id="btn_writeEmbed" type="button" value="REGIST"/>
+        <input class="btnStyle btn_category" id="btn_writeEmbed" type="button" value="REGISTER"/>
     </div>
     <div class="modal_bd modal_bd_dCategory" id="modal_bd_writeEmbed">
         <textarea placeholder="태그를 입력하세요."></textarea>
