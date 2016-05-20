@@ -4,10 +4,10 @@
 
 <link href="resources/css/myPage.css" rel="stylesheet" type="text/css"/>
 <link href="resources/css/search.css" rel="stylesheet" type="text/css"/>
-<link href="resources/css/index.css" rel="stylesheet" type="text/css"/>
 <link href="resources/css/index2.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="resources/css/jquery.bxslider.css"/>
 
+<script src="js/index2.js"></script>
 <script src="js/jQuery/jquery.dotdotdot.min.js"></script>
 <script src="js/jQuery/jquery.bxslider.min.js"></script>
 <div id="contentsWrap">
@@ -32,13 +32,13 @@
                     <div class="timeCard_visualWrap slider">
                         <ul class="bxslider">
                             <li><a href="#">
-                                <img src="images/pf6.png" class="timeLine_img">
+                                <img src="upload/3_1455848532091.png" class="timeLine_img">
                             </a></li>
                             <li><a href="#">
-                                <img src="images/pf5.png" class="timeLine_img">
+                                <img src="upload/2_1455848532063.png" class="timeLine_img">
                             </a></li>
                             <li><a href="#">
-                                <img src="images/pf6.png" class="timeLine_img">
+                                <img src="upload/20_1455852232507.jpg" class="timeLine_img">
                             </a></li>
                         </ul>
                     </div><!--//timeCard_visualWrap -->
@@ -59,10 +59,10 @@
                     <div class="timeCard_visualWrap slider">
                         <ul class="timeCard_imgWrap clear">
                             <li><a href="#">
-                                <img src="images/pf4.png">
+                                <img src="upload/3_1455848532091.png">
                             </a></li>
                             <li><a href="#">
-                                <img src="images/pf.png">
+                                <img src="upload/20_1455852232507.jpg">
                             </a></li>
                         </ul>
                     </div><!--//timeCard_visualWrap -->
@@ -90,7 +90,7 @@
                     <div class="timeCard_visualWrap slider">
                         <ul class="timeCard_imgWrap">
                             <li><a href="#">
-                                <img src="images/pf4.png">
+                                <img src="upload/20_1455852232507.jpg">
                             </a></li>
                         </ul>
                     </div><!--//timeCard_visualWrap -->
