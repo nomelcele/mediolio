@@ -164,10 +164,6 @@ public class ProjectModel {
 //				}
 //			}
 				
-		MemberVO mev = (MemberVO) session.getAttribute("mev");
-		model.addAttribute("mainProjects", mdao.mainProjects());
-		model.addAttribute("hashtag", mdao.projectHashtags());
-		model.addAttribute("category",mdao.catelist());
 		return "main.index";
 	}
 	

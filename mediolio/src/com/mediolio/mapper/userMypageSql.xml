@@ -7,7 +7,7 @@
     <select id="getMemberInfo" parameterType="int" resultType="fvo">
 		SELECT m_id, m_studentID, m_name, m_introduce, m_interesting1, m.m_interesting2,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
-			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
+			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2
 				FROM member m WHERE m_id=#{m_id}
 	</select>
 	
@@ -33,7 +33,7 @@
 						(SELECT cate_name FROM category WHERE cate_id = category_id) AS cate_name,
 						(SELECT SUBSTRING_INDEX(GROUP_CONCAT(h_value SEPARATOR ','), ',', 3) FROM hashtag WHERE p_id=project_id) AS hashtags
 							FROM project p, member_action ma 
-			                WHERE ma.act_to=p.m_id AND ma.p_id=p.p_id AND ma.act_type='like' AND ma.act_from=#{m_id}
+			                WHERE ma.act_to=p.m_id AND ma.act_what=p.p_id AND ma.act_type='like' AND ma.act_from=#{m_id}
 				) A,
 			  (SELECT @NO := 0 ) B
 			) C

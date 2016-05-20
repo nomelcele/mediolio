@@ -479,6 +479,22 @@
                     <input type="checkbox" name='skill' data-labelauty="인디자인" value="31"/>
                     <label class="label_category">인디자인</label>
                 </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="R" value="32"/>
+                    <label class="label_category">R</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="하둡" value="33"/>
+                    <label class="label_category">하둡</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="루비" value="34"/>
+                    <label class="label_category">루비</label>
+                </li>
+                <li>
+                    <input type="checkbox" name='skill' data-labelauty="node.js" value="35"/>
+                    <label class="label_category">node.js</label>
+                </li>
             </ul>
 
 

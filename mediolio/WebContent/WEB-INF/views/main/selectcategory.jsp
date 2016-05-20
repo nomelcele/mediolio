@@ -4,14 +4,12 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 	<div id="contentsWrap">
     <c:forEach var="mainProjects" items="${mainProjects}">
-    	<c:forEach items="${fn:split(mainProjects.sc_id,'/')}" var="sc">
-    	<c:if test="${sc eq selcat}">
 	    <div class="cardWrap">
 	    <input type="hidden" class="projectId" value="${mainProjects.p_id}">
 	    <input type="hidden" class="memberId" value="${mainProjects.m_id}">
 	    	<div class="card_hd"></div>
 	    	<div class="card_img">
-	            <a href="#" onClick="contentModalOpen(this, 'index')">
+	            <a href="projectView?m_id=${mainProjects.m_id}&p_id=${mainProjects.p_id}">
 	                <div>
 	                	<p>
 	                	<c:forEach var="hashtag" items="${hashtag}">
@@ -34,29 +32,7 @@
 	        	<p class="card_title ellipsis"><a href="#">${mainProjects.p_title}</a></p>
 	            <p class="card_dscrpt"><a href="#">${mainProjects.authorID} ${mainProjects.authorName}</a></p>
 	            <p class="card_tag">
-	            	<!-- 게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,게임프로그래밍,게임사운드, -->
-	            	<c:forEach items="${fn:split(mainProjects.sc_id,'/')}" var="sc">
-	            		<c:forEach var="subcategory" items="${subcategory}">
-	            			<c:if test="${sc eq subcategory.sc_id}">
-	            				<c:forEach var="category" items="${category}">
-	            					<c:if test="${category.cate_id eq subcategory.sc_parent}">
-	            						<%-- ${category.cate_name} ${subcategory.sc_name} --%>
-	            						<%-- <c:if test="${subcategory.sc_id eq '11'||subcategory.sc_id eq '12'||subcategory.sc_id eq '13'}">
-	            							${subcategory.sc_name}
-	            						<c:if test="${subcategory.sc_id eq '11'||subcategory.sc_id eq '12'||subcategory.sc_id eq '13'}"> --%>
-	            						<c:choose> 
-											<c:when test="${subcategory.sc_id eq '11'||subcategory.sc_id eq '12'||subcategory.sc_id eq '13'}">
-												${subcategory.sc_name},
-											</c:when>
-											<c:otherwise>
-												${category.cate_name} ${subcategory.sc_name},
-											</c:otherwise>
-										</c:choose>
-	            					</c:if>
-	            				</c:forEach>
-	            			</c:if>
-	            		</c:forEach>
-	            	</c:forEach>
+					${mainProjects.p_summary }		
 	            </p>
 	        </div><!--//card_bd-->
 	        <div class="card_ct">
@@ -64,8 +40,7 @@
 	            <p class="p_view"><span></span>${mainProjects.p_viewnum}</p>
 	        </div><!--//card_ct-->
 	    </div><!--//cardWrap-->
-	    </c:if>
-	    </c:forEach>
+
     </c:forEach>
   
 

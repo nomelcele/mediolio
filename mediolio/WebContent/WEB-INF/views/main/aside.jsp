@@ -54,11 +54,7 @@
     <div class="categoryWrap">
         <ul class="nav_category">
     		<li class="nav_group">
-    			<div class="nav_title" id="ct_game"><span></span>PROJECT</div>
-<!--             	<ul class="nav_sub">
-            		<li><a href="#" class='selsub'>기획</a>
-                    <li><a href="#" class='selsub'>개발</a>
-                </ul> -->
+    			<div class="nav_title" id="ct_project"><span></span>PROJECT</div>
             </li>
    		</ul>
     </div>
@@ -117,5 +113,4 @@
 
     	</ul><!--//nav_category-->
 	</div><!--//categoryWrap-->
-	<input type='hidden' id='selectcat' >
 </div><!--//aside-->

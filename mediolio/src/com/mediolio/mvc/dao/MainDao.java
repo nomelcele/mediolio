@@ -23,10 +23,6 @@ public class MainDao {
 		return st.selectOne("main.select_m_nickname",m_id);
 	}
 	
-	public List<ProjectVO> mainProjects(){
-		return st.selectList("main.mainProjects");
-	}
-	
 	public List<HashtagVO> projectHashtags(){
 		return st.selectList("main.projectHashtags");
 	}
@@ -38,6 +34,14 @@ public class MainDao {
 	public List<ProjectVO> likelist(int m_id){
 		System.out.println("likelist");
 		return st.selectList("main.selectlike",m_id);
+	}
+
+	public List<ProjectVO> getProjectLists() {
+		return st.selectList("main.getProjectLists");
+	}
+
+	public List<ProjectVO> getCertainCategoryList(String category) {
+		return st.selectList("main.getCertainCategoryList", category);
 	}
 
 	
