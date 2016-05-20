@@ -2,9 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
 
+<link href="resources/css/myPage.css" rel="stylesheet" type="text/css"/>
+<link href="resources/css/search.css" rel="stylesheet" type="text/css"/>
+<link href="resources/css/index.css" rel="stylesheet" type="text/css"/>
+<link href="resources/css/index2.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="resources/css/jquery.bxslider.css"/>
+
 <script src="js/jQuery/jquery.dotdotdot.min.js"></script>
 <script src="js/jQuery/jquery.bxslider.min.js"></script>
+<div id="contentsWrap">
 
 <div class="cardWrap cardWrap_main">
     <div id="historyTitle_main">
@@ -227,6 +233,7 @@
     </div><!--//newestWrap_bd-->
 </div><!--//newestWrap-->
 
+</div>
 
 <%-- 	<div id="contentsWrap">
     <c:forEach var="mainProjects" items="${mainProjects}">
