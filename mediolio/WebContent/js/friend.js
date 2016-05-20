@@ -99,9 +99,9 @@ function returnFriendList(list, type){
 				var aSetArr = projectArr[i].split(",");
 				//aSetArr[0]에는 p_id가, aSetArr[1]에는 coverImg가 들어있음
 				if(aSetArr[1].length){
-					aRow += '<a href="#detail?p_id='+aSetArr[0]+'" onclick="contentModalOpen(this, '+'\'friend\''+')"><img src="resources/images/projectCover/'+aSetArr[1]+'" width="80" height="80"/></a>';
+					aRow += '<a href="projectView?p_id='+aSetArr[0]+'&m_id='+entry.m_id+'"><img src="resources/images/projectCover/'+aSetArr[1]+'" width="80" height="80"/></a>';
 				}else{
-					aRow += '<a href="#detail?p_id='+aSetArr[0]+'" onclick="contentModalOpen(this, '+'\'friend\''+')"><img src="resources/images/default.png" width="80" height="80"/></a>';
+					aRow += '<a href="projectView?p_id='+aSetArr[0]+'&m_id='+entry.m_id+'"><img src="resources/images/default.png" width="80" height="80"/></a>';
 				}
 				
 			}
