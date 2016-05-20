@@ -32,29 +32,7 @@
 	        	<p class="card_title ellipsis"><a href="#">${mainProjects.p_title}</a></p>
 	            <p class="card_dscrpt"><a href="#">${mainProjects.authorID} ${mainProjects.authorName}</a></p>
 	            <p class="card_tag">
-	            	<!-- 게임프로그래밍,게임사운드,게임프로그래밍,게임사운드,게임프로그래밍,게임사운드, -->
-	            	<c:forEach items="${fn:split(mainProjects.sc_id,'/')}" var="sc">
-	            		<c:forEach var="subcategory" items="${subcategory}">
-	            			<c:if test="${sc eq subcategory.sc_id}">
-	            				<c:forEach var="category" items="${category}">
-	            					<c:if test="${category.cate_id eq subcategory.sc_parent}">
-	            						<%-- ${category.cate_name} ${subcategory.sc_name} --%>
-	            						<%-- <c:if test="${subcategory.sc_id eq '11'||subcategory.sc_id eq '12'||subcategory.sc_id eq '13'}">
-	            							${subcategory.sc_name}
-	            						<c:if test="${subcategory.sc_id eq '11'||subcategory.sc_id eq '12'||subcategory.sc_id eq '13'}"> --%>
-	            						<c:choose> 
-											<c:when test="${subcategory.sc_id eq '11'||subcategory.sc_id eq '12'||subcategory.sc_id eq '13'}">
-												${subcategory.sc_name},
-											</c:when>
-											<c:otherwise>
-												${category.cate_name} ${subcategory.sc_name},
-											</c:otherwise>
-										</c:choose>
-	            					</c:if>
-	            				</c:forEach>
-	            			</c:if>
-	            		</c:forEach>
-	            	</c:forEach>
+					${mainProjects.p_summary }
 	            </p>
 	        </div><!--//card_bd-->
 	        <div class="card_ct">

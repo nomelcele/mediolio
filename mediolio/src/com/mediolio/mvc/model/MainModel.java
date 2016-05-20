@@ -1,8 +1,7 @@
 package com.mediolio.mvc.model;
 
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,9 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mediolio.mvc.dao.HistoryDao;
 import com.mediolio.mvc.dao.MainDao;
-import com.mediolio.vo.BranchVO;
-import com.mediolio.vo.FriendVO;
-import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.HistoryVO;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectVO;
@@ -27,9 +23,7 @@ import com.mediolio.vo.ProjectVO;
 
 @Controller
 public class MainModel {
-	
-	private String cat="0";
-	
+		
 	@Autowired
 	private MainDao mdao;
 	@Autowired
@@ -37,73 +31,58 @@ public class MainModel {
 	
 	@RequestMapping(value={"","main"})
 	public ModelAndView main(HttpSession session){
-/*		ModelAndView mav = new ModelAndView("main/index");
-		int id = 0;
-		String nickname="";
-		try{
-			id = (int) session.getAttribute("id");
-			nickname = mdao.FindNickname(id);
-		}catch(Exception e){
-			id=0;
-			nickname="";
-		}
-		
-		System.out.println("id : " + id);
-		System.out.println("nickname :"+ nickname);
-		mav.addObject("m_id", id);
-		mav.addObject("m_nickname",nickname);
-		return mav;*/
-		cat="0";
+
 		ModelAndView mav = new ModelAndView("main/index");		
 		MemberVO mev = (MemberVO) session.getAttribute("mev");
 		if(mev!=null){
-		System.out.println("id : " +mev.getM_id());
-		System.out.println("nickname : "+mev.getM_name());
+			System.out.println("id : " +mev.getM_id());
+			System.out.println("nickname : "+mev.getM_name());
 		}
-		
-		mav.addObject("mainProjects", mdao.mainProjects());
-		mav.addObject("hashtag", mdao.projectHashtags());
-		mav.addObject("category",mdao.catelist());
-		mav.addObject("selcat", cat);
-		/*List<SubcategoryVO> list = mdao.subcatelist();
-		System.out.println(list.get(1).getSc_name());*/
+
 		return mav;
 	}
 	
+	//박성준 1차 작성
+	//오지은 수정
 	@RequestMapping("selcatcard")
 	public String selcatcard(HttpSession session, Model model, @RequestParam("selcat") String selcat){
-		if(selcat.equals("ct_game")){
-			cat="1";
-		}
-		else if(selcat.equals("ct_webApp")){
-			cat="2";
-		}
-		else if(selcat.equals("ct_video")){
-			cat="3";
-		}
-		else if(selcat.equals("ct_3d")){
-			cat="4";
-		}
-		else if(selcat.equals("ct_design")){
-			cat="5";
-		}
-		else if(selcat.equals("ct_misc")){
-			cat="6";
-		}
-		else{
-			cat="100";
-		}
-		System.out.println(cat);
-		MemberVO mev = (MemberVO) session.getAttribute("mev");
-		if(mev!=null){
-		System.out.println("id : " +mev.getM_id());
-		System.out.println("nickname : "+mev.getM_name());
+		String category="0";
+		String p_type;
+		List<ProjectVO> prjList;
+		
+		if(selcat.equals("ct_project")){
+			//프로젝트인 경우
+			p_type="1";
+			prjList = mdao.getProjectLists();
+			
+		}else{
+			//과제인 경우
+			p_type="0";
+			if(selcat.equals("ct_game")){
+				category="1";
+			}
+			else if(selcat.equals("ct_webApp")){
+				category="2";
+			}
+			else if(selcat.equals("ct_video")){
+				category="3";
+			}
+			else if(selcat.equals("ct_3d")){
+				category="4";
+			}
+			else if(selcat.equals("ct_design")){
+				category="5";
+			}
+			else if(selcat.equals("ct_misc")){
+				category="6";
+			}
+			prjList = mdao.getCertainCategoryList(category);
+			
 		}
 		
-		model.addAttribute("mainProjects", mdao.mainProjects());
+		model.addAttribute("p_type", p_type);
+		model.addAttribute("mainProjects", prjList);
 		model.addAttribute("hashtag", mdao.projectHashtags());
-		model.addAttribute("category",mdao.catelist());
-		model.addAttribute("selcat", cat);
 		return "main.selectcategory";
 	}
 	
@@ -147,7 +126,6 @@ public class MainModel {
 		
 		//model.addAttribute("mainProjects", mdao.mainProjects());
 		model.addAttribute("hashtag", mdao.projectHashtags());
-		model.addAttribute("category",mdao.catelist());
 		model.addAttribute("likepage",mdao.likelist(mev.getM_id()));
 		return "main.selectlikepage";
 	}

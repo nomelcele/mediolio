@@ -29,11 +29,8 @@
             <div class="content_userInfo">
             	<c:if test="${fn:length(memberInfo.m_interestingText1) ne 0}">
                 	${memberInfo.m_interestingText1 }
-                    	<c:if test="${fn:length(memberInfo.m_interestingText2) ne 0}">
-                        	, ${memberInfo.m_interestingText2 }
-	                    	<c:if test="${fn:length(memberInfo.m_interestingText3) ne 0}">
-	                        	, ${memberInfo.m_interestingText3 }
-	                    	</c:if>
+                    <c:if test="${fn:length(memberInfo.m_interestingText2) ne 0}">
+                        , ${memberInfo.m_interestingText2 }
                 	</c:if>
             	</c:if>
 			</div>
@@ -48,10 +45,10 @@
                     <li>
                     	<c:choose>
                         	<c:when test="${a.p_coverImg eq ''}">
-                        		<a href="#detail?p_id=${a.project_id }" onclick="contentModalOpen(this, 'myProj')"><img src="resources/images/default.png" width="70" height="70"/></a>         	
+                        		<a href="projectView?m_id=${memberInfo.m_id}&p_id=${a.project_id }"><img src="resources/images/default.png" width="70" height="70"/></a>         	
                         	</c:when>
 	                        <c:otherwise>
-								<a href="#detail?p_id=${a.project_id }" onclick="contentModalOpen(this, 'myProj')"><img src="resources/images/projectCover/${a.p_coverImg }" width="70" height="70"/></a>
+								<a href="projectView?m_id=${memberInfo.m_id}&p_id=${a.project_id }"><img src="resources/images/projectCover/${a.p_coverImg }" width="70" height="70"/></a>
 							</c:otherwise>
                         </c:choose>
                         <p class="userProject_category"><span>${a.cate_name }</span></p>
@@ -80,10 +77,10 @@
 						<li>
 							<c:choose>
 	                        	<c:when test="${a.p_coverImg eq ''}">
-	                        		<a href="#detail?p_id=${a.project_id }?writer=${a.m_id}" onclick="contentModalOpen(this, 'likeProj')"><img src="resources/images/default.png" width="70" height="70"/></a>         	
+	                        		<a href="projectView?m_id=${a.m_id}&p_id=${a.project_id }"><img src="resources/images/default.png" width="70" height="70"/></a>         	
 	                        	</c:when>
 		                        <c:otherwise>
-									<a href="#detail?p_id=${a.project_id }?writer=${a.m_id}" onclick="contentModalOpen(this, 'likeProj')"><img src="resources/images/projectCover/${a.p_coverImg }" width="70" height="70"/></a>
+									<a href="projectView?m_id=${a.m_id}&p_id=${a.project_id }"><img src="resources/images/projectCover/${a.p_coverImg }" width="70" height="70"/></a>
 								</c:otherwise>
 	                        </c:choose>
 	                        <p class="userProject_category"><span>${a.cate_name }</span></p>

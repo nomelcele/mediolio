@@ -7,11 +7,19 @@
     <select id="select_m_nickname" resultType="string">
 		SELECT m_name FROM MEMBER WHERE m_id=#{m_id}
 	</select>
-	<select id="mainProjects" resultType="pvo">
-		select p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID authorID, m.m_name authorName,
-		(select count(*) from member_action where p_id=p.p_id) p_likenum, p.p_viewnum 
-		from project p, member m where p.m_id=m.m_id order by p.p_date desc
+
+	<select id="getProjectLists" resultType="pvo">
+		SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, p.p_summary, m.m_studentID authorID, m.m_name authorName,
+			(select count(*) from member_action where act_type='like' AND act_what=p.p_id) p_likenum, p.p_viewnum 
+			FROM project p, member m where p.m_id=m.m_id AND p.p_type=1 ORDER BY p.p_date DESC
 	</select>
+	
+	<select id="getCertainCategoryList" resultType="pvo" parameterType="string">
+		SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, p.p_summary, m.m_studentID authorID, m.m_name authorName,
+			(select count(*) from member_action where act_type='like' AND act_what=p.p_id) p_likenum, p.p_viewnum 
+			FROM project p, member m where p.m_id=m.m_id AND p.p_type=0 AND p.cate_id=#{category } ORDER BY p.p_date DESC
+	</select>
+	
 	<select id="projectHashtags" resultType="hvo">
 		SELECT*FROM HASHTAG
 	</select>
@@ -21,8 +29,8 @@
 	</select>
 	
 	<select id="selectlike" parameterType ='int' resultType="pvo">
-		select p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID authorID, m.m_name authorName,
-		(select count(*) from member_action where p_id=p.p_id) p_likenum, p.p_viewnum 
+		select p.p_id, p.m_id, p.p_coverImg, p.p_title, p.p_summary, m.m_studentID authorID, m.m_name authorName,
+		(select count(*) from member_action where act_type='like' AND act_what=p.p_id) p_likenum, p.p_viewnum 
 		from project p, member m, member_action ma where p.m_id=m.m_id and p.p_id=ma.act_what and ma.act_type='like' and ma.act_from=#{m_id}
 		order by p.p_date desc
 	</select>
