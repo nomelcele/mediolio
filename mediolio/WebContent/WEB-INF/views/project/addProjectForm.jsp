@@ -26,6 +26,12 @@
  		<input type="hidden" id="hashtags" name="hashtags">
  		<input type="hidden" id="p_coverImgName" name="p_coverImg">
  		<input type="hidden" id="sc_id" name="sc_id">
+ 		<!-- 작업 이름 --><input type="hidden" id="p_prjname" name="p_prjname">
+ 		<!-- 작업 기간 --><input type="hidden" id="p_workfrom" name="p_workfrom">
+ 		<input type="hidden" id="p_workto" name="p_workto">
+ 		<!-- 관련 과목 <input type="hidden" id="cl_id" name="cl_id">-->
+ 		<!-- 팀원 소개 -->
+ 		<!-- 작업 개요 --><input type="hidden" id="p_summary" name="p_summary">
 </form>
 <div id="contentsWrap">
 	<div class="writeWrap clear">
@@ -159,7 +165,7 @@
             <div class="writeLineWrap">
                 <div class="writeLine_1">작업 이름</div>
                 <div class="writeLine_2">
-                    <input class="writeLine_text" type="text" name="p_prjname" placeholder="예) 미디어학과 포트폴리오 공유 사이트-미디올리오">
+                    <input class="writeLine_text" type="text" id="projectName" placeholder="예) 미디어학과 포트폴리오 공유 사이트-미디올리오">
                 </div>
             </div><!--//writeLineWrap-->
             <div class="writeLineWrap">
@@ -167,11 +173,11 @@
                 <div class="writeLine_2">
                     <span class="dateSpan">시작 : </span>
                     <div class="twoCell">
-                        <input class="writeLine_text" type="date" name="p_workfrom">
+                        <input class="writeLine_text" type="date" id="projectFrom">
                     </div>
                     <span class="dateSpan">종료 : </span>
                     <div class="twoCell">
-                        <input class="writeLine_text" type="date" name="p_workto">
+                        <input class="writeLine_text" type="date" id="projectTo">
                     </div>
                 </div>
             </div><!--//writeLineWrap-->
@@ -205,7 +211,7 @@
             <div class="writeLineWrap writeLongLineWrap clear">
                 <div class="writeLine_1 writeLine_1Long">작업 개요</div>
                 <div class="writeLine_2 writeLine_2Long">
-                    <textarea class="writeLine_textarea" type="text" placeholder="작업 내용을 입력해주세요."></textarea>
+                    <textarea class="writeLine_textarea" type="text" id="projectSummary" placeholder="작업 내용을 입력해주세요."></textarea>
                 </div>
             </div><!--//writeLineWrap-->
              </form>

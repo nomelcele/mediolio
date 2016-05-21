@@ -11,8 +11,8 @@
   		insert into content (p_id,c_type,c_value,c_order) values(#{p_id},#{c_type},#{c_value},#{c_order})
   	</insert>
   	<insert id="addProject" parameterType="pvo" useGeneratedKeys="true" keyProperty="p_id" keyColumn="p_id">
-  		insert into project (m_id,p_title,p_type,cate_id,p_date,p_viewnum,p_coverImg) 
-  		values(#{m_id},#{p_title},#{p_type},#{cate_id},sysdate(),0,#{p_coverImg})
+  		insert into project (m_id,p_title,p_type,p_prjname,p_summary,p_workfrom,p_workto,cl_id,cate_id,p_date,p_viewnum,p_coverImg) 
+  		values(#{m_id},#{p_title},#{p_type},#{p_prjname},#{p_summary},#{p_workfrom},#{p_workto},#{cl_id},#{cate_id},sysdate(),0,#{p_coverImg})
   		<selectKey keyProperty="p_id" resultType="Integer" order="AFTER">
   			select last_insert_id()
   		</selectKey>

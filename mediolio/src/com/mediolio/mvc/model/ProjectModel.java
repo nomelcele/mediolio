@@ -42,6 +42,7 @@ import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectVO;
+import com.mediolio.vo.TeamMemberVO;
 
 @Controller
 public class ProjectModel {
@@ -163,6 +164,12 @@ public class ProjectModel {
 //					}
 //				}
 //			}
+		
+		// 4. 프로젝트 팀원 정보 db에 업데이트
+//		for(TeamMemberVO tmvo:tmList){
+//			pdao.addTeamMember(tmvo);
+//		}
+		// List<TeamMemberVO> tmList
 				
 		return "main.index";
 	}

@@ -5,10 +5,34 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProjectVO {
-	private int p_id, m_id, cate_id, p_viewnum, p_likenum, p_type;
-	private String p_title, p_hash, p_date, p_coverImg, hashtags, authorID, authorName, p_prjname, p_summary;
+	private int p_id, m_id, cate_id, p_viewnum, p_likenum, p_type, cl_id, ht_id;
+	private String p_title, p_hash, p_date, p_coverImg, hashtags, authorID, authorName, p_prjname, p_summary, p_workfrom, p_workto;
 	private List<MultipartFile> contents;
 	
+	public int getCl_id() {
+		return cl_id;
+	}
+	public void setCl_id(int cl_id) {
+		this.cl_id = cl_id;
+	}
+	public int getHt_id() {
+		return ht_id;
+	}
+	public void setHt_id(int ht_id) {
+		this.ht_id = ht_id;
+	}
+	public String getP_workfrom() {
+		return p_workfrom;
+	}
+	public void setP_workfrom(String p_workfrom) {
+		this.p_workfrom = p_workfrom;
+	}
+	public String getP_workto() {
+		return p_workto;
+	}
+	public void setP_workto(String p_workto) {
+		this.p_workto = p_workto;
+	}
 	public int getP_type() {
 		return p_type;
 	}

@@ -107,15 +107,20 @@ $('document').ready(function(){
 	
 			// 9. 프로젝트 정보
 			// 9-1. 작업 이름
-			
+			$("#p_prjname").val($("#projectName").val());
+
 			// 9-2. 작업 기간
-			
+			$("#p_workfrom").val($("#projectFrom").val());
+			$("#p_workto").val($("#projectTo").val());
+
 			// 9-3. 관련 과목
-			
+			// $("#cl_id").val($("#p_coverImg").val());
+
 			// 9-4. 팀원 소개
 			
 			// 9-5. 작업 개요
-			
+			$("#p_summary").val($("#projectSummary").val());
+
 			
 			var other_data = $("#addProjectForm").serializeArray();
 		    $.each(other_data,function(key,input){
