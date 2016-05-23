@@ -13,7 +13,7 @@
     	<div class="card_hd" id="card_note_hd">
             <a class="btn_receiveView" href="#">받은 쪽지함</a>
             <a class="btn_sendView" href="#">보낸 쪽지함</a>
-            <input type="button" class="btnStyle3" id="btn_writeNote" value="쪽지보내기" onclick="noteModalOpen('somebody')"/>
+            <input type="button" class="btnStyle3" id="btn_writeNote" value="쪽지보내기" onclick="noteModalOpen('','')"/>
         </div>
         
         <!-- 받은쪽지 내용물-->
@@ -22,10 +22,9 @@
     		<div class="noteWrap receiveNoteWrap">
                 <div class="noteWrap_hd">
                 	<input type="hidden" class="this_msg_id" value="${aMsg.msg_id }">
-                	<input type="hidden" class="this_msg_m_id" value="${aMsg.msg_from }">
                     <p class="noteId">${aMsg.msg_from_studentID } ${aMsg.msg_from_nickname }</p>
                     <p class="noteDate">${aMsg.msg_date }</p>
-                    <a href="#" class="btn_note replyNote">답장</a>
+                    <a href="#" class="btn_note replyNote" onclick="noteModalOpen('${aMsg.msg_from }', '${aMsg.msg_from_studentID } ${aMsg.msg_from_nickname }')">답장</a>
                     <a href="#" class="btn_note btn_deleteNote receiveNote">삭제</a>
                     <hr>
                 </div>

@@ -108,15 +108,26 @@ function submitReply(){
 }
 
 function deleteReply($div){
-	$.ajax({
-		url: "deleteReply",
-		type: "POST",
-		data: {r_id:$div.find('input').val()},
-		dataType : "json",
-		success: function(result){
-			$div.remove();
-		}
-	});
+    $.jAlert({
+        'title': '!!',
+        'content': '정말 삭제하시겠습니까?',
+        'closeOnClick' : true,
+        'btns': [{ 'text': 'YES',  'theme' : 'green',
+		        	'onClick' : function(e){
+		        		e.preventDefault();
+		        		$.ajax({
+		        			url: "deleteReply",
+		        			type: "POST",
+		        			data: {r_id:$div.find('input').val()},
+		        			dataType : "json",
+		        			success: function(result){
+		        				$div.remove();
+		        			}
+		        		});
+		        	}
+        		  }, 
+                 { 'text': 'NO', 'theme' : 'red'}]
+      });
 }
 
 function returnReplyList(m_id, m_studentID, m_name, r_text, r_date, r_id){

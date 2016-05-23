@@ -253,24 +253,6 @@ function noteModalOpen(send_to, send_to_name){
 		send_to_name='';
 	}
 	
-/*	var send_to='', send_to_name='';
-	if(step=='somebody'){
-		//메세지 페이지에서 열었을 경우
-		send_to=0;
-		send_to_name='';
-	}else if(step=='prjView'){
-		//페이지 상세보기 페이지에서 열었을 경우
-		send_to = $('#userPopId').val();
-		send_to_name = $('#userPopName').val();
-	}else if(step=='certain'){
-		//특정인에게 보낸 경우
-		// - 받은쪽지 목록에서 답장하는 경우
-		// - usermypage에서 해당 페이지 주인에게 쪽지보내는 경우
-		console.log(oponent_id + ", " + oponent_name);
-		send_to = oponent_id;
-		send_to_name=oponent_name;
-	}*/
-	
 	$.ajax({
 		url : "msgModalOpen",
 		type : "POST",

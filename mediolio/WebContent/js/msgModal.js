@@ -1,16 +1,35 @@
 
 function msgSend(){
-	$.ajax({
-		url: "msgSend",
-		type: "POST",
-		data: $('#msgForm').serialize(),
-		dataType : "json",
-		success : function(data) {
-			alert("쪽지를 보냈습니다.");
-			
-			$('.modal_bg, #writeNoteWrap').hide();
-		}
-	});
+	if(!$("#writeNoteWrap #input_noteTo").prop('disabled')){
+		//보낼 대상을 fix하지 않은 경우
+		$.jAlert({
+		    'title': '!!',
+		    'content': '보낼 대상을 정확히 선택하세요',
+		    'theme': 'black',
+		    'size': 'xsm'
+		  });
+	}else if($('#msgForm textarea').val().length<6){
+		$.jAlert({ //this is the normal usage
+		    'title': '!!',
+		    'content': '다섯 자 이상 입력하세요',
+		    'theme': 'black',
+		    'size': 'xsm'
+		  });
+
+	}else{
+		
+		$.ajax({
+			url: "msgSend",
+			type: "POST",
+			data: $('#msgForm').serialize(),
+			dataType : "json",
+			success : function(data) {
+				alert("쪽지를 보냈습니다.");
+				
+				$('.modal_bg, #writeNoteWrap').hide();
+			}
+		});
+	}
 }
 
 //받는 사람 자동완성
@@ -54,6 +73,9 @@ function set_to_mid(li, to_mid){
 	$('#input_noteTo').val($(li).text());
 	$('.msgAutoCompleteBox').css("display","none");
 	$('#msgAutoCompleteArea').empty();
+	
+	//input 수정 불가하게 막기
+	$("#writeNoteWrap #input_noteTo" ).prop('disabled', true);
 }
 
 $(function(){
