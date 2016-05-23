@@ -91,6 +91,15 @@ public class MemberActionModel {
 		return "modal.messageModal";
 	}
 	
+	//쪽지 받을 대상 자동완성 검색
+	@RequestMapping("autoCompleteWhoReceive")
+	public ModelAndView autoCompleteWhoReceive(@RequestParam("m_name") String m_name){
+		ModelAndView mav = new ModelAndView("jsonView");
+		mav.addObject("list", maDao.autoCompleteWhoReceive(m_name));
+		
+		return mav;
+	}
+	
 	//쪽지 보내기
 	@RequestMapping("msgSend")
 	public ModelAndView msgSend(MessageVO vo, HttpSession session){
