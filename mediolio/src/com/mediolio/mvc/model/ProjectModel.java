@@ -189,6 +189,8 @@ public class ProjectModel {
 	
 	@RequestMapping(value="showViewer")
 	public void showViewer(ProjectVO pvo, HttpSession session, HttpServletResponse response) throws IOException, URISyntaxException{
+		System.out.println("showViewer-------------");
+		
 		// doc, ppt, pdf 업로드 했을 때 뷰어 보여주기
 		List<MultipartFile> contents = pvo.getContents();
 		MultipartFile projectFile = contents.get(0);
@@ -210,88 +212,88 @@ public class ProjectModel {
 		System.out.println("New File Name: "+newFileName); // 새로운 파일 이름(중복 방지)
 		
 		// 경로 설정
-//		String realPath = session.getServletContext().getRealPath("/");
-		String realPath = "http://52.79.195.100:8080/mediolio/upload/";
+		String realPath = session.getServletContext().getRealPath("/");
+//		String realPath = "http://52.79.195.100:8080/mediolio/upload/";
 		StringBuffer path = new StringBuffer();
-		path.append(realPath).append(newFileName);
+		path.append(realPath).append("upload/").append(newFileName);
 //		path.append(realPath);
 		System.out.println("Upload Path: "+path.toString());
 		
-		HttpURLConnection uc = null;
-		BufferedReader br = null;
-		DataOutputStream dos = null;
-		DataInputStream dis = null;
-		
-		InputStream is = null;
-		OutputStream os = null;
-		boolean ret = false;
-		String strMsg = "";
-		
-		String lineEnd = "\r\n";
-		String twoHyphens = "--";
-		String boundary = "*****";
-		
-		int bytesRead, bytesAvailable, bufferSize;
-		byte[] buffer;
-		int maxBufferSize = 1*1024*1024; // 사이즈..?
-		String responseFromServer = "";
-		String urlString = "http://52.79.195.100:8080/mediolio/upload/";
-		
-		try{
-		
-		File newFile = new File(newFileName);
-		projectFile.transferTo(newFile);
-		System.out.println("새 파일: "+newFile);
-		FileInputStream fis = new FileInputStream(newFile);
-		URL url = new URL(urlString);
-		uc = (HttpURLConnection)url.openConnection();
-		uc.setDoInput(true);
-		uc.setDoOutput(true);
-		uc.setRequestMethod("POST");
-		uc.setUseCaches(false);
-		
-		uc.setRequestProperty("Connection", "Keep-Alive");
-		uc.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
-		
-		dos = new DataOutputStream(uc.getOutputStream());
-		
-		dos.writeBytes(twoHyphens+boundary+lineEnd);
-		dos.writeBytes("Content-Disposition: form-data; name=\"doc\";"+" filename=\""+newFileName+"\""+lineEnd);
-		dos.writeBytes(lineEnd);
-
-		bytesAvailable = fis.available();
-		bufferSize = Math.min(bytesAvailable, maxBufferSize);
-		buffer = new byte[bufferSize];
-		
-		bytesRead = fis.read(buffer,0,bufferSize);
-		
-		while(bytesRead > 0){
-			dos.write(buffer,0,bufferSize);
-			bytesAvailable = fis.available();
-			bufferSize = Math.min(bytesAvailable, maxBufferSize);
-			bytesRead = fis.read(buffer,0,bufferSize);
-		}
-		
-		dos.writeBytes(lineEnd);
-		dos.writeBytes(twoHyphens+boundary+twoHyphens+lineEnd);
-		
-		fis.close();
-		dos.flush();
-		dos.close();
-	} catch(Exception ex){
-		System.out.println(ex);
-	}
-		
-		
-//		File file = new File(path.toString());
-//		System.out.println("파일......."+file);
-//		System.out.println("파일 업로드 되냐 "+file.mkdirs()); // 업로드 안 됨
+//		HttpURLConnection uc = null;
+//		BufferedReader br = null;
+//		DataOutputStream dos = null;
+//		DataInputStream dis = null;
 //		
-//		try {
-//			projectFile.transferTo(file);
-//		} catch (Exception e1) {
-//			e1.printStackTrace();
-//		} 
+//		InputStream is = null;
+//		OutputStream os = null;
+//		boolean ret = false;
+//		String strMsg = "";
+//		
+//		String lineEnd = "\r\n";
+//		String twoHyphens = "--";
+//		String boundary = "*****";
+//		
+//		int bytesRead, bytesAvailable, bufferSize;
+//		byte[] buffer;
+//		int maxBufferSize = 1*1024*1024; // 사이즈..?
+//		String responseFromServer = "";
+//		String urlString = "http://52.79.195.100:8080/mediolio/upload/";
+//		
+//		try{
+//		
+//		File newFile = new File(newFileName);
+//		projectFile.transferTo(newFile);
+//		System.out.println("새 파일: "+newFile);
+//		FileInputStream fis = new FileInputStream(newFile);
+//		URL url = new URL(urlString);
+//		uc = (HttpURLConnection)url.openConnection();
+//		uc.setDoInput(true);
+//		uc.setDoOutput(true);
+//		uc.setRequestMethod("POST");
+//		uc.setUseCaches(false);
+//		
+//		uc.setRequestProperty("Connection", "Keep-Alive");
+//		uc.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
+//		
+//		dos = new DataOutputStream(uc.getOutputStream());
+//		
+//		dos.writeBytes(twoHyphens+boundary+lineEnd);
+//		dos.writeBytes("Content-Disposition: form-data; name=\"doc\";"+" filename=\""+newFileName+"\""+lineEnd);
+//		dos.writeBytes(lineEnd);
+//
+//		bytesAvailable = fis.available();
+//		bufferSize = Math.min(bytesAvailable, maxBufferSize);
+//		buffer = new byte[bufferSize];
+//		
+//		bytesRead = fis.read(buffer,0,bufferSize);
+//		
+//		while(bytesRead > 0){
+//			dos.write(buffer,0,bufferSize);
+//			bytesAvailable = fis.available();
+//			bufferSize = Math.min(bytesAvailable, maxBufferSize);
+//			bytesRead = fis.read(buffer,0,bufferSize);
+//		}
+//		
+//		dos.writeBytes(lineEnd);
+//		dos.writeBytes(twoHyphens+boundary+twoHyphens+lineEnd);
+//		
+//		fis.close();
+//		dos.flush();
+//		dos.close();
+//	} catch(Exception ex){
+//		System.out.println(ex);
+//	}
+		
+		
+		File file = new File(path.toString());
+		System.out.println("파일......."+file);
+		System.out.println("파일 업로드 되냐 "+file.mkdirs()); // 업로드 안 됨
+		
+		try {
+			projectFile.transferTo(file);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} 
 		
 //		Map<String, Object> params = new HashMap<String, Object>();
 //		params.put("name", newFileName);
