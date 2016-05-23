@@ -13,13 +13,15 @@
 <link rel="stylesheet" href="resources/css/jquery.mCustomScrollbar.css" />
 <link rel="stylesheet" href="resources/css/nice-select.css"/>
 <link rel="stylesheet" href="resources/css/jquery-labelauty.css"/>
+<link rel="stylesheet" href="resources/css/jAlert-v4.css"/>
 
 <script src="js/jQuery/jquery-1.11.3.min.js"></script>
 <script src="js/jQuery/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="js/jQuery/jquery.nice-select.js"></script>
 <script src="js/jQuery/jquery-labelauty.js"></script>
 <script src="js/jQuery/jquery.mousewheel.min.js"></script>
-<script src="js/jQuery/jquery-confirm.js"></script>
+<script src="js/jQuery/jAlert-functions.min.js"></script>
+<script src="js/jQuery/jAlert-v4.min.js"></script>
 
 <script src="js/ui.js"></script>
 <script src="js/modal.js"></script>

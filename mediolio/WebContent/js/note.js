@@ -11,7 +11,7 @@ function deleteMsgSent($div){
 }
 
 function deleteMsgReceived($div){
-	$.ajax({
+    $.ajax({
 		url: "deleteMsgReceived",
 		type: "POST",
 		data: {msg_id:$div.find('input.this_msg_id').val()},
@@ -24,16 +24,36 @@ function deleteMsgReceived($div){
 
 $(function(){	
 	$(document).on('click', '.btn_deleteNote', function(){
+		$msg = $(this).closest('.noteWrap');
+		
 		if($(this).hasClass('receiveNote')){
-			deleteMsgReceived($(this).closest('.noteWrap'));
+		    $.jAlert({
+		        'title': '!!',
+		        'content': '정말 삭제하시겠습니까?',
+		        'closeOnClick' : true,
+		        'btns': [{ 'text': 'YES',  'theme' : 'green',
+				        	'onClick' : function(e){
+				        		e.preventDefault();
+				        		deleteMsgReceived($msg);
+				        	}
+		        		  }, 
+		                 { 'text': 'NO', 'theme' : 'red'}]
+		      });
 		}else{
-			deleteMsgSent($(this).closest('.noteWrap'));
+		    $.jAlert({
+		        'title': '!!',
+		        'content': '정말 삭제하시겠습니까?',
+		        'closeOnClick' : true,
+		        'btns': [{ 'text': 'YES', 'theme' : 'green',
+		        				'onClick' : function(e){
+		        					e.preventDefault();
+		        					deleteMsgSent($msg);
+		        				}
+		        		  },
+		                 { 'text': 'NO', 'theme' : 'red'}]
+		      });
 		}
 	});
-  
-	  $(document).on('click', '.replyNote', function(){
-		  noteModalOpen('certain', $(this).parent().find('.this_msg_m_id').val(), $(this).parent().find('.noteId').text());
-	  });
 	  
     $('#card_note_hd a').on('click',function(){
         $('#card_note_hd a').css({
@@ -45,6 +65,7 @@ $(function(){
             color: '#666'
         });
     });
+
     
     //받은쪽지함 보낸쪽지함 탭
     $('.btn_receiveView').on('click',function(){
@@ -93,7 +114,6 @@ $(function(){
     			msg+= '<div class="noteWrap receiveNoteWrap">'
 			    			+'<div class="noteWrap_hd">'
 			    				+'<input type="hidden" class="this_msg_id" value="'+entry.msg_id+'">'
-			    				+'<input type="hidden" class="this_msg_m_id" value="'+entry.msg_from+'">'
 								+'<p class="noteId">'+entry.msg_from_studentID+' '+entry.msg_from_nickname+'</p>'
 								+'<p class="noteDate">'+entry.msg_date+'</p>'
 								+'<a href="#" class="btn_note replyNote">답장</a>'
@@ -104,7 +124,6 @@ $(function(){
 	    		msg+= '<div class="noteWrap sendNoteWrap">'
 							+'<div class="noteWrap_hd">'
 								+'<input type="hidden" class="this_msg_id" value="'+entry.msg_id+'">'
-								+'<input type="hidden" class="this_msg_m_id" value="'+entry.msg_from+'">'
 								+'<p class="noteId">'+entry.msg_to_studentID+' '+entry.msg_to_nickname+'</p>'
 								+'<p class="noteDate">'+entry.msg_date+'</p>'
 								+'<a href="#" class="btn_note btn_deleteNote sendNote">삭제</a>';
