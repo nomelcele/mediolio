@@ -95,7 +95,7 @@
 		
 		<div class="projectViewBox clear" id="projectViewBox_right">
 		    <div class="writerWrap">
-		        <h1><a onclick="userPop(event)" class="btn_userPop" href="#">${writer.m_studentID } ${writer.m_name }</a></h1>
+		        <h1><a onclick="userPop(event, this, '${writer.m_id}')" class="btn_userPop" href="#">${writer.m_studentID } ${writer.m_name }</a></h1>
 		        <h2>${writer.m_introduce }</h2>
 		        <div class="lineWrap clear">
                     <span>관심 분야</span>
@@ -127,28 +127,20 @@
                 <hr>
                 
                 <h1>팀원 정보</h1>
+               	<c:forEach var="team" items="${team }">
                 <div class="projectTeamWrap clear">
-                    <h2><a onclick="userPop(event)" class="btn_userPop" href="#">12이유라</a></h2>
-                    <h3>디자인</h3>
-                    <h4>UI기획 및 디자인, 웹표준 마크업, CSSddddddd</h4>
+                    <h2><a onclick="userPop(event, this, '${team.m_id}')" class="btn_userPop" href="#">${team.m_studentID } ${team.m_name }</a></h2>
+                    <h3>${team.tm_role }</h3>
+                    <h4>${team.tm_detail }</h4>
                 </div>
-                <div class="projectTeamWrap clear">
-                    <h2><a onclick="userPop(event)" class="btn_userPop" href="#">12이유라</a></h2>
-                    <h3>디자인</h3>
-                    <h4>UI기획 및 디자인, 퍼블리싱</h4>
-                </div>
-                <div class="projectTeamWrap clear">
-                    <h2><a onclick="userPop(event)" class="btn_userPop" href="#">12이유라</a></h2>
-                    <h3>디자인</h3>
-                    <h4>UI기획 및 디자인, 퍼블리싱</h4>
-                </div>
+		        </c:forEach> 
 		    </div>
 		</div><!--//projectViewBox_right-->
 		
 	</div><!--//modal_content-->
 	<ul class="userPopWrap">
 	    <li><a href="#">유저페이지</a></li>
-	    <li><a href="#">쪽지 보내기</a></li>
+	    <li><a href="#" class="msg">쪽지 보내기</a></li>
 	    <li><a href="#">유저 히스토리</a></li>
 	</ul><!-- userPopWrap -->
 	

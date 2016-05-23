@@ -247,16 +247,21 @@ function contentModalOpen(a, type){
 
 
 //쪽지보내기 모달
-function noteModalOpen(step, oponent_id, oponent_name){
-	var send_to, send_to_name;
+function noteModalOpen(send_to, send_to_name){
+	if(send_to==''){
+		send_to = 0;
+		send_to_name='';
+	}
+	
+/*	var send_to='', send_to_name='';
 	if(step=='somebody'){
 		//메세지 페이지에서 열었을 경우
 		send_to=0;
 		send_to_name='';
-	}else if(step=='modal'){
+	}else if(step=='prjView'){
 		//페이지 상세보기 페이지에서 열었을 경우
-		send_to = $('#other_m_id').val();
-		send_to_name = $('#other_nickname').val();
+		send_to = $('#userPopId').val();
+		send_to_name = $('#userPopName').val();
 	}else if(step=='certain'){
 		//특정인에게 보낸 경우
 		// - 받은쪽지 목록에서 답장하는 경우
@@ -264,7 +269,7 @@ function noteModalOpen(step, oponent_id, oponent_name){
 		console.log(oponent_id + ", " + oponent_name);
 		send_to = oponent_id;
 		send_to_name=oponent_name;
-	}
+	}*/
 	
 	$.ajax({
 		url : "msgModalOpen",
@@ -280,22 +285,17 @@ function noteModalOpen(step, oponent_id, oponent_name){
 		    
 		    
 			$('#btn_sendNote').on('click', function(){
-				msgSend(step);
+				msgSend();
 			});
 			
 		    $('.modal_bg2').on('click',function(){
 		    	$('.modal_bg, .modal').hide();
-		        if(step=='modal'){
-		        	//프로젝트 상세보기 모달에서 열었을 경우
-		        	$('.modal_bg').show();
-		        }
 		    });
 		}
 	});
-	
 }
 
-function msgSend(step){
+function msgSend(){
 	$.ajax({
 		url: "msgSend",
 		type: "POST",
@@ -304,11 +304,7 @@ function msgSend(step){
 		success : function(data) {
 			alert("쪽지를 보냈습니다.");
 			
-			$('.modal_bg2, #writeNoteWrap').hide();
-			if(step=='modal'){
-		    	//프로젝트 상세보기 모달에서 열었을 경우
-		    	$('.modal_bg').show();
-			}
+			$('.modal_bg, #writeNoteWrap').hide();
 		}
 	});
 }

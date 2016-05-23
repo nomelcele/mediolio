@@ -13,6 +13,7 @@ import com.mediolio.vo.Member_actionVO;
 import com.mediolio.vo.ProjectDetailVO;
 import com.mediolio.vo.ProjectWriterVO;
 import com.mediolio.vo.ReplyVO;
+import com.mediolio.vo.TeamMemberVO;
 
 @Repository
 public class ProjectDetailDao {
@@ -64,6 +65,10 @@ public class ProjectDetailDao {
 	
 	public void increaseHits(int p_id){
 		st.update("pd.increaseHits",p_id);
+	}
+
+	public List<TeamMemberVO> getTeamMember(int p_id) {
+		return st.selectList("pd.getTeamMember", p_id);
 	}
 
 }

@@ -1,4 +1,9 @@
 /*
+ * 5.23 테이블 수정
+ */
+ALTER TABLE teammember ADD tm_detail VARCHAR(200);
+
+/*
  * 5.7 보유기술 추가
  */
 INSERT INTO `mediolio`.`skills` (`sk_id`, `sk_name`) VALUES ('32', 'R');
@@ -13,11 +18,6 @@ alter table history add m_id int(10); -- 히스토리 작성자
 alter table history add ht_public int(2); -- 히스토리 공개 여부
 alter table history drop ht_color;
 
-/* 아래 ALTER문은 3월 31일 이전에 수정된 DB 생성한 사람만 실행해주세요*/
-ALTER TABLE member MODIFY m_mail VARCHAR(50);
-ALTER TABLE history MODIFY ht_title VARCHAR(100);
-ALTER TABLE project MODIFY p_prjname VARCHAR(50);
-
 DROP TABLE member;
 DROP TABLE member_action;
 DROP TABLE category;
@@ -27,7 +27,6 @@ DROP TABLE content;
 DROP TABLE reply;
 DROP TABLE hashtag;
 DROP TABLE message;
-
 
 CREATE TABLE MEMBER(
   m_id int(10) PRIMARY KEY auto_increment,
@@ -81,7 +80,8 @@ CREATE TABLE TEAMMEMBER(
 	tm_id int(10) PRIMARY KEY auto_increment,
 	p_id int(10),
 	m_id int(10),
-	tm_role VARCHAR(10)
+	tm_role VARCHAR(10),
+	tm_detail VARCHAR(200)
 );
 
 CREATE TABLE HASHTAG(
@@ -135,9 +135,10 @@ CREATE TABLE HISTORY(
   ht_title VARCHAR(100),
   ht_introduce VARCHAR(500),
   cl_id int(3),
-  ht_color VARCHAR(10),
   ht_lastedit datetime,
-  ht_createdate datetime
+  ht_createdate datetime,
+  m_id int(10),
+  ht_public int(2)
 );
 
 CREATE TABLE BRANCH(
@@ -190,7 +191,7 @@ INSERT INTO SKILLS (sk_name) values
 ('JAVA'), ('Javascript'), ('python'), ('PHP'), ('JSP'), ('Android'), ('iOS'), ('MySQL'), ('Oracle'), ('MS-SQL'),
 ('아두이노'), ('라즈베리파이'),
 ('Premiere'), ('After Effect'), ('NUKE'), ('촬영'), ('PROTOOLS'), ('MAYA'), ('3DMAX'),
-('포토샵'), ('일러스트레이터'), ('인디자인');
+('포토샵'), ('일러스트레이터'), ('인디자인'), ('R'), ('하둡'), ('루비'), ('node.js');
 
 
 

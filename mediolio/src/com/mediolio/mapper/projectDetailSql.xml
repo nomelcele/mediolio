@@ -31,6 +31,11 @@
   		SELECT h_id, h_value FROM hashtag WHERE p_id=#{p_id}
   	</select>
   	
+  	<select id="getTeamMember" parameterType="int" resultType="tmvo">
+  		SELECT t.p_id, t.m_id, t.tm_role, t.tm_detail, m.m_studentID, m.m_name 
+  			FROM teammember t, member m WHERE t.m_id=m.m_id AND p_id=#{p_id}
+  	</select>
+  	
   	<insert id="submitReply" parameterType="rvo" useGeneratedKeys="true" keyProperty="r_id">
 		INSERT INTO reply (m_id, r_text, r_date, p_id) values (#{m_id}, #{r_text}, now(), #{p_id})
 	</insert>
