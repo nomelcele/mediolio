@@ -283,6 +283,14 @@ function noteModalOpen(send_to, send_to_name){
 			$('body').addClass('preventScroll');
 		    $('.modal_bg, #writeNoteWrap').show();
 		    
+		    if(send_to_name == ''){
+				//보내는 대상을 직접 입력하는 쪽지일 경우
+		    	$("#writeNoteWrap #input_noteTo" ).prop('disabled', false);
+		    }else{
+		    	//특정인을 지정해 쪽지보내기를 누른 경우 - 보내는 대상 수정 불가
+		    	$("#writeNoteWrap #input_noteTo" ).prop('disabled', true);
+		    }
+		    
 		    
 			$('#btn_sendNote').on('click', function(){
 				msgSend();
@@ -295,19 +303,6 @@ function noteModalOpen(send_to, send_to_name){
 	});
 }
 
-function msgSend(){
-	$.ajax({
-		url: "msgSend",
-		type: "POST",
-		data: $('#msgForm').serialize(),
-		dataType : "json",
-		success : function(data) {
-			alert("쪽지를 보냈습니다.");
-			
-			$('.modal_bg, #writeNoteWrap').hide();
-		}
-	});
-}
 
 function pwModalOpen() {
 	$('#modal_findPw, .modal_bg').hide();

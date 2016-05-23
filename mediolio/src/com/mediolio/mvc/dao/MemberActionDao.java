@@ -73,4 +73,8 @@ public class MemberActionDao {
 	public HashMap<String, Integer> friendCnt(int m_id) {
 		return st.selectOne("ma.friendCnt", m_id);
 	}
+
+	public Object autoCompleteWhoReceive(String m_name) {
+		return st.selectList("ma.autoCompleteWhoReceive", m_name);
+	}
 }

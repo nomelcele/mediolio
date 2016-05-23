@@ -17,8 +17,6 @@ function userPop(event, aTag, m_id){
 	usr_name = $(aTag).text();
 	usr_id = m_id;
 	
-	alert(usr_name +", " + usr_id );
-	
     var mouseX = event.screenX;
     var mouseY = event.screenY;
     

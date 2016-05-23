@@ -20,6 +20,10 @@
 		INSERT INTO message (msg_from, msg_to, msg_text, msg_date, msg_from_status, msg_to_status) VALUES (#{msg_from}, #{msg_to}, #{msg_text}, now(), 'sent', 'no-read')
 	</insert>
 	
+	<select id="autoCompleteWhoReceive" parameterType="string" resultType="mevo">
+		SELECT m_id, m_studentID, m_name FROM member WHERE m_name LIKE CONCAT('%',#{m_name},'%') 
+	</select>
+	
 	<select id="getMsgListReceived" parameterType="int" resultType="pmvo">
 		SELECT msg.msg_id, msg.msg_from, msg.msg_text, DATE_FORMAT(msg.msg_date, '%Y.%m.%d %H:%i:%s') AS msg_date, 
 			msg.msg_to_status, m.m_studentID AS msg_from_studentID, m.m_name AS msg_from_nickname

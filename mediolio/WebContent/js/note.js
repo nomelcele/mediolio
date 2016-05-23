@@ -22,18 +22,19 @@ function deleteMsgReceived($div){
 	});
 }
 
-$(function(){
-  $(document).on('click', '.btn_deleteNote', function(){
-	  if($(this).hasClass('receiveNote')){
-		  deleteMsgReceived($(this).closest('.noteWrap'));
-	  }else{
-		  deleteMsgSent($(this).closest('.noteWrap'));
-	  }
-  });
-  $(document).on('click', '.replyNote', function(){
-	  noteModalOpen('certain', $(this).parent().find('.this_msg_m_id').val(), $(this).parent().find('.noteId').text());
-  });
+$(function(){	
+	$(document).on('click', '.btn_deleteNote', function(){
+		if($(this).hasClass('receiveNote')){
+			deleteMsgReceived($(this).closest('.noteWrap'));
+		}else{
+			deleteMsgSent($(this).closest('.noteWrap'));
+		}
+	});
   
+	  $(document).on('click', '.replyNote', function(){
+		  noteModalOpen('certain', $(this).parent().find('.this_msg_m_id').val(), $(this).parent().find('.noteId').text());
+	  });
+	  
     $('#card_note_hd a').on('click',function(){
         $('#card_note_hd a').css({
             background: '#29AE5D',
@@ -148,5 +149,5 @@ $(function(){
         }
         return false;
     });
-
+    
 });
