@@ -43,6 +43,8 @@ public class ProjectDetailModel {
 		}else{
 			map.put("m_id", 0);
 		}
+		
+		int pid = Integer.parseInt(p_id);
 		//프로젝트 관련 정보 - 프로젝트 타이틀, 카테고리, 작업정보,  좋아요수 등
 		model.addAttribute("detail", pddao.projectDetailRelatedProject(p_id));
 				
@@ -50,10 +52,13 @@ public class ProjectDetailModel {
 		model.addAttribute("writer", pddao.projectDetailRelatedMember(map));
 		
 		//댓글목록
-		model.addAttribute("reply", pddao.getReplyList(Integer.parseInt(p_id)));
+		model.addAttribute("reply", pddao.getReplyList(pid));
 		
 		//해쉬태그
-		model.addAttribute("tag", pddao.projectHash(Integer.parseInt(p_id)));
+		model.addAttribute("tag", pddao.projectHash(pid));
+		
+		//팀원 정보
+		model.addAttribute("team", pddao.getTeamMember(pid));
 		return "project/projectView";
 	}
 	

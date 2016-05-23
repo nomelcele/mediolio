@@ -1,12 +1,24 @@
+var usr_name;
+var usr_id;
+
 $('document').ready(function(){
     
-    $('.btn_userPop').on('click', function(){
+    $('.btn_userPop').on('click', function(){	
         return false; 
     })
+    
+    $('.userPopWrap .msg').on('click', function(){
+    	noteModalOpen(usr_id, usr_name);
+    });
 })
 
 
-function userPop(event){
+function userPop(event, aTag, m_id){
+	usr_name = $(aTag).text();
+	usr_id = m_id;
+	
+	alert(usr_name +", " + usr_id );
+	
     var mouseX = event.screenX;
     var mouseY = event.screenY;
     
@@ -26,4 +38,5 @@ function userPop(event){
         top:mouseY-65
         
     })
+    
 }
