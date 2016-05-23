@@ -321,14 +321,17 @@ $('document').ready(function(){
 				var curOrder = order;
 				order = parseInt(order)+1;
 				$(".viewerBg .project_loading:last").css("display","block");
-    			$("#viewerForm").ajaxForm({
-    				dataType: "text",
-    				url: "showViewer",
-    				success: function(jdata){
+//    			$("#viewerForm").ajaxForm({
+//    				dataType: "text",
+//    				url: "showViewer",
+//    				success: function(jdata){
     					
 //    					$("#write_bd .contentBox:last").find("iframe")v.attr("src",jdata);
-    					$("[data-sort="+curOrder+"]").find("iframe").attr("src",jdata);
     					
+    		    		var file = $(this).prop("files")[0];
+    		    		blobURL = window.URL.createObjectURL(file);
+    		    		$("[data-sort="+curOrder+"]").find("iframe").attr("src",blobURL);
+    		    		
     					$("#write_bd .viewerBg:last").css("display","none");
 //    					$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
 //    						+"<ul class='content_toolBoxes' id='content_toolBox'>"
@@ -347,8 +350,8 @@ $('document').ready(function(){
 
     				    addContent();
     				
-    				}
-    			}).submit();
+//    				}
+//    			}).submit();
     			
     			
     			fileNum++;
@@ -812,6 +815,8 @@ function fileChange(file){
 			dataType: "text",
 			url: "showViewer",
 			success: function(jdata){
+		
+		
 				$("#write_bd .contentBox:last").find("iframe").attr("src",jdata);
 				$("#write_bd .viewerBg:last").css("display","none");							
 //				orderArr[order] = $(newFile).val().split("\\")[2];

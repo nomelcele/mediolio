@@ -19,20 +19,17 @@
 <script type="text/javascript" src="js/crop.js"></script> 
 </head>
 <body>
-<form id="addProjectForm" action="addProject" method="post">
-<!--  		<input type="hidden" id="orderArr" name="orderArr"> -->
- 		<input type="hidden" id="p_title" name="p_title">
- 		<input type="hidden" id="cate_id" name="cate_id">
- 		<input type="hidden" id="hashtags" name="hashtags">
- 		<input type="hidden" id="p_coverImgName" name="p_coverImg">
- 		<input type="hidden" id="sc_id" name="sc_id">
- 		<!-- 작업 이름 --><input type="hidden" id="p_prjname" name="p_prjname">
- 		<!-- 작업 기간 --><input type="hidden" id="p_workfrom" name="p_workfrom">
- 		<input type="hidden" id="p_workto" name="p_workto">
- 		<!-- 관련 과목 <input type="hidden" id="cl_id" name="cl_id">-->
- 		<!-- 팀원 소개 -->
- 		<!-- 작업 개요 --><input type="hidden" id="p_summary" name="p_summary">
-</form>
+<!-- <form id="addProjectForm" action="addProject" method="post"> -->
+<!-- <!--  		<input type="hidden" id="orderArr" name="orderArr"> --> 
+<!--  		<input type="hidden" id="p_title" name="p_title"> -->
+<!--  		<input type="hidden" id="cate_id" name="cate_id"> -->
+<!--  		<input type="hidden" id="hashtags" name="hashtags"> -->
+<!--  		<input type="hidden" id="p_coverImgName" name="p_coverImg"> -->
+<!--  		<input type="hidden" id="sc_id" name="sc_id"> -->
+<!--  		<input type="hidden" id="p_workto" name="p_workto"> -->
+<!--  		<!-- 관련 과목 <input type="hidden" id="cl_id" name="cl_id">-->
+<!--  		<!-- 팀원 소개 -->
+<!-- </form> -->
 <div id="contentsWrap">
 	<div class="writeWrap clear">
 	<!-- 탭 -->
@@ -227,6 +224,7 @@
     </div> <!-- writeWrap -->
     
 </div> <!-- contentsWrap -->        
+<!-- </form> -->
     
     
     
