@@ -19,12 +19,12 @@
 <script type="text/javascript" src="js/crop.js"></script> 
 </head>
 <body>
-<!-- <form id="addProjectForm" action="addProject" method="post"> -->
-<!-- <!--  		<input type="hidden" id="orderArr" name="orderArr"> --> 
+<form id="addProjectForm" action="addProject" method="post" enctype="multipart/form-data">
+		<input type="hidden" id="orderArr" name="orderArr"> 
 <!--  		<input type="hidden" id="p_title" name="p_title"> -->
 <!--  		<input type="hidden" id="cate_id" name="cate_id"> -->
-<!--  		<input type="hidden" id="hashtags" name="hashtags"> -->
-<!--  		<input type="hidden" id="p_coverImgName" name="p_coverImg"> -->
+ 		<input type="hidden" id="hashtags" name="hashtags">
+ 		<input type="hidden" id="p_coverImgName" name="p_coverImg">
 <!--  		<input type="hidden" id="sc_id" name="sc_id"> -->
 <!--  		<input type="hidden" id="p_workto" name="p_workto"> -->
 <!--  		<!-- 관련 과목 <input type="hidden" id="cl_id" name="cl_id">-->
@@ -39,7 +39,7 @@
 	        <div class="cardWindow_hd">1단계 : 글 내용 작성</div>
 	        <div id="write_hd">
 	            <div id="write_category">
-	                <select id="selectedCategory">
+	                <select name="cate_id" id="selectedCategory">
 	                	<option value="0">카테고리</option>
 	                    <option value="1">게임</option>
 	                    <option value="2">웹 & 앱</option>
@@ -55,19 +55,17 @@
 	        </div><!--//write_hd-->
 	        
 	        <div id="write_title">
-	            <input class="input_in" id="projectTitle" type="text" placeholder="글 제목을 입력하세요."/>
+	            <input class="input_in" id="projectTitle" name="p_title" type="text" placeholder="글 제목을 입력하세요."/>
 	        </div><!--//write_title-->
 	        
 	        <div id="write_bd">
 	            <a href="#" class="btn_circle" id="btn_addWrite"></a>
 	            <ul class="bubble" id="bubble_addWrite">
 	                <li>
-	                	<form id="viewerForm" action="showViewer" method="post" enctype="multipart/form-data">
 	                		<a id="btn_addFile" href="#">
 	                			<input type="file" class="contentFile" id="file0" name="contents"/> 
 	                			파일 업로드
 	                		</a>
-	                	</form>
 	                </li>
 	                <li><a id="btn_addMedia" href="#" onclick="writeEmbedModalOpen()">미디어 추가</a></li>
 	                <li><a id="btn_addText" href="#">텍스트 추가</a></li>
@@ -157,12 +155,11 @@
 		<!-- 2단계 (S) -->
 		
 	    <div class="cardWindow cardWindow_write2" id="projInfoArea">
-	    <form method="post">
             <div class="cardWindow_hd">2단계 : 프로젝트 정보 작성</div>
             <div class="writeLineWrap">
                 <div class="writeLine_1">작업 이름</div>
                 <div class="writeLine_2">
-                    <input class="writeLine_text" type="text" id="projectName" placeholder="예) 미디어학과 포트폴리오 공유 사이트-미디올리오">
+                    <input class="writeLine_text" type="text" name="p_prjname" placeholder="예) 미디어학과 포트폴리오 공유 사이트-미디올리오">
                 </div>
             </div><!--//writeLineWrap-->
             <div class="writeLineWrap">
@@ -170,11 +167,11 @@
                 <div class="writeLine_2">
                     <span class="dateSpan">시작 : </span>
                     <div class="twoCell">
-                        <input class="writeLine_text" type="date" id="projectFrom">
+                        <input class="writeLine_text" type="date" name="p_workfrom">
                     </div>
                     <span class="dateSpan">종료 : </span>
                     <div class="twoCell">
-                        <input class="writeLine_text" type="date" id="projectTo">
+                        <input class="writeLine_text" type="date" name="p_workto">
                     </div>
                 </div>
             </div><!--//writeLineWrap-->
@@ -208,10 +205,9 @@
             <div class="writeLineWrap writeLongLineWrap clear">
                 <div class="writeLine_1 writeLine_1Long">작업 개요</div>
                 <div class="writeLine_2 writeLine_2Long">
-                    <textarea class="writeLine_textarea" type="text" id="projectSummary" placeholder="작업 내용을 입력해주세요."></textarea>
+                    <textarea class="writeLine_textarea" type="text" name="p_summary" placeholder="작업 내용을 입력해주세요."></textarea>
                 </div>
             </div><!--//writeLineWrap-->
-             </form>
             
         </div><!--//cardWindow-->
         
@@ -224,7 +220,7 @@
     </div> <!-- writeWrap -->
     
 </div> <!-- contentsWrap -->        
-<!-- </form> -->
+</form>
     
     
     

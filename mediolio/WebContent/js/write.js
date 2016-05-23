@@ -65,12 +65,12 @@ $('document').ready(function(){
 			// 파일 업로드
 			// 서버로 보내야 할 파라미터 목록
 			// 1. 파일(이미지, 문서): formdata로 전송
-			var formData = new FormData();
+//			var formData = new FormData();
 			var firstFile = $("input[name=contents]")[0];
 			if($(firstFile).val() != ""){
 				for(var i=0; i<$("input[name=contents]").length; i++){
 					console.log($("input[name=contents]")[i]);
-					formData.append("contents",$("input[name=contents]")[i].files[0]);
+//					formData.append("contents",$("input[name=contents]")[i].files[0]);
 				};
 			}
 			
@@ -78,15 +78,15 @@ $('document').ready(function(){
 			// 2. 임베드 태그, 텍스트: orderArr에 있음
 			// 3. orderArr: 콘텐츠 순서 정보 저장
 			console.log("콘텐츠 순서: "+orderArr);
-			for(var i=0; i<orderArr.length; i++){
-				formData.append("orderArr",orderArr[i]);
-			}
+//			for(var i=0; i<orderArr.length; i++){
+//				formData.append("orderArr",orderArr[i]);
+//			}
 			
 			// 4. 프로젝트 제목
-			$("#p_title").val($("#projectTitle").val());
+//			$("#p_title").val($("#projectTitle").val());
 			
 			// 5. 카테고리 아이디
-			$("#cate_id").val($("#selectedCategory").val());
+//			$("#cate_id").val($("#selectedCategory").val());
 			
 //			// 6. 서브카테고리 아이디 목록
 //			var subcategories = "";
@@ -107,39 +107,41 @@ $('document').ready(function(){
 	
 			// 9. 프로젝트 정보
 			// 9-1. 작업 이름
-			$("#p_prjname").val($("#projectName").val());
+//			$("#p_prjname").val($("#projectName").val());
 
 			// 9-2. 작업 기간
-			$("#p_workfrom").val($("#projectFrom").val());
-			$("#p_workto").val($("#projectTo").val());
+//			$("#p_workfrom").val($("#projectFrom").val());
+//			$("#p_workto").val($("#projectTo").val());
 
 			// 9-3. 관련 과목
-			// $("#cl_id").val($("#p_coverImg").val());
 
+			
 			// 9-4. 팀원 소개
 			
 			// 9-5. 작업 개요
-			$("#p_summary").val($("#projectSummary").val());
+//			$("#p_summary").val($("#projectSummary").val());
 
 			
-			var other_data = $("#addProjectForm").serializeArray();
-		    $.each(other_data,function(key,input){
-		        formData.append(input.name,input.value);
-		    });
-		  
-			$.ajax({
-				url: "addProject",
-				processData: false,
-				contentType: false,
-				data: formData,
-				type: "POST",
-				success: function(result){
-					alert("업로드 완료");
-					$(".colorpicker_field").css("display","none");
-					$('#default_body').empty().append(result);
-					tagHover_write();
-				}
-			});
+//			var other_data = $("#addProjectForm").serializeArray();
+//		    $.each(other_data,function(key,input){
+//		        formData.append(input.name,input.value);
+//		    });
+//		  
+//			$.ajax({
+//				url: "addProject",
+//				processData: false,
+//				contentType: false,
+//				data: formData,
+//				type: "POST",
+//				success: function(result){
+//					alert("업로드 완료");
+//					$(".colorpicker_field").css("display","none");
+//					$('#default_body').empty().append(result);
+//					tagHover_write();
+//				}
+//			});
+			
+			$("#addProjectForm").submit();
 		}
 		
 	});
@@ -811,13 +813,13 @@ function fileChange(file){
 		order = parseInt(order)+1;
 		
 		$(".viewerBg .project_loading:last").css("display","block");
-		$("#viewerForm").ajaxForm({
-			dataType: "text",
-			url: "showViewer",
-			success: function(jdata){
+//		$("#viewerForm").ajaxForm({
+//			dataType: "text",
+//			url: "showViewer",
+//			success: function(jdata){
 		
 		
-				$("#write_bd .contentBox:last").find("iframe").attr("src",jdata);
+				$("#write_bd .contentBox:last").find("iframe").attr("src",blobURL);
 				$("#write_bd .viewerBg:last").css("display","none");							
 //				orderArr[order] = $(newFile).val().split("\\")[2];
 				if($(newFile).val().split("\\")[2] == undefined){
@@ -829,8 +831,8 @@ function fileChange(file){
 				
 				
 				addContent();
-			}
-		}).submit();
+//			}
+//		}).submit();
 		
 		fileNum++;
 		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents' onchange='fileChange(this)'/>");	
