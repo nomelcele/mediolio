@@ -184,13 +184,11 @@ public class ProjectModel {
 //		}
 		// List<TeamMemberVO> tmList
 				
-		return "main.index";
+		return "main/index";
 	}
 	
 	@RequestMapping(value="showViewer")
 	public void showViewer(ProjectVO pvo, HttpSession session, HttpServletResponse response) throws IOException, URISyntaxException{
-		System.out.println("showViewer-------------");
-		
 		// doc, ppt, pdf 업로드 했을 때 뷰어 보여주기
 		List<MultipartFile> contents = pvo.getContents();
 		MultipartFile projectFile = contents.get(0);
@@ -213,81 +211,11 @@ public class ProjectModel {
 		
 		// 경로 설정
 		String realPath = session.getServletContext().getRealPath("/");
-//		String realPath = "http://52.79.195.100:8080/mediolio/upload/";
 		StringBuffer path = new StringBuffer();
-		path.append(realPath).append("upload/").append(newFileName);
-//		path.append(realPath);
+		path.append(realPath).append("upload/docs/").append(newFileName);
 		System.out.println("Upload Path: "+path.toString());
 		
-//		HttpURLConnection uc = null;
-//		BufferedReader br = null;
-//		DataOutputStream dos = null;
-//		DataInputStream dis = null;
-//		
-//		InputStream is = null;
-//		OutputStream os = null;
-//		boolean ret = false;
-//		String strMsg = "";
-//		
-//		String lineEnd = "\r\n";
-//		String twoHyphens = "--";
-//		String boundary = "*****";
-//		
-//		int bytesRead, bytesAvailable, bufferSize;
-//		byte[] buffer;
-//		int maxBufferSize = 1*1024*1024; // 사이즈..?
-//		String responseFromServer = "";
-//		String urlString = "http://52.79.195.100:8080/mediolio/upload/";
-//		
-//		try{
-//		
-//		File newFile = new File(newFileName);
-//		projectFile.transferTo(newFile);
-//		System.out.println("새 파일: "+newFile);
-//		FileInputStream fis = new FileInputStream(newFile);
-//		URL url = new URL(urlString);
-//		uc = (HttpURLConnection)url.openConnection();
-//		uc.setDoInput(true);
-//		uc.setDoOutput(true);
-//		uc.setRequestMethod("POST");
-//		uc.setUseCaches(false);
-//		
-//		uc.setRequestProperty("Connection", "Keep-Alive");
-//		uc.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
-//		
-//		dos = new DataOutputStream(uc.getOutputStream());
-//		
-//		dos.writeBytes(twoHyphens+boundary+lineEnd);
-//		dos.writeBytes("Content-Disposition: form-data; name=\"doc\";"+" filename=\""+newFileName+"\""+lineEnd);
-//		dos.writeBytes(lineEnd);
-//
-//		bytesAvailable = fis.available();
-//		bufferSize = Math.min(bytesAvailable, maxBufferSize);
-//		buffer = new byte[bufferSize];
-//		
-//		bytesRead = fis.read(buffer,0,bufferSize);
-//		
-//		while(bytesRead > 0){
-//			dos.write(buffer,0,bufferSize);
-//			bytesAvailable = fis.available();
-//			bufferSize = Math.min(bytesAvailable, maxBufferSize);
-//			bytesRead = fis.read(buffer,0,bufferSize);
-//		}
-//		
-//		dos.writeBytes(lineEnd);
-//		dos.writeBytes(twoHyphens+boundary+twoHyphens+lineEnd);
-//		
-//		fis.close();
-//		dos.flush();
-//		dos.close();
-//	} catch(Exception ex){
-//		System.out.println(ex);
-//	}
-		
-		
 		File file = new File(path.toString());
-		System.out.println("파일......."+file);
-		System.out.println("파일 업로드 되냐 "+file.mkdirs()); // 업로드 안 됨
 		
 		try {
 			projectFile.transferTo(file);
@@ -383,10 +311,19 @@ public class ProjectModel {
 		String newFileName = fileName+"_"+System.currentTimeMillis()+"."+fileExt;
 		System.out.println("New File Name: "+newFileName); // 새로운 파일 이름(중복 방지)
 		
-		System.out.println("임시경로:"+session.getServletContext().getRealPath("/"));
-		String realPath = session.getServletContext().getRealPath("/")+"upload\\";
+		String realPath = session.getServletContext().getRealPath("/upload/");
 		StringBuffer path = new StringBuffer();
-		path.append(realPath).append(newFileName);
+		
+		String[] imgExt = {"gif","png","jpg","jpeg"};
+		for(String img:imgExt){
+			if(!(fileExt.contains(img))){
+				// 이미지 파일이 아닌 경우(문서 파일)
+				path.append(realPath).append("docs/").append(newFileName);
+			} else {
+				path.append(realPath).append("img/").append(newFileName);
+			}
+		}
+		
 		System.out.println("Upload Path: "+path.toString());
 		
 		File file = new File(path.toString());
