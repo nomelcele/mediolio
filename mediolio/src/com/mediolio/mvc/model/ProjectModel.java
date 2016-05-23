@@ -2,12 +2,25 @@ package com.mediolio.mvc.model;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -175,9 +188,8 @@ public class ProjectModel {
 	}
 	
 	@RequestMapping(value="showViewer")
-	public void showViewer(ProjectVO pvo, HttpSession session, HttpServletResponse response) throws IOException{
+	public void showViewer(ProjectVO pvo, HttpSession session, HttpServletResponse response) throws IOException, URISyntaxException{
 		// doc, ppt, pdf 업로드 했을 때 뷰어 보여주기
-		System.out.println("에이젝스폼 테스트 테스트 테스트 테스트");
 		List<MultipartFile> contents = pvo.getContents();
 		MultipartFile projectFile = contents.get(0);
 		String[] imgExt = {"gif","png","jpg","jpeg"};
@@ -197,39 +209,111 @@ public class ProjectModel {
 		String newFileName = fileName+"_"+System.currentTimeMillis()+"."+fileExt;
 		System.out.println("New File Name: "+newFileName); // 새로운 파일 이름(중복 방지)
 		
-		String realPath = session.getServletContext().getRealPath("/");
+		// 경로 설정
+//		String realPath = session.getServletContext().getRealPath("/");
+		String realPath = "http://52.79.195.100:8080/mediolio/upload/";
 		StringBuffer path = new StringBuffer();
 		path.append(realPath).append(newFileName);
+//		path.append(realPath);
 		System.out.println("Upload Path: "+path.toString());
 		
-		File file = new File(path.toString());
-		file.mkdirs();
-		try {
-			projectFile.transferTo(file);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		} 
+		HttpURLConnection uc = null;
+		BufferedReader br = null;
+		DataOutputStream dos = null;
+		DataInputStream dis = null;
 		
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("name", newFileName);
-		params.put("nonSvg", true);
+		InputStream is = null;
+		OutputStream os = null;
+		boolean ret = false;
+		String strMsg = "";
 		
-		try {
-			boxView = new BoxViewClient("3e7kxpyozin7r0kbknmiwa2dmpcoyq3w");
-			Document doc = boxView.upload(file, params);
-			Session viewSession = doc.createSession();
-			String viewUrl = viewSession.getViewUrl(); // 뷰어 url
-			System.out.println("View Url: "+viewUrl);
+		String lineEnd = "\r\n";
+		String twoHyphens = "--";
+		String boundary = "*****";
+		
+		int bytesRead, bytesAvailable, bufferSize;
+		byte[] buffer;
+		int maxBufferSize = 1*1024*1024; // 사이즈..?
+		String responseFromServer = "";
+		String urlString = "http://52.79.195.100:8080/mediolio/upload/";
+		
+		try{
+		
+		File newFile = new File(newFileName);
+		projectFile.transferTo(newFile);
+		System.out.println("새 파일: "+newFile);
+		FileInputStream fis = new FileInputStream(newFile);
+		URL url = new URL(urlString);
+		uc = (HttpURLConnection)url.openConnection();
+		uc.setDoInput(true);
+		uc.setDoOutput(true);
+		uc.setRequestMethod("POST");
+		uc.setUseCaches(false);
+		
+		uc.setRequestProperty("Connection", "Keep-Alive");
+		uc.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
+		
+		dos = new DataOutputStream(uc.getOutputStream());
+		
+		dos.writeBytes(twoHyphens+boundary+lineEnd);
+		dos.writeBytes("Content-Disposition: form-data; name=\"doc\";"+" filename=\""+newFileName+"\""+lineEnd);
+		dos.writeBytes(lineEnd);
+
+		bytesAvailable = fis.available();
+		bufferSize = Math.min(bytesAvailable, maxBufferSize);
+		buffer = new byte[bufferSize];
+		
+		bytesRead = fis.read(buffer,0,bufferSize);
+		
+		while(bytesRead > 0){
+			dos.write(buffer,0,bufferSize);
+			bytesAvailable = fis.available();
+			bufferSize = Math.min(bytesAvailable, maxBufferSize);
+			bytesRead = fis.read(buffer,0,bufferSize);
+		}
+		
+		dos.writeBytes(lineEnd);
+		dos.writeBytes(twoHyphens+boundary+twoHyphens+lineEnd);
+		
+		fis.close();
+		dos.flush();
+		dos.close();
+	} catch(Exception ex){
+		System.out.println(ex);
+	}
+		
+		
+//		File file = new File(path.toString());
+//		System.out.println("파일......."+file);
+//		System.out.println("파일 업로드 되냐 "+file.mkdirs()); // 업로드 안 됨
+//		
+//		try {
+//			projectFile.transferTo(file);
+//		} catch (Exception e1) {
+//			e1.printStackTrace();
+//		} 
+		
+//		Map<String, Object> params = new HashMap<String, Object>();
+//		params.put("name", newFileName);
+//		params.put("nonSvg", true);
+
+//		try {
+//			boxView = new BoxViewClient("3e7kxpyozin7r0kbknmiwa2dmpcoyq3w");
+//			Document doc = boxView.upload(file, params);
+//			Session viewSession = doc.createSession();
+//			String viewUrl = viewSession.getViewUrl(); // 뷰어 url
+//			System.out.println("View Url: "+viewUrl);
 			
+			String viewUrl = "http://docs.google.com/viewer?url="+path.toString()+"&embedded=true";
 			PrintWriter pw = response.getWriter();
 			pw.write(viewUrl);
 			pw.flush();
 			pw.close();
 			
-		} catch (BoxViewException e) {
-			System.out.println("Failed");
-			e.printStackTrace();
-		}
+//		} catch (BoxViewException e) {
+//			System.out.println("Failed");
+//			e.printStackTrace();
+//		}
 		
 	}
 	

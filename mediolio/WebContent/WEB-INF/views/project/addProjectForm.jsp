@@ -76,7 +76,7 @@
 	                <li><a id="btn_addText" href="#">텍스트 추가</a></li>
 	            </ul>
 	            <!--  url: 파일 주소(서버에 올려진 주소) -->
-	<!--             <iframe src="http://docs.google.com/viewer?url=http://infolab.stanford.edu/pub/papers/google.pdf&embedded=true" style="width:600px; height:500px;" frameborder="0"></iframe> -->
+<!-- 	            <iframe src="http://docs.google.com/viewer?url=http://52.79.195.100:8080/mediolio/upload/doctest.docx&embedded=true" style="width:600px; height:500px;" frameborder="0"></iframe> -->
 	 
 	 
 	 <!--
