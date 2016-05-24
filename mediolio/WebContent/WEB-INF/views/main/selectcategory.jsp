@@ -26,8 +26,8 @@
 	            </a>
 	        </div><!--//card_img-->
 	    	<div class="card_bd">
-	        	<p class="card_title ellipsis"><a href="#">${mainProjects.p_title}</a></p>
-	            <p class="card_dscrpt"><a href="#">${mainProjects.authorID} ${mainProjects.authorName}</a></p>
+	        	<p class="card_title ellipsis"><a href="projectView?m_id=${mainProjects.m_id}&p_id=${mainProjects.p_id}">${mainProjects.p_title}</a></p>
+	            <p class="card_dscrpt"><a href="userpage?usr_id=${mainProjects.m_id }">${mainProjects.authorID} ${mainProjects.authorName}</a></p>
 	            <p class="card_tag">
 					${mainProjects.p_summary }		
 	            </p>

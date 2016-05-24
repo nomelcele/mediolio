@@ -13,7 +13,7 @@
         <div id="btnWrap_userInfo">
         	<c:if test="${sessionScope.mev != null && sessionScope.mev.m_id != memberInfo.m_id}">
         	    <a class="btn_userInfo" id="btn_addFriend" href="#" data-click-state="0"></a>
-            	<a class="btn_userInfo" id="btn_userNote" href="#" onclick="noteModalOpen('certain', '${memberInfo.m_id }', '${memberInfo.m_name }')"></a>
+            	<a class="btn_userInfo" id="btn_userNote" href="#" onclick="noteModalOpen('${memberInfo.m_id }', '${memberInfo.m_studentID } ${memberInfo.m_name }')"></a>
         	</c:if>
         </div>
     </div> 

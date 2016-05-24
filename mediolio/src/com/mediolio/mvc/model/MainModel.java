@@ -1,7 +1,6 @@
 package com.mediolio.mvc.model;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -19,8 +18,6 @@ import com.mediolio.vo.CategoryVO;
 import com.mediolio.vo.HistoryVO;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectVO;
-
-
 
 
 @Controller
