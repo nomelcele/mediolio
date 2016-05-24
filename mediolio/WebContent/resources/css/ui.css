@@ -155,3 +155,11 @@ min-width:420px; width:auto; max-width:500px; height:150px; overflow-y:hidden; b
 
 #btn_rmcnUp{ background-image:url(../images/up_grey.png); background-repeat:no-repeat; background-position:center center; }
 #btn_rmcnDown{ background-image:url(../images/down_grey.png); background-repeat:no-repeat; background-position:center center; }
+
+
+/* 유저 팝업창 */
+.userPopWrap{ display:none; width:auto; position:fixed; top:0; left:0; background:#fff; border:1px solid #ccc; box-shadow:1px 1px 3px rgba(0,0,0,.2); z-index:100;}
+.userPopWrap li{ box-sizing:border-box; border-bottom:1px solid #eee;}
+.userPopWrap li:last-child{ border:none;}
+.userPopWrap li a{ display:inline-block; width:100px; line-height:20px; text-align:center; color:#666;  }
+.userPopWrap li a:hover{ background:#f9f9f9; }
