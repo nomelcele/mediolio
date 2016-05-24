@@ -25,7 +25,7 @@
 	        </a>
 	        <div class="search_contentWrap">
 	            <p class="search_title"><a class="ellipsis" href="projectView?m_id=${prj.m_id}&p_id=${prj.p_id}">${prj.p_title}</a></p>
-	            <p class="search_writer"><a class="ellipsis" href="#">${prj.authorID } ${prj.authorName }</a></p>
+	            <p class="search_writer"><a class="ellipsis" href="userpage?usr_id=${prj.m_id }">${prj.authorID } ${prj.authorName }</a></p>
 	            <p class="search_tag ellipsis">
 	                <c:forTokens var="aTag" items="${prj.hashtags }" delims=",">
 						#${aTag } 
