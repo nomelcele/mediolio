@@ -75,9 +75,3 @@
 .projectTeamWrap h4{ clear:both; font-size:11px; font-weight:normal; line-height:16px; color:#888; word-break:break-all; }
 
 
-/* 유저 팝업창 */
-.userPopWrap{ display:none; width:auto; position:fixed; top:0; left:0; background:#fff; border:1px solid #ccc; box-shadow:1px 1px 3px rgba(0,0,0,.2); z-index:100;}
-.userPopWrap li{ box-sizing:border-box; border-bottom:1px solid #eee;}
-.userPopWrap li:last-child{ border:none;}
-.userPopWrap li a{ display:inline-block; width:100px; line-height:20px; text-align:center; color:#666;  }
-.userPopWrap li a:hover{ background:#f9f9f9; }

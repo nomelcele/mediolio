@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-.searchResultWrap{ width:850px; height:50px; box-sizing:border-box; padding:0 20px; margin-bottom:0px; background:#0F84CF; border-radius:5px 5px 0 0; text-align:center; }
+.searchResultWrap{ width:850px; min-height:inherit; height:50px; box-sizing:border-box; padding:0 20px; margin-bottom:0px; background:#0F84CF; border-radius:5px 5px 0 0; text-align:center; }
 .searchResult{ display:inline-block; width:auto; font-size:14px;  color:#666; line-height:50px;  color:#fff;  background:url(../images/search_white.png) left center no-repeat; text-indent:25px;  }
 
 .searchLine{ width:850px; margin:10px 0 10px;}
@@ -18,3 +18,20 @@
 .searchWrap p a{ display:inline-block; width:auto; max-width:100%; line-height:20px;   }
 
 .searchWrap .search_tag{ display:block; line-height:20px; margin-top:15px; color:#666; }
+
+
+
+/* search_team */
+.searchTeamWrap{ height:auto; }
+.search_teamWrapLeft{ width:500px; float:left;}
+.search_teamWrapRight{ width:270px; height:80px; float:right; padding:10px 0;}
+.search_teamWrapRight a{ display:block; float:left; width:80px; height:80px; margin:0 0 0 10px;}
+
+.search_teamWrap{ width:100%; min-height:inherit; height:auto; box-sizing:border-box; padding:15px 20px; }
+.search_person, .search_personInfo{ width:100%; line-height:18px;}
+.search_person span, .search_personInfo span{ display:inline-block; float:left; width:60px; margin:0 5px 0 0; color:#888;}
+.search_personInfo .personInfo_cont{ width:430px; color:#333;}
+
+.search_person{ margin:0 0 5px 0;}
+.search_person a{ font-weight:bold;}
+

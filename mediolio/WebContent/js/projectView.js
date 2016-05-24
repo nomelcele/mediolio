@@ -25,8 +25,8 @@ function userPop(event, aTag, m_id){
 	usr_name = $(aTag).text();
 	usr_id = m_id;
 	
-    var mouseX = event.screenX;
-    var mouseY = event.screenY;
+    var mouseX = event.clientX;
+    var mouseY = event.clientY;
     
     $('.userPopWrap').show();
     
@@ -41,7 +41,7 @@ function userPop(event, aTag, m_id){
     
     $('.userPopWrap').css({
         left:mouseX,
-        top:mouseY-65
+        top:mouseY+10
         
     })
     
