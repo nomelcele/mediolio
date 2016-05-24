@@ -93,6 +93,8 @@ public class ProjectModel {
 		List<MultipartFile> contents = pvo.getContents();
 		String[] contentNames;
 		if(contents != null){
+			System.out.println("안들어옴??????????????????");
+			System.out.println(orderArr.length);
 			contentNames = new String[contents.size()];
 			for(int i=0; i<contentNames.length; i++){
 				contentNames[i] = contents.get(i).getOriginalFilename();
@@ -314,14 +316,19 @@ public class ProjectModel {
 		String realPath = session.getServletContext().getRealPath("/upload/");
 		StringBuffer path = new StringBuffer();
 		
+		String type = "docs";
 		String[] imgExt = {"gif","png","jpg","jpeg"};
 		for(String img:imgExt){
-			if(!(fileExt.contains(img))){
-				// 이미지 파일이 아닌 경우(문서 파일)
-				path.append(realPath).append("docs/").append(newFileName);
-			} else {
-				path.append(realPath).append("img/").append(newFileName);
+			if(fileExt.contains(img)){
+				type = "img";
+				break;
 			}
+		}
+		
+		if(type.equals("docs")){
+			path.append(realPath).append("docs/").append(newFileName);
+		} else {
+			path.append(realPath).append("img/").append(newFileName);
 		}
 		
 		System.out.println("Upload Path: "+path.toString());

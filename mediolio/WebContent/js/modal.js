@@ -138,7 +138,8 @@ function writeDCategoryModalOpen(){
 		     	$(".card_tag").html("");
 		    	for(var i=0; i<arr.length; i++){
 		    		var el = arr[i];
-		    		str += "<span><input type='hidden' name='p_type' class='subCategory' value="+$(el).val()+">"+$(el).parent().find(".label_category").html()+"</span>";
+		    		$("input[name=p_type]").val($(el).val());
+		    		str += "<span><input type='hidden' class='subCategory' value="+$(el).val()+">"+$(el).parent().find(".label_category").html()+"</span>";
 		    		$(".card_tag").append("<span><input type='hidden' class='subCategory' value="+$(el).val()+">"+$(el).parent().find(".label_category").html()+"</span>");
 		    		if(i<arr.length-1){
 		    			str += ", "
