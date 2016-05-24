@@ -27,11 +27,9 @@
 	            <p class="search_title"><a class="ellipsis" href="projectView?m_id=${prj.m_id}&p_id=${prj.p_id}">${prj.p_title}</a></p>
 	            <p class="search_writer"><a class="ellipsis" href="#">${prj.authorID } ${prj.authorName }</a></p>
 	            <p class="search_tag ellipsis">
-	            	<c:forEach var="aTag" items="${hashList }">
-						<c:if test="${prj.p_id eq aTag.p_id }">
-		            		#${aTag.h_value } 
-		            	</c:if>
-	            	</c:forEach>
+	                <c:forTokens var="aTag" items="${prj.hashtags }" delims=",">
+						#${aTag } 
+					</c:forTokens>
 	            </p>
 	        </div>
 	    </div>

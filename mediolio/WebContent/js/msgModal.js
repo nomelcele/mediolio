@@ -5,14 +5,14 @@ function msgSend(){
 		$.jAlert({
 		    'title': '!!',
 		    'content': '보낼 대상을 정확히 선택하세요',
-		    'theme': 'black',
+		    'closeOnClick' : true,
 		    'size': 'xsm'
 		  });
 	}else if($('#msgForm textarea').val().length<6){
 		$.jAlert({ //this is the normal usage
 		    'title': '!!',
 		    'content': '다섯 자 이상 입력하세요',
-		    'theme': 'black',
+		    'closeOnClick' : true,
 		    'size': 'xsm'
 		  });
 

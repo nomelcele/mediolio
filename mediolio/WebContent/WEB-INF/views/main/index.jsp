@@ -113,127 +113,198 @@
     
     
 <div class="cardWrap newestWrap">
+<c:choose>
+<c:when test="${sessionScope.mev != null }">
     <div class="hd_historyEx">나의 관심분야 최신 글</div>
+    	<c:set var="index" value="0"/>
+
+		    <div class="newestWrap_bd">
+		    	
+		        <div class="newestWrap_title">
+		            ${interesting[index].cate_name }
+		            <input type="button" value="more" class="btnStyle4" onclick="seeMore('${interesting[index].cate_id}')">
+		        </div><!--//newestWrap_title-->
+		        
+		        <c:choose>
+		        <c:when test="${new1_idx == 0 }">
+			        <div class="newest_contentWrap">
+			        	새로운 글이 없습니다.
+			        </div>
+		        </c:when>
+		        <c:otherwise>
+			        <c:forEach var="new" items="${new1}">
+			        <div class="newest_contentWrap">
+			            <a href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">
+			                <img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+			            </a>
+			            <div class="newest_textWrap">
+			                <p class="newest_title"><a class="ellipsis" href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">${newest.p_title }</a></p>
+			                <p class="newest_content"><a href="#">${newest.p_summary } </a></p>
+			                <p class="newest_tag ellipsis">
+			                	<c:forTokens var="aTag" items="${newest.hashtags }" delims=",">
+									#${aTag } 
+								</c:forTokens>
+			                </p>
+			            </div>
+			        </div><!--//newest_contentWrap-->	 
+			    	</c:forEach>       
+		        </c:otherwise>
+		        </c:choose>
+
+		    </div><!--//newestWrap_bd-->
+
+	    
+	    <c:set var="index" value="${index+1 }"/>
+	    
+		    <div class="newestWrap_bd">
+
+		        <div class="newestWrap_title">
+		            ${interesting[index].cate_name }
+		            <input type="button" value="more" class="btnStyle4" onclick="seeMore('${interesting[index].cate_id}')">
+		        </div><!--//newestWrap_title-->
+		        
+		        <c:choose>
+			        <c:when test="${new2_idx == 0 }">
+				        <div class="newest_contentWrap">
+				        	새로운 글이 없습니다.
+				        </div>
+			        </c:when>
+			        <c:otherwise>
+				        <c:forEach var="newest" items="${new2}">
+					        <div class="newest_contentWrap">
+					            <a href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">
+					                <img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+					            </a>
+					            <div class="newest_textWrap">
+					                <p class="newest_title"><a class="ellipsis" href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">${newest.p_title }</a></p>
+					                <p class="newest_content"><a href="#">${newest.p_summary }</a></p>
+					                <p class="newest_tag ellipsis">
+					                	<c:forTokens var="aTag" items="${newest.hashtags }" delims=",">
+											#${aTag } 
+										</c:forTokens>
+					                </p>
+					            </div>
+					        </div><!--//newest_contentWrap-->	        
+			    		</c:forEach>
+			        </c:otherwise>
+				</c:choose>
+		    </div><!--//newestWrap_bd-->
+
+</c:when>
+
+<c:otherwise>
+    <div class="hd_historyEx">최신 글</div>
+	
+		<div class="newestWrap_bd">
+			<div class="newestWrap_title">
+		                게임
+				<input type="button" value="more" class="btnStyle4"  onclick="seeMore('1')">
+			</div><!--//newestWrap_title-->
+			
+			
+		 <c:choose>
+			<c:when test="${new1_idx == 0 }">
+				<div class="newest_contentWrap">
+				 	새로운 글이 없습니다.
+				</div>
+			</c:when>
+			<c:otherwise>	
+				<c:forEach var="newest" items="${new1}">     
+					<div class="newest_contentWrap">
+						<a href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">
+							<img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+						</a>
+						<div class="newest_textWrap">
+							<p class="newest_title"><a class="ellipsis" href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">${newest.p_title }</a></p>
+							<p class="newest_content"><a href="#">${newest.p_summary }</a></p>
+							<p class="newest_tag ellipsis">
+								<c:forTokens var="aTag" items="${newest.hashtags }" delims=",">
+									#${aTag } 
+								</c:forTokens>
+							</p>
+						</div>
+					</div><!--//newest_contentWrap-->		        
+		    	</c:forEach>
+		    </c:otherwise>
+		</c:choose>
+		</div><!--//newestWrap_bd-->
+
     
-    <div class="newestWrap_bd">
-        <div class="newestWrap_title">
-            웹프로그래밍
-            <input type="button" value="more" class="btnStyle4">
-        </div><!--//newestWrap_title-->
-        
-        <div class="newest_contentWrap">
-            <a href="#">
-                <img src="http://placehold.it/80x80/ccc" width="80" height="80" alt="포트폴리오 이미지"/>
-            </a>
-            <div class="newest_textWrap">
-                <p class="newest_title"><a class="ellipsis" href="#">맘스터치 사이트 리뉴얼</a></p>
-                <p class="newest_content"><a href="#">내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. </a></p>
-                <p class="newest_tag ellipsis">#게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인</p>
-            </div>
-        </div><!--//newest_contentWrap-->
-        <div class="newest_contentWrap">
-            <a href="#">
-                <img src="http://placehold.it/80x80/ccc" width="80" height="80" alt="포트폴리오 이미지"/>
-            </a>
-            <div class="newest_textWrap">
-                <p class="newest_title"><a class="ellipsis" href="#">맘스터치 사이트 리뉴얼</a></p>
-                <p class="newest_content"><a href="#">내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. </a></p>
-                <p class="newest_tag ellipsis">#게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인</p>
-            </div>
-        </div><!--//newest_contentWrap-->
-        <div class="newest_contentWrap">
-            <a href="#">
-                <img src="http://placehold.it/80x80/ccc" width="80" height="80" alt="포트폴리오 이미지"/>
-            </a>
-            <div class="newest_textWrap">
-                <p class="newest_title"><a class="ellipsis" href="#">맘스터치 사이트 리뉴얼</a></p>
-                <p class="newest_content"><a href="#">내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. </a></p>
-                <p class="newest_tag ellipsis">#게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인</p>
-            </div>
-        </div><!--//newest_contentWrap-->
-        
-    </div><!--//newestWrap_bd-->
+		<div class="newestWrap_bd">
+
+			<div class="newestWrap_title">
+		                웹&앱
+				<input type="button" value="more" class="btnStyle4" onclick="seeMore('2')">
+			</div><!--//newestWrap_title-->
+			
+			<c:choose>
+				<c:when test="${new2_idx == 0 }">
+					<div class="newest_contentWrap">
+					 	새로운 글이 없습니다.
+					</div>
+				</c:when>
+				<c:otherwise>	
+					<c:forEach var="newest" items="${new2}">	        
+					<div class="newest_contentWrap">
+						<a href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">
+							<img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+						</a>
+						<div class="newest_textWrap">
+							<p class="newest_title"><a class="ellipsis" href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">${newest.p_title }</a></p>
+							<p class="newest_content"><a href="#">${newest.p_summary } </a></p>
+							<p class="newest_tag ellipsis">
+								<c:forTokens var="aTag" items="${newest.hashtags }" delims=",">
+									#${aTag } 
+								</c:forTokens>
+							</p>
+						</div>
+					</div><!--//newest_contentWrap-->		
+					</c:forEach>       
+				</c:otherwise>
+			</c:choose> 
+		</div><!--//newestWrap_bd-->
+
     
-    <div class="newestWrap_bd">
-        <div class="newestWrap_title">
-            웹프로그래밍
-            <input type="button" value="more" class="btnStyle4">
-        </div><!--//newestWrap_title-->
-        
-        <div class="newest_contentWrap">
-            <a href="#">
-                <img src="http://placehold.it/80x80/ccc" width="80" height="80" alt="포트폴리오 이미지"/>
-            </a>
-            <div class="newest_textWrap">
-                <p class="newest_title"><a class="ellipsis" href="#">맘스터치 사이트 리뉴얼</a></p>
-                <p class="newest_content"><a href="#">내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. </a></p>
-                <p class="newest_tag ellipsis">#게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인</p>
-            </div>
-        </div><!--//newest_contentWrap-->
-        <div class="newest_contentWrap">
-            <a href="#">
-                <img src="http://placehold.it/80x80/ccc" width="80" height="80" alt="포트폴리오 이미지"/>
-            </a>
-            <div class="newest_textWrap">
-                <p class="newest_title"><a class="ellipsis" href="#">맘스터치 사이트 리뉴얼</a></p>
-                <p class="newest_content"><a href="#">내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. </a></p>
-                <p class="newest_tag ellipsis">#게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인</p>
-            </div>
-        </div><!--//newest_contentWrap-->
-        <div class="newest_contentWrap">
-            <a href="#">
-                <img src="http://placehold.it/80x80/ccc" width="80" height="80" alt="포트폴리오 이미지"/>
-            </a>
-            <div class="newest_textWrap">
-                <p class="newest_title"><a class="ellipsis" href="#">맘스터치 사이트 리뉴얼</a></p>
-                <p class="newest_content"><a href="#">내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. </a></p>
-                <p class="newest_tag ellipsis">#게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인</p>
-            </div>
-        </div><!--//newest_contentWrap-->
-        
-    </div><!--//newestWrap_bd-->
+		<div class="newestWrap_bd">
+			<div class="newestWrap_title">
+		         	영상&사운드
+				<input type="button" value="more" class="btnStyle4" onclick="seeMore('3')">
+			</div><!--//newestWrap_title-->
+			
+			<c:choose>
+				<c:when test="${new3_idx == 0 }">
+					<div class="newest_contentWrap">
+					 	새로운 글이 없습니다.
+					</div>
+				</c:when>
+				<c:otherwise>	
+				 	<c:forEach var="newest" items="${new3}">       
+					<div class="newest_contentWrap">
+						<a href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">
+							<img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+						</a>
+						<div class="newest_textWrap">
+							<p class="newest_title"><a class="ellipsis" href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">${newest.p_title }</a></p>
+							<p class="newest_content"><a href="#">${newest.p_summary } </a></p>
+							<p class="newest_tag ellipsis">
+								<c:forTokens var="aTag" items="${newest.hashtags }" delims=",">
+									#${aTag } 
+								</c:forTokens>
+							</p>
+						</div>
+					</div><!--//newest_contentWrap-->	
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>     
+		</div><!--//newestWrap_bd-->
+
+</c:otherwise>
+</c:choose>
     
-    <div class="newestWrap_bd">
-        <div class="newestWrap_title">
-            웹프로그래밍
-            <input type="button" value="more" class="btnStyle4">
-        </div><!--//newestWrap_title-->
-        
-        <div class="newest_contentWrap">
-            <a href="#">
-                <img src="http://placehold.it/80x80/ccc" width="80" height="80" alt="포트폴리오 이미지"/>
-            </a>
-            <div class="newest_textWrap">
-                <p class="newest_title"><a class="ellipsis" href="#">맘스터치 사이트 리뉴얼</a></p>
-                <p class="newest_content"><a href="#">내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. </a></p>
-                <p class="newest_tag ellipsis">#게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인</p>
-            </div>
-        </div><!--//newest_contentWrap-->
-        <div class="newest_contentWrap">
-            <a href="#">
-                <img src="http://placehold.it/80x80/ccc" width="80" height="80" alt="포트폴리오 이미지"/>
-            </a>
-            <div class="newest_textWrap">
-                <p class="newest_title"><a class="ellipsis" href="#">맘스터치 사이트 리뉴얼</a></p>
-                <p class="newest_content"><a href="#">내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. </a></p>
-                <p class="newest_tag ellipsis">#게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인</p>
-            </div>
-        </div><!--//newest_contentWrap-->
-        <div class="newest_contentWrap">
-            <a href="#">
-                <img src="http://placehold.it/80x80/ccc" width="80" height="80" alt="포트폴리오 이미지"/>
-            </a>
-            <div class="newest_textWrap">
-                <p class="newest_title"><a class="ellipsis" href="#">맘스터치 사이트 리뉴얼</a></p>
-                <p class="newest_content"><a href="#">내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. </a></p>
-                <p class="newest_tag ellipsis">#게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인, #게임프로그래밍, #게임디자인</p>
-            </div>
-        </div><!--//newest_contentWrap-->
-        
-    </div><!--//newestWrap_bd-->
+
 </div><!--//newestWrap-->
 
-</div>
+</div><!-- contentsWrap -->
 
 <%-- 	<div id="contentsWrap">
     <c:forEach var="mainProjects" items="${mainProjects}">

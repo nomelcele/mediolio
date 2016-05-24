@@ -88,8 +88,17 @@
 					            	<input type="button" value="입력" onclick="submitReply()"/>
 					        	</form>
 					        </div>
-			    	</c:when>
-				</c:choose>			
+				    	</c:when>
+				    	<c:otherwise>
+				    		<div id="writeReplyWrap">
+					        	<form id="reply_form">
+					        		<input type="hidden" name="p_id" value="${detail.p_id }">
+					        	    <textarea placeholder="로그인 하세요." name="r_text"></textarea>
+					            	<input type="button" value="입력""/>
+					        	</form>
+					        </div>
+				    	</c:otherwise>
+					</c:choose>			
 			</div>
         </div><!--projectViewBox_left-->
 		

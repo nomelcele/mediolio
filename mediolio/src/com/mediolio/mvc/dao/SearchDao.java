@@ -35,8 +35,4 @@ public class SearchDao {
 		return st.selectList("search.searchMemberInCategory", map);
 	}
 
-	public List<HashtagVO> getHashList(List<Object> list) {
-		return st.selectList("search.getHashList", list);
-	}
-
 }

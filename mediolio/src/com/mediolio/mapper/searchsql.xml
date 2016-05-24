@@ -9,10 +9,10 @@
 			SELECT @NO := @NO + 1 AS ROWNUM, A.*
 				FROM(
 				SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID, m.m_name,
-					(SELECT count(*) FROM member_action WHERE act_what=p.p_id AND act_type='like') p_likenum, p.p_viewnum
-					FROM project p, member m, hashtag t
-					WHERE p.p_id=t.p_id AND p.m_id=m.m_id
-						AND t.h_value=#{key}
+					(SELECT count(*) FROM member_action WHERE act_what=p.p_id AND act_type='like') p_likenum, p.p_viewnum,
+					(SELECT GROUP_CONCAT(h.h_value SEPARATOR ',') FROM hashtag h WHERE h.p_id = p.p_id) hashtags
+						FROM project p, member m, hashtag t
+						WHERE p.p_id=t.p_id AND p.m_id=m.m_id AND t.h_value=#{key}
 				) A,(SELECT @NO := 0 ) B
 			) C
 		WHERE C.ROWNUM <![CDATA[>=]]> 1 AND C.ROWNUM <![CDATA[<=]]> 6
@@ -35,21 +35,23 @@
 	     			
   	<select id="searchSbj" parameterType="int" resultType="pvo">
   		SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, m.m_studentID "authorID", m.m_name "authorName", c.cl_name,
-			(SELECT count(*) FROM member_action WHERE act_what=p.p_id AND act_type='like') p_likenum, p.p_viewnum
+			(SELECT count(*) FROM member_action WHERE act_what=p.p_id AND act_type='like') p_likenum, p.p_viewnum,
+			(SELECT GROUP_CONCAT(h.h_value SEPARATOR ',') FROM hashtag h WHERE h.p_id = p.p_id) hashtags
 				FROM project p, member m, class c WHERE p.m_id=m.m_id AND p.cl_id = c.cl_id
 				AND p.cl_id=#{cl_id }
   	</select>
 	
-	<select id="getHashList" parameterType="java.util.List" resultType="hvo">
+<!-- 	<select id="getHashList" parameterType="java.util.List" resultType="hvo">
 		SELECT h_id, h_value, p_id FROM hashtag WHERE p_id IN
 		<foreach collection="list" item="item" separator="," open="(" close=")">
 	   		#{item.p_id}
 	    </foreach>
-	</select>
+	</select> -->
 	
 	<select id="searchTitle" parameterType="java.util.Map" resultType="pvo">
   				SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, p.p_prjname, m.m_studentID "authorID", m.m_name "authorName", p.p_date, 
-  					(SELECT count(*) FROM member_action WHERE act_what=p.p_id AND act_type='like') p_likenum, p.p_viewnum
+  					(SELECT count(*) FROM member_action WHERE act_what=p.p_id AND act_type='like') p_likenum, p.p_viewnum,
+					(SELECT GROUP_CONCAT(h.h_value SEPARATOR ',') FROM hashtag h WHERE h.p_id = p.p_id) hashtags
 						FROM member m, project p WHERE m.m_id=p.m_id
 					<if test="cate != 0"> <!-- 특정 카테고리 내 검색 -->
 						AND p.cate_id = #{cate} 
