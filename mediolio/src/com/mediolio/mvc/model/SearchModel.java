@@ -43,11 +43,7 @@ public class SearchModel {
 		for(int i=0; i<resultList.size(); i++){
 			System.out.println(((ProjectVO) resultList.get(i)).getP_title());
 		}
-		
-		if(resultList.size() > 0){
-			List<HashtagVO> hashList = sdao.getHashList(resultList);
-			mav.addObject("hashList", hashList);
-		}
+
 		mav.addObject("list", resultList);
 		mav.addObject("total", resultList.size());
 		return mav;
@@ -67,11 +63,7 @@ public class SearchModel {
 		for(int i=0; i<resultList.size(); i++){
 			System.out.println(((ProjectVO) resultList.get(i)).getP_title());
 		}
-		
-		if(resultList.size() > 0){
-			List<HashtagVO> hashList = sdao.getHashList(resultList);
-			mav.addObject("hashList", hashList);
-		}
+
 		return mav;
 	}
 	
@@ -100,11 +92,7 @@ public class SearchModel {
 		List<Object> resultList = sdao.searchTitle(map);
 		mav.addObject("list", resultList);
 		mav.addObject("total", resultList.size());
-		
-		if(resultList.size() > 0){
-			List<HashtagVO> hashList = sdao.getHashList(resultList);
-			mav.addObject("hashList", hashList);
-		}
+
 		return mav;
 	}
 	
@@ -145,11 +133,7 @@ public class SearchModel {
 			mav.addObject("list", resultList);
 		}
 		mav.addObject("total", resultList.size());
-		
-		if(resultList.size() > 0){
-			List<HashtagVO> hashList = sdao.getHashList(resultList);
-			mav.addObject("hashList", hashList);
-		}
+
 		return mav;
 	}
 

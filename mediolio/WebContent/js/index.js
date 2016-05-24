@@ -18,3 +18,15 @@ function tagHover(){
         $('p',this).hide();
     });
 }
+
+function seeMore(cat){
+	$.ajax({
+		url : "mainMorePrjs",
+		type : "POST",
+		data : {cate: cat},
+		success : function(data) {
+			$('#default_body').empty().append(data);
+			tagHover();
+		}
+	});
+}

@@ -6,7 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ProjectVO {
 	private int p_id, m_id, cate_id, p_viewnum, p_likenum, p_type, cl_id, ht_id;
-	private String p_title, p_hash, p_date, p_coverImg, hashtags, authorID, authorName, p_prjname, p_summary, p_workfrom, p_workto;
+	private String p_title, p_hash, p_date, p_coverImg, hashtags, authorID, authorName, p_prjname, p_summary, p_workfrom, p_workto, cate_name;
+
 	private List<MultipartFile> contents;
 	
 	public int getCl_id() {
@@ -51,7 +52,12 @@ public class ProjectVO {
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
 	}
-
+	public String getCate_name() {
+		return cate_name;
+	}
+	public void setCate_name(String cate_name) {
+		this.cate_name = cate_name;
+	}
 	public String getP_prjname() {
 		return p_prjname;
 	}

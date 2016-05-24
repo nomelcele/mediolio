@@ -1,6 +1,7 @@
 package com.mediolio.mvc.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mediolio.mvc.dao.HistoryDao;
 import com.mediolio.mvc.dao.MainDao;
+import com.mediolio.vo.CategoryVO;
 import com.mediolio.vo.HistoryVO;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectVO;
@@ -35,11 +37,43 @@ public class MainModel {
 		ModelAndView mav = new ModelAndView("main/index");		
 		MemberVO mev = (MemberVO) session.getAttribute("mev");
 		if(mev!=null){
+			//로그인 한 상태
 			System.out.println("id : " +mev.getM_id());
 			System.out.println("nickname : "+mev.getM_name());
+			
+			//관심분야 최신 글
+			List<CategoryVO> category = mdao.getInterestingPart(mev.getM_id());
+			mav.addObject("interesting", category);
+			List<ProjectVO> new1 = mdao.getNewProject_interest(category.get(0).getCate_id());
+			List<ProjectVO> new2 = mdao.getNewProject_interest(category.get(1).getCate_id());
+			
+			mav.addObject("new1_idx", new1.size());
+			mav.addObject("new2_idx", new2.size());
+			mav.addObject("new1", new1);
+			mav.addObject("new2", new2);
+		}else{
+			//로그인하지 않은 상태 - 게임/웹&앱/영상 분야 최신 글 출력
+			List<ProjectVO> new1 = mdao.getNewProject_visitor(1);
+			List<ProjectVO> new2 = mdao.getNewProject_visitor(2);
+			List<ProjectVO> new3 = mdao.getNewProject_visitor(3);
+			
+			mav.addObject("new1_idx", new1.size());
+			mav.addObject("new2_idx", new2.size());
+			mav.addObject("new3_idx", new3.size());
+			
+			mav.addObject("new1", new1);//게임
+			mav.addObject("new2", new2);//웹&앱
+			mav.addObject("new3", new3);//영상
 		}
 
 		return mav;
+	}
+	
+	@RequestMapping("mainMorePrjs")
+	public String mainMorePrjs(HttpSession session, Model model, @RequestParam("cate") String cate){
+		
+		model.addAttribute("mainProjects", mdao.mainMorePrjs(Integer.parseInt(cate)));		
+		return "main.selectcategory";
 	}
 	
 	//박성준 1차 작성
@@ -82,7 +116,6 @@ public class MainModel {
 		
 		model.addAttribute("p_type", p_type);
 		model.addAttribute("mainProjects", prjList);
-		model.addAttribute("hashtag", mdao.projectHashtags());
 		return "main.selectcategory";
 	}
 	
@@ -124,8 +157,6 @@ public class MainModel {
 			System.out.println("nickname : "+mev.getM_name());
 		}
 		
-		//model.addAttribute("mainProjects", mdao.mainProjects());
-		model.addAttribute("hashtag", mdao.projectHashtags());
 		model.addAttribute("likepage",mdao.likelist(mev.getM_id()));
 		return "main.selectlikepage";
 	}

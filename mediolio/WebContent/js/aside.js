@@ -1,3 +1,4 @@
+
 $(function(){
 	$(".nav_category>li>div").on('click',function(){
 		var str="";
@@ -12,7 +13,6 @@ $(function(){
 				tagHover();
 			}
 		});
-		
 	});
 /*	$("#userBox #myPf a").click(function(){
 		$.ajax({

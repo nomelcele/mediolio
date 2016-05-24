@@ -8,7 +8,15 @@ $('document').ready(function(){
     })
     
     $('.userPopWrap .msg').on('click', function(){
-    	noteModalOpen(usr_id, usr_name);
+    	if($('#bellWrap').length) noteModalOpen(usr_id, usr_name);
+    	else {
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '로그인하세요.',
+    		    'closeOnClick' : true,
+    		    'size': 'xsm'
+    		  });
+    	}
     });
 })
 

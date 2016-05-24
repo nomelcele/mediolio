@@ -12,12 +12,9 @@
 	            <a href="projectView?m_id=${mainProjects.m_id}&p_id=${mainProjects.p_id}">
 	                <div>
 	                	<p>
-	                	<c:forEach var="hashtag" items="${hashtag}">
-	                		<c:if test="${mainProjects.p_id eq hashtag.p_id && hashtag.h_value ne ''}">
-	                    <!-- <p>태그내용<br>태그내용태그내용태그내용태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br>태그내용<br></p> -->
-	                    		#${hashtag.h_value}<br>
-	                    	</c:if>
-	                    </c:forEach>
+	                		<c:forTokens var="aTag" items="${mainProjects.hashtags }" delims=",">
+								<span>#${aTag }</span><br>
+							</c:forTokens>
 	                    </p>
 	                </div>
 	                <c:if test="${mainProjects.p_coverImg ne '' && mainProjects.p_coverImg ne null}">
