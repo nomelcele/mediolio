@@ -1,5 +1,7 @@
 package com.mediolio.mvc.model;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import com.mediolio.mvc.dao.MemberActionDao;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.Member_actionVO;
 import com.mediolio.vo.MessageVO;
+import com.mediolio.vo.PushMsgVO;
 
 /*
  * Member Action : 쪽지, 팔로우, 푸쉬알림

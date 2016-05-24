@@ -24,7 +24,7 @@
                     <span>${detail.cate_name }</span>
                 </p>
                 <h2>${detail.p_title }</h2>
-                <h3 id="content_userId"><a href="userpage?usr_id=${aReply.m_id }">${writer.m_studentID } ${writer.m_name }</a></h3>
+                <h3 id="content_userId"><a href="userpage?usr_id=${writer.m_id }">${writer.m_studentID } ${writer.m_name }</a></h3>
                 <h3 id="content_date">${detail.p_date }</h3>
                 <h3 id="content_hits"><span>${detail.p_viewnum }</span> views</h3>
 

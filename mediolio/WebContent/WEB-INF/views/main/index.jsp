@@ -132,7 +132,7 @@
 			        </div>
 		        </c:when>
 		        <c:otherwise>
-			        <c:forEach var="new" items="${new1}">
+			        <c:forEach var="newest" items="${new1}">
 			        <div class="newest_contentWrap">
 			            <a href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">
 			                <img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>

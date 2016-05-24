@@ -114,7 +114,7 @@ $(function(){
     			msg+= '<div class="noteWrap receiveNoteWrap">'
 			    			+'<div class="noteWrap_hd">'
 			    				+'<input type="hidden" class="this_msg_id" value="'+entry.msg_id+'">'
-								+'<p class="noteId">'+entry.msg_from_studentID+' '+entry.msg_from_nickname+'</p>'
+								+'<a class="noteId" href="userpage?usr_id='+entry.msg_from+'">'+entry.msg_from_studentID+' '+entry.msg_from_nickname+'</a>'
 								+'<p class="noteDate">'+entry.msg_date+'</p>'
 								+'<a href="#" class="btn_note replyNote">답장</a>'
 								+'<a href="#" class="btn_note btn_deleteNote receiveNote">삭제</a>';
@@ -124,7 +124,7 @@ $(function(){
 	    		msg+= '<div class="noteWrap sendNoteWrap">'
 							+'<div class="noteWrap_hd">'
 								+'<input type="hidden" class="this_msg_id" value="'+entry.msg_id+'">'
-								+'<p class="noteId">'+entry.msg_to_studentID+' '+entry.msg_to_nickname+'</p>'
+								+'<a class="noteId" href="userpage?usr_id='+entry.msg_to+'">'+entry.msg_to_studentID+' '+entry.msg_to_nickname+'</a>'
 								+'<p class="noteDate">'+entry.msg_date+'</p>'
 								+'<a href="#" class="btn_note btn_deleteNote sendNote">삭제</a>';
     		} 
