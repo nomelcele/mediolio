@@ -47,20 +47,28 @@ $('document').ready(function(){
 			// 1. 카테고리 선택
 			alert("카테고리를 선택해주세요.");
 			console.log(orderArr);
-		} 
-		
-//		else if($("#write_dCategory a").html() == "세부 카테고리 선택.."){
-//			// 2. 세부카테고리 선택
-//			alert("세부카테고리를 선택해주세요.");
-//		} 
-		
-		else if($.trim($("#projectTitle").val()) == ""){
+		} else if($("input[name=p_type]").val() == 999){
+			// 2. 서브카테고리 입력
+			alert("서브카테고리를 선택해주세요.");
+		} else if($.trim($("#projectTitle").val()) == ""){
 			// 3. 글 제목 입력
 			alert("제목을 입력해주세요.");
 		} else if($("#write_bd .contentBox").size() == 0){
 			// 4. 내용 입력
 			// $("#write_tagTxt span").size()
 			alert("내용을 입력해주세요.");
+		} else if($.trim($("input[name=p_prjname]").val()) == ""){
+			// 5. 작업 이름 입력
+			alert("작업 이름을 입력해주세요.");
+		} else if($("input[name=p_workfrom]").val() == ""){
+			// 6. 작업 시작일 입력
+			alert("작업 시작일을 입력해주세요.");
+		} else if($("input[name=p_workto]").val() == ""){
+			// 7. 작업 종료일 입력
+			alert("작업 종료일을 입력해주세요.");
+		} else if($.trim($("textarea[name=p_summary]").val()) == ""){
+			// 9. 작업 개요 입력
+			alert("작업 개요를 입력해주세요.");
 		} else{
 			// 파일 업로드
 			// 서버로 보내야 할 파라미터 목록
@@ -78,6 +86,7 @@ $('document').ready(function(){
 			// 2. 임베드 태그, 텍스트: orderArr에 있음
 			// 3. orderArr: 콘텐츠 순서 정보 저장
 			console.log("콘텐츠 순서: "+orderArr);
+			$("input[name=orderArr]").val(orderArr);
 //			for(var i=0; i<orderArr.length; i++){
 //				formData.append("orderArr",orderArr[i]);
 //			}

@@ -21,6 +21,7 @@
 <body>
 <form id="addProjectForm" action="addProject" method="post" enctype="multipart/form-data">
 		<input type="hidden" id="orderArr" name="orderArr"> 
+		<input type="hidden" name="p_type" value="999">
 <!--  		<input type="hidden" id="p_title" name="p_title"> -->
 <!--  		<input type="hidden" id="cate_id" name="cate_id"> -->
  		<input type="hidden" id="hashtags" name="hashtags">
