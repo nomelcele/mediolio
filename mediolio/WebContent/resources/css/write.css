@@ -36,6 +36,8 @@
 #write_tagTxt span::before{content:"#";}
 #write_tagInput{ display:inline-block; width:auto; height:20px; padding:5px; position:absolute; left:0; font-size:14px;}
 
+.autoClass{top:262px; left:339px; z-index:5;}
+.autoMember{left:20px; width:109px; top:32px;}
 
 #projInfoArea{display:none;}
 #projBtnArea{display:none;}

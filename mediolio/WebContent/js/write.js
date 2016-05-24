@@ -593,7 +593,7 @@ $('document').ready(function(){
 	    			var codes = "";
 	    			var arr = jdata;
 	    			for(var i=0; i<arr.length; i++){
-	    				codes += "<li onclick='addClass(this)'>"+arr[i]+"</li>";
+	    				codes += "<li onclick='addProjClass(this)'>"+arr[i]+"</li>";
 	    			}
 	    			if(arr.length>0){
 	    				$(".autoClassArea").html(codes);
@@ -608,11 +608,11 @@ $('document').ready(function(){
 	    		}
 	    	});
     	} else {
-    		$(".autoCompleteBox").css("display","none");
+    		$(".autoClass").css("display","none");
     	}
     });
     
-    $(".writeLine_text").keyup(function(){
+    $(".teamMateName").keyup(function(){
     	// 학생 이름 자동 완성
 		if($(this).val().trim() != ""){
 	    	$.ajax({
@@ -1013,6 +1013,14 @@ function tagHover_write(){
     });
 }
 
+function addProjClass(li){
+	// 자동 완성 목록에서 항목 클릭 시 관련 과목 영역에 추가
+	var newClass = li;
+	$(newClass).parent().parent().parent().find(".project_related_class").val($(newClass).find("span").html());
+	$(".autoClass").css("display","none");
+	$(".cardWindow_write2").append("<input type='hidden' name='cl_id' value="+$(newClass).find(".classId").val()+">");
+}
+
 function addMember(li){
 	// 자동 완성 목록에서 항목 클릭 시 팀원 영역에 추가
 	var newMember = li;
@@ -1023,6 +1031,7 @@ function addMember(li){
 
 function autoCompleteMember(txt){
 	// 팀원 입력 시 이름 자동 완성
+	console.log("들어오냐???????");
 	var input = txt;
 	if($(input).val().trim() != ""){
     	$.ajax({
@@ -1041,8 +1050,8 @@ function autoCompleteMember(txt){
     			if(arr.length>0){
     				$(".autoMemberArea").html(codes);
         			$(".autoMember").css({
-        				display: "block"
-//        				top: $(".historyList_addRelated").offset().top-108
+        				display: "block",
+        				top: $(".autoMember").offset().top+35
         			});
         			
             		// moveAutoCompleteBox();
