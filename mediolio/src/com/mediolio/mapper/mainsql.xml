@@ -39,8 +39,8 @@
 			SELECT @NO := @NO + 1 AS ROWNUM, A.*
 				FROM(
 				SELECT p_id, m_id, p_coverImg, p_title, p_summary,
-					(SELECT GROUP_CONCAT(h.h_value SEPARATOR ',') FROM hashtag h WHERE h.p_id = p_id) hashtags
-					FROM project WHERE cate_id = #{category }
+					(SELECT GROUP_CONCAT(h.h_value SEPARATOR ',') FROM hashtag h WHERE h.p_id = p.p_id) hashtags
+					FROM project p WHERE cate_id = #{category }
 					ORDER BY p_id DESC
 				) A,(SELECT @NO := 0 ) B
 			) C
@@ -53,8 +53,8 @@
 			SELECT @NO := @NO + 1 AS ROWNUM, A.*
 				FROM(
 				SELECT p_id, m_id, p_coverImg, p_title, p_summary,
-					(SELECT GROUP_CONCAT(h.h_value SEPARATOR ',') FROM hashtag h WHERE h.p_id = p_id) hashtags
-					FROM project WHERE cate_id = #{category }
+					(SELECT GROUP_CONCAT(h.h_value SEPARATOR ',') FROM hashtag h WHERE h.p_id = p.p_id) hashtags
+					FROM project p WHERE cate_id = #{category }
 					ORDER BY p_id DESC
 				) A,(SELECT @NO := 0 ) B
 			) C
