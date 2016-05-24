@@ -19,6 +19,7 @@ function tagHover(){
     });
 }
 
+//메인에서 최신 글 "더 보기" 버튼 눌렀을 때
 function seeMore(cat){
 	$.ajax({
 		url : "mainMorePrjs",
