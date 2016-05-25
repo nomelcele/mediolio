@@ -6,6 +6,7 @@ var orderArr=[];
 var colorRange;
 var colorNum=0;
 var colorId=0;
+var tmNum = 0;
 
 $('document').ready(function(){
 	/* 프로젝트 개요 작성칸 height 조절*/
@@ -18,7 +19,8 @@ $('document').ready(function(){
     
     /* 팀원 추가 버튼 */
     $('#btn_addTeamMate').on('click', function(){
-        var newTeamInput = '<div class="write_teamMateWrap"><div class="threeCell shortCell"><input class="writeLine_text teamMateName" type="text" onkeyup="autoCompleteMember(this)" placeholder="이름"><div class="autoCompleteBox classBox autoMember"><ul class="autoCompleteArea autoMemberArea"></ul></div></div><div class="threeCell shortCell"><input class="writeLine_text" type="text" placeholder="역할"></div><div class="threeCell"><input class="writeLine_text" type="text" placeholder="소개"></div></div>';
+    	tmNum++;
+        var newTeamInput = '<div class="write_teamMateWrap"><div class="threeCell shortCell"><input class="writeLine_text teamMateName" data-sort='+tmNum+' type="text" onkeyup="autoCompleteMember(this)" placeholder="이름"><div class="autoCompleteBox classBox autoMember"><ul class="autoCompleteArea autoMemberArea"></ul></div></div><div class="threeCell shortCell"><input class="writeLine_text" type="text" name="tmList['+tmNum+'].tm_role" placeholder="역할"></div><div class="threeCell"><input class="writeLine_text" type="text" name="tmList['+tmNum+'].tm_detail" placeholder="소개"></div></div>';
         
         $('#teamMateGroup').append(newTeamInput);
     })
@@ -614,6 +616,7 @@ $('document').ready(function(){
     
     $(".teamMateName").keyup(function(){
     	// 학생 이름 자동 완성
+    	var input = $(this);
 		if($(this).val().trim() != ""){
 	    	$.ajax({
 	    		type: "POST",
@@ -629,12 +632,17 @@ $('document').ready(function(){
 	    				codes += "<li onclick='addMember(this)'>"+arr[i]+"</li>";
 	    			}
 	    			if(arr.length>0){
-	    				$(".autoMemberArea").html(codes);
-	        			$(".autoMember").css({
-	        				display: "block"
-//	        				top: $(".historyList_addRelated").offset().top-108
-	        			});
-	        			
+	    				$(input).parent().find(".autoMember").find(".autoMemberArea").html(codes);
+	    				// $(".autoMemberArea").html(codes);
+	    				$(input).parent().find(".autoMember").css({
+	    					display:"block"
+	    				});
+	    				
+//	    				$(".autoMember").css({
+//	        				display: "block"
+////	        				top: $(".historyList_addRelated").offset().top-108
+//	        			});
+//	        			
 	            		// moveAutoCompleteBox();
 	        			// 자동 완성 목록 위치 변경: 현재 커서 위치에 맞게
 	    			}
@@ -645,10 +653,6 @@ $('document').ready(function(){
     	}
     });
     
-    $("#submit_step1").click(function(){
-    	// location='gotoStep2';
-    	history.back();
-    });
     
 });
 
@@ -1025,8 +1029,10 @@ function addMember(li){
 	// 자동 완성 목록에서 항목 클릭 시 팀원 영역에 추가
 	var newMember = li;
 	$(newMember).parent().parent().parent().find(".teamMateName").val($(newMember).find("span").html());
+	var tmMemOrder = $(newMember).parent().parent().parent().find(".teamMateName").attr("data-sort");
+	console.log("팀원 순서: "+tmMemOrder);
 	$(".autoMember").css("display","none");
-	$(".cardWindow_write2").append("<input type='hidden' name='m_id' value="+$(newMember).find(".memId").val()+">");
+	$(".cardWindow_write2").append("<input type='hidden' name='tmList["+tmMemOrder+"].m_id' value="+$(newMember).find(".memId").val()+">");
 }
 
 function autoCompleteMember(txt){
@@ -1048,12 +1054,16 @@ function autoCompleteMember(txt){
     				codes += "<li onclick='addMember(this)'>"+arr[i]+"</li>";
     			}
     			if(arr.length>0){
-    				$(".autoMemberArea").html(codes);
-        			$(".autoMember").css({
-        				display: "block",
-        				top: $(".autoMember").offset().top+35
-        			});
-        			
+    				$(input).parent().find(".autoMember").find(".autoMemberArea").html(codes);
+    				$(input).parent().find(".autoMember").css({
+    					display:"block"
+    				});
+//    				
+//    				$(".autoMemberArea").html(codes);
+//    				var currentTop = $(".autoMember").offset().top;
+//        			$(".autoMember").css({
+//        				display: "block"
+//        			});
             		// moveAutoCompleteBox();
         			// 자동 완성 목록 위치 변경: 현재 커서 위치에 맞게
     			}
