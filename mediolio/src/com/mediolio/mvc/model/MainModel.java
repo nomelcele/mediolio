@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mediolio.mvc.dao.HistoryDao;
 import com.mediolio.mvc.dao.MainDao;
+import com.mediolio.vo.BranchVO;
 import com.mediolio.vo.CategoryVO;
 import com.mediolio.vo.HistoryVO;
 import com.mediolio.vo.MemberVO;
@@ -45,7 +46,13 @@ public class MainModel {
 			List<ProjectVO> new2 = mdao.getNewProject_interest(category.get(1).getCate_id());
 			
 			// 나의 최근 히스토리
-//			mav.addObject("", mdao.recentHistory(mev.getM_id()));
+			List<BranchVO> recentHt = mdao.recentHistory(mev.getM_id()); 
+			System.out.println("브랜치 개수: "+recentHt.size());
+			for(BranchVO vo:recentHt){
+				System.out.println("브랜치 번호: "+vo.getBr_id());
+			}
+			mav.addObject("recentHtTitle",recentHt.get(0).getHistoryTitle());
+			mav.addObject("recentHtBrs",recentHt);
 			
 			if(new1 != null && new2 != null){
 				mav.addObject("new1_idx", new1.size());
