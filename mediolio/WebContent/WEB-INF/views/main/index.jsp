@@ -30,25 +30,27 @@
                         <h3 class="ellipsis">${br.br_title}</h3>
                         <h4>${br.br_date}</h4>
                     </div>
-                    <div class="timeCard_visualWrap slider">
-                        <ul class="bxslider">
-                        	<c:if test="${br.br_img1 ne null}">
-	                            <li><a href="#">
-	                                <img src="upload/history/${br.br_img1}" class="timeLine_img">
-	                            </a></li>
-                            </c:if>
-                            <c:if test="${br.br_img2 ne null}">
-	                            <li><a href="#">
-	                                <img src="upload/history/${br.br_img2}" class="timeLine_img">
-	                            </a></li>
-                            </c:if>
-                            <c:if test="${br.br_img3 ne null}">
-	                            <li><a href="#">
-	                                <img src="upload/history/${br.br_img3}" class="timeLine_img">
-	                            </a></li>
-                            </c:if>
-                        </ul>
-                    </div><!--//timeCard_visualWrap -->
+                    <c:if test="${br.br_img1 ne null || br.br_img2 ne null || br.br_img3 ne null}">
+	                    <div class="timeCard_visualWrap slider">
+	                        <ul class="bxslider">
+	                        	<c:if test="${br.br_img1 ne null}">
+		                            <li><a href="#">
+		                                <img src="upload/history/${br.br_img1}" class="timeLine_img">
+		                            </a></li>
+	                            </c:if>
+	                            <c:if test="${br.br_img2 ne null}">
+		                            <li><a href="#">
+		                                <img src="upload/history/${br.br_img2}" class="timeLine_img">
+		                            </a></li>
+	                            </c:if>
+	                            <c:if test="${br.br_img3 ne null}">
+		                            <li><a href="#">
+		                                <img src="upload/history/${br.br_img3}" class="timeLine_img">
+		                            </a></li>
+	                            </c:if>
+	                        </ul>
+	                    </div><!--//timeCard_visualWrap -->
+                    </c:if>
                     <div class="timeCard_content">
                         ${br.br_text}
                     </div><!--//timeCard_content-->
