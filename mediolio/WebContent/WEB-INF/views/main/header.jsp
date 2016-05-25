@@ -41,14 +41,35 @@
 		<c:choose>
 		<c:when test="${sessionScope.mev != null }">
 			<div id="bellWrap">
-	            <a id="bellIcon" href="#"></a>
+	            <a id="bellIcon" href="#"><span id="bellNum">0</span></a>
 	            <ul class="bubble" id="bubble_bell">
-<!--  	                <li><a href="#">알림 3아주아주아주아주아주아주아주아주긴알람입니당 긴알람이에요 긴알람긴알람리람ㅇㄴ리ㅏㅁ넝리ㅏㅁㄴㅇ러ㅣㅏㅁㄴㄹㅇ</a></li>
-	                <li><a href="#">알림 1</a></li>
-	                <li><a href="#">알림 2</a></li>
-	                <li><a href="#">알림 3</a></li>
-	                <li><a href="#">알림 1</a></li>
-	                <li><a href="#">알림 2</a></li> -->
+	                <ul class="bellTab">
+	                    <li><a onclick="bellTab('bellContent01',event)" href="#" class="click">쪽지</a></li>
+	                    <li><a onclick="bellTab('bellContent02',event)" href="#">친구</a></li>
+	                    <li><a onclick="bellTab('bellContent03',event)" href="#">댓글</a></li>
+	                </ul>
+	                <ul class="bellContent" id="bellContent01">
+	                    <li><a href="#">알립입니다.</a></li>
+	                    <li><a href="#">알림 1</a></li>
+	                    <li><a href="#">알림 2</a></li>
+	                    <li><a href="#">알림 3</a></li>
+	                    <li><a href="#">알림 4</a></li>
+	                    <li><a href="#">알림 5</a></li>
+	                </ul>
+	                
+	                <ul class="bellContent" id="bellContent02">
+	                    <li><a href="#">알림 2</a></li>
+	                    <li><a href="#">알림 3</a></li>
+	                    <li><a href="#">알림 4</a></li>
+	                    <li><a href="#">알림 5</a></li>
+	                </ul>
+	                
+	                <ul class="bellContent" id="bellContent03">
+	                    <li><a href="#">알립입니다.</a></li>
+	                    <li><a href="#">알림 1</a></li>
+	                    <li><a href="#">알림 2</a></li>
+	                    <li><a href="#">알림 3</a></li>
+	                </ul>
 	            </ul>
 	            <span id="bubbleAfter"></span>
 	            <input type="hidden" id="hidden_m_id" value="${sessionScope.mev.m_id}"><!-- 로그인한 사람 m_id -->

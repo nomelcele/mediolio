@@ -106,47 +106,6 @@ a#uploadPf{ display:block; width:100%; height:60px; font-size:13px; font-family:
 
 
 
-#bellWrap{ position:relative; }
-#bellIcon{ display:block; position:relative; width:30px; height:30px; float:left; 
-margin-right:20px;  background-image:url(../images/bell.png); background-position:center center; background-repeat:no-repeat; background-size:95%; }
-
-#bellIcon span#bellNum{ display:block; position:absolute; z-index:15; top:0; right:0; width:15px; height:15px; border-radius:50%; background:red; color:#fff; font-size:9px; text-align:center; line-height:15px;}
-
-
-
-#bubble_bell{ position:absolute; z-index:17; top:35px; left:-15px; box-sizing: border-box;  
-background:#fff; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border:1px solid #eee; 
-min-width:420px; width:auto; max-width:500px; height:150px; overflow-y:hidden; box-shadow:1px 1px 8px rgba(0,0,0,.3)}
-
-
-#bubble_bell::-webkit-scrollbar { 
-    display: block; 
-}
-
-#bubbleAfter{   display: block;
-    content: "";
-    position: absolute;
-    top: 29px;
-    border-style: solid;
-    border-width: 0 10px 11px;
-    display: none;
-    width: 0;
-    z-index: 1;
-    left:5px; border-color:#fff transparent;}
-
-#bubble_bell .bell_content{float:left; width:100%; min-height:30px; height:auto; padding-top:10px; padding-bottom:10px; line-height:20px; box-sizing:border-box; outline:none; }
-#bubble_bell .bell_content img{height:16px; width:auto; float:left; display:inline-block; padding:4px 2px; margin:0 5px;}
-#bubble_bell .bell_content a{display:block; min-width:200px; width:auto; max-width:500px; height:auto; color:#666; font-size:12px; box-sizing:border-box; padding-left:10px; }
-#bubble_bell .bell_content a span{float:left;}
-#bubble_bell .bell_content .ellipsis{width:auto; max-width:100px; -o-text-overflow:ellipsis; word-wrap:normal !important; display: inline-block; font-weight:bold; margin:0 4px;}
-#bubble_bell .bell_content .msg_text{max-width:390px; font-weight:normal; clear: both;}
-#bubble_bell .bell_content .bell_date{float:right; margin-right:20px;}
-#bubble_bell .bell_content:hover{ background:#eee; }
-
-#bubble_bell .bell_content:first-child:hover{ background:#eee; border-radius:10px 10px 0 0; }
-#bubble_bell .bell_content:last-child:hover{ background:#eee; border-radius:0 0 10px 10px; }
-
-#bubble_bell .bell_nothing{width:100%; height:140px; line-height:140px; text-align: center;}
 
 
 /* 쪽지 페이지 */
@@ -163,3 +122,36 @@ min-width:420px; width:auto; max-width:500px; height:150px; overflow-y:hidden; b
 .userPopWrap li:last-child{ border:none;}
 .userPopWrap li a{ display:inline-block; width:100px; line-height:20px; text-align:center; color:#666;  }
 .userPopWrap li a:hover{ background:#f9f9f9; }
+
+
+
+/* 알림 */
+#bellWrap{ position:relative; }
+#bellWrap #bellIcon{ display:block; position:relative; float:left; width:30px; height:30px; margin:0 20px 0 0;  background-image:url(../images/bell.png); background-position:center center; background-repeat:no-repeat; background-size:95%; }
+#bellWrap #bellIcon span#bellNum{ display:block; position:absolute; z-index:15; top:0; right:0; width:15px; height:15px; border-radius:50%; background:red; color:#fff; font-size:9px; text-align:center; line-height:15px;}
+
+
+
+#bellWrap #bubble_bell{ position:absolute; z-index:17; top:35px; left:-15px; box-sizing: border-box;  min-width:420px; width:auto; max-width:500px; height:150px; background:#fff; box-shadow:1px 1px 8px rgba(0,0,0,.3); border:1px solid #eee; border-radius:0; overflow-y:hidden; }
+#bellWrap #bubble_bell::-webkit-scrollbar { display: block; }
+
+#bellWrap #bubble_bell .bellContent li{ box-sizing:border-box; width:100%; min-height:30px; height:auto; padding:10px 0; outline:none; line-height:20px;}
+#bellWrap #bubble_bell .bellContent li:hover{ background:#f8f8f8; }
+
+#bellWrap #bubble_bell .bellContent li a{ display:block; box-sizing:border-box; min-width:200px; width:auto; max-width:500px; height:auto; padding:0 0 0 10px; color:#666; font-size:12px;  }
+
+#bellWrap #bubbleAfter{ display:none; content:""; position:absolute; top:29px; z-index:1; left:5px; width:0; border-style:solid; border-width:0 10px 11px; border-color:#fff transparent;}
+
+
+
+/* 벨 탭 */
+.bellTab{ position:fixed; z-index:10; width:420px; height:30px; background:#fff; border-bottom:1px solid #ccc;  box-shadow:0 2px 2px #eee; background:#f7f7f7;; }
+
+.bellTab li{ float:left; box-sizing:border-box; width:33.333%; height:30px; border-right:1px solid #ddd; }
+.bellTab li:last-child{ border-right:none;}
+.bellTab li a{ display:block; line-height:30px; text-align:center; color:#ccc;}
+.bellTab li a:hover{ color:#333;}
+.bellTab li a.click{ color:#333; background:#eee;}
+.bellContent{ display:none; margin:30px 0 0 0;}
+.bellContent#bellContent01{ display:block;}
+
