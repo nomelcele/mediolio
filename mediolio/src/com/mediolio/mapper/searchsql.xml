@@ -4,6 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="search">
   
+  	<select id="getSkillName" parameterType="string" resultType="string">
+  		SELECT sk_name FROM skills WHERE sk_id=#{sk_id}
+  	</select>
+  	
   	<select id="searchtag" parameterType="string" resultType="pvo">
   		SELECT * FROM (
 			SELECT @NO := @NO + 1 AS ROWNUM, A.*
@@ -64,9 +68,10 @@
   	</select>
   	
 	<select id="searchMemberInCategory" parameterType="java.util.Map" resultType="fvo">
-		SELECT DISTINCT m.m_id, m.m_studentID "authorID", m.m_name "authorName", m.m_introduce, m.m_interesting1, m.m_interesting2,
+		SELECT DISTINCT m.m_id, m.m_studentID, m.m_name, m.m_interesting1, m.m_interesting2,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
+			(SELECT GROUP_CONCAT(_sk.sk_name SEPARATOR ', ') FROM memberskill _mk, skills _sk WHERE _mk.sk_id=_sk.sk_id AND _mk.m_id=m.m_id) AS skills,
 			(SELECT SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/'), ',', 3) FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC) AS projects
 			FROM
 				(SELECT DISTINCT m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2 FROM member m, project p WHERE m.m_id=p.m_id AND p.cate_id=#{cate} order by m.m_studentID DESC) m, memberskill mk 
@@ -85,9 +90,10 @@
   	</select>
   	
 	<select id="searchMemberInTotal" parameterType="java.util.Map" resultType="fvo">
-		SELECT DISTINCT m.m_id, m.m_studentID "authorID", m.m_name "authorName", m.m_introduce, m.m_interesting1, m.m_interesting2,
+		SELECT DISTINCT m.m_id, m.m_studentID, m.m_name, m.m_interesting1, m.m_interesting2,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting2) AS m_interestingText2,
+			(SELECT GROUP_CONCAT(_sk.sk_name SEPARATOR ', ') FROM memberskill _mk, skills _sk WHERE _mk.sk_id=_sk.sk_id AND _mk.m_id=m.m_id) AS skills,
 			(SELECT SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/'), ',', 3) FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC) AS projects
 			FROM
 				(SELECT count(p.p_id) AS cnt, m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2 FROM member m, project p WHERE m.m_id = p.m_id group by m.m_id ORDER BY cnt DESC, m.m_id DESC) m, memberskill mk 

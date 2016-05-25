@@ -21,8 +21,8 @@ $('document').ready(function(){
 })
 
 
-function userPop(event, aTag, m_id){
-	usr_name = $(aTag).text();
+function userPop(event, aObj, m_id){
+	usr_name = $(aObj).text();
 	usr_id = m_id;
 	
     var mouseX = event.clientX;
