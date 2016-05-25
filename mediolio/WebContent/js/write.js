@@ -9,6 +9,8 @@ var colorId=0;
 var tmNum = 0;
 
 $('document').ready(function(){
+	$(".writeStp2").hide();
+	
 	/* 프로젝트 개요 작성칸 height 조절*/
 	$('.writeLongLineWrap').on( 'keyup', 'textarea', function (e){
         $(this).css('height', 'auto' );
