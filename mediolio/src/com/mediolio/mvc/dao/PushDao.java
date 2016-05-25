@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.socket.WebSocketSession;
 
-import com.mediolio.vo.MessageVO;
 
 @Repository
 public class PushDao {

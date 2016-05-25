@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mediolio.mvc.dao.HistoryDao;
 import com.mediolio.mvc.dao.SearchDao;
 import com.mediolio.vo.FriendVO;
-import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.ProjectVO;
 
 @Controller
