@@ -34,8 +34,9 @@
 		        	</c:if>
 		        	<c:if test="${htNum eq -1}">
 		        		<div class="timeCardWrap clear">
+		        			<div class="timeCircle"></div>
 			        		<div class="cardWrap timeCard">
-			        			<div>로그인 후 나의 히스토리를 확인하세요.</div>
+			        			<div class="mainTxt">로그인 후 나의 히스토리를 확인하세요.</div>
 			        		</div>
 			        	</div>
 		        	</c:if>
