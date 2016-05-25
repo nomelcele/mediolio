@@ -12,7 +12,7 @@
 <div id="contentsWrap">
 	<div class="writeWrap clear">
 	<form method="post">
-	    <div class="cardWindow cardWindow_write2">
+	    <div class="cardWindow cardWindow_write2 writeStp2">
             <div class="cardWindow_hd">2단계 : 프로젝트 정보 작성</div>
             <div class="writeLineWrap">
                 <div class="writeLine_1">작업 이름</div>
@@ -68,8 +68,8 @@
             </div><!--//writeLineWrap-->
         </div><!--//cardWindow-->
         
-        <input type="button" class="write_submit" id="submit_step1" value="글 내용 작성"/>
-        <input type="button" class="write_submit" id="submit_portfolio" value="작성 완료"/>
+        <input type="button" class="write_submit writeStp2" id="submit_step1" onclick="writeStep('step1')" value="글 내용 작성"/>
+        <input type="button" class="write_submit writeStp2" id="submit_portfolio"  onclick="writeStep('step3')" value="작성 완료"/>
     </form>
     </div> <!-- writeWrap -->
 </div> <!-- contentsWrap -->        

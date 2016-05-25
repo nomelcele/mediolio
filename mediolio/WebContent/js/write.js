@@ -25,21 +25,7 @@ $('document').ready(function(){
         $('#teamMateGroup').append(newTeamInput);
     })
     
-    $("#projTab1").click(function(){
-    	// 1단계 이동
-    	$("#contentArea").css("display","block");
-    	$(".cardWrap").css("display","block");
-    	$("#projInfoArea").css("display","none");
-    	$("#projBtnArea").css("display","none");    	
-    });
 
-    $("#projTab2").click(function(){
-    	// 2단계 이동
-    	$("#contentArea").css("display","none");
-    	$(".cardWrap").css("display","none");
-    	$("#projInfoArea").css("display","block");
-    	$("#projBtnArea").css("display","block");
-    });
     
 	$("#submit_portfolio").click(function(){
 		// 프로젝트 등록
@@ -1075,7 +1061,21 @@ function autoCompleteMember(txt){
 }
 
 
-function writeNavi(event){
+function writeNavi(step){
 	$('.writeNavi a').removeClass('click');
-	event.target.className="click";
+	$('#'+step).addClass("click");
+	writeStep(step);
+}
+
+function writeStep(step){
+	$('.writeNavi a').removeClass('click');
+	$('#'+step).addClass("click");
+	if (step=='projTab1'){
+		$('.writeStp2').hide();
+		$('.writeStp1').show();
+	}
+	else if (step=='projTab2'){
+		$('.writeStp1').hide();
+		$('.writeStp2').show();
+	}
 }
