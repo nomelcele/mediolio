@@ -35,9 +35,6 @@
                         		${a.m_interestingText1 }
                         		<c:if test="${fn:length(a.m_interestingText2) ne 0}">
                         			, ${a.m_interestingText2 }
-                        			<c:if test="${fn:length(a.m_interestingText3) ne 0}">
-                        				, ${a.m_interestingText3 }
-                        			</c:if>
                         		</c:if>
                         	</c:if>
                         	</span>

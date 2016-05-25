@@ -85,7 +85,6 @@ function handlingSearch(option, keyword){
 		else {
 			if(skVal == null || skVal == undefined) skVal = '0';
 			var ctgr = returnCategoryVal($('.team_category').find('.btn_222').val());
-			alert(keyword +", " + option + ", " + ctgr + "," + skVal);
 			location.href="searchM?key="+keyword+"&ct="+ctgr+"&sk="+skVal;
 		}
 	}
@@ -104,8 +103,8 @@ function returnCategoryVal(text){
 
 $('document').ready(function(){
 	//검색창에 검색중인 옵션 표시
-	$('#text_main').val($('.searchResult strong').text());
-	var searched_option = $('.searchResult span').text();
+	$('#text_main').val($('.searchResult .searchKey').text());
+	var searched_option = $('.searchResult .searchType').text();
 	
 	$('#selectWrap_main .list li').removeClass("selected");
 	if(searched_option == ''){

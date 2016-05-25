@@ -10,7 +10,10 @@
     </div><!--//rmcnWrap-->
     
     <div class="cardWrap searchResultWrap">
-        <p class="searchResult">"<strong>${key }</strong>"&nbsp;<span>${type }</span> 검색결과 ${total }건</p>
+        <p class="searchResult">
+             <span class="searchType">${type }</span>  검색 > ${category } > 
+        	"<strong class="searchKey">${key }</strong>"  ( 결과 ${total }건 )
+		</p>
     </div>
     
     <c:forEach var="prj" items="${list}">
