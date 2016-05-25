@@ -6,10 +6,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class BranchVO {
 	private int br_id, ht_id, br_public;
-	private String br_title, br_img1, br_img2, br_img3, br_text, br_date;
+	private String br_title, br_img1, br_img2, br_img3, br_text, br_date, historyTitle;
 	private List<MultipartFile> imgFiles;
 	
-	
+	public String getHistoryTitle() {
+		return historyTitle;
+	}
+	public void setHistroyTitle(String historyTitle) {
+		this.historyTitle = historyTitle;
+	}
 	public List<MultipartFile> getImgFiles() {
 		return imgFiles;
 	}

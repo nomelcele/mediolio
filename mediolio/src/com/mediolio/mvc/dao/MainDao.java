@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mediolio.vo.BranchVO;
 import com.mediolio.vo.CategoryVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.ProjectVO;
@@ -46,6 +47,11 @@ public class MainDao {
 
 	public List<ProjectVO> mainMorePrjs(int category) {
 		return st.selectList("main.mainMorePrjs", category);
+	}
+	
+	public List<BranchVO> recentHistory(int m_id){
+		// 나의 최근 히스토리
+		return st.selectList("main.recentHistory", m_id);
 	}
 	
 }
