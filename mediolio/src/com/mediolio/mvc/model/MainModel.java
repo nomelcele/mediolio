@@ -51,8 +51,8 @@ public class MainModel {
 			for(BranchVO vo:recentHt){
 				System.out.println("브랜치 번호: "+vo.getBr_id());
 			}
-			mav.addObject("recentHtTitle",recentHt.get(0).getHistoryTitle());
-			mav.addObject("recentHtBrs",recentHt);
+			//mav.addObject("recentHtTitle",recentHt.get(0).getHistoryTitle());
+			//mav.addObject("recentHtBrs",recentHt);
 			
 			if(new1 != null && new2 != null){
 				mav.addObject("new1_idx", new1.size());
