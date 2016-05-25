@@ -50,10 +50,17 @@ public class HistoryModel {
 			for(int i=0; i<imgFiles.size(); i++){
 				MultipartFile multipartFile = imgFiles.get(i);
 				String fileName = multipartFile.getOriginalFilename();
+				
 				if(fileName != ""){
+					String[] fileFullName = multipartFile.getOriginalFilename().split("\\.");
+					String fName = fileFullName[0]; // 파일 이름
+					String fileExt = fileFullName[1].toLowerCase(); // 파일 확장자
+					String newFileName = fName+"_"+System.currentTimeMillis()+"."+fileExt;
+					System.out.println("New File Name: "+newFileName); // 새로운 파일 이름(중복 방지)
+				
 					String realPath = session.getServletContext().getRealPath("/"); // 업로드 경로
 					StringBuffer path = new StringBuffer();
-					path.append(realPath).append("upload\\history\\").append(fileName);
+					path.append(realPath).append("upload\\history\\").append(newFileName);
 					System.out.println("File Upload Path: "+path);
 					File file = new File(path.toString());
 					file.mkdirs();
@@ -62,13 +69,13 @@ public class HistoryModel {
 						switch(i){
 						// db에 저장할 이미지 파일 이름 VO 객체에 세팅
 							case 0:
-								brvo.setBr_img1(fileName);
+								brvo.setBr_img1(newFileName);
 								break;
 							case 1:
-								brvo.setBr_img2(fileName);
+								brvo.setBr_img2(newFileName);
 								break;
 							case 2:
-								brvo.setBr_img3(fileName);
+								brvo.setBr_img3(newFileName);
 								break;
 						}
 					} catch (Exception e) {
