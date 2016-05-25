@@ -13,7 +13,7 @@
 		// 웹소켓 생성
 		// spring - "ws://localhost:8089/mediolio/websocket?id="+m_id;
 		// 서버에 올릴 용 - "ws://52.79.195.100:8080/mediolio/websocket?id="+m_id;
-		var wsUri = "ws://52.79.195.100:8080/mediolio/websocket?id="+m_id;
+		var wsUri = "ws://localhost:8089/mediolio/websocket?id="+m_id;
 		websocket = new WebSocket(wsUri);
 		
 		//WebSocket 연결
@@ -85,9 +85,9 @@ function timeGapCalculate(pushed_date){
 }
 
 //푸쉬알림 목록 받아오기
-function getNotifications(){
+function getMsgNotifications(){
 	$.ajax({
-		url: "getNotifications",
+		url: "getMsgNotifications",
 		type: "POST",
 		data: {m_id :$('#hidden_m_id').val()},
 		dataType:"JSON",
@@ -109,7 +109,7 @@ function getNotifications(){
 				});
 				$('#mCSB_2_container').append(appendMsg);
 			}
-			if(result.act.length>0){
+/*			if(result.act.length>0){
 				$.each(result.act, function(index, entry){
 					if(entry.act_type == 'like'){
 						appendAct += '<li class="bell_content">'
@@ -140,7 +140,7 @@ function getNotifications(){
 					}
 				});
 				$('#mCSB_2_container').append(appendAct);
-			}
+			}*/
 			$('#bubble_bell, #bubbleAfter').show();  
 		}//success함수 끝
 	});
