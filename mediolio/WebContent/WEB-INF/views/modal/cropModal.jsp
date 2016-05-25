@@ -85,10 +85,13 @@
 	});
 	
 	function uploadAjax() {
+		var form = new FormData(document.getElementById("coverImg_form"));
+		form.append("coverImg", $('#cover_img').prop("files")[0], $('#cover_img').val());
+		
 		$.ajax({
 			url: "cropImage",
 			type: "POST",
-			data: new FormData(document.getElementById("coverImg_form")),
+			data: form,
 	        enctype: "multipart/form-data",
 			processData: false,
 			contentType: false,
