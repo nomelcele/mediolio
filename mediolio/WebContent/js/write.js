@@ -1073,3 +1073,9 @@ function autoCompleteMember(txt){
 		$(".autoMember").css("display","none");
 	}
 }
+
+
+function writeNavi(event){
+	$('.writeNavi a').removeClass('click');
+	event.target.className="click";
+}

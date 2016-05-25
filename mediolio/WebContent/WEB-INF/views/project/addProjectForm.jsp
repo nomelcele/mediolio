@@ -34,7 +34,13 @@
 <div id="contentsWrap">
 	<div class="writeWrap clear">
 	<!-- 탭 -->
-	        <h1 class="pageTitle"><a id="projTab1" href="#">1. 글 내용 작성</a><span class="pageTitleNext"><a id="projTab2" href="#">2. 프로젝트 정보 작성</a></span></h1>
+        <h1 class="writeNavi">
+        	<a class="click" id="projTab1" href="#" onclick="writeNavi(event)">1. 글 내용 작성</a>
+        	<b>></b>
+        	<span class="writeNaviNext">
+        		<a id="projTab2" href="#" onclick="writeNavi(event)">2. 프로젝트 정보 작성</a>
+        	</span>
+        </h1>
     	<!-- 탭 -->
 	    <div class="cardWindow" id="contentArea">
 	        <div class="cardWindow_hd">1단계 : 글 내용 작성</div>
