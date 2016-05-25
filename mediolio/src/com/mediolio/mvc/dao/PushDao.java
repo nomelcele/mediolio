@@ -48,4 +48,5 @@ public class PushDao {
 		map.put("msg", st.selectList("push.getNotificationsMsg", Integer.parseInt(m_id)));
 		return map;
 	}
+
 }

@@ -92,40 +92,44 @@ public class MainModel {
 	@RequestMapping("selcatcard")
 	public String selcatcard(HttpSession session, Model model, @RequestParam("selcat") String selcat){
 		String category="0";
-		String p_type;
+		String category_name="PROJECT";
 		List<ProjectVO> prjList;
 		
 		if(selcat.equals("ct_project")){
 			//프로젝트인 경우
-			p_type="1";
 			prjList = mdao.getProjectLists();
 			
 		}else{
 			//과제인 경우
-			p_type="0";
 			if(selcat.equals("ct_game")){
 				category="1";
+				category_name="GAME";
 			}
 			else if(selcat.equals("ct_webApp")){
 				category="2";
+				category_name="WEB & APP";
 			}
 			else if(selcat.equals("ct_video")){
 				category="3";
+				category_name="VIDEO & SOUND";
 			}
 			else if(selcat.equals("ct_3d")){
 				category="4";
+				category_name="DESIGN";
 			}
 			else if(selcat.equals("ct_design")){
 				category="5";
+				category_name="3D";
 			}
 			else if(selcat.equals("ct_misc")){
 				category="6";
+				category_name="MISC";
 			}
 			prjList = mdao.getCertainCategoryList(category);
 			
 		}
 		
-		model.addAttribute("p_type", p_type);
+		model.addAttribute("category_name", category_name);
 		model.addAttribute("mainProjects", prjList);
 		return "main.selectcategory";
 	}

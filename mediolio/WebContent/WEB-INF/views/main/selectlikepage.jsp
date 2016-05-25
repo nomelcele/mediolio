@@ -2,7 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
-	<div id="contentsWrap">
+<div id="navigator">
+    <p>나의 "좋아요" 리스트</p>
+</div>
+<div id="contentsWrap">
+	<div class="contentM clear">
     <c:forEach var="mainProjects" items="${likepage}">
 	    <div class="cardWrap">
 	    <input type="hidden" class="projectId" value="${mainProjects.p_id}">
@@ -39,5 +43,5 @@
 	    </div><!--//cardWrap-->
     </c:forEach>
   
-
+</div>
 </div>
