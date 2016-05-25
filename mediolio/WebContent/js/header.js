@@ -11,7 +11,9 @@
 	function send_message(m_id) {
 		console.log("m_id : " + m_id);
 		// 웹소켓 생성
-		var wsUri = "ws://localhost:8089/mediolio/websocket?id="+m_id;
+		// spring - "ws://localhost:8089/mediolio/websocket?id="+m_id;
+		// 서버에 올릴 용 - "ws://52.79.195.100:8080/mediolio/websocket?id="+m_id;
+		var wsUri = "ws://52.79.195.100:8080/mediolio/websocket?id="+m_id;
 		websocket = new WebSocket(wsUri);
 		
 		//WebSocket 연결
@@ -148,7 +150,7 @@ function getNotifications(){
 
 $(function(){
 	var login=$('#hidden_m_id').val();
-	//if(typeof login != 'undefined') send_message(login);
+	if(typeof login != 'undefined') send_message(login);
 	
 	$('#btn_logout').click(function(){
 		disconnect();

@@ -41,7 +41,7 @@
 		<c:choose>
 		<c:when test="${sessionScope.mev != null }">
 			<div id="bellWrap">
-	            <a id="bellIcon" href="#"><span id="bellNum">0</span></a>
+	            <a id="bellIcon" href="#"></a>
 	            <ul class="bubble" id="bubble_bell">
 	                <ul class="bellTab">
 	                    <li><a onclick="bellTab('bellContent01',event)" href="#" class="click">쪽지</a></li>
@@ -72,7 +72,7 @@
 	                </ul>
 	            </ul>
 	            <span id="bubbleAfter"></span>
-	            <input type="hidden" id="hidden_m_id" value="${sessionScope.mev.m_id}"><!-- 로그인한 사람 m_id -->
+	            <input type="hidden" id="hidden_m_id" value="${sessionScope.mev.m_id}"><!-- 로그인한 사람 m_id 푸쉬알림에 사용 -->
 	        </div><!--//bellWrap-->
 		</c:when>
 		</c:choose>

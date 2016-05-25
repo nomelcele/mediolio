@@ -8,8 +8,8 @@
 		SELECT count(*) FROM(
 			Select msg_id From message WHERE msg_to = #{m_id} AND msg_to_status = 'no-read' 
 			Union
-			SELECT act_id FROM member_action WHERE act_to = #{m_id} AND act_read = 0 AND act_from != #{m_id}
-	     )x;
+			SELECT act_id FROM member_action WHERE act_to = #{m_id} AND act_read = 0 AND act_type != 'like' AND act_from != #{m_id}
+	     )x
 	</select>
 	<select id="getNotificationsMsg" parameterType="int" resultType="pmvo">
 		SELECT m.m_id, m.m_name AS msg_from_nickname, m.m_studentID AS msg_from_studentID, msg.msg_id, DATE_FORMAT(msg.msg_date, '%Y.%m.%d %H:%i:%s') AS msg_date, msg.msg_text 
