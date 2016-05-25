@@ -39,8 +39,6 @@
 .autoClass{top:262px; left:339px; z-index:5;}
 .autoMember{left:20px; width:109px; top:32px;}
 
-#projInfoArea{display:none;}
-#projBtnArea{display:none;}
 /*글쓰기 추가 버튼, 말풍선*/
 .btn_circle{ display:block; width:40px; height:40px; background:#0F84CF; border-radius:50%; box-shadow:1px 1px 3px #ccc;}
 
@@ -137,7 +135,7 @@
 
 .write_submit{ width:200px; height:40px; border:none; font-size:14px; box-shadow:1px 1px 3px rgba(0,0,0,.5);}
 #submit_step1{  background:url(../images/prev.png) 20px center no-repeat;  background-color:#eee;  text-indent:20px; float:left; }
-#submit_step2{  background:url(../images/next.png) 20px center no-repeat;  background-color:#0F84CF; color:#fff; text-indent:20px; float:right;}
+#submit_step2{  background:url(../images/next_wh.png) 20px center no-repeat;  background-color:#0F84CF; color:#fff; text-indent:20px; float:right;}
 #submit_portfolio {  background:#0F84CF; color:#fff; float:right;}
 
 

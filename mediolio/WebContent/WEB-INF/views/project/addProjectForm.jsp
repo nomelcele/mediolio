@@ -35,14 +35,14 @@
 	<div class="writeWrap clear">
 	<!-- 탭 -->
         <h1 class="writeNavi">
-        	<a class="click" id="projTab1" href="#" onclick="writeNavi(event)">1. 글 내용 작성</a>
+        	<a class="click" id="projTab1" href="#" onclick="writeNavi('projTab1')">1. 글 내용 작성</a>
         	<b>></b>
         	<span class="writeNaviNext">
-        		<a id="projTab2" href="#" onclick="writeNavi(event)">2. 프로젝트 정보 작성</a>
+        		<a id="projTab2" href="#" onclick="writeNavi('projTab2')">2. 프로젝트 정보 작성</a>
         	</span>
         </h1>
     	<!-- 탭 -->
-	    <div class="cardWindow" id="contentArea">
+	    <div class="cardWindow writeStp1" id="contentArea">
 	        <div class="cardWindow_hd">1단계 : 글 내용 작성</div>
 	        <div id="write_hd">
 	            <div id="write_category">
@@ -127,7 +127,7 @@
 	        </div>
 	    </div><!--//cardWindow-->
     
-	    <div class="cardWrap">
+	    <div class="cardWrap writeStp1">
 	    	<div class="card_hd"></div>
 	    	<div class="card_img">
 		    	
@@ -151,13 +151,13 @@
 	        </div><!--//card_ct-->
 	    </div><!--//cardWrap-->
 	    <!-- ------ -->
-    	<input type="button" class="write_submit" id="submit_step2" value="프로젝트 정보 작성" onclick="location='gotoStep2'"/>
+    	<input type="button" class="write_submit writeStp1" id="submit_step2" value="프로젝트 정보 작성" onclick="writeStep('projTab2')"/>
     	<!-- ------ -->
 		
 		
 		<!-- 2단계 (S) -->
 		
-	    <div class="cardWindow cardWindow_write2" id="projInfoArea">
+	    <div class="cardWindow cardWindow_write2 writeStp2" id="projInfoArea">
             <div class="cardWindow_hd">2단계 : 프로젝트 정보 작성</div>
             <div class="writeLineWrap">
                 <div class="writeLine_1">작업 이름</div>
@@ -216,9 +216,9 @@
         
         <div id="projBtnArea">
         <!-- --------- -->
-         <input type="button" class="write_submit" id="submit_step1" value="글 내용 작성"/>
+         <input type="button" class="write_submit writeStp2" id="submit_step1" onclick="writeStep('projTab1')" value="글 내용 작성"/>
         <!-- --------- -->
-        <input type="button" class="write_submit" id="submit_portfolio" value="작성 완료"/>
+        <input type="button" class="write_submit writeStp2" id="submit_portfolio" onclick="writeStep('projTab3')" value="작성 완료"/>
         </div>
    
 		<!-- 2단계 (E) -->
