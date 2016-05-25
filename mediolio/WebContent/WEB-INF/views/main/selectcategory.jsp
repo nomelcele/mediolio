@@ -2,7 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
-	<div id="contentsWrap">
+<div id="navigator">
+    <p>${category_name }</p>
+</div>
+<div id="contentsWrap">
+	<div class="contentM clear">
     <c:forEach var="mainProjects" items="${mainProjects}">
 	    <div class="cardWrap">
 	    <input type="hidden" class="projectId" value="${mainProjects.p_id}">
@@ -40,5 +44,5 @@
 
     </c:forEach>
   
-
+</div>
 </div>

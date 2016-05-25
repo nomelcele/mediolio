@@ -49,26 +49,12 @@
 	                    <li><a onclick="bellTab('bellContent03',event)" href="#">댓글</a></li>
 	                </ul>
 	                <ul class="bellContent" id="bellContent01">
-	                    <li><a href="#">알립입니다.</a></li>
-	                    <li><a href="#">알림 1</a></li>
-	                    <li><a href="#">알림 2</a></li>
-	                    <li><a href="#">알림 3</a></li>
-	                    <li><a href="#">알림 4</a></li>
-	                    <li><a href="#">알림 5</a></li>
 	                </ul>
 	                
 	                <ul class="bellContent" id="bellContent02">
-	                    <li><a href="#">알림 2</a></li>
-	                    <li><a href="#">알림 3</a></li>
-	                    <li><a href="#">알림 4</a></li>
-	                    <li><a href="#">알림 5</a></li>
 	                </ul>
 	                
 	                <ul class="bellContent" id="bellContent03">
-	                    <li><a href="#">알립입니다.</a></li>
-	                    <li><a href="#">알림 1</a></li>
-	                    <li><a href="#">알림 2</a></li>
-	                    <li><a href="#">알림 3</a></li>
 	                </ul>
 	            </ul>
 	            <span id="bubbleAfter"></span>

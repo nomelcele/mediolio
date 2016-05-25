@@ -12,7 +12,7 @@
 <script src="js/jQuery/jquery.bxslider.min.js"></script>
 
 <div id="navigator">
-    <p>PROJECT</p>
+    <p>MAIN</p>
 </div>
 <div id="contentsWrap">
 	<div class="contentM clear">

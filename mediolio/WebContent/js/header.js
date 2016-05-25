@@ -13,7 +13,7 @@
 		// 웹소켓 생성
 		// spring - "ws://localhost:8089/mediolio/websocket?id="+m_id;
 		// 서버에 올릴 용 - "ws://52.79.195.100:8080/mediolio/websocket?id="+m_id;
-		var wsUri = "ws://localhost:8089/mediolio/websocket?id="+m_id;
+		var wsUri = "ws://52.79.195.100:8080/mediolio/websocket?id="+m_id;
 		websocket = new WebSocket(wsUri);
 		
 		//WebSocket 연결
@@ -73,7 +73,7 @@ function timeGapCalculate(pushed_date){
     	timeDisplay = diffDay+"일 전";
     }else if(diffHour){
     	//하루 이내의 시간차
-    	timeDisplay = diffHour+"시간 " +diffMin+ "분 전";
+    	timeDisplay = diffHour+"시간 전 ";
     }else if(diffMin){
     	//한시간 이내의 시간차
     	timeDisplay = diffMin+"분 전";
@@ -92,22 +92,21 @@ function getMsgNotifications(){
 		data: {m_id :$('#hidden_m_id').val()},
 		dataType:"JSON",
 		success: function(result){
-			$('#mCSB_2_container').empty();
+			$('#bellContent01').empty();
 			
 			var appendMsg= '';
-			var appendAct ='';
+			//var appendAct ='';
 			if(result.msg.length>0){
 				$.each(result.msg, function(index, entry){
 					appendMsg += '<li class="bell_content">'
-											+'<img src="resources/images/push/push_msg.png">'
 											+'<a href="#" class="bell_msg">'
-												+'<span>'+entry.msg_from_studentID +' '+entry.msg_from_nickname+'님이 메시지를 보냈습니다.</span>'
+												+'<span class="bell_what"><span>'+entry.msg_from_nickname+'</span> 님이 쪽지를 보냈습니다.</span>'
 												+'<span class="bell_date">'+timeGapCalculate(entry.msg_date)+'</span>'
-												+'<span class="ellipsis msg_text"> >> '+entry.msg_text+'</span>'
+												+'<span class="ellipsis msg_text">'+entry.msg_text+'</span>'
 											+'</a>'
 										+'</li>';
 				});
-				$('#mCSB_2_container').append(appendMsg);
+				$('#bellContent01').append(appendMsg);
 			}
 /*			if(result.act.length>0){
 				$.each(result.act, function(index, entry){
