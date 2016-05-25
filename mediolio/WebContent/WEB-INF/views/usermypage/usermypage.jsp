@@ -8,7 +8,7 @@
 <div id="contentsWrap">
 <div class="cardWrap" id="userInfoWrap">
 	<div id="userInfoWrap_hd">
-        <span>${memberInfo.m_name }</span>
+        <span>${memberInfo.m_studentID } ${memberInfo.m_name }</span>
         <input type="hidden" value="${memberInfo.m_id }" class="memberId"/>
         <div id="btnWrap_userInfo">
         	<c:if test="${sessionScope.mev != null && sessionScope.mev.m_id != memberInfo.m_id}">
@@ -19,13 +19,13 @@
     </div> 
     <div id="userInfoWrap_bd">
         <div class="box_userInfo" id="userIntro">
-            <div class="title_userInfo">INTRODUCE</div>
+            <div class="title_userInfo">자기 소개</div>
             <div class="content_userInfo">
 				${memberInfo.m_introduce }
             </div>
         </div><!--//modal_bd_content -->
         <div class="box_userInfo" id="userFavorite">
-            <div class="title_userInfo">FAVORITE</div>
+            <div class="title_userInfo">관심 분야</div>
             <div class="content_userInfo">
             	<c:if test="${fn:length(memberInfo.m_interestingText1) ne 0}">
                 	${memberInfo.m_interestingText1 }
@@ -35,10 +35,16 @@
             	</c:if>
 			</div>
         </div>
+        <div class="box_userInfo" id="userSkill">
+            <div class="title_userInfo">보유 기술</div>
+            <div class="content_userInfo">
+				${memberInfo.skills }
+			</div>
+        </div>
         <div class="box_userInfo gallery" id="userProject">
             <a class="gallery_arrows gallery_left"  href="#"></a>
             <a class="gallery_arrows gallery_right" id="gallery_right" href="#"></a>
-            <div class="title_userInfo">PROJECT</div>
+            <div class="title_userInfo">작업 목록</div>
             <div class="content_userInfo">
                 <ul>
 					<c:forEach var="a" items="${myProjects }">
@@ -70,7 +76,7 @@
         <div class="box_userInfo gallery" id="userLike">
             <a class="gallery_arrows gallery_left"  href="#"></a>
             <a class="gallery_arrows gallery_right" id="gallery_right" href="#"></a>
-            <div class="title_userInfo">LIKE</div>
+            <div class="title_userInfo">좋아요</div>
             <div class="content_userInfo">
                 <ul>
 					<c:forEach var="a" items="${likeProjects }">

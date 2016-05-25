@@ -82,7 +82,16 @@ public class MainModel {
 	
 	@RequestMapping("mainMorePrjs")
 	public String mainMorePrjs(HttpSession session, Model model, @RequestParam("cate") String cate){
+		String category_name="PROJECT";
 		
+		if(cate.equals("1")) category_name = "GAME";
+		else if(cate.equals("2")) category_name = "WEB & APP";
+		else if(cate.equals("3")) category_name = "VIDEO & SOUND";
+		else if(cate.equals("4")) category_name = "3D";
+		else if(cate.equals("5")) category_name = "DESIGN";
+		else if(cate.equals("6")) category_name = "MISC";
+		
+		model.addAttribute("category_name", category_name);
 		model.addAttribute("mainProjects", mdao.mainMorePrjs(Integer.parseInt(cate)));		
 		return "main.selectcategory";
 	}

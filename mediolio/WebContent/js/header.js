@@ -12,8 +12,8 @@
 		console.log("m_id : " + m_id);
 		// 웹소켓 생성
 		// spring - "ws://localhost:8089/mediolio/websocket?id="+m_id;
-		// 서버에 올릴 용 - "ws://localhost:8089/mediolio/websocket?id="+m_id;
-		var wsUri = "ws://localhost:8089/mediolio/websocket?id="+m_id;
+		// 서버에 올릴 용 - "ws://52.79.195.100:8080/mediolio/websocket?id="+m_id;
+		var wsUri = "ws://52.79.195.100:8080/mediolio/websocket?id="+m_id;
 		websocket = new WebSocket(wsUri);
 		
 		//WebSocket 연결
