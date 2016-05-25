@@ -80,7 +80,7 @@ html, body{ width:100%; height:100%; font-size:12px;}
 #userBox ul li a{width:35px; height:35px; }
 #userBox ul li.logon a{cursor:pointer;}
 
-a#uploadPf{ display:block; width:100%; height:60px; font-size:13px; font-family:'나눔고딕', 'Nanum Gothic', sans-serif;  color:#eee; line-height:60px; text-indent:20px; letter-spacing:1px; text-align:center; background:url(../images/write.png) 30px center no-repeat;}
+a#uploadPf{ display:block; width:100%; height:60px; font-size:13px; font-family:'나눔고딕', 'Nanum Gothic', sans-serif;  color:#ddd; line-height:60px; text-indent:20px; letter-spacing:1px; text-align:center; background:url(../images/write.png) 30px center no-repeat;}
 
 
 

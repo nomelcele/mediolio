@@ -234,7 +234,7 @@
     
 <div class="modal modal_dCategory" id="modal_writeDCategory">
     <div class="modal_hd modal_hd_dCategory">CATEGORY
-        <input class="btnStyle btn_category" id="btn_writeDCategory" type="button" value="REGISTER"/>
+        <input class="btnStyle btn_category" id="btn_writeDCategory" type="button" value="등록"/>
     </div>
     <div class="modal_bd modal_bd_dCategory" id="modal_bd_writeDCategory">
         <ul>
@@ -256,7 +256,7 @@
     
 <div class="modal modal_dCategory" id="modal_writeEmbed">
     <div class="modal_hd modal_hd_dCategory">EMBED TAG
-        <input class="btnStyle btn_category" id="btn_writeEmbed" type="button" value="REGISTER"/>
+        <input class="btnStyle btn_category" id="btn_writeEmbed" type="button" value="등록"/>
     </div>
     <div class="modal_bd modal_bd_dCategory" id="modal_bd_writeEmbed">
         <textarea placeholder="태그를 입력하세요."></textarea>
