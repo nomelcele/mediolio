@@ -124,14 +124,9 @@
 	    <div class="cardWrap">
 	    	<div class="card_hd"></div>
 	    	<div class="card_img">
-		    	<form method="post" id="coverImg_form" enctype="multipart/form-data">
-					<input type="file" id="cover_img" name="coverImg" onchange="fileValidation()" onclick="emptyValue()">
-				 	<input type="hidden" id="preview_url" name="preview_url">
-				 	<input type="hidden" id="preview_x" name="x" value=""/>
-					<input type="hidden" id="preview_y"name="y" value=""/>
-					<input type="hidden" id="preview_w"name="w" value=""/>
-					<input type="hidden" id="preview_h"name="h" value=""/>
-				</form>
+		    	
+				<input type="file" id="cover_img" name="coverImg" onchange="fileValidation()" onclick="emptyValue()">
+
 				<input type="hidden" id="p_coverImg" name="p_coverImg">
 	        	<a href="#">
 	        		<img src="resources/images/default_upload.png"><!-- 미리보기이미지 들어오는곳 -->
@@ -222,7 +217,15 @@
     
 </div> <!-- contentsWrap -->        
 </form>
-    
+
+<!-- img crop form -->
+<form method="post" id="coverImg_form" enctype="multipart/form-data">
+	<input type="hidden" id="preview_url" name="preview_url">
+	<input type="hidden" id="preview_x" name="x" value=""/>
+	<input type="hidden" id="preview_y"name="y" value=""/>
+	<input type="hidden" id="preview_w"name="w" value=""/>
+	<input type="hidden" id="preview_h"name="h" value=""/>
+</form>  
     
     
 <div class="modal_bg"></div>
