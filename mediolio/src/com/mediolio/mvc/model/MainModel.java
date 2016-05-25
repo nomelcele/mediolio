@@ -44,10 +44,13 @@ public class MainModel {
 			List<ProjectVO> new1 = mdao.getNewProject_interest(category.get(0).getCate_id());
 			List<ProjectVO> new2 = mdao.getNewProject_interest(category.get(1).getCate_id());
 			
-			mav.addObject("new1_idx", new1.size());
-			mav.addObject("new2_idx", new2.size());
-			mav.addObject("new1", new1);
-			mav.addObject("new2", new2);
+			if(new1 != null && new2 != null){
+				mav.addObject("new1_idx", new1.size());
+				mav.addObject("new2_idx", new2.size());
+				mav.addObject("new1", new1);
+				mav.addObject("new2", new2);
+			}
+
 		}else{
 			//로그인하지 않은 상태 - 게임/웹&앱/영상 분야 최신 글 출력
 			List<ProjectVO> new1 = mdao.getNewProject_visitor(1);
