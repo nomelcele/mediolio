@@ -42,4 +42,10 @@ public class PushDao {
 		map.put("act", st.selectList("push.getNotificationsAction", mem_id));
 		return map;
 	}
+
+	public Map<String, List<Object>> getMsgNotifications(String m_id) {
+		Map<String, List<Object>> map = new HashMap<String, List<Object>>();
+		map.put("msg", st.selectList("push.getNotificationsMsg", Integer.parseInt(m_id)));
+		return map;
+	}
 }

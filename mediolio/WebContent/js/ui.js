@@ -63,7 +63,7 @@ $('document').ready(function(){
     			$('#bubble_bell, #bubbleAfter').hide();
     		}else{
     			//알림목록 받아오는 함수 호출
-    			getNotifications(); //header.js 에 있는 함수 
+    			getMsgNotifications(); //header.js 에 있는 함수 
     		}
     	}
     });    

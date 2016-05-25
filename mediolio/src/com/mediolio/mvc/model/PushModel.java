@@ -17,11 +17,11 @@ public class PushModel {
 	@Autowired
 	private PushDao pdao;
 	
-	@RequestMapping("getNotifications")
-	public ModelAndView getNotifications(@RequestParam("m_id") String m_id){
+	@RequestMapping("getMsgNotifications")
+	public ModelAndView getMsgNotifications(@RequestParam("m_id") String m_id){
 		ModelAndView mav = new ModelAndView("jsonView");
 		
-		Map<String, List<Object>> map = pdao.getNotifications(m_id);
+		Map<String, List<Object>> map = pdao.getMsgNotifications(m_id);
 		mav.addObject("msg", map.get("msg"));
 		mav.addObject("act", map.get("act"));
 		return mav;
