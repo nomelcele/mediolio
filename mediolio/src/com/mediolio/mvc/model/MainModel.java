@@ -44,6 +44,9 @@ public class MainModel {
 			List<ProjectVO> new1 = mdao.getNewProject_interest(category.get(0).getCate_id());
 			List<ProjectVO> new2 = mdao.getNewProject_interest(category.get(1).getCate_id());
 			
+			// 나의 최근 히스토리
+//			mav.addObject("", mdao.recentHistory(mev.getM_id()));
+			
 			if(new1 != null && new2 != null){
 				mav.addObject("new1_idx", new1.size());
 				mav.addObject("new2_idx", new2.size());

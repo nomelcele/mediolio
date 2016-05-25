@@ -150,8 +150,9 @@
 	            <p class="p_view"><span></span>0</p>
 	        </div><!--//card_ct-->
 	    </div><!--//cardWrap-->
-<!--     	<input type="button" class="write_submit" id="submit_step2" value="프로젝트 정보 작성" onclick="location='gotoStep2'"/> -->
-    
+	    <!-- ------ -->
+    	<input type="button" class="write_submit" id="submit_step2" value="프로젝트 정보 작성" onclick="location='gotoStep2'"/>
+    	<!-- ------ -->
 		
 		
 		<!-- 2단계 (S) -->
@@ -214,7 +215,9 @@
         </div><!--//cardWindow-->
         
         <div id="projBtnArea">
-<!--          <input type="button" class="write_submit" id="submit_step1" value="글 내용 작성"/> -->
+        <!-- --------- -->
+         <input type="button" class="write_submit" id="submit_step1" value="글 내용 작성"/>
+        <!-- --------- -->
         <input type="button" class="write_submit" id="submit_portfolio" value="작성 완료"/>
         </div>
    

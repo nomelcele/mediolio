@@ -72,6 +72,12 @@
 			FROM project p, member m, member_action ma WHERE p.m_id=m.m_id AND p.p_id=ma.act_what AND ma.act_type='like' AND ma.act_from=#{m_id}
 			ORDER BY p.p_date desc
 	</select>
+	
+	<select id="recentHistory" parameterType="int" resultType="brvo">
+		select ht.ht_title historyTitle, br.br_title, DATE_FORMAT(br_date,'%Y.%m.%d %H:%i:%s') AS br_date, 
+		br.br_img1, br.br_img2, br.br_img3, br.br_text from history ht, branch br 
+		where ht.ht_id=br.ht_id and ht.m_id=#{m_id} order by ht.ht_lastedit desc limit 1
+	</select>
   
   </mapper>
   
