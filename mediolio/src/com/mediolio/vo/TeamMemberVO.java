@@ -1,8 +1,18 @@
 package com.mediolio.vo;
 
+import java.util.List;
+
 public class TeamMemberVO {
 	int tm_id, p_id, m_id;
 	String tm_role, tm_detail, m_studentID, m_name;
+	private List<TeamMemberVO> tmList;
+	
+	public List<TeamMemberVO> getTmList() {
+		return tmList;
+	}
+	public void setTmList(List<TeamMemberVO> tmList) {
+		this.tmList = tmList;
+	}
 	public String getM_studentID() {
 		return m_studentID;
 	}

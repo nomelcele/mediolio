@@ -184,14 +184,14 @@
                 <div class="writeLine_2 writeLine_2Long clear" id="teamMateGroup">
                     <div class="write_teamMateWrap">
                         <div class="threeCell shortCell">
-                            <input class="writeLine_text teamMateName" type="text" placeholder="이름">
+                            <input class="writeLine_text teamMateName" data-sort="0" type="text" placeholder="이름">
                             <div class="autoCompleteBox classBox autoMember"><ul class="autoCompleteArea autoMemberArea"></ul></div>
                         </div>
                         <div class="threeCell shortCell">
-                            <input class="writeLine_text" type="text" placeholder="역할">
+                            <input class="writeLine_text" type="text" name="tmList[0].tm_role" placeholder="역할">
                         </div>
                         <div class="threeCell">
-                            <input class="writeLine_text" type="text" placeholder="소개">
+                            <input class="writeLine_text" type="text" name="tmList[0].tm_detail" placeholder="소개">
                         </div>
                     </div>
                     

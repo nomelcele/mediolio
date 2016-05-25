@@ -65,7 +65,7 @@ public class ProjectModel {
 	private MainDao mdao;
 		
 	
-	private static BoxViewClient boxView;
+//	private static BoxViewClient boxView;
 	
 	@RequestMapping(value="addProjectForm")
 	public String addForm(Model model, HttpSession session){
@@ -82,8 +82,7 @@ public class ProjectModel {
 //	}
 
 	@RequestMapping(value="addProject")
-	public String addProject(ProjectVO pvo, String[] orderArr, HttpSession session, Model model){
-		
+	public String addProject(ProjectVO pvo, TeamMemberVO tmvo, String[] orderArr, HttpSession session, Model model){
 		// 프로젝트 업로드
 		// 1. 새로운 프로젝트 추가
 		pvo.setM_id(((MemberVO)session.getAttribute("mev")).getM_id());
@@ -93,7 +92,6 @@ public class ProjectModel {
 		List<MultipartFile> contents = pvo.getContents();
 		String[] contentNames;
 		if(contents != null){
-			System.out.println("안들어옴??????????????????");
 			System.out.println(orderArr.length);
 			contentNames = new String[contents.size()];
 			for(int i=0; i<contentNames.length; i++){
@@ -180,11 +178,12 @@ public class ProjectModel {
 //				}
 //			}
 		
+		List<TeamMemberVO> tmList = tmvo.getTmList();
 		// 4. 프로젝트 팀원 정보 db에 업데이트
-//		for(TeamMemberVO tmvo:tmList){
-//			pdao.addTeamMember(tmvo);
-//		}
-		// List<TeamMemberVO> tmList
+		for(TeamMemberVO vo:tmList){
+			vo.setP_id(p_id);
+			pdao.addTeamMember(vo);
+		}
 				
 		return "main/index";
 	}
