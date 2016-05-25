@@ -46,14 +46,13 @@ public class MainModel {
 			List<ProjectVO> new2 = mdao.getNewProject_interest(category.get(1).getCate_id());
 			
 			// 나의 최근 히스토리
-			List<BranchVO> recentHt = mdao.recentHistory(mev.getM_id()); 
-			System.out.println("브랜치 개수: "+recentHt.size());
-			for(BranchVO vo:recentHt){
-				System.out.println("브랜치 번호: "+vo.getBr_id());
-			}
-			//mav.addObject("recentHtTitle",recentHt.get(0).getHistoryTitle());
-			//mav.addObject("recentHtBrs",recentHt);
-			
+			List<BranchVO> recentHt = mdao.recentHistory(mev.getM_id());
+			mav.addObject("htNum", recentHt.size());
+			if(recentHt.size() != 0){
+				mav.addObject("recentHtTitle",recentHt.get(0).getHistoryTitle());
+				mav.addObject("recentHtBrs",recentHt);
+			} 
+
 			if(new1 != null && new2 != null){
 				mav.addObject("new1_idx", new1.size());
 				mav.addObject("new2_idx", new2.size());
@@ -74,6 +73,8 @@ public class MainModel {
 			mav.addObject("new1", new1);//게임
 			mav.addObject("new2", new2);//웹&앱
 			mav.addObject("new3", new3);//영상
+			
+			mav.addObject("htNum", -1);
 		}
 
 		return mav;

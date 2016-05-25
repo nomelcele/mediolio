@@ -74,10 +74,10 @@
 	</select>
 	
 	<select id="recentHistory" parameterType="int" resultType="brvo">
-		select ht.ht_title historyTitle, br.br_id, br.br_title, DATE_FORMAT(br_date,'%Y.%m.%d %H:%i:%s') AS br_date, 
-		br.br_img1, br.br_img2, br.br_img3, br.br_text from history ht, branch br 
-		where (select ht_id from history order by ht_lastedit desc limit 1)=br.ht_id and ht.m_id=#{m_id}	
-		group by br.br_id order by br.br_date desc
+		select ht.ht_title historyTitle, br.br_id, br.ht_id, br.br_title, DATE_FORMAT(br_date,'%Y.%m.%d %H:%i:%s') AS br_date, 
+		br.br_img1, br.br_img2, br.br_img3, br.br_text from branch br, history ht 
+		where ht.ht_id=br.ht_id and br.ht_id=(select ht_id from history where m_id=#{m_id} order by ht_lastedit desc limit 1)
+		order by br.br_date desc
 	</select>
   
   </mapper>

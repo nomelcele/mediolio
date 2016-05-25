@@ -21,6 +21,20 @@
     <div class="historyWrap historyWrap_main clear">
         
         <div class="timeLineWrap clear">
+        	<c:if test="${htNum eq 0}">
+	        	<div class="timeCardWrap clear">
+	        		<div class="cardWrap timeCard">
+	        			<div>새로운 히스토리가 없습니다.</div>
+	        		</div>
+	        	</div>
+        	</c:if>
+        	<c:if test="${htNum eq -1}">
+        		<div class="timeCardWrap clear">
+	        		<div class="cardWrap timeCard">
+	        			<div>로그인 후 나의 히스토리를 확인하세요.</div>
+	        		</div>
+	        	</div>
+        	</c:if>
             
             <c:forEach var="br" items="${recentHtBrs}">
             <div class="timeCardWrap clear">
