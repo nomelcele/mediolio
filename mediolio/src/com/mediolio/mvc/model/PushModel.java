@@ -26,4 +26,24 @@ public class PushModel {
 		mav.addObject("act", map.get("act"));
 		return mav;
 	}
+	
+	@RequestMapping("getFollowNotifications")
+	public ModelAndView getFollowNotifications(@RequestParam("m_id") String m_id){
+		ModelAndView mav = new ModelAndView("jsonView");
+		
+		Map<String, List<Object>> map = pdao.getFollowNotifications(m_id);
+		mav.addObject("msg", map.get("msg"));
+		mav.addObject("act", map.get("act"));
+		return mav;
+	}
+	
+	@RequestMapping("getReplyNotifications")
+	public ModelAndView getReplyNotifications(@RequestParam("m_id") String m_id){
+		ModelAndView mav = new ModelAndView("jsonView");
+		
+		Map<String, List<Object>> map = pdao.getReplyNotifications(m_id);
+		mav.addObject("msg", map.get("msg"));
+		mav.addObject("act", map.get("act"));
+		return mav;
+	}
 }

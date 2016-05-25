@@ -115,11 +115,11 @@ public class MainModel {
 			}
 			else if(selcat.equals("ct_3d")){
 				category="4";
-				category_name="DESIGN";
+				category_name="3D";
 			}
 			else if(selcat.equals("ct_design")){
 				category="5";
-				category_name="3D";
+				category_name="DESIGN";
 			}
 			else if(selcat.equals("ct_misc")){
 				category="6";
