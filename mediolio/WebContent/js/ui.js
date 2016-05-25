@@ -203,3 +203,12 @@ function openMyMsgPage(){
 		}
 	});
 }
+
+
+function bellTab(category,event){
+    $('.bellContent').hide();
+    $('#'+category).show();
+    
+    $('.bellTab li a').removeClass('click');
+    event.target.className='click';
+}
