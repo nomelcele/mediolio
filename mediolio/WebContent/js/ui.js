@@ -183,6 +183,7 @@ $('document').ready(function(){
     })
 });
 
+//aside에서 팔로우 아이콘 누르거나, 알림 말풍선에서 도착한 팔로 알림 눌렀을 때
 function openMyFriendPage(){
 	$.ajax({
 		url: "follow",
@@ -209,6 +210,20 @@ function bellTab(category,event){
     $('.bellContent').hide();
     $('#'+category).show();
     
+    if(category == "bellContent01"){
+    	//쪽지
+    	getMsgNotifications();
+    }
+    else if(category == "bellContent02"){
+    	//친구(팔로우)
+    	getFollowNotifications(); //header.js
+    }
+    else if(category == "bellContent03"){
+    	//댓글
+    	getReplyNotifications(); //header.js
+    }
+    
     $('.bellTab li a').removeClass('click');
     event.target.className='click';
 }
+

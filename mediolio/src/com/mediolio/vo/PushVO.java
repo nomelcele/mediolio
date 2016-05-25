@@ -1,7 +1,7 @@
 package com.mediolio.vo;
 
 public class PushVO {
-	private int m_id, p_id, r_id;
+	private int m_id, p_id, r_id, author_m_id;
 	private String m_studentID, m_name, act_date, p_title, act_type;
 	
 	public String getM_studentID() {
@@ -21,6 +21,13 @@ public class PushVO {
 	}
 	public void setP_id(int p_id) {
 		this.p_id = p_id;
+	}
+	
+	public int getAuthor_m_id() {
+		return author_m_id;
+	}
+	public void setAuthor_m_id(int author_m_id) {
+		this.author_m_id = author_m_id;
 	}
 	public int getR_id() {
 		return r_id;

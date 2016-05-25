@@ -12,8 +12,8 @@
 		console.log("m_id : " + m_id);
 		// 웹소켓 생성
 		// spring - "ws://localhost:8089/mediolio/websocket?id="+m_id;
-		// 서버에 올릴 용 - "ws://52.79.195.100:8080/mediolio/websocket?id="+m_id;
-		var wsUri = "ws://52.79.195.100:8080/mediolio/websocket?id="+m_id;
+		// 서버에 올릴 용 - "ws://localhost:8089/mediolio/websocket?id="+m_id;
+		var wsUri = "ws://localhost:8089/mediolio/websocket?id="+m_id;
 		websocket = new WebSocket(wsUri);
 		
 		//WebSocket 연결
@@ -92,10 +92,7 @@ function getMsgNotifications(){
 		data: {m_id :$('#hidden_m_id').val()},
 		dataType:"JSON",
 		success: function(result){
-			$('#bellContent01').empty();
-			
 			var appendMsg= '';
-			//var appendAct ='';
 			if(result.msg.length>0){
 				$.each(result.msg, function(index, entry){
 					appendMsg += '<li class="bell_content">'
@@ -106,46 +103,64 @@ function getMsgNotifications(){
 											+'</a>'
 										+'</li>';
 				});
-				$('#bellContent01').append(appendMsg);
+				$('#bellContent01').empty().append(appendMsg);
 			}
-/*			if(result.act.length>0){
-				$.each(result.act, function(index, entry){
-					if(entry.act_type == 'like'){
-						appendAct += '<li class="bell_content">'
-												+'<img src="resources/images/push/push_like.png">'
-												+'<a href="#">'
-													+'<span>'+entry.m_studentID +' '+entry.m_name+'님이 </span>'
-													+'<span class="ellipsis">'+entry.p_title+'</span><span>를 좋아합니다</span>'
-													+'<span class="bell_date">'+timeGapCalculate(entry.act_date)+'</span>'
-												+'</a>'
-											+'</li>';
-					}else if(entry.act_type == 'follow'){
-						appendAct += '<li class="bell_content">'
-												+'<img src="resources/images/push/push_follow.png">'
-												+'<a href="#">'
-													+'<span>'+entry.m_studentID +' '+entry.m_name+'님이 회원님을 팔로우합니다</span>'
-													+'<span class="bell_date">'+timeGapCalculate(entry.act_date)+'</span>'
-												+'</a>'
-											+'</li>';
-					}else if(entry.act_type=="reply"){
-						appendAct += '<li class="bell_content">'
-												+'<img src="resources/images/push/push_reply.png">'
-												+'<a href="#">'
-													+'<span>'+entry.m_studentID +' '+entry.m_name+'님이 </span>'
-													+'<span class="ellipsis">'+entry.p_title+'</span><span>에 댓글을 달았습니다</span>'
-													+'<span class="bell_date">'+timeGapCalculate(entry.act_date)+'</span>'
-												+'</a>'
-											+'</li>';
-					}
-				});
-				$('#mCSB_2_container').append(appendAct);
-			}*/
 			$('#bubble_bell, #bubbleAfter').show();  
 		}//success함수 끝
 	});
 	
 }
 
+//팔로우 관련 알림
+function getFollowNotifications(){
+	$.ajax({
+		url: "getFollowNotifications",
+		type: "POST",
+		data: {m_id :$('#hidden_m_id').val()},
+		dataType:"JSON",
+		success: function(result){
+			var appendMsg= '';
+
+			if(result.msg.length>0){
+				$.each(result.msg, function(index, entry){
+					appendMsg += '<li class="bell_content">'
+											+'<a href="#" class="bell_follow">'
+												+'<span class="bell_what"><span>'+entry.m_studentID+' '+ entry.m_name + '</span> 님이 팔로우 했습니다.</span>'
+												+'<span class="bell_date">'+timeGapCalculate(entry.act_date)+'</span>'
+											+'</a>'
+										+'</li>';
+				});
+				$('#bellContent02').empty().append(appendMsg);
+			}
+		}
+	})
+}
+
+//댓글 알림
+function getReplyNotifications(){
+	$.ajax({
+		url: "getReplyNotifications",
+		type: "POST",
+		data: {m_id :$('#hidden_m_id').val()},
+		dataType:"JSON",
+		success: function(result){
+			var appendMsg= '';
+
+			if(result.msg.length>0){
+				$.each(result.msg, function(index, entry){
+					appendMsg += '<li class="bell_content">'
+											+'<a href="projectView?m_id='+entry.author_m_id +'&p_id='+ entry.p_id+'" class="bell_reply">'
+												+'<span class="bell_what"><span>'+entry.m_name + '</span></span> 님이'
+												+'<span class="ellipsis bell_prjname">'+entry.p_title+'</span><span>에 댓글을 달았습니다</span>'
+												+'<span class="bell_date">'+timeGapCalculate(entry.act_date)+'</span>'
+											+'</a>'
+										+'</li>';
+				});
+				$('#bellContent03').empty().append(appendMsg);
+			}
+		}
+	})
+}
 
 $(function(){
 	var login=$('#hidden_m_id').val();
@@ -156,5 +171,15 @@ $(function(){
 		location.href="logout";
 	});
 	
-	$(document).on('click', '.bell_msg', openMyMsgPage);
+	$(document).on('click', '.bell_msg', function(){
+		//쪽지페이지 열기
+		openMyMsgPage();
+		//해당 쪽지 읽음 처리
+		
+	});
+	$(document).on('click', '.bell_follow', function(){
+		//친구 페이지 열기
+		openMyFriendPage();
+		
+	});
 });
