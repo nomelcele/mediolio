@@ -38,9 +38,8 @@ input[type="date"].writeLine_text{ font-size:12px; border: 1px solid #ccc; margi
 #submit_step1, #submit_portfolio{ margin:30px 0 0 0;}
 
 
-.writeNavi{ box-sizing:border-box; width:900px; height:40px; padding:12px 20px; margin:0 0 10px 0; background:#f1f1f1; border:1px solid #bbb;}
-.writeNavi a{ font-weight:normal; font-size:13px; color:#aaa;}
-.writeNavi a:hover{ color:#333;}
-.writeNavi a.click{ color:#333; text-decoration:underline;}
-.writeNavi b{ font-weight:normal; margin:0 15px; color:#999;}
-
+#navigator .writeNavi{ background:none; text-indent:0;}
+#navigator .writeNavi a{ font-weight:normal; font-size:13px; color:#aaa;}
+#navigator .writeNavi a:hover{ color:#333;}
+#navigator .writeNavi a.click{ color:#333; text-decoration:underline;}
+#navigator .writeNavi b{ font-weight:normal; margin:0 10px; color:#999; font-size:12px;}

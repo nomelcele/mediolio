@@ -12,7 +12,7 @@
     </div><!--//rmcnWrap-->
 
     <div class="cardWrap friendWrap">
-        <div class="friendwrap_content friendwrap_hd">FRIEND LIST</div>
+        <div class="friendwrap_content friendwrap_hd">친구목록</div>
         <ul class="friendwrap_content friendwrap_tab">
             <li><a href="#" class="friendTab" id="friendTab_following">FOLLOWING<span>${cnt.following }</span></a></li>
             <li><a href="#" class="friendTab" id="friendTab_follower">FOLLOWER<span>${cnt.follower }</span></a></li>
