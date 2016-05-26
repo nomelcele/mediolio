@@ -15,7 +15,7 @@
     <p>MAIN</p>
 </div>
 <div id="contentsWrap">
-	<div class="contentM clear">
+	<div class="contentS clear">
 		<div class="cardWrap cardWrap_main">
 		    <div id="historyTitle_main">
 		        <span>내 히스토리 - </span>
