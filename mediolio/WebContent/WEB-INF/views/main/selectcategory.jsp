@@ -21,12 +21,14 @@
 							</c:forTokens>
 	                    </p>
 	                </div>
-	                <c:if test="${mainProjects.p_coverImg ne '' && mainProjects.p_coverImg ne null}">
-	                	<img src="resources/images/projectCover/${mainProjects.p_coverImg}"/>
-	                </c:if>
-	                <c:if test="${mainProjects.p_coverImg eq '' || mainProjects.p_coverImg eq null}">
-		                <img src="resources/images/default.png"/>
-	                </c:if>
+					<c:choose>
+						<c:when test="${mainProjects.p_coverImg ne '' && mainProjects.p_coverImg ne null}">
+							<img src="resources/images/projectCover/${mainProjects.p_coverImg}"/>
+						</c:when>
+						<c:otherwise>
+							<img src="resources/images/default.png"/>
+						</c:otherwise>
+					</c:choose>
 	            </a>
 	        </div><!--//card_img-->
 	    	<div class="card_bd">

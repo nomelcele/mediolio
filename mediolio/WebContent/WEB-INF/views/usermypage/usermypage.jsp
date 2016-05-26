@@ -21,7 +21,15 @@
         <div class="box_userInfo" id="userIntro">
             <div class="title_userInfo">자기 소개</div>
             <div class="content_userInfo">
-				${memberInfo.m_introduce }
+            <c:choose>
+            	<c:when test="${memberInfo.m_introduce eq '' || memberInfo.m_introduce eq null }">
+            	  <!-- 자기소개 없을때 -->
+            	  	안녕하세요. ${memberInfo.m_name } 입니다.
+            	</c:when>
+            	<c:otherwise>
+            		${memberInfo.m_introduce }
+            	</c:otherwise>
+            </c:choose>
             </div>
         </div><!--//modal_bd_content -->
         <div class="box_userInfo" id="userFavorite">
@@ -47,28 +55,35 @@
             <div class="title_userInfo">작업 목록</div>
             <div class="content_userInfo">
                 <ul>
-					<c:forEach var="a" items="${myProjects }">
-                    <li>
-                    	<c:choose>
-                        	<c:when test="${a.p_coverImg eq ''}">
-                        		<a href="projectView?m_id=${memberInfo.m_id}&p_id=${a.project_id }"><img src="resources/images/default.png" width="70" height="70"/></a>         	
-                        	</c:when>
-	                        <c:otherwise>
-								<a href="projectView?m_id=${memberInfo.m_id}&p_id=${a.project_id }"><img src="resources/images/projectCover/${a.p_coverImg }" width="70" height="70"/></a>
-							</c:otherwise>
-                        </c:choose>
-                        <p class="userProject_category"><span>${a.cate_name }</span></p>
-                        <p class="userProject_title">${a.p_title }</p>
-                        <c:if test="${a.hashtags ne null }">
-                           	<c:set var="tagArr" value="${fn:split(a.hashtags, ',') }"/>
-                           	<p class="userProject_tag">
-                           		<c:forEach var="tag" items="${tagArr }">
-                           			#${tag } 
-                           		</c:forEach>
-                        	</p>
-                        </c:if>
-                    </li>					
-					</c:forEach>
+                	<c:choose>
+                		<c:when test="${empty myProjects}">
+                			<li>등록한 글이 없습니다.</li>
+                		</c:when>
+                		<c:otherwise>
+							<c:forEach var="a" items="${myProjects }">
+		                    <li>
+		                    	<c:choose>
+		                        	<c:when test="${a.p_coverImg eq ''}">
+		                        		<a href="projectView?m_id=${memberInfo.m_id}&p_id=${a.project_id }"><img src="resources/images/default.png" width="70" height="70"/></a>         	
+		                        	</c:when>
+			                        <c:otherwise>
+										<a href="projectView?m_id=${memberInfo.m_id}&p_id=${a.project_id }"><img src="resources/images/projectCover/${a.p_coverImg }" width="70" height="70"/></a>
+									</c:otherwise>
+		                        </c:choose>
+		                        <p class="userProject_category"><span>${a.cate_name }</span></p>
+		                        <p class="userProject_title">${a.p_title }</p>
+		                        <c:if test="${a.hashtags ne null }">
+		                           	<c:set var="tagArr" value="${fn:split(a.hashtags, ',') }"/>
+		                           	<p class="userProject_tag">
+		                           		<c:forEach var="tag" items="${tagArr }">
+		                           			#${tag } 
+		                           		</c:forEach>
+		                        	</p>
+		                        </c:if>
+		                    </li>					
+							</c:forEach>                		
+                		</c:otherwise>
+                	</c:choose>
                 </ul>
             </div>
         </div><!--//userProject-->
@@ -79,28 +94,35 @@
             <div class="title_userInfo">좋아요</div>
             <div class="content_userInfo">
                 <ul>
-					<c:forEach var="a" items="${likeProjects }">
-						<li>
-							<c:choose>
-	                        	<c:when test="${a.p_coverImg eq ''}">
-	                        		<a href="projectView?m_id=${a.m_id}&p_id=${a.project_id }"><img src="resources/images/default.png" width="70" height="70"/></a>         	
-	                        	</c:when>
-		                        <c:otherwise>
-									<a href="projectView?m_id=${a.m_id}&p_id=${a.project_id }"><img src="resources/images/projectCover/${a.p_coverImg }" width="70" height="70"/></a>
-								</c:otherwise>
-	                        </c:choose>
-	                        <p class="userProject_category"><span>${a.cate_name }</span></p>
-	                        <p class="userProject_title">${a.p_title }</p>
-		                    <c:if test="${a.hashtags ne null }">
-	                           	<c:set var="tagArr" value="${fn:split(a.hashtags, ',') }"/>
-	                           	<p class="userProject_tag">
-	                           		<c:forEach var="tag" items="${tagArr }">
-	                           			#${tag } 
-	                           		</c:forEach>
-	                        	</p>
-	                        </c:if>
-	                    </li>
-					</c:forEach>
+					<c:choose>
+                		<c:when test="${empty likeProjects }">
+                			<li>좋아하는 게시물이 없습니다.</li>
+                		</c:when>
+                		<c:otherwise>
+	 					<c:forEach var="a" items="${likeProjects }">
+							<li>
+								<c:choose>
+		                        	<c:when test="${a.p_coverImg eq ''}">
+		                        		<a href="projectView?m_id=${a.m_id}&p_id=${a.project_id }"><img src="resources/images/default.png" width="70" height="70"/></a>         	
+		                        	</c:when>
+			                        <c:otherwise>
+										<a href="projectView?m_id=${a.m_id}&p_id=${a.project_id }"><img src="resources/images/projectCover/${a.p_coverImg }" width="70" height="70"/></a>
+									</c:otherwise>
+		                        </c:choose>
+		                        <p class="userProject_category"><span>${a.cate_name }</span></p>
+		                        <p class="userProject_title">${a.p_title }</p>
+			                    <c:if test="${a.hashtags ne null }">
+		                           	<c:set var="tagArr" value="${fn:split(a.hashtags, ',') }"/>
+		                           	<p class="userProject_tag">
+		                           		<c:forEach var="tag" items="${tagArr }">
+		                           			#${tag } 
+		                           		</c:forEach>
+		                        	</p>
+		                        </c:if>
+		                    </li>
+						</c:forEach>               		
+                		</c:otherwise>
+                	</c:choose>
                 </ul>
             </div>
         </div><!--//userLike-->

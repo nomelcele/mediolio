@@ -44,14 +44,7 @@
 				FROM project p, member m, class c WHERE p.m_id=m.m_id AND p.cl_id = c.cl_id
 				AND p.cl_id=#{cl_id }
   	</select>
-	
-<!-- 	<select id="getHashList" parameterType="java.util.List" resultType="hvo">
-		SELECT h_id, h_value, p_id FROM hashtag WHERE p_id IN
-		<foreach collection="list" item="item" separator="," open="(" close=")">
-	   		#{item.p_id}
-	    </foreach>
-	</select> -->
-	
+
 	<select id="searchTitle" parameterType="java.util.Map" resultType="pvo">
   				SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, p.p_prjname, m.m_studentID "authorID", m.m_name "authorName", p.p_date, 
   					(SELECT count(*) FROM member_action WHERE act_what=p.p_id AND act_type='like') p_likenum, p.p_viewnum,
@@ -67,6 +60,7 @@
 	     			ORDER BY p.p_id DESC
   	</select>
   	
+  	 <!-- 학우 검색 - 특정 카테고리(게임, 웹앱, 영상 등) 선택 : 그 카테고리에 글을 올린 회원을 대상으로, 올린 글 수가 많은 순서대로 출력 -->
 	<select id="searchMemberInCategory" parameterType="java.util.Map" resultType="fvo">
 		SELECT DISTINCT m.m_id, m.m_studentID, m.m_name, m.m_interesting1, m.m_interesting2,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
@@ -89,6 +83,7 @@
 				</choose>
   	</select>
   	
+  	<!-- 학우 검색 - 전체 : 가입한 회원들 모두를 대상으로, 올린 글 수가 많은 순서대로 출력 -->
 	<select id="searchMemberInTotal" parameterType="java.util.Map" resultType="fvo">
 		SELECT DISTINCT m.m_id, m.m_studentID, m.m_name, m.m_interesting1, m.m_interesting2,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
@@ -96,7 +91,7 @@
 			(SELECT GROUP_CONCAT(_sk.sk_name SEPARATOR ', ') FROM memberskill _mk, skills _sk WHERE _mk.sk_id=_sk.sk_id AND _mk.m_id=m.m_id) AS skills,
 			(SELECT SUBSTRING_INDEX(GROUP_CONCAT(CONCAT_WS(',', p_id, p_coverImg) SEPARATOR '/'), ',', 3) FROM project WHERE m_id=m.m_id ORDER BY p_viewnum DESC) AS projects
 			FROM
-				(SELECT count(p.p_id) AS cnt, m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2 FROM member m, project p WHERE m.m_id = p.m_id group by m.m_id ORDER BY cnt DESC, m.m_id DESC) m, memberskill mk 
+				(SELECT count(p.p_id) AS cnt, m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2 FROM member m LEFT JOIN project p ON m.m_id = p.m_id group by m.m_id ORDER BY cnt DESC, m.m_id DESC) m, memberskill mk 
 		        WHERE m.m_id = mk.m_id 
 				<choose>
 				    <when test="sk != 0"><!-- 선택한 기술이 있을 경우 -->

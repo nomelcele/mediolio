@@ -3,9 +3,22 @@ $(document).ready(function(){
     $("#friendWrap_bd_following").show();
     $("#friendWrap_bd_follower").hide();
     
-    $(document).on('click', '.btn_cancelFollow', function(){
-    	cancelFollow($(this).closest('li'));
-    });
+    $(document).unbind("click").on('click', '.btn_cancelFollow', function(){
+    	var liObj = $(this).closest('li');
+	    $.jAlert({
+	        'title': '!!',
+	        'content': '정말 팔로우를 취소하시겠습니까?',
+	        'closeOnClick' : true,
+	        'theme' : 'red',
+	        'btns': [{ 'text': 'YES',  'theme' : 'green',
+			        	'onClick' : function(e){
+			        		e.preventDefault();
+			        		cancelFollow(liObj);
+			        	}
+	        		  }, 
+	                 { 'text': 'NO', 'theme' : 'red'}]
+	      });
+	})
     
     //following 탭
     $('#friendTab_following').on('click',function(){

@@ -69,11 +69,25 @@ function searchbyClass(cl_id, cl_name){
 //검색 옵션에 따라 각각 다른 처리 컨트롤러로 이동
 function handlingSearch(option, keyword){
 	if(option == 'tag' ) {
-		if(keyword.length ==0) alert("검색어를 입력하십시오.");
+		if(keyword.length ==0) 		
+			$.jAlert({
+			    'title': '!!',
+			    'content': '검색어를 입력하십시오.',
+			    'closeOnClick' : true,
+			    'theme' : 'red',
+			    'size': 'xsm'
+			  });
 		else location.href="searchH?key="+keyword;		
 	}
 	else if(option == 'title'){
-		if(keyword.length ==0) alert("검색어를 입력하십시오.");
+		if(keyword.length ==0) 
+			$.jAlert({
+			    'title': '!!',
+			    'content': '검색어를 입력하십시오.',
+			    'closeOnClick' : true,
+			    'theme' : 'red',
+			    'size': 'xsm'
+			  });
 		else {
 			var ctgr = returnCategoryVal($('.team_category').find('.btn_222').val());
 			location.href="searchT?key="+keyword+"&ct="+ctgr;
@@ -81,7 +95,14 @@ function handlingSearch(option, keyword){
 	}
 	else if(option == 'member'){
 		var skVal = $('.team_techWrap input:radio[name="skills"]:checked').val();
-		if(keyword.length == 0 && skVal === undefined) alert("검색어를 입력하거나 보유기술을 선택하십시오.");
+		if(keyword.length == 0 && skVal === undefined) 
+			$.jAlert({
+			    'title': '!!',
+			    'content': '검색어를 입력하거나 보유기술을 선택하십시오.',
+			    'closeOnClick' : true,
+			    'theme' : 'red',
+			    'size': 'xsm'
+			  });
 		else {
 			if(skVal == null || skVal == undefined) skVal = '0';
 			var ctgr = returnCategoryVal($('.team_category').find('.btn_222').val());
@@ -144,7 +165,14 @@ $('document').ready(function(){
 		var keyword = document.getElementById('text_main');
 		
 		if(event.keyCode==13){
-			if(option_value == 'subject') alert("제시된 목록에서 선택하세요.");
+			if(option_value == 'subject') 
+				$.jAlert({
+				    'title': '!!',
+				    'content': '제시된 목록에서 선택하세요.',
+				    'closeOnClick' : true,
+				    'theme' : 'red',
+				    'size': 'xsm'
+				  });
 			else handlingSearch(option_value, keyword.value);
 		}
 		else if(option_value == 'subject'){

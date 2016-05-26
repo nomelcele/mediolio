@@ -5,13 +5,15 @@ function msgSend(){
 		$.jAlert({
 		    'title': '!!',
 		    'content': '보낼 대상을 정확히 선택하세요',
+		    'theme' : 'red',
 		    'closeOnClick' : true,
 		    'size': 'xsm'
 		  });
 	}else if($('#msgForm textarea').val().length<6){
-		$.jAlert({ //this is the normal usage
+		$.jAlert({
 		    'title': '!!',
-		    'content': '다섯 자 이상 입력하세요',
+		    'content': '다섯 자 이상 입력하세요.',
+		    'theme' : 'red',
 		    'closeOnClick' : true,
 		    'size': 'xsm'
 		  });
@@ -24,7 +26,13 @@ function msgSend(){
 			data: $('#msgForm').serialize(),
 			dataType : "json",
 			success : function(data) {
-				alert("쪽지를 보냈습니다.");
+				$.jAlert({
+				    'title': '!!',
+				    'content': '쪽지를 보냈습니다.',
+				    'theme' : 'blue',
+				    'closeOnClick' : true,
+				    'size': 'xsm'
+				  });
 				
 				$('.modal_bg, #writeNoteWrap').hide();
 			}

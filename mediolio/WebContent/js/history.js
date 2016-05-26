@@ -190,7 +190,13 @@ function branchLoad(){
 				$("#imgFileBox3").css("display","block");
 				break;
 			default:
-				alert("이미지는 최대 3개까지만 업로드 가능합니다.");	
+        		$.jAlert({
+        		    'title': '!!',
+        		    'content': '이미지는 최대 3개까지만 업로드 가능합니다.',
+        		    'closeOnClick' : true,
+        		    'theme' : 'red',
+        		    'size': 'xsm'
+        		  });
 		}
 	});
 	

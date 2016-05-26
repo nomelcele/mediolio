@@ -123,7 +123,12 @@ function toolModalOpen(){
 function writeDCategoryModalOpen(){
    	// 카테고리 선택 안 하고 세부카테고리 선택 클릭했을 때
 	if($("#selectedCategory").val() == 0){
-		alert("카테고리를 선택해주세요.");
+ 	    $.jAlert({
+ 	        'title': '!!',
+ 	        'content': '카테고리를 선택해주세요.',
+ 	        'closeOnClick' : true,
+ 	        'theme' : 'red',
+ 	      });
 	} else {
 		$('body').addClass('preventScroll');
 	    $('.modal_bg, #modal_writeDCategory').show();
@@ -133,7 +138,12 @@ function writeDCategoryModalOpen(){
 	    	var arr = $(":checkbox:checked");
 	     	var str = "";
 	     	if($(arr).size() == 0){
-	     		alert("세부카테고리를 선택해주세요.");
+	     	    $.jAlert({
+	     	        'title': '!!',
+	     	        'content': '세부카테고리를 선택해주세요.',
+	     	        'closeOnClick' : true,
+	     	        'theme' : 'red',
+	     	      });
 	     	} else {
 		     	$(".card_tag").html("");
 		    	for(var i=0; i<arr.length; i++){
