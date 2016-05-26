@@ -25,9 +25,10 @@ $(function(){
 	    			}
 	    			if(arr.length>0){
 	    				$("#autoCompleteArea").html(codes);
-	        			$(".autoCompleteBox").css({
+	        			$(".autoHtClass").css({
 	        				display: "block",
-	        				top: $(".historyList_addRelated").offset().top-108
+	        				top: $(".historyList_addRelated").offset().top-108,
+	        				left: 24
 	        			});
 	        			
 	            		// moveAutoCompleteBox();
@@ -36,7 +37,7 @@ $(function(){
 	    		}
 	    	});
     	} else {
-    		$(".autoCompleteBox").css("display","none");
+    		$(".autoHtClass").css("display","none");
     	}
 
 	});
@@ -50,7 +51,7 @@ function addClass(li){
 	var newClass = li;
 	console.log("과목: "+$(newClass).find("span").html());
 	$(".historyList_addRelated").val($(newClass).find("span").html());
-	$(".autoCompleteBox").css("display","none");
+	$(".autoHtClass").css("display","none");
 	$(".timeCard_writeDisplayWrap").append("<input type='hidden' name='cl_id' value="+$(newClass).find(".classId").val()+">");
 }
 
@@ -156,7 +157,7 @@ function listLoad(){
 	    			}
 	    			if(arr.length>0){
 	    				$("#autoCompleteArea").html(codes);
-	        			$(".autoCompleteBox").css({
+	        			$(".autoHtClass").css({
 	        				display: "block",
 	        				top: $(".historyList_addRelated").offset().top-108
 	        			});
@@ -167,7 +168,7 @@ function listLoad(){
 	    		}
 	    	});
     	} else {
-    		$(".autoCompleteBox").css("display","none");
+    		$(".autoHtClass").css("display","none");
     	}
 
 	});
