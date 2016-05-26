@@ -227,35 +227,7 @@ public class ProjectModel {
 //		}
 		
 	}
-	
-/*	@RequestMapping(value="subcategoryList")
-	public void subcategoryList(int sc_parent, HttpServletResponse response) throws IOException{
-		// 카테고리 선택 후 서브카테고리 추가 영역을 클릭했을 때
-		// 해당하는 서브카테고리의 목록 출력
-		List<SubcategoryVO> scList = pdao.subcategoryList(sc_parent);
-		int[] scIds = new int[scList.size()];
-		String[] scNames = new String[scList.size()];
 		
-		StringBuffer sb = new StringBuffer();
-		sb.append("[");
-		for(int i=0; i<scList.size(); i++){
-			scIds[i] = scList.get(i).getSc_id();
-			scNames[i] = scList.get(i).getSc_name();
-			sb.append("\"<input type='checkbox' value="+scIds[i]+" data-labelauty='"+scNames[i]+"'/>");
-			sb.append("<label class='label_category'>"+scNames[i]+"</label>");
-			sb.append("\"");
-			if(!(i == scList.size()-1)){
-				sb.append(",");
-			}
-		}
-		sb.append("]");
-		
-		PrintWriter pw = response.getWriter();
-		pw.write(sb.toString());
-		pw.flush();
-		pw.close();
-	}*/
-	
 	@RequestMapping(value="autocompleteTags")
 	public void autocompleteTags(String h_value, HttpServletResponse response) throws IOException{
 		// 태그 입력 시 자동 완성
@@ -324,47 +296,54 @@ public class ProjectModel {
 	}
 
 	
-	//이미지 크롭 모달 및 파일업로드
+	
+	/* ***** 오지은 작성         *************
+	 * ***** 이미지 크롭 관련  *************
+	 * ***** 
+	 * */
+	//이미지 크롭 모달 열기
 	@RequestMapping(value = "imgCrop_modal")
-	public String imgCrop_modal(Model model, @RequestParam("url") String url, HttpServletResponse response) throws IOException{
+	public String imgCrop_modal(Model model, @RequestParam("url") String url) throws IOException{
 		model.addAttribute("imgUrl", url);
 		return "modal.cropModal";
 	}
 	
+	//크롭한 이미지 파일화하여 폴더에 업로드, 파일명 리턴받는 함수
 	@RequestMapping(value = "cropImage", method = RequestMethod.POST)
-	public ModelAndView cropImage( MultipartHttpServletRequest  request, HttpServletResponse response, HttpSession session) throws IOException{
+	public ModelAndView cropImage( MultipartHttpServletRequest  request, HttpSession session) throws IOException{
 		ModelAndView mav = new ModelAndView("jsonView");
 		
+		//뷰에서 넘어온 파일객체 받아 가공
 		MultipartFile multipartFile = request.getFile("coverImg");
-		String fileFullName = multipartFile.getOriginalFilename();
-		String fileName = fileFullName.substring(0, fileFullName.lastIndexOf("."));
-		String fileType = fileFullName.substring(fileFullName.lastIndexOf(".")+1, fileFullName.length());
+		String fileFullName = multipartFile.getOriginalFilename(); //파일명.확장자명 받기
+		String fileName = fileFullName.substring(0, fileFullName.lastIndexOf(".")); //파일 명만 split
+		String fileType = fileFullName.substring(fileFullName.lastIndexOf(".")+1, fileFullName.length()); //확장자 명만 split
 		System.out.println("fileName : " + fileName + ", " + "fileType : " + fileType);
 		
-		//경로
+		//경로 설정
 		String saveDir = new HttpServletRequestWrapper(request).getSession().getServletContext().getRealPath("/resources/images/projectCover");
 		System.out.println(saveDir);
 		
+		//크롭할 영역 받아오기
 		int x=(int) Float.parseFloat(request.getParameter("x"));
         int y=(int) Float.parseFloat(request.getParameter("y"));
         int w=(int) Float.parseFloat(request.getParameter("w"))-4;
         int h=(int) Float.parseFloat(request.getParameter("h"))-4;
-        System.out.println(x+" "+y+" "+w+" "+h);
 
 		try {
-			//multipartFile->Image->BufferedImage
+			//multipartFile 형식을 BufferedImage로 변환 (이미지를 크롭하려면 BufferedImage 형식이 필요)
+			//multipartFile->Image->BufferedImage (ImageUtil.java에 있는 함수 사용)
 			Image originalImage = ImageUtil.get_imageObj(multipartFile);
 			BufferedImage buffered_originalImg = ImageUtil.toBufferedImage(originalImage);
 			
-			//crop 이미지 생성 과정
+			//원본 이미지에서 crop 이미지 생성 과정
 			BufferedImage SubImage = buffered_originalImg.getSubimage(x, y, w, h);
-			System.out.println("Cropped image dimension: "+SubImage.getWidth()+"x"+SubImage.getHeight());
 			
-			//이름 재설정
+			//이름 재설정(중복방지)
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 			String cropReplaceName = "crop_"+fileName+"_"+formatter.format(new Date()) +"."+ fileType;
 			
-			//bufferedImage -> InputStream
+			//bufferedImage -> InputStream (이미지를 파일에 쓰기 위한 형식)
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			ImageIO.write(SubImage, fileType, baos);
 			InputStream is = new ByteArrayInputStream(baos.toByteArray());
@@ -372,6 +351,7 @@ public class ProjectModel {
 			//파일쓰기
 			ImageUtil.fileUpload(is, saveDir, cropReplaceName);
 			
+			//새로 지정된 파일명 리턴
 			mav.addObject("result", cropReplaceName);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -379,6 +359,10 @@ public class ProjectModel {
 		}	
 		return mav;
 	}
+	//------------ 오지은 작성 부분 끝 ---------------------------------------------------
+	
+	
+	
 	
 	@RequestMapping(value="gotoStep2")
 	public String gotoStep2(){
