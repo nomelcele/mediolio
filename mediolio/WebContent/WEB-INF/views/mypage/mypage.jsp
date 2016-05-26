@@ -96,7 +96,7 @@
 	                        </span>
 	                    </div>
 	                    <div class="timeCard_visualWrap slider">
-	                        <ul class="timeCard_imgWrap">
+	                        <ul class="timeCard_imgWrap" id="bxslider">
 	                        	<c:if test="${branches.br_img1 != null}">
 		                            <li><a href="#">
 		                                <img src="upload/history/${branches.br_img1}" class="timeLine_img">

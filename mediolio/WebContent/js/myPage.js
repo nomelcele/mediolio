@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	$(".myProject").hide();
+	$('#bxslider').bxSlider();
 	
 	$(".showMyHistory").click(function(){
 		// 내 히스토리 보기
@@ -15,36 +16,36 @@ $(document).ready(function(){
 		$(".myProject").show();
 	});
 	
-    $('.timeCard_imgWrap').each(function(){
-        var timeCard_imgNum = $(this).children().size();
-        switch(timeCard_imgNum){
-            case 1 :
-                
-                $(this).find('li a img').css({ width:'100%' })
-                $(this).find('li').css({ width:'100%'})
-            break;
-            
-            case 2 :
-                $(this).find('li').css({
-                    width:'50%'
-                })
-                $(this).find('li a img').css({ width:'100%', verticalAlign:'middle'})
-                
-            break;
-                
-            case 3 :
-                $(this).css({ height:'265px', lineHeight:'265px' })
-                $(this).find('li').css({ width:'50%' });
-                $(this).find('li').eq(0).css({ height:'100%' });
-                $(this).find('li').eq(0).find('img').css({ verticalAlign:'middle', position:'relative' });
-                $(this).find('li').eq(1).css({ height:'50%' });
-                $(this).find('li').eq(2).css({ height:'50%' });
-                $(this).find('li a img').css({ width:'100%' })
-            break;
-        }
-        
-        
-    })
+//    $('.timeCard_imgWrap').each(function(){
+//        var timeCard_imgNum = $(this).children().size();
+//        switch(timeCard_imgNum){
+//            case 1 :
+//                
+//                $(this).find('li a img').css({ width:'100%' })
+//                $(this).find('li').css({ width:'100%'})
+//            break;
+//            
+//            case 2 :
+//                $(this).find('li').css({
+//                    width:'50%'
+//                })
+//                $(this).find('li a img').css({ width:'100%', verticalAlign:'middle'})
+//                
+//            break;
+//                
+//            case 3 :
+//                $(this).css({ height:'265px', lineHeight:'265px' })
+//                $(this).find('li').css({ width:'50%' });
+//                $(this).find('li').eq(0).css({ height:'100%' });
+//                $(this).find('li').eq(0).find('img').css({ verticalAlign:'middle', position:'relative' });
+//                $(this).find('li').eq(1).css({ height:'50%' });
+//                $(this).find('li').eq(2).css({ height:'50%' });
+//                $(this).find('li a img').css({ width:'100%' })
+//            break;
+//        }
+//        
+//        
+//    })
     
     /* 히스토리 카드 전체 편집버튼 */
     var btn_editAllCards=false;
