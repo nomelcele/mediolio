@@ -18,7 +18,7 @@
 .timeCardWrap{ width:100%;}
 .timeCardWrap .timeCircle{ display:block; float:left; width:20px; height:20px; margin-top:20px; background:url(../images/timeCircle.png)}
 
-.timeCardWrap:last-of-type .timeCard{ margin-bottom:100px; }
+.timeCardWrap:last-of-type .timeCard{ margin-bottom:50px; }
 
 
 
