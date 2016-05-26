@@ -21,7 +21,7 @@
 #heartNum{ display:block; width:50px;  text-align:center; font-size:11px;position:absolute; top:95px; right:30px; }
 
 #modal_bd_content{ width:auto; height:auto; margin:0 5% 30px;}
-#content_imgWrap{ width:100%; min-height:500px; height:auto; background:#f5f5f5; }
+#content_imgWrap{ width:100%; min-height:500px; height:auto;  }
 #content_imgWrap img, #content_imgWrap iframe{ margin:0 auto;}
 
 #content_tagWrap{width:100%; min-height:60px; height:auto; padding:0; margin-top:20px;}
