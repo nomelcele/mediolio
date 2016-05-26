@@ -16,6 +16,12 @@ import com.mediolio.mvc.dao.SearchDao;
 import com.mediolio.vo.FriendVO;
 import com.mediolio.vo.ProjectVO;
 
+
+/* *****
+ * ***** 오지은 작성
+ * *****
+ * */
+
 @Controller
 public class SearchModel {
 
@@ -24,6 +30,8 @@ public class SearchModel {
 	@Autowired
 	private HistoryDao htdao;
 	
+	// 과목 검색 시 - 검색창에 글자를 타이핑 할 때(keyevent) 과목 자동완성을 위한 함수.
+	// 과목 명 리스트 리턴
 	@RequestMapping("searchAutoCompleteClass")
 	public ModelAndView searchAutoCompleteClass(String cl_name){
 		ModelAndView mav = new ModelAndView("jsonView");
@@ -31,25 +39,9 @@ public class SearchModel {
 
 		return mav;
 	}
-	@RequestMapping("searchH")
-	public ModelAndView searchH(@RequestParam("key") String key){
-		ModelAndView mav = new ModelAndView("search/search");
-		mav.addObject("key", key);
-		mav.addObject("type", "태그");
-		key = key.trim();
-		key = key.replaceAll(" ", ""); //해쉬태그 띄어쓰기 없애기
-		
-		List<ProjectVO> resultList = sdao.searchTag(key);
-		for(int i=0; i<resultList.size(); i++){
-			System.out.println(((ProjectVO) resultList.get(i)).getP_title());
-		}
-
-		mav.addObject("list", resultList);
-		mav.addObject("total", resultList.size());
-		return mav;
-	}
 	
-	//과목으로 검색
+	//과목 검색 - 자동완성되어 나타난 과목 목록을 선택했을 때 실행되는 함수
+	// 과목 id를 기반으로, 해당 과목에 관련된 프로젝트 목록 리턴
 	@RequestMapping("searchC")
 	public ModelAndView search(@RequestParam("cl_id") String cl_id, @RequestParam("cl_n") String cl_name){
 		ModelAndView mav = new ModelAndView("search/search");
@@ -60,29 +52,43 @@ public class SearchModel {
 		mav.addObject("list", resultList);
 		mav.addObject("total", resultList.size());
 		
-		for(int i=0; i<resultList.size(); i++){
-			System.out.println(((ProjectVO) resultList.get(i)).getP_title());
-		}
-
 		return mav;
 	}
 	
-	//글 제목으로 검색
+	
+	// 해시태그로 검색 시 - 그 해시태그를 가지고 있는 프로젝트 목록들을 리턴
+	@RequestMapping("searchH")
+	public ModelAndView searchH(@RequestParam("key") String key){
+		ModelAndView mav = new ModelAndView("search/search");
+		mav.addObject("key", key);
+		mav.addObject("type", "태그");
+		key = key.trim();
+		key = key.replaceAll(" ", ""); //검색어에 띄어쓰기가 있다면 띄어쓰기 없애기
+		
+		List<ProjectVO> resultList = sdao.searchTag(key);
+
+		mav.addObject("list", resultList);
+		mav.addObject("total", resultList.size());
+		return mav;
+	}
+	
+	
+	//글 제목으로 검색 시 - 전체 범위에서 또는 특정 카테고리에서 어떤 글 제목을 가진 프로젝트들을 출력
 	@RequestMapping("searchT")
 	public ModelAndView searchTitle(@RequestParam("key") String key, @RequestParam("ct") String category){
 		ModelAndView mav = new ModelAndView("search/search");
 		mav.addObject("key", key);
 		mav.addObject("type", "제목");
 		mav.addObject("category", getCategoryName(category));
-		System.out.println("searchDetail : " + key + ", " + category);
 		
 		//검색어 가공 - 띄어쓰기로 구분
+		// ex) 검색어 "안드로이드 어플리케이션" 
+		//       -> "안드로이드" 또는 "어플리케이션"을 제목(p_title) 또는 작업 명(p_prjname)으로 가진 프로젝트 출력
 		key = key.trim();
 		String[] splitKey =  key.split(" ");
 		List<String> keys = new ArrayList<>();
 		
 		for (int i=0; i<splitKey.length; i++){
-			System.out.println("검색어 : " + splitKey[i]);
 			keys.add("%"+splitKey[i]+"%");
 		}
 		
@@ -97,7 +103,7 @@ public class SearchModel {
 		return mav;
 	}
 	
-	//학우 검색
+	//학우 검색 - "이름" 또는 "기술" 또는 "그 기술을 가진 사람이름" 을 기반으로 검색
 	@RequestMapping("searchM")
 	public ModelAndView searchMember(@RequestParam("key") String key, @RequestParam("ct") String category, @RequestParam("sk") String skill){
 		ModelAndView mav = new ModelAndView("search/searchm");
@@ -116,7 +122,6 @@ public class SearchModel {
 		List<String> keys = new ArrayList<>();
 		
 		for (int i=0; i<splitKey.length; i++){
-			System.out.println("검색어 : " + splitKey[i]);
 			keys.add("%"+splitKey[i]+"%");
 		}
 		
@@ -127,15 +132,13 @@ public class SearchModel {
 		
 		List<FriendVO> resultList;
 		
-		if(category.equals("0")){//전체에서 검색
-			System.out.println("전체검색");
+		if(category.equals("0")){
+			//전체에서 검색
 			resultList = sdao.searchMemberInTotal(map);
-		}else{//특정 카테고리에 글을 쓴 학우 내에서 검색
+		}else{
+			//특정 카테고리에 글을 쓴 학우 내에서 검색
 			map.put("cate", category);
 			resultList = sdao.searchMemberInCategory(map);
-		}
-		for(int i=0; i<resultList.size(); i++){
-			System.out.println(resultList.get(i).getM_name());
 		}
 		
 		mav.addObject("list", resultList);
@@ -144,6 +147,8 @@ public class SearchModel {
 		return mav;
 	}
 
+	// 뷰에서 넘어온 카테고리id를 카테고리 이름으로 변환해주는 함수
+	// 다시 뷰로 출력할 때 필요한 값
 	private String getCategoryName(String intCategory){
 		String strCategory = "전체";
 		

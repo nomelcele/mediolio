@@ -2,31 +2,17 @@ package com.mediolio.mvc.model;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -46,7 +32,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mediolio.fileupload.ImageUtil;
 import com.mediolio.mvc.dao.MainDao;
 import com.mediolio.mvc.dao.ProjectDao;
-import com.mediolio.vo.ClassVO;
 import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.MemberVO;
@@ -60,8 +45,6 @@ public class ProjectModel {
 	@Autowired
 	private MainDao mdao;
 		
-	
-//	private static BoxViewClient boxView;
 	
 	@RequestMapping(value="addProjectForm")
 	public String addForm(Model model, HttpSession session){
