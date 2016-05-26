@@ -33,7 +33,7 @@ $('document').ready(function(){
 		// 프로젝트 등록
 		
 		// 유효성 검사
-		if($("#selectedCategory").val() == 0){
+		if($("#selectedCategory").val() == 999){
 			// 1. 카테고리 선택
 			$.jAlert({
 			    'title': '!!',
@@ -43,7 +43,7 @@ $('document').ready(function(){
 			    'size': 'xsm'
 			  });
 			console.log(orderArr);
-		} else if($("input[name=p_type]").val() == 999){
+		} else if($("input[name=cate_id]").val() == 999){
 			// 2. 서브카테고리 입력
 			$.jAlert({
 			    'title': '!!',

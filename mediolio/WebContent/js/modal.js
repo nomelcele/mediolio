@@ -122,7 +122,7 @@ function toolModalOpen(){
 
 function writeDCategoryModalOpen(){
    	// 카테고리 선택 안 하고 세부카테고리 선택 클릭했을 때
-	if($("#selectedCategory").val() == 0){
+	if($("#selectedCategory").val() == 999){
  	    $.jAlert({
  	        'title': '!!',
  	        'content': '카테고리를 선택해주세요.',
@@ -148,7 +148,7 @@ function writeDCategoryModalOpen(){
 		     	$(".card_tag").html("");
 		    	for(var i=0; i<arr.length; i++){
 		    		var el = arr[i];
-		    		$("input[name=p_type]").val($(el).val());
+		    		$("input[name=cate_id]").val($(el).val());
 		    		str += "<span><input type='hidden' class='subCategory' value="+$(el).val()+">"+$(el).parent().find(".label_category").html()+"</span>";
 		    		$(".card_tag").append("<span><input type='hidden' class='subCategory' value="+$(el).val()+">"+$(el).parent().find(".label_category").html()+"</span>");
 		    		if(i<arr.length-1){
@@ -168,8 +168,12 @@ function writeDCategoryModalOpen(){
 //		sb.append("<label class='label_category'>"+scNames[i]+"</label>");
 
 //	    $("#modal_bd_writeDCategory ul").html("<li>"+scList[i]+"</li>");
-		$("#modal_bd_writeDCategory ul").html("<li><input type='checkbox' value='0' data-labelauty='프로젝트'/><label class='label_category'>프로젝트</label></li>"+
-				"<li><input type='checkbox' value='1' data-labelauty='과제'/><label class='label_category'>과제</label></li>");
+		$("#modal_bd_writeDCategory ul").html("<li><input type='checkbox' value='1' data-labelauty='게임'/><label class='label_category'>게임</label></li>"+
+				"<li><input type='checkbox' value='2' data-labelauty='웹&앱'/><label class='label_category'>웹&앱</label></li>"+
+				"<li><input type='checkbox' value='3' data-labelauty='영상&사운드'/><label class='label_category'>영상&사운드</label></li>"+
+				"<li><input type='checkbox' value='4' data-labelauty='3D'/><label class='label_category'>3D</label></li>"+
+				"<li><input type='checkbox' value='5' data-labelauty='디자인'/><label class='label_category'>디자인</label></li>"+
+				"<li><input type='checkbox' value='6' data-labelauty='기타'/><label class='label_category'>기타</label></li>");
 		
 		$(":checkbox").labelauty({ label: false });
 	    

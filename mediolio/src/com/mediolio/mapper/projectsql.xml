@@ -30,6 +30,6 @@
   		where p_id=#{p_id}
   	</update>
   	<insert id="addTeamMember" parameterType="tmvo">
-  		insert into teammember (p_id,m_id,tm_role) values(#{p_id},#{m_id},#{tm_role})
+  		insert into teammember (p_id,m_id,tm_role,tm_detail) values(#{p_id},#{m_id},#{tm_role},#{tm_detail})
   	</insert>
   </mapper>

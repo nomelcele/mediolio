@@ -21,7 +21,7 @@
 <body>
 <form id="addProjectForm" action="addProject" method="post" enctype="multipart/form-data">
 		<input type="hidden" id="orderArr" name="orderArr"> 
-		<input type="hidden" name="p_type" value="999">
+		<input type="hidden" name="cate_id" value="999">
 <!--  		<input type="hidden" id="p_title" name="p_title"> -->
 <!--  		<input type="hidden" id="cate_id" name="cate_id"> -->
  		<input type="hidden" id="hashtags" name="hashtags">
@@ -52,14 +52,17 @@
 		        <div class="cardWindow_hd">1단계 : 글 내용 작성</div>
 		        <div id="write_hd">
 		            <div id="write_category">
-		                <select name="cate_id" id="selectedCategory">
-		                	<option value="0">카테고리</option>
-		                    <option value="1">게임</option>
-		                    <option value="2">웹 & 앱</option>
-		                    <option value="3">영상 & 사운드</option>
-		                    <option value="4">3D</option>
-		                    <option value="5">디자인</option>
-		                    <option value="6">기타</option>
+		                <select name="p_type" id="selectedCategory">
+		                	<option value="999">카테고리</option>
+		                	<option value="0">과제</option>
+		                	<option value="1">프로젝트</option>
+<!-- 		                	<option value="0">카테고리</option> -->
+<!-- 		                    <option value="1">게임</option> -->
+<!-- 		                    <option value="2">웹 & 앱</option> -->
+<!-- 		                    <option value="3">영상 & 사운드</option> -->
+<!-- 		                    <option value="4">3D</option> -->
+<!-- 		                    <option value="5">디자인</option> -->
+<!-- 		                    <option value="6">기타</option> -->
 		                </select>
 		            </div><!--//write_category-->
 		            <div id="write_dCategory">
