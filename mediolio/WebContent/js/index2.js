@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$(".historyWrap_main .timeCard_content, .newest_content").dotdotdot();
     
+    $('.bxslider').bxSlider();
     
     
     $(".historyWrap_main .timeCard_more").on('click', function(){

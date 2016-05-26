@@ -1,5 +1,5 @@
 $('document').ready(function(){
-	$('.bxslider').bxSlider();
+	
 	
 	// 카테고리 시작
 	var wHeight = $(window).height();
