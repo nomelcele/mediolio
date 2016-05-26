@@ -25,7 +25,7 @@
 <!--  		<input type="hidden" id="p_title" name="p_title"> -->
 <!--  		<input type="hidden" id="cate_id" name="cate_id"> -->
  		<input type="hidden" id="hashtags" name="hashtags">
- 		<input type="hidden" id="p_coverImgName" name="p_coverImg">
+<!--  		<input type="hidden" id="p_coverImgName" name="p_coverImg"> -->
 <!--  		<input type="hidden" id="sc_id" name="sc_id"> -->
 <!--  		<input type="hidden" id="p_workto" name="p_workto"> -->
 <!--  		<!-- 관련 과목 <input type="hidden" id="cl_id" name="cl_id">-->
