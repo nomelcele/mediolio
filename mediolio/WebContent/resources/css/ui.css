@@ -110,7 +110,7 @@ a#uploadPf{ display:block; width:100%; height:60px; font-size:13px; font-family:
 
 
 /* 쪽지 페이지 */
-.rmcnWrap{ position:fixed; right:40px; bottom:20px; width:40px; height:100px; }
+.rmcnWrap{ position:fixed; right:40px; bottom:20px; width:40px; height:100px; z-index:1;}
 .btn_rmcn{ display:block; width:40px; height:40px; background:#fff; margin-bottom:5px; box-sizing: border-box; border:1px solid #999; border-radius:10px; box-shadow:1px 1px 5px rgba(0,0,0,.5); }
 
 #btn_rmcnUp{ background-image:url(../images/up_grey.png); background-repeat:no-repeat; background-position:center center; }

@@ -107,7 +107,7 @@ textarea{ width:100%; height:100%; box-sizing: border-box; padding:10px 20px; bo
 .pageTitleNext:before{ content:"|"; margin:0 12px; color:#bbb; font-weight:lighter;}
 .pageTitleNext a{ color:#999;}
 .pageTitleNext a:hover{ color:#0F84CF;}
-
+.showMyHistory a{ color:#333;}
 
 #contentsWrap{ width:100%; height:auto; box-sizing: border-box; padding-left:230px; padding-bottom:100px; margin-top:50px; padding-top:20px; float:left; }
 #contentsWrap:after{ visibility:hidden; display:table; content:" "; font-size:0; clear:both; height:0; }

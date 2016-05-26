@@ -9,12 +9,13 @@
             <a class="btn_rmcn" id="btn_rmcnDown" href="#"></a>
     </div><!--//rmcnWrap-->
     <h1 class="pageTitle">
-    <span class="pageTitleIcon"></span><span class="showMyHistory"><a href="#">내 히스토리</a></span>
+    <span class="pageTitleIcon"></span>
+    <span class="showMyHistory"><a href="#">내 히스토리</a></span>
     <span class="pageTitleNext"><a href="#">내 게시물</a></span>
     </h1>
     
     <hr>
-   <div class="myHistory">
+   <div id="myHistoryWrap">
     <div class="historyWrap clear">
     	<input type="hidden" id="recentHtTitle" name="ht_title" value="${recentHtTitle}">
         <h2 class="historyTitle ellipsis"><span>제목</span>${recentHtTitle}</h2>
@@ -96,7 +97,7 @@
 	                        </span>
 	                    </div>
 	                    <div class="timeCard_visualWrap slider">
-	                        <ul class="timeCard_imgWrap" id="bxslider">
+	                        <ul class="timeCard_imgWrap">
 	                        	<c:if test="${branches.br_img1 != null}">
 		                            <li><a href="#">
 		                                <img src="upload/history/${branches.br_img1}" class="timeLine_img">

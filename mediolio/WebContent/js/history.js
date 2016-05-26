@@ -42,8 +42,80 @@ $(function(){
 
 	});
 	
-	branchLoad();
+	listLoad();
+
 	
+		$(".btn_timeCard_addImage").click(function(){
+		
+		// 사진 추가
+		if(imgCnt<=3)
+			imgCnt++;
+		
+		console.log("사진 수: "+imgCnt);
+		
+		switch(imgCnt){
+			case 1:
+				$("#imgFileBox1").css("display","block");
+				break;
+			case 2:
+				$("#imgFileBox2").css("display","block");
+				break;
+			case 3:
+				$("#imgFileBox3").css("display","block");
+				break;
+			default:
+	    		$.jAlert({
+	    		    'title': '!!',
+	    		    'content': '이미지는 최대 3개까지만 업로드 가능합니다.',
+	    		    'closeOnClick' : true,
+	    		    'theme' : 'red',
+	    		    'size': 'xsm'
+	    		  });
+		}
+	});
+
+	$(".file_timeCard").change(function(){
+		// 파일 업로드 했을 때 이름 보여주기
+		var fileName = $(this).val().split("\\")[2];
+		$(this).parent().parent().find("label").html(fileName);
+	});
+
+	$(".btn_timeCard_delImage").click(function(){
+		// 사진 삭제
+	
+		if(imgCnt == 4){
+			imgCnt -= 2;
+		} else if(imgCnt > 1){
+			imgCnt--;
+		} 
+		
+		console.log("사진 수: "+imgCnt);
+		if($(this).parent().prop("id") != "imgFileBox1"){
+			$(this).parent().css("display","none");
+		} else {
+			console.log("첫번째 사진 삭제");
+			$(this).parent().find("label").html("");
+		}
+		// input 파일 내용 비우기
+		$(this).parent().find(".fileWrap_timeCard").find("input[type=file]").val("");
+	});
+
+	$(".br_delete_btn").click(function(){
+		// 브랜치 삭제
+		$.ajax({
+			type: "POST",
+			url: "deleteBranch",
+			data: {
+				br_id: $(this).parent().find(".branch_id").val(),
+				ht_id: $("#recentHtId").val(),
+				ht_title: $("#recentHtTitle").val()
+			}, 
+			success: function(result){
+				$(".historyWrap").html(result);
+				branchLoad();
+			}
+		});
+	});
 });
 
 function addClass(li){
@@ -94,7 +166,7 @@ function listLoad(){
     $('.historyList_contentWrap, .historyList_pop').hide();
     $('.bd_historyEx table').css({ minHeight:40 });
     
-    
+    //.historyList_name
     $('.historyList_name').on('click',function(e){
     	// 선택한 히스토리 보여주기
 		$.ajax({
@@ -106,7 +178,7 @@ function listLoad(){
 			},
 			success: function(result){
 				$(".historyWrap").html(result);
-				branchLoad();
+				
 			}
 		});
     	
@@ -122,7 +194,7 @@ function listLoad(){
         
         btn_historyList_pop = false;
         
-    })
+    });
     
     
     
@@ -175,60 +247,148 @@ function listLoad(){
 }
 
 function branchLoad(){
-	$(".btn_timeCard_addImage").click(function(){
-		// 사진 추가
-		if(imgCnt<=3)
-			imgCnt++;
-		
-		switch(imgCnt){
-			case 1:
-				$("#imgFileBox1").css("display","block");
-				break;
-			case 2:
-				$("#imgFileBox2").css("display","block");
-				break;
-			case 3:
-				$("#imgFileBox3").css("display","block");
-				break;
-			default:
-        		$.jAlert({
-        		    'title': '!!',
-        		    'content': '이미지는 최대 3개까지만 업로드 가능합니다.',
-        		    'closeOnClick' : true,
-        		    'theme' : 'red',
-        		    'size': 'xsm'
-        		  });
+//	$(".btn_timeCard_addImage").click(function(){
+//		
+//		// 사진 추가
+//		if(imgCnt<=3)
+//			imgCnt++;
+//		
+//		console.log("사진 수: "+imgCnt);
+//		
+//		switch(imgCnt){
+//			case 1:
+//				$("#imgFileBox1").css("display","block");
+//				break;
+//			case 2:
+//				$("#imgFileBox2").css("display","block");
+//				break;
+//			case 3:
+//				$("#imgFileBox3").css("display","block");
+//				break;
+//			default:
+//        		$.jAlert({
+//        		    'title': '!!',
+//        		    'content': '이미지는 최대 3개까지만 업로드 가능합니다.',
+//        		    'closeOnClick' : true,
+//        		    'theme' : 'red',
+//        		    'size': 'xsm'
+//        		  });
+//		}
+//	});
+	
+//	$(".file_timeCard").change(function(){
+//		// 파일 업로드 했을 때 이름 보여주기
+//		var fileName = $(this).val().split("\\")[2];
+//		$(this).parent().parent().find("label").html(fileName);
+//	});
+	
+//	$(".btn_timeCard_delImage").click(function(){
+//		// 사진 삭제
+//
+//		if(imgCnt == 4){
+//			imgCnt -= 2;
+//		} else if(imgCnt > 1){
+//			imgCnt--;
+//		} 
+//		
+//		console.log("사진 수: "+imgCnt);
+//		if($(this).parent().prop("id") != "imgFileBox1"){
+//			$(this).parent().css("display","none");
+//		} else {
+//			console.log("첫번째 사진 삭제");
+//			$(this).parent().find("label").html("");
+//		}
+//		// input 파일 내용 비우기
+//		$(this).parent().find(".fileWrap_timeCard").find("input[type=file]").val("");
+//	});
+	
+//	$(".br_delete_btn").click(function(){
+//		// 브랜치 삭제
+//		$.ajax({
+//			type: "POST",
+//			url: "deleteBranch",
+//			data: {
+//				br_id: $(this).parent().find(".branch_id").val(),
+//				ht_id: $("#recentHtId").val(),
+//				ht_title: $("#recentHtTitle").val()
+//			}, 
+//			success: function(result){
+//				$(".historyWrap").html(result);
+//				branchLoad();
+//			}
+//		});
+//	});
+	
+}
+
+function addBrImg(){
+	// 사진 추가
+	if(imgCnt<=3)
+		imgCnt++;
+	
+	console.log("사진 수: "+imgCnt);
+	
+	switch(imgCnt){
+		case 1:
+			$("#imgFileBox1").css("display","block");
+			break;
+		case 2:
+			$("#imgFileBox2").css("display","block");
+			break;
+		case 3:
+			$("#imgFileBox3").css("display","block");
+			break;
+		default:
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '이미지는 최대 3개까지만 업로드 가능합니다.',
+    		    'closeOnClick' : true,
+    		    'theme' : 'red',
+    		    'size': 'xsm'
+    		  });
+	}
+}
+
+function showFileName(file){
+	// 파일 업로드 시 파일 이름 보여주기
+	var imgFile = file;
+	var fileName = $(imgFile).val().split("\\")[2];
+	$(imgFile).parent().parent().find("label").html(fileName);
+}
+
+function deleteBrImg(btn){
+	// 사진 삭제
+	var delBtn = btn;
+
+	if(imgCnt == 4){
+		imgCnt -= 2;
+	} else if(imgCnt > 1){
+		imgCnt--;
+	} 
+	
+	console.log("사진 수: "+imgCnt);
+	if($(delBtn).parent().prop("id") != "imgFileBox1"){
+		$(delBtn).parent().css("display","none");
+	} else {
+		console.log("첫번째 사진 삭제");
+		$(delBtn).parent().find("label").html("");
+	}
+	// input 파일 내용 비우기
+	$(delBtn).parent().find(".fileWrap_timeCard").find("input[type=file]").val("");
+}
+
+function deleteBranch(){
+	// 브랜치 삭제
+	$.ajax({
+		type: "POST",
+		url: "deleteBranch",
+		data: {
+			br_id: $(this).parent().find(".branch_id").val(),
+			ht_id: $("#recentHtId").val(),
+			ht_title: $("#recentHtTitle").val()
+		}, 
+		success: function(result){
+			$(".historyWrap").html(result);
 		}
 	});
-	
-	$(".file_timeCard").change(function(){
-		// 파일 업로드 했을 때 이름 보여주기
-		var fileName = $(this).val().split("\\")[2];
-		$(this).parent().parent().find("label").html(fileName);
-	});
-	
-	$(".btn_timeCard_delImage").click(function(){
-		// 사진 삭제
-		imgCnt--;
-		$(this).parent().css("display","none");
-		// input 파일 내용 비우기
-	});
-	
-	$(".br_delete_btn").click(function(){
-		// 브랜치 삭제
-		$.ajax({
-			type: "POST",
-			url: "deleteBranch",
-			data: {
-				br_id: $(this).parent().find(".branch_id").val(),
-				ht_id: $("#recentHtId").val(),
-				ht_title: $("#recentHtTitle").val()
-			}, 
-			success: function(result){
-				$(".historyWrap").html(result);
-				branchLoad();
-			}
-		});
-	});
-	
 }
