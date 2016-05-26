@@ -9,6 +9,7 @@
 <link href="resources/css/modal.css" rel="stylesheet" type="text/css"/>
 <link href="resources/css/note.css" rel="stylesheet" type="text/css"/>
 <link href="resources/css/write.css" rel="stylesheet" type="text/css"/>
+<link href="resources/css/myPage.css" rel="stylesheet" type="text/css"/>
 
 <link rel="stylesheet" href="resources/css/jquery.mCustomScrollbar.css" />
 <link rel="stylesheet" href="resources/css/nice-select.css"/>

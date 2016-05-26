@@ -32,4 +32,10 @@
   	<insert id="addTeamMember" parameterType="tmvo">
   		insert into teammember (p_id,m_id,tm_role,tm_detail) values(#{p_id},#{m_id},#{tm_role},#{tm_detail})
   	</insert>
+  	<select id="userProject" parameterType="int" resultType="pvo">
+		SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, p.p_summary, m.m_studentID authorID, m.m_name authorName,
+			(SELECT count(*) from member_action where act_type='like' AND act_what=p.p_id) p_likenum, p.p_viewnum,
+			(SELECT GROUP_CONCAT(h.h_value SEPARATOR ',') FROM hashtag h WHERE h.p_id = p.p_id) hashtags
+			FROM project p, member m where p.m_id=m.m_id and p.m_id=#{m_id} ORDER BY p.p_date DESC
+  	</select>
   </mapper>

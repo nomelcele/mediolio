@@ -48,4 +48,9 @@ public class ProjectDao {
 		// 팀원 소개 추가
 		st.insert("proj.addTeamMember", tmvo);
 	}
+	
+	public List<ProjectVO> userProject(int m_id){
+		// 유저 프로젝트
+		return st.selectList("proj.userProject", m_id);
+	}
 }

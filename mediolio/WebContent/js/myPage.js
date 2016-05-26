@@ -1,4 +1,20 @@
 $(document).ready(function(){
+	$(".myProject").hide();
+	
+	$(".showMyHistory").click(function(){
+		// 내 히스토리 보기
+		console.log("내 히스토리 보기");
+		$(".myHistory").show();
+		$(".myProject").hide();
+	});
+	
+	$(".pageTitleNext").click(function(){
+		// 내 게시물 보기
+		console.log("내 게시물 보기");
+		$(".myHistory").hide();
+		$(".myProject").show();
+	});
+	
     $('.timeCard_imgWrap').each(function(){
         var timeCard_imgNum = $(this).children().size();
         switch(timeCard_imgNum){
