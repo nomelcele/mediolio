@@ -8,10 +8,13 @@
             <a class="btn_rmcn" id="btn_rmcnUp" href="#"></a>
             <a class="btn_rmcn" id="btn_rmcnDown" href="#"></a>
     </div><!--//rmcnWrap-->
-    <h1 class="pageTitle"><span class="pageTitleIcon"></span>내 히스토리<span class="pageTitleNext"><a href="#">내 게시물</a></span></h1>
+    <h1 class="pageTitle">
+    <span class="pageTitleIcon"></span><span class="showMyHistory"><a href="#">내 히스토리</a></span>
+    <span class="pageTitleNext"><a href="#">내 게시물</a></span>
+    </h1>
     
     <hr>
-    
+   <div class="myHistory">
     <div class="historyWrap clear">
     	<input type="hidden" id="recentHtTitle" name="ht_title" value="${recentHtTitle}">
         <h2 class="historyTitle ellipsis"><span>제목</span>${recentHtTitle}</h2>
@@ -198,12 +201,56 @@
             
         </div><!--/bd_historyEx-->
     </div><!--//historyExWrap-->
+</div>   
+    
+    <!-- 내 게시물(S) -->
+	<div id="myProjectWrap" class="myProject">
+		<div id="myProj" class="contentM clear">
+		    <c:forEach var="myProjects" items="${myProjects}">
+			    <div class="cardWrap">
+			    <input type="hidden" class="projectId" value="${myProjects.p_id}">
+			    <input type="hidden" class="memberId" value="${myProjects.m_id}">
+			    	<div class="card_hd"></div>
+			    	<div class="card_img">
+			            <a href="projectView?m_id=${myProjects.m_id}&p_id=${myProjects.p_id}">
+			                <div>
+			                	<p>
+			                		<c:forTokens var="aTag" items="${mainProjects.hashtags }" delims=",">
+										<span>#${aTag }</span><br>
+									</c:forTokens>
+			                    </p>
+			                </div>
+							<c:choose>
+								<c:when test="${myProjects.p_coverImg ne '' && myProjects.p_coverImg ne null}">
+									<img src="resources/images/projectCover/${myProjects.p_coverImg}"/>
+								</c:when>
+								<c:otherwise>
+									<img src="resources/images/default.png"/>
+								</c:otherwise>
+							</c:choose>
+			            </a>
+			        </div><!--//card_img-->
+			    	<div class="card_bd">
+			        	<p class="card_title ellipsis"><a href="projectView?m_id=${myProjects.m_id}&p_id=${myProjects.p_id}">${myProjects.p_title}</a></p>
+			            <p class="card_dscrpt"><a href="userpage?usr_id=${myProjects.m_id }">${myProjects.authorID} ${myProjects.authorName}</a></p>
+			            <p class="card_tag">
+							${myProjects.p_summary }		
+			            </p>
+			        </div><!--//card_bd-->
+			        <div class="card_ct">
+			        	<p class="p_like"><span></span>${myProjects.p_likenum}</p>
+			            <p class="p_view"><span></span>${myProjects.p_viewnum}</p>
+			        </div><!--//card_ct-->
+			    </div><!--//cardWrap-->
+		
+		    </c:forEach>
+		  
+		</div>
+		</div>
     
     
     
     
     
-    
-    
-    
+    <!-- 내 게시물(E) -->
 </div>
