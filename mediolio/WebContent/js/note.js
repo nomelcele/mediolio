@@ -23,13 +23,14 @@ function deleteMsgReceived($div){
 }
 
 $(function(){	
-	$(document).on('click', '.btn_deleteNote', function(){
+	$(document).unbind("click").on('click', '.btn_deleteNote', function(){
 		$msg = $(this).closest('.noteWrap');
 		
 		if($(this).hasClass('receiveNote')){
 		    $.jAlert({
 		        'title': '!!',
 		        'content': '정말 삭제하시겠습니까?',
+		        'theme' : 'red',
 		        'closeOnClick' : true,
 		        'btns': [{ 'text': 'YES',  'theme' : 'green',
 				        	'onClick' : function(e){
@@ -43,6 +44,7 @@ $(function(){
 		    $.jAlert({
 		        'title': '!!',
 		        'content': '정말 삭제하시겠습니까?',
+		        'theme' : 'red',
 		        'closeOnClick' : true,
 		        'btns': [{ 'text': 'YES', 'theme' : 'green',
 		        				'onClick' : function(e){

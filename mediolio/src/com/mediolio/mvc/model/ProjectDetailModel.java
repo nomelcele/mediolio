@@ -44,6 +44,11 @@ public class ProjectDetailModel {
 			map.put("m_id", 0);
 		}
 		
+		// 조회수 증가(자기가 올린 프로젝트가 아닌 경우)
+		if(Integer.parseInt(m_id) != map.get("m_id").intValue()){
+			pddao.increaseHits(Integer.parseInt(p_id));
+		}
+		
 		int pid = Integer.parseInt(p_id);
 		//프로젝트 관련 정보 - 프로젝트 타이틀, 카테고리, 작업정보,  좋아요수 등
 		model.addAttribute("detail", pddao.projectDetailRelatedProject(p_id));
@@ -78,6 +83,7 @@ public class ProjectDetailModel {
 
 		// 조회수 증가(자기가 올린 프로젝트가 아닌 경우)
 		if(Integer.parseInt(m_id) != map.get("m_id").intValue()){
+			/*프로젝트 올린 사람 m_id != 로그인한 회원 m_id*/
 			System.out.println("조회수 증가");
 			pddao.increaseHits(Integer.parseInt(p_id));
 		}

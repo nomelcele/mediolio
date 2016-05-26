@@ -7,19 +7,27 @@ $('document').ready(function(){
         return false; 
     })
     
-    $('.userPopWrap .msg').on('click', function(){
+    $('.userPopWrap .msg').unbind("click").on('click', function(){
     	if($('#bellWrap').length) noteModalOpen(usr_id, usr_name);
     	else {
     		$.jAlert({
     		    'title': '!!',
     		    'content': '로그인하세요.',
+    		    'theme' : 'red',
     		    'closeOnClick' : true,
     		    'size': 'xsm'
     		  });
     	}
     });
-    $('.userPopWrap .userPop_userHt').on('click', function(){
-    	if($('#bellWrap').length) location.href="gotoMyPage"
+    $('.userPopWrap .userPop_userHt').unbind("click").on('click', function(){
+		$.jAlert({
+		    'title': '!!',
+		    'content': '준비중입니다.',
+		    'closeOnClick' : true,
+		    'theme' : 'red',
+		    'size': 'xsm'
+		  });
+    	/*    	if($('#bellWrap').length) location.href="gotoMyPage"
     	else {
     		$.jAlert({
     		    'title': '!!',
@@ -27,7 +35,7 @@ $('document').ready(function(){
     		    'closeOnClick' : true,
     		    'size': 'xsm'
     		  });
-    	}
+    	}*/
     })
 })
 

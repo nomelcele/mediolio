@@ -17,28 +17,68 @@ $(function(){
 		var stdid=Number($("#m_studentID").val());
 		
 		if(mail==""){
-			alert('이메일을 입력해주세요');
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '이메일을 입력해주세요.',
+    		    'closeOnClick' : true,
+    		    'theme' : 'red',
+    		    'size': 'xsm'
+    		  });
 		}
 		else if(!regex.test(mail)){
-			alert('이메일의 형식에 맞지 않습니다.');
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '이메일의 형식에 맞지 않습니다.',
+    		    'closeOnClick' : true,
+    		    'theme' : 'red',
+    		    'size': 'xsm'
+    		  });
 		}
 		else if($('#m_pw').val()==""){
-			alert('비밀번호를 올바르게 입력해주세요.');
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '비밀번호를 올바르게 입력해주세요.',
+    		    'closeOnClick' : true,
+    		    'theme' : 'red',
+    		    'size': 'xsm'
+    		  });
 		}
 		else if($("#m_nickname").val()==""){
-			alert('닉네임을 입력해주세요');
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '이름을 입력해주세요.',
+    		    'closeOnClick' : true,
+    		    'theme' : 'red',
+    		    'size': 'xsm'
+    		  });
 		}
-/*		else if($("#input_gender").val()!="male"&&$("#input_gender").val()!="female"){
-			alert('성별을 입력해주세요');
-		}*/
+
 		else if($("#sel_gender").text()=="GENDER"){
-			alert('성별을 입력해주세요');
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '성별을 입력해주세요.',
+    		    'closeOnClick' : true,
+    		    'theme' : 'red',
+    		    'size': 'xsm'
+    		  });
 		}
 		else if(stdid>16&&stdid<98||$("#m_studentID").val().length==0||$("#m_studentID").val().length==1){
-			alert('학번을 올바르게 입력해주세요');
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '학번을 올바르게 입력해주세요.',
+    		    'closeOnClick' : true,
+    		    'theme' : 'red',
+    		    'size': 'xsm'
+    		  });
 		}
 		else if($('#m_interesting1').val()==""||$('#m_interesting2').val()==""){
-			alert('관심분야를 2개 입력해주세요(필수)');
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '관심분야를 2개 입력해주세요(필수)',
+    		    'closeOnClick' : true,
+    		    'theme' : 'red',
+    		    'size': 'xsm'
+    		  });
 		}
 		else{
 			$.ajax({
@@ -51,7 +91,13 @@ $(function(){
 				success : function(response) {								
 					if(response.m_id!='0')
 					{
-						alert('이메일이 중복됩니다');
+			    		$.jAlert({
+			    		    'title': '!!',
+			    		    'content': '이메일이 중복됩니다.',
+			    		    'closeOnClick' : true,
+			    		    'theme' : 'red',
+			    		    'size': 'xsm'
+			    		  });
 					}
 					else
 					{
@@ -64,7 +110,13 @@ $(function(){
 								type: 'POST',
 								success: function (data) {
 									if(data.m_id==null){
-										alert('회원가입 실패');	
+							    		$.jAlert({
+							    		    'title': '!!',
+							    		    'content': '회원가입 실패',
+							    		    'closeOnClick' : true,
+							    		    'theme' : 'red',
+							    		    'size': 'xsm'
+							    		  });
 									}
 									else{
 										$(":checkbox[name='skill']:checked").each(function() {
@@ -77,12 +129,24 @@ $(function(){
 												type: 'POST',
 												success: function (data1) {
 													if(data1.m_id==null){
-														alert('관련기술 입력 실패');
+											    		$.jAlert({
+											    		    'title': '!!',
+											    		    'content': '관련기술 입력 실패',
+											    		    'closeOnClick' : true,
+											    		    'theme' : 'red',
+											    		    'size': 'xsm'
+											    		  });
 													}
 												}
 											});
 										});
-										alert('회원가입 성공');
+							    		$.jAlert({
+							    		    'title': '!!',
+							    		    'content': '회원가입 성공',
+							    		    'closeOnClick' : true,
+							    		    'theme' : 'blue',
+							    		    'size': 'xsm'
+							    		  });
 										location.href="main";
 									}
 								}

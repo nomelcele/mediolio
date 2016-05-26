@@ -192,7 +192,14 @@
 					        <c:forEach var="newest" items="${new1}">
 					        <div class="newest_contentWrap">
 					            <a href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">
-					                <img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+								<c:choose>
+									<c:when test="${newest.p_coverImg eq '' || newest.p_coverImg eq null}">
+										<img src="resources/images/default.png" width="80" height="80" alt="포트폴리오 이미지"/>
+									</c:when>
+									<c:otherwise>
+										<img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+									</c:otherwise>
+								</c:choose>
 					            </a>
 					            <div class="newest_textWrap">
 					                <p class="newest_title"><a class="ellipsis" href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">${newest.p_title }</a></p>
@@ -230,7 +237,14 @@
 						        <c:forEach var="newest" items="${new2}">
 							        <div class="newest_contentWrap">
 							            <a href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">
-							                <img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+										<c:choose>
+											<c:when test="${newest.p_coverImg eq '' || newest.p_coverImg eq null}">
+												<img src="resources/images/default.png" width="80" height="80" alt="포트폴리오 이미지"/>
+											</c:when>
+											<c:otherwise>
+												<img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+											</c:otherwise>
+										</c:choose>
 							            </a>
 							            <div class="newest_textWrap">
 							                <p class="newest_title"><a class="ellipsis" href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">${newest.p_title }</a></p>
@@ -269,7 +283,14 @@
 						<c:forEach var="newest" items="${new1}">     
 							<div class="newest_contentWrap">
 								<a href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">
-									<img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+								<c:choose>
+									<c:when test="${newest.p_coverImg eq '' || newest.p_coverImg eq null}">
+										<img src="resources/images/default.png" width="80" height="80" alt="포트폴리오 이미지"/>
+									</c:when>
+									<c:otherwise>
+										<img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+									</c:otherwise>
+								</c:choose>
 								</a>
 								<div class="newest_textWrap">
 									<p class="newest_title"><a class="ellipsis" href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">${newest.p_title }</a></p>
@@ -304,7 +325,14 @@
 							<c:forEach var="newest" items="${new2}">	        
 							<div class="newest_contentWrap">
 								<a href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">
-									<img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+								<c:choose>
+									<c:when test="${newest.p_coverImg eq '' || newest.p_coverImg eq null}">
+										<img src="resources/images/default.png" width="80" height="80" alt="포트폴리오 이미지"/>
+									</c:when>
+									<c:otherwise>
+										<img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+									</c:otherwise>
+								</c:choose>
 								</a>
 								<div class="newest_textWrap">
 									<p class="newest_title"><a class="ellipsis" href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">${newest.p_title }</a></p>
@@ -338,7 +366,14 @@
 						 	<c:forEach var="newest" items="${new3}">       
 							<div class="newest_contentWrap">
 								<a href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">
-									<img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+								<c:choose>
+									<c:when test="${newest.p_coverImg eq '' || newest.p_coverImg eq null}">
+										<img src="resources/images/default.png" width="80" height="80" alt="포트폴리오 이미지"/>
+									</c:when>
+									<c:otherwise>
+										<img src="resources/images/projectCover/${newest.p_coverImg}" width="80" height="80" alt="포트폴리오 이미지"/>
+									</c:otherwise>
+								</c:choose>
 								</a>
 								<div class="newest_textWrap">
 									<p class="newest_title"><a class="ellipsis" href="projectView?m_id=${newest.m_id}&p_id=${newest.p_id}">${newest.p_title }</a></p>

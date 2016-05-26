@@ -3,13 +3,31 @@ $(function(){
 		var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 		var email = $('#mail').val();
 		if(email==""){
-			alert('이메일을 입력하시오.');
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '이메일을 입력하세요.',
+    		    'closeOnClick' : true,
+    		    'theme' : 'red',
+    		    'size': 'xsm'
+    		  });
 		}
 		else if(!regex.test(email)){
-			alert('이메일 형식에 맞지 않습니다.');
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '이메일 형식에 맞지 않습니다.',
+    		    'closeOnClick' : true,
+    		    'theme' : 'red',
+    		    'size': 'xsm'
+    		  });
 		}
 		else if($('#pw').val()==""){
-			alert('비밀번호를 입력해주세요.');
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '비밀번호를 입력해주세요.',
+    		    'closeOnClick' : true,
+    		    'theme' : 'red',
+    		    'size': 'xsm'
+    		  });
 		}
 		else{
 			$.ajax({
@@ -25,11 +43,23 @@ $(function(){
 						location.href='main';
 					}
 					else if(response.m_id==null){
-						alert('가입되지 않은 사용자 입니다.');
+			    		$.jAlert({
+			    		    'title': '!!',
+			    		    'content': '가입되지 않은 사용자 입니다.',
+			    		    'closeOnClick' : true,
+			    		    'theme' : 'red',
+			    		    'size': 'xsm'
+			    		  });
 					}
 					else
 					{
-						alert('비밀번호가 일치하지 않습니다.');
+			    		$.jAlert({
+			    		    'title': '!!',
+			    		    'content': '비밀번호가 일치하지 않습니다.',
+			    		    'closeOnClick' : true,
+			    		    'theme' : 'red',
+			    		    'size': 'xsm'
+			    		  });
 					}	
 				}
 			});
@@ -55,10 +85,22 @@ $(function(){
 		var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 		var email = $('#fpw_email').val();
 		if(email==""){
-			alert('이메일을 입력하세요');
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '이메일을 입력하세요.',
+    		    'closeOnClick' : true,
+    		    'theme' : 'red',
+    		    'size': 'xsm'
+    		  });
 		}
 		else if(!regex.test(email)){
-			alert('이메일 형식에 맞지 않습니다.');
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '이메일 형식에 맞지 않습니다.',
+    		    'closeOnClick' : true,
+    		    'theme' : 'red',
+    		    'size': 'xsm'
+    		  });
 		}
 		else{
 			$.ajax({
@@ -71,12 +113,24 @@ $(function(){
 				success : function(response) {								
 					if(response.m_id=='0')
 					{
-						alert('가입되어있지 않은 사용자입니다.');
+			    		$.jAlert({
+			    		    'title': '!!',
+			    		    'content': '가입되어있지 않은 사용자입니다.',
+			    		    'closeOnClick' : true,
+			    		    'theme' : 'red',
+			    		    'size': 'xsm'
+			    		  });
 						
 					}
 					else
 					{
-						alert('회원님의 이메일로 임시비밀번호를 전송하였습니다.');
+			    		$.jAlert({
+			    		    'title': '!!',
+			    		    'content': '회원님의 이메일로 임시비밀번호를 전송하였습니다.',
+			    		    'closeOnClick' : true,
+			    		    'theme' : 'blue',
+			    		    'size': 'xsm'
+			    		  });
 						$('#modal_findPw').hide();
 						$('.modal_bg2').hide();
 						$('.modal_bg').show();

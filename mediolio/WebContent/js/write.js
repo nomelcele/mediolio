@@ -35,30 +35,78 @@ $('document').ready(function(){
 		// 유효성 검사
 		if($("#selectedCategory").val() == 0){
 			// 1. 카테고리 선택
-			alert("카테고리를 선택해주세요.");
+			$.jAlert({
+			    'title': '!!',
+			    'content': '카테고리를 선택해주세요.',
+			    'closeOnClick' : true,
+			    'theme' : 'red',
+			    'size': 'xsm'
+			  });
 			console.log(orderArr);
 		} else if($("input[name=p_type]").val() == 999){
 			// 2. 서브카테고리 입력
-			alert("서브카테고리를 선택해주세요.");
+			$.jAlert({
+			    'title': '!!',
+			    'content': '서브카테고리를 선택해주세요.',
+			    'closeOnClick' : true,
+			    'theme' : 'red',
+			    'size': 'xsm'
+			  });
 		} else if($.trim($("#projectTitle").val()) == ""){
 			// 3. 글 제목 입력
-			alert("제목을 입력해주세요.");
+			$.jAlert({
+			    'title': '!!',
+			    'content': '제목을 입력해주세요.',
+			    'closeOnClick' : true,
+			    'theme' : 'red',
+			    'size': 'xsm'
+			  });
 		} else if($("#write_bd .contentBox").size() == 0){
 			// 4. 내용 입력
 			// $("#write_tagTxt span").size()
-			alert("내용을 입력해주세요.");
+			$.jAlert({
+			    'title': '!!',
+			    'content': '내용을 입력해주세요.',
+			    'closeOnClick' : true,
+			    'theme' : 'red',
+			    'size': 'xsm'
+			  });
 		} else if($.trim($("input[name=p_prjname]").val()) == ""){
 			// 5. 작업 이름 입력
-			alert("작업 이름을 입력해주세요.");
+			$.jAlert({
+			    'title': '!!',
+			    'content': '작업 이름을 입력해주세요.',
+			    'closeOnClick' : true,
+			    'theme' : 'red',
+			    'size': 'xsm'
+			  });
 		} else if($("input[name=p_workfrom]").val() == ""){
 			// 6. 작업 시작일 입력
-			alert("작업 시작일을 입력해주세요.");
+			$.jAlert({
+			    'title': '!!',
+			    'content': '작업 시작일을 입력해주세요.',
+			    'closeOnClick' : true,
+			    'theme' : 'red',
+			    'size': 'xsm'
+			  });
 		} else if($("input[name=p_workto]").val() == ""){
 			// 7. 작업 종료일 입력
-			alert("작업 종료일을 입력해주세요.");
+			$.jAlert({
+			    'title': '!!',
+			    'content': '작업 종료일을 입력해주세요.',
+			    'closeOnClick' : true,
+			    'theme' : 'red',
+			    'size': 'xsm'
+			  });
 		} else if($.trim($("textarea[name=p_summary]").val()) == ""){
 			// 9. 작업 개요 입력
-			alert("작업 개요를 입력해주세요.");
+			$.jAlert({
+			    'title': '!!',
+			    'content': '작업 개요를 입력해주세요.',
+			    'closeOnClick' : true,
+			    'theme' : 'red',
+			    'size': 'xsm'
+			  });
 		} else{
 			// 파일 업로드
 			// 서버로 보내야 할 파라미터 목록
@@ -299,7 +347,13 @@ $('document').ready(function(){
     $(".contentFile").change(function(){
     	if($(this).prop("files")[0].size > 10485500){
     		// 10메가 이상의 파일 업로드했을 때(톰캣 자체 설정 -> 설정 변경하면 업로드 가능한 max size 조절 가능)
-    		alert("10MB 이하의 파일만 업로드 가능합니다.");
+			$.jAlert({
+			    'title': '!!',
+			    'content': '10MB 이하의 파일만 업로드 가능합니다.',
+			    'closeOnClick' : true,
+			    'theme' : 'red',
+			    'size': 'xsm'
+			  });
     	} else {
         	// 파일(이미지, 문서) 추가
     		var ext = $(this).val().split('.')[1].toLowerCase(); // 파일의 확장자
@@ -386,7 +440,13 @@ $('document').ready(function(){
     			addContent();
     			
     		} else {
-    			alert("업로드가 지원되지 않는 파일 형식입니다.");
+    			$.jAlert({
+    			    'title': '!!',
+    			    'content': '업로드가 지원되지 않는 파일 형식입니다.',
+    			    'closeOnClick' : true,
+    			    'theme' : 'red',
+    			    'size': 'xsm'
+    			  });
     		}
     	}
     });
@@ -868,7 +928,13 @@ function fileChange(file){
 		addContent();
 		
 	} else {
-		alert("업로드가 지원되지 않는 파일 형식입니다.");
+		$.jAlert({
+		    'title': '!!',
+		    'content': '업로드가 지원되지 않는 파일 형식입니다.',
+		    'closeOnClick' : true,
+		    'theme' : 'red',
+		    'size': 'xsm'
+		  });
 	}
 }
 

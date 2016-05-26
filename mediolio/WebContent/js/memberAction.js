@@ -1,14 +1,28 @@
 //오지은 - 좋아요, 팔로우, 댓글달기
 
 $('document').ready(function(){
-	$('#modal_ft_content').on('click', '.btn_deleteReply', function(){
+	$('#modal_ft_content').unbind("click").on('click', '.btn_deleteReply', function(){
 		deleteReply($(this).closest('.replyContentWrap'));
 	});
 	$('#modal_hd_content').on('click', '.cancelLikeProject', cancelLikeProject);
 	$('#modal_hd_content').on('click', '.likeProject', likeProject);
 	
 	$('#modal_content_userInfo').on('click', '.followMember', followMember);
-	$('#modal_content_userInfo').on('click', '.unfollowMember', followCancel);
+	$('#modal_content_userInfo').unbind("click").on('click', '.unfollowMember', function(){
+	    $.jAlert({
+	        'title': '!!',
+	        'content': '정말 팔로우를 취소하시겠습니까?',
+	        'closeOnClick' : true,
+	        'theme' : 'red',
+	        'btns': [{ 'text': 'YES',  'theme' : 'green',
+			        	'onClick' : function(e){
+			        		e.preventDefault();
+			        		followCancel();
+			        	}
+	        		  }, 
+	                 { 'text': 'NO', 'theme' : 'red'}]
+	      });
+	})
 });
 
 /*
@@ -88,7 +102,13 @@ function cancelLikeProject(){
 function submitReply(){
 	/*$('#writeReplyWrap textarea').val().replace(/\n/g, '<br>');*/ 
 	if(!$.trim($("#writeReplyWrap textarea").val())){
-		alert('댓글을 입력해주세요');
+		$.jAlert({
+		    'title': '!!',
+		    'content': '댓글을 입력해주세요.',
+		    'closeOnClick' : true,
+		    'theme' : 'red',
+		    'size': 'xsm'
+		  });
 	}
 	else{
 		
@@ -112,6 +132,7 @@ function deleteReply($div){
         'title': '!!',
         'content': '정말 삭제하시겠습니까?',
         'closeOnClick' : true,
+        'theme' : 'red',
         'btns': [{ 'text': 'YES',  'theme' : 'green',
 		        	'onClick' : function(e){
 		        		e.preventDefault();
