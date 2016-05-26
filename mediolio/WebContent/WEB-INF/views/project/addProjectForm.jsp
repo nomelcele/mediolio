@@ -129,7 +129,7 @@
 		            		<div id="write_tagTxt"></div>
 		            		<div class="write_tagArea">
 			            		<input id="write_tagInput" class="input_in" type="text" placeholder="태그를 입력하세요."/>
-			            		<div class="autoCompleteBox"><ul id="autoCompleteArea"></ul></div>
+			            		<div class="autoCompleteBox autoTag"><ul id="autoCompleteArea"></ul></div>
 			            	</div>
 		            	</div>
 		            </div>

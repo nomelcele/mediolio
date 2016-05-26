@@ -9,7 +9,7 @@
 .writeLineWrap .writeLine_2 .twoCell{ width:340px; height:30px; box-sizing:border-box; float:left; }
 .writeLineWrap .writeLine_2 .twoCell:first-of-type{ margin-right:10px;}
 .writeLineWrap .writeLine_2 .threeCell{ width:428px; height:inherit;box-sizing:border-box; float:left; }
-.writeLineWrap .writeLine_2 .threeCell.shortCell{ width:125px; border-right:1px solid #ccc; }
+.writeLineWrap .writeLine_2 .threeCell.shortCell{ width:125px; border-right:1px solid #ccc; position:relative;}
 
 .writeLongLineWrap{ min-height:120px; height:auto; overflow:auto;}
 .writeLineWrap .writeLine_1Long{ width:89px; border-right:none; }

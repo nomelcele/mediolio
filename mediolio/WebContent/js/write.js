@@ -481,13 +481,13 @@ $('document').ready(function(){
     			}
     			if(arr.length>0){
     				$("#autoCompleteArea").html(codes);
-        			$(".autoCompleteBox").css("display","block");
+        			$(".autoTag").css("display","block");
             		moveAutoCompleteBox();
     			}
     		}
     	});
     	} else {
-    		$(".autoCompleteBox").css("display","none");
+    		$(".autoTag").css("display","none");
     	}
     });
     
@@ -521,10 +521,10 @@ $('document').ready(function(){
 	    		$("#write_tagInput").attr("placeholder","태그를 입력하세요.");
 	    	}
 	    	
-	    	$(".autoCompleteBox").css("display","none");
+	    	$(".autoTag").css("display","none");
 	    	
 	    	if($("#write_tagTxt span").size() < 2){
-	    		$(".autoCompleteBox").css({
+	    		$(".autoTag").css({
 	    			left: 0,
 	    			top: 30
 	    		});
@@ -533,7 +533,7 @@ $('document').ready(function(){
 		    	var lastSpanOffset = $('#write_tagTxt span').last().offset().left;
 		    	var lastSpanWidth = $('#write_tagTxt span').last().width();
 		    	
-		    	$('.autoCompleteBox').css({
+		    	$('.autoTag').css({
 		    		left: lastSpanOffset+lastSpanWidth-100,
 		    		top: $('#write_tagTxt').height()
 		    	});
@@ -574,7 +574,7 @@ $('document').ready(function(){
 	    		})
 	    		
 	    		
-	    		$(".autoCompleteBox").css("display","none");
+	    		$(".autoTag").css("display","none");
 	    		moveAutoCompleteBox();
     		}
     	}
@@ -610,7 +610,7 @@ $('document').ready(function(){
 	    		$("#write_tagInput").attr("placeholder","태그를 입력하세요.");
 	    	}
 	    	
-    		$(".autoCompleteBox").css("display","none");
+    		$(".autoTag").css("display","none");
     		moveAutoCompleteBox();
     	}
     });
@@ -826,7 +826,7 @@ function addTag(li){
 	$("#write_tagTxt").append("<span>"+$(newTag).find("span").html()+"</span>");
 	$("#write_tagInput").val("");
 	$("#write_tagInput").focus();
-	$(".autoCompleteBox").css("display","none");
+	$(".autoTag").css("display","none");
 	
 	if( $('#write_tagTxt span').last().length == 0){
 		$('#write_tagInput').css({
@@ -1055,7 +1055,7 @@ function moveAutoCompleteBox(){
 	var lastSpanOffset = $('#write_tagTxt span').last().offset().left;
 	var lastSpanWidth = $('#write_tagTxt span').last().width();
 	
-	$('.autoCompleteBox').css({
+	$('.autoTag').css({
 		left: lastSpanOffset+lastSpanWidth-280,
 		top: $('#write_tagTxt').height()
 	});
