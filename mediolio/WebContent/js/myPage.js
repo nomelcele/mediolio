@@ -1,19 +1,53 @@
 $(document).ready(function(){
-	$(".myProject").hide();
-	$('#bxslider').bxSlider();
+	$("#myProjectWrap").hide();
+//	$('#bxslider').bxSlider();
 	
 	$(".showMyHistory").click(function(){
 		// 내 히스토리 보기
-		console.log("내 히스토리 보기");
-		$(".myHistory").show();
-		$(".myProject").hide();
+		$("#myHistoryWrap").show();
+		$("#myProjectWrap").hide();
+		$(".showMyHistory a").css("color","#333");
+		$(".showMyHistory a").hover(
+				  function () {
+				    $(this).css("color", "#0F84CF");
+				  }, 
+				  function () {
+				    $(this).css("color", "#333");
+				  }
+		);
+		$(".pageTitleNext a").css("color","#999");
+		$(".pageTitleNext a").hover(
+				  function () {
+				    $(this).css("color", "#0F84CF");
+				  }, 
+				  function () {
+				    $(this).css("color", "#999");
+				  }
+		);
 	});
 	
 	$(".pageTitleNext").click(function(){
 		// 내 게시물 보기
-		console.log("내 게시물 보기");
-		$(".myHistory").hide();
-		$(".myProject").show();
+		$("#myHistoryWrap").hide();
+		$("#myProjectWrap").show();
+		$(".showMyHistory a").css("color","#999");
+		$(".showMyHistory a").hover(
+				  function () {
+				    $(this).css("color", "#0F84CF");
+				  }, 
+				  function () {
+				    $(this).css("color", "#999");
+				  }
+		);
+		$(".pageTitleNext a").css("color","#333");
+		$(".pageTitleNext a").hover(
+				  function () {
+				    $(this).css("color", "#0F84CF");
+				  }, 
+				  function () {
+				    $(this).css("color", "#333");
+				  }
+		);
 	});
 	
 //    $('.timeCard_imgWrap').each(function(){

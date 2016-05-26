@@ -72,7 +72,7 @@ top: 20px;
 .timeCard_visualWrap{ width:530px; margin-top:10px; overflow:hidden; position:relative; }
 .timeCard_imgWrap{ width:100%; }
 .timeCard_imgWrap li{ float:left; width:100%; max-height:100%; overflow:hidden; position:relative;}
-.timeCard_imgWrap li img{ max-width:none; }
+.timeCard_imgWrap li img{ max-width:100%; /*none*/ }
 
 
 .timeCard_content{ width:100%; padding:10px 0 0 0; line-height:18px; color:#666; float:left;}
@@ -211,3 +211,5 @@ display: block; width: 0; z-index: 0; top: -11px; left: 40px; }
 .historyList_addContentWrap textarea{ padding:0; min-height:100px; font-size:12px;}
 .historyList_addContentWrap textarea:first-child{ border-bottom:1px solid #ddd; margin:0 0 5px 0; }
 .historyList_addContentWrap .historyList_addRelated{ margin:10px 0 0 0; min-height:50px;}
+
+#myProj{margin-top:30px;}
