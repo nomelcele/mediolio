@@ -187,9 +187,9 @@
 	            <div class="writeLineWrap">
 	                <div class="writeLine_1">관련 과목</div>
 	                <div class="writeLine_2">
-	                	<input class="writeLine_text project_related_class" type="text">
-	<!--                     <a href="#"  onclick="subjectModalOpen()">과목 선택..</a> -->
-						<div class="autoCompleteBox classBox autoClass"><ul class="autoCompleteArea autoClassArea"></ul></div>
+		                	<input class="writeLine_text project_related_class" type="text">
+		<!--                     <a href="#"  onclick="subjectModalOpen()">과목 선택..</a> -->
+							<div class="autoCompleteBox classBox autoClass"><ul class="autoCompleteArea autoClassArea"></ul></div>
 	                </div>
 	            </div><!--//writeLineWrap-->
 	            <div class="writeLineWrap clear">
@@ -197,8 +197,8 @@
 	                <div class="writeLine_2 writeLine_2Long clear" id="teamMateGroup">
 	                    <div class="write_teamMateWrap">
 	                        <div class="threeCell shortCell">
-	                            <input class="writeLine_text teamMateName" data-sort="0" type="text" placeholder="이름">
-	                            <div class="autoCompleteBox classBox autoMember"><ul class="autoCompleteArea autoMemberArea"></ul></div>
+	                            	<input class="writeLine_text teamMateName" data-sort="0" type="text" placeholder="이름">
+	                            	<div class="autoCompleteBox classBox autoMember"><ul class="autoCompleteArea autoMemberArea"></ul></div>
 	                        </div>
 	                        <div class="threeCell shortCell">
 	                            <input class="writeLine_text" type="text" name="tmList[0].tm_role" placeholder="역할">

@@ -1091,7 +1091,6 @@ function addMember(li){
 
 function autoCompleteMember(txt){
 	// 팀원 입력 시 이름 자동 완성
-	console.log("들어오냐???????");
 	var input = txt;
 	if($(input).val().trim() != ""){
     	$.ajax({
