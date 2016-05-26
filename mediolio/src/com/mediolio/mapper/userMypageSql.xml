@@ -4,6 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="userpage">
   
+  
+  <!-- !!!!!!!!!!!!!      오지은 작성        !!!!!!!!!!!!!!!! -->
+  
+  <!-- 유저의 id를 기반으로 해당 유저의 정보를 받아오는 쿼리문  -->
     <select id="getMemberInfo" parameterType="int" resultType="fvo">
 		SELECT m_id, m_studentID, m_name, m_introduce, m_interesting1, m.m_interesting2,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
@@ -12,6 +16,7 @@
 				FROM member m WHERE m_id=#{m_id}
 	</select>
 	
+	<!-- 유저의 id를 기반으로 해당 유저가 업로드한 프로젝트들을 받아오는 쿼리문. 한 번에 6개만.  -->
 	<select id="getProjectsUploaded" parameterType="int" resultType="upvo">
 		SELECT * FROM (
 			SELECT @NO := @NO + 1 AS ROWNUM, A.*
@@ -26,6 +31,7 @@
 		WHERE C.ROWNUM <![CDATA[>=]]> 1 AND C.ROWNUM <![CDATA[<=]]> 6
 	</select>
   
+   <!-- 유저의 id를 기반으로 해당 유저가 좋아요 누른 프로젝트들을 받아오는 쿼리문. 한 번에 6개만.  -->
   	<select id="getProjectsLiked" parameterType="int" resultType="upvo">
 		SELECT * FROM (
 			SELECT @NO := @NO + 1 AS ROWNUM, A.*

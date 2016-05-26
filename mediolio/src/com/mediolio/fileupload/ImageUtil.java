@@ -20,17 +20,6 @@ public class ImageUtil {
 
 	public static void fileUpload(InputStream is, String path, String fileName) throws IOException {
 
-		//String originalFileName = fileData.getOriginalFilename();
-		//String contentType = fileData.getContentType();
-		//long fileSize = fileData.getSize();
-
-		/*
-		 * System.out.println("file Info"); System.out.println("fileName " +
-		 * fileName); System.out.println("originalFileName :" +
-		 * originalFileName); System.out.println("contentType :" + contentType);
-		 * System.out.println("fileSize :" + fileSize);
-		 */
-
 		OutputStream out = null;
 
 		try {

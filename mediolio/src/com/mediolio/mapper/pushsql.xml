@@ -4,6 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="push">
   
+  <!-- !!!!!!!!!!!!!      오지은 작성        !!!!!!!!!!!!!!!! -->
+  
+  	<!-- 30초마다 websocket에 의해 실행되는 쿼리. 알림해야 할 목록 갯수 리턴 -->
 	<select id="checkLatestNews" parameterType="int" resultType="int">
 		SELECT count(*) FROM(
 			Select msg_id From message WHERE msg_to = #{m_id} AND msg_to_status = 'no-read' 
@@ -11,6 +14,8 @@
 			SELECT act_id FROM member_action WHERE act_to = #{m_id} AND act_read = 0 AND act_type != 'like' AND act_from != #{m_id}
 	     )x
 	</select>
+	
+	<!-- 특정 유저가 아직 읽지 않은 메세지 목록을 리턴하는 쿼리 -->
 	<select id="getMsgNotifications" parameterType="int" resultType="pmvo">
 		SELECT m.m_id, m.m_name AS msg_from_nickname, m.m_studentID AS msg_from_studentID, msg.msg_id, DATE_FORMAT(msg.msg_date, '%Y.%m.%d %H:%i:%s') AS msg_date, msg.msg_text 
 			FROM message msg JOIN member m ON m.m_id=msg.msg_from
@@ -18,6 +23,7 @@
 			ORDER BY msg.msg_id DESC
 	</select>
 
+	<!-- 특정 유저에게 들어온 새로운 팔로워 목록을 리턴하는 쿼리 -->
 	<select id="getFollowNotifications" parameterType="int" resultType="psvo">
 		SELECT m.m_id, m.m_name, m.m_studentID, DATE_FORMAT(act.act_date, '%Y.%m.%d %H:%i:%s') AS act_date
 			FROM member_action act JOIN member m ON act.act_from=m.m_id
@@ -25,11 +31,12 @@
 			ORDER BY act.act_date DESC
 	</select> 
 	
+	<!-- 특정 유저가 올린 글에 새로운 댓글이 달렸을 때, 댓글 목록을 리턴하는 쿼리 -->
 	<select id="getReplyNotifications" parameterType="int" resultType="psvo">
 		SELECT m.m_id, m.m_name, m.m_studentID, DATE_FORMAT(act.act_date, '%Y.%m.%d %H:%i:%s') AS act_date, p.p_id, p.m_id AS author_m_id, p.p_title, act.act_what AS r_id
 			FROM member_action act, reply r, member m, project p
 			WHERE act.act_from=m.m_id AND act.act_what = r.r_id AND r.p_id = p.p_id AND act.act_read=0 AND act.act_to=#{m_id} AND act.act_from !=#{m_id}
-			ORDER BY act.act_date DESC;
+			ORDER BY act.act_date DESC
 	</select> 
 
 </mapper>
