@@ -20,9 +20,12 @@
 #contentHeart img{ margin:11px 9px;}
 #heartNum{ display:block; width:50px;  text-align:center; font-size:11px;position:absolute; top:95px; right:30px; }
 
+/* 글 내용 - 컨텐츠 */
 #modal_bd_content{ width:auto; height:auto; margin:0 5% 30px;}
-#content_imgWrap{ width:100%; min-height:500px; height:auto;  }
-#content_imgWrap img, #content_imgWrap iframe{ margin:0 auto;}
+#modal_bd_content #content_imgWrap{ width:100%; min-height:500px; height:auto; }
+#modal_bd_content #content_imgWrap img, #modal_bd_content p, #content_imgWrap iframe{ margin:0 auto 15px; line-height:20px;}
+#modal_bd_content *{ display:inline-block; margin:0 auto 10px;}
+
 
 #content_tagWrap{width:100%; min-height:60px; height:auto; padding:0; margin-top:20px;}
 #content_tagWrap p{ font-weight:600; font-size:16px; line-height:30px;}
