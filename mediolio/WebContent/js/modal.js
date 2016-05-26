@@ -199,15 +199,15 @@ function writeDCategoryModalOpen(){
 	}
 }    
 
-function writeEmbedModalOpen(){
-	$('body').addClass('preventScroll');
-    $('.modal_bg, #modal_writeEmbed').show();
-    
-    $('#btn_writeEmbed').on('click',function(){
-        $('.modal_bg, .modal').hide();
-    	$('body').removeClass('preventScroll');
-    })
-}
+//function writeEmbedModalOpen(){
+//	$('body').addClass('preventScroll');
+//    $('.modal_bg, #modal_writeEmbed').show();
+//    
+//    $('#btn_writeEmbed').on('click',function(){
+//        $('.modal_bg, .modal').hide();
+//    	$('body').removeClass('preventScroll');
+//    })
+//}
 
 
 //인덱스 모달 추가

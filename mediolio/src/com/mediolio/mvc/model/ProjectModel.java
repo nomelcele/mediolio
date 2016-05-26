@@ -44,7 +44,6 @@ public class ProjectModel {
 	private ProjectDao pdao;
 	@Autowired
 	private MainDao mdao;
-		
 	
 	@RequestMapping(value="addProjectForm")
 	public String addForm(Model model, HttpSession session){
@@ -72,7 +71,6 @@ public class ProjectModel {
 		List<MultipartFile> contents = pvo.getContents();
 		String[] contentNames;
 		if(contents != null){
-			System.out.println(orderArr.length);
 			contentNames = new String[contents.size()];
 			for(int i=0; i<contentNames.length; i++){
 				contentNames[i] = contents.get(i).getOriginalFilename();
@@ -82,12 +80,25 @@ public class ProjectModel {
 				System.out.println((i+1)+"번째 콘텐츠: "+orderArr[i]);
 				ContentVO covo = new ContentVO();
 
-				if(Arrays.asList(contentNames).contains(orderArr[i])){
+				String docRealName = "default";
+				if(orderArr[i].contains(".") && orderArr[i].contains("_"))
+					docRealName = orderArr[i].split("_")[0] +"."+ orderArr[i].split("\\.")[1];
+				System.out.println("docRealName: "+docRealName);
+				
+				int idx = 0;
+				MultipartFile file = null;
+				
+				if(Arrays.asList(contentNames).contains(orderArr[i]) || Arrays.asList(contentNames).contains(docRealName)){
 					// 2-1. 이미지, 문서 파일일 경우
-					int idx = Arrays.asList(contentNames).indexOf(orderArr[i]);
-					MultipartFile file = contents.get(idx); 
-					String newFileName = fileUpload(file, session); // 파일 업로드
-					String fileExt = newFileName.split("\\.")[1]; // 파일의 확장자
+					if(Arrays.asList(contentNames).contains(orderArr[i])){
+						idx = Arrays.asList(contentNames).indexOf(orderArr[i]);
+					} else if(Arrays.asList(contentNames).contains(docRealName)){
+						idx = Arrays.asList(contentNames).indexOf(docRealName);
+					}
+					
+					file = contents.get(idx);
+					
+					String fileExt = file.getOriginalFilename().split("\\.")[1]; // 파일의 확장자
 					
 					String c_type = "document";
 					String[] imgExt = {"gif","png","jpg","jpeg"};
@@ -97,13 +108,25 @@ public class ProjectModel {
 						}
 					}
 					
+					if(c_type.equals("image")){
+						// 이미지 파일인 경우 업로드
+						String newFileName = fileUpload(file, session); // 파일 업로드
+						covo.setC_value(newFileName); // 콘텐츠의 파일 이름
+					} else {
+						// 문서 파일의 경우, 뷰어 보여줄 때(showViewer2) 이미 업로드를 했기 때문에 이 단계에서는 db에 파일 이름만 넣어주면 됨.
+						// orderArr 배열에 저장된 이름으로 저장('파일 원래 이름_업로드 시간' 형식의 이름)
+						System.out.println("문서파일 디비에 넣기: "+orderArr[i]);
+						covo.setC_value(orderArr[i]);
+					}
+					
 					covo.setC_type(c_type); // 콘텐츠의 타입(image/document)
-					covo.setC_value(newFileName); // 콘텐츠의 파일 이름
+					
 
 				} else {
 					// 2-2. 임베드 태그, 텍스트 db에 등록
 					covo.setC_type("html");
-					covo.setC_value(orderArr[i]);
+					covo.setC_value(orderArr[i].replace("contenteditable=\"true\"", ""));
+					
 				}
 				
 				covo.setP_id(p_id); // 프로젝트 id
@@ -168,9 +191,20 @@ public class ProjectModel {
 		return "redirect:projectView?m_id="+m_id+"&p_id="+p_id;
 	}
 	
-	@RequestMapping(value="showViewer")
-	public void showViewer(ProjectVO pvo, HttpSession session, HttpServletResponse response) throws IOException, URISyntaxException{
+	@RequestMapping(value="showViewer2")
+	public void showViewer2(ProjectVO pvo, HttpSession session, HttpServletResponse response) throws IOException{
 		// doc, ppt, pdf 업로드 했을 때 뷰어 보여주기
+		MultipartFile docFile = pvo.getDoc();
+		String newFileName = fileUpload(docFile, session);
+		PrintWriter pw = response.getWriter();
+		pw.write(newFileName);
+		pw.flush();
+		pw.close();
+	}
+	
+	@RequestMapping(value="showViewer")
+	public void showViewer(ProjectVO pvo, HttpSession session, HttpServletResponse response) throws IOException{
+		// doc, ppt, pdf 업로드 했을 때 뷰어 보여주기 (이전 버전)
 		List<MultipartFile> contents = pvo.getContents();
 		MultipartFile projectFile = contents.get(0);
 		String[] imgExt = {"gif","png","jpg","jpeg"};
