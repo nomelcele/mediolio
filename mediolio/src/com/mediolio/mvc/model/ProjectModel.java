@@ -85,7 +85,8 @@ public class ProjectModel {
 	public String addProject(ProjectVO pvo, TeamMemberVO tmvo, String[] orderArr, HttpSession session, Model model){
 		// 프로젝트 업로드
 		// 1. 새로운 프로젝트 추가
-		pvo.setM_id(((MemberVO)session.getAttribute("mev")).getM_id());
+		int m_id = ((MemberVO)session.getAttribute("mev")).getM_id();
+		pvo.setM_id(m_id);
 		int p_id = pdao.addProject(pvo); 
 		
 		// 2. 콘텐츠(이미지, 문서, 임베드 태그, 텍스트) 업로드 및 db에 등록
@@ -185,7 +186,7 @@ public class ProjectModel {
 			pdao.addTeamMember(vo);
 		}
 				
-		return "main/index";
+		return "redirect:projectView?m_id="+m_id+"&p_id="+p_id;
 	}
 	
 	@RequestMapping(value="showViewer")

@@ -48,7 +48,28 @@
                 <span id="heartNum">${detail.p_likenum }</span>
             </div> 
             <div class="modal_bd" id="modal_bd_content">
-                <div id="content_imgWrap"></div>
+                <div id="content_imgWrap">
+               	 <!-- 콘텐츠 내용 (S) -->
+		    		<c:forEach var="contents" items="${contents}">
+		    			<c:choose>
+		    				<c:when test="${contents.c_type eq 'image'}">
+		    					<!-- 이미지 -->
+		    					<div class="contentBox"><img src="upload/img/${contents.c_value}" style="display:block; margin:auto"/></div>
+		    				</c:when>
+		    				<c:when test="${contents.c_type eq 'document'}">
+		    					<!-- 문서 -->
+		    					<div class="contentBox"><iframe src="http://docs.google.com/viewer?embedded=true&url=http://52.79.195.100:8080/mediolio/upload/docs/${contents.c_value}" style="height:700px; width:100%;"></iframe></div>
+		    				</c:when>
+		    				<c:otherwise>
+		    					<!-- 임베드 태그, 텍스트 -->
+		    					<c:if test="${contents.c_type eq 'html' && contents.c_value ne 'undefined'}">
+		    						<div class="contentBox">${contents.c_value}</div>
+		    					</c:if>
+		    				</c:otherwise>
+		    			</c:choose>
+		    		</c:forEach>
+    			<!-- 콘텐츠 내용 (E) -->
+                </div>
                 <div id="content_tagWrap">
                     <p>연관 태그</p>
 		            <c:forEach var="aTag" items="${tag }">

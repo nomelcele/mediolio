@@ -44,6 +44,11 @@ public class ProjectDetailModel {
 			map.put("m_id", 0);
 		}
 		
+		// 프로젝트 콘텐츠
+		List<ContentVO> contents = pddao.projectContents(Integer.parseInt(p_id));
+		model.addAttribute("contents", contents);
+
+		
 		// 조회수 증가(자기가 올린 프로젝트가 아닌 경우)
 		if(Integer.parseInt(m_id) != map.get("m_id").intValue()){
 			pddao.increaseHits(Integer.parseInt(p_id));

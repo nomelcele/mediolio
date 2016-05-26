@@ -52,11 +52,11 @@
     			<c:choose>
     				<c:when test="${contents.c_type eq 'image'}">
     					<!-- 이미지 -->
-    					<div class="contentBox"><img src="upload/${contents.c_value}" style="display:block; margin:auto"/></div>
+    					<div class="contentBox"><img src="upload/img/${contents.c_value}" style="display:block; margin:auto"/></div>
     				</c:when>
     				<c:when test="${contents.c_type eq 'document'}">
     					<!-- 문서 -->
-    					<div class="contentBox"><iframe src="${contents.c_value}" style="width:570px; height:740px;"></iframe></div>
+    					<div class="contentBox"><iframe src="http://docs.google.com/viewer?embedded=true&url=http://52.79.195.100:8080/mediolio/upload/docs/${contents.c_value}" style="width:570px; height:740px;"></iframe></div>
     				</c:when>
     				<c:otherwise>
     					<!-- 임베드 태그, 텍스트 -->
