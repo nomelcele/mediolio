@@ -135,8 +135,8 @@
                     <span>보유 기술</span>
                     <h3>JAVA, JAVASCRIPT, Photoshop, Illustrator</h3>
                 </div>
-<!--                 <h4>관련 히스토리</h4> -->
-<!--                 <h5><a href="#">JUICY 반응형 웹사이트</a></h5> -->
+                <h4>관련 히스토리</h4>
+                <h5><a href="#">JUICY 반응형 웹사이트</a></h5>
 		    </div>
 		    
 		    <div class="projectWrap">

@@ -58,9 +58,9 @@ public class HistoryModel {
 					String newFileName = fName+"_"+System.currentTimeMillis()+"."+fileExt;
 					System.out.println("New File Name: "+newFileName); // 새로운 파일 이름(중복 방지)
 				
-					String realPath = session.getServletContext().getRealPath("/"); // 업로드 경로
+					String realPath = session.getServletContext().getRealPath("/upload/"); // 업로드 경로
 					StringBuffer path = new StringBuffer();
-					path.append(realPath).append("upload\\history\\").append(newFileName);
+					path.append(realPath).append("history/").append(newFileName);
 					System.out.println("File Upload Path: "+path);
 					File file = new File(path.toString());
 					file.mkdirs();
