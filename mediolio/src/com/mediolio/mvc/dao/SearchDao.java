@@ -10,6 +10,12 @@ import org.springframework.stereotype.Repository;
 import com.mediolio.vo.FriendVO;
 import com.mediolio.vo.ProjectVO;
 
+
+/* *****
+ * ***** 오지은 작성
+ * *****
+ * */
+
 @Repository
 public class SearchDao {
 

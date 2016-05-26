@@ -4,26 +4,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="ma">
 
+  <!-- !!!!!!!!!!!!!      오지은 작성        !!!!!!!!!!!!!!!! -->
+
+	<!-- 프로젝트를 "좋아요" 눌렀을 때 Member_action 테이블에 입력-->
     <insert id="projectLike" parameterType="mavo">
 		INSERT INTO member_action (act_type, act_to, act_from, act_what, act_date, act_read) VALUES ('like', #{act_to}, #{act_from},#{act_what}, now(), 0)
 	</insert>
 	
+	<!-- 프로젝트를 "좋아요" 취소했을 때 Member_action 테이블에서 삭제-->
 	<delete id="projectLikeCancel" parameterType="mavo">
 		DELETE FROM member_action WHERE act_type='like' AND act_from=#{act_from} AND act_what=#{act_what}
 	</delete>
 		
+	<!-- 특정 프로젝트에 대한 "좋아요" 수 받아오기-->
   	<select id="getProjectLike" parameterType="int" resultType="int">
 		SELECT count(*) from member_action WHERE act_type='like' AND act_what=#{act_what}
 	</select>
 	
+	<!-- 메세지 보냄-->
   	<insert id="msgSend" parameterType="msvo">
 		INSERT INTO message (msg_from, msg_to, msg_text, msg_date, msg_from_status, msg_to_status) VALUES (#{msg_from}, #{msg_to}, #{msg_text}, now(), 'sent', 'no-read')
 	</insert>
 	
+	<!-- 메세지 보낼 대상을 수동으로 입력할 때 타이핑한 회원 이름에 관련된 회원목록 리턴 -->
 	<select id="autoCompleteWhoReceive" parameterType="string" resultType="mevo">
 		SELECT m_id, m_studentID, m_name FROM member WHERE m_name LIKE CONCAT('%',#{m_name},'%') 
 	</select>
 	
+	<!-- 내가 받은 메세지 목록 리턴 -->
 	<select id="getMsgListReceived" parameterType="int" resultType="pmvo">
 		SELECT msg.msg_id, msg.msg_from, msg.msg_text, DATE_FORMAT(msg.msg_date, '%Y.%m.%d %H:%i:%s') AS msg_date, 
 			msg.msg_to_status, m.m_studentID AS msg_from_studentID, m.m_name AS msg_from_nickname
@@ -31,6 +39,7 @@
 				WHERE msg.msg_from=m.m_id AND msg.msg_to=#{m_id} AND msg.msg_to_status != 'deleted' ORDER BY msg.msg_to_status ASC, msg.msg_id DESC
 	</select>
 	
+	<!-- 내가 보낸 메세지 목록 리턴 -->
 	<select id="getMsgListSent" parameterType="int" resultType="pmvo">
 		SELECT msg.msg_id, msg.msg_to, msg.msg_text, DATE_FORMAT(msg.msg_date, '%Y.%m.%d %H:%i:%s') AS msg_date, 
 			m.m_studentID AS msg_to_studentID, m.m_name AS msg_to_nickname
@@ -38,30 +47,37 @@
 				WHERE msg.msg_to=m.m_id AND msg.msg_from=#{m_id} AND msg.msg_from_status = 'sent' ORDER BY msg.msg_id DESC
 	</select>
 	
+	<!-- 보낸 사람이 보낸 메세지를 삭제했을 때, 보낸사람 측 메세지가 삭제되었다는 정보를 업데이트 -->
 	<update id="deleteMsgSent" parameterType="int">
 		UPDATE message SET msg_from_status = 'deleted' WHERE msg_id = #{msg_id}
 	</update>
 	
+	<!-- 메세지를 받은 사람이 메세지를 삭제했을 때, 받은사람 측  메세지가 삭제되었다는 정보 업데이트 -->
 	<update id="deleteMsgReceived" parameterType="int">
 		UPDATE message SET msg_to_status = 'deleted' WHERE msg_id = #{msg_id}
 	</update>
 	
+	<!-- 메세지를 받은 사람이 메세지를 읽었음을 업데이트 -->
 	<update id="readMsgReceived" parameterType ="int">
 		UPDATE message SET msg_to_status='read' WHERE msg_id = #{msg_id}
 	</update>
 	
+	<!-- 누군가를 팔로우 할 때 -->
 	<insert id="followMember" parameterType="mavo">
 		INSERT INTO member_action (act_type, act_to, act_from, act_date, act_read) VALUES ('follow', #{act_to}, #{act_from}, now(), 0)
 	</insert>
 	
+	<!-- 팔로우를 취소할 때 -->
 	<delete id="followCancel" parameterType="mavo">
 		DELETE FROM member_action WHERE act_type='follow' AND act_from=#{act_from} AND act_to=#{act_to}
 	</delete>
 	
+	<!-- 어떤 회원과 내가 팔로우 된 사이인지를 체크 -->
 	<select id="followCheck" parameterType = "mavo" resultType="int">
 		SELECT count(*) from member_action WHERE act_type='follow' AND act_from=#{act_from} AND act_to=#{act_to}
 	</select>
 
+	<!-- 어떤 회원의 팔로잉 리스트 리턴 -->
 	<select id="getFollowingList" parameterType="int" resultType="fvo">
 		SELECT m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2,
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
@@ -70,6 +86,7 @@
 				FROM member m, member_action ma WHERE m.m_id=ma.act_to AND ma.act_type='follow' AND ma.act_from=#{m_id}
 	</select>
 	
+	<!-- 어떤 회원의 팔로워 리스트 리턴 -->
 	<select id="getFollowerList" parameterType="int" resultType="fvo">
 		SELECT m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2, 
 			(SELECT c.cate_name FROM category c WHERE c.cate_id=m_interesting1) AS m_interestingText1,
@@ -78,6 +95,7 @@
 				FROM member m, member_action ma WHERE m.m_id=ma.act_from AND ma.act_type='follow' AND ma.act_to=#{m_id}
 	</select>
 	
+	<!-- 팔로잉/팔로워 수 리턴 -->
   	<select id="friendCnt" parameterType="int" resultType="java.util.HashMap">
   		SELECT
 			(SELECT count(*) from member_action WHERE act_type = 'follow' AND act_from = #{m_id } ) AS following,

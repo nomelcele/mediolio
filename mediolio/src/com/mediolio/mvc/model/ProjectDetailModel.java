@@ -18,11 +18,18 @@ import com.mediolio.vo.ContentVO;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ReplyVO;
 
+
+/* *****
+ * ***** 오지은 + 모하람 작성 class
+ * *****
+ * */
+
 @Controller
 public class ProjectDetailModel {
 	@Autowired
 	private ProjectDetailDao pddao;
 	
+	// 프로젝트 상세 보기 페이지(projectView.jsp)를 여는 함수
 	@RequestMapping("projectView")
 	public String projectView(Model model, @RequestParam("p_id") String p_id, @RequestParam("m_id") String m_id, HttpSession session){
 		MemberVO mev = (MemberVO)session.getAttribute("mev");
@@ -37,35 +44,34 @@ public class ProjectDetailModel {
 			map.put("m_id", 0);
 		}
 		
-		// 프로젝트 콘텐츠
+		// 모하람 작성 - 해당 프로젝트 포함된 콘텐츠(이미지/문서/글 등)
 		List<ContentVO> contents = pddao.projectContents(Integer.parseInt(p_id));
 		model.addAttribute("contents", contents);
 
-		
-		// 조회수 증가(자기가 올린 프로젝트가 아닌 경우)
+		// 모하람 작성 - 조회수 증가(자기가 올린 프로젝트가 아닌 경우)
 		if(Integer.parseInt(m_id) != map.get("m_id").intValue()){
 			pddao.increaseHits(Integer.parseInt(p_id));
 		}
 		
 		int pid = Integer.parseInt(p_id);
-		//프로젝트 관련 정보 - 프로젝트 타이틀, 카테고리, 작업정보,  좋아요수 등
-		model.addAttribute("detail", pddao.projectDetailRelatedProject(p_id));
+		// 오지은 작성 - 프로젝트 관련 정보 - 프로젝트 타이틀, 카테고리, 작업정보,  좋아요수 등
+		model.addAttribute("detail", pddao.projectDetailRelatedProject(pid));
 				
-		//프로젝트 작성자 정보 - 이름, 관심분야, 좋아요 여부 등
+		// 오지은 작성 - 프로젝트 작성자 정보 - 이름, 관심분야, 좋아요 여부 등
 		model.addAttribute("writer", pddao.projectDetailRelatedMember(map));
 		
-		//댓글목록
+		// 오지은 작성 - 댓글목록
 		model.addAttribute("reply", pddao.getReplyList(pid));
 		
-		//해쉬태그
+		// 오지은 작성 - 해쉬태그
 		model.addAttribute("tag", pddao.projectHash(pid));
 		
-		//팀원 정보
+		// 오지은 작성 - 팀원 정보
 		model.addAttribute("team", pddao.getTeamMember(pid));
 		return "project/projectView";
 	}
 
-	//댓글 달기
+	//오지은 작성 - 댓글 업로드
 	@RequestMapping("submitReply")
 	public ModelAndView submitReply(ReplyVO vo, @RequestParam("act_to") String act_to, HttpSession session){
 		ModelAndView mav = new ModelAndView("jsonView");
@@ -74,12 +80,11 @@ public class ProjectDetailModel {
 		if(mev!=null){			
 			vo.setM_id(mev.getM_id());
 			mav.addObject("reply", pddao.submitReply(vo, act_to));
-			System.out.println("댓글 내용 : " + vo.getR_text() + ", projectID : " + vo.getP_id() + ", m_id : " + vo.getM_id());
 		}
 		return mav;
 	}
 	
-	//댓글 삭제
+	//오지은 작성 - 댓글 삭제
 	@RequestMapping("deleteReply")
 	public ModelAndView deleteReply(@RequestParam("r_id") String r_id){
 		ModelAndView mav = new ModelAndView("jsonView");
