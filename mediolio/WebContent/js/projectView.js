@@ -18,12 +18,24 @@ $('document').ready(function(){
     		  });
     	}
     });
+    $('.userPopWrap .userPop_userHt').on('click', function(){
+    	if($('#bellWrap').length) location.href="gotoMyPage"
+    	else {
+    		$.jAlert({
+    		    'title': '!!',
+    		    'content': '로그인하세요.',
+    		    'closeOnClick' : true,
+    		    'size': 'xsm'
+    		  });
+    	}
+    })
 })
 
 
 function userPop(event, aObj, m_id){
 	usr_name = $(aObj).text();
 	usr_id = m_id;
+	$('.userPopWrap .userPop_userPage').attr("href", "userpage?usr_id="+usr_id);
 	
     var mouseX = event.clientX;
     var mouseY = event.clientY;

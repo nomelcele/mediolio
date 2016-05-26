@@ -148,9 +148,9 @@
 		
 	</div><!--//modal_content-->
 	<ul class="userPopWrap">
-	    <li><a href="#">유저페이지</a></li>
+	    <li><a href="#" class="userPop_userPage">유저페이지</a></li>
 	    <li><a href="#" class="msg">쪽지 보내기</a></li>
-	    <li><a href="#">유저 히스토리</a></li>
+	    <li><a href="#" class="userPop_userHt">유저 히스토리</a></li>
 	</ul><!-- userPopWrap -->
 	
 	<input type="hidden" id="other_m_id" value="${writer.m_id }"> <!-- !!!!!!!!!!!!  작성자 ID input hidden   !!!!!!!!!! -->
