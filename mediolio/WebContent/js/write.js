@@ -11,6 +11,26 @@ var tmNum = 0;
 $('document').ready(function(){
 	$(".writeStp2").hide();
 	
+    $('#btn_writeEmbed').on('click',function(){
+    	// 임베드 태그 등록
+        $('.modal_bg, .modal').hide();
+        var embed = $("#modal_bd_writeEmbed textarea").val();
+        console.log($(embed).css("width","100%"));
+        
+        $("#write_bd").append("<div class='contentBox' data-sort="+order+">"
+    			+"<ul class='content_toolBoxes' id='content_toolBox'>"
+    			+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
+    			+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
+    			+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+    			+"</ul>"
+    			+embed+"</div>");
+        
+        orderArr[order] = embed;
+        order = parseInt(order)+1;
+        addContent();
+    	$('body').removeClass('preventScroll');
+    });
+	
 	/* 프로젝트 개요 작성칸 height 조절*/
 	$('.writeLongLineWrap').on( 'keyup', 'textarea', function (e){
         $(this).css('height', 'auto' );
@@ -345,8 +365,8 @@ $('document').ready(function(){
     
   
     $(".contentFile").change(function(){
-    	if($(this).prop("files")[0].size > 10485500){
-    		// 10메가 이상의 파일 업로드했을 때(톰캣 자체 설정 -> 설정 변경하면 업로드 가능한 max size 조절 가능)
+    	if($(this).prop("files")[0].size > 20485500){
+    		// 20메가 이상의 파일 업로드했을 때(톰캣 자체 설정 -> 설정 변경하면 업로드 가능한 max size 조절 가능)
 			$.jAlert({
 			    'title': '!!',
 			    'content': '10MB 이하의 파일만 업로드 가능합니다.',
@@ -376,38 +396,37 @@ $('document').ready(function(){
 				var curOrder = order;
 				order = parseInt(order)+1;
 				$(".viewerBg .project_loading:last").css("display","block");
-//    			$("#viewerForm").ajaxForm({
-//    				dataType: "text",
-//    				url: "showViewer",
-//    				success: function(jdata){
-    					
-//    					$("#write_bd .contentBox:last").find("iframe")v.attr("src",jdata);
-    					
-    		    		var file = $(this).prop("files")[0];
-    		    		blobURL = window.URL.createObjectURL(file);
-    		    		$("[data-sort="+curOrder+"]").find("iframe").attr("src",blobURL);
-    		    		
+				
+				var docFile = new FormData();
+				docFile.append("doc",$(this).prop("files")[0]);
+				
+				$.ajax({
+					url: "showViewer2",
+					processData: false,
+					contentType: false,
+					data: docFile,
+					type: "POST",
+					success: function(newFileName){
+						console.log("새로운 파일 이름: "+newFileName);
+						var iframeSrc = "http://docs.google.com/viewer?url=http://52.79.195.100:8080/mediolio/upload/docs/"+newFileName+"&embedded=true";
+						$("[data-sort="+curOrder+"]").find("iframe").attr("src",iframeSrc);
+						
     					$("#write_bd .viewerBg:last").css("display","none");
-//    					$("#write_bd").append("<div class='contentBox' data-sort="+order+">"
-//    						+"<ul class='content_toolBoxes' id='content_toolBox'>"
-//    						+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
-//    						+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
-//    						+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
-//    						+"</ul>"
-//    						+"<iframe src='"+jdata+"' style='width:570px; height:740px;'/></div>");		
-    					console.log("파일 이름: "+$(newFile).val());
     					if($(newFile).val().split("\\")[2] == undefined){
-    						orderArr[curOrder] = $(newFile).val();
+//    						orderArr[curOrder] = $(newFile).val();
+    						orderArr[curOrder] = newFileName;
+    						console.log("orderArr 들어갔는지 확인: "+orderArr[curOrder]);
     					} else {
-    						orderArr[curOrder] = $(newFile).val().split("\\")[2];
+//    						orderArr[curOrder] = $(newFile).val().split("\\")[2];
+    						orderArr[curOrder] = newFileName;
+    						console.log("orderArr 들어갔는지 확인: "+orderArr[curOrder]);
     					}
     					
 
     				    addContent();
-    				
-//    				}
-//    			}).submit();
-    			
+					}
+				});
+
     			
     			fileNum++;
     			$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents' onchange='fileChange(this)'/>");	
@@ -799,21 +818,22 @@ function writeEmbedModalOpen(){
     $('.modal_bg, #modal_writeEmbed').show();
     
     
-    $('#btn_writeEmbed').on('click',function(){
-    	// 임베드 태그 등록
-        $('.modal_bg, .modal').hide();
-        $("#write_bd").append("<div class='contentBox' data-sort="+order+">"
-    			+"<ul class='content_toolBoxes' id='content_toolBox'>"
-    			+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
-    			+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
-    			+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
-    			+"</ul>"
-    			+$("#modal_bd_writeEmbed textarea").val()+"</div>");
-        orderArr[order] = $("#modal_bd_writeEmbed textarea").val();
-        order = parseInt(order)+1;
-        addContent();
-    	$('body').removeClass('preventScroll');
-    });
+//    $('#btn_writeEmbed').on('click',function(){
+//    	console.log("왜 두번찍히니??????");
+//    	// 임베드 태그 등록
+//        $('.modal_bg, .modal').hide();
+//        $("#write_bd").append("<div class='contentBox' data-sort="+order+">"
+//    			+"<ul class='content_toolBoxes' id='content_toolBox'>"
+//    			+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
+//    			+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
+//    			+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
+//    			+"</ul>"
+//    			+$("#modal_bd_writeEmbed textarea").val()+"</div>");
+//        orderArr[order] = $("#modal_bd_writeEmbed textarea").val();
+//        order = parseInt(order)+1;
+//        addContent();
+//    	$('body').removeClass('preventScroll');
+//    });
     
   
     
@@ -872,26 +892,56 @@ function fileChange(file){
 				+"<iframe style='width:570px; height:740px;'/></div>");
 		var curOrder = order;
 		order = parseInt(order)+1;
-		
 		$(".viewerBg .project_loading:last").css("display","block");
+
+		var docFile = new FormData();
+		docFile.append("doc",$(newFile).prop("files")[0]);
+		
+		$.ajax({
+			url: "showViewer2",
+			processData: false,
+			contentType: false,
+			data: docFile,
+			type: "POST",
+			success: function(newFileName){
+				console.log("새로운 파일 이름: "+newFileName);
+				var iframeSrc = "http://docs.google.com/viewer?url=http://52.79.195.100:8080/mediolio/upload/docs/"+newFileName+"&embedded=true";
+				$("[data-sort="+curOrder+"]").find("iframe").attr("src",iframeSrc);
+				
+				$("#write_bd .viewerBg:last").css("display","none");
+				if($(newFile).val().split("\\")[2] == undefined){
+					orderArr[curOrder] = newFileName;
+					console.log("orderArr 들어갔는지 확인: "+orderArr[curOrder]);
+				} else {
+					orderArr[curOrder] = newFileName;
+					console.log("orderArr 들어갔는지 확인: "+orderArr[curOrder]);
+				}
+				
+
+			    addContent();
+			}
+		});
+		
+		
+		
 //		$("#viewerForm").ajaxForm({
 //			dataType: "text",
 //			url: "showViewer",
 //			success: function(jdata){
 		
-		
-				$("#write_bd .contentBox:last").find("iframe").attr("src",blobURL);
-				$("#write_bd .viewerBg:last").css("display","none");							
-//				orderArr[order] = $(newFile).val().split("\\")[2];
-				if($(newFile).val().split("\\")[2] == undefined){
-					// 파이어폭스
-					orderArr[curOrder] = $(newFile).val();
-				} else {
-					orderArr[curOrder] = $(newFile).val().split("\\")[2];
-				}
-				
-				
-				addContent();
+//		
+//				$("#write_bd .contentBox:last").find("iframe").attr("src","http://docs.google.com/viewer?url="+blobURL+"&embedded=true");
+//				$("#write_bd .viewerBg:last").css("display","none");							
+////				orderArr[order] = $(newFile).val().split("\\")[2];
+//				if($(newFile).val().split("\\")[2] == undefined){
+//					// 파이어폭스
+//					orderArr[curOrder] = $(newFile).val();
+//				} else {
+//					orderArr[curOrder] = $(newFile).val().split("\\")[2];
+//				}
+//				
+//				
+//				addContent();
 //			}
 //		}).submit();
 		

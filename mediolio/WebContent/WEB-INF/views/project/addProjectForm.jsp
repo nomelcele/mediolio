@@ -245,7 +245,6 @@
 	<input type="hidden" id="preview_h"name="h" value=""/>
 </form>  
     
-    
 <div class="modal_bg"></div>
 
 

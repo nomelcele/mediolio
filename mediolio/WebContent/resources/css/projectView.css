@@ -25,7 +25,7 @@
 #modal_bd_content #content_imgWrap{ width:100%; min-height:500px; height:auto; }
 #modal_bd_content #content_imgWrap img, #modal_bd_content p, #content_imgWrap iframe{ margin:0 auto 15px; line-height:20px;}
 #content_imgWrap iframe{ width:540px;}
-#modal_bd_content *{ display:inline-block; margin:0 auto 10px;}
+#modal_bd_content *{ display:block;/*display: inline-block*/ margin:0 auto 10px;}
 
 
 #content_tagWrap{width:100%; min-height:60px; height:auto; padding:0; margin-top:20px;}

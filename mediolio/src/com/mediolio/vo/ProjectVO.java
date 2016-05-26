@@ -9,7 +9,14 @@ public class ProjectVO {
 	private String p_title, p_hash, p_date, p_coverImg, hashtags, authorID, authorName, p_prjname, p_summary, p_workfrom, p_workto, cate_name;
 
 	private List<MultipartFile> contents;
+	private MultipartFile doc;
 	
+	public MultipartFile getDoc() {
+		return doc;
+	}
+	public void setDoc(MultipartFile doc) {
+		this.doc = doc;
+	}
 	public int getCl_id() {
 		return cl_id;
 	}
