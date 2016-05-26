@@ -4,12 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="pd">
   	
+  	<!-- 오지은 + 모하람 작성 -->
+  	
+  	<!-- 오지은 작성 - 해당 프로젝트에 달린 댓글목록 리턴 -->
 	<select id="getReplyList" parameterType="int" resultType="rvo">
 		SELECT r.r_id, r.m_id, r.p_id, r.r_text, DATE_FORMAT(r.r_date, '%Y.%m.%d %H:%i:%s') AS r_date, m.m_studentID, m.m_name 
 			FROM reply r JOIN member m ON r.m_id=m.m_id 
 			WHERE r.p_id=#{p_id} ORDER BY p_id DESC
 	</select>
 	
+	<!-- 오지은 작성 - 프로젝트 관련 정보 리턴- 프로젝트 타이틀, 카테고리, 작업정보,  좋아요수 등 -->
   	<select id="projectDetailRelatedProject" parameterType="int" resultType="pdvo">
 	  	SELECT p.p_id, p.p_type, p.p_title, p.p_prjname, p.p_summary, p.cl_id, c.cl_name,
 	  	DATE_FORMAT(p.p_workfrom, '%Y.%m.%d') AS p_workfrom, DATE_FORMAT(p.p_workto, '%Y.%m.%d') AS p_workto,
@@ -19,6 +23,7 @@
 	  			AND p.p_id=#{p_id}
   	</select>
   	
+  	<!-- 오지은 작성 - 프로젝트 작성자 정보 리턴 - 이름, 관심분야, 좋아요 여부 등 -->
   	<select id="projectDetailRelatedMember" parameterType="java.util.Map" resultType="pwvo">
   		SELECT m.m_id, m.m_studentID, m.m_name, m.m_introduce, m.m_interesting1, m.m_interesting2,
   			(SELECT cate_name FROM category WHERE cate_id = m.m_interesting1) AS m_interesting1_text,
@@ -27,41 +32,50 @@
   			FROM member m WHERE m.m_id=#{p_m_id}
   	</select>
   	
+  	<!-- 오지은 작성 - 해쉬태그 리턴 -->
   	<select id="projectHash" parameterType="int" resultType="hvo">
   		SELECT h_id, h_value FROM hashtag WHERE p_id=#{p_id}
   	</select>
   	
+  	<!-- 오지은 작성 - 해당 프로젝트에 관련된 팀원 목록 리턴 -->
   	<select id="getTeamMember" parameterType="int" resultType="tmvo">
   		SELECT t.p_id, t.m_id, t.tm_role, t.tm_detail, m.m_studentID, m.m_name 
   			FROM teammember t, member m WHERE t.m_id=m.m_id AND p_id=#{p_id}
   	</select>
   	
+  	<!-- 오지은 작성 - Reply 테이블에 댓글 업로드 -->
   	<insert id="submitReply" parameterType="rvo" useGeneratedKeys="true" keyProperty="r_id">
 		INSERT INTO reply (m_id, r_text, r_date, p_id) values (#{m_id}, #{r_text}, now(), #{p_id})
 	</insert>
 	
+	<!-- 오지은 작성 - Member_action  테이블에 새로운 댓글이 등록되었음을 입력 -->
 	<insert id="actionReplySumbitted" parameterType="mavo">
 		INSERT INTO member_action (act_type, act_to, act_from, act_what, act_date, act_read) VALUES ('reply', #{act_to}, #{act_from}, #{act_what}, now(), 0)
 	</insert>
 	
+	<!-- 오지은 작성 - 특정 reply id에 대한 댓글정보 리턴 -->
 	<select id="selectInsertedReply" parameterType="int" resultType="rvo">
 		SELECT r.r_id, r.m_id, r.p_id, r.r_text, DATE_FORMAT(r.r_date, '%Y.%m.%d %H:%i:%s') AS r_date, m.m_studentID, m.m_name 
 			FROM reply r JOIN member m ON r.m_id=m.m_id
 			WHERE r_id = #{r_id}
 	</select>
 	
+	<!-- 오지은 작성 - Reply 테이블에서 댓글 삭제 -->
 	<delete id="deleteReply" parameterType="int">
 		DELETE FROM reply WHERE r_id=#{r_id}
 	</delete>
 	
+	<!-- 오지은 작성 - Member_action 테이블에서 삭제된 댓글 정보 삭제 -->
 	<delete id="actionDeleteReply" parameterType="int">
 		DELETE FROM member_action WHERE act_type='reply' AND act_what=#{r_id}
 	</delete>
 	
+	<!-- 모하람 작성 - 해당 프로젝트 id 에 포함된 콘텐츠 목록 리턴 -->
 	<select id="projectContents" parameterType="int" resultType="covo">
 		select c_type, c_value, c_order from content where p_id=#{p_id} order by c_order asc
 	</select>
 	
+	<!-- 모하람 작성 - 조횟수 업데이트 -->
 	<update id="increaseHits" parameterType="int">
 		update project set p_viewnum=p_viewnum+1 where p_id=#{p_id}
 	</update>

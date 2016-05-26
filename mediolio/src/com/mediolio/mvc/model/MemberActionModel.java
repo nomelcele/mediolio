@@ -1,6 +1,5 @@
 package com.mediolio.mvc.model;
 
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,10 +14,10 @@ import com.mediolio.mvc.dao.MemberActionDao;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.Member_actionVO;
 import com.mediolio.vo.MessageVO;
-import com.mediolio.vo.PushMsgVO;
 
 /*
- * Member Action : 쪽지, 팔로우, 푸쉬알림
+ * ***** 오지은 작성
+ * ***** Member Action : 쪽지, 팔로우, 푸쉬알림
  */
 
 @Controller
@@ -27,8 +26,7 @@ public class MemberActionModel {
 	private MemberActionDao maDao;
 	
 	
-	
-	//쪽지페이지 이동
+	//쪽지페이지 이동. '나'에게 온 메세지 리스트를 받아서 이동
 	@RequestMapping("message")
 	public String message(HttpSession session, Model model){		
 		MemberVO mev = (MemberVO)session.getAttribute("mev");
@@ -38,7 +36,7 @@ public class MemberActionModel {
 		return "mypage.message";
 	}
 	
-	//팔로워페이지 이동
+	//팔로우/팔로워 페이지 이동. 팔로우한 회원 목록과 팔로우/팔로워 숫자를 받아서 이동.
 	@RequestMapping("follow")
 	public String friend(HttpSession session, Model model){
 		MemberVO mev = (MemberVO)session.getAttribute("mev");
@@ -49,11 +47,10 @@ public class MemberActionModel {
 		return "mypage.friend";
 	}
 	
-	//프로젝트 좋아요
+	//프로젝트를 "좋아요" 눌렀을 때
 	@RequestMapping("projectLike")
 	public ModelAndView projectLike(@RequestParam("p_id") String p_id, @RequestParam("act_to") String act_to, HttpSession session){
 		ModelAndView mav = new ModelAndView("jsonView");
-		System.out.println("여기");
 		MemberVO mev = (MemberVO)session.getAttribute("mev");
 		if(mev!=null){		
 			Member_actionVO maVo = new Member_actionVO();
@@ -67,7 +64,7 @@ public class MemberActionModel {
 		return mav;
 	}
 	
-	//프로젝트 좋아요 취소
+	//프로젝트 "좋아요" 취소
 	@RequestMapping("projectLikeCancel")
 	public ModelAndView projectLikeCancel(@RequestParam("p_id") String p_id, @RequestParam("act_to") String act_to, HttpSession session){
 		ModelAndView mav = new ModelAndView("jsonView");
@@ -94,7 +91,7 @@ public class MemberActionModel {
 		return "modal.messageModal";
 	}
 	
-	//쪽지 받을 대상 자동완성 검색
+	//쪽지 받을 대상 자동완성. 뷰에서 keyevent에 의해 발생
 	@RequestMapping("autoCompleteWhoReceive")
 	public ModelAndView autoCompleteWhoReceive(@RequestParam("m_name") String m_name){
 		ModelAndView mav = new ModelAndView("jsonView");
@@ -109,11 +106,9 @@ public class MemberActionModel {
 		MemberVO mev = (MemberVO)session.getAttribute("mev");
 		if(mev!=null){
 			vo.setMsg_from(mev.getM_id());
-			maDao.msgSend(vo);
+			maDao.msgSend(vo); //보낸 쪽지 디비에 등록
 		}
-		ModelAndView mav = new ModelAndView("jsonView");
-		System.out.println("메세지내용 : " + vo.getMsg_text() + ", from~to : " + vo.getMsg_from() + ", " + vo.getMsg_to());	
-		return mav;
+		return new ModelAndView("jsonView");
 	}
 	
 	//나에게 온 쪽지 받아오기
@@ -140,7 +135,7 @@ public class MemberActionModel {
 		return mav;
 	}
 	
-	//내가 보낸 쪽지 삭제하기
+	//내가 보낸 메세지를 보낸메세지 목록에서 삭제했을 때
 	@RequestMapping("deleteMsgSent")
 	public ModelAndView deleteMsgSent(@RequestParam("msg_id") String msg_id){
 		ModelAndView mav = new ModelAndView("jsonView");
@@ -148,7 +143,7 @@ public class MemberActionModel {
 		return mav;
 	}
 	
-	//내가 받은 쪽지 삭제하기
+	//내가 받은 메세지를 받은메세지 목록에서 삭제했을 때
 	@RequestMapping("deleteMsgReceived")
 	public ModelAndView deleteMsgReceived(@RequestParam("msg_id") String msg_id){
 		ModelAndView mav = new ModelAndView("jsonView");
@@ -173,7 +168,6 @@ public class MemberActionModel {
 		MemberVO mev = (MemberVO)session.getAttribute("mev");
 		if(mev!=null){
 			Member_actionVO maVo = new Member_actionVO();
-			System.out.println("m_id to follow : " + m_id +", my m_id : " + mev.getM_id());
 			
 			maVo.setAct_from(mev.getM_id());
 			maVo.setAct_to(Integer.parseInt(m_id));
@@ -212,7 +206,6 @@ public class MemberActionModel {
 			
 			//팔로우된 row가 있는지 체크
 			int isFollow = maDao.followCheck(maVo);
-			System.out.println("isFollowed : " + isFollow);
 			if(isFollow>0){
 				//팔로우 됨
 				mav.addObject("isFollowed", "y");
