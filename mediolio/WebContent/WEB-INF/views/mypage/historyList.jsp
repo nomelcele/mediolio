@@ -55,8 +55,8 @@
                     <td class="historyList_border historyList_addContentWrap clear">
                         <textarea name="ht_introduce" placeholder="내용을 입력하세요."></textarea>
                         <span>관련과목 : </span>
-                        <textarea placeholder="예)웹앱프로그래밍" class="historyList_addRelated"></textarea>
-                        <div class="autoCompleteBox classBox"><ul id="autoCompleteArea"></ul></div>
+                        <textarea placeholder="예)웹앱프로그래밍" class="historyList_addRelated" onkeyup="autoCompleteHtClass(this)"></textarea>
+                        <div class="autoCompleteBox classBox autoHtClass"><ul id="autoCompleteArea"></ul></div>
                         <div class="timeCard_writeDisplayWrap">
                             <input name="ht_public" value="1" type="radio" checked><label>공개</label>
                             <input name="ht_public" value="0" type="radio"><label>비공개</label>

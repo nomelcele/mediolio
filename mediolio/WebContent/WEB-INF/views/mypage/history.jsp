@@ -23,7 +23,7 @@
                         <div class="timeCard_addImageWrap clear">
 	                        <div id="imgFileBox1">
 	                            <label></label>
-	                            <a class="btn_timeCard_delImage" href="javascript:deleteBrImg(this)">X</a>
+	                            <a class="btn_timeCard_delImage" href="javascript:deleteBrImg(1)">X</a>
 	                            <div class="fileWrap_timeCard">
 	                                <span>파일 추가</span>
 	                                <input type="file" name="imgFiles[0]" class="file_timeCard" onchange="showFileName(this)">
@@ -32,7 +32,7 @@
                             
                             <div id="imgFileBox2" style="display:none;">
 	                            <label></label>
-	                            <a class="btn_timeCard_delImage" href="javascript:deleteBrImg(this)">X</a>
+	                            <a class="btn_timeCard_delImage" href="javascript:deleteBrImg(2)">X</a>
 	                            <div class="fileWrap_timeCard">
 	                                <span>파일 추가</span>
 	                                <input type="file" name="imgFiles[1]" class="file_timeCard" onchange="showFileName(this)">
@@ -41,7 +41,7 @@
                             
                             <div id="imgFileBox3" style="display:none;">
 	                            <label></label>
-	                            <a class="btn_timeCard_delImage" href="javascript:deleteBrImg(this)">X</a>
+	                            <a class="btn_timeCard_delImage" href="javascript:deleteBrImg(3)">X</a>
 	                            <div class="fileWrap_timeCard">
 	                                <span>파일 추가</span>
 	                                <input type="file" name="imgFiles[2]" class="file_timeCard" onchange="showFileName(this)">

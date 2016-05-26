@@ -112,7 +112,8 @@ $(function(){
 			}, 
 			success: function(result){
 				$(".historyWrap").html(result);
-				branchLoad();
+//				branchLoad();
+				imgCnt = 1;
 			}
 		});
 	});
@@ -178,6 +179,7 @@ function listLoad(){
 			},
 			success: function(result){
 				$(".historyWrap").html(result);
+				imgCnt = 1;
 				
 			}
 		});
@@ -211,39 +213,73 @@ function listLoad(){
         return false;
     });
     
-	$(".historyList_addRelated").keyup(function(){
-		// 관련 과목 입력 시 자동 완성
-		if($(this).val().trim() != ""){
-	    	$.ajax({
-	    		type: "POST",
-	    		url: "autocompleteClass",
-	    		data: {
-	    			cl_name: $(this).val()
-	    		},
-	    		dataType: "json",
-	    		success: function(jdata){
-	    			var codes = "";
-	    			var arr = jdata;
-	    			for(var i=0; i<arr.length; i++){
-	    				codes += "<li onclick='addClass(this)'>"+arr[i]+"</li>";
-	    			}
-	    			if(arr.length>0){
-	    				$("#autoCompleteArea").html(codes);
-	        			$(".autoHtClass").css({
-	        				display: "block",
-	        				top: $(".historyList_addRelated").offset().top-108
-	        			});
-	        			
-	            		// moveAutoCompleteBox();
-	        			// 자동 완성 목록 위치 변경: 현재 커서 위치에 맞게
-	    			}
-	    		}
-	    	});
-    	} else {
-    		$(".autoHtClass").css("display","none");
-    	}
+//	$(".historyList_addRelated").keyup(function(){
+//		// 관련 과목 입력 시 자동 완성
+//		if($(this).val().trim() != ""){
+//	    	$.ajax({
+//	    		type: "POST",
+//	    		url: "autocompleteClass",
+//	    		data: {
+//	    			cl_name: $(this).val()
+//	    		},
+//	    		dataType: "json",
+//	    		success: function(jdata){
+//	    			var codes = "";
+//	    			var arr = jdata;
+//	    			for(var i=0; i<arr.length; i++){
+//	    				codes += "<li onclick='addClass(this)'>"+arr[i]+"</li>";
+//	    			}
+//	    			if(arr.length>0){
+//	    				$("#autoCompleteArea").html(codes);
+//	        			$(".autoHtClass").css({
+//	        				display: "block",
+//	        				top: $(".historyList_addRelated").offset().top-108
+//	        			});
+//	        			
+//	            		// moveAutoCompleteBox();
+//	        			// 자동 완성 목록 위치 변경: 현재 커서 위치에 맞게
+//	    			}
+//	    		}
+//	    	});
+//    	} else {
+//    		$(".autoHtClass").css("display","none");
+//    	}
+//
+//	});
+}
 
-	});
+function autoCompleteHtClass(txt){
+	var htClass = txt;
+	if($(htClass).val().trim() != ""){
+    	$.ajax({
+    		type: "POST",
+    		url: "autocompleteClass",
+    		data: {
+    			cl_name: $(htClass).val()
+    		},
+    		dataType: "json",
+    		success: function(jdata){
+    			var codes = "";
+    			var arr = jdata;
+    			for(var i=0; i<arr.length; i++){
+    				codes += "<li onclick='addClass(this)'>"+arr[i]+"</li>";
+    			}
+    			if(arr.length>0){
+    				$("#autoCompleteArea").html(codes);
+        			$(".autoHtClass").css({
+        				display: "block",
+        				top: $(".historyList_addRelated").offset().top-108,
+        				left: 24
+        			});
+        			
+            		// moveAutoCompleteBox();
+        			// 자동 완성 목록 위치 변경: 현재 커서 위치에 맞게
+    			}
+    		}
+    	});
+	} else {
+		$(".autoHtClass").css("display","none");
+	}
 }
 
 function branchLoad(){
@@ -356,9 +392,8 @@ function showFileName(file){
 	$(imgFile).parent().parent().find("label").html(fileName);
 }
 
-function deleteBrImg(btn){
+function deleteBrImg(num){
 	// 사진 삭제
-	var delBtn = btn;
 
 	if(imgCnt == 4){
 		imgCnt -= 2;
@@ -367,14 +402,31 @@ function deleteBrImg(btn){
 	} 
 	
 	console.log("사진 수: "+imgCnt);
-	if($(delBtn).parent().prop("id") != "imgFileBox1"){
-		$(delBtn).parent().css("display","none");
-	} else {
-		console.log("첫번째 사진 삭제");
-		$(delBtn).parent().find("label").html("");
+	
+	
+	switch(num){
+		case 1:
+			$("#imgFileBox1").find("label").html("");
+			$("input[name=imgFiles[0]").val("");
+			break;
+		case 2:
+			$("#imgFileBox2").css("display","none");
+			$("input[name=imgFiles[1]").val("");
+			break;
+		case 3:
+			$("#imgFileBox3").css("display","none");
+			$("input[name=imgFiles[2]").val("");
+			break;	
 	}
+	
+	
+//	if($(delBtn).parent().prop("id") != "imgFileBox1"){
+//		$(delBtn).parent().css("display","none");
+//	} else {
+//		$(delBtn).parent().find("label").html("");
+//	}
 	// input 파일 내용 비우기
-	$(delBtn).parent().find(".fileWrap_timeCard").find("input[type=file]").val("");
+//	$(delBtn).parent().find(".fileWrap_timeCard").find("input[type=file]").val("");
 }
 
 function deleteBranch(){
@@ -389,6 +441,7 @@ function deleteBranch(){
 		}, 
 		success: function(result){
 			$(".historyWrap").html(result);
+			imgCnt = 1;
 		}
 	});
 }
