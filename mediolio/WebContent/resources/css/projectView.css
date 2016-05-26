@@ -29,7 +29,7 @@
 
 
 #content_tagWrap{width:100%; min-height:60px; height:auto; padding:0; margin-top:20px;}
-#content_tagWrap p{ font-weight:600; font-size:16px; line-height:30px;}
+#content_tagWrap p{ width:100%; font-weight:600; font-size:16px; line-height:30px;}
 #content_tagWrap span{ display:inline-block; width:auto; height:20px;  line-height:20px; margin-right:5px; border-radius:8px; padding:5px 8px; background:#999; color:#fff; margin-bottom:8px; font-size:12px;}
 
 #modal_content hr{ margin-bottom:20px;}
