@@ -4,12 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="main">
 
-	<!-- 로그인한 회원의 관심분야 받아오기 -->
+  <!-- !!!!!!!!!!!!!      오지은  + 모하람  작성        !!!!!!!!!!!!!!!! -->
+
+	<!-- 오지은 작성 - 로그인한 회원의 관심분야 받아오기 -->
 	<select id="getInterestingPart" resultType="cavo" parameterType="int">
 		SELECT c.cate_id, c.cate_name FROM category c, member m WHERE c.cate_id IN (m.m_interesting1, m.m_interesting2) AND m.m_id = #{m_id }
 	</select>
 
-	<!-- 모든 프로젝트 받아오기 (과제x) -->
+	<!-- 오지은 작성 - 모든 프로젝트 받아오기 (과제x) -->
 	<select id="getProjectLists" resultType="pvo">
 		SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, p.p_summary, m.m_studentID authorID, m.m_name authorName,
 			(SELECT count(*) from member_action where act_type='like' AND act_what=p.p_id) p_likenum, p.p_viewnum,
@@ -17,7 +19,7 @@
 			FROM project p, member m where p.m_id=m.m_id AND p.p_type=1 ORDER BY p.p_date DESC
 	</select>
 	
-	<!-- 메인에서 최신 글 더 보기 눌렀을 때 -->
+	<!-- 오지은 작성 - 메인에서 최신 글 더 보기 눌렀을 때 -->
 	<select id="mainMorePrjs" resultType="pvo" parameterType="int">
 		SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, p.p_summary, m.m_studentID authorID, m.m_name authorName,
 			(SELECT count(*) from member_action where act_type='like' AND act_what=p.p_id) p_likenum, p.p_viewnum,
@@ -25,7 +27,7 @@
 			FROM project p, member m where p.m_id=m.m_id AND p.cate_id=#{category } ORDER BY p.p_date DESC
 	</select>
 	
-	<!-- 카테고리 메뉴 클릭 시 -->
+	<!-- 오지은 작성 - 카테고리 메뉴 클릭 시 -->
 	<select id="getCertainCategoryList" resultType="pvo" parameterType="string">
 		SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, p.p_summary, m.m_studentID authorID, m.m_name authorName,
 			(SELECT count(*) from member_action where act_type='like' AND act_what=p.p_id) p_likenum, p.p_viewnum,
@@ -33,7 +35,7 @@
 			FROM project p, member m where p.m_id=m.m_id AND p.p_type=0 AND p.cate_id=#{category } ORDER BY p.p_date DESC
 	</select>
 	
-	<!-- 로그인 한 회원의 관심분야 최신글 -->
+	<!-- 오지은 작성 - 로그인 한 회원의 관심분야 최신글 : 각 분야당 5개씩 리턴-->
 	<select id="getNewProject_interest" resultType="pvo" parameterType="int">
 		SELECT * FROM (
 			SELECT @NO := @NO + 1 AS ROWNUM, A.*
@@ -47,7 +49,7 @@
 		WHERE C.ROWNUM <![CDATA[>=]]> 1 AND C.ROWNUM <![CDATA[<=]]> 5
 	</select>
 	
-	<!-- 비회원의 메인 - 각 분야 최신글 -->
+	<!-- 오지은 작성 - 비회원의 메인 - 각 분야 최신글 3개씩 리턴 -->
 	<select id="getNewProject_visitor" resultType="pvo" parameterType="int">
 		SELECT * FROM (
 			SELECT @NO := @NO + 1 AS ROWNUM, A.*

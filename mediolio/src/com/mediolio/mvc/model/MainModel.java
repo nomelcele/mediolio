@@ -21,6 +21,10 @@ import com.mediolio.vo.HistoryVO;
 import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectVO;
 
+/* ***** 박성준 + 
+ * ***** 모하람 + 
+ * ***** 오지은 작성 class
+ * */
 
 @Controller
 public class MainModel {
@@ -171,10 +175,6 @@ public class MainModel {
 	@RequestMapping("selectlikepage")
 	public String selectlikepage(HttpSession session, Model model){
 		MemberVO mev = (MemberVO) session.getAttribute("mev");
-		if(mev!=null){
-			System.out.println("id : " +mev.getM_id());
-			System.out.println("nickname : "+mev.getM_name());
-		}
 		
 		model.addAttribute("likepage",mdao.likelist(mev.getM_id()));
 		return "main.selectlikepage";
