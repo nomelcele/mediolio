@@ -145,20 +145,7 @@ public class MainModel {
 		model.addAttribute("mainProjects", prjList);
 		return "main.selectcategory";
 	}
-	
-/*	@RequestMapping("selectmypage")
-	public String selectmypage(HttpSession session, Model model){
-		MemberVO mev = (MemberVO) session.getAttribute("mev");
-		if(mev!=null){
-		System.out.println("id : " +mev.getM_id());
-		System.out.println("nickname : "+mev.getM_name());
-		}
-		
-		model.addAttribute("mainProjects", mdao.mainProjects());
-		model.addAttribute("hashtag", mdao.projectHashtags());
-		model.addAttribute("category",mdao.catelist());
-		return "main.selectmypage";
-	}*/
+
 	
 	@RequestMapping("gotoMyPage")
 	public String gotoMyPage(Model model, HttpSession session){
