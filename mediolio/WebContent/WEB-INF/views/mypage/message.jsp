@@ -22,24 +22,32 @@
         
         <!-- 받은쪽지 내용물-->
         <div class="card_note_bd" id="card_receiveNote_bd">
-        <c:forEach var="aMsg" items="${list }">
-    		<div class="noteWrap receiveNoteWrap">
-                <div class="noteWrap_hd">
-                	<input type="hidden" class="this_msg_id" value="${aMsg.msg_id }">
-                    <a class="noteId" href="userpage?usr_id=${aMsg.msg_from }">FROM : ${aMsg.msg_from_studentID } ${aMsg.msg_from_nickname }</a>
-                    <p class="noteDate">${aMsg.msg_date }</p>
-                    <a href="#" class="btn_note replyNote" onclick="noteModalOpen('${aMsg.msg_from }', '${aMsg.msg_from_studentID } ${aMsg.msg_from_nickname }')">답장</a>
-                    <a href="#" class="btn_note btn_deleteNote receiveNote">삭제</a>
-                    <hr>
-                </div>
-                <div class="noteWrap_bd">
-                	<p>
-                    	${aMsg.msg_text }
-                    </p>
-                    <a href="#" class="noteMore">>> more</a>
-                </div><!--//noteWrap_bd-->
-            </div><!--//noteWrap -->
-    	</c:forEach>
+        <c:choose>
+       		<c:when test="${!empty list }">
+		       	<c:forEach var="aMsg" items="${list }">
+		    		<div class="noteWrap receiveNoteWrap">
+		                <div class="noteWrap_hd">
+		                	<input type="hidden" class="this_msg_id" value="${aMsg.msg_id }">
+		                    <a class="noteId" href="userpage?usr_id=${aMsg.msg_from }">FROM : ${aMsg.msg_from_studentID } ${aMsg.msg_from_nickname }</a>
+		                    <p class="noteDate">${aMsg.msg_date }</p>
+		                    <a href="#" class="btn_note replyNote" onclick="noteModalOpen('${aMsg.msg_from }', '${aMsg.msg_from_studentID } ${aMsg.msg_from_nickname }')">답장</a>
+		                    <a href="#" class="btn_note btn_deleteNote receiveNote">삭제</a>
+		                    <hr>
+		                </div>
+		                <div class="noteWrap_bd">
+		                	<p>
+		                    	${aMsg.msg_text }
+		                    </p>
+		                    <a href="#" class="noteMore">>> more</a>
+		                </div><!--//noteWrap_bd-->
+		            </div><!--//noteWrap -->
+		    	</c:forEach>
+       		</c:when> 
+       		<c:otherwise>
+				<p class="no_note">쪽지가 없습니다</p>
+       		</c:otherwise>
+        </c:choose>
+
         </div><!--//card_receiveNote_bd --> 
 
         

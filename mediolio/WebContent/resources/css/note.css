@@ -47,6 +47,7 @@ a.noteMore{ display:block; width:60px; position:absolute; z-index:200; right:20p
 .btn_note:hover{ background:#f3f3f3;}
 .btn_deleteNote{ right:20px;}
 
+.no_note{width:100%; font-size: 14px; text-align: center; margin-top:10px;}
 
 /* 쪽지모달 자동완성*/
 .msgAutoCompleteBox{width:200px; font-size:13px; background-color:#fff; border:1px solid #cfcbcb; display:none; border-radius:4px; padding:5px 7px; position:absolute; top:98px; left:0;}

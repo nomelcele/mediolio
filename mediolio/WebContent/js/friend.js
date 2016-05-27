@@ -63,12 +63,20 @@ $(document).ready(function(){
     
     //follower 탭
     $('#friendTab_follower').on('click',function(){
-    	if($('#friendWrap_bd_follower').find('li').length || $('#friendTab_follower').find('span').text() == '0'){
-    		//내용물이 이미 존재하거나 follower 수가 0이면 받아오지 않음
+    	if($('#friendWrap_bd_follower').find('li').length){
+    		//내용물이 이미 존재하면 새로 데이터를 받아오지 않음
 
     		//이유라 작성
     		$('.friendTab').removeClass("friendTabClick");
             $("#friendWrap_bd_following").hide();
+            $("#friendWrap_bd_follower").show();
+            $(this).addClass("friendTabClick");
+    	}else if($('#friendTab_follower').find('span').text() == '0'){
+    		
+    		//팔로워가 없을때
+    		$('.friendTab').removeClass("friendTabClick");
+            $("#friendWrap_bd_following").hide();
+            $('#friendWrap_bd_follower ul').empty().append('<li><p>팔로워가 없습니다</p></li>');
             $("#friendWrap_bd_follower").show();
             $(this).addClass("friendTabClick");
     	}
@@ -108,6 +116,7 @@ function cancelFollow($li){
 //오지은 작성 - 팔로우/팔로워 탭을 눌렀을 때 동적으로 받아온 팔로워 목록을 html로 가공하여 리턴하는 함수
 function returnFriendList(list, type){
 	var aRow='';
+
 	$.each(list, function(index, entry){
 		aRow += '<li>'
 					+'<p class="friendList_id"><input type="hidden" value="'+entry.m_id+'" class="memberId"/>'
@@ -122,7 +131,6 @@ function returnFriendList(list, type){
 				+'<p class="friendList_like">관심분야 : <span>'+entry.m_interestingText1;
 		if(entry.m_interestingText2 != null){
 			aRow += ', ' +entry.m_interestingText2;
-			if(entry.m_interestingText3 != null) aRow += ', ' +entry.m_interestingText3;
 		}
 		aRow += '</span></p>'
 					+'<div class="friendList_project">';
@@ -131,8 +139,8 @@ function returnFriendList(list, type){
 			//projectArr[0]에 "id,img" 붙어있음 
 			for(var i=0; i<projectArr.length; i++){
 				var aSetArr = projectArr[i].split(",");
-				//aSetArr[0]에는 p_id가, aSetArr[1]에는 coverImg가 들어있음
-				if(aSetArr[1].length){
+				//aSetArr[0]=p_id, aSetArr[1]= coverImg
+				if(aSetArr.length==2){
 					aRow += '<a href="projectView?p_id='+aSetArr[0]+'&m_id='+entry.m_id+'"><img src="resources/images/projectCover/'+aSetArr[1]+'" width="80" height="80"/></a>';
 				}else{
 					aRow += '<a href="projectView?p_id='+aSetArr[0]+'&m_id='+entry.m_id+'"><img src="resources/images/default.png" width="80" height="80"/></a>';
