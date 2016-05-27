@@ -1,14 +1,19 @@
+/*  히스토리 관련 javascript
+ * 	 이유라 - UI 관련 javascript
+ *  모하람 - 기능 관련 javascript
+ * */
+
 var imgCnt = 1;
 
 $(function(){
 	$("#addHistoryBtn").click(function(){
-		// 히스토리 추가
+		// 모하람 작성 - 히스토리 추가
 		$("#addHistoryForm").submit();
 	});
 	
 	
 	$(".historyList_addRelated").keyup(function(){
-		// 관련 과목 입력 시 자동 완성
+		// 모하람 작성 - 관련 과목 입력 시 자동 완성
 		if($(this).val().trim() != ""){
 	    	$.ajax({
 	    		type: "POST",
@@ -45,9 +50,8 @@ $(function(){
 	listLoad();
 
 	
-		$(".btn_timeCard_addImage").click(function(){
-		
-		// 사진 추가
+	$(".btn_timeCard_addImage").click(function(){
+		// 모하람 작성 - 브랜치 등록 시 사진 추가
 		if(imgCnt<=3)
 			imgCnt++;
 		
@@ -75,13 +79,13 @@ $(function(){
 	});
 
 	$(".file_timeCard").change(function(){
-		// 파일 업로드 했을 때 이름 보여주기
+		// 모하람 작성 - 파일 업로드 했을 때 이름 보여주기
 		var fileName = $(this).val().split("\\")[2];
 		$(this).parent().parent().find("label").html(fileName);
 	});
 
 	$(".btn_timeCard_delImage").click(function(){
-		// 사진 삭제
+		// 모하람 작성 - 등록한 사진 삭제
 	
 		if(imgCnt == 4){
 			imgCnt -= 2;
@@ -101,7 +105,7 @@ $(function(){
 	});
 
 	$(".br_delete_btn").click(function(){
-		// 브랜치 삭제
+		// 모하람 작성 - 브랜치 삭제
 		$.ajax({
 			type: "POST",
 			url: "deleteBranch",
@@ -112,7 +116,6 @@ $(function(){
 			}, 
 			success: function(result){
 				$(".historyWrap").html(result);
-//				branchLoad();
 				imgCnt = 1;
 			}
 		});
@@ -120,7 +123,7 @@ $(function(){
 });
 
 function addClass(li){
-	// 자동 완성 목록에서 항목 클릭 시 관련 과목 영역에 추가
+	// 모하람 작성 - 자동 완성 목록에서 항목 클릭 시 관련 과목 영역에 추가
 	var newClass = li;
 	console.log("과목: "+$(newClass).find("span").html());
 	$(".historyList_addRelated").val($(newClass).find("span").html());
@@ -129,12 +132,12 @@ function addClass(li){
 }
 
 function deleteHistory(ht_id){
-	// 히스토리 삭제
+	// 모하람 작성 - 히스토리 삭제
 	$("#deleteHt"+ht_id).submit();
 }
 
 function changeHtPublic(ht_id,ht_public){
-	// 공개 여부 변경
+	// 모하람 작성 - 히스토리의 공개 여부 변경
 	var new_public;
 	if(ht_public == 1){
 		new_public = 0;
@@ -157,10 +160,11 @@ function changeHtPublic(ht_id,ht_public){
 
 function listLoad(){
 	$("#addHistoryBtn").click(function(){
-		// 히스토리 추가
+		// 모하람 작성 - 히스토리 추가
 		$("#addHistoryForm").submit();
 	});
 	
+	// 이유라 작성 
     /* 히스토리 목록 */
     var btn_difHistory = false;
     /*-- 히스토리 선택 전 숨기기 --*/
@@ -169,7 +173,7 @@ function listLoad(){
     
     //.historyList_name
     $('.historyList_name').on('click',function(e){
-    	// 선택한 히스토리 보여주기
+    	// 모하람 작성 - 선택한 히스토리 보여주기
 		$.ajax({
 			type: "POST",
 			url: "historyDetail",
@@ -185,22 +189,20 @@ function listLoad(){
 			}
 		});
     	
+		// 이유라 작성
         $('.historyList_name .history_popMenuWrap').not($(this).find('.history_popMenuWrap')).hide();
-        
         /*-- 선택한 것 이외의 것들 숨기기 --*/
         $('.historyList_contentWrap, .historyList_pop').hide();
         $('.bd_historyEx table').css({ minHeight:40 });
-        
         /*-- 하나의 히스토리 선택 후 --*/ $(this).parent().siblings().find('.historyList_contentWrap').show();
         $(this).parents('.bd_historyEx table').css({ minHeight:100 });
         $('.historyList_pop',this).show();
-        
         btn_historyList_pop = false;
         
     });
     
     
-    
+    // 이유라 작성
     var btn_historyList_pop = false;
     $('.historyList_name .historyList_pop').on('click', function(){
         btn_historyList_pop = !btn_historyList_pop; 
@@ -214,42 +216,10 @@ function listLoad(){
         return false;
     });
     
-//	$(".historyList_addRelated").keyup(function(){
-//		// 관련 과목 입력 시 자동 완성
-//		if($(this).val().trim() != ""){
-//	    	$.ajax({
-//	    		type: "POST",
-//	    		url: "autocompleteClass",
-//	    		data: {
-//	    			cl_name: $(this).val()
-//	    		},
-//	    		dataType: "json",
-//	    		success: function(jdata){
-//	    			var codes = "";
-//	    			var arr = jdata;
-//	    			for(var i=0; i<arr.length; i++){
-//	    				codes += "<li onclick='addClass(this)'>"+arr[i]+"</li>";
-//	    			}
-//	    			if(arr.length>0){
-//	    				$("#autoCompleteArea").html(codes);
-//	        			$(".autoHtClass").css({
-//	        				display: "block",
-//	        				top: $(".historyList_addRelated").offset().top-108
-//	        			});
-//	        			
-//	            		// moveAutoCompleteBox();
-//	        			// 자동 완성 목록 위치 변경: 현재 커서 위치에 맞게
-//	    			}
-//	    		}
-//	    	});
-//    	} else {
-//    		$(".autoHtClass").css("display","none");
-//    	}
-//
-//	});
 }
 
 function autoCompleteHtClass(txt){
+	// 모하람 작성 - 히스토리 관련 과목 자동 완성
 	var htClass = txt;
 	if($(htClass).val().trim() != ""){
     	$.ajax({
@@ -283,83 +253,8 @@ function autoCompleteHtClass(txt){
 	}
 }
 
-function branchLoad(){
-//	$(".btn_timeCard_addImage").click(function(){
-//		
-//		// 사진 추가
-//		if(imgCnt<=3)
-//			imgCnt++;
-//		
-//		console.log("사진 수: "+imgCnt);
-//		
-//		switch(imgCnt){
-//			case 1:
-//				$("#imgFileBox1").css("display","block");
-//				break;
-//			case 2:
-//				$("#imgFileBox2").css("display","block");
-//				break;
-//			case 3:
-//				$("#imgFileBox3").css("display","block");
-//				break;
-//			default:
-//        		$.jAlert({
-//        		    'title': '!!',
-//        		    'content': '이미지는 최대 3개까지만 업로드 가능합니다.',
-//        		    'closeOnClick' : true,
-//        		    'theme' : 'red',
-//        		    'size': 'xsm'
-//        		  });
-//		}
-//	});
-	
-//	$(".file_timeCard").change(function(){
-//		// 파일 업로드 했을 때 이름 보여주기
-//		var fileName = $(this).val().split("\\")[2];
-//		$(this).parent().parent().find("label").html(fileName);
-//	});
-	
-//	$(".btn_timeCard_delImage").click(function(){
-//		// 사진 삭제
-//
-//		if(imgCnt == 4){
-//			imgCnt -= 2;
-//		} else if(imgCnt > 1){
-//			imgCnt--;
-//		} 
-//		
-//		console.log("사진 수: "+imgCnt);
-//		if($(this).parent().prop("id") != "imgFileBox1"){
-//			$(this).parent().css("display","none");
-//		} else {
-//			console.log("첫번째 사진 삭제");
-//			$(this).parent().find("label").html("");
-//		}
-//		// input 파일 내용 비우기
-//		$(this).parent().find(".fileWrap_timeCard").find("input[type=file]").val("");
-//	});
-	
-//	$(".br_delete_btn").click(function(){
-//		// 브랜치 삭제
-//		$.ajax({
-//			type: "POST",
-//			url: "deleteBranch",
-//			data: {
-//				br_id: $(this).parent().find(".branch_id").val(),
-//				ht_id: $("#recentHtId").val(),
-//				ht_title: $("#recentHtTitle").val()
-//			}, 
-//			success: function(result){
-//				$(".historyWrap").html(result);
-//				branchLoad();
-//			}
-//		});
-//	});
-	
-}
-
 function addBrImg(){
-	// 사진 추가
+	// 모하람 작성 - 브랜치에 사진 추가
 	if(imgCnt<=3)
 		imgCnt++;
 	
@@ -387,14 +282,14 @@ function addBrImg(){
 }
 
 function showFileName(file){
-	// 파일 업로드 시 파일 이름 보여주기
+	// 모하람 작성 - 파일 업로드 시 파일 이름 보여주기
 	var imgFile = file;
 	var fileName = $(imgFile).val().split("\\")[2];
 	$(imgFile).parent().parent().find("label").html(fileName);
 }
 
 function deleteBrImg(num){
-	// 사진 삭제
+	// 모하람 작성 - 브랜치에 등록한 사진 삭제
 
 	if(imgCnt == 4){
 		imgCnt -= 2;
@@ -431,7 +326,7 @@ function deleteBrImg(num){
 }
 
 function deleteBranch(){
-	// 브랜치 삭제
+	// 모하람 작성 - 브랜치 삭제
 	$.ajax({
 		type: "POST",
 		url: "deleteBranch",

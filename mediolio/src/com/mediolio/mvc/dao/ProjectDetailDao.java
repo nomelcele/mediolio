@@ -73,7 +73,7 @@ public class ProjectDetailDao {
 		st.delete("pd.actionDeleteReply", r_id); //Member_Action 테이블에서 삭제
 	}
 	
-	// 모하람 작성 - 해당 프로젝트 id에 포함된 콘텐츠 목록(영상, 문서, 이미지, 텍스트) 리턴
+	// 모하람 작성 - 해당 프로젝트 id에 포함된 콘텐츠 목록(문서, 이미지, embed 태그, 텍스트) 리턴
 	public List<ContentVO> projectContents(int p_id){
 		return st.selectList("pd.projectContents", p_id);
 	}

@@ -77,6 +77,7 @@
 			ORDER BY p.p_date desc
 	</select>
 	
+	<!-- 모하람 작성 - 로그인한 회원이 가장 최근에 브랜치를 등록한 히스토리 리턴 -->
 	<select id="recentHistory" parameterType="int" resultType="brvo">
 		select ht.ht_title historyTitle, br.br_id, br.ht_id, br.br_title, DATE_FORMAT(br_date,'%Y.%m.%d %H:%i:%s') AS br_date, 
 		br.br_img1, br.br_img2, br.br_img3, br.br_text from branch br, history ht 

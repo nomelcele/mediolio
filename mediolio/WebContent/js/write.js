@@ -1,3 +1,9 @@
+/*  게시물 작성 페이지 관련 javascript
+ *  이유라 - UI 관련 javascript
+ *  모하람 - 기능 관련 javascript
+ * */
+
+
 jQuery.ajaxSettings.traditional = true;
 
 var order=0; // 콘텐츠들의 순서

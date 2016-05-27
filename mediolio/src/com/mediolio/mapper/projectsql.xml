@@ -3,13 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="proj">
+  
+    <!-- !!!!!!!!!!!!!      모하람 작성        !!!!!!!!!!!!!!!! -->
+  
+  	<!-- 태그 작성 시, 입력한 글자가 포함된 태그들의 목록을 보여줌(자동 완성) -->
   	<select id="autocompleteTags" parameterType="String" resultType="hvo">
   		select h_id, h_value from hashtag where h_value like CONCAT('%', #{h_value}, '%') 
   		group by h_value order by h_value
   	</select>
+  	
+  	<!-- 게시물 안에 들어가는 콘텐츠(사진, 문서, embed 태그, 텍스트)의 정보 저장 -->
   	<insert id="uploadContent" parameterType="covo">
   		insert into content (p_id,c_type,c_value,c_order) values(#{p_id},#{c_type},#{c_value},#{c_order})
   	</insert>
+  	
+  	<!-- 새로운 게시물(프로젝트, 과제) 등록  -->
   	<insert id="addProject" parameterType="pvo" useGeneratedKeys="true" keyProperty="p_id" keyColumn="p_id">
   		insert into project (m_id,p_title,p_type,p_prjname,p_summary,p_workfrom,p_workto,cl_id,cate_id,p_date,p_viewnum,p_coverImg) 
   		values(#{m_id},#{p_title},#{p_type},#{p_prjname},#{p_summary},#{p_workfrom},#{p_workto},#{cl_id},#{cate_id},sysdate(),0,#{p_coverImg})
@@ -17,21 +25,31 @@
   			select last_insert_id()
   		</selectKey>
   	</insert>
+  	
+  	<!-- 게시물의 태그들 등록 -->
   	<insert id="addHashtag" parameterType="hvo">
   		insert into hashtag (h_value,p_id) values(#{h_value},#{p_id})
   	</insert>
+  	
+  	<!-- 프로젝트 정보 등록 탭에서 팀원 정보를 추가할 때, 입력한 글자가 포함된 회원들의 이름 목록 리턴 -->
   	<select id="autocompleteMember" parameterType="String" resultType="mevo">
   		select m_id, m_name, m_studentID from member where m_name like CONCAT('%',#{m_name},'%') 
   		order by m_name
   	</select>
+  	
+  	<!-- 프로젝트 정보 등록 -->
   	<update id="addProjectInfo" parameterType="pvo">
   		update project set p_prjname=#{p_prjname}, p_summary=#{p_summary},
   		p_workfrom=#{p_workfrom}, p_workto=#{p_workto}, cl_id=#{cl_id} 
   		where p_id=#{p_id}
   	</update>
+  	
+  	<!-- 프로젝트 팀원 정보 등록 -->
   	<insert id="addTeamMember" parameterType="tmvo">
   		insert into teammember (p_id,m_id,tm_role,tm_detail) values(#{p_id},#{m_id},#{tm_role},#{tm_detail})
   	</insert>
+  	
+  	<!-- 유저의 게시물 정보 리턴 -->
   	<select id="userProject" parameterType="int" resultType="pvo">
 		SELECT p.p_id, p.m_id, p.p_coverImg, p.p_title, p.p_summary, m.m_studentID authorID, m.m_name authorName,
 			(SELECT count(*) from member_action where act_type='like' AND act_what=p.p_id) p_likenum, p.p_viewnum,

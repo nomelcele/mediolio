@@ -61,9 +61,8 @@ public class MainDao {
 		return st.selectList("main.mainMorePrjs", category);
 	}
 	
-	// 모하람 작성 - 
+	// 모하람 작성 - 유저가 가장 최근에 업데이트한 히스토리의 브랜치들을 리턴
 	public List<BranchVO> recentHistory(int m_id){
-		// 나의 최근 히스토리
 		return st.selectList("main.recentHistory", m_id);
 	}
 	

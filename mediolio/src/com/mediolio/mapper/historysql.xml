@@ -3,6 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="ht">
+  
+  <!-- !!!!!!!!!!!!!      모하람 작성        !!!!!!!!!!!!!!!! -->
+  
+  	<!-- 회원의 히스토리 목록 불러오기 -->
   	<select id="historyList" parameterType="java.util.Map" resultType="htvo">
   		select h.ht_id, h.ht_title, h.ht_public, h.ht_introduce, c.cl_name class_name from history h, class c 
   		where h.m_id=#{m_id} and h.cl_id=c.cl_id 
@@ -11,13 +15,19 @@
   		</if>
   		order by h.ht_lastedit desc
   	</select>
+  	
+  	<!-- 새로운 히스토리 추가 -->
   	<insert id="addHistory" parameterType="htvo">
   		insert into history (ht_title,ht_introduce,cl_id,ht_lastedit,ht_createdate,m_id,ht_public) 
   		values (#{ht_title},#{ht_introduce},#{cl_id},sysdate(),sysdate(),#{m_id},#{ht_public})
   	</insert>
+  	
+  	<!-- 히스토리 삭제 -->
   	<delete id="deleteHistory" parameterType="int">
   		delete from history where ht_id=#{ht_id}
   	</delete>
+  	
+  	<!-- 히스토리의 브랜치들 불러오기 -->
   	<select id="branchList" parameterType="java.util.Map" resultType="brvo">
   		select br_id,ht_id,br_title,br_img1,br_img2,br_img3,br_text,
   		DATE_FORMAT(br_date,'%Y.%m.%d %H:%i:%s') AS br_date,br_public 
@@ -27,20 +37,31 @@
   		</if>
   		order by br_date desc
   	</select>
+  	
+  	<!-- 히스토리에 새로운 브랜치 추가 -->
   	<insert id="addBranch" parameterType="brvo">
   		insert into branch (ht_id,br_title,br_img1,br_img2,br_img3,br_text,br_date,br_public) 
   		values (#{ht_id},#{br_title},#{br_img1},#{br_img2},#{br_img3},#{br_text},sysdate(),#{br_public})
   	</insert>
+  	
+  	<!-- 히스토리에 새로운 브랜치 추가 -->
   	<delete id="deleteBranch" parameterType="int">
   		delete from branch where br_id=#{br_id}
   	</delete>
+  	
+  	<!-- 히스토리에 브랜치를 추가했을 경우, 
+  	당시의 시간 기록(마이 페이지의 히스토리 탭에서 제일 최근에 브랜치를 작성한 히스토리를 보여주기 위해서) -->
   	<update id="updateLastEdit" parameterType="int">
   		update history set ht_lastedit=sysdate() where ht_id=#{ht_id}
   	</update>
+  	
+  	<!-- 히스토리 등록 폼에서 관련 과목 추가 시, 입력한 글자가 포함된 과목 이름들의 목록을 불러옴 -->
   	<select id="autocompleteClass" parameterType="String" resultType="clvo">
   		select * from class where cl_name like CONCAT('%',#{cl_name},'%') 
   		order by cl_name
   	</select>
+  	
+  	<!-- 히스토리의 공개 여부 변경(공개/비공개) -->
   	<update id="changeHtPublic" parameterType="htvo">
 		update history set ht_public=#{ht_public} where ht_id=#{ht_id}  	
   	</update>
