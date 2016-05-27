@@ -121,8 +121,9 @@ function toolModalOpen(){
     
 }
 
-
+// (이유라+모하람): 게시물 작성 페이지에서 세부카테고리 선택 모달 띄우는 함수
 function writeDCategoryModalOpen(){
+	// 모하람 작성
    	// 카테고리 선택 안 하고 세부카테고리 선택 클릭했을 때
 	if($("#selectedCategory").val() == 999){
  	    $.jAlert({
@@ -132,6 +133,7 @@ function writeDCategoryModalOpen(){
  	        'theme' : 'red',
  	      });
 	} else {
+		// 이유라 작성
 		$('body').addClass('preventScroll');
 	    $('.modal_bg, #modal_writeDCategory').show();
 	    
@@ -147,6 +149,7 @@ function writeDCategoryModalOpen(){
 	     	        'theme' : 'red',
 	     	      });
 	     	} else {
+	     		// 모하람 작성
 		     	$(".card_tag").html("");
 		    	for(var i=0; i<arr.length; i++){
 		    		var el = arr[i];
@@ -159,6 +162,7 @@ function writeDCategoryModalOpen(){
 		    		}
 		    	}
 		    	
+		    	// 이유라 작성
 		    	$('.modal_bg, .modal').hide();
 		    	$("#write_dCategory a").html(str);
 		    	$('body').removeClass('preventScroll');
@@ -166,10 +170,7 @@ function writeDCategoryModalOpen(){
 	     	}
 	    });
 	    
-//		sb.append("\"<input type='checkbox' value="+scIds[i]+" data-labelauty='"+scNames[i]+"'/>");
-//		sb.append("<label class='label_category'>"+scNames[i]+"</label>");
-
-//	    $("#modal_bd_writeDCategory ul").html("<li>"+scList[i]+"</li>");
+	    // 모하람 작성 - 모달에 세부카테고리 목록 보여주기
 		$("#modal_bd_writeDCategory ul").html("<li><input type='checkbox' value='1' data-labelauty='게임'/><label class='label_category'>게임</label></li>"+
 				"<li><input type='checkbox' value='2' data-labelauty='웹&앱'/><label class='label_category'>웹&앱</label></li>"+
 				"<li><input type='checkbox' value='3' data-labelauty='영상&사운드'/><label class='label_category'>영상&사운드</label></li>"+
@@ -179,37 +180,8 @@ function writeDCategoryModalOpen(){
 		
 		$(":checkbox").labelauty({ label: false });
 	    
-	    // 1. 선택한 카테고리를 가지고 세부 카테고리 검색
-//	    $.ajax({
-//	    	type: "POST",
-//	    	url: "subcategoryList",
-//	    	data: {
-//	    		sc_parent: $("#selectedCategory").val()
-//	    	},
-//	    	dataType: "json",
-//	    	success: function(jdata){
-//	    		var scList = jdata;
-//	    		var codes = "";
-//	    		for(var i=0; i<scList.length; i++){
-//	    			codes += "<li>"+scList[i]+"</li>";
-//	    		}
-//	    	    // 2. 세부 카테고리 목록 출력
-//	    	    $("#modal_bd_writeDCategory ul").html(codes);
-//	    	    $(":checkbox").labelauty({ label: false });
-//	    	}
-//	    });
 	}
 }    
-
-//function writeEmbedModalOpen(){
-//	$('body').addClass('preventScroll');
-//    $('.modal_bg, #modal_writeEmbed').show();
-//    
-//    $('#btn_writeEmbed').on('click',function(){
-//        $('.modal_bg, .modal').hide();
-//    	$('body').removeClass('preventScroll');
-//    })
-//}
 
 
 

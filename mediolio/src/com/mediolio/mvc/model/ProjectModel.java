@@ -38,6 +38,10 @@ import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectVO;
 import com.mediolio.vo.TeamMemberVO;
 
+/* *****
+ * ***** 모하람 + 오지은 작성
+ * *****
+ * */
 @Controller
 public class ProjectModel {
 	@Autowired
@@ -45,35 +49,28 @@ public class ProjectModel {
 	@Autowired
 	private MainDao mdao;
 	
+	// 모하람 작성 - 게시물 작성 페이지로 이동
 	@RequestMapping(value="addProjectForm")
 	public String addForm(Model model, HttpSession session){
 		return "project/addProjectForm";
 	}
 	
-//	@RequestMapping(value="uploadProjectFiles")
-//	public void uploadProjectFiles(ProjectVO pvo, String[] orderArr, HttpSession session){
-//		// 프로젝트 관련 파일들 업로드(이미지, 문서)
-//		List<MultipartFile> contents = pvo.getContents();
-//		System.out.println("파일 들어오세요? "+contents.get(0).getOriginalFilename());
-//		System.out.println("첫번째 파일: "+orderArr[0]);
-//		System.out.println("프로젝트 제목: "+pvo.getP_title());
-//	}
-
+	// 모하람 작성 - 새로운 게시물(프로젝트/과제) 작성
 	@RequestMapping(value="addProject")
 	public String addProject(ProjectVO pvo, TeamMemberVO tmvo, String[] orderArr, HttpSession session, Model model){
-		// 프로젝트 업로드
-		// 1. 새로운 프로젝트 추가
-		int m_id = ((MemberVO)session.getAttribute("mev")).getM_id();
+		
+		// 1. 새로운 게시물 추가
+		int m_id = ((MemberVO)session.getAttribute("mev")).getM_id(); // 현재 로그인한 유저의 회원 번호
 		pvo.setM_id(m_id);
-		int p_id = pdao.addProject(pvo); 
+		int p_id = pdao.addProject(pvo); // 새로운 게시물 등록 후 그 게시물의 id 리턴
 		
 		// 2. 콘텐츠(이미지, 문서, 임베드 태그, 텍스트) 업로드 및 db에 등록
-		List<MultipartFile> contents = pvo.getContents();
-		String[] contentNames;
+		List<MultipartFile> contents = pvo.getContents(); // 업로드할 파일(이미지, 문서)들의 리스트
+		String[] contentNames; // 파일의 이름을 저장할 배열
 		if(contents != null){
 			contentNames = new String[contents.size()];
 			for(int i=0; i<contentNames.length; i++){
-				contentNames[i] = contents.get(i).getOriginalFilename();
+				contentNames[i] = contents.get(i).getOriginalFilename(); // 배열에 파일 이름 저장
 			}
 			
 			for(int i=0; i<orderArr.length; i++){
@@ -100,11 +97,13 @@ public class ProjectModel {
 					
 					String fileExt = file.getOriginalFilename().split("\\.")[1]; // 파일의 확장자
 					
+					// c_type: 콘텐츠의 타입(document: 문서, image: 이미지, html: embed 태그,텍스트) 지정
+					// db에 저장할 때 구분하기 위해서 타입 지정
 					String c_type = "document";
 					String[] imgExt = {"gif","png","jpg","jpeg"};
 					for(String e:imgExt){
 						if(fileExt.contains(e)){
-							c_type = "image";
+							c_type = "image"; 
 						}
 					}
 					
@@ -113,19 +112,19 @@ public class ProjectModel {
 						String newFileName = fileUpload(file, session); // 파일 업로드
 						covo.setC_value(newFileName); // 콘텐츠의 파일 이름
 					} else {
-						// 문서 파일의 경우, 뷰어 보여줄 때(showViewer2) 이미 업로드를 했기 때문에 이 단계에서는 db에 파일 이름만 넣어주면 됨.
-						// orderArr 배열에 저장된 이름으로 저장('파일 원래 이름_업로드 시간' 형식의 이름)
+						// 문서 파일의 경우, 게시물 작성 단계에서 미리보기로 뷰어 보여줄 때(요청명-showViewer2) 
+						// 이미 업로드를 했기 때문에 이 단계에서는 db에 파일 이름만 넣어주면 됨
+						// orderArr 배열에 저장된 이름으로 저장('파일의 최초 이름_업로드 당시의 시간'형식의 이름)
 						System.out.println("문서파일 디비에 넣기: "+orderArr[i]);
 						covo.setC_value(orderArr[i]);
 					}
 					
-					covo.setC_type(c_type); // 콘텐츠의 타입(image/document)
+					covo.setC_type(c_type); 
 					
 
 				} else {
-					// 2-2. 임베드 태그, 텍스트 db에 등록
+					// 2-2. embed 태그, 텍스트 db에 등록
 					covo.setC_type("html");
-					System.out.println("텍스트: "+orderArr[i].replace("contenteditable=\"true\"", ""));
 					covo.setC_value(orderArr[i].replace("contenteditable=\"true\"", ""));
 					
 				}
@@ -149,7 +148,7 @@ public class ProjectModel {
 		
 
 		
-		// 3. 해쉬태그 db에 등록
+		// 3. 게시물의 해쉬태그 db에 등록
 		String[] hashtagArr = pvo.getHashtags().split("/");
 		for(String tag:hashtagArr){
 			HashtagVO hvo = new HashtagVO();
@@ -158,30 +157,6 @@ public class ProjectModel {
 			pdao.addHashtag(hvo);
 		}
 			
-//			if(null != contents & contents.size()>0){
-//				for(MultipartFile file:contents){
-//					if(file.getOriginalFilename() != ""){
-//						String newFileName = fileUpload(file, session); // 파일 업로드
-//						String fileExt = newFileName.split("\\.")[1]; // 파일의 확장자
-//						ContentVO covo = new ContentVO();
-//						
-//						String c_type = "document";
-//						String[] imgExt = {"gif","png","jpg","jpeg"};
-//						for(String e:imgExt){
-//							if(fileExt.contains(e)){
-//								c_type = "image";
-//							}
-//						}
-//						
-//						covo.setP_id(p_id); // 프로젝트 id
-//						covo.setC_type(c_type); // 콘텐츠의 타입(image/document)
-//						covo.setC_value(newFileName); // 콘텐츠의 파일 이름
-////						covo.setC_order(Arrays.asList(orderArr).indexOf(file.getOriginalFilename())); // 콘텐츠 순서
-//						pdao.uploadContent(covo); // db에 콘텐츠 정보 업데이트
-//					}
-//				}
-//			}
-		
 		List<TeamMemberVO> tmList = tmvo.getTmList();
 		// 4. 프로젝트 팀원 정보 db에 업데이트
 		for(TeamMemberVO vo:tmList){
@@ -189,87 +164,30 @@ public class ProjectModel {
 			pdao.addTeamMember(vo);
 		}
 				
+		// 새로 등록된 게시물의 상세 보기 페이지로 바로 이동
 		return "redirect:projectView?m_id="+m_id+"&p_id="+p_id;
 	}
 	
+	// 게시물 작성 페이지에서 문서 파일 업로드 했을 때, 뷰어(미리보기) 보여주기
 	@RequestMapping(value="showViewer2")
 	public void showViewer2(ProjectVO pvo, HttpSession session, HttpServletResponse response) throws IOException{
-		// doc, ppt, pdf 업로드 했을 때 뷰어 보여주기
 		MultipartFile docFile = pvo.getDoc();
-		String newFileName = fileUpload(docFile, session);
+		String newFileName = fileUpload(docFile, session); // 파일 서버에 업로드
 		PrintWriter pw = response.getWriter();
-		pw.write(newFileName);
+		pw.write(newFileName); // 새로운 파일 이름(중복 방지를 위해 새롭게 만든 파일 이름)을 클라이언트에 전송
 		pw.flush();
 		pw.close();
 	}
 	
-	@RequestMapping(value="showViewer")
-	public void showViewer(ProjectVO pvo, HttpSession session, HttpServletResponse response) throws IOException{
-		// doc, ppt, pdf 업로드 했을 때 뷰어 보여주기 (이전 버전)
-		List<MultipartFile> contents = pvo.getContents();
-		MultipartFile projectFile = contents.get(0);
-		String[] imgExt = {"gif","png","jpg","jpeg"};
-		for(MultipartFile file:contents){
-			String ext = file.getOriginalFilename().split("\\.")[1];
-			for(String img:imgExt){
-				if(!(ext.contains(img))){
-					projectFile = file;
-				}
-			}
-		}
-		
-		String[] fileFullName = projectFile.getOriginalFilename().split("\\.");
-		System.out.println(projectFile.getOriginalFilename());
-		String fileName = fileFullName[0]; // 파일 이름
-		String fileExt = fileFullName[1]; // 파일 확장자
-		String newFileName = fileName+"_"+System.currentTimeMillis()+"."+fileExt;
-		System.out.println("New File Name: "+newFileName); // 새로운 파일 이름(중복 방지)
-		
-		// 경로 설정
-		String realPath = session.getServletContext().getRealPath("/");
-		StringBuffer path = new StringBuffer();
-		path.append(realPath).append("upload/docs/").append(newFileName);
-		System.out.println("Upload Path: "+path.toString());
-		
-		File file = new File(path.toString());
-		
-		try {
-			projectFile.transferTo(file);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		} 
-		
-//		Map<String, Object> params = new HashMap<String, Object>();
-//		params.put("name", newFileName);
-//		params.put("nonSvg", true);
-
-//		try {
-//			boxView = new BoxViewClient("3e7kxpyozin7r0kbknmiwa2dmpcoyq3w");
-//			Document doc = boxView.upload(file, params);
-//			Session viewSession = doc.createSession();
-//			String viewUrl = viewSession.getViewUrl(); // 뷰어 url
-//			System.out.println("View Url: "+viewUrl);
-			
-			String viewUrl = "http://docs.google.com/viewer?url="+path.toString()+"&embedded=true";
-			PrintWriter pw = response.getWriter();
-			pw.write(viewUrl);
-			pw.flush();
-			pw.close();
-			
-//		} catch (BoxViewException e) {
-//			System.out.println("Failed");
-//			e.printStackTrace();
-//		}
-		
-	}
-		
+	// 해쉬태그 입력 시 자동 완성
 	@RequestMapping(value="autocompleteTags")
 	public void autocompleteTags(String h_value, HttpServletResponse response) throws IOException{
-		// 태그 입력 시 자동 완성
-		List<HashtagVO> tagList = pdao.autocompleteTags(h_value);
+		List<HashtagVO> tagList = pdao.autocompleteTags(h_value); // 사용자가 입력한 글자(h_value)가 포함된 해쉬태그 목록 리턴
 		int[] tagIds = new int[tagList.size()];
 		String[] tagNames = new String[tagList.size()];
 		
+		// JSON 형식으로 데이터 입력(해쉬태그 id, 해쉬태그 이름)
+		// 클라이언트에서 데이터를 파싱하여 view에 html tag 동적으로 추가
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");
 		for(int i=0; i<tagList.size(); i++){
@@ -285,33 +203,36 @@ public class ProjectModel {
 		}
 		sb.append("]");
 		
+		// JSON 데이터 클라이언트로 전송
 		PrintWriter pw = response.getWriter();
 		pw.write(sb.toString());
 		pw.flush();
 		pw.close();
 	}
 	
+	// 파일 업로드
 	public String fileUpload(MultipartFile projectFile, HttpSession session){
 		String[] fileFullName = projectFile.getOriginalFilename().split("\\.");
 		System.out.println(projectFile.getOriginalFilename());
-		String fileName = fileFullName[0]; // 파일 이름
+		String fileName = fileFullName[0]; // 파일 이름(확장자를 제외한 부분)
 		String fileExt = fileFullName[1].toLowerCase(); // 파일 확장자
-		String newFileName = fileName+"_"+System.currentTimeMillis()+"."+fileExt;
-		System.out.println("New File Name: "+newFileName); // 새로운 파일 이름(중복 방지)
+		String newFileName = fileName+"_"+System.currentTimeMillis()+"."+fileExt; // 중복 방지를 위해 파일 이름에 현재 시간을 붙여서 새로운 이름 생성
+		System.out.println("New File Name: "+newFileName); 
 		
 		String realPath = session.getServletContext().getRealPath("/upload/");
 		StringBuffer path = new StringBuffer();
 		
 		String type = "docs";
 		String[] imgExt = {"gif","png","jpg","jpeg"};
-		for(String img:imgExt){
+		for(String img:imgExt){ // 확장자를 확인하여 문서/이미지 파일 구분
 			if(fileExt.contains(img)){
 				type = "img";
 				break;
 			}
 		}
 		
-		if(type.equals("docs")){
+		// 문서 파일은 docs 폴더에, 이미지 파일은 img 폴더에 저장하기 위해 업로드 경로 설정
+		if(type.equals("docs")){ 
 			path.append(realPath).append("docs/").append(newFileName);
 		} else {
 			path.append(realPath).append("img/").append(newFileName);
@@ -322,7 +243,7 @@ public class ProjectModel {
 		File file = new File(path.toString());
 		file.mkdirs();
 		try {
-			projectFile.transferTo(file);
+			projectFile.transferTo(file); // 파일 업로드
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		} 
@@ -397,16 +318,9 @@ public class ProjectModel {
 	//------------ 오지은 작성 부분 끝 ---------------------------------------------------
 	
 	
-	
-	
-	@RequestMapping(value="gotoStep2")
-	public String gotoStep2(){
-		return "project/addProjectForm2";
-	}
-	
+	// 팀원 정보 입력 시 이름 자동 완성
 	@RequestMapping(value="autocompleteMember")
 	public void autocompleteMember(String m_name,HttpServletResponse response) throws IOException{
-		// 팀원 입력 시 이름 자동 완성
 		List<MemberVO> memList = pdao.autocompleteMember(m_name);
 		int memNum = memList.size();
 		int[] m_ids = new int[memNum];

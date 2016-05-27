@@ -29,14 +29,14 @@ public class ProjectDetailModel {
 	@Autowired
 	private ProjectDetailDao pddao;
 	
-	// 프로젝트 상세 보기 페이지(projectView.jsp)를 여는 함수
+	// 게시물(프로젝트/과제) 상세 보기 페이지(projectView.jsp)를 여는 함수
 	@RequestMapping("projectView")
 	public String projectView(Model model, @RequestParam("p_id") String p_id, @RequestParam("m_id") String m_id, HttpSession session){
 		MemberVO mev = (MemberVO)session.getAttribute("mev");
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("p_id", Integer.parseInt(p_id)); 
-		map.put("p_m_id", Integer.parseInt(m_id)); //프로젝트 작성자 m_id
+		map.put("p_m_id", Integer.parseInt(m_id)); //게시물 작성자 m_id
 		
 		if(mev!=null){
 			map.put("m_id", mev.getM_id()); //로그인 한 사람의 m_id
@@ -44,20 +44,20 @@ public class ProjectDetailModel {
 			map.put("m_id", 0);
 		}
 		
-		// 모하람 작성 - 해당 프로젝트 포함된 콘텐츠(이미지/문서/글 등)
+		// 모하람 작성 - 해당 게시물에 포함된 콘텐츠(이미지/문서/텍스트/embed 태그 등)
 		List<ContentVO> contents = pddao.projectContents(Integer.parseInt(p_id));
 		model.addAttribute("contents", contents);
 
-		// 모하람 작성 - 조회수 증가(자기가 올린 프로젝트가 아닌 경우)
+		// 모하람 작성 - 조회수 증가(자기가 올린 게시물이 아닌 경우)
 		if(Integer.parseInt(m_id) != map.get("m_id").intValue()){
 			pddao.increaseHits(Integer.parseInt(p_id));
 		}
 		
 		int pid = Integer.parseInt(p_id);
-		// 오지은 작성 - 프로젝트 관련 정보 - 프로젝트 타이틀, 카테고리, 작업정보,  좋아요수 등
+		// 오지은 작성 - 게시물 관련 정보 -  타이틀, 카테고리, 작업정보,  좋아요수 등
 		model.addAttribute("detail", pddao.projectDetailRelatedProject(pid));
 				
-		// 오지은 작성 - 프로젝트 작성자 정보 - 이름, 관심분야, 좋아요 여부 등
+		// 오지은 작성 - 게시물 작성자 정보 - 이름, 관심분야, 좋아요 여부 등
 		model.addAttribute("writer", pddao.projectDetailRelatedMember(map));
 		
 		// 오지은 작성 - 댓글목록

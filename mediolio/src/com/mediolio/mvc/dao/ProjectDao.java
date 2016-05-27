@@ -12,30 +12,38 @@ import com.mediolio.vo.MemberVO;
 import com.mediolio.vo.ProjectVO;
 import com.mediolio.vo.TeamMemberVO;
 
+/* *****
+ * ***** 모하람 작성
+ * *****
+ * */
 @Repository
 public class ProjectDao {
 	@Autowired
 	private SqlSessionTemplate st;
 	
 	public List<HashtagVO> autocompleteTags(String h_value){
+		// 태그 등록 시, 사용자가 입력한 글자(h_value)가 포함된 태그들의 목록 리턴
 		return st.selectList("proj.autocompleteTags",h_value);
 	}
 	
 	public void uploadContent(ContentVO covo){
+		// 게시물의 콘텐츠(이미지, 문서, embed 태그, 텍스트) 정보 등록
 		st.insert("proj.uploadContent",covo);
 	}
 	
 	public int addProject(ProjectVO pvo){
+		// 새로운 게시물 등록 후 게시물의 id를 리턴
 		st.insert("proj.addProject", pvo);
 		return pvo.getP_id();
 	}
 	
 	public void addHashtag(HashtagVO hvo){
+		// 게시물의 태그들 등록
 		st.insert("proj.addHashtag", hvo);
 	}
 	
 	public List<MemberVO> autocompleteMember(String m_name){
-		// 팀원 추가 시 학생 이름 자동 완성
+		// 프로젝트 정보 등록 페이지에서 팀원 추가 시 사용자가 입력한 글자(m_name)가 포함된 회원들의 이름 목록 리턴
 		return st.selectList("proj.autocompleteMember", m_name);
 	}
 	
@@ -45,12 +53,12 @@ public class ProjectDao {
 	}
 	
 	public void addTeamMember(TeamMemberVO tmvo){
-		// 팀원 소개 추가
+		// 프로젝트의 팀원 정보 등록
 		st.insert("proj.addTeamMember", tmvo);
 	}
 	
 	public List<ProjectVO> userProject(int m_id){
-		// 유저 프로젝트
+		// 유저가 등록한 게시물 목록 리턴
 		return st.selectList("proj.userProject", m_id);
 	}
 }

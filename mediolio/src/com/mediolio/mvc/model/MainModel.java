@@ -160,17 +160,16 @@ public class MainModel {
 
 	
 	//모하람 작성
+	// 로그인한 사용자의 히스토리, 게시물(프로젝트/과제) 목록 보여주는 마이 페이지로 이동
 	@RequestMapping("gotoMyPage")
 	public String gotoMyPage(Model model, HttpSession session){
-		// 전체 히스토리 리스트
+		// 로그인한 사용자의 전체 히스토리 리스트
 		int m_id = ((MemberVO)session.getAttribute("mev")).getM_id();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("m_id", String.valueOf(m_id));
 		map.put("type", "myPage");
 		List<HistoryVO> htList = htdao.historyList(map);
-		
-		
 		
 		model.addAttribute("htList", htList);
 		// 가장 최근에 업데이트 된 히스토리의 브랜치들 불러오기
@@ -187,7 +186,7 @@ public class MainModel {
 				
 		}
 		
-		// 나의 게시물
+		// 사용자의 게시물
 		model.addAttribute("myProjects",pdao.userProject(m_id));
 		model.addAttribute("type","myPage");
 		
