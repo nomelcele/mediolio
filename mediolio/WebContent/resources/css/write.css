@@ -27,7 +27,7 @@
 #write_tagBox{width:100%;}
 .write_tagArea{display:block; float:left; position:absolute; }
 
-.autoCompleteBox{width:100px; font-size:13px; background-color:#fff; border:1px solid #cfcbcb; display:none; border-radius:4px; padding:5px 7px; position:absolute; top:30px; left:0;}
+.autoCompleteBox{width:auto; font-size:13px; background-color:#fff; border:1px solid #cfcbcb; display:none; border-radius:4px; padding:5px 7px; position:absolute; top:30px; left:0;}
 .autoCompleteBox li{margin:6px 0;}
 .autoCompleteBox li:hover{background-color:#BEE4F5;}
 #write_tagTxt{ display:inline-block; min-width:0; width:auto; max-width:740px; min-height:30px; height:auto; overflow:auto; float:left;}
@@ -36,7 +36,7 @@
 #write_tagTxt span::before{content:"#";}
 #write_tagInput{ display:inline-block; width:auto; height:20px; padding:5px; position:absolute; left:0; font-size:14px;}
 
-.autoClass{top:262px; left:339px; z-index:5;}
+.autoClass{top:262px; left:339px; z-index:3;}
 .autoMember{left:0; width:109px; top:32px; z-index:2;}
 
 /*글쓰기 추가 버튼, 말풍선*/
