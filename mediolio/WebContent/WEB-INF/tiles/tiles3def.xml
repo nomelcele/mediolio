@@ -4,6 +4,9 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 
+<!-- 오지은 작성 -->
+<!-- Spring Tiles 기능(header - body - aside 세 jsp 파일을 묶어 페이지를 구성하는 기능) -->
+
 	<definition name="empty_layout" template="/WEB-INF/tiles/template/emptyTemplate.jsp">
 	   <put-attribute name="body" value="" />
 	</definition>

@@ -39,6 +39,7 @@
 </script>
 
 <!-- 이유라 : 마크업  -->
+<!-- 박성준 : 데이터 뿌림  -->
 
 <div id="header">
 	<div id="headerWrap">

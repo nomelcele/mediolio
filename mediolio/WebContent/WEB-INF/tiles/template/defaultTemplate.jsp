@@ -8,6 +8,9 @@
 <title>MEDIOLIO</title>
 </head>
 <body>
+
+<!-- 오지은 작성 (Spring Tiles 템플릿)-->
+
 	<!-- 헤더 영역 -->
 	<tiles:insertAttribute name="header"/>
 
