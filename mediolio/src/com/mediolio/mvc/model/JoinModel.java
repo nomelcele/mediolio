@@ -29,29 +29,11 @@ public class JoinModel {
 	@Autowired
 	private Email email;
 
-	
-/*	@RequestMapping("/menu=login")
-	public ModelAndView gotoLogin(){
-		return new ModelAndView("/login/login");
-	}*/
 	@RequestMapping("/menu=password")
 	public ModelAndView gotoPassword(){
 		return new ModelAndView("/login/password");
 	}
-/*	@RequestMapping("/menu=join")
-	public ModelAndView gotoJoin(){
-		return new ModelAndView("/login/join");
-	}
-	@RequestMapping("/menu=loginsuccess")
-	public ModelAndView gotoTestmain(){
-		return new ModelAndView("/login/loginsuccess");
-	}*/
-/*	@RequestMapping("/logout")
-	public ModelAndView logout(HttpSession session) throws Exception{
-		ModelAndView mav = new ModelAndView("redirect:menu=nonlogin");
-		session.invalidate();
-		return mav;
-	}*/
+
 	@RequestMapping("/menu=nonlogin")
 	public ModelAndView gotoTestnonlogin(){
 		return new ModelAndView("/login/nonlogin");
@@ -73,8 +55,6 @@ public class JoinModel {
 		mav.addObject("m_id", insertedJoininfo);
 		MemberVO selectedPw = jdao.LoginInfo(mevo.getM_mail());
 		if(insertedJoininfo!=0){
-			/*session.setAttribute("id", insertedJoininfo);
-			session.setAttribute("pw", mevo.getM_pw());*/
 			session.setAttribute("mev",selectedPw);
 		}
 		return mav;
@@ -83,7 +63,6 @@ public class JoinModel {
 	@RequestMapping(value="InsertSkillInfo", method = RequestMethod.POST)
 	public ModelAndView InsertSkillInfo(MemberSkillVO mkvo, HttpSession session){
 		// 관련기술 입력
-		//int m_id= acvo.getM_id();
 		System.out.println(mkvo.getM_id());
 
 		ModelAndView mav = new ModelAndView("jsonView");
@@ -108,13 +87,10 @@ public class JoinModel {
 	public ModelAndView LoginInfo(String m_mail, String pw, HttpSession session){
 		ModelAndView mav = new ModelAndView("jsonView");
 		MemberVO selectedPw = jdao.LoginInfo(m_mail);
-		//System.out.println(selectedPw);
 		if(selectedPw!=null){
 			mav.addObject("m_pw", selectedPw.getM_pw());
 			mav.addObject("m_id", selectedPw.getM_id());
 			if(selectedPw.getM_pw().equals(pw)){
-				/*session.setAttribute("id", selectedPw.getM_id());
-				session.setAttribute("pw", pw);*/
 				session.setAttribute("mev",selectedPw);
 			}
 			return mav;
@@ -129,8 +105,6 @@ public class JoinModel {
 	@RequestMapping("sendEmailAction")
     public ModelAndView sendEmailAction (String m_mail) throws Exception {
         ModelAndView mav = new ModelAndView("jsonView");
-        //AccountVO selectedPw = new AccountVO();
-        //selectedPw.setM_mail(m_mail);
         MemberVO selectedPw = new MemberVO();
         selectedPw.setM_mail(m_mail);
         StringBuffer buffer = new StringBuffer();
@@ -140,9 +114,7 @@ public class JoinModel {
         buffer.append(chars[random.nextInt(chars.length)]);
         }
         selectedPw.setM_pw(buffer.toString());
-        //AccountVO selectedPw = jdao.sendEmailAction(m_mail);
         jdao.sendEmailAction(selectedPw);
-       // mav.addObject("m_pw", selectedPw.getM_pw());
         mav.addObject("m_pw", buffer.toString());
         String id=m_mail;
         String pw=selectedPw.getM_pw();
