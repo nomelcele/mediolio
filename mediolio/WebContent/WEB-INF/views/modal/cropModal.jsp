@@ -9,8 +9,8 @@
 
 	$(function($) {
 		var jcrop_api, boundx, boundy;
-		var box_width = 640;
-		var box_height = 600;
+		var box_width = 640; 
+		var box_height = 600; 
 		
 		// 잘린 부분 미리보기 div
 		$preview = $('#preview-pane');
@@ -25,11 +25,11 @@
 		//console.log("target W/H : " + imgWidth + " , " + imgHeight);
 		
 		$('#target').Jcrop({
-			boxWidth: box_width, 
-			boxHeight: box_height,
+			boxWidth: box_width, //모달 가로 최대크기
+			boxHeight: box_height, //모달 세로 최대크기
 			minSize:[200, 200], //최소 사이즈 200px 200px
 			setSelect:[imgWidth/2-90, imgHeight/2-90, imgWidth/2+90, imgHeight/2+90], //모달이 열렸을 때 이미지 중앙에 크롭영역 위치
-			onChange : updatePreview,
+			onChange : updatePreview, //크롭 영역 이동될 때 호출하는 함수
 			onSelect : updatePreview,
 			aspectRatio : xsize / ysize //크롭 영역 비율 - 200/200 정사각형
 		}, function() {
@@ -75,6 +75,7 @@
 				$('#preview_w').val(c.w);
 				$('#preview_h').val(c.h);
 				
+				//크롭영역 이동에 따른 미리보기 영역 세팅
 				$pimg.css({
 					width : Math.round(rx * boundx) + 'px',
 					height : Math.round(ry * boundy) + 'px',
