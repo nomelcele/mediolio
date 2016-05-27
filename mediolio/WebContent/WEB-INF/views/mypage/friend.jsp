@@ -47,18 +47,20 @@
                         </p>
                         <div class="friendList_project">
                         	<c:set var="projects" value="${a.projects }"/>
-                        	<c:set var="projectArr" value="${fn:split(projects, '/') }"/>
-                        	<c:forEach var="id_img_set" items="${projectArr }">
-                        		<c:set var="id_img_arr" value="${fn:split(id_img_set, ',') }"/>
-                        		<c:choose>
-                        			<c:when test="${fn:length(id_img_arr) eq 1}">
-                        				<a href="projectView?p_id=${id_img_arr[0] }&m_id=${a.m_id }"><img src="resources/images/default.png" width="80" height="80"/></a>
-                        			</c:when>
-	                        		<c:otherwise>
-										<a href="projectView?p_id=${id_img_arr[0] }&m_id=${a.m_id }"><img src="resources/images/projectCover/${id_img_arr[1] }" width="80" height="80"/></a>	                        			
-	                        		</c:otherwise>
-                        		</c:choose>
-                        	</c:forEach>
+                        	<c:if test="${!empty projects }">
+	                        	<c:set var="projectArr" value="${fn:split(projects, '/') }"/>
+	                        	<c:forEach var="id_img_set" items="${projectArr }">
+	                        		<c:set var="id_img_arr" value="${fn:split(id_img_set, ',') }"/>
+	                        		<c:choose>
+	                        			<c:when test="${fn:length(id_img_arr) eq 1}">
+	                        				<a href="projectView?p_id=${id_img_arr[0] }&m_id=${a.m_id }"><img src="resources/images/default.png" width="80" height="80"/></a>
+	                        			</c:when>
+		                        		<c:otherwise>
+											<a href="projectView?p_id=${id_img_arr[0] }&m_id=${a.m_id }"><img src="resources/images/projectCover/${id_img_arr[1] }" width="80" height="80"/></a>	                        			
+		                        		</c:otherwise>
+	                        		</c:choose>
+	                        	</c:forEach>
+                        	</c:if>
                         </div>
                     </li>
 				</c:forEach>

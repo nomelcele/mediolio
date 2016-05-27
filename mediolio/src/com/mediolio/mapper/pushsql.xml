@@ -27,7 +27,7 @@
 	<select id="getFollowNotifications" parameterType="int" resultType="psvo">
 		SELECT m.m_id, m.m_name, m.m_studentID, DATE_FORMAT(act.act_date, '%Y.%m.%d %H:%i:%s') AS act_date
 			FROM member_action act JOIN member m ON act.act_from=m.m_id
-			WHERE act.act_read='0' AND act.act_to=#{m_id} AND act.act_from !=#{m_id}
+			WHERE act.act_type='follow' AND act.act_read='0' AND act.act_to=#{m_id} AND act.act_from !=#{m_id}
 			ORDER BY act.act_date DESC
 	</select> 
 	
@@ -35,7 +35,7 @@
 	<select id="getReplyNotifications" parameterType="int" resultType="psvo">
 		SELECT m.m_id, m.m_name, m.m_studentID, DATE_FORMAT(act.act_date, '%Y.%m.%d %H:%i:%s') AS act_date, p.p_id, p.m_id AS author_m_id, p.p_title, act.act_what AS r_id
 			FROM member_action act, reply r, member m, project p
-			WHERE act.act_from=m.m_id AND act.act_what = r.r_id AND r.p_id = p.p_id AND act.act_read=0 AND act.act_to=#{m_id} AND act.act_from !=#{m_id}
+			WHERE act.act_type='reply' AND act.act_from=m.m_id AND act.act_what = r.r_id AND r.p_id = p.p_id AND act.act_read=0 AND act.act_to=#{m_id} AND act.act_from !=#{m_id}
 			ORDER BY act.act_date DESC
 	</select> 
 
