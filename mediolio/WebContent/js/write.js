@@ -1,4 +1,4 @@
-/*  게시물 작성 페이지 관련 javascript
+/*  게시물(과제/프로젝트) 작성 페이지 관련 javascript
  *  이유라 - UI 관련 javascript
  *  모하람 - 기능 관련 javascript
  * */
@@ -6,9 +6,9 @@
 
 jQuery.ajaxSettings.traditional = true;
 
-var order=0; // 콘텐츠들의 순서
+var order=0; // 콘텐츠(이미지 파일, 문서 파일, embed 태그, 텍스트) 들의 순서
 var fileNum=0; // 업로드할 파일 수
-var orderArr=[];
+var orderArr=[]; // 파일의 이름, embed 태그/텍스트의 내용을 콘텐츠의 순서에 따라 배열에 저장(게시물 상세 보기 페이지에서 입력한 순서대로 보여주기 위해)
 var colorRange;
 var colorNum=0;
 var colorId=0;
@@ -18,11 +18,12 @@ $('document').ready(function(){
 	$(".writeStp2").hide();
 	
     $('#btn_writeEmbed').on('click',function(){
-    	// 임베드 태그 등록
+    	// 모하람 작성 - 임베드 태그 등록
         $('.modal_bg, .modal').hide();
         var embed = $("#modal_bd_writeEmbed textarea").val();
         console.log($(embed).css("width","100%"));
         
+        // 이유라 작성 - 콘텐츠 이동/삭제 박스 보여주기
         $("#write_bd").append("<div class='contentBox' data-sort="+order+">"
     			+"<ul class='content_toolBoxes' id='content_toolBox'>"
     			+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
@@ -31,12 +32,14 @@ $('document').ready(function(){
     			+"</ul>"
     			+embed+"</div>");
         
+        // 모하람 작성
         orderArr[order] = embed;
         order = parseInt(order)+1;
         addContent();
     	$('body').removeClass('preventScroll');
     });
 	
+    // 이유라 작성
 	/* 프로젝트 개요 작성칸 height 조절*/
 	$('.writeLongLineWrap').on( 'keyup', 'textarea', function (e){
         $(this).css('height', 'auto' );
@@ -45,6 +48,7 @@ $('document').ready(function(){
     $('.writeLongLineWrap').find( 'textarea' ).keyup();
     
     
+    // 이유라 작성
     /* 팀원 추가 버튼 */
     $('#btn_addTeamMate').on('click', function(){
     	tmNum++;
@@ -56,7 +60,7 @@ $('document').ready(function(){
 
     
 	$("#submit_portfolio").click(function(){
-		// 프로젝트 등록
+		// 모하람 작성 - 게시물 등록
 		
 		// 유효성 검사
 		if($("#selectedCategory").val() == 999){
@@ -145,13 +149,11 @@ $('document').ready(function(){
 		} else{
 			// 파일 업로드
 			// 서버로 보내야 할 파라미터 목록
-			// 1. 파일(이미지, 문서): formdata로 전송
-//			var formData = new FormData();
+			// 1. 파일(이미지, 문서)
 			var firstFile = $("input[name=contents]")[0];
 			if($(firstFile).val() != ""){
 				for(var i=0; i<$("input[name=contents]").length; i++){
 					console.log($("input[name=contents]")[i]);
-//					formData.append("contents",$("input[name=contents]")[i].files[0]);
 				};
 			}
 			
@@ -160,22 +162,6 @@ $('document').ready(function(){
 			// 3. orderArr: 콘텐츠 순서 정보 저장
 			console.log("콘텐츠 순서: "+orderArr);
 			$("input[name=orderArr]").val(orderArr);
-//			for(var i=0; i<orderArr.length; i++){
-//				formData.append("orderArr",orderArr[i]);
-//			}
-			
-			// 4. 프로젝트 제목
-//			$("#p_title").val($("#projectTitle").val());
-			
-			// 5. 카테고리 아이디
-//			$("#cate_id").val($("#selectedCategory").val());
-			
-//			// 6. 서브카테고리 아이디 목록
-//			var subcategories = "";
-//			$("#write_dCategory .subCategory").each(function(){
-//				subcategories += $(this).val()+"/";
-//			});
-//			$("#sc_id").val(subcategories);
 			
 			// 7. 커버 이미지 파일 이름
 			$("#p_coverImgName").val($("#p_coverImg").val());
@@ -186,48 +172,13 @@ $('document').ready(function(){
 				hashtags += $(this).html()+"/";
 			});
 			$("#hashtags").val(hashtags);
-	
-			// 9. 프로젝트 정보
-			// 9-1. 작업 이름
-//			$("#p_prjname").val($("#projectName").val());
-
-			// 9-2. 작업 기간
-//			$("#p_workfrom").val($("#projectFrom").val());
-//			$("#p_workto").val($("#projectTo").val());
-
-			// 9-3. 관련 과목
-
-			
-			// 9-4. 팀원 소개
-			
-			// 9-5. 작업 개요
-//			$("#p_summary").val($("#projectSummary").val());
-
-			
-//			var other_data = $("#addProjectForm").serializeArray();
-//		    $.each(other_data,function(key,input){
-//		        formData.append(input.name,input.value);
-//		    });
-//		  
-//			$.ajax({
-//				url: "addProject",
-//				processData: false,
-//				contentType: false,
-//				data: formData,
-//				type: "POST",
-//				success: function(result){
-//					alert("업로드 완료");
-//					$(".colorpicker_field").css("display","none");
-//					$('#default_body').empty().append(result);
-//					tagHover_write();
-//				}
-//			});
 			
 			$("#addProjectForm").submit();
 		}
 		
 	});
 
+    // 이유라 작성
     //팝업 쓰기버튼 호버- 말풍선 띄우기
     $('#btn_addWrite').hover(function(){
         $('#bubble_addWrite').show();
@@ -245,6 +196,7 @@ $('document').ready(function(){
     $('#btn_addText').on('click',function(){
 //    	addContent();
     	
+    	// 이유라 작성 - 텍스트 편집(사이즈, 색깔, 스타일(이탤릭/볼드/언더라인)) 툴박스 보여주기
         $('#write_bd').append('<div class="write_textarea contentBox"  data-sort='+order+'>'
         		+'<div contenteditable="true" style="min-height:inherit; height:auto;"></div>'
 //        		+'<div contenteditable="false">'
@@ -268,6 +220,7 @@ $('document').ready(function(){
         
         $(".write_textarea:last").trigger("focus");
         
+        // 모하람 작성 - 텍스트의 사이즈 변경
         $(".txtSize").on("change",function(){
         	var range = window.getSelection().getRangeAt(0);
         	console.log(range);
@@ -287,6 +240,7 @@ $('document').ready(function(){
         
         addContent();
         
+        // 모하람 작성 - 텍스트 색상 변경
     	$(".palette").ColorPicker({
     		color: "#000000",
     		onShow: function(colpkr){
@@ -323,7 +277,7 @@ $('document').ready(function(){
         $('select').niceSelect();
         
 	    
-	 	
+	 	// 모하람 작성 - 콘텐츠 순서 변경(위, 아래로 이동)
         $(".write_textarea").on('keyup',function(){
         	var value = $(this).html();
         	orderArr[$(this).attr("data-sort")] = value.split("<ul")[0];
@@ -336,7 +290,7 @@ $('document').ready(function(){
         
         
 
-        
+        // 이유라 작성
         $('html').mouseover(function(e) {   
             if( !$(e.target).is( $('.contentBox')) ) { 
                if( !$(e.target).is( $('.contentBox').find('*') ) ){                    
@@ -353,7 +307,7 @@ $('document').ready(function(){
         
         
         
-        //div.write_textarea에 focus된 경우 툴박스 보이기
+        // 이유라 작성 - div.write_textarea에 focus된 경우 툴박스 보이기
         $('.write_textarea').on('click', function(){
             $(".content_toolBoxes").hide();
             $(".text_toolBoxes").hide();
@@ -379,6 +333,7 @@ $('document').ready(function(){
     });//끝- 텍스트 추가 버튼 누르고 난 후 이벤트
     
   
+    // 모하람 작성 - 파일 업로드 시 미리 보기
     $(".contentFile").change(function(){
     	if($(this).prop("files")[0].size > 20485500){
     		// 20메가 이상의 파일 업로드했을 때(톰캣 자체 설정 -> 설정 변경하면 업로드 가능한 max size 조절 가능)
@@ -486,7 +441,7 @@ $('document').ready(function(){
     });
     
     $("#selectedCategory").change(function(){
-    	// 카테고리 새로 선택했을 때 기존에 있던 세부카테고리 초기화
+    	// 모하람 작성 - 카테고리 새로 선택했을 때 기존에 있던 세부카테고리 초기화
     	$(".card_tag").html("");
 //    	if($("#write_dCategory a").html() != "세부 카테고리 선택.."){
     		$("#write_dCategory a").html("세부 카테고리 선택..");
@@ -498,7 +453,7 @@ $('document').ready(function(){
     
     
     $("#write_tagInput").keyup(function(){
-    	// 태그 자동 완성
+    	// 모하람 작성 - 태그 자동 완성
     	if($(this).val().trim() != ""){
     	$.ajax({
     		type: "POST",
@@ -527,7 +482,7 @@ $('document').ready(function(){
     
     $("#write_tagInput").keydown(function(e){
     	if(e.keyCode == 8 && $(this).val() == ""){
-    		// 백스페이스 누르면 태그 삭제
+    		// 모하람 작성 - 백스페이스 누르면 태그 삭제
 	    	$("#write_tagTxt span:last-child").remove();
 
     		
@@ -581,9 +536,8 @@ $('document').ready(function(){
 	
     $("#write_tagInput").keyup(function(e){
     	if(e.keyCode == 188 || e.keyCode == 13){
-    		// 컴마 누르면 태그 입력
+    		// 모하람 작성 - 컴마 누르면 태그 입력
     		if(($.trim($(this).val()) != "") || ($(this).val() != ",")){
-    			// 왜 이프문 먹통
 	    		var newTag = $(this).val().replace(",","");
 	    		$(this).attr("placeholder","");
 	    		$("#write_tagTxt").append("<span>"+newTag+"</span>");
@@ -616,6 +570,7 @@ $('document').ready(function(){
     
     $('#contentsWrap').click(function(){
     	if($.trim($("#write_tagInput").val()) != ""){
+    		// 모하람 작성
     		var newTag = $("#write_tagInput").val().replace(",","");
     		$("#write_tagInput").attr("placeholder","");
     		$("#write_tagTxt").append("<span>"+newTag+"</span>");
@@ -650,7 +605,7 @@ $('document').ready(function(){
     });
     
     $("#projectTitle").keyup(function(){
-    	// 글 제목 입력하면 우측 미리보기 박스의 제목 변경
+    	// 모하람 작성 - 글 제목 입력하면 우측 미리보기 박스의 제목 변경
     	$(".card_title a").html($(this).val());
     });
     
@@ -662,8 +617,7 @@ $('document').ready(function(){
     /////////////////////////////////////////////////////////////////////////////////////
     // 2단계: 프로젝트 정보 작성
     $(".project_related_class").keyup(function(){
-    	// 관련 과목 자동 완성
-    	// div 위치가 이상한 데 뜸
+    	// 모하람 작성 - 관련 과목 자동 완성
     	console.log("관련 과목");
 		if($(this).val().trim() != ""){
 	    	$.ajax({
@@ -686,8 +640,6 @@ $('document').ready(function(){
 //	        				top: $(".historyList_addRelated").offset().top-108
 	        			});
 	        			
-	            		// moveAutoCompleteBox();
-	        			// 자동 완성 목록 위치 변경: 현재 커서 위치에 맞게
 	    			}
 	    		}
 	    	});
@@ -697,7 +649,7 @@ $('document').ready(function(){
     });
     
     $(".teamMateName").keyup(function(){
-    	// 학생 이름 자동 완성
+    	// 모하람 작성 - 학생 이름 자동 완성
     	var input = $(this);
 		if($(this).val().trim() != ""){
 	    	$.ajax({
@@ -720,13 +672,6 @@ $('document').ready(function(){
 	    					display:"block"
 	    				});
 	    				
-//	    				$(".autoMember").css({
-//	        				display: "block"
-////	        				top: $(".historyList_addRelated").offset().top-108
-//	        			});
-//	        			
-	            		// moveAutoCompleteBox();
-	        			// 자동 완성 목록 위치 변경: 현재 커서 위치에 맞게
 	    			}
 	    		}
 	    	});
@@ -739,7 +684,7 @@ $('document').ready(function(){
 });
 
 function moveUpElement(e){
-	// 엘리먼트 위로 이동
+	// 모하람 작성 - 엘리먼트 위로 이동(콘텐츠 순서 변경)
 	var element = e;
 	var order = $(element).closest(".contentBox").attr("data-sort");
 	
@@ -759,7 +704,7 @@ function moveUpElement(e){
 }
 
 function moveDownElement(e){
-	// 엘리먼트 아래로 이동
+	// 모하람 작성 - 엘리먼트 아래로 이동(콘텐츠 순서 변경)
 	var element = e;
 	var order = $(element).closest(".contentBox").attr("data-sort");
 	$(element).closest(".contentBox").attr("data-sort",parseInt(order)+1);
@@ -777,7 +722,7 @@ function moveDownElement(e){
 }
 
 function removeElement(e){
-	// 엘리먼트 삭제
+	// 모하람 작성 - 콘텐츠 삭제
 	var element = e;
 	var elementOrder = $(element).closest(".contentBox").attr("data-sort");
 	var nextElements = $("#write_bd").find(".contentBox").filter(function(){
@@ -791,15 +736,6 @@ function removeElement(e){
 	
 	$(element).closest(".contentBox").remove();
 
-	// 파일 삭제했을 경우 그 파일의 input file 삭제
-//	$("input[name=contents]").each(function(){
-//		if($(this).val().split("\\")[2] == orderArr[order]){
-//			console.log("삭제할 파일: "+$(this).val());
-//			$(this).remove();
-//		}
-//	});
-//	   
-	// 삭제하면 한칸씩 밀어야함...
 	var arr1 = orderArr.slice(0,elementOrder);
 	var arr2 = orderArr.slice(parseInt(elementOrder)+1,orderArr.length);
 	orderArr = arr1.concat(arr2);
@@ -811,7 +747,7 @@ function removeElement(e){
 }
 
 function sortElements(){
-	// 순서에 따라 엘리먼트 정렬
+	// 모하람 작성 - 순서에 따라 콘텐츠 정렬
 	var $wrapper = $('#write_bd');
 
 	$wrapper.find('.contentBox').sort(function (a, b) {
@@ -821,41 +757,20 @@ function sortElements(){
 }
 
 function getSelectedText(){
-	// 선택된 텍스트 출력
-//	console.log("선택된 텍스트: "+window.getSelection());
+	// 모하람 작성 - 선택된 텍스트 출력
 	var obj = window.getSelection();
-//	$(obj).css("font-size","20px");
 }
 
 function writeEmbedModalOpen(){
-	// 미디어 태그 추가
+	// 이유라 작성 - 임베드 태그 모달 띄우기
 	$('body').addClass('preventScroll');
     $('.modal_bg, #modal_writeEmbed').show();
     
     
-//    $('#btn_writeEmbed').on('click',function(){
-//    	console.log("왜 두번찍히니??????");
-//    	// 임베드 태그 등록
-//        $('.modal_bg, .modal').hide();
-//        $("#write_bd").append("<div class='contentBox' data-sort="+order+">"
-//    			+"<ul class='content_toolBoxes' id='content_toolBox'>"
-//    			+"<li id='text_up'><a href='#' onclick='moveUpElement(this); return false;'></a></li>"
-//    			+"<li id='text_down'><a href='#' onclick='moveDownElement(this); return false;'></a></li>"
-//    			+"<li id='text_delete'><a href='#' onclick='removeElement(this); return false;'></a></li>"
-//    			+"</ul>"
-//    			+$("#modal_bd_writeEmbed textarea").val()+"</div>");
-//        orderArr[order] = $("#modal_bd_writeEmbed textarea").val();
-//        order = parseInt(order)+1;
-//        addContent();
-//    	$('body').removeClass('preventScroll');
-//    });
-    
-  
-    
 }
 
 function addTag(li){
-	// 자동 완성된 태그 클릭 시 태그 추가
+	// 모하람 작성 - 자동 완성된 태그 클릭 시 태그 추가
 	var newTag = li;
 	$("#write_tagInput").attr("placeholder","");
 	$("#write_tagTxt").append("<span>"+$(newTag).find("span").html()+"</span>");
@@ -868,6 +783,7 @@ function addTag(li){
 			left: 0
 		})
 	}
+	// 이유라 작성 - 태그가 입력되는 위치 변경
 	else if( $('#write_tagTxt span').last().length == 1){
 		var lastSpanOffset = $('#write_tagTxt span').last().offset().left;
 		var lastSpanWidth = $('#write_tagTxt span').last().width();
@@ -887,9 +803,9 @@ function addTag(li){
 	}
 }
 
+//모하람 작성 - 파일(이미지, 문서) 추가
 function fileChange(file){
 	var newFile = file;
-	// 파일(이미지, 문서) 추가
 	var ext = $(newFile).val().split('.')[1].toLowerCase(); // 파일의 확장자
 	var file = $(newFile).prop("files")[0];
 	blobURL = window.URL.createObjectURL(file);
@@ -936,29 +852,6 @@ function fileChange(file){
 			    addContent();
 			}
 		});
-		
-		
-		
-//		$("#viewerForm").ajaxForm({
-//			dataType: "text",
-//			url: "showViewer",
-//			success: function(jdata){
-		
-//		
-//				$("#write_bd .contentBox:last").find("iframe").attr("src","http://docs.google.com/viewer?url="+blobURL+"&embedded=true");
-//				$("#write_bd .viewerBg:last").css("display","none");							
-////				orderArr[order] = $(newFile).val().split("\\")[2];
-//				if($(newFile).val().split("\\")[2] == undefined){
-//					// 파이어폭스
-//					orderArr[curOrder] = $(newFile).val();
-//				} else {
-//					orderArr[curOrder] = $(newFile).val().split("\\")[2];
-//				}
-//				
-//				
-//				addContent();
-//			}
-//		}).submit();
 		
 		fileNum++;
 		$("#btn_addFile").append("<input type='file' class='contentFile' id='file"+fileNum+"' name='contents' onchange='fileChange(this)'/>");	
@@ -1019,38 +912,31 @@ function replaceSelectedText(replacementText) {
     }
 }
 
+// 모하람 작성 - 텍스트 bold로 변경
 function txtBold(){
 	var range = window.getSelection().getRangeAt(0);
 	console.log(range);
 	console.log(range.toString());
 	if(getSelectedNode().className.indexOf("txtBold") > -1){
-		// 선택한 부분에 이미 txtBold 클래스가 적용된 부분이 있을 경우
-		// 클래스 삭제
-		// 1. 
-//		console.log("클래스 이름: "+getSelectedNode().className);
-//		getSelectedNode().classList.remove("txtBold");
-		// 2. 선택된 부분 bold 해제
+		
 		var newNode = document.createElement("span");
 		newNode.setAttribute("class", "txtBoldRemove");
 		newNode.appendChild(range.extractContents());
-//		range.surroundContents(newNode);
 		range.insertNode(newNode);		
 		
 	} else {
 		var newNode = document.createElement("span");
 		newNode.setAttribute("class", "txtBold");
 		newNode.appendChild(range.extractContents());
-//		range.surroundContents(newNode);
 		range.insertNode(newNode);
 	}
 	
 }
 
+// 모하람 작성 - 텍스트 이탤릭 적용
 function txtItalic(){
 	var range = window.getSelection().getRangeAt(0);
 	if(getSelectedNode().className.indexOf("txtItalic") > -1){
-		// 선택한 부분에 이미 txtBold 클래스가 적용된 부분이 있을 경우
-		// 클래스 삭제
 		var newNode = document.createElement("span");
 		newNode.setAttribute("class", "txtItalicRemove");
 		newNode.appendChild(range.extractContents());
@@ -1060,17 +946,15 @@ function txtItalic(){
 		var newNode = document.createElement("span");
 		newNode.setAttribute("class", "txtItalic");
 		newNode.appendChild(range.extractContents());
-//		range.surroundContents(newNode);
 		range.insertNode(newNode);
 	}
 	
 }
 
+// 모하람 작성 - 텍스트 언더라인 적용
 function txtUnderline(){
 	var range = window.getSelection().getRangeAt(0);
 	if(getSelectedNode().className.indexOf("txtUnderline") > -1){
-		// 선택한 부분에 이미 txtBold 클래스가 적용된 부분이 있을 경우
-		// 클래스 삭제
 		var newNode = document.createElement("span");
 		newNode.setAttribute("class", "txtUnderlineRemove");
 		newNode.appendChild(range.extractContents());
@@ -1098,6 +982,7 @@ function getSelectedNode()
     }
 }
 
+// 이유라 작성 
 function addContent(){
 	$('#write_bd .contentBox').hover(function(){
     	$('.content_toolBoxes',this).css('top', - 40 );    //툴박스 위치
@@ -1116,6 +1001,7 @@ function getColorRange(){
 }
 
 
+// 이유라 작성 - 자동 완성 박스 위치 조정
 function moveAutoCompleteBox(){
 	var lastSpanOffset = $('#write_tagTxt span').last().offset().left;
 	var lastSpanWidth = $('#write_tagTxt span').last().width();
@@ -1126,6 +1012,7 @@ function moveAutoCompleteBox(){
 	});
 }
 
+// 이유라 작성 - 태그 hover 스타일 적용
 function tagHover_write(){
 	$(".card_img").hover(function(){
         $('div', this).addClass("card_hover");
@@ -1137,26 +1024,24 @@ function tagHover_write(){
 }
 
 function addProjClass(li){
-	// 자동 완성 목록에서 항목 클릭 시 관련 과목 영역에 추가
+	// 모하람 작성 - 자동 완성 목록에서 항목 클릭 시 관련 과목 영역에 추가
 	var newClass = li;
 	$(newClass).parent().parent().parent().find(".project_related_class").val($(newClass).find("span").html());
 	$(".autoClass").css("display","none");
 	$("input[name=cl_id]").val($(newClass).find(".classId").val());
-//	$(".cardWindow_write2").append("<input type='hidden' name='cl_id' value="+$(newClass).find(".classId").val()+">");
 }
 
 function addMember(li){
-	// 자동 완성 목록에서 항목 클릭 시 팀원 영역에 추가
+	// 모하람 작성 - 자동 완성 목록에서 항목 클릭 시 팀원 영역에 추가
 	var newMember = li;
 	$(newMember).parent().parent().parent().find(".teamMateName").val($(newMember).find("span").html());
 	var tmMemOrder = $(newMember).parent().parent().parent().find(".teamMateName").attr("data-sort");
-	console.log("팀원 순서: "+tmMemOrder);
 	$(".autoMember").css("display","none");
 	$(".cardWindow_write2").append("<input type='hidden' name='tmList["+tmMemOrder+"].m_id' value="+$(newMember).find(".memId").val()+">");
 }
 
 function autoCompleteMember(txt){
-	// 팀원 입력 시 이름 자동 완성
+	// 모하람 작성 - 팀원 입력 시 이름 자동 완성
 	var input = txt;
 	if($(input).val().trim() != ""){
     	$.ajax({
@@ -1177,14 +1062,7 @@ function autoCompleteMember(txt){
     				$(input).parent().find(".autoMember").css({
     					display:"block"
     				});
-//    				
-//    				$(".autoMemberArea").html(codes);
-//    				var currentTop = $(".autoMember").offset().top;
-//        			$(".autoMember").css({
-//        				display: "block"
-//        			});
-            		// moveAutoCompleteBox();
-        			// 자동 완성 목록 위치 변경: 현재 커서 위치에 맞게
+
     			}
     		}
     	});
@@ -1193,13 +1071,14 @@ function autoCompleteMember(txt){
 	}
 }
 
-
+// 이유라 작성
 function writeNavi(step){
 	$('.writeNavi a').removeClass('click');
 	$('#'+step).addClass("click");
 	writeStep(step);
 }
 
+// 이유라 작성
 function writeStep(step){
 	$('.writeNavi a').removeClass('click');
 	$('#'+step).addClass("click");
