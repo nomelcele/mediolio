@@ -5,6 +5,10 @@
 <link href="resources/css/search.css" rel="stylesheet" type="text/css"/>
 <script src="js/projectView.js"></script>
 
+
+<!-- 이유라 : 마크업  -->
+<!-- 오지은 : 데이터 뿌림 -->
+
 <div id="contentsWrap">
     <div class="cardWrap searchResultWrap">
         <p class="searchResult">

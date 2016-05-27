@@ -5,6 +5,11 @@
 <script type="text/javascript" src="js/projectView.js"></script>
 <script type="text/javascript" src="js/memberAction.js"></script>
 
+
+<!-- 이유라 : 마크업  -->
+<!-- 모하람 : 데이터 뿌림 (이미지/문서/미디어택/텍스트)-->
+<!-- 오지은 : 데이터 뿌림 (글제목/프로젝트 부가정보/팀원정보/댓글 등)-->
+
 <div id="contentsWrap">
 	<div class="cardWrap clear" id="modal_content">
         <div class="projectViewBox clear" id="projectViewBox_left">

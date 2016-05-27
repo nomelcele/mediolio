@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="js/msgModal.js"></script> 
 
+<!-- 이유라 : 마크업  -->
+<!-- 오지은 : 데이터 뿌림 -->
+
 <!-- 쪽지보내기 모달 -->
     <div class="modal" id="writeNoteWrap">
         <div class="modal_hd"  id="writeNoteWrap_hd">SEND MESSAGE

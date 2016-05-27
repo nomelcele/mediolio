@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
+
+
+<!-- 이유라 : 마크업  -->
+<!-- 박성준 : 데이터 뿌림 -->
+
 <div id="navigator">
     <p>나의 "좋아요" 리스트</p>
 </div>

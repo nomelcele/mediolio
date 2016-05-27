@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="js/note.js"></script> 
 
+
+<!-- 이유라 : 마크업  -->
+<!-- 오지은 : 데이터 뿌림 -->
+
 <div id="contentsWrap">
     <div class="rmcnWrap">
             <a class="btn_rmcn" id="btn_rmcnUp" href="#"></a>
