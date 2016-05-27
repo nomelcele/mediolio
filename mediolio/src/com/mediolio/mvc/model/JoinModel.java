@@ -15,7 +15,10 @@ import com.mediolio.email.EmailSender;
 import com.mediolio.mvc.dao.JoinDao;
 import com.mediolio.vo.MemberSkillVO;
 import com.mediolio.vo.MemberVO;
-
+/*
+ * ***** 박성준 작성 class
+ * ***** 로그인 및 회원가입, 임시비밀번호 전송
+ */
 
 
 
@@ -29,20 +32,9 @@ public class JoinModel {
 	@Autowired
 	private Email email;
 
-	@RequestMapping("/menu=password")
-	public ModelAndView gotoPassword(){
-		return new ModelAndView("/login/password");
-	}
-
-	@RequestMapping("/menu=nonlogin")
-	public ModelAndView gotoTestnonlogin(){
-		return new ModelAndView("/login/nonlogin");
-	}
-	
 	@RequestMapping(value="InsertJoinInfo", method = RequestMethod.POST)
 	public ModelAndView InsertJoinInfo(MemberVO mevo, HttpSession session){
 		// 회원가입
-		//int m_id= acvo.getM_id();
 		System.out.println(mevo.getM_id());
 		System.out.println(mevo.getM_mail());
 		System.out.println(mevo.getM_pw());
@@ -73,6 +65,7 @@ public class JoinModel {
 	
 	@RequestMapping(value = "DoubleInfo")
 	public ModelAndView DoubleInfo(String m_mail){
+		//중복검사
 		ModelAndView mav = new ModelAndView("jsonView");
 		System.out.println(m_mail);
 		String Isdouble = jdao.DoubleInfo(m_mail);
@@ -85,6 +78,7 @@ public class JoinModel {
 	
 	@RequestMapping(value = "LoginInfo")
 	public ModelAndView LoginInfo(String m_mail, String pw, HttpSession session){
+		//회원정보 조회
 		ModelAndView mav = new ModelAndView("jsonView");
 		MemberVO selectedPw = jdao.LoginInfo(m_mail);
 		if(selectedPw!=null){
@@ -104,6 +98,7 @@ public class JoinModel {
 	
 	@RequestMapping("sendEmailAction")
     public ModelAndView sendEmailAction (String m_mail) throws Exception {
+		//임시 비밀번호 변경
         ModelAndView mav = new ModelAndView("jsonView");
         MemberVO selectedPw = new MemberVO();
         selectedPw.setM_mail(m_mail);
