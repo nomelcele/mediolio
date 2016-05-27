@@ -1,5 +1,8 @@
-/* 오지은
- * header.jsp 의 id 'select_main'의 onchange 이벤트 */
+    
+	/*
+	 *  오지은 작성 - 검색 기능 관련 javascript
+	 * */
+
 
 //검색옵션 select 값 변경 시 호출되는 함수
 function selectChanged(){
@@ -32,6 +35,7 @@ function selectChanged(){
 	}
 }
 
+
 //과목 자동완성
 function autoRecommendClass(classname){
     if( classname.trim() != ""){
@@ -62,13 +66,14 @@ function autoRecommendClass(classname){
     }
 }
 
+//과목 클릭 시 검색페이지로 이동
 function searchbyClass(cl_id, cl_name){
 	location.href="searchC?cl_id="+cl_id+"&cl_n="+cl_name;
 }
 
 //검색 옵션에 따라 각각 다른 처리 컨트롤러로 이동
 function handlingSearch(option, keyword){
-	if(option == 'tag' ) {
+	if(option == 'tag' ) { //해시태그 검색 처리
 		if(keyword.length ==0) 		
 			$.jAlert({
 			    'title': '!!',
@@ -79,7 +84,7 @@ function handlingSearch(option, keyword){
 			  });
 		else location.href="searchH?key="+keyword;		
 	}
-	else if(option == 'title'){
+	else if(option == 'title'){ //글제목 검색 처리
 		if(keyword.length ==0) 
 			$.jAlert({
 			    'title': '!!',
@@ -93,7 +98,7 @@ function handlingSearch(option, keyword){
 			location.href="searchT?key="+keyword+"&ct="+ctgr;
 		}
 	}
-	else if(option == 'member'){
+	else if(option == 'member'){ //학우검색 처리
 		var skVal = $('.team_techWrap input:radio[name="skills"]:checked').val();
 		if(keyword.length == 0 && skVal === undefined) 
 			$.jAlert({
@@ -111,6 +116,7 @@ function handlingSearch(option, keyword){
 	}
 }
 
+//선택한 카테고리에 대한 int값 리턴
 function returnCategoryVal(text){
 	var cateIntVal = "0";
 	if(text == "게임") cateIntVal = "1";
@@ -122,7 +128,9 @@ function returnCategoryVal(text){
 	return cateIntVal;
 }
 
+
 $('document').ready(function(){
+	
 	//검색창에 검색중인 옵션 표시
 	$('#text_main').val($('.searchResult .searchKey').text());
 	var searched_option = $('.searchResult .searchType').text();
@@ -146,16 +154,7 @@ $('document').ready(function(){
 		
 		handlingSearch(option_value, keyword.value);
 	});
-	
-/*	if(isFireFox()) {
-	    element.bind("keypress", function (event) {
-	        var keyCode = event.which || event.keyCode;
-	        if(keyCode === 13 || keyCode === 9) { // 13: enter, 9: tab
-	        	alert("키키");
-	        }
-	    })
-	}*/
-	
+
 	var select = document.getElementById('select_main');
 	var keyword = document.getElementById('text_main');
 	
@@ -173,9 +172,9 @@ $('document').ready(function(){
 				    'theme' : 'red',
 				    'size': 'xsm'
 				  });
-			else handlingSearch(option_value, keyword.value);
+			else handlingSearch(option_value, keyword.value); //엔터 누르면 핸들러 호출
 		}
-		else if(option_value == 'subject'){
+		else if(option_value == 'subject'){ // 검색창에 타이핑 할 때마다 자동완성 처리함수 호출
 			autoRecommendClass(keyword.value, option_value);
 		}
 	});

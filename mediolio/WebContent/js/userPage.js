@@ -1,5 +1,12 @@
 $(function(){
     
+	/* userPage.jsp에 관련된 javascript
+	 *  이유라 - UI 관련 javascript
+	 *  오지은 - 기능 관련 javasciript
+	 * */
+	
+	
+	//이유라 작성 부분
     //페이지처리 ul 3줄이상(240)이면 뜨도록
     $(".gallery").hover(function(){
         if( $('ul',this).height() >= 240 ){
@@ -15,11 +22,13 @@ $(function(){
     });
     
     $(".gallery_right").on('click',function(){
-        
-        
+
         return false;
     })
     
+    
+
+    // 오지은 작성 부분 - 팔로우/팔로우취소
     $("#btn_addFriend").on('click',function(){
         if($(this).attr('data-click-state') == 0) {//친추 안되어 있는 상태. 팔로하고 싶을 때 클릭
         	$.ajax({

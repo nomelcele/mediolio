@@ -1,12 +1,21 @@
 var usr_name;
 var usr_id;
 
+/* projectView.jsp 관련 javascript
+ *  이유라 - UI 관련 javascript
+ *  오지은 - 기능 관련 jvavasciript
+ * */
+
+
 $('document').ready(function(){
     
+	//이유라 작성
     $('.btn_userPop').on('click', function(){	
         return false; 
     })
     
+    //오지은 작성 - 팝업메뉴에서 각 메뉴 클릭시 발생하는 이벤트
+    //쪽지보내기 클릭
     $('.userPopWrap .msg').unbind("click").on('click', function(){
     	if($('#bellWrap').length) noteModalOpen(usr_id, usr_name);
     	else {
@@ -19,6 +28,8 @@ $('document').ready(function(){
     		  });
     	}
     });
+    
+    //오지은 작성 - 히스토리 가기 클릭 
     $('.userPopWrap .userPop_userHt').unbind("click").on('click', function(){
 		$.jAlert({
 		    'title': '!!',
@@ -40,6 +51,7 @@ $('document').ready(function(){
 })
 
 
+//이유라 작성 - 팝업메뉴 보이기
 function userPop(event, aObj, m_id){
 	usr_name = $(aObj).text();
 	usr_id = m_id;

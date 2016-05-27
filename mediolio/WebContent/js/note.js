@@ -1,3 +1,11 @@
+
+/*  쪽지 관련
+ *  이유라 - UI 관련 javascript
+ *  오지은 - 기능 관련 jvavasciript
+ * */
+
+
+//오지은 작성 - 보낸 메세지 삭제
 function deleteMsgSent($div){
 	$.ajax({
 		url: "deleteMsgSent",
@@ -10,6 +18,7 @@ function deleteMsgSent($div){
 	});
 }
 
+//오지은 작성 - 받은 메세지 삭제
 function deleteMsgReceived($div){
     $.ajax({
 		url: "deleteMsgReceived",
@@ -23,10 +32,12 @@ function deleteMsgReceived($div){
 }
 
 $(function(){	
+	
+	//오지은 작성 - 삭제버튼 눌렀을 때
 	$(document).unbind("click").on('click', '.btn_deleteNote', function(){
 		$msg = $(this).closest('.noteWrap');
 		
-		if($(this).hasClass('receiveNote')){
+		if($(this).hasClass('receiveNote')){ //받은 쪽지일 때 - deleteMsgReceived() 호출
 		    $.jAlert({
 		        'title': '!!',
 		        'content': '정말 삭제하시겠습니까?',
@@ -40,7 +51,7 @@ $(function(){
 		        		  }, 
 		                 { 'text': 'NO', 'theme' : 'red'}]
 		      });
-		}else{
+		}else{ //보낸 쪽지일 때 - deleteMsgSent() 호출
 		    $.jAlert({
 		        'title': '!!',
 		        'content': '정말 삭제하시겠습니까?',
@@ -57,6 +68,8 @@ $(function(){
 		}
 	});
 	  
+	
+	//이유라 작성
     $('#card_note_hd a').on('click',function(){
         $('#card_note_hd a').css({
             background: '#29AE5D',
@@ -69,7 +82,8 @@ $(function(){
     });
 
     
-    //받은쪽지함 보낸쪽지함 탭
+    // 이유라 작성 - 받은쪽지함 탭 클릭 시 UI변화
+    // 오지은 ajax 추가
     $('.btn_receiveView').on('click',function(){
     	if($('.receiveNoteWrap').length){
     		//내용물이 이미 존재하면 다시 받아오지 않음
@@ -89,6 +103,9 @@ $(function(){
     	}
     });
     
+    
+    // 이유라 작성 - 보낸쪽지함 탭 클릭 시 UI변화
+    // 오지은 ajax 추가
     $('.btn_sendView').on('click',function(){
     	if($('.sendNoteWrap').length){
     		//내용물이 이미 존재하면 다시 받아오지 않음
@@ -108,6 +125,8 @@ $(function(){
     	}
     });
     
+    
+    // 오지은 작성 - ajax로 받아온 메세지 목록들을 html 태그로 만들어 반환하는 함수
     function returnMsgs(msgs, type){
     	var msg = '';
     	$.each(msgs, function(index, entry){
@@ -142,6 +161,7 @@ $(function(){
     	return msg;
     }
     
+    //이유라 작성
     //쪽지 내용 더보기/숨기기 버튼 띄우기
     $(document).on('mouseenter','.noteWrap',function(){
     	$('.noteMore',this).fadeIn(300).show();  
