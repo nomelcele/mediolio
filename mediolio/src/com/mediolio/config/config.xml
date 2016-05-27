@@ -15,7 +15,6 @@
   		<typeAlias type="com.mediolio.vo.PushVO" alias="psvo"/>
   		<typeAlias type="com.mediolio.vo.PushMsgVO" alias="pmvo"/>
   		<typeAlias type="com.mediolio.vo.ProjectDetailVO" alias="pdvo"/>
-  		<typeAlias type="com.mediolio.vo.ProjectWriterVO" alias="pwvo"/>
   		<typeAlias type="com.mediolio.vo.FriendVO" alias="fvo"/>
   		<typeAlias type="com.mediolio.vo.UserProjectsVO" alias="upvo"/>
   		<typeAlias type="com.mediolio.vo.BranchVO" alias="brvo"/>

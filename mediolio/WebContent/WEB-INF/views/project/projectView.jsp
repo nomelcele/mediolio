@@ -134,11 +134,11 @@
 		        <h2>${writer.m_introduce }</h2>
 		        <div class="lineWrap clear">
                     <span>관심 분야</span>
-                    <h3>${writer.m_interesting1_text }, ${writer.m_interesting2_text }</h3>
+                    <h3>${writer.m_interestingText1 }, ${writer.m_interestingText2 }</h3>
                 </div>
                 <div class="lineWrap clear">
                     <span>보유 기술</span>
-                    <h3>JAVA, JAVASCRIPT, Photoshop, Illustrator</h3>
+                    <h3>${writer.skills }</h3>
                 </div>
                 <h4>관련 히스토리</h4>
                 <h5><a href="#">JUICY 반응형 웹사이트</a></h5>

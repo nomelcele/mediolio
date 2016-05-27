@@ -6,7 +6,7 @@ package com.mediolio.vo;
 
 public class FriendVO {
 
-	private int m_id, m_interesting1, m_interesting2;
+	private int m_id, m_interesting1, m_interesting2, like_or_not;
 	private String m_studentID, m_name, m_introduce, m_interestingText1, m_interestingText2, projects, skills;
 	
 	public String getProjects() {
@@ -69,5 +69,11 @@ public class FriendVO {
 	public void setSkills(String skills) {
 		this.skills = skills;
 	}
-
+	public int getLike_or_not() {
+		return like_or_not;
+	}
+	public void setLike_or_not(int like_or_not) {
+		this.like_or_not = like_or_not;
+	}
+	
 }

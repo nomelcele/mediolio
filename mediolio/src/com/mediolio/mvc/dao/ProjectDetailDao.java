@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mediolio.vo.ContentVO;
+import com.mediolio.vo.FriendVO;
 import com.mediolio.vo.HashtagVO;
 import com.mediolio.vo.Member_actionVO;
 import com.mediolio.vo.ProjectDetailVO;
-import com.mediolio.vo.ProjectWriterVO;
 import com.mediolio.vo.ReplyVO;
 import com.mediolio.vo.TeamMemberVO;
 
@@ -36,7 +36,7 @@ public class ProjectDetailDao {
 	}
 
 	// 오지은 작성 - 프로젝트 작성자 정보 리턴 - 이름, 관심분야, 좋아요 여부 등
-	public ProjectWriterVO projectDetailRelatedMember(Map<String, Integer> map) {
+	public FriendVO projectDetailRelatedMember(Map<String, Integer> map) {
 		return st.selectOne("pd.projectDetailRelatedMember", map);
 	}
 	
