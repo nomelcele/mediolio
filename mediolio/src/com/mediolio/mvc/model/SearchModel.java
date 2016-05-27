@@ -154,9 +154,9 @@ public class SearchModel {
 		
 		if(intCategory.equals("1")) strCategory = "게임";
 		else if(intCategory.equals("2")) strCategory = "웹&앱";
-		else if(intCategory.equals("3")) strCategory = "디자인";
-		else if(intCategory.equals("4")) strCategory = "영상&사운드";
-		else if(intCategory.equals("5")) strCategory = "3D";
+		else if(intCategory.equals("3")) strCategory = "영상&사운드";
+		else if(intCategory.equals("4")) strCategory = "3D";
+		else if(intCategory.equals("5")) strCategory = "디자인";
 		else if(intCategory.equals("6")) strCategory = "기타";
 		
 		return strCategory;
