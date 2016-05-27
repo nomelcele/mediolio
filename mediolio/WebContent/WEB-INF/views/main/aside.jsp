@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="js/aside.js"></script>
+
+<!-- 이유라 : 마크업  -->
+<!-- 박성준 : 데이터 뿌림 -->
+
 <div id="aside">
     <div id="logoWrap">
 		<a href="main"><img src="resources/images/mediolio.png"></a>
@@ -27,13 +31,7 @@
         			</ul>
 			</c:otherwise>
 		</c:choose>
-<!--     	<div id="user_idWrap"><a href="#" id="user_id">12LEEYURA</a></div>
-        <ul>
-        	<li id="myPf"><a href="#" class="indent">MyPortfolio</a></li>
-            <li id="likePf"><a href="#" class="indent">Like</a></li>
-            <li id="follow"><a href="#" class="indent">Follow</a></li>
-            <li id="message"><a href="#" class="indent">Message</a></li>
-        </ul> -->
+
     </div><!--//userBox-->
     <c:choose> 
 			<c:when test="${sessionScope.mev == null }">
@@ -45,9 +43,7 @@
     			</div><!--//uploadWrap-->
 			</c:otherwise>
 		</c:choose>
-<!--     <div id="uploadWrap">
-    	<a id="uploadPf" onclick="location='addProjectForm'; return false;" href="#">UPLOAD PORTFOLIO</a>
-    </div>//uploadWrap -->
+
     <div class="asideWrap categoryTitle">
     	<p>프로젝트</p>
     </div><!--//categoryTitle-->
@@ -68,44 +64,24 @@
         <ul class="nav_category">
     		<li class="nav_group">
     			<div class="nav_title" id="ct_game"><span></span>GAME</div>
-<!--             	<ul class="nav_sub">
-            		<li><a href="#" class='selsub'>기획</a>
-                    <li><a href="#" class='selsub'>개발</a>
-                </ul> -->
             </li>
             
             <li class="nav_group">
     			<div class="nav_title" id="ct_webApp"><span></span>WEB &amp; APP</div>
-<!--             	<ul class="nav_sub">
-            		<li><a href="#" class='selsub'>기획</a>
-            		<li><a href="#" class='selsub'>개발</a>
-                </ul> -->
             </li>
             
             <li class="nav_group">
     			<div class="nav_title" id="ct_video"><span></span>VIDEO  &amp;  SOUND</div>
-<!--             	<ul class="nav_sub">
-            		<li><a href="#" class='selsub'>시나리오</a>
-                    <li><a href="#" class='selsub'>연출</a>
-                    <li><a href="#" class='selsub'>촬영</a>
-                    <li><a href="#" class='selsub'>OAP</a>
-                    <li><a href="#" class='selsub'>SOUND</a>
-                </ul> -->
             </li>
 
             <li class="nav_group">
     			<div class="nav_title" id="ct_3d"><span></span>3D</div>
-<!--             	<ul class="nav_sub">
-            		<li><a href="#" class='selsub'>모델링</a>
-                    <li><a href="#" class='selsub'>애니메이션</a>
-                </ul> -->
             </li>  
             
             <li class="nav_group">
     			<div class="nav_title" id="ct_design"><span></span>DESIGN</div>
             </li>
 
-            
             <li class="nav_group">
     			<div class="nav_title" id="ct_misc"><span></span>MISC</div>
             </li>

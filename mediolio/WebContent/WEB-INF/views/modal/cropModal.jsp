@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
+<!-- 오지은 작성 -->
+<!-- 글 작성 시 이미지 크롭 모달(마크업+JCrop 오픈소스 일부 기능) -->
+
 <script type="text/javascript">
 
 	$(function($) {

@@ -3,9 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>MEDIOLIO</title>
-
 <link href="resources/css/write.css" rel="stylesheet" type="text/css"/>
 <link href="resources/css/write2.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" media="screen" type="text/css" href="resources/css/colorpicker.css" />
@@ -18,6 +15,14 @@
 <script type="text/javascript" src="js/jQuery/jquery.form.js"></script>
 <script type="text/javascript" src="js/crop.js"></script> 
 </head>
+
+
+
+<!-- 이유라 : 마크업  -->
+<!-- 모하람 : 데이터 뿌림 -->
+
+
+
 <body>
 <form id="addProjectForm" action="addProject" method="post" enctype="multipart/form-data">
 		<input type="hidden" id="orderArr" name="orderArr"> 

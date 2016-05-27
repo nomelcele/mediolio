@@ -4,6 +4,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link href="resources/css/friend.css" rel="stylesheet" type="text/css"/>    
 <script src="js/friend.js"></script>
+
+
+<!-- 이유라 : 마크업  -->
+<!-- 오지은 : 데이터 뿌림 -->
+
+
 <!--<div id="navigator"></div>-->
 <div id="contentsWrap">
    <div class="rmcnWrap">

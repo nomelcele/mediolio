@@ -37,6 +37,9 @@
 <script type="text/javascript">
 
 </script>
+
+<!-- 이유라 : 마크업  -->
+
 <div id="header">
 	<div id="headerWrap">
 		<c:choose>
