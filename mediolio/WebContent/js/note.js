@@ -1,7 +1,7 @@
 
 /*  쪽지 관련
  *  이유라 - UI 관련 javascript
- *  오지은 - 기능 관련 jvavasciript
+ *  오지은 - 기능 관련 javasciript
  * */
 
 

@@ -1,5 +1,10 @@
 $('document').ready(function(){
-    
+
+	/*  각종 모달에서 행해지는 액션을 처리하는 javascript
+	 *  이유라 - UI 관련 javascript
+	 *  모하람/박성준/오지은 - 기능 관련 javasciript
+	 * */
+	
     //모달 닫기-클래스
 	$('.modal_bg, .modal_scroll').click(function(e) {   
 		if( !$(e.target).is( $('.modal_scroll').find('*')) &&  !$(e.target).is( $('.modal_bg2').find('*')) ) {
@@ -77,10 +82,7 @@ function likeCategoryModalOpen(){
     
     $('.modal_bg').hide();
     $('.modal_bg2, #modal_likeCategory').show();
-/*    $('#btn_likeCategory').on('click',function(){
-        $('#modal_likeCategory, .modal_bg2').hide();
-        $('.modal_bg').show();
-    })*/
+
     
     $('#btn_likeCategory').on('click',function(){
         $('#modal_likeCategory, .modal_bg2').hide();
@@ -210,64 +212,16 @@ function writeDCategoryModalOpen(){
 //}
 
 
-//인덱스 모달 추가
-function contentModalOpen(a, type){
-	$('body').addClass('preventScroll');
-    $('#modal_content').parents('.modal_bg').animate({ scrollTop: 0 })
-    
-    $('.modal').css({ 
-        position:'static',
-        left:0,
-        top:0
-    });
-    $(".project_loading").css("display","block");
-
-	var anchor = a;
-    
-	var open_p_id;
-	var open_m_id;
-	
-	if(type=="index"){
-/*		open_p_id = $(anchor).closest(".cardWrap").find(".projectId").val();
-		open_m_id = $(anchor).closest(".cardWrap").find(".memberId").val();*/
-	}else if(type=="friend"){
-		open_p_id = (($(anchor).attr('href')).split('='))[1];
-		open_m_id = $(anchor).closest("li").find(".memberId").val();
-	}else if(type=="myProj"){
-		open_p_id = (($(anchor).attr('href')).split('='))[1];
-		open_m_id = $('#contentsWrap').find('.memberId').val();
-	}else if(type=="likeProj"){
-		var href= $(anchor).attr('href');
-		open_p_id = href.substr(href.indexOf("=")+1, 1);
-		open_m_id = href.substr(href.lastIndexOf("=")+1, 1);
-	}
-	
-	$.ajax({
-		url : "projectView",
-		type : "POST",
-		data : {
-			p_id: open_p_id, 
-			m_id: open_m_id
-		},
-		success : function(data) {
-			$('.modal_bg').css({ overflowY:'scroll'});
-		    $('.modal_bg, #modal_content, #modal_content_userInfo').show();
-
-		}
-	});
-	
-    $(".project_loading").css("display","none");
-
-}
 
 
-//쪽지보내기 모달
+//(이유라+오지은) 쪽지보내기 모달 열기
 function noteModalOpen(send_to, send_to_name){
 	if(send_to==''){
 		send_to = 0;
 		send_to_name='';
 	}
 	
+	//ajax 오지은 작성
 	$.ajax({
 		url : "msgModalOpen",
 		type : "POST",
@@ -275,11 +229,11 @@ function noteModalOpen(send_to, send_to_name){
 		success : function(data) {
 			$("#modalBox2").html(data);
 			location.href="#msgSend";
-			//console.log('success : ' + step);
 			
-			$('body').addClass('preventScroll');
-		    $('.modal_bg, #writeNoteWrap').show();
+			$('body').addClass('preventScroll'); //이유라
+		    $('.modal_bg, #writeNoteWrap').show(); //이유라
 		    
+		    //오지은
 		    if(send_to_name == ''){
 				//보내는 대상을 직접 입력하는 쪽지일 경우
 		    	$("#writeNoteWrap #input_noteTo" ).prop('disabled', false);
@@ -288,11 +242,12 @@ function noteModalOpen(send_to, send_to_name){
 		    	$("#writeNoteWrap #input_noteTo" ).prop('disabled', true);
 		    }
 		    
-		    
+		    //오지은
 			$('#btn_sendNote').on('click', function(){
 				msgSend();
 			});
 			
+			//이유라
 		    $('.modal_bg2').on('click',function(){
 		    	$('.modal_bg, .modal').hide();
 		    });
@@ -313,27 +268,7 @@ function pwModalOpen() {
 	})
 
 }
-/*$(function(){
-	$("#reply_form textarea").keypress(function(e){
-	    if(e.which == 13) {
-	    	submitReply();  // 이벤트 실행
-	    }   
-	});
-});*/
-/*function handleEnter (field, event, num) {
-    // 눌려진 키 코드를 가져온다.
-    var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;   
 
-    // Enter 키가 눌린 경우
-    	if (keyCode == 13) {
-    		event.keyCode = null;
-            	if(num == 1){
-            		if($('#writeReplyWrap textarea').val()!='')
-            		submitReply();// 엔터키가 눌렸을 때 처리할 코드
-                }
-        }
-
-}*/
 
 function modalScroll(){
     var currentTop = $('#modal_content').offset().top;

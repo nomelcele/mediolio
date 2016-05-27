@@ -1,12 +1,19 @@
-//오지은 - 좋아요, 팔로우, 댓글달기
+
+
+	/*  좋아요, 팔로우, 댓글달기에 관련한 javascript
+	 *  오지은 작성
+	 * */
 
 $('document').ready(function(){
+	//댓글 지우기 버튼 클릭시
 	$('#modal_ft_content').unbind("click").on('click', '.btn_deleteReply', function(){
 		deleteReply($(this).closest('.replyContentWrap'));
 	});
+	//프로젝트 "좋아요" 버튼 클릭시
 	$('#modal_hd_content').on('click', '.cancelLikeProject', cancelLikeProject);
 	$('#modal_hd_content').on('click', '.likeProject', likeProject);
 	
+	//팔로우하기 버튼 클릭시
 	$('#modal_content_userInfo').on('click', '.followMember', followMember);
 	$('#modal_content_userInfo').unbind("click").on('click', '.unfollowMember', function(){
 	    $.jAlert({
@@ -99,6 +106,7 @@ function cancelLikeProject(){
  * ***** 댓글 관련 시작 *****
  * *********************
  */
+//댓글 등록 버튼 클릭시 호출
 function submitReply(){
 	/*$('#writeReplyWrap textarea').val().replace(/\n/g, '<br>');*/ 
 	if(!$.trim($("#writeReplyWrap textarea").val())){
@@ -127,6 +135,7 @@ function submitReply(){
 	}
 }
 
+//댓글 삭제 버튼 클릭시 호출
 function deleteReply($div){
     $.jAlert({
         'title': '!!',
@@ -151,11 +160,10 @@ function deleteReply($div){
       });
 }
 
+
+//등록한 댓글을 html로 가공하는 함수
 function returnReplyList(m_id, m_studentID, m_name, r_text, r_date, r_id){
-/*	var resultDateTime = r_date;
-	var dateArr = resultDateTime.split(" ");
-	var date = dateArr[0].replace(/-/gi, ".");
-	var time = dateArr[1].substring(0, dateArr[1].lastIndexOf(":"));*/
+
 	var inserted = '<div class="replyContentWrap">'
 							+'<p>'
 								+'<a href="#">'+m_studentID+' '+m_name+'</a>'

@@ -1,8 +1,19 @@
+
+/*  팔로우/팔로잉 페이지 관련 javascript
+ *  이유라 - UI 관련 javascript
+ *  오지은 - 기능 관련 javasciript
+ * */
+
+
 $(document).ready(function(){
+	
+	//이유라 작성 - 탭 클릭 시 UI 변화
     $('#friendTab_following').addClass("friendTabClick");
     $("#friendWrap_bd_following").show();
     $("#friendWrap_bd_follower").hide();
     
+    
+    //오지은 작성 - 팔로우 삭제 버튼 눌렀을 때 cancelFollow() 호출
     $(document).unbind("click").on('click', '.btn_cancelFollow', function(){
     	var liObj = $(this).closest('li');
 	    $.jAlert({
@@ -24,12 +35,15 @@ $(document).ready(function(){
     $('#friendTab_following').on('click',function(){
     	if($('#friendWrap_bd_following').find('li').length || $('#friendTab_following').find('span').text() == '0'){
     		//내용물이 이미 존재하면 다시 받아오지 않음
-            $('.friendTab').removeClass("friendTabClick");
+            
+    		//이유라 작성
+    		$('.friendTab').removeClass("friendTabClick");
             $("#friendWrap_bd_follower").hide();
             $("#friendWrap_bd_following").show();
             $(this).addClass("friendTabClick");
     	}
     	else{
+    		//ajax 오지은 작성
     		$.ajax({
     			url : "getFollowingList",
     			type : "POST",
@@ -37,6 +51,7 @@ $(document).ready(function(){
     			success : function(data) {
     				$('#friendWrap_bd_following ul').empty().append(returnFriendList(data.list, "following"));		
     	            
+    				//이유라 작성
     				$('.friendTab').removeClass("friendTabClick");
     	            $("#friendWrap_bd_follower").hide();
     	            $("#friendWrap_bd_following").show();
@@ -50,12 +65,15 @@ $(document).ready(function(){
     $('#friendTab_follower').on('click',function(){
     	if($('#friendWrap_bd_follower').find('li').length || $('#friendTab_follower').find('span').text() == '0'){
     		//내용물이 이미 존재하거나 follower 수가 0이면 받아오지 않음
-            $('.friendTab').removeClass("friendTabClick");
+
+    		//이유라 작성
+    		$('.friendTab').removeClass("friendTabClick");
             $("#friendWrap_bd_following").hide();
             $("#friendWrap_bd_follower").show();
             $(this).addClass("friendTabClick");
     	}
     	else{
+    		//ajax 오지은 작성
     		$.ajax({
     			url : "getFollowerList",
     			type : "POST",
@@ -63,6 +81,7 @@ $(document).ready(function(){
     			success : function(data) {
     				$('#friendWrap_bd_follower ul').empty().append(returnFriendList(data.list, "follower"));
     	            
+    				//이유라 작성
     				$('.friendTab').removeClass("friendTabClick");
     	            $("#friendWrap_bd_following").hide();
     	            $("#friendWrap_bd_follower").show();
@@ -73,6 +92,7 @@ $(document).ready(function(){
     });
 });
 
+//오지은 작성 - 팔로우 취소 눌렀을 때 처리하는 ajax
 function cancelFollow($li){
 	$.ajax({
 		url: "followCancel",
@@ -85,6 +105,7 @@ function cancelFollow($li){
 	});
 }
 
+//오지은 작성 - 팔로우/팔로워 탭을 눌렀을 때 동적으로 받아온 팔로워 목록을 html로 가공하여 리턴하는 함수
 function returnFriendList(list, type){
 	var aRow='';
 	$.each(list, function(index, entry){

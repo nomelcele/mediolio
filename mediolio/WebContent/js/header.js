@@ -1,15 +1,17 @@
-/*
- *	websocket 시작    **********************
- * (notification 기능) *********************
- */
+
+
+	/*  푸시알림을 위한 Websocket 관련 javascript
+	 *  오지은 작성
+	 * */
+
 	var websocket;
 
+	//헤더에 종모양 아이콘(#bellIcon)이 있을 때(=로그인했을때) 객체 생성
 	function init() {
 		output = document.getElementById("bellIcon");
 	}
 	
 	function send_message(m_id) {
-		console.log("m_id : " + m_id);
 		// 웹소켓 생성
 		// spring - "ws://localhost:8089/mediolio/websocket?id="+m_id;
 		// 서버에 올릴 용 - "ws://52.79.195.100:8080/mediolio/websocket?id="+m_id;
@@ -21,18 +23,19 @@
 			websocket.send("login");
 		};
 		
-		//메시지가 왔을 때 호출되는 메소드
+		//서버에서 메시지가 왔을 때 호출되는 메소드
 		websocket.onmessage = function(evt) {
+			//알림 갯수 표시
 			if(evt.data != '0') $('#bellIcon').append('<span id="bellNum">'+evt.data+'</span>');
 		};
 		
 		//전송 에러 발생
 		websocket.onerror = function(evt) {
-		
+			disconnect();
 		};
 		//WebSocket 연결 끊기
 		websocket.onclose = function(evt){
-		
+			disconnect();
 		};
 	}
 
@@ -42,7 +45,8 @@
         	websocket = null;
         }
 	}
-
+	
+	//리스너 등록
 	window.addEventListener("load", init, false);
 
 /*
@@ -84,7 +88,8 @@ function timeGapCalculate(pushed_date){
     return timeDisplay;
 }
 
-//푸쉬알림 목록 받아오기
+
+//메세지 알림 목록 받아와 뷰에 표시
 function getMsgNotifications(){
 	$.ajax({
 		url: "getMsgNotifications",
@@ -111,7 +116,7 @@ function getMsgNotifications(){
 	
 }
 
-//팔로우 관련 알림
+//팔로우 관련 알림 목록 받아와 뷰에 표시
 function getFollowNotifications(){
 	$.ajax({
 		url: "getFollowNotifications",
@@ -136,7 +141,7 @@ function getFollowNotifications(){
 	})
 }
 
-//댓글 알림
+//댓글 알림 목록 받아와 뷰에 표시
 function getReplyNotifications(){
 	$.ajax({
 		url: "getReplyNotifications",
@@ -163,20 +168,25 @@ function getReplyNotifications(){
 }
 
 $(function(){
+	//로그인 했을 때  websocket 시작
 	var login=$('#hidden_m_id').val();
 	if(typeof login != 'undefined') send_message(login);
 	
+	//로그아웃 버튼 클릭시
 	$('#btn_logout').click(function(){
 		disconnect();
 		location.href="logout";
 	});
 	
+	//알림 쪽지목록 클릭했을 때
 	$(document).on('click', '.bell_msg', function(){
 		//쪽지페이지 열기
 		openMyMsgPage();
 		//해당 쪽지 읽음 처리
 		
 	});
+	
+	//알림 팔로우목록 클릭했을 때
 	$(document).on('click', '.bell_follow', function(){
 		//친구 페이지 열기
 		openMyFriendPage();
