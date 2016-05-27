@@ -1,5 +1,9 @@
 package com.mediolio.vo;
 
+/*
+ *  DB I/O에 사용 - 데이터를 담는 객체 class
+ * */
+
 public class MemberVO {
 	private int m_id;
 	private String m_mail, m_pw, m_name, m_gender,

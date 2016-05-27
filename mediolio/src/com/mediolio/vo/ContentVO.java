@@ -1,5 +1,9 @@
 package com.mediolio.vo;
 
+/*
+ *  DB I/O에 사용 - 데이터를 담는 객체 class
+ * */
+
 public class ContentVO {
 	private int c_id, p_id, c_order;
 	private String c_type, c_value;

@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+/*
+ *  DB I/O에 사용 - 데이터를 담는 객체 class
+ * */
+
 public class BranchVO {
 	private int br_id, ht_id, br_public;
 	private String br_title, br_img1, br_img2, br_img3, br_text, br_date, historyTitle;

@@ -1,5 +1,9 @@
 package com.mediolio.vo;
 
+/*
+ *  DB I/O에 사용 - 데이터를 담는 객체 class
+ * */
+
 public class UserProjectsVO {
 
 	private int project_id, m_id, category_id;

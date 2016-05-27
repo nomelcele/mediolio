@@ -1,5 +1,9 @@
 package com.mediolio.vo;
 
+/*
+ *  DB I/O에 사용 - 데이터를 담는 객체 class
+ * */
+
 public class HashtagVO {
 	private int h_id, p_id;
 	private String h_value;

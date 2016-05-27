@@ -1,5 +1,9 @@
 package com.mediolio.vo;
 
+/*
+ *  DB I/O에 사용 - 데이터를 담는 객체 class
+ * */
+
 public class ReplyVO {
 	private int r_id, m_id, p_id;
 	private String r_text, r_date, m_studentID, m_name;

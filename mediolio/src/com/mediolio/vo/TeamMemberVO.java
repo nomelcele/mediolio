@@ -2,6 +2,10 @@ package com.mediolio.vo;
 
 import java.util.List;
 
+/*
+ *  DB I/O에 사용 - 데이터를 담는 객체 class
+ * */
+
 public class TeamMemberVO {
 	int tm_id, p_id, m_id;
 	String tm_role, tm_detail, m_studentID, m_name;
