@@ -35,7 +35,7 @@
 		};
 		//WebSocket 연결 끊기
 		websocket.onclose = function(evt){
-			disconnect();
+
 		};
 	}
 
