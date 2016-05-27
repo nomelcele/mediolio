@@ -1,5 +1,11 @@
 $('document').ready(function(){
 	
+    
+	/* header, aside.jsp 에 관련된 공통 javascript
+	 *  이유라 - UI 관련 javascript
+	 *  오지은 - 기능 관련 javasciript
+	 * */
+	
 	
 	// 카테고리 시작
 	var wHeight = $(window).height();
@@ -36,11 +42,7 @@ $('document').ready(function(){
 		$('span', this).not('.nav_selected span').css('background-position','left center');
 		$(this).not('.nav_selected').removeClass('choose_menuText');
 	})
-//	
-//	$(".categoryWrap").mCustomScrollbar();
-//	// 카테고리 끝
-	
-	
+
 	
 	// 검색_카테고리변경
 	$('select').niceSelect();
@@ -185,7 +187,8 @@ $('document').ready(function(){
     })
 });
 
-//aside에서 팔로우 아이콘 누르거나, 알림 말풍선에서 도착한 팔로 알림 눌렀을 때
+
+//오지은 작성 부분 - aside에서 팔로우 아이콘 누르거나, 알림 말풍선에서 도착한 팔로 알림 눌렀을 때
 function openMyFriendPage(){
 	$.ajax({
 		url: "follow",
@@ -196,7 +199,7 @@ function openMyFriendPage(){
 	});
 }
 
-//aside에서 메세지 아이콘 누르거나, 알림 말풍선에서 도착한 메세지 눌렀을 때
+//오지은 작성 부분 - aside에서 메세지 아이콘 누르거나, 알림 말풍선에서 도착한 메세지 눌렀을 때
 function openMyMsgPage(){
 	$.ajax({
 		url: "message",
