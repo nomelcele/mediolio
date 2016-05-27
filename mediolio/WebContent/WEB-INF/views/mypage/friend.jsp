@@ -27,43 +27,51 @@
         <div class="friendwrap_content friendwrap_bd">
             <div class="friendWrap_bd_content" id="friendWrap_bd_following">
                 <ul>
-                <c:forEach var="a" items="${list }">
-                    <li>
-                        <p class="friendList_id">
-                        	<input type="hidden" value="${a.m_id }" class="memberId"/>
-                            <a href="userpage?usr_id=${a.m_id }">${a.m_studentID } ${a.m_name }</a>
-                            <input type="button" value="X" class="btn_cancelFollow"/>
-                        </p>
-                        <p class="friendList_intro">${a.m_introduce }</p>
-                        <p class="friendList_like">관심분야 : 
-                        	<span>
-                        	<c:if test="${fn:length(a.m_interestingText1) ne 0}">
-                        		${a.m_interestingText1 }
-                        		<c:if test="${fn:length(a.m_interestingText2) ne 0}">
-                        			, ${a.m_interestingText2 }
-                        		</c:if>
-                        	</c:if>
-                        	</span>
-                        </p>
-                        <div class="friendList_project">
-                        	<c:set var="projects" value="${a.projects }"/>
-                        	<c:if test="${!empty projects }">
-	                        	<c:set var="projectArr" value="${fn:split(projects, '/') }"/>
-	                        	<c:forEach var="id_img_set" items="${projectArr }">
-	                        		<c:set var="id_img_arr" value="${fn:split(id_img_set, ',') }"/>
-	                        		<c:choose>
-	                        			<c:when test="${fn:length(id_img_arr) eq 1}">
-	                        				<a href="projectView?p_id=${id_img_arr[0] }&m_id=${a.m_id }"><img src="resources/images/default.png" width="80" height="80"/></a>
-	                        			</c:when>
-		                        		<c:otherwise>
-											<a href="projectView?p_id=${id_img_arr[0] }&m_id=${a.m_id }"><img src="resources/images/projectCover/${id_img_arr[1] }" width="80" height="80"/></a>	                        			
-		                        		</c:otherwise>
-	                        		</c:choose>
-	                        	</c:forEach>
-                        	</c:if>
-                        </div>
-                    </li>
-				</c:forEach>
+                <c:choose>
+               		<c:when test="${!empty list }">
+		               	<c:forEach var="a" items="${list }">
+		                    <li>
+		                        <p class="friendList_id">
+		                        	<input type="hidden" value="${a.m_id }" class="memberId"/>
+		                            <a href="userpage?usr_id=${a.m_id }">${a.m_studentID } ${a.m_name }</a>
+		                            <input type="button" value="X" class="btn_cancelFollow"/>
+		                        </p>
+		                        <p class="friendList_intro">${a.m_introduce }</p>
+		                        <p class="friendList_like">관심분야 : 
+		                        	<span>
+		                        	<c:if test="${fn:length(a.m_interestingText1) ne 0}">
+		                        		${a.m_interestingText1 }
+		                        		<c:if test="${fn:length(a.m_interestingText2) ne 0}">
+		                        			, ${a.m_interestingText2 }
+		                        		</c:if>
+		                        	</c:if>
+		                        	</span>
+		                        </p>
+		                        <div class="friendList_project">
+		                        	<c:set var="projects" value="${a.projects }"/>
+		                        	<c:if test="${!empty projects }">
+			                        	<c:set var="projectArr" value="${fn:split(projects, '/') }"/>
+			                        	<c:forEach var="id_img_set" items="${projectArr }">
+			                        		<c:set var="id_img_arr" value="${fn:split(id_img_set, ',') }"/>
+			                        		<c:choose>
+			                        			<c:when test="${fn:length(id_img_arr) eq 1}">
+			                        				<a href="projectView?p_id=${id_img_arr[0] }&m_id=${a.m_id }"><img src="resources/images/default.png" width="80" height="80"/></a>
+			                        			</c:when>
+				                        		<c:otherwise>
+													<a href="projectView?p_id=${id_img_arr[0] }&m_id=${a.m_id }"><img src="resources/images/projectCover/${id_img_arr[1] }" width="80" height="80"/></a>	                        			
+				                        		</c:otherwise>
+			                        		</c:choose>
+			                        	</c:forEach>
+		                        	</c:if>
+		                        </div>
+		                    </li>
+						</c:forEach>
+               		</c:when> 
+               		<c:otherwise>
+               			<li><p>팔로잉 회원이 없습니다</p></li>
+               		</c:otherwise>
+                </c:choose>
+
                 </ul>
             </div><!--//friendWrap_bd_following-->
             

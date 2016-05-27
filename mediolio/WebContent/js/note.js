@@ -95,7 +95,7 @@ $(function(){
     			type : "POST",
     			dataType : "JSON",
     			success : function(data) {
-    				$('#card_receiveNote_bd').append(returnMsgs(data.list, "r"));    				
+    				$('#card_receiveNote_bd').empty().append(returnMsgs(data.list, "r"));    				
     	            $('#card_sendNote_bd').hide();
     	            $('#card_receiveNote_bd').show();
     			}
@@ -117,7 +117,7 @@ $(function(){
     			type : "POST",
     			dataType : "JSON",
     			success : function(data) {
-    				$('#card_sendNote_bd').append(returnMsgs(data.list, "s"));
+    				$('#card_sendNote_bd').empty().append(returnMsgs(data.list, "s"));
     				$('#card_receiveNote_bd').hide();
     	            $('#card_sendNote_bd').show();
     			}
@@ -129,35 +129,39 @@ $(function(){
     // 오지은 작성 - ajax로 받아온 메세지 목록들을 html 태그로 만들어 반환하는 함수
     function returnMsgs(msgs, type){
     	var msg = '';
-    	$.each(msgs, function(index, entry){
-    		if(type=="r"){
-    			//받은 메세지 탭일 경우
-    			msg+= '<div class="noteWrap receiveNoteWrap">'
-			    			+'<div class="noteWrap_hd">'
-			    				+'<input type="hidden" class="this_msg_id" value="'+entry.msg_id+'">'
-								+'<a class="noteId" href="userpage?usr_id='+entry.msg_from+'">FROM : '+entry.msg_from_studentID+' '+entry.msg_from_nickname+'</a>'
-								+'<p class="noteDate">'+entry.msg_date+'</p>'
-								+'<a href="#" class="btn_note replyNote">답장</a>'
-								+'<a href="#" class="btn_note btn_deleteNote receiveNote">삭제</a>';
-    		} 
-    		else{
-    			//보낸 메세지 탭일 경우
-	    		msg+= '<div class="noteWrap sendNoteWrap">'
-							+'<div class="noteWrap_hd">'
-								+'<input type="hidden" class="this_msg_id" value="'+entry.msg_id+'">'
-								+'<a class="noteId" href="userpage?usr_id='+entry.msg_to+'">TO : '+entry.msg_to_studentID+' '+entry.msg_to_nickname+'</a>'
-								+'<p class="noteDate">'+entry.msg_date+'</p>'
-								+'<a href="#" class="btn_note btn_deleteNote sendNote">삭제</a>';
-    		} 
-			
-    		msg +=			  '<hr>'
-    						+'</div>' //noteWrap_hd 끝
-    						+'<div class="noteWrap_bd">'
-    							+'<p>'+entry.msg_text+'</p>'
-    							+'<a href="#" class="noteMore">>> more</a>'
-    						+'</div>' //noteWrap_bd 끝
-    					+'</div>';//noteWrap 끝
-    	});
+    	if(msgs == ''){
+    		msg = '<p class="no_note">쪽지가 없습니다</p>';
+    	}else{
+        	$.each(msgs, function(index, entry){
+        		if(type=="r"){
+        			//받은 메세지 탭일 경우
+        			msg+= '<div class="noteWrap receiveNoteWrap">'
+    			    			+'<div class="noteWrap_hd">'
+    			    				+'<input type="hidden" class="this_msg_id" value="'+entry.msg_id+'">'
+    								+'<a class="noteId" href="userpage?usr_id='+entry.msg_from+'">FROM : '+entry.msg_from_studentID+' '+entry.msg_from_nickname+'</a>'
+    								+'<p class="noteDate">'+entry.msg_date+'</p>'
+    								+'<a href="#" class="btn_note replyNote">답장</a>'
+    								+'<a href="#" class="btn_note btn_deleteNote receiveNote">삭제</a>';
+        		} 
+        		else{
+        			//보낸 메세지 탭일 경우
+    	    		msg+= '<div class="noteWrap sendNoteWrap">'
+    							+'<div class="noteWrap_hd">'
+    								+'<input type="hidden" class="this_msg_id" value="'+entry.msg_id+'">'
+    								+'<a class="noteId" href="userpage?usr_id='+entry.msg_to+'">TO : '+entry.msg_to_studentID+' '+entry.msg_to_nickname+'</a>'
+    								+'<p class="noteDate">'+entry.msg_date+'</p>'
+    								+'<a href="#" class="btn_note btn_deleteNote sendNote">삭제</a>';
+        		} 
+    			
+        		msg +=			  '<hr>'
+        						+'</div>' //noteWrap_hd 끝
+        						+'<div class="noteWrap_bd">'
+        							+'<p>'+entry.msg_text+'</p>'
+        							+'<a href="#" class="noteMore">>> more</a>'
+        						+'</div>' //noteWrap_bd 끝
+        					+'</div>';//noteWrap 끝
+        	});   		
+    	}
     	return msg;
     }
     
