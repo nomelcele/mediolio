@@ -26,7 +26,7 @@
     		<div class="noteWrap receiveNoteWrap">
                 <div class="noteWrap_hd">
                 	<input type="hidden" class="this_msg_id" value="${aMsg.msg_id }">
-                    <a class="noteId" href="userpage?usr_id=${aMsg.msg_from }">${aMsg.msg_from_studentID } ${aMsg.msg_from_nickname }</a>
+                    <a class="noteId" href="userpage?usr_id=${aMsg.msg_from }">FROM : ${aMsg.msg_from_studentID } ${aMsg.msg_from_nickname }</a>
                     <p class="noteDate">${aMsg.msg_date }</p>
                     <a href="#" class="btn_note replyNote" onclick="noteModalOpen('${aMsg.msg_from }', '${aMsg.msg_from_studentID } ${aMsg.msg_from_nickname }')">답장</a>
                     <a href="#" class="btn_note btn_deleteNote receiveNote">삭제</a>
