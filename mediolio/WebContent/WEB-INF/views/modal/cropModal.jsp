@@ -3,38 +3,35 @@
 
 
 <!-- 오지은 작성 -->
-<!-- 글 작성 시 이미지 크롭 모달(마크업+JCrop 오픈소스 일부 기능) -->
+<!-- 글 작성 시 이미지 크롭 모달(마크업+JCrop api 기능 활용) -->
 
 <script type="text/javascript">
 
 	$(function($) {
-		// Create variables (in this scope) to hold the API and image size
 		var jcrop_api, boundx, boundy;
-		var box_width = 740;
-		var box_height = 700;
+		var box_width = 640;
+		var box_height = 600;
 		
-		// Grab some information about the preview pane
+		// 잘린 부분 미리보기 div
 		$preview = $('#preview-pane');
-		$pcnt = $('#preview-pane .preview-container');
 		$pimg = $('#preview-pane .preview-container img');
 
 		var xsize = 200; 
 		var ysize = 200;
-		//xsize = $pcnt.width(), ysize = $pcnt.height();
 
 		var target = document.getElementById("target");
 		var imgWidth = target.width;
 		var imgHeight = target.height;
-		console.log("target W/H : " + imgWidth + " , " + imgHeight);
+		//console.log("target W/H : " + imgWidth + " , " + imgHeight);
 		
 		$('#target').Jcrop({
 			boxWidth: box_width, 
 			boxHeight: box_height,
-			minSize:[200, 200],
-			setSelect:[imgWidth/2-90, imgHeight/2-90, imgWidth/2+90, imgHeight/2+90],
+			minSize:[200, 200], //최소 사이즈 200px 200px
+			setSelect:[imgWidth/2-90, imgHeight/2-90, imgWidth/2+90, imgHeight/2+90], //모달이 열렸을 때 이미지 중앙에 크롭영역 위치
 			onChange : updatePreview,
 			onSelect : updatePreview,
-			aspectRatio : xsize / ysize
+			aspectRatio : xsize / ysize //크롭 영역 비율 - 200/200 정사각형
 		}, function() {
 			
 			// 이미지 사이즈 구함
@@ -67,6 +64,7 @@
 			$preview.appendTo(jcrop_api.ui.holder);
 		});
 
+		//크롭 영역이 이동될 때(onchange 이벤트) 실시간으로 좌표를 계산하는 함수
 		function updatePreview(c) {
 			if (parseInt(c.w) > 0) {
 				var rx = xsize / c.w;
@@ -88,6 +86,7 @@
 		
 	});
 	
+	//CROP 버튼을 눌렀을 때, 이미지를 비동기적으로 처리하는 함수
 	function uploadAjax() {
 		var form = new FormData(document.getElementById("coverImg_form"));
 		form.append("coverImg", $('#cover_img').prop("files")[0], $('#cover_img').val());
@@ -114,6 +113,7 @@
 		});
 	}
 	
+	//CANCEL 버튼을 눌렀을 때, 이미지 크롭 모달을 닫음
 	function cancelCrop(){
 		$('#contentsWrap').css({position: 'relative'});
 		$('#crop').remove();
