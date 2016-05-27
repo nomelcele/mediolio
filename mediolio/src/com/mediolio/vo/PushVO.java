@@ -1,5 +1,9 @@
 package com.mediolio.vo;
 
+/*
+ *  DB I/O에 사용 - 데이터를 담는 객체 class
+ * */
+
 public class PushVO {
 	private int m_id, p_id, r_id, author_m_id;
 	private String m_studentID, m_name, act_date, p_title, act_type;

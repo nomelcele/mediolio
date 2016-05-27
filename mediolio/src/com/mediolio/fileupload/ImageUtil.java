@@ -15,8 +15,8 @@ import java.io.OutputStream;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-/* *****
- * ***** 오지은 작성
+/* ***** 오지은 작성
+ * ***** 
  * ***** 이미지 크롭에서 사용하는 기능 모음
  * ***** 대부분 구글링하여 참고
  * */

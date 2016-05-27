@@ -22,7 +22,6 @@
   		<typeAlias type="com.mediolio.vo.ClassVO" alias="clvo"/>
   		<typeAlias type="com.mediolio.vo.HistoryVO" alias="htvo"/>
   		<typeAlias type="com.mediolio.vo.MemberSkillVO" alias="mkvo"/>
-  		<typeAlias type="com.mediolio.vo.SkillsVO" alias="skvo"/>
   		<typeAlias type="com.mediolio.vo.TeamMemberVO" alias="tmvo"/>
   	</typeAliases>
   </configuration>

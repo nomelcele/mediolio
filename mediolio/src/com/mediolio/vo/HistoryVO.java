@@ -1,5 +1,9 @@
 package com.mediolio.vo;
 
+/*
+ *  DB I/O에 사용 - 데이터를 담는 객체 class
+ * */
+
 public class HistoryVO {
 	private int ht_id, cl_id, m_id, ht_public;
 	private String ht_title, ht_introduce, ht_lastedit, ht_createdate,class_name;

@@ -1,5 +1,9 @@
 package com.mediolio.vo;
 
+/*
+ *  DB I/O에 사용 - 데이터를 담는 객체 class
+ * */
+
 public class Member_actionVO {
 	private int act_id, act_to, act_from, act_what;
 	private String act_type, act_read, act_date;

@@ -41,24 +41,15 @@ public class MainModel {
 
 		ModelAndView mav = new ModelAndView("main/index");		
 		MemberVO mev = (MemberVO) session.getAttribute("mev");
+		
 		if(mev!=null){
-			//로그인 한 상태
-			System.out.println("id : " +mev.getM_id());
-			System.out.println("nickname : "+mev.getM_name());
+			//로그인한 경우
 			
-			//관심분야 최신 글
+			//오지은 작성 - 회원별 관심분야 최신 글
 			List<CategoryVO> category = mdao.getInterestingPart(mev.getM_id());
 			mav.addObject("interesting", category);
 			List<ProjectVO> new1 = mdao.getNewProject_interest(category.get(0).getCate_id());
 			List<ProjectVO> new2 = mdao.getNewProject_interest(category.get(1).getCate_id());
-			
-			// 나의 최근 히스토리
-			List<BranchVO> recentHt = mdao.recentHistory(mev.getM_id());
-			mav.addObject("htNum", recentHt.size());
-			if(recentHt.size() != 0){
-				mav.addObject("recentHtTitle",recentHt.get(0).getHistoryTitle());
-				mav.addObject("recentHtBrs",recentHt);
-			} 
 
 			if(new1 != null && new2 != null){
 				mav.addObject("new1_idx", new1.size());
@@ -66,9 +57,20 @@ public class MainModel {
 				mav.addObject("new1", new1);
 				mav.addObject("new2", new2);
 			}
+			
+			
+			// 모하람 작성 - 나의 최근 히스토리
+			List<BranchVO> recentHt = mdao.recentHistory(mev.getM_id());
+			mav.addObject("htNum", recentHt.size());
+			if(recentHt.size() != 0){
+				mav.addObject("recentHtTitle",recentHt.get(0).getHistoryTitle());
+				mav.addObject("recentHtBrs",recentHt);
+			} 
 
 		}else{
-			//로그인하지 않은 상태 - 게임/웹&앱/영상 분야 최신 글 출력
+			//로그인하지 않은 상태 
+			
+			//오지은 작성 - 게임/웹&앱/영상 분야 최신 글 출력
 			List<ProjectVO> new1 = mdao.getNewProject_visitor(1);
 			List<ProjectVO> new2 = mdao.getNewProject_visitor(2);
 			List<ProjectVO> new3 = mdao.getNewProject_visitor(3);
@@ -81,12 +83,14 @@ public class MainModel {
 			mav.addObject("new2", new2);//웹&앱
 			mav.addObject("new3", new3);//영상
 			
+			//모하람 작성
 			mav.addObject("htNum", -1);
 		}
 
 		return mav;
 	}
 	
+	//오지은 작성 - 메인화면의 각 카테고리 최신 글에서 "더보기"를 눌렀을 때
 	@RequestMapping("mainMorePrjs")
 	public String mainMorePrjs(HttpSession session, Model model, @RequestParam("cate") String cate){
 		String category_name="PROJECT";
@@ -98,13 +102,15 @@ public class MainModel {
 		else if(cate.equals("5")) category_name = "DESIGN";
 		else if(cate.equals("6")) category_name = "MISC";
 		
+		//그 카테고리에 속한 게시물들과 카테고리 명을 들고 이동
 		model.addAttribute("category_name", category_name);
 		model.addAttribute("mainProjects", mdao.mainMorePrjs(Integer.parseInt(cate)));		
 		return "main.selectcategory";
 	}
 	
-	//박성준 1차 작성
-	//오지은 수정
+	// 카테고리 메뉴 클릭 시
+	// 박성준 1차 작성
+	// 오지은 수정
 	@RequestMapping("selcatcard")
 	public String selcatcard(HttpSession session, Model model, @RequestParam("selcat") String selcat){
 		String category="0";
@@ -151,6 +157,7 @@ public class MainModel {
 	}
 
 	
+	//모하람 작성
 	@RequestMapping("gotoMyPage")
 	public String gotoMyPage(Model model, HttpSession session){
 		// 전체 히스토리 리스트
@@ -172,6 +179,8 @@ public class MainModel {
 		return "mypage/mypage";
 	}
 	
+	
+	// 박성준 작성
 	@RequestMapping("selectlikepage")
 	public String selectlikepage(HttpSession session, Model model){
 		MemberVO mev = (MemberVO) session.getAttribute("mev");

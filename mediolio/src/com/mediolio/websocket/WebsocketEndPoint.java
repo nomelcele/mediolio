@@ -15,6 +15,12 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.mediolio.mvc.dao.PushDao;
 
+/* *****  오지은 작성
+ * ***** 
+ * *****  각 회원의 Push 알람을 위한 Websocket class
+ * *****  각 회원마다 스레드를 생성하여, 30초마다 각 회원에게 새로운 알림을 푸시하는 역할
+ * */
+
 public class WebsocketEndPoint extends TextWebSocketHandler {
 
     // 접속하는 사용자에 대한 세션을 보관하기 위해 정의
@@ -32,7 +38,7 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
         super.afterConnectionEstablished(session);
         System.out.println("Session Connected");
         
-        sessionSet.add(session);
+        sessionSet.add(session); //sessionSet에 각 회원의 세션 저장
     } 
   
     // 클라이언트에서 send를 이용해서 메시지 발송을 한 경우 이벤트 핸들링
@@ -40,6 +46,7 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         //String payloadMessage = (String) message.getPayload();
         
+    	// 클라이언트에서 메세지를 보낸 회원 식별(usrId)
         Map<String, Object> map = session.getAttributes();
         String usrId = (String)map.get("usrId");
         
@@ -54,9 +61,10 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
 	                		//새 push가 0개 이상인 경우에만 client에 알림
 	                		if(msg>0) session.sendMessage(new TextMessage(msg+""));
 	                    	
-	                    	Thread.sleep(30000);
+	                    	Thread.sleep(30000); //30초 sleep
 	                 	} catch (InterruptedException | IOException e) {
 	                 		Thread.currentThread().interrupt();
+	                 		sessionSet.remove(session);
 	                    	System.out.println("thread interrupted");
 	                    	break;
 	                 	} 
@@ -72,14 +80,23 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
   
     // 클라이언트에서 연결을 종료할 경우 발생하는 이벤트
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        super.afterConnectionClosed(session, status);
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
+        try {
+			super.afterConnectionClosed(session, status);
+			
+        } catch (Exception e) {
+			e.printStackTrace();
+			
+		}finally{
+	        //System.out.println("Closed");
+	        
+			// 연결을 종료한 회원의 thread 멈춤
+	        String usrId =  (String) session.getAttributes().get("usrId");
+	        threadMap.get(usrId).interrupt();
+	        
+	        //그 회원의 session 삭제
+	        sessionSet.remove(session);
+		}
 
-        System.out.println("Closed");
-        //thread 멈춤
-        String usrId =  (String) session.getAttributes().get("usrId");
-        threadMap.get(usrId).interrupt();
-        //session 삭제
-        sessionSet.remove(session);
     }
 }

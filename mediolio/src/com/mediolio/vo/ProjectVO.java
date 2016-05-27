@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+/*
+ *  DB I/O에 사용 - 데이터를 담는 객체 class
+ * */
+
 public class ProjectVO {
 	private int p_id, m_id, cate_id, p_viewnum, p_likenum, p_type, cl_id, ht_id;
 	private String p_title, p_hash, p_date, p_coverImg, hashtags, authorID, authorName, p_prjname, p_summary, p_workfrom, p_workto, cate_name;
