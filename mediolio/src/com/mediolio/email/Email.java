@@ -1,5 +1,10 @@
 package com.mediolio.email;
 
+/*
+ * ***** 박성준 작성 class
+ * ***** 임시비밀번호 메일 정보 저장
+ */
+
 public class Email {
 	private String subject;
     private String content;

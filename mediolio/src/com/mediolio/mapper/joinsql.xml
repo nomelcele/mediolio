@@ -4,28 +4,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="join">
   
+    <!-- !!!!!!!!!!!!!     박성준 작성        !!!!!!!!!!!!!!!! -->
+  
+  	<!-- !!!!!!!!!!!!!     id값 조회        !!!!!!!!!!!!!!!! -->
     <select id="select_m_id" resultType="int">
 		SELECT MAX(m_id) FROM MEMBER 
 	</select>
-
+	
+	<!-- !!!!!!!!!!!!!     회원가입 정보 삽입        !!!!!!!!!!!!!!!! -->
 	<insert id="InsertJoinInfo" parameterType="mevo">
 		INSERT INTO MEMBER (m_mail,m_pw,m_name,m_gender,m_studentID,m_interesting1, m_interesting2, m_introduce,m_joindate) VALUES(#{m_mail}, #{m_pw}, #{m_name}, #{m_gender}, #{m_studentID}, #{m_interesting1}, #{m_interesting2}, #{m_introduce}, SYSDATE())
 	</insert>
 	
+	<!-- !!!!!!!!!!!!!     보유기술 삽입        !!!!!!!!!!!!!!!! -->
 	<insert id="InsertSkillInfo" parameterType="mkvo">
 		INSERT INTO MEMBERSKILL (m_id,sk_id) VALUES(#{m_id}, #{sk_id})
 	</insert>
-  
+	
+	<!-- !!!!!!!!!!!!!     중복 검사        !!!!!!!!!!!!!!!! -->  
   	<select id="doubleInfo" resultType="string" parameterType="string" >
 		SELECT count(m_id) FROM MEMBER WHERE m_mail=#{m_mail}
 	</select>
-	
-<!-- 	<select id="loginIdentify" resultType="mevo" parameterType="String" >
-		SELECT m_pw,m_id FROM MEMBER WHERE m_mail=#{m_mail}
-	</select> -->
+
+	<!-- !!!!!!!!!!!!!     회원정보 조회        !!!!!!!!!!!!!!!! -->
 	<select id="loginIdentify" resultType="mevo" parameterType="String" >
 		SELECT * FROM MEMBER WHERE m_mail=#{m_mail}
 	</select>
+	
+	<!-- !!!!!!!!!!!!!     임시비밀번호로 변경        !!!!!!!!!!!!!!!! -->
 	<update id="sendpw" parameterType="mevo">
   		UPDATE MEMBER SET m_pw=#{m_pw} WHERE m_mail=#{m_mail}
   	</update>

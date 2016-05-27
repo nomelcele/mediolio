@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 
+/*
+ * ***** 박성준 작성 class
+ * ***** 임시 비밀번호 전송
+ */
 
 public class EmailSender {
 	@Autowired
