@@ -1,7 +1,9 @@
 package com.mediolio.mvc.model;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -162,19 +164,32 @@ public class MainModel {
 	public String gotoMyPage(Model model, HttpSession session){
 		// 전체 히스토리 리스트
 		int m_id = ((MemberVO)session.getAttribute("mev")).getM_id();
-		List<HistoryVO> htList = htdao.historyList(m_id);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("m_id", String.valueOf(m_id));
+		map.put("type", "myPage");
+		List<HistoryVO> htList = htdao.historyList(map);
+		
+		
+		
 		model.addAttribute("htList", htList);
 		// 가장 최근에 업데이트 된 히스토리의 브랜치들 불러오기
 		if(!htList.isEmpty()){
 			HistoryVO recentHt = htList.get(0);
 			model.addAttribute("recentHtId", recentHt.getHt_id());
 			model.addAttribute("recentHtTitle", recentHt.getHt_title());
-			model.addAttribute("branches",htdao.branchList(recentHt.getHt_id()));
+			
+			Map<String, Object> map2 = new HashMap<String, Object>();
+			map2.put("ht_id", String.valueOf(recentHt.getHt_id()));
+			map2.put("type", "myPage");
+			List<BranchVO> list = htdao.branchList(map2);
+			model.addAttribute("branches",list);
 				
 		}
 		
 		// 나의 게시물
 		model.addAttribute("myProjects",pdao.userProject(m_id));
+		model.addAttribute("type","myPage");
 		
 		return "mypage/mypage";
 	}

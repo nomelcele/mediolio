@@ -1,6 +1,8 @@
 package com.mediolio.mvc.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,9 @@ public class HistoryDao {
 	@Autowired
 	private SqlSessionTemplate st;
 	
-	public List<HistoryVO> historyList(int m_id){
+	public List<HistoryVO> historyList(Map<String, Object> map){
 		// 히스토리 리스트 불러오기
-		return st.selectList("ht.historyList", m_id);
+		return st.selectList("ht.historyList", map);
 	}
 	
 	public void addHistory(HistoryVO htvo){
@@ -30,9 +32,11 @@ public class HistoryDao {
 		st.delete("ht.deleteHistory", ht_id);
 	}
 	
-	public List<BranchVO> branchList(int ht_id){
+	public List<BranchVO> branchList(Map<String, Object> map){
 		// 히스토리의 브랜치 불러오기
-		return st.selectList("ht.branchList", ht_id);
+		System.out.println("브랜치 확인할 히스토리 번호: "+map.get("ht_id"));
+		System.out.println(map.get("type"));
+		return st.selectList("ht.branchList", map);
 	}
 	
 	public void addBranch(BranchVO brvo){

@@ -6,7 +6,7 @@
 
 <!-- 이유라 : 마크업  -->
 <!-- 모하람 : 데이터 뿌림 -->
-
+<input type="hidden" id="mypageType" value="${type}">
 
 <div id="contentsWrap_nopd">
     <div class="rmcnWrap">
@@ -25,10 +25,12 @@
     	<input type="hidden" id="recentHtTitle" name="ht_title" value="${recentHtTitle}">
         <h2 class="historyTitle ellipsis"><span>제목</span>${recentHtTitle}</h2>
 <!--        <input class="btnStyle2 btn_card" id="btn_editAllCards" type="button" value="편집">-->
-        <input class="btnStyle2 btn_card" id="btn_addCard" type="button" value="글쓰기">
-        
+        <c:if test="${type eq 'myPage'}">
+        	<input class="btnStyle2 btn_card" id="btn_addCard" type="button" value="글쓰기">
+        </c:if>
         
         <div class="timeLineWrap clear">
+          <c:if test="${type eq 'myPage'}">
             <form action="addBranch" method="post" enctype="multipart/form-data">
             <input type="hidden" id="recentHtId" name="ht_id" value="${recentHtId}">
             <div class="timeCardWrap clear">
@@ -82,6 +84,7 @@
                 </div><!--//timeCard-->
             </div><!--//timeCardWrap-->
             </form>
+            </c:if>
             
             
             
@@ -124,8 +127,10 @@
 	                    	${branches.br_text}
 	                    </div><!--//timeCard_content-->
 	                    <div class="timeCard_btnBox">
-	                        <input class="btnStyle_timeCard_left" type="button" value="수정">
-	                        <input class="btnStyle_timeCard_right br_delete_btn" type="button" value="삭제">
+<!-- 	                        <input class="btnStyle_timeCard_left" type="button" value="수정"> -->
+        					<c:if test="${type eq 'myPage'}">
+	                        	<input class="btnStyle_timeCard_right br_delete_btn" type="button" value="삭제">
+	                        </c:if>
 	                        <input type="hidden" class="branch_id" value="${branches.br_id}">
 	                    </div>
 	                </div><!--//timeCard-->
@@ -136,7 +141,9 @@
     </div>
     <div class="cardWrap historyExWrap">
         <div class="hd_historyEx">히스토리 목록
+        <c:if test="${type eq 'myPage'}">
             <input type="button" class="btnStyle3" id="btn_addHistory" value="추가">
+        </c:if>
         </div>
         <div class="bd_historyEx">
         <!-- 히스토리 목록 -->
@@ -146,26 +153,28 @@
 	                    <td class="historyList_border historyList_name">
 	                    	<input type="hidden" class="history_id" value="${htList.ht_id}">
 	                        <p class="historyList_arco ellipsis history_title">${htList.ht_title}</p>
-	                        <a class="historyList_pop" href="#"></a>
-	                        <div class="history_popMenuWrap">
-	                            <ul class="history_popMenu">
-	                                <li><a href="#">히스토리 수정</a></li>
-	                                <li>
-	                                	<form action="deleteHistory" id="deleteHt${htList.ht_id}">
-	                                		<input type="hidden" name="ht_id" value="${htList.ht_id}">
-	                                	</form>
-	                                	<a href="javascript:deleteHistory(${htList.ht_id});">히스토리 삭제</a>
-	                                </li>
-	                                <li><a href="javascript:changeHtPublic(${htList.ht_id},${htList.ht_public});">공개설정 : 
-		                                <c:if test="${htList.ht_public eq 1}">
-		                                	공개
-		                                </c:if>
-		                                <c:if test="${htList.ht_public eq 0}">
-		                                	비공개
-		                                </c:if>
-	                                </a></li>
-	                            </ul>
-	                        </div>
+	                        <c:if test="${type eq 'myPage'}">
+	                        	<a class="historyList_pop" href="#"></a>
+		                        <div class="history_popMenuWrap">
+		                            <ul class="history_popMenu">
+		                                <li><a href="#">히스토리 수정</a></li>
+		                                <li>
+		                                	<form action="deleteHistory" id="deleteHt${htList.ht_id}">
+		                                		<input type="hidden" name="ht_id" value="${htList.ht_id}">
+		                                	</form>
+		                                	<a href="javascript:deleteHistory(${htList.ht_id});">히스토리 삭제</a>
+		                                </li>
+		                                <li><a href="javascript:changeHtPublic(${htList.ht_id},${htList.ht_public});">공개설정 : 
+			                                <c:if test="${htList.ht_public eq 1}">
+			                                	공개
+			                                </c:if>
+			                                <c:if test="${htList.ht_public eq 0}">
+			                                	비공개
+			                                </c:if>
+		                                </a></li>
+		                            </ul>
+		                        </div>
+		                     </c:if>
 	                    </td>
 	                </tr>
 	                <tr>
@@ -178,6 +187,7 @@
 	            </table>
             </c:forEach>
          <!-- 히스토리 목록 -->
+         <c:if test="${type eq 'myPage'}">
             <form id="addHistoryForm" action="addHistory" method="post">
             <table cellspacing="0" cellpadding="0" class="historyList_addTable">
                 <tr>
@@ -203,7 +213,7 @@
                 </tr>
             </table>
             </form>
-            
+          </c:if>  
             
         </div><!--/bd_historyEx-->
     </div><!--//historyExWrap-->

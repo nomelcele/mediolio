@@ -31,13 +31,16 @@ $('document').ready(function(){
     
     //오지은 작성 - 히스토리 가기 클릭 
     $('.userPopWrap .userPop_userHt').unbind("click").on('click', function(){
-		$.jAlert({
-		    'title': '!!',
-		    'content': '준비중입니다.',
-		    'closeOnClick' : true,
-		    'theme' : 'red',
-		    'size': 'xsm'
-		  });
+    	
+    	
+    	
+//		$.jAlert({
+//		    'title': '!!',
+//		    'content': '준비중입니다.',
+//		    'closeOnClick' : true,
+//		    'theme' : 'red',
+//		    'size': 'xsm'
+//		  });
     	/*    	if($('#bellWrap').length) location.href="gotoMyPage"
     	else {
     		$.jAlert({
@@ -56,6 +59,7 @@ function userPop(event, aObj, m_id){
 	usr_name = $(aObj).text();
 	usr_id = m_id;
 	$('.userPopWrap .userPop_userPage').attr("href", "userpage?usr_id="+usr_id);
+	$('.userPopWrap .userPop_userHt').attr("href", "userHistory?m_id="+usr_id);
 	
     var mouseX = event.clientX;
     var mouseY = event.clientY;

@@ -3,7 +3,9 @@ package com.mediolio.mvc.model;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mediolio.mvc.dao.HistoryDao;
+import com.mediolio.mvc.dao.ProjectDao;
 import com.mediolio.vo.BranchVO;
 import com.mediolio.vo.ClassVO;
 import com.mediolio.vo.HistoryVO;
@@ -25,6 +28,8 @@ import com.mediolio.vo.MemberVO;
 public class HistoryModel {
 	@Autowired
 	private HistoryDao htdao;
+	@Autowired
+	private ProjectDao pdao;
 	
 	@RequestMapping(value="addHistory")
 	public String addHistory(HistoryVO htvo,HttpSession session){
@@ -96,14 +101,25 @@ public class HistoryModel {
 		htdao.deleteBranch(brvo.getBr_id());
 		model.addAttribute("htId", brvo.getHt_id());
 		model.addAttribute("htTitle", ht_title);
-		model.addAttribute("branchList", htdao.branchList(brvo.getHt_id()));
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ht_id", String.valueOf(brvo.getHt_id()));
+		map.put("type", "myPage");
+		model.addAttribute("branchList", htdao.branchList(map));
+		
+		
 		return "mypage.history";
 	}
 	
 	@RequestMapping(value="historyDetail")
-	public String historyDetail(HistoryVO htvo,Model model){
+	public String historyDetail(HistoryVO htvo,String type,Model model){
 		// 목록에서 히스토리 선택 시 그 히스토리의 브랜치 표시
-		model.addAttribute("branchList", htdao.branchList(htvo.getHt_id()));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ht_id", String.valueOf(htvo.getHt_id()));
+		map.put("type", type);
+		model.addAttribute("branchList", htdao.branchList(map));
+		
 		model.addAttribute("htId", htvo.getHt_id());
 		model.addAttribute("htTitle", htvo.getHt_title());
 		return "mypage.history";
@@ -146,7 +162,41 @@ public class HistoryModel {
 	public String changeHtPublic(HistoryVO htvo,Model model,HttpSession session){
 		// 히스토리 공개 상태 변경
 		htdao.changeHtPublic(htvo);
-		model.addAttribute("htList", htdao.historyList(((MemberVO)(session.getAttribute("mev"))).getM_id()));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("m_id", String.valueOf(((MemberVO)(session.getAttribute("mev"))).getM_id()));
+		map.put("type", "myPage");
+		
+		model.addAttribute("htList", htdao.historyList(map));
 		return "mypage.historyList";
+	}
+	
+	@RequestMapping(value="userHistory")
+	public String userHistory(int m_id, Model model){
+		// 유저(접속한 사용자 외의 회원)의 히스토리, 게시물(프로젝트,과제) 열람
+		
+		// 전체 히스토리 리스트
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("m_id", String.valueOf(m_id));
+		map.put("type", "userPage");
+		List<HistoryVO> htList = htdao.historyList(map);
+		model.addAttribute("htList", htList);
+		// 가장 최근에 업데이트 된 히스토리의 브랜치들 불러오기
+		if(!htList.isEmpty()){
+			HistoryVO recentHt = htList.get(0);
+			model.addAttribute("recentHtId", recentHt.getHt_id());
+			model.addAttribute("recentHtTitle", recentHt.getHt_title());
+			
+			Map<String, Object> map2 = new HashMap<String, Object>();
+			map2.put("ht_id", String.valueOf(recentHt.getHt_id()));
+			map2.put("type", "userPage");
+			model.addAttribute("branches",htdao.branchList(map2));
+		}
+				
+		// 유저의 게시물
+		model.addAttribute("myProjects",pdao.userProject(m_id));
+		model.addAttribute("type","userPage");
+				
+		return "mypage/mypage";
 	}
 }

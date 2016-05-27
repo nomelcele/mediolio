@@ -176,6 +176,7 @@ function listLoad(){
 			data: {
 				ht_id: $(this).find(".history_id").val(),
 				ht_title: $(this).find(".history_title").html(),
+				type: $("#mypageType").val()
 			},
 			success: function(result){
 				$(".historyWrap").html(result);

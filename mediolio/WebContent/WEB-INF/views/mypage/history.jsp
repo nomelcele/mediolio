@@ -5,7 +5,7 @@
 
 <!-- 이유라 : 마크업  -->
 <!-- 모하람 : 데이터 뿌림 -->
-
+<input type="hidden" id="mypageType" value="${type}">
 
 <!--  <div class="historyWrap clear"> -->
         <h2 class="historyTitle ellipsis"><span>제목</span>${htTitle}</h2>
