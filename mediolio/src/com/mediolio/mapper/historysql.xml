@@ -3,9 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="ht">
-  	<select id="historyList" parameterType="int" resultType="htvo">
+  	<select id="historyList" parameterType="java.util.Map" resultType="htvo">
   		select h.ht_id, h.ht_title, h.ht_public, h.ht_introduce, c.cl_name class_name from history h, class c 
-  		where h.m_id=#{m_id} and h.cl_id=c.cl_id order by h.ht_lastedit desc
+  		where h.m_id=#{m_id} and h.cl_id=c.cl_id 
+  		<if test="type eq 'userPage'">
+  			and ht_public = 1
+  		</if>
+  		order by h.ht_lastedit desc
   	</select>
   	<insert id="addHistory" parameterType="htvo">
   		insert into history (ht_title,ht_introduce,cl_id,ht_lastedit,ht_createdate,m_id,ht_public) 
@@ -14,10 +18,14 @@
   	<delete id="deleteHistory" parameterType="int">
   		delete from history where ht_id=#{ht_id}
   	</delete>
-  	<select id="branchList" parameterType="int" resultType="brvo">
+  	<select id="branchList" parameterType="java.util.Map" resultType="brvo">
   		select br_id,ht_id,br_title,br_img1,br_img2,br_img3,br_text,
   		DATE_FORMAT(br_date,'%Y.%m.%d %H:%i:%s') AS br_date,br_public 
-  		from branch where ht_id=#{ht_id} order by br_date desc
+  		from branch where ht_id=#{ht_id} 
+  		<if test="type eq 'userPage'">
+  			and br_public = 1
+  		</if>
+  		order by br_date desc
   	</select>
   	<insert id="addBranch" parameterType="brvo">
   		insert into branch (ht_id,br_title,br_img1,br_img2,br_img3,br_text,br_date,br_public) 

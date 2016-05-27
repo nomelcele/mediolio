@@ -33,7 +33,7 @@
 <!--  		<input type="hidden" id="p_coverImgName" name="p_coverImg"> -->
 <!--  		<input type="hidden" id="sc_id" name="sc_id"> -->
 <!--  		<input type="hidden" id="p_workto" name="p_workto"> -->
-<!--  		<!-- 관련 과목 <input type="hidden" id="cl_id" name="cl_id">-->
+ 		 <input type="hidden" id="cl_id" name="cl_id">
 <!--  		<!-- 팀원 소개 -->
 <!-- </form> -->
 

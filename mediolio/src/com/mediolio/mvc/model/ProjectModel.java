@@ -125,6 +125,7 @@ public class ProjectModel {
 				} else {
 					// 2-2. 임베드 태그, 텍스트 db에 등록
 					covo.setC_type("html");
+					System.out.println("텍스트: "+orderArr[i].replace("contenteditable=\"true\"", ""));
 					covo.setC_value(orderArr[i].replace("contenteditable=\"true\"", ""));
 					
 				}

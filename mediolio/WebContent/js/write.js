@@ -118,6 +118,15 @@ $('document').ready(function(){
 			    'theme' : 'red',
 			    'size': 'xsm'
 			  });
+		} else if($("input[name=cl_id]").val() == null){
+			// 8. 관련 과목 선택
+			$.jAlert({
+			    'title': '!!',
+			    'content': '관련 과목을 선택해주세요.',
+			    'closeOnClick' : true,
+			    'theme' : 'red',
+			    'size': 'xsm'
+			  });
 		} else if($.trim($("textarea[name=p_summary]").val()) == ""){
 			// 9. 작업 개요 입력
 			$.jAlert({
@@ -1126,7 +1135,8 @@ function addProjClass(li){
 	var newClass = li;
 	$(newClass).parent().parent().parent().find(".project_related_class").val($(newClass).find("span").html());
 	$(".autoClass").css("display","none");
-	$(".cardWindow_write2").append("<input type='hidden' name='cl_id' value="+$(newClass).find(".classId").val()+">");
+	$("input[name=cl_id]").val($(newClass).find(".classId").val());
+//	$(".cardWindow_write2").append("<input type='hidden' name='cl_id' value="+$(newClass).find(".classId").val()+">");
 }
 
 function addMember(li){
