@@ -103,9 +103,9 @@ public class ProjectModel {
 					// c_type: 콘텐츠의 타입(document: 문서, image: 이미지, html: embed 태그,텍스트) 지정
 					// db에 저장할 때 구분하기 위해서 타입 지정
 					String c_type = "document";
-					String[] imgExt = {"gif","png","jpg","jpeg", "PNG", "JPG", "GIF", "JPEG"};
+					String[] imgExt = {"gif","png","jpg","jpeg"};
 					for(String e:imgExt){
-						if(fileExt.contains(e)){
+						if(fileExt.toLowerCase().contains(e)){
 							c_type = "image"; 
 						}
 					}
@@ -226,9 +226,9 @@ public class ProjectModel {
 		StringBuffer path = new StringBuffer();
 		
 		String type = "docs";
-		String[] imgExt = {"gif","png","jpg","jpeg","PNG", "GIF", "JPG", "JPEG"};
+		String[] imgExt = {"gif","png","jpg","jpeg"};
 		for(String img:imgExt){ // 확장자를 확인하여 문서/이미지 파일 구분
-			if(fileExt.contains(img)){
+			if(fileExt.toLowerCase().contains(img)){
 				type = "img";
 				break;
 			}
