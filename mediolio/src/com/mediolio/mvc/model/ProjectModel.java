@@ -71,15 +71,18 @@ public class ProjectModel {
 			contentNames = new String[contents.size()];
 			for(int i=0; i<contentNames.length; i++){
 				contentNames[i] = contents.get(i).getOriginalFilename(); // 배열에 파일 이름 저장
+				System.out.println("contentNames "+i+"번째 : " + contentNames[i]);
 			}
 			
 			for(int i=0; i<orderArr.length; i++){
-				System.out.println((i+1)+"번째 콘텐츠: "+orderArr[i]);
+				System.out.println("orderArr" + (i+1)+"번째 콘텐츠: "+orderArr[i]);
 				ContentVO covo = new ContentVO();
 
 				String docRealName = "default";
-				if(orderArr[i].contains(".") && orderArr[i].contains("_"))
-					docRealName = orderArr[i].split("_")[0] +"."+ orderArr[i].split("\\.")[1];
+				if(orderArr[i].contains(".") && orderArr[i].contains("_")){
+					docRealName = orderArr[i].substring(0,orderArr[i].lastIndexOf("_"))+"."+ orderArr[i].split("\\.")[1];
+				}
+					
 				System.out.println("docRealName: "+docRealName);
 				
 				int idx = 0;
@@ -223,7 +226,7 @@ public class ProjectModel {
 		StringBuffer path = new StringBuffer();
 		
 		String type = "docs";
-		String[] imgExt = {"gif","png","jpg","jpeg"};
+		String[] imgExt = {"gif","png","jpg","jpeg","PNG", "GIF", "JPG", "JPEG"};
 		for(String img:imgExt){ // 확장자를 확인하여 문서/이미지 파일 구분
 			if(fileExt.contains(img)){
 				type = "img";
