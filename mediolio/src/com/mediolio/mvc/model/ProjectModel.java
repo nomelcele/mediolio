@@ -100,7 +100,7 @@ public class ProjectModel {
 					// c_type: 콘텐츠의 타입(document: 문서, image: 이미지, html: embed 태그,텍스트) 지정
 					// db에 저장할 때 구분하기 위해서 타입 지정
 					String c_type = "document";
-					String[] imgExt = {"gif","png","jpg","jpeg"};
+					String[] imgExt = {"gif","png","jpg","jpeg", "PNG", "JPG", "GIF", "JPEG"};
 					for(String e:imgExt){
 						if(fileExt.contains(e)){
 							c_type = "image"; 
@@ -133,7 +133,7 @@ public class ProjectModel {
 				covo.setC_order(i); // 콘텐츠 순서
 				pdao.uploadContent(covo); // db에 콘텐츠 정보 업데이트
 				
-			}
+			}//for문 끝
 		} else {
 			// 파일을 업로드하지 않았을 경우
 			for(int i=0; i<orderArr.length; i++){
