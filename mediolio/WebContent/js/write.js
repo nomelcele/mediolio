@@ -160,8 +160,13 @@ $('document').ready(function(){
 			
 			// 2. 임베드 태그, 텍스트: orderArr에 있음
 			// 3. orderArr: 콘텐츠 순서 정보 저장
+			$(".write_textarea").each(function(){
+			    orderArr[$(this).attr("data-sort")] = $(this).html().split("<ul")[0];
+			    console.log(orderArr[$(this).attr("data-sort")]);
+			});
 			console.log("콘텐츠 순서: "+orderArr);
 			$("input[name=orderArr]").val(orderArr);
+			console.log($("input[name=orderArr]").val());
 			
 			// 7. 커버 이미지 파일 이름
 			$("#p_coverImgName").val($("#p_coverImg").val());
@@ -172,6 +177,13 @@ $('document').ready(function(){
 				hashtags += $(this).html()+"/";
 			});
 			$("#hashtags").val(hashtags);
+			
+			var arrStr = "";
+			for(var i=0; i<orderArr.length; i++){
+				arrStr += orderArr[i]+"@@@@@@@@@@@@@@@";
+			}
+			
+			$("input[name=orderArrStr]").val(arrStr);
 			
 			$("#addProjectForm").submit();
 		}
@@ -269,6 +281,7 @@ $('document').ready(function(){
     			}
     			console.log($(this));
             	var value = $(this).closest(".write_textarea").html();
+            	console.log(value);
             	orderArr[$(this).closest(".write_textarea").attr("data-sort")] = value.split("<ul")[0];
     		}
     	});
@@ -1080,6 +1093,10 @@ function writeNavi(step){
 
 // 이유라 작성
 function writeStep(step){
+	$(".write_textarea").each(function(){
+	    orderArr[$(this).attr("data-sort")] = $(this).html().split("<ul")[0];
+	    console.log(orderArr[$(this).attr("data-sort")]);
+	});
 	$('.writeNavi a').removeClass('click');
 	$('#'+step).addClass("click");
 	if (step=='projTab1'){
