@@ -171,14 +171,24 @@ function writeDCategoryModalOpen(){
 	    });
 	    
 	    // 모하람 작성 - 모달에 세부카테고리 목록 보여주기
-		$("#modal_bd_writeDCategory ul").html("<li><input type='checkbox' value='1' data-labelauty='게임'/><label class='label_category'>게임</label></li>"+
-				"<li><input type='checkbox' value='2' data-labelauty='웹&앱'/><label class='label_category'>웹&앱</label></li>"+
-				"<li><input type='checkbox' value='3' data-labelauty='영상&사운드'/><label class='label_category'>영상&사운드</label></li>"+
-				"<li><input type='checkbox' value='4' data-labelauty='3D'/><label class='label_category'>3D</label></li>"+
-				"<li><input type='checkbox' value='5' data-labelauty='디자인'/><label class='label_category'>디자인</label></li>"+
-				"<li><input type='checkbox' value='6' data-labelauty='기타'/><label class='label_category'>기타</label></li>");
+		$("#modal_bd_writeDCategory ul").html("<li><input type='checkbox' name='sub' value='1' data-labelauty='게임'/><label class='label_category'>게임</label></li>"+
+				"<li><input type='checkbox' name='sub' value='2' data-labelauty='웹&앱'/><label class='label_category'>웹&앱</label></li>"+
+				"<li><input type='checkbox' name='sub' value='3' data-labelauty='영상&사운드'/><label class='label_category'>영상&사운드</label></li>"+
+				"<li><input type='checkbox' name='sub' value='4' data-labelauty='3D'/><label class='label_category'>3D</label></li>"+
+				"<li><input type='checkbox' name='sub' value='5' data-labelauty='디자인'/><label class='label_category'>디자인</label></li>"+
+				"<li><input type='checkbox' name='sub' value='6' data-labelauty='기타'/><label class='label_category'>기타</label></li>");
 		
 		$(":checkbox").labelauty({ label: false });
+		
+		$(":checkbox[name='sub']").change(function() {
+	        if( $(":checkbox[name='sub']:checked").length==1 ) {
+	            $(":checkbox[name='sub']:not(:checked)").attr("disabled", "disabled");
+	        }
+	        // 체크된 갯수가 다르면 활성화 시킴
+	        else {
+	            $(":checkbox[name='sub']").removeAttr("disabled");
+	        }
+	    });
 	    
 	}
 }    

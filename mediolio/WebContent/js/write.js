@@ -128,7 +128,7 @@ $('document').ready(function(){
 			    'theme' : 'red',
 			    'size': 'xsm'
 			  });
-		} else if($("input[name=cl_id]").val() == null){
+		} else if($("input[name=cl_id]").val() == ""){
 			// 8. 관련 과목 선택
 			$.jAlert({
 			    'title': '!!',
