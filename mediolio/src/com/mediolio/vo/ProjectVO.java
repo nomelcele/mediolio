@@ -14,7 +14,26 @@ public class ProjectVO {
 
 	private List<MultipartFile> contents;
 	private MultipartFile doc;
+
+	private String[] orderArr;
+	private String orderArrStr;
 	
+	
+	
+	
+	
+	public String getOrderArrStr() {
+		return orderArrStr;
+	}
+	public void setOrderArrStr(String orderArrStr) {
+		this.orderArrStr = orderArrStr;
+	}
+	public String[] getOrderArr() {
+		return orderArr;
+	}
+	public void setOrderArr(String[] orderArr) {
+		this.orderArr = orderArr;
+	}
 	public MultipartFile getDoc() {
 		return doc;
 	}

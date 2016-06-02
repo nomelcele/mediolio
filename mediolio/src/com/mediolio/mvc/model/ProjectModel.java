@@ -57,12 +57,23 @@ public class ProjectModel {
 	
 	// 모하람 작성 - 새로운 게시물(프로젝트/과제) 작성
 	@RequestMapping(value="addProject")
-	public String addProject(ProjectVO pvo, TeamMemberVO tmvo, String[] orderArr, HttpSession session, Model model){
+	public String addProject(ProjectVO pvo, TeamMemberVO tmvo, HttpSession session, Model model){
 		
 		// 1. 새로운 게시물 추가
 		int m_id = ((MemberVO)session.getAttribute("mev")).getM_id(); // 현재 로그인한 유저의 회원 번호
 		pvo.setM_id(m_id);
 		int p_id = pdao.addProject(pvo); // 새로운 게시물 등록 후 그 게시물의 id 리턴
+		
+		String orderArrStr = pvo.getOrderArrStr();
+		System.out.println(orderArrStr);
+		
+		
+		String[] arr = orderArrStr.split("@@@@@@@@@@@@@@@");
+		String[] orderArr = new String[arr.length];
+		for(int k=0; k<arr.length; k++){
+			 orderArr[k] = arr[k].replace("@@@@@@@@@@@@@@@", "");
+			 System.out.println(k+"번째 "+orderArr[k]);
+		}
 		
 		// 2. 콘텐츠(이미지, 문서, 임베드 태그, 텍스트) 업로드 및 db에 등록
 		List<MultipartFile> contents = pvo.getContents(); // 업로드할 파일(이미지, 문서)들의 리스트
