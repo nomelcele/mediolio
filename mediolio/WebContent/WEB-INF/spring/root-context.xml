@@ -42,7 +42,7 @@
 	<mvc:interceptors>
         <mvc:interceptor> 
            <mvc:mapping path="/addProjectForm"/>
-           <beans:bean class="com.mediolio.mvc.model.SessionModel"/>
+           <beans:bean class="com.mediolio.mvc.controller.SessionController"/>
         </mvc:interceptor>
     </mvc:interceptors>
 		
